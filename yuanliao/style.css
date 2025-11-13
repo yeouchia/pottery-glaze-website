@@ -1,0 +1,253 @@
+/* =================================================== */
+/* 陶瓷釉藥賽格式計算器 V10.7 樣式表 */
+/* 作用：確保佈局、顏色、字體穩定，並修復所有對齊問題 */
+/* =================================================== */
+
+/* --- 基礎設置與通用樣式 --- */
+body {
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f3f6; /* 背景顏色 */
+    color: #333;
+    font-size: 14px; /* 基礎字體大小 */
+}
+
+header {
+    background-color: #34495e; /* 藍色標題背景 */
+    color: white;
+    padding: 15px; 
+    text-align: center;
+}
+header h1 {
+    font-size: 1.8em; 
+    margin: 0;
+}
+main {
+    max-width: 1400px; /* 限制內容最大寬度 */
+    margin: 20px auto; /* 居中 */
+    padding: 0 15px;
+}
+h2 {
+    color: #2c3e50; /* 區塊標題顏色 */
+    font-size: 1.4em; 
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+h3 {
+    color: #34495e; /* 組別標題顏色 */
+    font-size: 1.1em; 
+    margin: 5px 0 10px 0;
+}
+.box-shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+/* --- 核心佈局 (Flexbox 實現左右橫向排版 - 穩定版) --- */
+.main-content {
+    display: flex;
+    gap: 20px; /* 左右區塊間距 */
+    align-items: flex-start;
+    flex-wrap: nowrap; /* 確保不換行，強制左右並排 */
+}
+/* 左側輸入區塊 (原料表格) */
+.input-section {
+    flex: 0 0 40%; /* 固定寬度 40% */
+    max-height: 85vh; 
+    overflow-y: auto; 
+}
+/* 右側輸出區塊 (釉式結果) */
+.output-wrapper {
+    flex: 1; /* 佔據所有剩餘空間 */
+}
+
+/* --- 輸入區塊樣式 --- */
+#recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 原料選擇選單和重量輸入框的統一字體和樣式 */
+#recipe-table input[type="number"], 
+#recipe-table .raw-name {          
+    width: 95%; 
+    padding: 6px;
+    /* 【可修改】這裡控制原料名稱和重量數字的字體大小 */
+    font-size: 1.25em; 
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 38px; 
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    margin: 0; 
+}
+
+/* 總計百分比樣式 */
+.total-display {
+    /* 【可修改】總計百分比的字體大小 */
+    font-size: 2.0em; 
+    margin-left: 20px;
+    font-weight: bold;
+    line-height: 38px; 
+    vertical-align: top;
+    display: inline-block;
+}
+
+/* 移除按鈕和計算按鈕的樣式 */
+.remove-row-btn {
+    padding: 6px 10px;
+    font-size: 0.9em;
+    background-color: #e74c3c; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; 
+}
+#calculate-btn {
+    padding: 12px 25px; 
+    font-size: 1.1em;
+    background-color: #3498db; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%; 
+}
+#calculate-btn:hover {
+    background-color: #2980b9;
+}
+
+
+/* --- 輸出區塊樣式 --- */
+
+/* 三組顏色定義 */
+.ro-group {
+    background-color: #d4edda; /* RO 組 - 綠色背景 */
+    border-color: #28a745; 
+}
+.r2o3-group {
+    background-color: #f8d7da; /* R2O3 組 - 紅色背景 */
+    border-color: #dc3545; 
+}
+.ro2-group {
+    background-color: #d1ecf1; /* RO2 組 - 藍色背景 */
+    border-color: #17a2b8; 
+}
+
+.seger-formula-output {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px; 
+    margin-top: 15px;
+    text-align: center;
+}
+.seger-group {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc; 
+}
+
+/* 分子數值的總和顯示樣式 */
+.mole-value, .mole-line {
+    font-size: 2.0em; 
+    font-weight: bold;
+    margin: 5px 0;
+    color: #2c3e50; 
+}
+
+/* 各別氧化物分子數的列表細節容器 */
+.details {
+    /* 【可修改】列表分子數的字體大小 */
+    font-size: 1.3em; 
+    max-height: 200px; 
+    overflow-y: auto; 
+    text-align: left;
+    padding-top: 8px;
+    border-top: 1px dashed #ccc;
+}
+
+/* 關鍵區塊：控制氧化物名稱和數值的排列 (已修正黏在一起問題) */
+.details p {
+    margin: 5px 0; 
+    display: flex;
+    /* 確保元素分佈到兩端，實現名稱在左，數值在右 */
+    justify-content: space-between; 
+    font-weight: 500; 
+    width: 100%; 
+}
+
+/* KNaO 總和的特殊樣式 (粗體深綠色) */
+.details .knao-total {
+    font-weight: bold; 
+    color: #006400; /* 【可修改】KNaO 總和的深綠色 */
+    border-top: 1px dashed #aaa; 
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+/* 關鍵分析指標區塊的樣式 */
+.analysis-summary {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px; 
+    display: flex; 
+    justify-content: space-between;
+}
+.analysis-box {
+    width: 48%;
+}
+.ratio-value {
+    font-size: 1.6em; 
+    color: #c0392b; 
+    font-weight: bold;
+}
+
+
+/* --- 響應式佈局 (小螢幕時改為堆疊) --- */
+@media (max-width: 1000px) {
+    .main-content {
+        flex-direction: column; /* 小螢幕時改為垂直堆疊 */
+        flex-wrap: wrap; 
+    }
+    .input-section {
+        flex: 1;
+        max-height: none; 
+        overflow-y: visible;
+    }
+}
+
+
+<! youtube 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-youtube {
+    background-color: #dc3545;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 20px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 550px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-youtube a {
+    color: white;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}

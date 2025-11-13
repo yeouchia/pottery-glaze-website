@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶瓷釉藥賽格式計算器 V5.1 - 釉式→原料計算 (複製功能)</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <h1>陶瓷釉藥賽格式計算器 V5.1 釉式→原料計算</h1>
+        <div id="author-info">© 2025 陶瓷釉藥輔助工具 by 黃明文</div>
+    </header>
+
+    <main>
+        <div class="left-column-wrapper">
+
+            <section class="umf-inputs-section">
+                <h2>1. 釉式目標 (RO組總和必須為 1.0)</h2>
+                <div class="umf-inputs-container">
+                    
+                    <fieldset class="umf-inputs ro-group">
+                        <legend>RO 組 (R₂O + RO) <span id="ro-umf-total">合計: 0.000</span></legend>
+                        
+                        <div class="input-row">
+                            <label for="umf-KNaO-sum">KNaO 總目標 (必填)</label>
+                            <input type="number" step="0.001" id="umf-KNaO-sum" value="0.400" min="0">
+                        </div>
+                        
+                        <div class="input-row readonly-row">
+                            <label for="umf-K2O">K₂O 鉀 (長石分配)</label>
+                            <input type="number" step="0.0001" id="umf-K2O" value="0.0000" readonly>
+                        </div>
+                        
+                        <div class="input-row readonly-row">
+                            <label for="umf-Na2O">Na₂O 鈉 (長石分配)</label>
+                            <input type="number" step="0.0001" id="umf-Na2O" value="0.0000" readonly>
+                        </div>
+                        
+                        <div class="input-row">
+                            <label for="umf-CaO">CaO 鈣</label>
+                            <input type="number" step="0.001" id="umf-CaO" value="0.350" min="0">
+                        </div>
+                        
+                        <div class="input-row">
+                            <label for="umf-MgO">MgO 鎂</label>
+                            <input type="number" step="0.001" id="umf-MgO" value="0.250" min="0">
+                        </div>
+                        
+                        <div class="input-row">
+                            <label for="umf-BaO">BaO 鋇</label>
+                            <input type="number" step="0.001" id="umf-BaO" value="0.000" min="0">
+                        </div>
+                        
+                        <div class="input-row">
+                            <label for="umf-ZnO">ZnO 鋅</label>
+                            <input type="number" step="0.001" id="umf-ZnO" value="0.000" min="0">
+                        </div>
+
+                        <div class="input-row">
+                            <label for="umf-SrO">SrO 鍶</label>
+                            <input type="number" step="0.001" id="umf-SrO" value="0.000" min="0">
+                        </div>
+                        
+                        <div class="input-row">
+                            <label for="umf-PbO">PbO 鉛</label>
+                            <input type="number" step="0.001" id="umf-PbO" value="0.000" min="0">
+                        </div>
+                        
+                        <div class="input-row">
+                            <label for="umf-Li2O">Li₂O 鋰</label>
+                            <input type="number" step="0.001" id="umf-Li2O" value="0.000" min="0">
+                        </div>
+
+                    </fieldset>
+                    
+                    <div class="umf-right-column">
+                        
+                        <fieldset class="umf-inputs r2o3-group">
+                            <legend>R₂O₃ 組 (中性/穩定劑)</legend>
+                            
+                            <div class="input-row">
+                                <label for="umf-Al2O3">Al₂O₃ 鋁</label>
+                                <input type="number" step="0.001" id="umf-Al2O3" value="0.700" min="0">
+                            </div>
+                            
+                            <div class="input-row">
+                                <label for="umf-Fe2O3">Fe₂O₃ 鐵</label>
+                                <input type="number" step="0.0001" id="umf-Fe2O3" value="0.0000" min="0">
+                            </div>
+                            
+                            <div class="input-row">
+                                <label for="umf-Cr2O3">Cr₂O₃ 鉻</label>
+                                <input type="number" step="0.0001" id="umf-Cr2O3" value="0.0000" min="0">
+                            </div>
+
+                            <div class="input-row">
+                                <label for="umf-B2O3">B₂O₃ 硼</label>
+                                <input type="number" step="0.001" id="umf-B2O3" value="0.000" min="0">
+                            </div>
+                            
+                            <div class="input-row">
+                                <label for="umf-P2O5">P₂O₅ 磷</label>
+                                <input type="number" step="0.001" id="umf-P2O5" value="0.000" min="0">
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset class="umf-inputs ro2-group">
+                            <legend>RO₂ 組 (酸性/形成劑)</legend>
+                            
+                            <div class="input-row">
+                                <label for="umf-SiO2">SiO₂ 矽</label>
+                                <input type="number" step="0.01" id="umf-SiO2" value="4.00" min="0">
+                            </div>
+                            
+                            <div class="input-row">
+                                <label for="umf-TiO2">TiO₂ 鈦</label>
+                                <input type="number" step="0.001" id="umf-TiO2" value="0.000" min="0">
+                            </div>
+                            
+                            <div class="input-row">
+                                <label for="umf-SnO2">SnO₂ 錫</label>
+                                <input type="number" step="0.001" id="umf-SnO2" value="0.000" min="0">
+                            </div>
+
+                            <div class="input-row">
+                                <label for="umf-ZrO2">ZrO₂ 鋯</label>
+                                <input type="number" step="0.001" id="umf-ZrO2" value="0.000" min="0">
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <div id="glaze-chart-section">
+                <h3>2. Al₂O₃ SiO₂ 線性圖</h3>
+                <div id="glaze-chart">
+                    <div class="chart-area matte-area">無光釉區</div>
+                    <div class="chart-area bright-area">光亮釉區</div>
+                    <div class="chart-area opacified-area">乳濁區</div> 
+                    
+                    <div id="chart-grid">
+                        <div class="y-tick y-02"><span class="tick-label">0.2</span></div>
+                        <div class="y-tick y-04"><span class="tick-label">0.4</span></div>
+                        <div class="y-tick y-06"><span class="tick-label">0.6</span></div>
+                        <div class="y-tick y-08"><span class="tick-label">0.8</span></div>
+                        <div class="y-tick y-10"><span class="tick-label">1.0</span></div>
+                        
+                        <div class="x-tick x-20"><span class="tick-label">2.0</span></div>
+                        <div class="x-tick x-40"><span class="tick-label">4.0</span></div>
+                        <div class="x-tick x-60"><span class="tick-label">6.0</span></div>
+                        <div class="x-tick x-80"><span class="tick-label">8.0</span></div>
+                        <div class="x-tick x-100"><span class="tick-label">10.0</span></div>
+                    </div>
+                    
+                    <div class="axis-label x-label" id="sio2-axis-label">SiO₂ 莫耳數 (酸性)</div>
+                    <div class="axis-label y-label" id="al2o3-axis-label">Al₂O₃ 莫耳數 (中性)</div>
+
+ 
+
+                    <div id="current-glaze-point" class="glaze-point"><font color="red" size="1">▲A:S~Position</font> <div class="point-value"></div>
+                    </div>
+                    <div class="origin-label">0</div>
+                </div>
+            </div>
+
+        </div> <section class="recipe-section">
+            <h2>3. 配方求解</h2>
+
+            <div class="recipe-summary">
+                <p id="feldspar-warning" class="warning-box notice-box">請選擇長石類原料並輸入 KNaO 總目標。</p>
+            </div>
+
+            <table id="recipe-table">
+                <thead>
+                    <tr>
+                        <th>原料名稱 (請依據類別分配)</th>
+                        <th>計算重量 (100%)</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="recipe-tbody">
+                    </tbody>
+                </table>
+            
+            <button id="add-raw-btn">新增原料行</button>
+            <button id="calculate-btn">重新計算配方</button>
+            
+            <button id="copy-umf-btn">複製賽格式</button>
+            <button id="copy-batch-btn">複製原料配方</button>
+
+            <div id="recipe-summary-footer">
+                <div class="summary-row">
+                    <span class="summary-label">總計 (不含 LOI):</span>
+                    <span id="total-weight-display" class="summary-value">0.00 %</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">燒失量 (LOI):</span>
+                    <span id="total-loi" class="summary-value">0.00 %</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">SiO₂/Al₂O₃ 比值:</span>
+                    <span id="si-al-ratio" class="summary-value">N/A</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Fe₂O₃/Al₂O₃ 比值:</span>
+                    <span id="fe-al-ratio" class="summary-value">N/A</span>
+                </div>
+            </div>
+
+<! 新增釉式配方區>
+ <! 新增釉式配方區>
+ <button id="add-youtube">
+    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">
+        Youtube陶藝與釉藥調配 </a>
+</button>
+
+<br>
+
+
+ <button id="add-glaze-1">
+    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">天目釉釉式資料</button>
+ <button id="add-glaze-2">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">銅紅釉釉式資料</button>
+ <button id="add-glaze-3">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">青瓷釉釉式資料</button>
+ <button id="add-glaze-4">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">鈞紅釉釉式資料</button>
+ <button id="add-glaze-5">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">哥窯釉釉式資料</button>
+ <button id="add-glaze-6">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">金銅釉釉式資料</button>
+ <button id="add-glaze-7">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">閃光釉釉式資料</button>
+ <button id="add-glaze-8">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">鐵紅釉釉式資料</button>
+ <button id="add-glaze-9">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">三彩釉釉式資料</button>
+ <button id="add-glaze-10">    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">汝瓷釉釉式資料</button>
+<br>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

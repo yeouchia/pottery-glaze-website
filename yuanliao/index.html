@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶瓷釉藥賽格式計算器 V10.7 (最終穩定版)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>陶瓷釉藥賽格式計算器V10.7 原料→釉式計算</h1>
+       <div id="author-info">© 2025 陶瓷釉藥輔助工具 by 黃明文</div>
+
+    </header>
+
+    <main>
+        <div class="main-content">
+            
+            <section class="input-section box-shadow">
+                <h2>原料配方 (重量 %)</h2>
+                <table id="recipe-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 45%;">原料名稱</th>
+                            <th style="width: 30%;">重量 (%)</th>
+                            <th style="width: 25%;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <button id="add-row-btn">➕ 新增原料</button>
+                                <span id="total-weight-display" class="total-display">總計: 0.00 %</span>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+    
+            <section class="output-wrapper">
+                
+                <div class="calculation-section">
+                    <button id="calculate-btn">開始計算釉式</button>
+                </div>
+                
+                <div class="output-section box-shadow">
+                    <h2>釉藥分析結果</h2>
+                    
+                    <div class="seger-formula-output">
+                        
+                        <div class="seger-group ro-group">
+                            <h3>RO 組 - 助熔劑</h3>
+                            <div class="mole-line">1.000</div>
+                            <div id="ro-details" class="details"></div>
+                        </div>
+
+                        <div class="seger-group r2o3-group">
+                            <h3>R₂O₃ 組 - 中性/穩定劑</h3>
+                            <div id="r2o3-mole" class="mole-value">0.000</div>
+                            <div id="r2o3-details" class="details"></div>
+                        </div>
+
+                        <div class="seger-group ro2-group">
+                            <h3>RO₂ 組 - 酸性/形成劑</h3>
+                            <div id="ro2-mole" class="mole-value">0.000</div>
+                            <div id="ro2-details" class="details"></div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-summary">
+                        
+                        <div class="analysis-box" style="width: 48%;">
+                            <p><strong>SiO₂ : Al₂O₃ 比</strong></p>
+                            <div id="si-al-ratio" class="ratio-value">0.00 : 1</div>
+                        </div>
+                        
+                        <div class="analysis-box" style="width: 48%;">
+                            <p><strong>總燒失量 (L.O.I.)</strong></p>
+                            <div id="total-loi" class="ratio-value">0.00 %</div>
+                        </div>
+                    </div>
+
+                </div>
+
+<! 新增釉式配方區>
+ <button id="add-youtube">
+    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank">
+        Youtube陶藝與釉藥調配 </a>
+</button>
+
+            </section>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>

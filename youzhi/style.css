@@ -1,0 +1,959 @@
+/* ===================================================
+   陶瓷釉藥賽格式計算器 V5.1 CSS 樣式 - 總結區塊移至按鈕下方 + 成功提示閃爍
+   【修正】移除 tfoot 樣式，新增 #recipe-summary-footer 樣式。新增 success-pulse 動畫。
+   【V5.1 佈局修正】新增 .left-column-wrapper 以容納 UMF 和 圖表。
+   =================================================== */
+
+body {
+    font-family: '微軟正黑體', 'Microsoft JhengHei', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9; /* 淺灰色背景 */
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #34495e; 
+    color: white;
+    /* 核心修復：使用 Flexbox 佈局 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 讓 h1 預設居中 */
+    padding: 6px 15px; /* 增加左右 padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* 確保作者資訊能相對於此定位 */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 14px; 
+    font-weight: bold;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    /* 在 Flex 容器中，h1 自動居中 */
+}
+
+/* 修正 1 修復: 作者資訊靠左對齊，不再使用 position: absolute */
+#author-info {
+    position: absolute; /* 重新使用 absolute 但確保 h1 居中是靠 Flex */
+    left: 15px; /* 靠左邊距 */
+    top: 50%;
+    transform: translateY(-50%); /* 垂直居中 */
+    font-size: 11px; /* 縮小字體 */
+    opacity: 0.8;
+}
+
+main {
+    max-width: 1400px; 
+    margin: 20px auto;
+    padding: 0 10px;
+    
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 25px; 
+}
+
+/* ===================================================
+   V4.9.9 佈局修正：新增左欄 Wrapper
+   =================================================== */
+.left-column-wrapper {
+    /* 將原 .umf-inputs-section 的 flex 佈局屬性移至此處 */
+    flex: 0 0 550px; 
+    min-width: 550px; 
+
+    /* 確保內部的 1. 和 2. 垂直堆疊 */
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* 保持與 main 相同的間距 */
+}
+
+
+/* 左右區塊的樣式 */
+.umf-inputs-section, .recipe-section {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.umf-inputs-section {
+    /* 【V4.9.9 佈局修正】移除 flex 佈局屬性 (已移至 wrapper) */
+    /* flex: 0 0 550px; (Removed) */
+    /* min-width: 550px; (Removed) */
+}
+
+.recipe-section {
+    flex: 1; 
+    min-width: 450px; 
+}
+
+/* 區塊標題 H2 樣式 */
+.umf-inputs-section h2, .recipe-section h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #34495e; 
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* 警告/提示區域樣式 */
+.warning-box {
+    padding: 8px; 
+    margin-bottom: 10px; 
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid transparent;
+    /* 確保初始狀態有過渡效果 */
+    transition: all 0.2s ease-in-out; 
+}
+
+.warning-box.notice-box {
+    background-color: #e6ffe6; 
+    color: #0056b3; 
+    border-color: #b3d9ff;
+    box-shadow: none; 
+}
+
+.warning-box.error-box {
+    background-color: #f8d7da; 
+    color: #721c24;
+    border-color: #f5c6cb;
+    box-shadow: none; 
+}
+
+/* ===================================================
+   UMF 輸入區：颜色調換修正 (RO:綠, R2O3:紅, RO2:藍)
+   =================================================== */
+.umf-inputs-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* RO組 (現在是綠色) */
+.ro-group {
+    flex: 1 1 50%;
+    padding: 8px;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #e6ffe6;
+}
+
+.ro-group legend {
+    color: #1e7e34;
+    font-weight: bold;
+}
+
+.umf-right-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 45%;
+    gap: 15px;
+}
+
+/* R2O3組 (現在是粉紅色) */
+.r2o3-group {
+    border: 1px solid #dc3545;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #ffe6e6;
+}
+
+.r2o3-group legend {
+    color: #8b0000;
+    font-weight: bold;
+}
+
+/* RO2組 (現在是藍色) */
+.ro2-group {
+    border: 1px solid #007bff;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #e6f7ff;
+}
+
+.ro2-group legend {
+    color: #004085;
+    font-weight: bold;
+}
+
+.umf-inputs .input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px; 
+    font-size: 13px;
+}
+
+.umf-inputs label {
+    flex: 1;
+    white-space: nowrap;
+    margin-right: 10px; 
+}
+
+.umf-inputs input[type="number"] {
+    width: 80px; 
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: right; 
+    font-size: 13px;
+}
+
+.umf-inputs .readonly-row input[type="number"] {
+    background-color: #e9ecef; 
+    color: #6c757d; 
+    border-style: dashed;
+}
+
+/* RO 組合計顯示樣式 */
+#ro-umf-total {
+    font-weight: bold;
+    color: #333; 
+    margin-left: 10px;
+}
+
+/* ===================================================
+   配方表格樣式 (移除 tfoot 相關樣式)
+   =================================================== */
+#recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+#recipe-table th, #recipe-table td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+}
+
+#recipe-table th {
+    background-color: #34495e;
+    color: white;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+#recipe-tbody td {
+    vertical-align: middle;
+}
+
+/* 隱藏 tfoot 區塊 */
+#recipe-table tfoot {
+    display: none;
+}
+/* 由於 tfoot 被移除，原有的 tfoot td 樣式也無需保留 */
+
+
+.calculated-weight-cell {
+    text-align: right;
+    font-weight: bold;
+    color: #28a745;
+}
+
+#recipe-tbody select {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+/* ===================================================
+   按鈕樣式 (維持不變)
+   =================================================== */
+
+button {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 8px;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+    font-size: 13px;
+}
+
+/* ===================================================
+   按鈕樣式 (維持不變) 天目釉 銅紅釉
+   =================================================== */
+<! youtube 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-youtube {
+    background-color: #dc3545;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 20px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-youtube a {
+    color: white;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+
+   =================================================== */
+<! 天目釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-1 {
+    background-color: #00a800;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-1 a {
+    color: white;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+
+   =================================================== */
+<! 銅紅釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-2 {
+    background-color: #dc143c;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-2 a {
+    color: white;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+
+   =================================================== */
+<! 青瓷釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-3 {
+    background-color: #7fffd4;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-3 a {
+    color: black;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 鈞紅釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-4 {
+    background-color: #ba55d3;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-4 a {
+    color: black;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 哥窯釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-5 {
+    background-color: #d3d3d3;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-5 a {
+    color: 000080;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 金銅釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-6 {
+    background-color: #ff8c00;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-6 a {
+    color: black;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 閃光釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-7 {
+    background-color: #1e90ff;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-7 a {
+    color: black;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 鐵紅釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-8 {
+    background-color: #800000;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-8 a {
+    color: white;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 三彩釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-9 {
+    background-color: #FFFF00;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-9 a {
+    color: BLACK;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+   =================================================== */
+<! 汝瓷釉 按鈕連結設定>
+/* 容器（假設這是您的按鈕所在的父元素） */
+.container {
+    /* 這裡省略，請根據您選擇的佈局方式添加 Flex/Grid 佈局代碼 */
+}
+
+/* 按鈕的樣式和位置控制 */
+#add-glaze-10 {
+    background-color: #F0FFFF;
+    border: none;        /* 移除按鈕預設邊框 */
+    padding: 10px 5px;  /* 增加內邊距讓按鈕看起來更舒適 */
+    cursor: pointer;     /* 顯示手型游標 */
+    
+    /* 範例: 使用 margin 向下向右移動 */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 連結的樣式：必須設定這個才能讓文字是白色 */
+#add-glaze-10 a {
+    color: black;             /* 確保連結文字是白色 */
+    text-decoration: none;    /* 移除連結預設的底線 */
+    display: inline-block;    /* 確保連結可以填滿按鈕空間 */
+}
+<! youtube 按鈕連結設定結束>
+<!========================================================================>
+
+
+
+
+
+#add-Copper-Red {
+    background-color: #28a745;
+    color: white;
+}
+
+#add-raw-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+
+
+#calculate-btn {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.remove-row-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    font-weight: normal;
+    margin: 0;
+    font-size: 12px;
+}
+
+/* 確保按鈕在 table 外，因此調整 margin-top */
+.recipe-section button {
+    margin-top: 15px;
+}
+
+/* V4.7 新增樣式：複製按鈕 */
+#copy-umf-btn,
+#copy-batch-btn {
+    background-color: #3498db; 
+    color: white;
+}
+#copy-umf-btn:hover,
+#copy-batch-btn:hover {
+    background-color: #2980b9;
+}
+.recipe-section #copy-umf-btn,
+.recipe-section #copy-batch-btn {
+    margin-top: 15px; 
+}
+
+
+/* ===================================================
+   V4.9.5 新增樣式：配方總結區 (移動自 tfoot)
+   =================================================== */
+#recipe-summary-footer {
+    display: grid;
+    /* 建立兩欄佈局，模擬原 tfoot 的兩行四列 */
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px 20px; /* 行間距 10px, 欄間距 20px */
+    margin-top: 25px; /* 與按鈕區隔開 */
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+#recipe-summary-footer .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 2px 0;
+}
+
+#recipe-summary-footer .summary-label {
+    color: #333;
+    white-space: nowrap;
+}
+
+#recipe-summary-footer .summary-value {
+    text-align: right;
+    font-weight: bold;
+    color: #007bff; /* 使用藍色強調數值 */
+}
+
+
+/* ===================================================
+   V4.9.6 新增樣式：成功提示閃爍動畫
+   =================================================== */
+/* 定義成功脈衝動畫 keyframes */
+@keyframes success-pulse-flash {
+    /* 0% 和 50% 使用顯眼的顏色 (綠色背景, 白色文字) */
+    0%, 50% { 
+        background-color: #28a745; 
+        color: white; 
+        border-color: #28a745; 
+        transform: scale(1.02); /* 輕微放大以增加衝擊 */
+        box-shadow: 0 0 10px rgba(40, 167, 69, 0.6); /* 增加陰影 */
+    }
+    /* 25% 和 75% 使用 notice-box 的預設色 (淺藍色) */
+    25%, 75% { 
+        background-color: #e6ffe6; 
+        color: #0056b3; 
+        border-color: #b3d9ff;
+        transform: scale(1);
+        box-shadow: none;
+    }
+    /* 100% 恢復到 notice-box 的樣式 (結束狀態) */
+    100% { 
+        background-color: #e6ffe6; 
+        color: #0056b3; 
+        border-color: #b3d9ff;
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+/* 應用於成功訊息框的 Class */
+.success-pulse {
+    /* 動畫執行 2 秒，執行一次，並停在 100% 的狀態 */
+    animation: success-pulse-flash 2s ease-in-out forwards; 
+    border-width: 2px !important; /* 邊框略微變粗，增加衝擊感 */
+}
+
+
+/* ===================================================
+   【V11.0.30 新增樣式】原料無作用時的提示
+   =================================================== */
+.raw-material-warning-text {
+    display: block; /* 讓提示文字換行 */
+    font-size: 11px;
+    font-weight: bold;
+    color: #dc3545; /* 使用錯誤紅色 */
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+/* (RWD 響應式調整 - 保持不變) */
+@media (max-width: 1000px) { 
+    main {
+        flex-direction: column; 
+        gap: 15px;
+    }
+
+    /* 【V4.9.9 佈局修正】RWD 下 Wrapper 也失效 */
+    .left-column-wrapper {
+        min-width: 100%;
+        gap: 15px;
+    }
+    
+    .umf-inputs-section, .recipe-section {
+        min-width: 100%;
+        max-width: 100%; 
+        flex: auto;
+    }
+    
+    .umf-inputs-container {
+        flex-direction: column;
+    }
+    .ro-group, .umf-right-column {
+        flex: 1 1 100%;
+    }
+}
+/* ===================================================
+   V4.9.9 修正樣式：釉式圖表 (Al2O3 vs SiO2) - 精確網格與刻度
+   =================================================== */
+
+/* 【V4.9.9 佈局修正】圖表區塊現在是獨立 <section> */
+#glaze-chart-section {
+    /* 保持 V4.9.6 的外觀 */
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+#glaze-chart h3 {
+    font-size: 14px;
+    color: #34495e; /* V4.9.9 修正: 統一 H3 顏色 */
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd; /* V4.9.9 修正: 統一 H3 樣式 */
+    padding-bottom: 5px;
+}
+
+#glaze-chart {
+    position: relative;
+    width: 350px; /* 圖表寬度 */
+    height: 350px; /* 圖表高度 */
+    border-left: 2px solid #333; /* Y 軸 */
+    border-bottom: 2px solid #333; /* X 軸 */
+    margin: 15px 10px 35px 35px; /* 調整左邊距給 Al2O3 標籤/刻度 */
+    background-color: #f9f9f9;
+}
+
+/* 經典區域劃分 (保持不變) */
+.chart-area {
+    position: absolute;
+    opacity: 0.7;
+    font-size: 11px;
+    color: #333;
+    padding: 5px;
+    border-radius: 4px;
+    text-align: center;
+    box-sizing: border-box;
+    bottom: 0; 
+    left: 0;
+}
+
+/* 1. 無光釉區 (Matte Area) */
+.matte-area {
+    background-color: rgba(255, 199, 199, 0.7); 
+    width: 150px; 
+    height: 200px; 
+    top: 0;
+    left: 0;
+    line-height: 1.2;
+}
+
+/* 2. 光亮釉區 (Bright/Glossy Area) */
+.bright-area {
+    background-color: rgba(199, 255, 199, 0.7); 
+    width: 250px; 
+    height: 200px; 
+    bottom: 0; 
+    left: 100px; 
+    line-height: 1.2;
+}
+
+/* 3. 乳濁釉區 (Opacified Area) */
+.opacified-area {
+    background-color: rgba(199, 199, 255, 0.7); 
+    width: 100px;
+    height: 100px;
+    top: 150px;
+    right: 0;
+    line-height: 1.2;
+}
+
+
+/* 座標軸標籤 (修正 Y 軸標籤位置) */
+.axis-label {
+    position: absolute;
+    font-size: 11px;
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+}
+.x-label {
+    bottom: -40px; /* 從 -30px 改為 -40px，向外移 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px; /* 統一為 12px */
+}
+/* Y 軸標籤：置於 Y 軸數據刻度左邊 */
+.y-label {
+    top: 50%;
+    left: -105px; /* 從 -45px 改為 -105px，向外移 */
+    transform: rotate(-90deg) translateY(50%);
+    font-size: 12px;
+}
+
+/* 網格線和刻度樣式 */
+#chart-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.y-tick, .x-tick {
+    position: absolute;
+    border-color: #ccc;
+    border-style: dashed;
+    pointer-events: none;
+    z-index: 5; /* 確保網格線在點的下方 */
+}
+.tick-label {
+    position: absolute;
+    font-size: 10px;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* Y 軸刻度線/標籤 (0.2, 0.4, 0.6, 0.8, 1.0) */
+.y-tick {
+    left: 0;
+    width: 100%;
+    height: 1px;
+    border-top-width: 1px;
+}
+.y-tick .tick-label {
+    right: 100%; /* 標籤放在 Y 軸線的左邊 */
+    padding-right: 5px;
+    transform: translateY(-50%);
+}
+
+.y-02 { bottom: 20%; }
+.y-04 { bottom: 40%; }
+.y-06 { bottom: 60%; }
+.y-08 { bottom: 80%; }
+.y-10 { top: 0; border-top: 1px solid #333; } /* 頂部刻度線加粗 */
+.y-10 .tick-label { transform: translateY(-100%); bottom: auto; top: 0; } /* 避免超出圖表 */
+
+
+/* X 軸刻度線/標籤 (2.0, 4.0, 6.0, 8.0, 10.0) */
+.x-tick {
+    bottom: 0;
+    height: 100%;
+    width: 1px;
+    border-left-width: 1px;
+}
+.x-tick .tick-label {
+    top: 100%; /* 標籤放在 X 軸線的下方 */
+    transform: translateX(-50%);
+    padding-top: 5px;
+}
+
+.x-20 { left: 20%; }
+.x-40 { left: 40%; }
+.x-60 { left: 60%; }
+.x-80 { left: 80%; }
+.x-100 { right: 0; border-left: 1px solid #333; } /* 右側刻度線加粗 */
+.x-100 .tick-label { transform: translateX(50%); left: auto; right: 0; } /* 避免超出圖表 */
+
+/* 原點標記 (0) */
+.origin-label {
+    position: absolute;
+    bottom: -20px;
+    left: -15px;
+    font-size: 10px;
+    color: #333;
+}
+
+
+/* 計算點樣式 */
+.glaze-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    /* V4.9.9 修正：點位定位基準點 (左下角) */
+    transform: translate(-50%, 50%); 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
+    transition: all 0.5s ease;
+    /* 預設隱藏，直到 JS 計算完成 */
+    display: none; 
+}
+
+/* 點的數值提示 */
+.glaze-point .point-value {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap; /* 確保提示不換行 */
+}
+
+.glaze-point:hover .point-value {
+    opacity: 1;
+}
+/* --- 修改 1：圖表座標軸標籤顏色 --- */
+#al2o3-axis-label {
+    color: red;
+}
+
+#sio2-axis-label {
+    color: blue;
+}
+/* --- 結束 修改 1 --- */
+
+
+
