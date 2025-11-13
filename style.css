@@ -1,120 +1,198 @@
+/* 標記: 基礎設定 */
 body {
     font-family: 'Microsoft JhengHei', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #f8f8f8; /* 標記: 網頁背景色 - 極淺灰 (乾淨現代感) */
+    color: #333; /* 標記: 預設文字顏色 */
     line-height: 1.6;
 }
 
+/* 標記: 頁首區塊 (上方選項區) */
 header {
-    background-color: #4CAF50; /* 主題綠色 */
+    background-color: #14213d; /* 標記: 頁首背景色 - 深海軍藍 (高級感主色) */
     color: white;
-    padding: 30px 20px;
+    padding: 10px 20px; /* 標記: 大幅縮小垂直高度 */
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* 標記: 核心修改：啟用 Flexbox 實現單行對齊 */
+.header-bar {
+    display: flex;
+    justify-content: space-between; /* 標題靠左，按鈕靠右 */
+    align-items: center; /* 垂直居中對齊 */
+    max-width: 1400px; /* 讓內容在超寬螢幕上也能保持居中 */
+    margin: 0 auto;
+}
+
+/* 標記: 隱藏佔空間的描述文字 */
+.header-text .description {
+    display: none;
 }
 
 header h1 {
-    margin-top: 0;
-    font-size: 2.5em;
+    margin: 0; /* 移除標題的邊距 */
+    font-size: 1.5em; /* 標記: 縮小標題文字 */
+    white-space: nowrap; /* 確保標題不換行 */
 }
 
-main {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-section {
-    background-color: white;
-    padding: 30px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-h2 {
-    color: #4CAF50;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-
-/* YouTube 連結樣式 */
-.youtube-section .main-link {
-    display: block;
-    text-align: center;
-    background-color: #FF0000; /* YouTube 紅色 */
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin: 20px 0;
-    transition: background-color 0.3s;
-}
-
-.youtube-section .main-link:hover {
-    background-color: #cc0000;
-}
-
-.youtube-section ul {
-    list-style: none;
+/* 標記: 導覽工具區塊的容器 */
+.nav-tools {
+    margin: 0;
     padding: 0;
+    text-align: right; /* 按鈕靠右 */
+    display: flex; /* 讓按鈕組件也能水平排列 */
+    align-items: center;
+    gap: 10px; /* 縮小按鈕群組之間的間距 */
 }
 
-.youtube-section ul li a {
-    display: block;
-    padding: 8px 0;
-    color: #1a73e8;
+/* 標記: 移除不再使用的社群連結容器 */
+.social-links {
+    display: none; 
+}
+
+/* 標記: 按鈕通用樣式 (移除白色強制設定) */
+.social-button, .main-link {
+    padding: 6px 10px; /* 縮小按鈕高度 */
+    font-size: 0.9em;
+    border: none; /* 移除邊框 */
     text-decoration: none;
-    border-bottom: 1px dashed #eee;
-}
-
-/* 計算器連結樣式 */
-.calculator-tools {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-    flex-wrap: wrap; 
-}
-
-.tool-button {
-    flex-grow: 1;
-    min-width: 250px;
-    background-color: #00796b; /* 藍綠色 */
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.2em;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s;
+    white-space: nowrap;
 }
 
-.tool-button:hover {
-    background-color: #004d40;
-    transform: translateY(-2px);
+
+/* --- 標記: 個別按鈕顏色定義 (核心修改) --- */
+
+/* Facebook (FB 藍) */
+.facebook-btn {
+    background-color: #1877F2;
+    color: white;
+}
+.facebook-btn:hover {
+    background-color: #145DB0;
 }
 
-.tool-button small {
+/* Instagram (IG 粉/紫) */
+.instagram-btn {
+    background-color: #C13584;
+    color: white;
+}
+.instagram-btn:hover {
+    background-color: #9C2A6A;
+}
+
+/* 工作坊 (黃色) */
+.workshop-btn {
+    background-color: #FFC107; /* 標記: 顯眼的黃色 */
+    color: #14213d; /* 標記: 深藍文字，確保對比 */
+}
+.workshop-btn:hover {
+    background-color: #E0A800;
+}
+
+/* YouTube 連結 (YT 紅) */
+.main-link { 
+    background-color: #FF0000; /* 標記: YouTube 紅色 */
+    color: white; 
+}
+.main-link:hover { 
+    background-color: #CC0000;
+}
+/* --- 結束個別按鈕顏色定義 --- */
+
+
+/* 標記: 計算器按鈕群組 */
+.content-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+/* 標記: 白色按鈕群組 (現已不是白色) */
+.white-buttons-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+/* 計算器連結 (土耳其藍) */
+.tool-button { 
+    background-color: #48D1CC; 
+    color: #14213d; 
+    padding: 6px 10px;
+    font-size: 0.9em;
+}
+.tool-button:hover { background-color: #38C7C2; }
+
+
+/* 標記: 網站主要內容區塊的容器 */
+main {
+    margin: 20px auto; 
+    padding: 0 20px; 
+    width: auto; 
+}
+
+/* 標記: 內容分割區塊 (使用 iframe) 的樣式 */
+#content-iframe {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    background-color: white;
     display: block;
-    font-size: 0.8em;
-    margin-top: 5px;
-    font-weight: normal;
 }
 
-/* 頁腳 */
+/* 標記: 頁腳區塊 */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #14213d; 
     color: white;
     font-size: 0.9em;
     margin-top: 20px;
+}
+
+/* 標記: 響應式調整 (維持上次的緊湊配置) */
+@media (max-width: 950px) {
+    .header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-tools {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+    .header-text {
+        text-align: left;
+        width: 100%;
+    }
+    header h1 {
+        font-size: 1.8em;
+    }
+    .content-links, .white-buttons-group {
+        margin-top: 5px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 500px) {
+    .content-links, .white-buttons-group {
+        flex-wrap: wrap;
+    }
+}
+
+/* 移除不再需要的舊樣式 */
+.youtube-section, .calculator-section, 
+.youtube-section ul, .youtube-section ul li, 
+.youtube-section ul li a, .tool-button small {
+    display: none !important;
 }
