@@ -3,40 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歡迎</title>
+    <title>網頁架構中</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- CSS 樣式保持不變 --- */
         body {
-            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 40px;
-            background-color: #f8f8f8; /* 與主頁背景色保持一致 */
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #f8f9fa, #e3f2fd, #fff8e1, #f3e5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             color: #14213d;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-icon {
+            position: fixed;
+            color: rgba(20, 33, 61, 0.03);
+            z-index: 0;
+            animation: floatBackground 20s linear infinite;
+            pointer-events: none;
+        }
+        .bg-icon:nth-child(1) { top: 10%; left: 5%; font-size: 8em; animation-duration: 25s; }
+        .bg-icon:nth-child(2) { top: 15%; right: 10%; font-size: 10em; animation-duration: 35s; animation-delay: -5s; }
+        .bg-icon:nth-child(3) { bottom: 10%; left: 10%; font-size: 6em; animation-duration: 30s; animation-delay: -10s; }
+        .bg-icon:nth-child(4) { bottom: 5%; right: 5%; font-size: 5em; animation-duration: 20s; animation-delay: -2s; }
+
+        @keyframes floatBackground {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, 20px) rotate(10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 95%;
+            max-width: 1400px;
             text-align: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
         }
+
+        .hero-section {
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            text-align: left;
+        }
+
+        .main-icon {
+            font-size: 4.5em;
+            background: linear-gradient(135deg, #555, #fca311);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0;
+            animation: floatIcon 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         h2 {
-            font-size: 2em;
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
             color: #14213d;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1.2;
         }
-        p {
-            font-size: 1.1em;
-            color: #333;
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #555;
+            max-width: 800px;
+            margin: 0;
+            line-height: 1.6;
         }
-        .note {
+
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin-top: 30px;
-            padding: 15px;
-            border: 2px solid #48D1CC; /* 搭配計算器顏色 */
-            background-color: #EDFDFD;
-            border-radius: 8px;
-            display: inline-block;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            flex-wrap: nowrap;
+        }
+
+        .feature-card {
+            flex: 1;
+            min-width: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            opacity: 0.85; 
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+        }
+        .card-calc::before { background: #fca311; }
+        .card-video::before { background: #ff0000; }
+        .card-life::before { background: #9d4edd; }
+        .card-fun::before { background: #4caf50; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon { font-size: 1.8em; flex-shrink: 0; }
+        .card-calc .card-icon { color: #fca311; }
+        .card-video .card-icon { color: #ff0000; }
+        .card-life .card-icon { color: #9d4edd; }
+        .card-fun .card-icon { color: #4caf50; }
+
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #14213d;
+            white-space: nowrap;
+        }
+
+        .card-desc {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            flex-grow: 1;
+            margin-bottom: 10px;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 30px;
+            background-color: #fff;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            font-size: 0.9em;
+            color: #555;
+            font-weight: bold;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            border: 1px solid #eee;
+        }
+        .footer-note i {
+            color: #fca311;
+            margin-right: 10px;
+            font-size: 1.2em;
+            animation: bounceArrow 1.5s infinite;
+        }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounceArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        @media (max-width: 1024px) {
+            .features-grid { flex-wrap: wrap; }
+            .feature-card { flex: 1 1 45%; min-width: 250px; }
+        }
+        @media (max-width: 600px) {
+            .hero-section { flex-direction: column; text-align: center; gap: 10px; }
+            .main-icon { margin-bottom: 10px; }
+            .subtitle { text-align: center; }
+            h2 { font-size: 1.8em; }
+            .container { padding: 20px 15px; width: 100%; }
+            .feature-card { flex: 1 1 100%; }
         }
     </style>
 </head>
-<body>
-    <h2>🎨 歡迎使用釉藥調配計算工具</h2>
-    <p>「雙向轉換 (二合一)」** 開發進行中。</p>
-    
-    <div class="note">
-        <p>敬請等待...............。</p>
+<body onclick="unlockAudio()">
+
+    <!-- 背景漂浮元素 -->
+    <i class="fa-solid fa-wrench bg-icon"></i>
+    <i class="fa-solid fa-compass-drafting bg-icon"></i>
+    <i class="fa-solid fa-hammer bg-icon"></i>
+    <i class="fa-solid fa-helmet-safety bg-icon"></i>
+
+    <!-- 隱藏的音效元素 (使用 data URI 確保無需外部連線) -->
+    <!-- 這是一個短促的 'Pop' 聲 -->
+    <audio id="hoverSound">
+        <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWgAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYaW5nAAAAEAAAAA0AAALeAAgJCQ0NDRERERkZGSYmJi0tLTExMTk5OUpKSk5OTlNTU1xcXGRkZGlpaW1tbXFxcXl5eX9/f4CAgIaGho6OjpKSkp2dnaCgoKenp6mpqbGxsbu7u8DAwM3NzdfX19/f3+Tk5O3t7fPz8/n5+f///wAAAAAAAAD/8AAAAAAA//uQZAAABi0K0/sJQAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAAAAAAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQZAAABi0K0/sJQAIAAAAkAAAAgAAABAAAAAAgICAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- 頂部標題區 -->
+        <div class="hero-section">
+            <div class="main-icon">
+                <i class="fa-solid fa-person-digging"></i>
+            </div>
+            <div class="hero-text">
+                <h2>功能架構中</h2>
+                <div class="subtitle">
+                    本頁面功能正在積極開發與建構中，敬請期待。<br>
+                    為了提供更完美的體驗，我們正在努力打磨每一個細節。
+                </div>
+            </div>
+        </div>
+
+        <!-- 下方卡片區 -->
+        <div class="features-grid">
+            <div class="feature-card card-calc" onmouseenter="playHoverSound()">
+                <div class="card-header">
+                    <i class="fa-solid fa-calculator card-icon"></i>
+                    <span class="card-title">精準計算</span>
+                </div>
+                <div class="card-desc">開發團隊正在調校核心演算法，以確保未來計算的精確度與速度...</div>
+            </div>
+
+            <div class="feature-card card-video" onmouseenter="playHoverSound()">
+                <div class="card-header">
+                    <i class="fa-brands fa-youtube card-icon"></i>
+                    <span class="card-title">影音課程</span>
+                </div>
+                <div class="card-desc">更多精彩教學影片即將上線，涵蓋更多陶藝實作與理論知識...</div>
+            </div>
+
+            <div class="feature-card card-life" onmouseenter="playHoverSound()">
+                <div class="card-header">
+                    <i class="fa-solid fa-heart card-icon"></i>
+                    <span class="card-title">生活靈感</span>
+                </div>
+                <div class="card-desc">正在整理更多創作故事與展覽資訊，期待與您分享更多陶藝生活...</div>
+            </div>
+
+            <div class="feature-card card-fun" onmouseenter="playHoverSound()">
+                <div class="card-header">
+                    <i class="fa-solid fa-gamepad card-icon"></i>
+                    <span class="card-title">紓壓天地</span>
+                </div>
+                <div class="card-desc">新遊戲正在測試中，我們希望為您打造最放鬆的課後休憩空間...</div>
+            </div>
+        </div>
+
+        <!-- 底部引導 -->
+        <div class="footer-note">
+            <i class="fa-solid fa-arrow-up"></i>
+            請先嘗試上方其他已完成的功能
+        </div>
     </div>
+
+    <!-- JavaScript 控制音效 -->
+    <script>
+        var audio = document.getElementById("hoverSound");
+        
+        // 第一次點擊頁面時解鎖音效 (瀏覽器限制)
+        function unlockAudio() {
+            if(audio) {
+                audio.play().then(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }).catch((e) => {});
+                // 解鎖後移除點擊事件，避免重複觸發
+                document.body.onclick = null;
+            }
+        }
+
+        function playHoverSound() {
+            if (audio) {
+                audio.currentTime = 0; // 每次移入都從頭播放
+                audio.volume = 0.5;    // 設定音量 50%
+                var playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                        console.log("Audio play prevented. User interaction required first.");
+                    });
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>
