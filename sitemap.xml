@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 首頁 (最重要的頁面) -->
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/</loc>
+    <lastmod>2023-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 歡迎頁面 -->
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/welcome.html</loc>
+    <lastmod>2023-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 施工中頁面 -->
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/welcome-2.html</loc>
+    <lastmod>2023-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 原料轉釉式 (請確認實際路徑是否正確) -->
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/yuanliao/index.html</loc>
+    <lastmod>2023-12-27</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 釉式轉原料 (請確認實際路徑是否正確) -->
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/youzhi/index.html</loc>
+    <lastmod>2023-12-27</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 教學頁面 (請確認實際路徑) -->
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/jiaoxue/sanjiao.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/jiaoxue/sege.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aawenhuang.github.io/glaze-calculator/info/suppliers.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
