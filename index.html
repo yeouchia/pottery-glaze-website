@@ -17,19 +17,13 @@
             --header-height: 64px;      /* Header 高度 */
             
             /* 下拉選單配色系統 */
-            --blue-light: #e0f7fa;      /* 極淡粉藍 */
-            --blue-hover: #b3e5fc;      /* 懸停背景 */
-            --blue-icon: #0277bd;       /* 深藍圖示色 */
+            --blue-light: #e0f7fa; --blue-hover: #b3e5fc; --blue-icon: #0277bd;
+            --green-light: #e0f2f1; --green-hover: #b2dfdb; --green-icon: #00695c;
+            --pink-light: #fce4ec; --pink-hover: #f8bbd0; --pink-icon: #ad1457;
 
-            --green-light: #e0f2f1;     /* 極淡粉綠 */
-            --green-hover: #b2dfdb;     /* 懸停背景 */
-            --green-icon: #00695c;      /* 深綠圖示色 */
-
-            --pink-light: #fce4ec;      /* 極淡粉紅 */
-            --pink-hover: #f8bbd0;      /* 懸停背景 */
-            --pink-icon: #ad1457;       /* 深紅圖示色 */
-
-            /* 雙向轉換不再需要紫色變數，直接在 CSS 中定義金-白-金 */
+            /* 雙向轉換金色系 */
+            --fusion-start: #fca311;
+            --fusion-end: #fb8500;
         }
 
         /* --- 2. 核心佈局設定 --- */
@@ -67,17 +61,40 @@
             align-items: center;
         }
 
-        /* 左側 Logo */
+        /* 左側 Logo 樣式與互動效果 */
         .brand {
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: white;
+            color: white; /* 預設文字白色 */
             margin-right: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease; /* 加入平滑過渡效果 */
+            padding: 5px 10px; /* 增加一點點內距讓 Hover 背景好看 */
+            border-radius: 4px;
         }
+        
         .brand h1 { margin: 0; font-size: 1.2rem; font-weight: 700; white-space: nowrap;}
-        .brand i { font-size: 1.4rem; color: var(--accent-color); }
+        
+        /* 預設圖示顏色：琥珀金 */
+        .brand i { 
+            font-size: 1.4rem; 
+            color: var(--accent-color); 
+            transition: color 0.3s ease;
+        }
+
+        /* 滑鼠移入時的反色效果 */
+        .brand:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* 背景微微亮起 */
+        }
+        .brand:hover h1 {
+            color: var(--accent-color); /* 文字變金 */
+        }
+        .brand:hover i {
+            color: white; /* 圖示變白 (反色) */
+            transform: scale(1.1); /* 圖示稍微放大 */
+        }
 
         /* 導航選單 */
         .nav-menu {
@@ -114,7 +131,7 @@
             cursor: pointer;
         }
 
-        /* 1. 原料轉釉式：金 -> 白 */
+        /* 1. 原料轉釉式 */
         .nav-btn.grad-gold-white {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
             color: var(--primary-bg);
@@ -136,7 +153,7 @@
         }
         .nav-btn.grad-gold-white:hover i { color: #ff0000; }
 
-        /* 2. 釉式轉原料：白 -> 金 */
+        /* 2. 釉式轉原料 */
         .nav-btn.grad-white-gold {
             background: linear-gradient(90deg, #ffffff 0%, var(--accent-color) 100%);
             color: var(--primary-bg);
@@ -158,58 +175,27 @@
         }
         .nav-btn.grad-white-gold:hover i { color: #00b300; }
 
-        /* =========================================================
-           3. [核心修正] 雙向轉換：金 -> 白 -> 金
-           ========================================================= */
+        /* 3. 雙向轉換 */
         .nav-btn.double {
-            /* background: linear-gradient(
-                   90deg, 
-                   var(--accent-color) 0%,   // 左邊琥珀金
-                   #ffffff 50%,              // 中間亮白
-                   var(--accent-color) 100%  // 右邊琥珀金
-               );
-            */
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
-            
-            color: var(--primary-bg); /* 深藍字 */
+            color: var(--primary-bg);
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             border: 1px solid transparent;
         }
-        
         .nav-btn.double:hover {
-            /* Hover 時，為了不讓按鈕消失在白背景或變太花，
-               我們可以讓它變成全白，邊框變成金色，或者變成全金色。
-               這裡建議變全白帶金框，最清爽。
-            */
             background: white; 
-            color: var(--accent-color); /* Hover時變金色文字 */
+            color: var(--accent-color);
             border-color: var(--accent-color);   
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
         }
-        
-        /* 紅綠圖示在金-白-金背景上 */
-        .nav-btn.double i:first-child { 
-            color: #ff0000; 
-            font-size: 1rem; 
-            text-shadow: 0 0 1px rgba(255,255,255,0.8); /* 稍微加白邊讓它在金色部分更清楚 */
-        }
-        /* 中間的 + 號 */
+        .nav-btn.double i:first-child { color: #ff0000; font-size: 1rem; text-shadow: 0 0 1px rgba(255,255,255,0.8); }
         .nav-btn.double span { color: rgba(20, 33, 61, 0.6); }
         .nav-btn.double:hover span { color: #ccc; }
-
-        /* 綠圖示 */
-        .nav-btn.double i:last-child { 
-            color: #00b300; 
-            font-size: 1rem; 
-            text-shadow: 0 0 1px rgba(255,255,255,0.8);
-        }
-        
-        /* Hover 時保持紅綠 */
+        .nav-btn.double i:last-child { color: #00b300; font-size: 1rem; text-shadow: 0 0 1px rgba(255,255,255,0.8); }
         .nav-btn.double:hover i:first-child { color: #ff0000; }
         .nav-btn.double:hover i:last-child { color: #00b300; }
-
 
         /* 教學按鈕 */
         .nav-btn.learn {
@@ -272,7 +258,6 @@
         }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* 下拉選項設計 */
         .dropdown-item {
             color: #000; 
             padding: 15px 20px; 
@@ -332,53 +317,50 @@
         }
     </style>
 </head>
-<body>
+<body onclick="unlockAudio()"> <!-- 點擊頁面解鎖音效與背景音樂 -->
 
     <header>
         <div class="header-container">
-            <a href="#" class="brand">
+            <a href="./welcome.html" target="content_frame" class="brand" onclick="playClickSound()" onmouseenter="playHoverSound()">
                 <i class="fa-solid fa-jar"></i>
                 <h1>陶藝與釉藥調配</h1>
             </a>
+
             <button class="mobile-menu-btn" onclick="toggleMenu()">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
-                    <!-- 1. 原料轉釉式 (金 -> 白) + 鮮紅圖示 -->
-                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white">
+                    <!-- 標記：加入 class "protected-link" 防止右鍵 -->
+                    <!-- 1. 原料轉釉式 -->
+                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-flask"></i> 原料轉釉式
                     </a>
                     
-                    <!-- 2. 釉式轉原料 (白 -> 金) + 鮮綠圖示 -->
-                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold">
+                    <!-- 2. 釉式轉原料 -->
+                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-calculator"></i> 釉式轉原料
                     </a>
 
-                    <!-- 3. [修正] 雙向轉換 (金 -> 白 -> 金) + 紅綠圖示 -->
-                    <a href="./welcome-2.html" target="content_frame" class="nav-btn double" title="新功能開發中">
-                        <!-- 第一個 icon: 燒瓶 (鮮紅) -->
-                        <i class="fa-solid fa-flask"></i> 
-                        <span style="font-size: 0.8em;">+</span> 
-                        <!-- 第二個 icon: 計算機 (深綠) -->
-                        <i class="fa-solid fa-calculator"></i>
+                    <!-- 3. 雙向轉換 -->
+                    <a href="./welcome-2.html" target="content_frame" class="nav-btn double protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                        <i class="fa-solid fa-flask"></i> <span style="font-size: 0.8em;">+</span> <i class="fa-solid fa-calculator"></i>
                         雙向轉換 (二合一)
                     </a>
 
-                    <!-- 4. 計算教學 (馬卡龍) -->
                     <div class="dropdown">
-                        <a href="#" class="nav-btn learn">
+                        <a href="#" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="playClickSound()">
                             <i class="fa-solid fa-book-open"></i> 計算教學 <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="./jiaoxue/sanjiao.html" target="content_frame" class="dropdown-item item-blue">
+                                <a href="./jiaoxue/sanjiao.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="playClickSound()">
                                     <i class="fa-solid fa-shapes"></i> 三角座標計算
                                 </a>
-                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-green">
+                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="playClickSound()">
                                     <i class="fa-solid fa-table-cells"></i> 賽格式計算
                                 </a>
-                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-pink">
+                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-pink" onmouseenter="playHoverSound()" onclick="playClickSound()">
                                     <i class="fa-solid fa-store"></i> 原料廠商資訊
                                 </a>
                             </div>
@@ -387,19 +369,19 @@
                 </div>
                 
                 <div class="social-group">
-                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片">
+                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
-                    <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲">
+                    <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-gamepad"></i>
                     </a>
-                    <a href="https://www.facebook.com/aawen.huang" target="_blank" class="icon-btn fb" title="Facebook">
+                    <a href="https://www.facebook.com/aawen.huang" target="_blank" class="icon-btn fb" title="Facebook" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/aawenhuang/" target="_blank" class="icon-btn ig" title="Instagram">
+                    <a href="https://www.instagram.com/aawenhuang/" target="_blank" class="icon-btn ig" title="Instagram" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    <a href="https://www.facebook.com/profile.php?id=100063821328990" target="_blank" class="icon-btn fire" title="炎變の燒">
+                    <a href="https://www.facebook.com/profile.php?id=100063821328990" target="_blank" class="icon-btn fire" title="炎變の燒" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-fire"></i>
                     </a>
                 </div>
@@ -419,6 +401,12 @@
         &copy; 2024 陶藝與釉藥調配
     </footer>
 
+    <!-- 音效標籤 -->
+    <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
+    <audio id="clickSound" src="click.wav" preload="auto"></audio>
+    <!-- 背景音樂：loop 代表循環播放 -->
+    <audio id="bgMusic" src="good.mp3" loop preload="auto"></audio>
+
     <script>
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
@@ -431,6 +419,61 @@
                 }
             });
         });
+
+        // 標記：防止特定連結被右鍵開啟
+        document.querySelectorAll('.protected-link').forEach(link => {
+            link.addEventListener('contextmenu', function(e) {
+                e.preventDefault(); // 阻止右鍵選單
+                alert('為確保計算功能正常運作，\n請使用「左鍵」點擊於當前頁面操作。');
+            });
+        });
+
+        // 音效控制
+        var hoverAudio = document.getElementById("hoverSound");
+        var clickAudio = document.getElementById("clickSound");
+        var bgMusic = document.getElementById("bgMusic");
+        
+        function unlockAudio() {
+            if(hoverAudio) {
+                hoverAudio.play().then(() => {
+                    hoverAudio.pause();
+                    hoverAudio.currentTime = 0;
+                }).catch((e) => {});
+            }
+            if(clickAudio) {
+                clickAudio.play().then(() => {
+                    clickAudio.pause();
+                    clickAudio.currentTime = 0;
+                }).catch((e) => {});
+            }
+            // 播放背景音樂
+            if(bgMusic) {
+                bgMusic.volume = 0.3; // 音量設為 30%，避免太吵
+                bgMusic.play().catch((e) => {
+                    console.log("Background music blocked:", e);
+                });
+            }
+            // 解鎖後移除點擊事件
+            document.body.onclick = null;
+        }
+
+        function playHoverSound() {
+            if (hoverAudio) {
+                hoverAudio.currentTime = 0;
+                hoverAudio.volume = 0.5;
+                var promise = hoverAudio.play();
+                if (promise !== undefined) { promise.catch(function(error) {}); }
+            }
+        }
+
+        function playClickSound() {
+            if (clickAudio) {
+                clickAudio.currentTime = 0;
+                clickAudio.volume = 0.5;
+                var promise = clickAudio.play();
+                if (promise !== undefined) { promise.catch(function(error) {}); }
+            }
+        }
     </script>
 </body>
 </html>

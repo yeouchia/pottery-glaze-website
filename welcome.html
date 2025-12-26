@@ -60,16 +60,15 @@
             box-sizing: border-box;
         }
 
-        /* --- 4. 歡迎標題區 (核心修改：左右排列) --- */
+        /* --- 4. 歡迎標題區 --- */
         .hero-section {
             margin-bottom: 40px;
             animation: fadeInDown 1s ease-out;
-            /* 使用 Flexbox 讓圖示與文字並排 */
             display: flex;
-            align-items: center; /* 垂直居中 */
-            justify-content: center; /* 水平居中 */
-            gap: 25px; /* 圖示與文字的間距 */
-            text-align: left; /* 文字改為靠左對齊，閱讀性較佳 */
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            text-align: left;
         }
 
         .main-icon {
@@ -77,15 +76,12 @@
             background: linear-gradient(135deg, #fca311, #fb8500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* 移除下邊距，因為現在是左右排 */
             margin-bottom: 0;
             animation: floatIcon 3s ease-in-out infinite;
-            /* 確保圖示不會被壓縮 */
             flex-shrink: 0;
         }
 
         .hero-text {
-            /* 包裹標題與副標題的容器 */
             display: flex;
             flex-direction: column;
         }
@@ -97,7 +93,7 @@
 
         h2 {
             font-size: 2.5em;
-            margin: 0 0 10px 0; /* 調整邊距 */
+            margin: 0 0 10px 0;
             color: #14213d;
             font-weight: 800;
             letter-spacing: 1px;
@@ -108,11 +104,11 @@
             font-size: 1.2em;
             color: #555;
             max-width: 800px;
-            margin: 0; /* 移除自動 margin，因為現在靠左 */
+            margin: 0;
             line-height: 1.6;
         }
 
-        /* --- 5. 特色卡片區 (Flex Layout for Row) --- */
+        /* --- 5. 特色卡片區 (一字排開) --- */
         .features-grid {
             display: flex;
             justify-content: center;
@@ -137,6 +133,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
 
         .feature-card:hover {
@@ -145,7 +142,6 @@
             z-index: 5;
         }
 
-        /* 裝飾條 */
         .feature-card::before {
             content: '';
             position: absolute;
@@ -225,46 +221,26 @@
             animation: bounceArrow 1.5s infinite;
         }
 
-        /* --- 動畫 --- */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounceArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
         /* --- RWD 響應式調整 --- */
-        
-        /* 平板直向與手機：強迫換行變成垂直排列 */
         @media (max-width: 1024px) {
-            .features-grid {
-                flex-wrap: wrap; /* 允許換行 */
-            }
-            .feature-card {
-                flex: 1 1 45%; /* 兩個一排 */
-                min-width: 250px;
-            }
+            .features-grid { flex-wrap: wrap; }
+            .feature-card { flex: 1 1 45%; min-width: 250px; }
         }
-
-        /* 手機版：單欄排列 + 標題區塊變回垂直堆疊 */
         @media (max-width: 600px) {
-            .hero-section {
-                flex-direction: column; /* 手機上變回上下排 */
-                text-align: center;
-                gap: 10px;
-            }
-            .main-icon {
-                margin-bottom: 10px;
-            }
-            .subtitle {
-                text-align: center;
-            }
+            .hero-section { flex-direction: column; text-align: center; gap: 10px; }
+            .main-icon { margin-bottom: 10px; }
+            .subtitle { text-align: center; }
             h2 { font-size: 1.8em; }
             .container { padding: 20px 15px; width: 100%; }
-            .feature-card {
-                flex: 1 1 100%; /* 一個一排 */
-            }
+            .feature-card { flex: 1 1 100%; }
         }
     </style>
 </head>
-<body>
+<body onclick="unlockAudio()"> <!-- 標記: 點擊頁面解鎖音效 -->
 
     <!-- 背景漂浮元素 -->
     <i class="fa-solid fa-flask bg-icon"></i>
@@ -272,15 +248,19 @@
     <i class="fa-solid fa-shapes bg-icon"></i>
     <i class="fa-solid fa-palette bg-icon"></i>
 
+    <!-- 
+      音效檔案設定
+      src="hover.wav" 表示檔案必須與 welcome.html 在同一個資料夾 
+    -->
+    <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
+
     <div class="container">
-        <!-- 頂部標題區 (左右排列) -->
+        <!-- 頂部標題區 -->
         <div class="hero-section">
-            <!-- 左側圖示 -->
             <div class="main-icon">
                 <i class="fa-solid fa-layer-group"></i>
             </div>
             
-            <!-- 右側文字 -->
             <div class="hero-text">
                 <h2>陶藝與釉藥調配</h2>
                 <div class="subtitle">
@@ -290,10 +270,10 @@
             </div>
         </div>
 
-        <!-- 特色卡片展示區 (水平排列) -->
+        <!-- 特色卡片展示區 -->
         <div class="features-grid">
-            <!-- 1. 專業計算 -->
-            <div class="feature-card card-calc">
+            <!-- 卡片 1 -->
+            <div class="feature-card card-calc" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <i class="fa-solid fa-calculator card-icon"></i>
                     <span class="card-title">精準釉藥計算</span>
@@ -303,8 +283,8 @@
                 </div>
             </div>
 
-            <!-- 2. 影音教學 -->
-            <div class="feature-card card-video">
+            <!-- 卡片 2 -->
+            <div class="feature-card card-video" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <i class="fa-brands fa-youtube card-icon"></i>
                     <span class="card-title">豐富影音課程</span>
@@ -314,8 +294,8 @@
                 </div>
             </div>
 
-            <!-- 3. 創作生活 -->
-            <div class="feature-card card-life">
+            <!-- 卡片 3 -->
+            <div class="feature-card card-life" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <i class="fa-solid fa-heart card-icon"></i>
                     <span class="card-title">陶藝生活與靈感</span>
@@ -326,18 +306,18 @@
                 <ul class="card-links">
                     <li><i class="fa-solid fa-palette"></i> 個人作品分享</li>
                     <li><i class="fa-solid fa-landmark"></i> 展覽資訊推薦</li>
-                    <li><i class="fa-solid fa-fire"></i> 柴燒幕後花絮</li>
+                    <li><i class="fa-solid fa-fire"></i> 陶藝教學</li>
                 </ul>
             </div>
 
-            <!-- 4. 紓壓娛樂 -->
-            <div class="feature-card card-fun">
+            <!-- 卡片 4 -->
+            <div class="feature-card card-fun" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <i class="fa-solid fa-gamepad card-icon"></i>
                     <span class="card-title">課後紓壓天地</span>
                 </div>
                 <div class="card-desc">
-                    創作累了嗎？這裡準備了輕鬆的小遊戲，讓您在學習之餘也能放鬆心情。
+                    創作累了嗎？這裡準備了輕鬆的懷舊經典天堂小遊戲，讓您在學習之餘也能放鬆心情。
                 </div>
             </div>
         </div>
@@ -348,6 +328,44 @@
             請使用上方導航列，開啟您感興趣的功能
         </div>
     </div>
+
+    <!-- JavaScript 控制音效 -->
+    <script>
+        var audio = document.getElementById("hoverSound");
+        
+        // 解鎖音效功能：當使用者第一次點擊頁面時觸發
+        function unlockAudio() {
+            if(audio) {
+                // 嘗試播放然後立即暫停，藉此獲得瀏覽器授權
+                audio.play().then(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }).catch((e) => {
+                    // 如果還是失敗也沒關係，這是正常的瀏覽器行為
+                    console.log("Audio unlock status:", e);
+                });
+                // 解鎖後移除點擊事件，避免每次點擊都觸發
+                document.body.onclick = null;
+            }
+        }
+
+        // 播放音效功能
+        function playHoverSound() {
+            if (audio) {
+                audio.currentTime = 0; // 每次移入都從頭播放
+                audio.volume = 0.5;    // 設定音量 50%
+                
+                var playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                        // 如果音效被瀏覽器阻擋，會在控制台顯示訊息
+                        console.log("Audio play prevented. User interaction required first.");
+                    });
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
