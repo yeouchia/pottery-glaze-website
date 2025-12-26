@@ -3,11 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陶藝與釉藥調配 - 專業計算工具</title>
+    
+    <!-- === SEO 關鍵優化設定 === -->
+    <!-- 1. 網頁標題：最重要的關鍵字放前面 -->
+    <title>陶藝與釉藥調配 - 專業釉式計算、賽格式計算與教學工具</title>
+    
+    <!-- 2. 網頁描述：搜尋結果下方顯示的文字 (建議 150 字內，包含核心關鍵字) -->
+    <meta name="description" content="專為陶藝愛好者設計的免費釉藥計算工具。提供原料轉釉式、釉式轉原料、賽格式計算、三角座標分析等功能。內含豐富的陶藝教學影片與原料資料庫，助您精準調配完美釉方。">
+    
+    <!-- 3. 關鍵字：雖然 Google 不太看重，但其他引擎可能會參考 -->
+    <meta name="keywords" content="陶藝, 釉藥, 釉藥計算, 賽格式, 釉式計算, 陶藝教學, 陶瓷原料, 釉藥配方, 陶藝課程, 釉藥分析">
+    
+    <!-- 4. 作者資訊 -->
+    <meta name="author" content="陶藝與釉藥調配">
+
+    <!-- === Open Graph (OG) 社群分享設定 (讓 FB/Line 分享時變漂亮) === -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="陶藝與釉藥調配 - 專業計算工具">
+    <meta property="og:description" content="免費的陶藝釉藥計算器！支援賽格式、三角座標與原料分析，陶藝人必備的數位工具。">
+    <meta property="og:url" content="https://aawenhuang.github.io/glaze-calculator/"> <!-- 請替換成您實際的 GitHub Pages 網址 -->
+    <meta property="og:image" content="https://aawenhuang.github.io/glaze-calculator/preview.jpg"> <!-- 建議上傳一張 1200x630 的預覽圖 -->
+    <meta property="og:site_name" content="陶藝與釉藥調配">
+
     <!-- 引入 Font Awesome 用於圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* --- CSS 樣式保持不變，直接沿用您滿意的版本 --- */
         /* --- 1. 全局變數定義 --- */
         :root {
             --primary-bg: #14213d;      /* 主色：深海軍藍 */
@@ -61,7 +83,8 @@
             align-items: center;
         }
 
-        /* 左側 Logo 樣式與互動效果 */
+        /* [核心修正] 左側 Logo 樣式與互動效果 
+        */
         .brand {
             display: flex;
             align-items: center;
@@ -84,7 +107,7 @@
             transition: color 0.3s ease;
         }
 
-        /* 滑鼠移入時的反色效果 */
+        /* [新增] 滑鼠移入時的反色效果 */
         .brand:hover {
             background-color: rgba(255, 255, 255, 0.1); /* 背景微微亮起 */
         }
@@ -317,7 +340,7 @@
         }
     </style>
 </head>
-<body onclick="unlockAudio()"> <!-- 點擊頁面解鎖音效與背景音樂 -->
+<body onclick="unlockAudio()">
 
     <header>
         <div class="header-container">
