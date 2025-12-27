@@ -1,506 +1,458 @@
+<!-- 
+Lineage M v77.89 (Pottery & Glaze Integration)
+----------------------------------------
+[版本資訊]
+* Core: v77.87 (Audio/FX/Visual Swap/AOE Fix/Balance)
+* UI: v77.89 (Pottery Website Intro Added)
+----------------------------------------
+[修正記錄]
+* Fix: 在啟動畫面左上角新增「陶藝與釉藥調配」網站推廣區塊。
+* Fix: 整合 FontAwesome 圖示庫以支援新介面圖示。
+-->
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- === SEO 關鍵優化設定 === -->
-    <!-- 1. 網頁標題：最重要的關鍵字放前面 -->
-    <title>陶藝與釉藥調配 - 專業釉式計算、賽格式計算與教學工具</title>
-    
-    <!-- 2. 網頁描述：搜尋結果下方顯示的文字 (建議 150 字內，包含核心關鍵字) -->
-    <meta name="description" content="專為陶藝愛好者設計的免費釉藥計算工具。提供原料轉釉式、釉式轉原料、賽格式計算、三角座標分析等功能。內含豐富的陶藝教學影片與原料資料庫，助您精準調配完美釉方。">
-    
-    <!-- 3. 關鍵字：雖然 Google 不太看重，但其他引擎可能會參考 -->
-    <meta name="keywords" content="陶藝, 釉藥, 釉藥計算, 賽格式, 釉式計算, 陶藝教學, 陶瓷原料, 釉藥配方, 陶藝課程, 釉藥分析">
-    
-    <!-- 4. 作者資訊 -->
-    <meta name="author" content="陶藝與釉藥調配">
-
-    <!-- === Open Graph (OG) 社群分享設定 (讓 FB/Line 分享時變漂亮) === -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="陶藝與釉藥調配 - 專業計算工具">
-    <meta property="og:description" content="免費的陶藝釉藥計算器！支援賽格式、三角座標與原料分析，陶藝人必備的數位工具。">
-    <meta property="og:url" content="https://aawenhuang.github.io/glaze-calculator/"> <!-- 請替換成您實際的 GitHub Pages 網址 -->
-    <meta property="og:image" content="https://aawenhuang.github.io/glaze-calculator/preview.jpg"> <!-- 建議上傳一張 1200x630 的預覽圖 -->
-    <meta property="og:site_name" content="陶藝與釉藥調配">
-
-    <!-- 引入 Font Awesome 用於圖示 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lineage M v77.89: Pottery Edition</title>
+    <!-- 引入 FontAwesome (參考 welcome.html) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <!-- 這代表：「親愛的 Google，請**索引 (Index)** 這個頁面，並且**跟隨 (Follow)** 頁面上的連結去抓取更多頁面。」
-完成這些後，您的網站 SEO 基礎建設就非常穩固了！接下來就是等待時間發酵，讓大家在網路上搜到您的專業心血！ 🏺🚀 -->
-  <meta name="robots" content="index, follow">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Noto+Serif+TC:wght@500;900&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS 樣式保持不變，直接沿用您滿意的版本 --- */
-        /* --- 1. 全局變數定義 --- */
-        :root {
-            --primary-bg: #14213d;      /* 主色：深海軍藍 */
-            --accent-color: #fca311;    /* 基礎工具：琥珀金 */
-            --text-light: #e5e5e5;      /* 淺色文字 */
-            --bg-color: #f4f6f8;        /* 網頁背景 */
-            --header-height: 64px;      /* Header 高度 */
-            
-            /* 下拉選單配色系統 */
-            --blue-light: #e0f7fa; --blue-hover: #b3e5fc; --blue-icon: #0277bd;
-            --green-light: #e0f2f1; --green-hover: #b2dfdb; --green-icon: #00695c;
-            --pink-light: #fce4ec; --pink-hover: #f8bbd0; --pink-icon: #ad1457;
-
-            /* 雙向轉換金色系 */
-            --fusion-start: #fca311;
-            --fusion-end: #fb8500;
-        }
-
-        /* --- 2. 核心佈局設定 --- */
-        * { box-sizing: border-box; }
+        body { margin: 0; background: #050505; color: #ddd; font-family: 'Noto Serif TC', serif; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; cursor: default; }
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .glass-panel { background: rgba(20, 24, 28, 0.95); border: 1px solid #6b5b4b; border-top: 3px solid #9c7c5b; box-shadow: 0 10px 60px rgba(0,0,0,1), inset 0 0 50px rgba(0,0,0,0.9); color: #eec; border-radius: 4px; pointer-events: auto; }
+        .glass-btn { background: linear-gradient(180deg, #444455, #222233); border: 1px solid #776655; color: #ddccaa; padding: 4px 10px; border-radius: 3px; font-size: 12px; pointer-events: auto; cursor: pointer; box-shadow: 0 3px 5px rgba(0,0,0,0.5); font-weight: bold; font-family: 'Noto Serif TC', serif; transition: all 0.1s; text-shadow: 1px 1px 0 #000; }
+        .glass-btn:active { transform: translateY(2px); filter: brightness(0.8); }
+        .btn-buy-10 { border-color: #468; color: #adf; margin-left: 2px; background: linear-gradient(180deg, #223344, #112233); }
+        .btn-plus { border-color: #2a2; color: #4f4; padding: 2px 6px; margin-left:5px; font-size:10px; }
+        #btn-auto { width: 80px; border-color: #4a4; color: #4f4; text-shadow: 0 0 5px #0f0; }
+        #btn-auto.off { background: linear-gradient(180deg, #333, #222); border-color: #666; color: #888; text-shadow: none; }
+        .enchant-target { animation: pulse 0.3s infinite alternate; border-color: #0f0 !important; cursor: pointer; background: rgba(0,50,0,0.5); }
+        @keyframes pulse { from { box-shadow: 0 0 5px #0f0; } to { box-shadow: 0 0 20px #0f0; } }
+        .window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 380px; max-height: 580px; display: none; flex-direction: column; z-index: 1000; }
+        .win-head { padding: 10px 15px; background: linear-gradient(90deg, #2b2015, #4e3828, #2b2015); border-bottom: 1px solid #765; color: #ffcc66; font-weight: bold; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; text-shadow: 0 2px 4px #000; font-family: 'Cinzel', serif; font-size: 15px; }
+        .win-body { padding: 10px; overflow-y: auto; flex-grow: 1; scrollbar-width: thin; scrollbar-color: #654 #111; }
+        .win-close { cursor: pointer; color: #e55; font-size: 20px; font-weight: bold;}
         
-        html, body {
-            height: 100%; 
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* 禁止網頁本身出現捲軸 */
-            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            display: flex;
-            flex-direction: column;
+        /* Paper Doll (Character Equip Slots) */
+        .paper-doll { position: relative; width: 240px; height: 280px; margin: 0 auto 5px auto; background: #080808; border: 2px solid #443; border-radius: 8px; background-image: radial-gradient(circle at 50% 20%, #222 15px, transparent 16px), linear-gradient(to bottom, transparent 60px, #222 60px, #222 160px, transparent 160px), linear-gradient(to bottom, transparent 60px, #222 60px, #222 140px, transparent 140px); background-repeat: no-repeat; background-size: 100% 100%, 60px 100%, 140px 100%; background-position: center top, center top, center top; }
+        .pd-slot { position: absolute; width: 42px; height: 42px; background: rgba(0,0,0,0.6); border: 1px solid #554; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 24px; color: #444; cursor: pointer; box-shadow: inset 0 0 10px #000; overflow: hidden; }
+        .pd-slot.filled { border-color: #aa8; color: #fff; background: rgba(50,50,60,0.8); }
+        .pd-lbl { position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; font-size: 10px; color: #887; background: rgba(0,0,0,0.7); padding: 1px 0; white-space: nowrap; pointer-events: none; z-index: 5; }
+        .pd-slot.filled .pd-lbl { color: #0f0; text-shadow: 1px 1px 0 #000; }
+        #slot-helm { top: 10px; left: 100px; } #slot-neck { top: 55px; left: 100px; } #slot-shirt { top: 55px; left: 150px; } #slot-armor { top: 100px; left: 100px; width: 40px; height: 60px; } #slot-cloak { top: 100px; left: 50px; width: 40px; height: 60px; } #slot-weapon { top: 100px; left: 150px; width: 40px; height: 60px; } #slot-glove { top: 170px; left: 40px; } #slot-boot { top: 220px; left: 100px; }
+        
+        #game-ui { display: none; width: 100%; height: 100%; pointer-events: none; }
+        #hud-top-left { position: absolute; top: 15px; left: 15px; display: flex; gap: 6px; pointer-events: auto; align-items: center; }
+        #hud-stats { font-weight: bold; text-shadow: 1px 1px 0 #000; background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 3px; }
+        #ui-map-name { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); color: #eee; font-family: 'Noto Serif TC'; font-size: 18px; font-weight: bold; text-shadow: 0 0 5px rgba(0,0,0,1); background: linear-gradient(90deg, transparent, rgba(0,0,0,0.7), transparent); padding: 4px 60px; pointer-events: none; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        #minimap-group { position: absolute; top: 15px; right: 15px; pointer-events: auto; }
+        #minimap-con { width: 130px; height: 130px; background: #000; border: 3px double #765; border-radius: 50%; overflow: hidden; box-shadow: 0 5px 15px #000; position: relative; }
+        #btn-map-m { position: absolute; bottom: 0px; right: 100px; width: 28px; height: 28px; background: #222; border: 1px solid #ba8; color: #ba8; font-weight: bold; border-radius: 50%; text-align: center; line-height: 26px; cursor: pointer; box-shadow: 0 0 10px #000; pointer-events: auto; z-index: 50; }
+        #hud-bottom { position: absolute; bottom: 0; left: 0; width: 100%; height: 140px; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%); pointer-events: none; }
+        
+        /* Status Bars */
+        #status-bars { position: absolute; bottom: 20px; left: 20px; width: 220px; pointer-events: auto; }
+        .bar-frame { padding: 2px; background: #0c0c0c; border: 1px solid #333; margin-bottom: 5px; position: relative; box-shadow: 0 2px 5px #000; transform: skewX(-10deg); }
+        .bar-fill { height: 10px; width: 0%; transition: width 0.2s; position: relative; overflow: hidden; }
+        .hp { background: linear-gradient(90deg, #600, #c00, #f44); } .mp { background: linear-gradient(90deg, #004, #008, #37f); } .exp-bar { background: linear-gradient(90deg, #040, #080, #0f0); }
+        .bar-text { position: absolute; top: -2px; width: 100%; text-align: center; font-size: 10px; color: #fff; transform: skewX(10deg); text-shadow: 1px 1px 0 #000; pointer-events: none; font-weight: bold; z-index: 2; }
+        
+        #buff-bar { position: absolute; top: -45px; left: 0; display: flex; gap: 5px; pointer-events: none;}
+        .buff-icon { width: 44px; height: 34px; background: rgba(0,0,0,0.6); border: 1px solid #665; border-radius: 4px; font-size: 11px; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2px 0; margin-right: 4px; }
+        .buff-name { font-size: 10px; line-height: 12px; font-weight: bold; } .buff-time { font-size: 9px; color: #0f0; line-height: 12px; }
+        
+        /* Hotkeys */
+        #hotkeys { position: absolute; bottom: 20px; left: 260px; display: flex; gap: 4px; pointer-events: auto; }
+        .key-slot { width: 36px; height: 36px; background: rgba(20,20,25,0.9); border: 1px solid #555; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: inset 0 0 10px #000; }
+        .key-slot:active { border-color: #fca; transform: scale(0.95); }
+        .key-lbl { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #aaa; font-weight: bold; }
+        .key-qty { position: absolute; bottom: 0px; right: 1px; font-size: 9px; color: #fff; text-shadow: 1px 1px 0 #000; font-weight: bold; }
+        
+        #msg-log { position: absolute; bottom: 20px; right: 20px; width: 360px; height: 140px; background: rgba(0,0,0,0.6); border: 1px solid #444; border-radius: 4px; overflow: hidden; pointer-events: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; font-size: 13px; text-shadow: 1px 1px 0 #000; mask-image: linear-gradient(to top, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%); }
+        
+        #start-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: auto; background-image: radial-gradient(circle at 50% 40%, #1a1a20 0%, #000 100%); }
+        .login-box { background: rgba(20,20,25,0.9); border: 2px solid #554; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 0 50px #000; margin-bottom: 20px; width: 300px; }
+        .login-input { background: #000; border: 1px solid #443; color: #da0; padding: 10px; font-size: 16px; width: 90%; text-align: center; font-family: 'Cinzel'; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
+        
+        /* [New] Pottery Intro Widget Styles */
+        #pottery-intro {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 280px;
+            z-index: 2001; /* Higher than start screen bg but lower than GM console */
+            text-align: left;
         }
-
-        /* --- 3. 頂部導航列 --- */
-        header {
-            flex-shrink: 0;
-            background-color: var(--primary-bg);
-            color: white;
-            height: var(--header-height);
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .header-container {
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* [核心修正] 左側 Logo 樣式與互動效果 
-        */
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white; /* 預設文字白色 */
-            margin-right: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease; /* 加入平滑過渡效果 */
-            padding: 5px 10px; /* 增加一點點內距讓 Hover 背景好看 */
+        .intro-card {
+            background: rgba(20, 24, 28, 0.85);
+            border: 1px solid #6b5b4b;
+            border-left: 3px solid #fca311; /* Orange accent from welcome.html */
             border-radius: 4px;
+            padding: 15px;
+            color: #ddd;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
         }
-        
-        .brand h1 { margin: 0; font-size: 1.2rem; font-weight: 700; white-space: nowrap;}
-        
-        /* 預設圖示顏色：琥珀金 */
-        .brand i { 
-            font-size: 1.4rem; 
-            color: var(--accent-color); 
-            transition: color 0.3s ease;
-        }
-
-        /* [新增] 滑鼠移入時的反色效果 */
-        .brand:hover {
-            background-color: rgba(255, 255, 255, 0.1); /* 背景微微亮起 */
-        }
-        .brand:hover h1 {
-            color: var(--accent-color); /* 文字變金 */
-        }
-        .brand:hover i {
-            color: white; /* 圖示變白 (反色) */
-            transform: scale(1.1); /* 圖示稍微放大 */
-        }
-
-        /* 導航選單 */
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .tools-group { display: flex; gap: 10px; align-items: center; }
-        
-        .social-group {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            border-left: 1px solid rgba(255,255,255,0.2);
-            padding-left: 15px;
-            margin-left: 15px;
-        }
-
-        /* --- 按鈕樣式 --- */
-        .nav-btn {
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            padding: 8px 14px; 
-            border-radius: 4px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .intro-title {
+            color: #fca311;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
             display: flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap;
-            border: none;
-            cursor: pointer;
         }
-
-        /* 1. 原料轉釉式 */
-        .nav-btn.grad-gold-white {
-            background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
-            color: var(--primary-bg);
+        .intro-link-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 0;
+            background: linear-gradient(90deg, #9d4edd, #5a189a); /* Purple accent */
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #c77dff;
+            border-radius: 3px;
+            font-size: 13px;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent; 
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+            transition: all 0.2s;
+            box-sizing: border-box;
         }
-        .nav-btn.grad-gold-white i {
-            color: #ff0000; 
-            font-size: 1.1em; 
-            text-shadow: 0 0 1px rgba(0,0,0,0.1);
+        .intro-link-btn:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
         }
-        .nav-btn.grad-gold-white:hover {
-            background: white;
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
+        .intro-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 11px;
+            color: #aaa;
         }
-        .nav-btn.grad-gold-white:hover i { color: #ff0000; }
-
-        /* 2. 釉式轉原料 */
-        .nav-btn.grad-white-gold {
-            background: linear-gradient(90deg, #ffffff 0%, var(--accent-color) 100%);
-            color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent;
-        }
-        .nav-btn.grad-white-gold i {
-            color: #00b300; 
-            font-size: 1.1em;
-            text-shadow: 0 0 1px rgba(0,0,0,0.1);
-        }
-        .nav-btn.grad-white-gold:hover {
-            background: white;
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4);
-        }
-        .nav-btn.grad-white-gold:hover i { color: #00b300; }
-
-        /* 3. 雙向轉換 */
-        .nav-btn.double {
-            background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
-            color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent;
-        }
-        .nav-btn.double:hover {
-            background: white; 
-            color: var(--accent-color);
-            border-color: var(--accent-color);   
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
-        }
-        .nav-btn.double i:first-child { color: #ff0000; font-size: 1rem; text-shadow: 0 0 1px rgba(255,255,255,0.8); }
-        .nav-btn.double span { color: rgba(20, 33, 61, 0.6); }
-        .nav-btn.double:hover span { color: #ccc; }
-        .nav-btn.double i:last-child { color: #00b300; font-size: 1rem; text-shadow: 0 0 1px rgba(255,255,255,0.8); }
-        .nav-btn.double:hover i:first-child { color: #ff0000; }
-        .nav-btn.double:hover i:last-child { color: #00b300; }
-
-        /* 教學按鈕 */
-        .nav-btn.learn {
-            background: linear-gradient(135deg, #4CC9F0 0%, #2EC4B6 100%);
-            color: #14213d; 
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .nav-btn.learn:hover {
-            background: white;
-            color: #F72585; 
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-
-        /* --- Icon 按鈕樣式 --- */
-        .icon-btn {
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none; 
-            font-size: 1.1rem;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-            position: relative;
-        }
-        .icon-btn.yt { background-color: #FF0000; }
-        .icon-btn.yt:hover { background-color: white; color: #FF0000; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.game { background-color: #4CAF50; }
-        .icon-btn.game:hover { background-color: white; color: #4CAF50; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.fb { background-color: #1877F2; }
-        .icon-btn.fb:hover { background-color: white; color: #1877F2; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .icon-btn.ig:hover { background: white; color: #C13584; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.fire { background-color: #FFC107; color: #14213d; }
-        .icon-btn.fire:hover { background-color: white; color: #FFC107; transform: translateY(-3px) scale(1.1); }
-
-        /* --- 下拉選單樣式 --- */
-        .dropdown { position: relative; padding-bottom: 0; }
-        .dropdown-content {
-            display: none; 
-            position: absolute; 
-            left: 0; 
-            top: 100%; 
-            margin-top: 0;
-            padding-top: 5px; 
-            background-color: transparent; 
-            min-width: 220px; 
-            z-index: 100;
-        }
-        .dropdown-inner {
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        .dropdown-item {
-            color: #000; 
-            padding: 15px 20px; 
-            text-decoration: none; 
-            display: flex; 
+        .intro-list li {
+            margin-bottom: 6px;
+            display: flex;
             align-items: center;
-            gap: 15px;     
-            font-size: 0.95rem;
-            font-weight: 700; 
-            white-space: nowrap; 
-            transition: all 0.2s ease;
-            border-left: 6px solid transparent; 
-            background-color: #f9f9f9;
+            gap: 8px;
         }
-        .dropdown-item i { width: 24px; text-align: center; font-size: 1.2em; transition: all 0.2s; flex-shrink: 0; opacity: 0.8; }
+        .intro-list i {
+            width: 16px;
+            text-align: center;
+        }
+        /* Icon colors to match welcome.html themes */
+        .ic-calc { color: #fca311; }
+        .ic-video { color: #ff4444; }
+        .ic-life { color: #9d4edd; }
+        .ic-game { color: #4caf50; }
 
-        .dropdown-item.item-blue { background-color: var(--blue-light); border-left-color: var(--blue-icon); }
-        .dropdown-item.item-blue i { color: var(--blue-icon); } 
-        .dropdown-item.item-blue:hover { background-color: var(--blue-hover); padding-left: 25px; }
-        .dropdown-item.item-blue:hover i { opacity: 1; transform: scale(1.1); }
-
-        .dropdown-item.item-green { background-color: var(--green-light); border-left-color: var(--green-icon); }
-        .dropdown-item.item-green i { color: var(--green-icon); }
-        .dropdown-item.item-green:hover { background-color: var(--green-hover); padding-left: 25px; }
-        .dropdown-item.item-green:hover i { opacity: 1; transform: scale(1.1); }
-
-        .dropdown-item.item-pink { background-color: var(--pink-light); border-left-color: var(--pink-icon); }
-        .dropdown-item.item-pink i { color: var(--pink-icon); }
-        .dropdown-item.item-pink:hover { background-color: var(--pink-hover); padding-left: 25px; }
-        .dropdown-item.item-pink:hover i { opacity: 1; transform: scale(1.1); }
+        #inv-info, #shop-info { background: #111; color: #888; padding: 5px; font-size: 12px; font-weight: bold; border-top: 1px solid #444; height: 35px; display: flex; align-items: center; justify-content: center; text-shadow: 0 0 5px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        .item-row { display: flex; justify-content: space-between; padding: 6px; border-bottom: 1px solid #333; align-items: center; background: rgba(0,0,0,0.2); }
+        .item-icon { width: 28px; height: 28px; background: #111; border: 1px solid #444; margin-right: 8px; border-radius: 2px; display:flex; align-items:center; justify-content:center; font-size:16px; cursor: pointer; flex-shrink: 0;}
+        .item-icon:hover { border-color: #d4af37; box-shadow: 0 0 5px #d4af37; }
         
-        .dropdown-item { border-bottom: 2px solid #fff; }
-        .dropdown-item:last-child { border-bottom: none; }
-
-        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
-        /* --- 主要內容區 --- */
-        main { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; background-color: white; position: relative; }
-        .iframe-container { width: 100%; height: 100%; flex: 1; border: none; box-shadow: none; }
-        iframe { width: 100%; height: 100%; border: none; display: block; }
-
-        /* --- 底部區 --- */
-        footer { flex-shrink: 0; background-color: #0f1a2e; color: #666; padding: 5px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
-
-        /* --- RWD --- */
-        @media (max-width: 1150px) {
-            .nav-menu { display: none; position: absolute; top: var(--header-height); left: 0; width: 100%; background-color: var(--primary-bg); flex-direction: column; padding: 10px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); align-items: stretch; }
-            .nav-menu.active { display: flex; }
-            .tools-group, .social-group { flex-direction: column; width: 100%; gap: 0; margin: 0; padding: 0; border: none; }
-            .nav-btn, .icon-btn { width: 100%; justify-content: flex-start; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; }
-            .icon-btn { width: 100%; height: auto; border-radius: 0; background-color: transparent !important; color: var(--text-light) !important; gap: 10px; box-shadow: none; }
-            .icon-btn:hover { background-color: rgba(255,255,255,0.1) !important; color: white !important; transform: none; }
-            .icon-btn.yt i { color: #FF0000; } .icon-btn.game i { color: #4CAF50; } .icon-btn.fb i { color: #1877F2; } .icon-btn.ig i { color: #E1306C; } .icon-btn.fire i { color: #FFC107; }
-            .dropdown-item { padding-left: 20px; } .dropdown-item:hover { padding-left: 25px; }
-            .icon-btn::after { content: attr(title); font-size: 0.9rem; }
-            .mobile-menu-btn { display: block; }
-        }
+        #joy-zone { position: absolute; bottom: 40px; left: 30px; width: 100px; height: 100px; pointer-events: auto; opacity: 0.5; }
+        #joy-base { width: 100%; height: 100%; border: 2px solid #555; border-radius: 50%; }
+        #joy-stick { width: 40px; height: 40px; background: #888; border-radius: 50%; position: absolute; top: 30px; left: 30px; }
+        
+        #teleport-menu { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; display: none; z-index: 2000; text-align: center; }
+        #win-map { width: 640px !important; height: 680px !important; }
+        #map-container { width: 600px !important; height: 600px !important; }
+        
+        #asset-btn { display:block; width:80%; margin:10px auto; padding:15px; background: linear-gradient(180deg, #464, #242); border:1px solid #6a6; color:#cfc; font-weight:bold; cursor:pointer; }
+        #asset-status { font-size:12px; color:#888; text-align:center; margin-top:5px; }
+        .as-cb { transform: scale(1.5); cursor: pointer; }
+        
+        #win-stats .win-body { padding: 5px; }
+        #st-summary { display:flex; justify-content:space-around; margin:5px 0; background:#111; padding:3px; border-radius:4px; font-size: 11px; }
+        #st-summary span { display: inline-flex; align-items: center; gap: 4px; }
+        #st-points-row { text-align:center; color:#ff0; margin-bottom:5px; font-size: 11px; }
+        .st-attr-row { display: flex; justify-content: space-between; padding: 3px 8px; border-bottom: 1px solid #333; align-items: center; background: rgba(0,0,0,0.2); font-size: 11px; }
+        .st-attr-row button { transform: scale(0.9); }
     </style>
 </head>
-<body onclick="unlockAudio()">
-
-    <header>
-        <div class="header-container">
-            <a href="./welcome.html" target="content_frame" class="brand" onclick="playClickSound()" onmouseenter="playHoverSound()">
-                <i class="fa-solid fa-jar"></i>
-                <h1>陶藝與釉藥調配</h1>
-            </a>
-
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <nav class="nav-menu" id="navMenu">
-                <div class="tools-group">
-                    <!-- 標記：加入 class "protected-link" 防止右鍵 -->
-                    <!-- 1. 原料轉釉式 -->
-                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-flask"></i> 原料轉釉式
-                    </a>
-                    
-                    <!-- 2. 釉式轉原料 -->
-                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-calculator"></i> 釉式轉原料
-                    </a>
-
-                    <!-- 3. 雙向轉換 -->
-                    <a href="./welcome-2.html" target="content_frame" class="nav-btn double protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-flask"></i> <span style="font-size: 0.8em;">+</span> <i class="fa-solid fa-calculator"></i>
-                        雙向轉換 (二合一)
-                    </a>
-
-                    <div class="dropdown">
-                        <a href="#" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                            <i class="fa-solid fa-book-open"></i> 計算教學 <i class="fa-solid fa-caret-down"></i>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="dropdown-inner">
-                                <a href="./jiaoxue/sanjiao.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                                    <i class="fa-solid fa-shapes"></i> 三角座標計算
-                                </a>
-                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                                    <i class="fa-solid fa-table-cells"></i> 賽格式計算
-                                </a>
-                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-pink" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                                    <i class="fa-solid fa-store"></i> 原料廠商資訊
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="social-group">
-                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
-                    <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-gamepad"></i>
-                    </a>
-                    <a href="https://www.facebook.com/aawen.huang" target="_blank" class="icon-btn fb" title="Facebook" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.instagram.com/aawenhuang/" target="_blank" class="icon-btn ig" title="Instagram" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100063821328990" target="_blank" class="icon-btn fire" title="炎變の燒" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-fire"></i>
-                    </a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <div class="iframe-container">
-            <iframe name="content_frame" id="content-iframe" src="./welcome.html">
-                您的瀏覽器不支援內嵌框架 (iframe)。
-            </iframe>
-        </div>
-    </main>
-
-    <footer>
-        &copy; 2024 陶藝與釉藥調配
-    </footer>
-
-    <!-- 音效標籤 -->
-    <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
-    <audio id="clickSound" src="click.wav" preload="auto"></audio>
-    <!-- 背景音樂：loop 代表循環播放 -->
-    <audio id="bgMusic" src="good.mp3" loop preload="auto"></audio>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-        }
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 1150) {
-                    document.getElementById('navMenu').classList.remove('active');
-                }
-            });
-        });
-
-        // 標記：防止特定連結被右鍵開啟
-        document.querySelectorAll('.protected-link').forEach(link => {
-            link.addEventListener('contextmenu', function(e) {
-                e.preventDefault(); // 阻止右鍵選單
-                alert('為確保計算功能正常運作，\n請使用「左鍵」點擊於當前頁面操作。');
-            });
-        });
-
-        // 音效控制
-        var hoverAudio = document.getElementById("hoverSound");
-        var clickAudio = document.getElementById("clickSound");
-        var bgMusic = document.getElementById("bgMusic");
+<body>
+<canvas id="cvs"></canvas>
+<div id="ui-layer">
+    <!-- Start Screen -->
+    <div id="start-screen">
         
-        function unlockAudio() {
-            if(hoverAudio) {
-                hoverAudio.play().then(() => {
-                    hoverAudio.pause();
-                    hoverAudio.currentTime = 0;
-                }).catch((e) => {});
-            }
-            if(clickAudio) {
-                clickAudio.play().then(() => {
-                    clickAudio.pause();
-                    clickAudio.currentTime = 0;
-                }).catch((e) => {});
-            }
-            // 播放背景音樂
-            if(bgMusic) {
-                bgMusic.volume = 0.3; // 音量設為 30%，避免太吵
-                bgMusic.play().catch((e) => {
-                    console.log("Background music blocked:", e);
-                });
-            }
-            // 解鎖後移除點擊事件
-            document.body.onclick = null;
-        }
+        <!-- [New] Pottery Website Intro Widget -->
+        <div id="pottery-intro">
+            <div class="intro-card">
+                <div class="intro-title">
+                    <i class="fa-solid fa-flask"></i> 陶藝與釉藥調配
+                </div>
+                <div style="font-size:11px; color:#999; margin-bottom:10px; line-height:1.4;">
+                    融合科學計算與藝術創作的陶藝學習中心。精準配方、歷史文化與生活美學。
+                </div>
+                <a href="https://yeouchia.github.io/pottery-glaze-website/" target="_blank" class="intro-link-btn">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> 前往陶藝中心
+                </a>
+                <ul class="intro-list">
+                    <li><i class="fa-solid fa-calculator ic-calc"></i> <span>精準釉藥計算 (科學調配)</span></li>
+                    <li><i class="fa-brands fa-youtube ic-video"></i> <span>豐富影音課程 (線上教學)</span></li>
+                    <li><i class="fa-solid fa-heart ic-life"></i> <span>陶藝生活 (FB/IG/展覽)</span></li>
+                    <li><i class="fa-solid fa-gamepad ic-game"></i> <span>課後紓壓天地 (本遊戲)</span></li>
+                </ul>
+            </div>
+        </div>
 
-        function playHoverSound() {
-            if (hoverAudio) {
-                hoverAudio.currentTime = 0;
-                hoverAudio.volume = 0.5;
-                var promise = hoverAudio.play();
-                if (promise !== undefined) { promise.catch(function(error) {}); }
-            }
-        }
+        <h1 style="color:#d9a040; font-family:'Cinzel'; margin-bottom:5px; font-size:48px; text-shadow:0 0 20px #a60; letter-spacing: 4px;">LINEAGE M</h1>
+        <p style="color:#666; font-size:12px; margin-bottom:20px; letter-spacing: 4px;">v77.81 AUDIO & VISUAL OVERHAUL</p>
+        <div id="login-box-main" class="login-box">
+            <div style="color:#888; font-size:12px; margin-bottom:5px;">帳號 (ID)</div>
+            <input type="text" id="login-id" class="login-input" placeholder="User ID">
+            <div style="color:#888; font-size:12px; margin-bottom:5px;">密碼 (Password)</div>
+            <input type="password" id="login-pw" class="login-input" placeholder="Password">
+            <button class="glass-btn" style="width:100%; border-color:#d44; color:#f88; margin-top:5px;" onclick="deleteAccountData()">⚠ 刪除帳號資料</button>
+            <div style="border-top:1px solid #444; margin:15px 0; padding-top:15px;">
+                <button id="asset-btn" onclick="document.getElementById('folder-input').click()">📂 載入圖檔資料夾 (選用)</button>
+                <input type="file" id="folder-input" webkitdirectory directory multiple style="display:none" onchange="loadAssets(this)">
+                <div id="asset-status">預設使用內建高畫質 SVG (150x150)</div>
+            </div>
+            <div style="font-size:10px; color:#555; margin-top:10px;">(系統自動儲存進度)</div>
+        </div>
+        <div style="display:flex; gap:20px; margin-top:20px;">
+            <div onclick="loginAndStart('knight')" style="cursor:pointer; text-align:center; opacity:0.8; transition:0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8"><div style="font-size:40px; color:#ddd; margin-bottom:5px;">🛡️</div><div style="color:#d4af37; font-weight:bold;">騎士</div></div>
+            <div onclick="loginAndStart('elf')" style="cursor:pointer; text-align:center; opacity:0.8; transition:0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8"><div style="font-size:40px; color:#adff2f; margin-bottom:5px;">🏹</div><div style="color:#d4af37; font-weight:bold;">妖精</div></div>
+            <div onclick="loginAndStart('mage')" style="cursor:pointer; text-align:center; opacity:0.8; transition:0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8"><div style="font-size:40px; color:#87ceeb; margin-bottom:5px;">🔮</div><div style="color:#d4af37; font-weight:bold;">法師</div></div>
+        </div>
+        <br>
+        <label for="bgm-input" class="glass-btn">📂 載入 BGM (MP3)</label>
+        <input type="file" id="bgm-input" accept="audio/*" style="display:none">
+    </div>
 
-        function playClickSound() {
-            if (clickAudio) {
-                clickAudio.currentTime = 0;
-                clickAudio.volume = 0.5;
-                var promise = clickAudio.play();
-                if (promise !== undefined) { promise.catch(function(error) {}); }
-            }
-        }
-    </script>
+    <!-- GM Console (Restored Full Version) -->
+    <div id="gm-console" class="window glass-panel" style="width:320px; z-index:3000; display:none; top:50%; left:50%; transform:translate(-50%, -50%);">
+        <div class="win-head" style="background: linear-gradient(90deg, #400, #800, #400);"><span>👑 GM 管理員控制台</span></div>
+        <div class="win-body" style="padding:20px;">
+            <div style="margin-bottom:15px;">
+                <div style="color:#ff0; font-size:12px; margin-bottom:5px;">EXP 倍率 (經驗值)</div>
+                <select id="gm-exp" style="width:100%; background:#222; color:#fff; padding:5px;">
+                    <option value="1">正常 (1x)</option><option value="100">高倍率 (100x)</option><option value="500">超高倍率 (500x)</option>
+                    <option value="1000">變態倍率 (1000x)</option><option value="2000">神之領域 (2000x)</option><option value="4000">一刀滿等 (4000x)</option>
+                    <option value="8000">光速升級 (8000x)</option>
+                    <option value="50000">GM 測試 (50000x)</option>
+                </select>
+            </div>
+            <div style="margin-bottom:15px;">
+                <div style="color:#fd0; font-size:12px; margin-bottom:5px;">Gold 倍率 (金幣)</div>
+                <select id="gm-gold" style="width:100%; background:#222; color:#fff; padding:5px;">
+                    <option value="1">正常 (1x)</option><option value="10">富裕 (10x)</option><option value="100">財富自由 (100x)</option><option value="1000">錢淹腳目 (1000x)</option>
+                </select>
+            </div>
+            <div style="margin-bottom:15px;">
+                <div style="color:#f88; font-size:12px; margin-bottom:5px;">Mob 倍率 (怪物數量)</div>
+                <select id="gm-spawn" style="width:100%; background:#222; color:#fff; padding:5px;">
+                    <option value="1">正常 (1x)</option><option value="2">多 (2x)</option><option value="3">很多 (3x)</option>
+                    <option value="4">怪物海 (4x)</option><option value="8">怪物洗屏 (8x)</option>
+                    <option value="12">末日級 (12x)</option>
+                    <option value="20">壓力測試 (20x)</option>
+                </select>
+            </div>
+            <div style="margin-bottom:15px; border-top:1px dashed #666; padding-top:10px;">
+                <div style="color:#0f0; font-size:12px; margin-bottom:5px;">Drop (消耗品)</div>
+                <select id="gm-drop-use" style="width:100%; background:#222; color:#fff; padding:2px;"><option value="1">1x</option><option value="5">5x</option><option value="10">10x</option></select>
+                <div style="color:#aaf; font-size:12px; margin-bottom:5px; margin-top:5px;">Drop (一般裝備)</div>
+                <select id="gm-drop-equip" style="width:100%; background:#222; color:#fff; padding:2px;"><option value="1">1x</option><option value="10">10x</option><option value="100">100x</option></select>
+                <div style="color:#f0f; font-size:12px; margin-bottom:5px; margin-top:5px;">Drop (高級/稀有)</div>
+                <select id="gm-drop-rare" style="width:100%; background:#222; color:#fff; padding:2px;"><option value="1">1x</option><option value="50">50x</option><option value="500">500x (必掉)</option></select>
+            </div>
+            <button class="glass-btn" style="width:100%; padding:10px; border-color:#f00; color:#fff; font-weight:bold; background:#500;" onclick="applyGMSettings()">確認並生效</button>
+            <div style="text-align:center; font-size:10px; color:#888; margin-top:10px;">設定後請改回正常帳號登入遊戲</div>
+        </div>
+    </div>
+
+    <!-- Main Game HUD -->
+    <div id="game-ui">
+        <div id="ui-map-name">說話之島</div>
+        <div id="hud-top-left">
+            <button class="glass-btn" onclick="toggleAutoCombat()" id="btn-auto">自動: ON</button>
+            <button class="glass-btn" onclick="toggleWin('guide')" style="border-color:#da0; color:#ffc;">📖 指南</button>
+            <button class="glass-btn" onclick="toggleWin('stats')">狀態</button>
+            <button class="glass-btn" onclick="toggleWin('skills')">技能</button>
+            <button class="glass-btn" onclick="toggleWin('inv')">背包</button>
+            <button class="glass-btn" onclick="toggleWin('shop')">商店</button>
+            <button class="glass-btn" onclick="toggleWin('settings')">設定</button>
+        </div>
+        <div style="position:absolute; top:15px; right:160px; pointer-events:auto;"><button class="glass-btn" style="border-color:#844; color:#fcc;" onclick="saveAndLogout()">登出</button></div>
+        <div id="minimap-group">
+            <div id="minimap-con"><canvas id="mm-cvs" width="130" height="130"></canvas></div>
+            <div id="btn-map-m" onclick="toggleWin('map')">M</div>
+        </div>
+        <div id="hud-bottom">
+            <div id="status-bars">
+                <div class="lvl-badge" style="margin-bottom:2px;">Lv.<span id="ui-lvl">1</span> <span style="font-size:12px; color:#aaa" id="ui-class"></span></div>
+                <div class="bar-frame" style="height:6px; margin-bottom:5px; border-color:#444; background:#000;"><div class="bar-fill exp-bar" id="bar-exp" style="width:0%"></div></div>
+                <div id="buff-bar"></div>
+                <div class="bar-frame"><div class="bar-fill hp" id="bar-hp" style="width:100%"></div><div class="bar-text" id="txt-hp"></div></div>
+                <div class="bar-frame"><div class="bar-fill mp" id="bar-mp" style="width:100%"></div><div class="bar-text" id="txt-mp"></div></div>
+                <div style="font-size:12px; color:#ffd700; text-align:right; margin-top:2px;">💰 <span id="ui-gold">0</span></div>
+            </div>
+            <div id="hotkeys">
+                <div class="key-slot" onclick="assignHotkey(0)"><div class="key-lbl">1</div><div class="key-icon" id="hk-0"></div><div class="key-qty" id="qt-0"></div></div>
+                <div class="key-slot" onclick="assignHotkey(1)"><div class="key-lbl">2</div><div class="key-icon" id="hk-1"></div><div class="key-qty" id="qt-1"></div></div>
+                <div class="key-slot" onclick="assignHotkey(2)"><div class="key-lbl">3</div><div class="key-icon" id="hk-2"></div><div class="key-qty" id="qt-2"></div></div>
+                <div class="key-slot" onclick="assignHotkey(3)"><div class="key-lbl">4</div><div class="key-icon" id="hk-3"></div><div class="key-qty" id="qt-3"></div></div>
+                <div class="key-slot" onclick="assignHotkey(4)"><div class="key-lbl">5</div><div class="key-icon" id="hk-4"></div><div class="key-qty" id="qt-4"></div></div>
+                <div class="key-slot" onclick="assignHotkey(5)"><div class="key-lbl">6</div><div class="key-icon" id="hk-5"></div><div class="key-qty" id="qt-5"></div></div>
+                <div class="key-slot" onclick="assignHotkey(6)"><div class="key-lbl">7</div><div class="key-icon" id="hk-6"></div><div class="key-qty" id="qt-6"></div></div>
+                <div class="key-slot" onclick="assignHotkey(7)"><div class="key-lbl">8</div><div class="key-icon" id="hk-7"></div><div class="key-qty" id="qt-7"></div></div>
+                <div class="key-slot" onclick="assignHotkey(8)"><div class="key-lbl">9</div><div class="key-icon" id="hk-8"></div><div class="key-qty" id="qt-8"></div></div>
+                <div class="key-slot" onclick="assignHotkey(9)"><div class="key-lbl">0</div><div class="key-icon" id="hk-9"></div><div class="key-qty" id="qt-9"></div></div>
+            </div>
+            <div id="msg-log"></div>
+        </div>
+        <div id="joy-zone"><div id="joy-base"><div id="joy-stick"></div></div></div>
+    </div>
+
+    <!-- Windows (Popups) -->
+    <div id="win-guide" class="window glass-panel" style="width:400px; height:500px;">
+        <div class="win-head"><span>📖 冒險指南 (Game Guide)</span><span class="win-close" onclick="toggleWin('guide')">✕</span></div>
+        <div class="win-body" id="guide-content"></div>
+    </div>
+    <div id="win-inv" class="window glass-panel">
+        <div class="win-head"><span id="inv-title">背包 (Inventory)</span><span class="win-close" onclick="toggleWin('inv')">✕</span></div>
+        <div class="win-body" id="inv-list"></div>
+        <div id="inv-info">點擊圖示查看資訊</div>
+    </div>
+    <div id="win-shop" class="window glass-panel">
+        <div class="win-head"><span>商店 (Merchant)</span><span class="win-close" onclick="toggleWin('shop')">✕</span></div>
+        <div class="tab-bar" style="display:flex; justify-content:center; margin-top:5px;">
+            <button class="glass-btn" onclick="setShopTab('buy')" style="width:45%; margin-right:5px;">購買</button>
+            <button class="glass-btn" onclick="setShopTab('sell')" style="width:45%;">販賣</button>
+        </div>
+        <div class="win-body" id="shop-list"></div>
+        <div id="shop-info">點擊商品查看說明</div>
+        <div style="padding:8px; text-align:center; color:#ffd700;">持有金幣: <span id="shop-gold">0</span></div>
+    </div>
+    <div id="win-stats" class="window glass-panel" style="width:360px;">
+        <div class="win-head"><span>角色資訊 (Status)</span><span class="win-close" onclick="toggleWin('stats')">✕</span></div>
+        <div class="win-body">
+            <div class="paper-doll">
+                <div class="pd-slot" id="slot-helm" onclick="unequip('helm')"><div class="pd-lbl">頭盔</div></div>
+                <div class="pd-slot" id="slot-neck" onclick="unequip('neck')"><div class="pd-lbl">項鍊</div></div>
+                <div class="pd-slot" id="slot-shirt" onclick="unequip('shirt')"><div class="pd-lbl">內衣</div></div>
+                <div class="pd-slot" id="slot-armor" onclick="unequip('armor')"><div class="pd-lbl">盔甲</div></div>
+                <div class="pd-slot" id="slot-cloak" onclick="unequip('cloak')"><div class="pd-lbl">斗篷</div></div>
+                <div class="pd-slot" id="slot-weapon" onclick="unequip('weapon')"><div class="pd-lbl">武器</div></div>
+                <div class="pd-slot" id="slot-glove" onclick="unequip('glove')"><div class="pd-lbl">手套</div></div>
+                <div class="pd-slot" id="slot-boot" onclick="unequip('boot')"><div class="pd-lbl">靴子</div></div>
+            </div>
+            <div id="st-summary"><span>⚔️ <span id="st-atk" style="color:#fff">0</span></span><span>🛡️ <span id="st-def" style="color:#fff">0</span></span></div>
+            <div id="st-points-row">剩餘點數: <span id="st-pts">0</span></div>
+            <div class="st-attr-row"><span>STR (近戰傷害)</span><span><span id="st-str"></span> <button class="glass-btn" onclick="addStat('str')">+</button></span></div>
+            <div class="st-attr-row"><span>DEX (防禦/遠攻)</span><span><span id="st-dex"></span> <button class="glass-btn" onclick="addStat('dex')">+</button></span></div>
+            <div class="st-attr-row"><span>CON (血量成長/回血)</span><span><span id="st-con"></span> <button class="glass-btn" onclick="addStat('con')">+</button></span></div>
+            <div class="st-attr-row"><span>INT (魔法傷害/回魔)</span><span><span id="st-int"></span> <button class="glass-btn" onclick="addStat('int')">+</button></span></div>
+        </div>
+    </div>
+    <div id="win-skills" class="window glass-panel" style="width:360px;">
+        <div class="win-head"><span>技能 (Skills)</span><span class="win-close" onclick="toggleWin('skills')">✕</span></div>
+        <div class="win-body">
+            <div style="margin-top:5px; text-align:center; padding-top:5px; color:#0ff; border-bottom: 1px solid #444; margin-bottom:10px;">技能點數 (SP): <span id="sp-pts">0</span></div>
+            <div id="skill-tree-list"></div>
+        </div>
+    </div>
+    <div id="win-settings" class="window glass-panel">
+        <div class="win-head"><span>設定 (Settings)</span><span class="win-close" onclick="toggleWin('settings')">✕</span></div>
+        <div class="win-body">
+            <label for="bgm-input-2" class="glass-btn" style="display:block; text-align:center; margin-bottom:10px;">📂 載入背景音樂</label>
+            <input type="file" id="bgm-input-2" accept="audio/*" style="display:none" onchange="loadBgm(this)">
+            <div style="margin:10px 0;">HP喝水 < <span id="pot-val">80</span>% <input type="range" min="0" max="95" value="80" oninput="updateSettings(this.value, 'hp')" style="width:100%"></div>
+            <div style="margin:10px 0;">優先使用:<select onchange="updateSettings(this.value, 'type')" style="background:#222; color:#fff; border:1px solid #555;"><option value="white">白色藥水 (高效)</option><option value="red">紅色藥水 (普通)</option><option value="ultimate">終極藥水 (最強)</option></select></div>
+            <div style="margin:10px 0; border-top:1px solid #444; padding-top:10px;"><label style="color:#ff0; font-weight:bold; cursor:pointer;"><input type="checkbox" onchange="updateSettings(this.checked, 'show_range')"> 顯示攻擊射程 (輔助圈)</label></div>
+            <div style="margin:10px 0; border-top:1px solid #444; padding-top:10px;">
+                <button class="glass-btn" style="width:100%; margin-bottom:10px; border-color:#aa4; color:#ff8;" onclick="toggleWin('autosell')">💰 自動販賣管理</button>
+                <div style="color:#da0">自動施法/狀態:</div>
+                <label><input type="checkbox" onchange="updateSettings(this.checked, 'auto_haste')" id="cb_haste"> 綠色藥水</label>
+                <label><input type="checkbox" onchange="updateSettings(this.checked, 'auto_brave')" id="cb_brave"> 勇/精/慎</label>
+                <label><input type="checkbox" onchange="updateSettings(this.checked, 'auto_blue')" id="cb_blue"> 藍色藥水 (MP Buff)</label>
+                <div style="margin:10px 0;">
+                    自動治癒 (法/妖):<br>
+                    <select onchange="updateSettings(this.value, 'auto_heal_skill')" style="background:#222; color:#fff; width:100%; margin-bottom:5px;"><option value="none">關閉</option><option value="heal_1">初級治癒</option><option value="heal_2">中級治癒</option><option value="heal_3">高級治癒</option><option value="e_heal">精靈治癒</option></select>
+                    <br>HP < <input type="number" style="width:40px;background:#111;color:#fff;border:1px solid #444" value="60" onchange="updateSettings(this.value, 'auto_heal_val')">% 且 MP > <input type="number" style="width:40px;background:#111;color:#fff;border:1px solid #444" value="20" onchange="updateSettings(this.value, 'auto_heal_mp_limit')">%
+                </div>
+            </div>
+            <div id="knight-settings" style="display:none; border-top:1px solid #444; margin-top:10px; padding-top:10px;">
+                <div style="color:#ddd; font-weight:bold; margin-bottom:5px;">🛡️ 騎士專屬設定:</div>
+                <label style="display:block; font-size:11px;"><input type="checkbox" id="cb_auto_solid" onchange="updateSettings(this.checked, 'auto_solid_carriage')"> 自動增幅防禦 (MP &gt; 15)</label>
+                <label style="display:block; font-size:11px;"><input type="checkbox" id="cb_auto_counter" onchange="updateSettings(this.checked, 'auto_counter_barrier')"> 自動反擊屏障 (MP &gt; 20)</label>
+            </div>
+            <div id="elf-settings" style="display:none; border-top:1px solid #444; margin-top:10px; padding-top:10px;">
+                <div style="color:#adff2f; font-weight:bold; margin-bottom:5px;">🧝 妖精專屬設定:</div>
+                <label><input type="checkbox" id="cb_auto_b2m" onchange="updateSettings(this.checked, 'auto_b2m')"> 自動魂體轉換 (洗魔)</label>
+                <div style="font-size:12px; margin-top:5px;">HP > <input type="number" id="b2m-hp-input" value="80" style="width:35px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'b2m_hp')">% 且 MP < <input type="number" id="b2m-mp-input" value="50" style="width:35px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'b2m_mp')">% 時使用</div>
+                <div style="margin-top:10px; border-top:1px dashed #444; padding-top:5px;">
+                    <div style="color:#adff2f; font-weight:bold; margin-bottom:5px;">狀態/攻擊魔法:</div>
+                    <label style="display:block; font-size:11px;"><input type="checkbox" id="cb_auto_fire" onchange="updateSettings(this.checked, 'auto_fire')"> 自動烈炎武器 (MP &gt; <input type="number" id="fire-mp-limit" value="30" style="width:30px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'fire_mp_limit')">)</label>
+                    <label style="display:block; font-size:11px;"><input type="checkbox" id="cb_auto_wind" onchange="updateSettings(this.checked, 'auto_wind')"> 自動風之神射 (MP &gt; <input type="number" id="wind-mp-limit" value="30" style="width:30px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'wind_mp_limit')">)</label>
+                    <label style="display:block; font-size:11px;"><input type="checkbox" id="cb_auto_storm" onchange="updateSettings(this.checked, 'auto_storm')"> 自動暴風神射 (MP &gt; <input type="number" id="storm-mp-limit" value="40" style="width:30px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'storm_mp_limit')">)</label>
+                </div>
+            </div>
+            <!-- 新增法師設定 -->
+            <div id="mage-settings" style="display:none; border-top:1px solid #444; margin-top:10px; padding-top:10px;">
+                <div style="color:#87ceeb; font-weight:bold; margin-bottom:5px;">🔮 法師專屬設定:</div>
+                <label style="display:block; font-size:11px; margin-bottom:3px;">
+                    <input type="checkbox" id="cb_auto_immune" onchange="updateSettings(this.checked, 'auto_immune_to_harm')"> 
+                    自動聖結界 (MP &gt; <input type="number" id="immune-mp-limit" value="60" style="width:30px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'immune_mp_limit')">%)
+                </label>
+                <label style="display:block; font-size:11px;">
+                    <input type="checkbox" id="cb_auto_soul" onchange="updateSettings(this.checked, 'auto_soul_elevation')"> 
+                    自動靈魂昇華 (MP &gt; <input type="number" id="soul-mp-limit" value="80" style="width:30px;background:#111;color:#fff;border:1px solid #555" onchange="updateSettings(this.value, 'soul_mp_limit')">%)
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <div id="win-autosell" class="window glass-panel">
+        <div class="win-head"><span>自動販賣管理</span><span class="win-close" onclick="toggleWin('autosell')">✕</span></div>
+        <div class="win-body" id="autosell-list"></div>
+        <div style="padding:10px; font-size:11px; color:#aaa; text-align:center;">勾選的物品在獲得時會直接賣出換取金幣<br>(不會佔用背包空間)</div>
+    </div>
+
+    <div id="win-map" class="window glass-panel" style="width:640px; height:680px;">
+        <div class="win-head"><span>世界地圖 (World Map)</span><span class="win-close" onclick="toggleWin('map')">✕</span></div>
+        <div class="win-body" style="padding:0; text-align:center; position:relative;">
+            <div id="map-container" style="margin:20px auto; border:2px solid #543; box-shadow: 0 0 20px #000; cursor:crosshair;">
+                <canvas id="map-canvas" width="600" height="600"></canvas>
+            </div>
+            <div style="font-size:12px; color:#888;">點擊地圖色塊進行傳送</div>
+        </div>
+    </div>
+
+    <div id="assign-modal" class="window glass-panel" style="width:300px; height:auto; z-index:1500; text-align:center;">
+        <div class="win-head"><span>設置快捷鍵</span></div>
+        <div class="win-body" style="display:flex; justify-content:center; gap:5px; flex-wrap:wrap; padding:20px;">
+            <button class="glass-btn" onclick="bindHotkey(0)">1</button>
+            <button class="glass-btn" onclick="bindHotkey(1)">2</button>
+            <button class="glass-btn" onclick="bindHotkey(2)">3</button>
+            <button class="glass-btn" onclick="bindHotkey(3)">4</button>
+            <button class="glass-btn" onclick="bindHotkey(4)">5</button>
+            <button class="glass-btn" onclick="bindHotkey(5)">6</button>
+            <button class="glass-btn" onclick="bindHotkey(6)">7</button>
+            <button class="glass-btn" onclick="bindHotkey(7)">8</button>
+            <button class="glass-btn" onclick="bindHotkey(8)">9</button>
+            <button class="glass-btn" onclick="bindHotkey(9)">0</button>
+        </div>
+    </div>
+    
+    <div id="teleport-menu" class="glass-panel" style="width:320px; padding:15px; display:none; z-index:2000; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+        <h3 style="color:#adf; margin:0 0 10px 0; border-bottom:1px solid #456; text-align:center;">世界地圖傳送</h3>
+        <div id="tele-list" style="max-height:300px; overflow-y:auto;"></div>
+        <button class="glass-btn" style="width:100%; margin-top:10px; border-color:#644;" onclick="closeTeleport()">關閉選單</button>
+    </div>
+</div>
+<!-- Scripts Order: Data -> Assets -> Game -->
+<script src="data.js"></script>
+<script src="assets.js"></script>
+<script src="game.js"></script>
 </body>
 </html>
