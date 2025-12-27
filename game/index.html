@@ -1,20 +1,22 @@
 <!-- 
-Lineage M v77.87 (Mage Settings UI Update)
+Lineage M v77.89 (Pottery & Glaze Integration)
 ----------------------------------------
 [版本資訊]
 * Core: v77.87 (Audio/FX/Visual Swap/AOE Fix/Balance)
-* UI: v77.87 (Mage Auto Settings Added)
+* UI: v77.89 (Pottery Website Intro Added)
 ----------------------------------------
 [修正記錄]
-* Fix: 新增法師專屬自動化設定介面 (聖結界/靈魂昇華)。
-* Fix: 保持原有 UI 風格與 GM 控制台功能。
+* Fix: 在啟動畫面左上角新增「陶藝與釉藥調配」網站推廣區塊。
+* Fix: 整合 FontAwesome 圖示庫以支援新介面圖示。
 -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lineage M v77.84: Mage Evolution</title>
+    <title>Lineage M v77.89: Pottery Edition</title>
+    <!-- 引入 FontAwesome (參考 welcome.html) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Noto+Serif+TC:wght@500;900&display=swap" rel="stylesheet">
     <style>
         body { margin: 0; background: #050505; color: #ddd; font-family: 'Noto Serif TC', serif; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -62,7 +64,7 @@ Lineage M v77.87 (Mage Settings UI Update)
         .buff-icon { width: 44px; height: 34px; background: rgba(0,0,0,0.6); border: 1px solid #665; border-radius: 4px; font-size: 11px; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2px 0; margin-right: 4px; }
         .buff-name { font-size: 10px; line-height: 12px; font-weight: bold; } .buff-time { font-size: 9px; color: #0f0; line-height: 12px; }
         
-        /* Hotkeys - IMPORTANT: Keep this structure for game.js compatibility */
+        /* Hotkeys */
         #hotkeys { position: absolute; bottom: 20px; left: 260px; display: flex; gap: 4px; pointer-events: auto; }
         .key-slot { width: 36px; height: 36px; background: rgba(20,20,25,0.9); border: 1px solid #555; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: inset 0 0 10px #000; }
         .key-slot:active { border-color: #fca; transform: scale(0.95); }
@@ -75,6 +77,81 @@ Lineage M v77.87 (Mage Settings UI Update)
         .login-box { background: rgba(20,20,25,0.9); border: 2px solid #554; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 0 50px #000; margin-bottom: 20px; width: 300px; }
         .login-input { background: #000; border: 1px solid #443; color: #da0; padding: 10px; font-size: 16px; width: 90%; text-align: center; font-family: 'Cinzel'; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
         
+        /* [New] Pottery Intro Widget Styles */
+        #pottery-intro {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 280px;
+            z-index: 2001; /* Higher than start screen bg but lower than GM console */
+            text-align: left;
+        }
+        .intro-card {
+            background: rgba(20, 24, 28, 0.85);
+            border: 1px solid #6b5b4b;
+            border-left: 3px solid #fca311; /* Orange accent from welcome.html */
+            border-radius: 4px;
+            padding: 15px;
+            color: #ddd;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        .intro-title {
+            color: #fca311;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .intro-link-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 0;
+            background: linear-gradient(90deg, #9d4edd, #5a189a); /* Purple accent */
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #c77dff;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+        .intro-link-btn:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+        }
+        .intro-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 11px;
+            color: #aaa;
+        }
+        .intro-list li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .intro-list i {
+            width: 16px;
+            text-align: center;
+        }
+        /* Icon colors to match welcome.html themes */
+        .ic-calc { color: #fca311; }
+        .ic-video { color: #ff4444; }
+        .ic-life { color: #9d4edd; }
+        .ic-game { color: #4caf50; }
+
         #inv-info, #shop-info { background: #111; color: #888; padding: 5px; font-size: 12px; font-weight: bold; border-top: 1px solid #444; height: 35px; display: flex; align-items: center; justify-content: center; text-shadow: 0 0 5px rgba(0,0,0,0.8); letter-spacing: 1px; }
         .item-row { display: flex; justify-content: space-between; padding: 6px; border-bottom: 1px solid #333; align-items: center; background: rgba(0,0,0,0.2); }
         .item-icon { width: 28px; height: 28px; background: #111; border: 1px solid #444; margin-right: 8px; border-radius: 2px; display:flex; align-items:center; justify-content:center; font-size:16px; cursor: pointer; flex-shrink: 0;}
@@ -105,6 +182,28 @@ Lineage M v77.87 (Mage Settings UI Update)
 <div id="ui-layer">
     <!-- Start Screen -->
     <div id="start-screen">
+        
+        <!-- [New] Pottery Website Intro Widget -->
+        <div id="pottery-intro">
+            <div class="intro-card">
+                <div class="intro-title">
+                    <i class="fa-solid fa-flask"></i> 陶藝與釉藥調配
+                </div>
+                <div style="font-size:11px; color:#999; margin-bottom:10px; line-height:1.4;">
+                    融合科學計算與藝術創作的陶藝學習中心。精準配方、歷史文化與生活美學。
+                </div>
+                <a href="https://yeouchia.github.io/pottery-glaze-website/" target="_blank" class="intro-link-btn">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> 前往陶藝中心
+                </a>
+                <ul class="intro-list">
+                    <li><i class="fa-solid fa-calculator ic-calc"></i> <span>精準釉藥計算 (科學調配)</span></li>
+                    <li><i class="fa-brands fa-youtube ic-video"></i> <span>豐富影音課程 (線上教學)</span></li>
+                    <li><i class="fa-solid fa-heart ic-life"></i> <span>陶藝生活 (FB/IG/展覽)</span></li>
+                    <li><i class="fa-solid fa-gamepad ic-game"></i> <span>課後紓壓天地 (本遊戲)</span></li>
+                </ul>
+            </div>
+        </div>
+
         <h1 style="color:#d9a040; font-family:'Cinzel'; margin-bottom:5px; font-size:48px; text-shadow:0 0 20px #a60; letter-spacing: 4px;">LINEAGE M</h1>
         <p style="color:#666; font-size:12px; margin-bottom:20px; letter-spacing: 4px;">v77.81 AUDIO & VISUAL OVERHAUL</p>
         <div id="login-box-main" class="login-box">
