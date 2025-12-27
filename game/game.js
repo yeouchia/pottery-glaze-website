@@ -1,16 +1,13 @@
 /**
- * Lineage M v77.85 Game Engine (Mage Heal Fix & Sync)
+ * Lineage M v77.89 Game Engine (Logic Fixes & Stun Redesign)
  * ---------------------------------------------------
- * [更新記錄 - v77.85_MageHealFix]
- * * Ver 77.85 (Mage Healing Logic):
- * - [修正] 治癒術數值公式化: 加入 INT (智力) 加成。
- * - 初級: 30 + (INT * 2)
- * - 中級: 70 + (INT * 3)
- * - 高級: 150 + (INT * 5)
- * - [新增] 自動治癒邏輯 (Auto Heal Spell):
- * - 在 update 迴圈中實作自動施法。
- * - 獨立計時器 (lastHealSpellTime)，可與喝水 (lastPotionTime) 同步觸發。
- * - 支援檢查 MP 門檻與 HP 觸發線。
+ * [修正記錄 - v77.89_Fix2]
+ * 1. [修正] 補上檔案末尾缺失的閉合括號，解決 "Unexpected end of input" 錯誤。
+ * ---------------------------------------------------
+ * [更新記錄 - v77.89_BGM]
+ * 1. [音效] 新增自動背景音樂功能：
+ * - 遊戲啟動時自動嘗試讀取並播放同目錄下的 'lineage.mp3'。
+ * - 若玩家手動上傳音樂，會自動停止預設音樂並切換。
  * ---------------------------------------------------
  */
 
@@ -42,22 +39,51 @@ function resize(){
 window.addEventListener('resize',resize); 
 resize();
 
-// --- 音效系統 (Audio System v2.0 - Synthesizer) ---
+// --- 音效系統 (Audio System v3.0 - Hybrid) ---
 var AudioSys = { 
     ctx: null, 
-    bgmNode: null, 
+    bgmNode: null,
+    defaultAudio: null, // 用來存儲 lineage.mp3 的 HTMLAudioElement
+
     init: function() { 
         try { 
             window.AudioContext = window.AudioContext || window.webkitAudioContext; 
             if(window.AudioContext) { 
-                this.ctx = new AudioContext(); 
+                if (!this.ctx) this.ctx = new AudioContext(); 
                 if(this.ctx.state === 'suspended') this.ctx.resume(); 
             } 
-        } catch(e) {} 
+            // 預備預設音樂物件
+            if (!this.defaultAudio) {
+                this.defaultAudio = new Audio('lineage.mp3');
+                this.defaultAudio.loop = true;
+                this.defaultAudio.volume = 0.4;
+            }
+        } catch(e) { console.warn("Audio init failed:", e); } 
     }, 
+
+    // [New] 播放預設音樂 (lineage.mp3)
+    playDefault: function() {
+        this.init();
+        if (this.defaultAudio) {
+            var playPromise = this.defaultAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("自動播放預設音樂失敗 (可能缺少檔案或瀏覽器阻擋):", error);
+                });
+            }
+        }
+    },
+
     playFile: function(file) { 
         if(!this.ctx) this.init(); 
         if(!file || !this.ctx) return; 
+        
+        // 如果正在播放預設音樂，先停止
+        if (this.defaultAudio) {
+            this.defaultAudio.pause();
+            this.defaultAudio.currentTime = 0;
+        }
+
         var r = new FileReader(); 
         r.onload = e => this.ctx.decodeAudioData(e.target.result, b => { 
             if(this.bgmNode) this.bgmNode.stop(); 
@@ -72,6 +98,7 @@ var AudioSys = {
         }); 
         r.readAsArrayBuffer(file); 
     }, 
+    
     playTone: function(type) {
         if (!this.ctx) return;
         const t = this.ctx.currentTime;
@@ -104,7 +131,7 @@ if(document.getElementById('bgm-input-2')) document.getElementById('bgm-input-2'
 var gameState = 'MENU'; 
 var currentMapId = 0; 
 var accountId = "guest";
-// [Update] 玩家物件擴充: 新增 lastHealSpellTime 用於自動治癒計時
+// [Update] 玩家物件擴充
 var player = { 
     x:0, y:0, hp:100, maxHp:100, mp:50, maxMp:50, str:10, dex:10, con:10, int:10, 
     class:'knight', exp:0, nextExp:1000, lvl:1, points:0, skillPoints:0, gold:1000, 
@@ -113,7 +140,7 @@ var player = {
     autoPotLimit:80, autoMpLimit:20, autoPotType:'white', lastPotionTime:0, lastRegenTime:0, 
     autoBuffs:{haste:false, brave:false, blue:false, wind:false, fire:false, storm:false, solid_carriage:false, counter_barrier:false, immune_to_harm:false, soul_elevation:false}, 
     autoHealSkill:'none', autoHealVal:60, autoHealMpLimit: 20, 
-    lastHealSpellTime: 0, // [New] 自動治癒術計時器
+    lastHealSpellTime: 0, 
     autoFireMp: 30, autoWindMp: 30, autoStormMp: 40, 
     autoImmuneMpLimit: 60, autoSoulMpLimit: 80,
     manualTarget: false, autoCombat: true, autoCombatDelay: 0, autoSellKeys: [], 
@@ -168,7 +195,9 @@ function loginAndStart(cls) {
     if (typeof Assets === 'undefined') { alert("資源庫載入失敗: Assets 未定義"); return; }
     
     try { 
-        AudioSys.init(); 
+        // [New] 啟動預設背景音樂
+        AudioSys.playDefault(); 
+        
         initAssets(); 
         
         var idInput = document.getElementById('login-id').value.trim(); 
@@ -260,7 +289,11 @@ function initMap(id) {
     if (id !== 0) { portals.push({x: mapInfo.x + 200, y: mapInfo.y + 200, r: 50, dest: 0}); } else { portals.push({x: 200, y: 200, r: 50, dest: 1}); } 
     generateEnvironment(mapInfo.theme, g); 
     if (id == 0) { for(let i=0; i<5; i++) entities.push({name:'新手導師', hp:1000, maxHp:1000, s:24, c:'#aaa', x:600+(Math.random()-0.5)*200, y:900+(Math.random()-0.5)*200, isFakePlayer:true, chatTimer:0, chatText:''}); } 
-    var baseMobCount = (id === 0) ? 200 : ((mapInfo.w && mapInfo.w > 100) ? 350 : 200); 
+    
+    // [Fix v77.88] 調整怪物基礎數量
+    // Map 0 (隱藏之谷) 提升至 600 (3倍), 一般地圖為 350 或 200
+    var baseMobCount = (id === 0) ? 900 : ((mapInfo.w && mapInfo.w > 100) ? 350 : 200); 
+    
     var mobCount = baseMobCount * GM_SPAWN_MULT; 
     for(let i=0; i<mobCount; i++) spawnMob(true); 
     if(mapInfo.boss) checkAndSpawnBoss(mapInfo.boss); 
@@ -304,7 +337,12 @@ function spawnMob(isInitial = false) {
     var mx = (Math.random()-0.5)*2*range; 
     var my = (Math.random()-0.5)*2*range; 
     if (t.aggro && Math.hypot(mx,my)<600) mx+=1000; 
-    entities.push({ name:t.name, hp:t.hp, maxHp:t.hp, exp:t.exp, s:t.s, c:t.c, isBoss:false, type:mobKey, drops:t.drops, x:mx, y:my, atkTimer:0, aggro: false, magic: t.magic, stunTimer: 0, direction: 1 }); 
+    
+    // [Fix v77.88] 地圖難度動態調整: Map 2 (Lv.15) 以上地圖，血量 2 倍
+    var multiplier = (currentMapId >= 2) ? 2 : 1;
+    var finalHp = Math.floor(t.hp * multiplier);
+    
+    entities.push({ name:t.name, hp:finalHp, maxHp:finalHp, exp:t.exp, s:t.s, c:t.c, isBoss:false, type:mobKey, drops:t.drops, x:mx, y:my, atkTimer:0, aggro: false, magic: t.magic, stunTimer: 0, direction: 1 }); 
 }
 
 function spawnBoss(key) { 
@@ -312,7 +350,12 @@ function spawnBoss(key) {
     if(!t) return; 
     var d = (currentMapId >= 14 || currentMapId === 1) ? 3500 : 2000; 
     var a = Math.random()*6.28; 
-    entities.push({ name: t.name, hp: t.hp, maxHp: t.hp, exp: t.exp, s: t.s, c: t.c, isBoss: true, type: key, drops: t.drops, x: Math.cos(a)*d, y: Math.sin(a)*d, atkTimer: 0, aggro: t.aggro, magic: t.magic, scale: t.scale || 2.0, stunTimer: 0, direction: 1 }); 
+    
+    // [Fix v77.88] BOSS 也要應用 2 倍血量規則 (若在地圖 2 以上)
+    var multiplier = (currentMapId >= 2) ? 2 : 1;
+    var finalHp = Math.floor(t.hp * multiplier);
+
+    entities.push({ name: t.name, hp: finalHp, maxHp: finalHp, exp: t.exp, s: t.s, c: t.c, isBoss: true, type: key, drops: t.drops, x: Math.cos(a)*d, y: Math.sin(a)*d, atkTimer: 0, aggro: t.aggro, magic: t.magic, scale: t.scale || 2.0, stunTimer: 0, direction: 1 }); 
     logMsg("BOSS 出現了: " + t.name, "#f0f"); 
 }
 
@@ -404,7 +447,10 @@ function update() {
 
     if (now - player.lastRegenTime > 3000) { player.lastRegenTime = now; if (player.hp > 0) { var stats = getPlayerStats(); var hpRegen = Math.floor(player.lvl / 2) + stats.con; player.hp = Math.min(player.maxHp, player.hp + hpRegen); var mpRegen = Math.floor(player.lvl / 3) + stats.int; if (player.buffs.blue_potion) mpRegen += 5; if (player.equip.armor && player.equip.armor.key === 'armor_robe') mpRegen += 5; if (player.equip.weapon && player.equip.weapon.key === 'staff_crystal') mpRegen += 5; player.mp = Math.min(player.maxMp, player.mp + mpRegen); } if (MAPS[currentMapId].boss) checkAndSpawnBoss(MAPS[currentMapId].boss); }
     
-    var baseMaxMobs = (currentMapId === 0) ? 200 : ((MAPS[currentMapId].w > 100) ? 350 : 200); var maxMobs = baseMaxMobs * GM_SPAWN_MULT; if (maxMobs > 3000) maxMobs = 3000;
+    // [Fix v77.88] 更新 Map 0 的怪物上限判斷 (配合 initMap 的修改)
+    var baseMaxMobs = (currentMapId === 0) ? 600 : ((MAPS[currentMapId].w > 100) ? 350 : 200); 
+    
+    var maxMobs = baseMaxMobs * GM_SPAWN_MULT; if (maxMobs > 3000) maxMobs = 3000;
     if(entities.length < maxMobs && Math.random()>0.9 && currentMapId != 0) spawnMob();
     
     var speed = player.buffs.haste ? 9 : 6; if (player.lvl >= 52) speed += 1; if (player.lvl >= 60) speed += 1; if (player.lvl >= 70) speed += 1;
@@ -464,6 +510,13 @@ function update() {
                 if (mx > 0) m.direction = 1; if (mx < 0) m.direction = -1; 
             } else if (Date.now() - m.atkTimer > 1500) { 
                 m.atkTimer = Date.now(); var mobData = MOB_TYPES[m.type] || {atk:10}; var rawDmg = (mobData.atk || 10) + Math.random()*5; 
+
+                // [Fix v77.88] 怪物攻擊力倍率 (Map 2+ 兩倍傷害)
+                if (currentMapId >= 2 && !m.isPet && !m.isFakePlayer) {
+                    var baseAtk = (mobData.atk || 10) * 2;
+                    rawDmg = baseAtk + Math.random()*5;
+                }
+
                 if (target === player) { 
                     if (player.buffs.counter_barrier) { 
                         var k3Lv = player.skillLevels['k3'] || 1; 
@@ -585,8 +638,14 @@ function hit(m, extra=0, effect=null, source=null) {
                 if (isStaff && wItem.key === 'staff') player.mp = Math.min(player.maxMp, player.mp + 3); 
             } 
             var mobDef = MOB_TYPES[m.type] ? (MOB_TYPES[m.type].def || 0) : 0; 
+            
+            // [Fix v77.88] 怪物防禦力倍率 (Map 2+ 兩倍防禦)
+            if (currentMapId >= 2 && !m.isPet && !m.isFakePlayer) {
+                mobDef *= 2;
+            }
+
             var dmg = Math.max(1, Math.floor(rawDmg - mobDef/2 + extra + Math.floor(player.lvl/5))); 
-            if (effect === 'stun') { var k1Lv = player.skillLevels['k1'] || 1; var duration = 3000 + (k1Lv-1)*1000; m.stunTimer = Date.now() + duration; addFloat(mx, my-80, `💫暈眩 (${duration/1000}s)!`, "#ff0", 30); } 
+            if (effect === 'stun') { var k1Lv = player.skillLevels['k1'] || 1; var duration = 3000 + (k1Lv-1)*1000; m.stunTimer = Date.now() + duration; addFloat(mx, my-80, `暈眩 (${duration/1000}s)!`, "#ff0", 30); } 
             m.hp -= dmg; 
             if (!source) AudioSys.sfx('hit'); 
             addFloat(mx, my-50, ""+dmg, "#fff", 20); 
@@ -625,8 +684,23 @@ function useItemIdx(idx) {
     var item = player.inventory[idx]; 
     var i = ITEMS[item.key]; 
     if (i.class && i.class !== player.class) { var cName = i.class==='knight'?'騎士':(i.class==='elf'?'妖精':'法師'); logMsg("職業不符 (" + cName + "專用)", "#f00"); return; } 
-    if (i.key === 'scroll_teleport') { player.x += (Math.random()-0.5)*2000; player.y += (Math.random()-0.5)*2000; player.tx = player.x; player.ty = player.y; if(item.count>1) item.count--; else player.inventory.splice(idx,1); AudioSys.sfx('magic_soul'); logMsg("瞬間移動!", "#0ff"); addPart(player.x, player.y, "#aaf", 20); renderInv(); updateUI(); return; } 
-    if (i.key === 'scroll_return') { var mapInfo = MAPS[currentMapId]; var destMap = mapInfo.returnMap || 1; teleport(destMap); if(item.count>1) item.count--; else player.inventory.splice(idx,1); AudioSys.sfx('magic_soul'); logMsg("傳送回村莊", "#0ff"); renderInv(); updateUI(); return; } 
+    // [Fix] 瞬間傳送卷軸：使用絕對座標範圍，防止飛出地圖
+    if (i.key === 'scroll_teleport') { 
+        var mapRange = (MAPS[currentMapId].w > 100) ? 5000 : 2500;
+        player.x = (Math.random() - 0.5) * mapRange; 
+        player.y = (Math.random() - 0.5) * mapRange;
+        player.tx = player.x; player.ty = player.y; 
+        if(item.count>1) item.count--; else player.inventory.splice(idx,1); 
+        AudioSys.sfx('magic_soul'); logMsg("瞬間移動!", "#0ff"); addPart(player.x, player.y, "#aaf", 20); renderInv(); updateUI(); return; 
+    } 
+    // [Fix] 回家卷軸：強制指定 Map 0 (隱藏之谷) 傳送點旁
+    if (i.key === 'scroll_return') { 
+        teleport(0); 
+        player.x = 280; player.y = 280; // 強制設定在傳送點旁
+        player.tx = 280; player.ty = 280;
+        if(item.count>1) item.count--; else player.inventory.splice(idx,1); 
+        AudioSys.sfx('magic_soul'); logMsg("傳送回村莊", "#0ff"); renderInv(); updateUI(); return; 
+    } 
     if(i.buff) { player.buffs[i.buff] = Date.now() + i.duration; if(item.count>1) item.count--; else player.inventory.splice(idx,1); AudioSys.sfx('magic_def'); updateUI(); renderInv(); return; } 
     if(i.type === 'scroll') { enchantMode = true; enchantScroll = { idx: idx, target: i.target }; renderInv(); return; } 
     if(i.type === 'use') { if(i.heal) player.hp = Math.min(player.hp+i.heal, player.maxHp); if(item.count>1) item.count--; else player.inventory.splice(idx,1); AudioSys.sfx('heal'); } 
@@ -742,7 +816,45 @@ function draw() {
             }
         }
         if(img && img.complete) { var scale = e.scale || 1; var w = img.width * scale; var h = img.height * scale; ctx.save(); ctx.translate(sx, sy); var dir = e.direction || 1; ctx.scale(dir, 1); ctx.drawImage(img, -w/2, -h + 20, w, h); ctx.restore(); } else { ctx.fillStyle = e.c || '#555'; ctx.fillRect(sx - size/1.5, sy - size*1.8, size*1.3, size*1.8); }
-        if (e.stunTimer && Date.now() < e.stunTimer) { ctx.font = "20px sans-serif"; ctx.fillText("💫", sx, sy-50); }
+        
+        // [Fix Visual v77.87] 衝擊之暈：Canvas 繪製旋轉金星
+        if (e.stunTimer && Date.now() < e.stunTimer) { 
+            ctx.save();
+            // 自動計算高度：根據怪物圖片高度，若無圖片則用預設值，再往上偏移
+            var mobH = (img && img.complete) ? img.height * (e.scale||1) : 120;
+            var stunY = sy - mobH - 20; 
+            ctx.translate(sx, stunY); // 移動到頭頂
+            
+            // 旋轉動畫
+            var rot = (Date.now() / 5) % 360; 
+            ctx.rotate(rot * Math.PI / 180);
+            
+            // 繪製五角星
+            ctx.beginPath();
+            var spikes = 5; var outerRadius = 30; var innerRadius = 15;
+            // 脈衝縮放
+            var pulse = 1 + Math.sin(Date.now() / 100) * 0.2;
+            outerRadius *= pulse; innerRadius *= pulse;
+
+            for (var i = 0; i < spikes; i++) {
+                var x = Math.cos((18 + i * 72) * Math.PI / 180) * outerRadius;
+                var y = Math.sin((18 + i * 72) * Math.PI / 180) * outerRadius;
+                ctx.lineTo(x, -y);
+                x = Math.cos((54 + i * 72) * Math.PI / 180) * innerRadius;
+                y = Math.sin((54 + i * 72) * Math.PI / 180) * innerRadius;
+                ctx.lineTo(x, -y);
+            }
+            ctx.closePath();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#fff'; // 白邊
+            ctx.stroke();
+            ctx.fillStyle = '#ffd700'; // 金色填充
+            ctx.shadowBlur = 30;
+            ctx.shadowColor = '#fff'; // 強力白光
+            ctx.fill();
+            ctx.restore();
+        }
+
         if(e!==player && !e.key) { var barH = 120; if(img && img.complete) barH = img.height * (e.scale||1); var barY = sy - barH + 10; ctx.fillStyle = "#300"; ctx.fillRect(sx-20, barY, 40, 4); ctx.fillStyle = "#f00"; ctx.fillRect(sx-20, barY, 40*(e.hp/e.maxHp), 4); ctx.font="10px sans-serif"; ctx.fillStyle="#fff"; ctx.textAlign="center"; ctx.shadowColor="black"; ctx.shadowBlur=2; ctx.fillText(e.name, sx, barY-5); ctx.shadowBlur=0; }
         if (player.target === e) { ctx.strokeStyle = "rgba(255, 50, 50, 0.8)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(sx, sy - 20, 40, 0, Math.PI*2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(sx-50, sy-20); ctx.lineTo(sx-30, sy-20); ctx.stroke(); ctx.beginPath(); ctx.moveTo(sx+30, sy-20); ctx.lineTo(sx+50, sy-20); ctx.stroke(); ctx.beginPath(); ctx.moveTo(sx, sy-70); ctx.lineTo(sx, sy-50); ctx.stroke(); ctx.beginPath(); ctx.moveTo(sx, sy+10); ctx.lineTo(sx, sy+30); ctx.stroke(); }
     });

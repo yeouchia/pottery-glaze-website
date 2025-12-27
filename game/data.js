@@ -1,15 +1,11 @@
 /**
- * Lineage M v77.84 Data Module (Mage Balance Overhaul)
+ * Lineage M v77.87 Data Module (Hardcore Economy++)
  * ---------------------------------------------------
- * [更新記錄 - 第五階段 v77.84_Balance]
- * * Ver 77.84 (Magic Cost Adjustment):
- * - [平衡] 大幅調升法師技能 MP 消耗，避免職業過強。
- * - [修正] 聖結界 (Immune to Harm): MP 30 -> 600。
- * - [修正] 火風暴 (Fire Storm): MP 50 -> 1000。
- * - [修正] 流星雨 (Meteor Rain): MP 100 -> 2000。
- * - [修正] 烈炎術 (Sunburst): MP 30 -> 200。
- * - [修正] 火球術 (Fireball): MP 25 -> 80。
- * - [修正] 靈魂昇華 (Soul Elevation): MP 60 -> 500。
+ * [更新記錄 - v77.87_Economy]
+ * 1. [平衡] 全域怪物金幣掉落量 (Gold) 再次下調 50%。
+ * - 現在金幣產出僅為原版的 25%，極度考驗資源控管。
+ * 2. [保留] 經驗值維持 v77.86 的 50% 設定。
+ * 3. [保留] 掉寶率維持 v77.85 的高倍率設定 (鼓勵打寶賣錢)。
  * ---------------------------------------------------
  */
 
@@ -98,7 +94,7 @@ const ITEMS = {
     'boot_iron': {name:'鋼鐵長靴', icon:'🥾', type:'equip', slot:'boot', def:3, price:1200, class:'knight', desc:'[AC-3] 騎士專用'},
     'boot_dk': {name:'死亡騎士長靴', icon:'👢', type:'equip', slot:'boot', def:5, price:200000, desc:'[AC-5] 全職通用'},
 
-    // 內衣與飾品 (新增屬性系列)
+    // 內衣與飾品
     'shirt_old': {name:'老舊內衣', icon:'🎽', type:'equip', slot:'shirt', def:1, price:100, desc:'[AC-1]'},
     'shirt_str': {name:'武力內衣', icon:'🎽', type:'equip', slot:'shirt', def:1, str:1, price:10000, desc:'[AC-1] [STR+1]'},
     'shirt_dex': {name:'敏捷內衣', icon:'🎽', type:'equip', slot:'shirt', def:1, dex:1, price:10000, desc:'[AC-1] [DEX+1]'},
@@ -109,7 +105,7 @@ const ITEMS = {
     'neck_dex': {name:'敏捷項鍊', icon:'📿', type:'equip', slot:'neck', dex:1, price:5000, desc:'[DEX+1]'},
     'neck_int': {name:'智力項鍊', icon:'📿', type:'equip', slot:'neck', int:1, price:5000, desc:'[INT+1]'},
     
-    // 材料 (不可購買，僅可販售) - buyable: false
+    // 材料
     'mat_leather': {name:'皮革', icon:'📜', color:'#aa8', type:'material', price:10, stackable:true, buyable:false, desc:'基礎材料'},
     'mat_iron': {name:'鐵塊', icon:'🧱', color:'#889', type:'material', price:20, stackable:true, buyable:false, desc:'基礎材料'},
     'mat_mithril': {name:'粗糙米索莉塊', icon:'💎', color:'#eff', type:'material', price:100, stackable:true, buyable:false, desc:'貴重材料'},
@@ -121,9 +117,9 @@ const SKILLS = {
     // 騎士
     'k1': {name:'衝擊之暈', mp:15, lv:15, class:'knight', icon:'💫', sound:'stun', desc:'使敵人暈眩3秒 (隨技能等級增加時間)'},
     'k2': {name:'增幅防禦', mp:15, lv:30, class:'knight', icon:'🛡️', buff:'solid_carriage', duration:60000, sound:'magic_def', desc:'60秒內減傷 (隨技能等級增加)'},
-    'k3': {name:'反擊屏障', mp:20, lv:45, class:'knight', icon:'⚔️', buff:'counter_barrier', duration:120000, sound:'magic_atk', desc:'機率迴避近戰並反擊 (隨技能等級增傷)'},
+    'k3': {name:'反擊屏障', mp:20, lv:45, class:'knight', icon:'⚔️', buff:'counter_barrier', duration:120000, sound:'magic_atk', desc:'機率迴避近戰傷害並反擊 (隨技能等級增傷)'},
     
-    // 妖精 (新增 projType 與 sound)
+    // 妖精
     'e4': {name:'治癒術', mp:20, lv:10, class:'elf', icon:'💖', sound:'heal', desc:'恢復少量HP'}, 
     'e5': {name:'風之神射', mp:20, lv:15, class:'elf', icon:'🍃', buff:'wind_shot', duration:960000, sound:'magic_wind', desc:'[遠攻命中+6]'}, 
     'e2': {name:'魂體轉換', mp:0, lv:30, class:'elf', icon:'🌀', sound:'magic_soul', desc:'消耗HP轉換MP'}, 
@@ -131,15 +127,13 @@ const SKILLS = {
     'e6': {name:'暴風神射', mp:40, lv:45, class:'elf', icon:'🌪️', buff:'storm_shot', duration:960000, sound:'magic_wind', desc:'[遠攻傷害+5]'}, 
     'e1': {name:'三重矢', mp:15, lv:52, class:'elf', icon:'🏹', projType:'arrow_triple', sound:'bow_triple', desc:'快速三連射'}, 
 
-    // 法師 (Mage Balance Update v77.84)
+    // 法師
     'm1': {name:'光箭', mp:10, lv:1, class:'mage', icon:'⚡', projType:'arrow', sound:'magic_arrow', desc:'基礎遠程魔法'},
     'm2': {name:'火球術', mp:80, lv:15, class:'mage', icon:'🔥', effectType:'fire_area', areaRange: 300, sound:'fireball', desc:'大範圍爆炸傷害 (MP:80)'}, 
     'm3': {name:'初級治癒術', mp:10, lv:5, class:'mage', icon:'❤️', sound:'heal', desc:'恢復HP'},
     'm4': {name:'中級治癒術', mp:20, lv:20, class:'mage', icon:'🧡', sound:'heal', desc:'恢復更多HP'},
     'm5': {name:'高級治癒術', mp:40, lv:40, class:'mage', icon:'💛', sound:'heal_full', desc:'強力恢復HP'},
     'm6': {name:'聖結界', mp:600, lv:45, class:'mage', icon:'🛡️', buff:'immune_to_harm', duration:120000, sound:'magic_def', desc:'[Lv.45] 受到傷害減半 (MP:600)'},
-    
-    // Advanced Mage Skills (High MP Cost)
     'm8': {name:'烈炎術', mp:150, lv:50, class:'mage', icon:'💥', effectType:'explosion', sound:'fire_bang', desc:'[Lv.50] 巨大單體爆發 (MP:200)'},
     'm9': {name:'火風暴', mp:200, lv:55, class:'mage', icon:'🌪️', effectType:'fire_storm', sound:'fire_storm', desc:'[Lv.55] 地面持續燃燒，持續傷害 (MP:1000)'},
     'm7': {name:'流星雨', mp:500, lv:60, class:'mage', icon:'☄️', effectType:'meteor_rain', cooldown:12000, sound:'meteor', desc:'[Lv.60] 全畫面毀滅性隕石 (MP:2000)'},
@@ -148,112 +142,113 @@ const SKILLS = {
 };
 
 // --- 怪物資料 (Mobs) ---
+// Note: Gold Reduced to 25% of base (0.5 * 0.5). Exp remains 50%.
 const MOB_TYPES = {
     // 0. 新手木樁
-    'dummy': {name:'木人', hp:500, exp:0.005, atk:0, def:0, s:20, c:'#8b4513', aggro:false, drops:[], minGold:0, maxGold:0}, 
+    'dummy': {name:'木人', hp:500, exp:0.0025, atk:0, def:0, s:20, c:'#8b4513', aggro:false, drops:[], minGold:0, maxGold:0}, 
     
     // Special
     'summon_creature': {name:'召喚獸', hp:2000, exp:0, atk:150, def:20, s:15, c:'#4169e1', aggro:false, drops:[], isPet:true, minGold:0, maxGold:0},
 
-    // 1. 初級 (Lv 1-15) - HP ~100, ATK ~15, Gold 10-30
-    'goblin': {name:'哥布林 Lv.5', hp:80, exp:0.01, atk:15, def:0, s:20, c:'#32cd32', aggro:false, drops:[{k:'potion',c:0.5},{k:'mat_leather',c:0.2},{k:'shirt_old',c:0.01}], minGold:10, maxGold:30}, 
-    'kobold': {name:'地靈 Lv.8', hp:120, exp:0.015, atk:20, def:1, s:22, c:'#cd853f', aggro:false, drops:[{k:'potion',c:0.4},{k:'mat_iron',c:0.1},{k:'dagger',c:0.05}], minGold:15, maxGold:35}, 
-    'orc': {name:'妖魔 Lv.10', hp:160, exp:0.02, atk:25, def:2, s:24, c:'#556b2f', aggro:false, drops:[{k:'potion',c:0.6},{k:'mat_leather',c:0.3},{k:'cloak_protect',c:0.01}], minGold:20, maxGold:40},
-    'dwarf': {name:'侏儒 Lv.12', hp:200, exp:0.03, atk:30, def:3, s:22, c:'#8b4513', aggro:false, drops:[{k:'mat_iron',c:0.4},{k:'helm_iron',c:0.05},{k:'helm_leather',c:0.1}], minGold:25, maxGold:45},
+    // 1. 初級 (Lv 1-15) - Gold 0.25x
+    'goblin': {name:'哥布林 Lv.5', hp:80, exp:0.005, atk:15, def:0, s:20, c:'#32cd32', aggro:false, drops:[{k:'potion',c:0.5},{k:'mat_leather',c:0.2},{k:'shirt_old',c:0.01}], minGold:2, maxGold:7}, 
+    'kobold': {name:'地靈 Lv.8', hp:120, exp:0.0075, atk:20, def:1, s:22, c:'#cd853f', aggro:false, drops:[{k:'potion',c:0.4},{k:'mat_iron',c:0.1},{k:'dagger',c:0.05}], minGold:4, maxGold:9}, 
+    'orc': {name:'妖魔 Lv.10', hp:160, exp:0.01, atk:25, def:2, s:24, c:'#556b2f', aggro:false, drops:[{k:'potion',c:0.6},{k:'mat_leather',c:0.3},{k:'cloak_protect',c:0.01}], minGold:5, maxGold:10},
+    'dwarf': {name:'侏儒 Lv.12', hp:200, exp:0.015, atk:30, def:3, s:22, c:'#8b4513', aggro:false, drops:[{k:'mat_iron',c:0.4},{k:'helm_iron',c:0.05},{k:'helm_leather',c:0.1}], minGold:6, maxGold:11},
     
-    // 2. 說話之島冒險 (Lv 15-25) - HP ~400, ATK ~50, Gold 40-80
-    'orc_fighter': {name:'妖魔鬥士 Lv.15', hp:300, exp:0.05, atk:45, def:4, s:28, c:'#8fbc8f', aggro:true, drops:[{k:'helm_leather',c:0.1},{k:'dagger',c:0.1},{k:'armor_leather',c:0.05}], minGold:40, maxGold:60},
-    'werewolf': {name:'狼人 Lv.18', hp:400, exp:0.08, atk:55, def:2, s:30, c:'#708090', aggro:true, drops:[{k:'potion_green',c:0.1},{k:'mat_leather',c:0.5},{k:'glove_leather',c:0.1}], minGold:50, maxGold:70}, 
-    'ungoliant': {name:'楊果里恩 Lv.22', hp:500, exp:0.12, atk:60, def:5, s:35, c:'#4b0082', aggro:true, drops:[{k:'antidote',c:0.5},{k:'zel',c:0.0003},{k:'bow',c:0.05}], minGold:60, maxGold:80}, 
+    // 2. 說話之島冒險
+    'orc_fighter': {name:'妖魔鬥士 Lv.15', hp:300, exp:0.025, atk:45, def:4, s:28, c:'#8fbc8f', aggro:true, drops:[{k:'helm_leather',c:0.1},{k:'dagger',c:0.1},{k:'armor_leather',c:0.05}], minGold:10, maxGold:15},
+    'werewolf': {name:'狼人 Lv.18', hp:400, exp:0.04, atk:55, def:2, s:30, c:'#708090', aggro:true, drops:[{k:'potion_green',c:0.1},{k:'mat_leather',c:0.5},{k:'glove_leather',c:0.1}], minGold:12, maxGold:17}, 
+    'ungoliant': {name:'楊果里恩 Lv.22', hp:500, exp:0.06, atk:60, def:5, s:35, c:'#4b0082', aggro:true, drops:[{k:'antidote',c:0.5},{k:'zel',c:0.0006},{k:'bow',c:0.05}], minGold:15, maxGold:20}, 
     
-    // 3. 地監與沙漠 (Lv 25-40) - HP ~800, ATK ~80, Gold 70-120
-    'skeleton': {name:'骷髏 Lv.25', hp:600, exp:0.15, atk:75, def:6, s:24, c:'#f5f5f5', aggro:true, drops:[{k:'helm_skull',c:0.1},{k:'armor_skull',c:0.1},{k:'zel',c:0.0003},{k:'boot_leather',c:0.1}], minGold:70, maxGold:90}, 
-    'ghoul': {name:'食屍鬼 Lv.28', hp:800, exp:0.18, atk:90, def:4, s:28, c:'#556b2f', aggro:true, drops:[{k:'dai',c:0.0003},{k:'antidote',c:0.3},{k:'helm_magic',c:0.01}], minGold:80, maxGold:100},
-    'lycanthrope': {name:'萊肯 Lv.30', hp:900, exp:0.25, atk:100, def:8, s:35, c:'#4a4a4a', aggro:true, drops:[{k:'zel',c:0.0004},{k:'sword_katana',c:0.05},{k:'shirt_str',c:0.005}], minGold:90, maxGold:110}, 
-    'ant': {name:'巨蟻 Lv.32', hp:700, exp:0.22, atk:85, def:10, s:24, c:'#1a1a1a', aggro:true, drops:[{k:'potion_orange',c:0.3},{k:'armor_plate',c:0.01}], minGold:85, maxGold:105}, 
-    'gast': {name:'食人妖精 Lv.35', hp:1200, exp:0.35, atk:120, def:5, s:50, c:'#696969', aggro:true, drops:[{k:'glove_power',c:0.05},{k:'potion_brave',c:0.2},{k:'bow_cross',c:0.05}], minGold:100, maxGold:120},
+    // 3. 地監與沙漠
+    'skeleton': {name:'骷髏 Lv.25', hp:600, exp:0.075, atk:75, def:6, s:24, c:'#f5f5f5', aggro:true, drops:[{k:'helm_skull',c:0.1},{k:'armor_skull',c:0.1},{k:'zel',c:0.0006},{k:'boot_leather',c:0.1}], minGold:17, maxGold:22}, 
+    'ghoul': {name:'食屍鬼 Lv.28', hp:800, exp:0.09, atk:90, def:4, s:28, c:'#556b2f', aggro:true, drops:[{k:'dai',c:0.0006},{k:'antidote',c:0.3},{k:'helm_magic',c:0.01}], minGold:20, maxGold:25},
+    'lycanthrope': {name:'萊肯 Lv.30', hp:900, exp:0.125, atk:100, def:8, s:35, c:'#4a4a4a', aggro:true, drops:[{k:'zel',c:0.0008},{k:'sword_katana',c:0.05},{k:'shirt_str',c:0.005}], minGold:22, maxGold:27}, 
+    'ant': {name:'巨蟻 Lv.32', hp:700, exp:0.11, atk:85, def:10, s:24, c:'#1a1a1a', aggro:true, drops:[{k:'potion_orange',c:0.3},{k:'armor_plate',c:0.01}], minGold:21, maxGold:26}, 
+    'gast': {name:'食人妖精 Lv.35', hp:1200, exp:0.175, atk:120, def:5, s:50, c:'#696969', aggro:true, drops:[{k:'glove_power',c:0.05},{k:'potion_brave',c:0.2},{k:'bow_cross',c:0.05}], minGold:25, maxGold:30},
     
-    // 4. 進階區域 (Lv 40-55) - HP ~1800, ATK ~150, Gold 110-160
-    'lizardman': {name:'蜥蜴人 Lv.45', hp:1500, exp:0.45, atk:130, def:12, s:35, c:'#6b8e23', aggro:true, drops:[{k:'glove_leather',c:0.2},{k:'sword_long',c:0.1},{k:'shirt_dex',c:0.005}], minGold:110, maxGold:140}, 
-    'bandit': {name:'奇岩盜賊 Lv.48', hp:1600, exp:0.55, atk:150, def:10, s:32, c:'#d2b48c', aggro:true, drops:[{k:'zel_b',c:0.0001},{k:'sword_tsurugi',c:0.02},{k:'armor_elven',c:0.02}], minGold:120, maxGold:150}, 
-    'yeti': {name:'雪怪 Lv.50', hp:2000, exp:0.6, atk:180, def:15, s:45, c:'#f0ffff', aggro:true, drops:[{k:'potion_white',c:0.5},{k:'glove_power',c:0.05},{k:'boot_iron',c:0.05}], minGold:130, maxGold:160},
-    'elmore_soldier': {name:'艾爾摩士兵 Lv.52', hp:2200, exp:0.7, atk:170, def:18, s:35, c:'#8b4513', aggro:true, drops:[{k:'armor_plate',c:0.1},{k:'dai',c:0.0004},{k:'helm_iron',c:0.1}], minGold:135, maxGold:165}, 
+    // 4. 進階區域
+    'lizardman': {name:'蜥蜴人 Lv.45', hp:1500, exp:0.225, atk:130, def:12, s:35, c:'#6b8e23', aggro:true, drops:[{k:'glove_leather',c:0.2},{k:'sword_long',c:0.1},{k:'shirt_dex',c:0.005}], minGold:27, maxGold:35}, 
+    'bandit': {name:'奇岩盜賊 Lv.48', hp:1600, exp:0.275, atk:150, def:10, s:32, c:'#d2b48c', aggro:true, drops:[{k:'zel_b',c:0.0002},{k:'sword_tsurugi',c:0.02},{k:'armor_elven',c:0.02}], minGold:30, maxGold:37}, 
+    'yeti': {name:'雪怪 Lv.50', hp:2000, exp:0.3, atk:180, def:15, s:45, c:'#f0ffff', aggro:true, drops:[{k:'potion_white',c:0.5},{k:'glove_power',c:0.05},{k:'boot_iron',c:0.05}], minGold:32, maxGold:40},
+    'elmore_soldier': {name:'艾爾摩士兵 Lv.52', hp:2200, exp:0.35, atk:170, def:18, s:35, c:'#8b4513', aggro:true, drops:[{k:'armor_plate',c:0.1},{k:'dai',c:0.0008},{k:'helm_iron',c:0.1}], minGold:33, maxGold:41}, 
     
-    // 5. 高難度 (Lv 60-80) - HP ~3000, ATK ~250, Gold 150-200
-    'medusa': {name:'梅杜莎 Lv.60', hp:2800, exp:1.0, atk:220, def:20, s:35, c:'#9acd32', aggro:true, drops:[{k:'helm_magic',c:0.05},{k:'zel',c:0.0005},{k:'shirt_int',c:0.005}], minGold:150, maxGold:180},
-    'dragon_fly': {name:'飛龍 Lv.65', hp:4500, exp:2.0, atk:300, def:25, s:80, c:'#5d4037', aggro:true, drops:[{k:'zel',c:0.0006},{k:'mat_mithril',c:0.5},{k:'neck_brave',c:0.01}], magic:'fireball', minGold:160, maxGold:190}, 
-    'fire_egg': {name:'火靈 Lv.70', hp:3500, exp:1.5, atk:250, def:10, s:25, c:'#ff4500', aggro:true, drops:[{k:'potion_ultimate',c:0.3},{k:'staff_crystal',c:0.01}], magic:'fireball', minGold:170, maxGold:200},
-    'succubus': {name:'思克巴 Lv.75', hp:4000, exp:2.5, atk:350, def:15, s:32, c:'#9932cc', aggro:true, drops:[{k:'dai_b',c:0.0002},{k:'scroll_teleport',c:1.0},{k:'neck_int',c:0.01}], magic:'magic', minGold:180, maxGold:210},
-    'living_armor': {name:'活鎧甲 Lv.78', hp:6000, exp:3.0, atk:320, def:40, s:40, c:'#708090', aggro:true, drops:[{k:'armor_plate',c:0.3},{k:'sword_great',c:0.1},{k:'glove_iron',c:0.1}], minGold:190, maxGold:220},
+    // 5. 高難度 (Lv 60-80)
+    'medusa': {name:'梅杜莎 Lv.60', hp:2800, exp:0.5, atk:220, def:20, s:35, c:'#9acd32', aggro:true, drops:[{k:'helm_magic',c:0.05},{k:'zel',c:0.001},{k:'shirt_int',c:0.005}], minGold:37, maxGold:45},
+    'dragon_fly': {name:'飛龍 Lv.65', hp:4500, exp:1.0, atk:300, def:25, s:80, c:'#5d4037', aggro:true, drops:[{k:'zel',c:0.0012},{k:'mat_mithril',c:0.5},{k:'neck_brave',c:0.01}], magic:'fireball', minGold:40, maxGold:47}, 
+    'fire_egg': {name:'火靈 Lv.70', hp:3500, exp:0.75, atk:250, def:10, s:25, c:'#ff4500', aggro:true, drops:[{k:'potion_ultimate',c:0.3},{k:'staff_crystal',c:0.01}], magic:'fireball', minGold:42, maxGold:50},
+    'succubus': {name:'思克巴 Lv.75', hp:4000, exp:1.25, atk:350, def:15, s:32, c:'#9932cc', aggro:true, drops:[{k:'dai_b',c:0.0004},{k:'scroll_teleport',c:1.0},{k:'neck_int',c:0.01}], magic:'magic', minGold:45, maxGold:52},
+    'living_armor': {name:'活鎧甲 Lv.78', hp:6000, exp:1.5, atk:320, def:40, s:40, c:'#708090', aggro:true, drops:[{k:'armor_plate',c:0.3},{k:'sword_great',c:0.1},{k:'glove_iron',c:0.1}], minGold:47, maxGold:55},
     
-    // 6. 終局怪物 (Lv 85-110) - HP ~10000, ATK ~500, Gold 200-250
-    'minotaur': {name:'米諾斯 Lv.85', hp:9000, exp:5.0, atk:450, def:30, s:60, c:'#daa520', aggro:true, drops:[{k:'sword_cb',c:0.1},{k:'neck_str',c:0.02}], minGold:200, maxGold:230}, 
-    'dark_elf': {name:'暗殺軍王下屬 Lv.92', hp:11000, exp:7.0, atk:550, def:25, s:32, c:'#ffd700', aggro:true, drops:[{k:'zel_b',c:0.0005},{k:'rapier',c:0.05},{k:'neck_dex',c:0.02}], minGold:210, maxGold:240}, 
-    'snake_woman': {name:'蛇人 Lv.96', hp:12000, exp:9.0, atk:500, def:35, s:35, c:'#9acd32', aggro:true, drops:[{k:'potion_ultimate',c:0.8},{k:'armor_robe',c:0.05}], magic:'magic', minGold:220, maxGold:250}, 
-    'anubis': {name:'阿努比斯 Lv.105', hp:18000, exp:15.0, atk:650, def:50, s:40, c:'#ffd700', aggro:true, drops:[{k:'zel_b',c:0.001},{k:'dai_b',c:0.001},{k:'cloak_mr',c:0.05}], magic:'fireball', minGold:230, maxGold:250}, 
-    'void_spirit': {name:'虛空之靈 Lv.115', hp:25000, exp:20.0, atk:800, def:10, s:35, c:'#000000', aggro:true, drops:[{k:'potion_ultimate',c:1.0},{k:'cloak_lich',c:0.005}], magic:'meteor', minGold:230, maxGold:250}, 
+    // 6. 終局怪物 (Lv 85-110)
+    'minotaur': {name:'米諾斯 Lv.85', hp:9000, exp:2.5, atk:450, def:30, s:60, c:'#daa520', aggro:true, drops:[{k:'sword_cb',c:0.1},{k:'neck_str',c:0.02}], minGold:50, maxGold:57}, 
+    'dark_elf': {name:'暗殺軍王下屬 Lv.92', hp:11000, exp:3.5, atk:550, def:25, s:32, c:'#ffd700', aggro:true, drops:[{k:'zel_b',c:0.001},{k:'rapier',c:0.05},{k:'neck_dex',c:0.02}], minGold:52, maxGold:60}, 
+    'snake_woman': {name:'蛇人 Lv.96', hp:12000, exp:4.5, atk:500, def:35, s:35, c:'#9acd32', aggro:true, drops:[{k:'potion_ultimate',c:0.8},{k:'armor_robe',c:0.05}], magic:'magic', minGold:55, maxGold:62}, 
+    'anubis': {name:'阿努比斯 Lv.105', hp:18000, exp:7.5, atk:650, def:50, s:40, c:'#ffd700', aggro:true, drops:[{k:'zel_b',c:0.0015},{k:'dai_b',c:0.0015},{k:'cloak_mr',c:0.05}], magic:'fireball', minGold:57, maxGold:65}, 
+    'void_spirit': {name:'虛空之靈 Lv.115', hp:25000, exp:10.0, atk:800, def:10, s:35, c:'#000000', aggro:true, drops:[{k:'potion_ultimate',c:1.0},{k:'cloak_lich',c:0.005}], magic:'meteor', minGold:57, maxGold:62}, 
 
-    // --- Bosses - HP ~100000+, ATK ~1000+, Gold 10000-35000 ---
-    'araneid': {name:'巨大蜘蛛 (Boss) Lv.25', hp:10000, exp:10.0, atk:300, def:20, s:60, c:'#8b4513', aggro:true, drops:[
-        {k:'zel',c:0.05},{k:'sword_long',c:0.5},
+    // --- Bosses ---
+    'araneid': {name:'巨大蜘蛛 (Boss) Lv.25', hp:10000, exp:5.0, atk:300, def:20, s:60, c:'#8b4513', aggro:true, drops:[
+        {k:'zel',c:0.08},{k:'sword_long',c:0.5},
         {k:'helm_dk',c:0.0005}, {k:'armor_dk',c:0.0001}, {k:'glove_dk',c:0.0002}, {k:'boot_dk',c:0.0002}
-    ], isBoss:true, respawnTime:3600, scale:2.2, minGold:10000, maxGold:15000},
+    ], isBoss:true, respawnTime:3600, scale:2.2, minGold:2500, maxGold:3750},
     
-    'necromancer': {name:'死靈法師 (Boss) Lv.30', hp:15000, exp:20.0, atk:450, def:30, s:50, c:'#483d8b', aggro:true, drops:[
-        {k:'staff',c:1.0},{k:'zel_b',c:0.01},
+    'necromancer': {name:'死靈法師 (Boss) Lv.30', hp:15000, exp:10.0, atk:450, def:30, s:50, c:'#483d8b', aggro:true, drops:[
+        {k:'staff',c:1.0},{k:'zel_b',c:0.015},
         {k:'helm_dk',c:0.001}, {k:'armor_dk',c:0.0005}, {k:'glove_dk',c:0.001}, {k:'boot_dk',c:0.001}
-    ], isBoss:true, magic:'fireball', respawnTime:7200, scale:2.0, minGold:12000, maxGold:18000},
+    ], isBoss:true, magic:'fireball', respawnTime:7200, scale:2.0, minGold:3000, maxGold:4500},
     
-    'giant_ant_queen': {name:'巨蟻女皇 (Boss) Lv.45', hp:30000, exp:50.0, atk:600, def:50, s:100, c:'#2a2a2a', aggro:true, drops:[
-        {k:'cloak_protect',c:1.0},{k:'dai_b',c:0.02},{k:'glove_power',c:0.2},
+    'giant_ant_queen': {name:'巨蟻女皇 (Boss) Lv.45', hp:30000, exp:25.0, atk:600, def:50, s:100, c:'#2a2a2a', aggro:true, drops:[
+        {k:'cloak_protect',c:1.0},{k:'dai_b',c:0.03},{k:'glove_power',c:0.2},
         {k:'helm_dk',c:0.001}, {k:'armor_dk',c:0.0005}, {k:'glove_dk',c:0.001}, {k:'boot_dk',c:0.001}
-    ], isBoss:true, respawnTime:14400, scale:2.5, minGold:15000, maxGold:20000}, 
+    ], isBoss:true, respawnTime:14400, scale:2.5, minGold:3750, maxGold:5000}, 
     
-    'giant_crocodile': {name:'巨大鱷魚 (Boss) Lv.50', hp:45000, exp:80.0, atk:800, def:60, s:90, c:'#228b22', aggro:true, drops:[
-        {k:'dai',c:0.1},{k:'potion_brave',c:1.0},{k:'sword_tsurugi',c:0.2},
+    'giant_crocodile': {name:'巨大鱷魚 (Boss) Lv.50', hp:45000, exp:40.0, atk:800, def:60, s:90, c:'#228b22', aggro:true, drops:[
+        {k:'dai',c:0.15},{k:'potion_brave',c:1.0},{k:'sword_tsurugi',c:0.2},
         {k:'helm_dk',c:0.002}, {k:'armor_dk',c:0.001}, {k:'glove_dk',c:0.002}, {k:'boot_dk',c:0.002}
-    ], isBoss:true, respawnTime:14400, scale:2.5, minGold:18000, maxGold:22000}, 
+    ], isBoss:true, respawnTime:14400, scale:2.5, minGold:4500, maxGold:5500}, 
     
-    'drake': {name:'飛龍 (Boss) Lv.60', hp:60000, exp:150.0, atk:1000, def:70, s:80, c:'#5d4037', aggro:true, drops:[
+    'drake': {name:'飛龍 (Boss) Lv.60', hp:60000, exp:75.0, atk:1000, def:70, s:80, c:'#5d4037', aggro:true, drops:[
         {k:'neck_brave',c:1.0},{k:'mat_mithril',c:1.0},{k:'sword_great',c:0.1},
         {k:'helm_dk',c:0.005}, {k:'armor_dk',c:0.002}, {k:'glove_dk',c:0.005}, {k:'boot_dk',c:0.005}
-    ], isBoss:true, magic:'fireball', respawnTime:21600, scale:2.8, minGold:20000, maxGold:25000}, 
+    ], isBoss:true, magic:'fireball', respawnTime:21600, scale:2.8, minGold:5000, maxGold:6250}, 
     
-    'demon': {name:'惡魔 (Boss) Lv.80', hp:120000, exp:500.0, atk:1500, def:80, s:100, c:'#b22222', aggro:true, drops:[
+    'demon': {name:'惡魔 (Boss) Lv.80', hp:120000, exp:250.0, atk:1500, def:80, s:100, c:'#b22222', aggro:true, drops:[
         {k:'rapier',c:1.0},{k:'glove_dk',c:0.1},{k:'shirt_str',c:0.1},
         {k:'helm_dk',c:0.01}, {k:'armor_dk',c:0.005}, {k:'boot_dk',c:0.01}
-    ], isBoss:true, magic:'meteor', respawnTime:43200, scale:2.2, minGold:22000, maxGold:28000}, 
+    ], isBoss:true, magic:'meteor', respawnTime:43200, scale:2.2, minGold:5500, maxGold:7000}, 
     
-    'death_knight': {name:'死亡騎士 (Boss) Lv.85', hp:150000, exp:800.0, atk:2000, def:100, s:70, c:'#ffd700', aggro:true, drops:[
+    'death_knight': {name:'死亡騎士 (Boss) Lv.85', hp:150000, exp:400.0, atk:2000, def:100, s:70, c:'#ffd700', aggro:true, drops:[
         {k:'sword_dk',c:0.1}, {k:'bow_dk',c:0.1}, {k:'staff_dk',c:0.1}, 
         {k:'helm_dk',c:0.1}, {k:'armor_dk',c:0.05}, {k:'glove_dk',c:0.05}, {k:'boot_dk',c:0.05}, 
         {k:'zel_b',c:1.0}
-    ], isBoss:true, magic:'meteor', respawnTime:21600, scale:2.0, minGold:25000, maxGold:30000}, 
+    ], isBoss:true, magic:'meteor', respawnTime:21600, scale:2.0, minGold:6250, maxGold:7500}, 
     
-    'baphomet': {name:'巴風特 (Boss) Lv.90', hp:180000, exp:1000.0, atk:2200, def:90, s:90, c:'#191970', aggro:true, drops:[
+    'baphomet': {name:'巴風特 (Boss) Lv.90', hp:180000, exp:500.0, atk:2200, def:90, s:90, c:'#191970', aggro:true, drops:[
         {k:'staff_crystal',c:1.0},{k:'staff_lich',c:0.1},{k:'armor_dk',c:0.1},{k:'cloak_lich',c:0.1},
         {k:'helm_dk',c:0.05}, {k:'glove_dk',c:0.05}, {k:'boot_dk',c:0.05}
-    ], isBoss:true, magic:'fireball', respawnTime:43200, scale:2.2, minGold:28000, maxGold:32000}, 
+    ], isBoss:true, magic:'fireball', respawnTime:43200, scale:2.2, minGold:7000, maxGold:8000}, 
     
-    'dante': {name:'丹特斯 (Boss) Lv.95', hp:250000, exp:2000.0, atk:2500, def:120, s:75, c:'#4b0082', aggro:true, drops:[
+    'dante': {name:'丹特斯 (Boss) Lv.95', hp:250000, exp:1000.0, atk:2500, def:120, s:75, c:'#4b0082', aggro:true, drops:[
         {k:'boot_dk',c:0.3},{k:'sword_execution',c:0.01},{k:'glove_dk',c:0.1},
         {k:'helm_dk',c:0.05}, {k:'armor_dk',c:0.05}
-    ], isBoss:true, magic:'meteor', respawnTime:43200, scale:2.0, minGold:30000, maxGold:35000}, 
+    ], isBoss:true, magic:'meteor', respawnTime:43200, scale:2.0, minGold:7500, maxGold:8750}, 
     
-    'zebulon': {name:'傑弗雷肯 (Boss) Lv.100', hp:300000, exp:3000.0, atk:2800, def:130, s:120, c:'#556b2f', aggro:true, drops:[
+    'zebulon': {name:'傑弗雷肯 (Boss) Lv.100', hp:300000, exp:1500.0, atk:2800, def:130, s:120, c:'#556b2f', aggro:true, drops:[
         {k:'glove_dk',c:0.3},{k:'sword_wind',c:0.05},{k:'armor_dk',c:0.1},
         {k:'helm_dk',c:0.05}, {k:'boot_dk',c:0.05}
-    ], isBoss:true, magic:'fireball', respawnTime:43200, scale:2.5, minGold:30000, maxGold:35000}, 
+    ], isBoss:true, magic:'fireball', respawnTime:43200, scale:2.5, minGold:7500, maxGold:8750}, 
     
-    'osiris': {name:'歐西里斯 (Boss) Lv.110', hp:450000, exp:5000.0, atk:3500, def:150, s:80, c:'#ffd700', aggro:true, drops:[
+    'osiris': {name:'歐西里斯 (Boss) Lv.110', hp:450000, exp:2500.0, atk:3500, def:150, s:80, c:'#ffd700', aggro:true, drops:[
         {k:'helm_dk',c:0.3},{k:'bow_sayha',c:0.1},{k:'neck_int',c:0.1},
         {k:'armor_dk',c:0.05}, {k:'glove_dk',c:0.05}, {k:'boot_dk',c:0.05}
-    ], isBoss:true, magic:'meteor', respawnTime:86400, scale:2.2, minGold:30000, maxGold:35000}, 
+    ], isBoss:true, magic:'meteor', respawnTime:86400, scale:2.2, minGold:7500, maxGold:8750}, 
     
-    'girtao': {name:'吉爾塔斯 (Boss) Lv.120', hp:1000000, exp:10000.0, atk:5000, def:200, s:150, c:'#4b0082', aggro:true, drops:[
+    'girtao': {name:'吉爾塔斯 (Boss) Lv.120', hp:1000000, exp:5000.0, atk:5000, def:200, s:150, c:'#4b0082', aggro:true, drops:[
         {k:'armor_dk',c:0.5},{k:'staff_girtao',c:0.05},{k:'neck_str',c:0.1},
         {k:'helm_dk',c:0.1}, {k:'glove_dk',c:0.1}, {k:'boot_dk',c:0.1}
-    ], isBoss:true, magic:'meteor', respawnTime:86400, scale:3.0, minGold:30000, maxGold:35000},
+    ], isBoss:true, magic:'meteor', respawnTime:86400, scale:3.0, minGold:7500, maxGold:8750},
 };
 
 // --- 地圖資料 (Maps) ---
