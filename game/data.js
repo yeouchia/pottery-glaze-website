@@ -1,5 +1,12 @@
 /**
- * Lineage M v77.87 Data Module (Hardcore Economy++)
+ * Lineage M v77.90 Data Module (Hardcore Economy++)
+ * ---------------------------------------------------
+ * [更新記錄 - v77.90_NewbieSupport]
+ * 1. [掉落] 隱藏之谷 (Map 0) 的「木人」現在會掉落加速藥水。
+ * - 綠色藥水 (30%)
+ * - 勇敢藥水 (10%)
+ * - 精靈餅乾 (10%)
+ * - 慎重藥水 (10%)
  * ---------------------------------------------------
  * [更新記錄 - v77.87_Economy]
  * 1. [平衡] 全域怪物金幣掉落量 (Gold) 再次下調 50%。
@@ -144,8 +151,17 @@ const SKILLS = {
 // --- 怪物資料 (Mobs) ---
 // Note: Gold Reduced to 25% of base (0.5 * 0.5). Exp remains 50%.
 const MOB_TYPES = {
-    // 0. 新手木樁
-    'dummy': {name:'木人', hp:500, exp:0.0025, atk:0, def:0, s:20, c:'#8b4513', aggro:false, drops:[], minGold:0, maxGold:0}, 
+    // 0. 新手木樁 (Mod v77.90: 新增掉落)
+    'dummy': {
+        name:'木人', hp:500, exp:0.0025, atk:0, def:0, s:20, c:'#8b4513', aggro:false, 
+        drops:[
+            {k:'potion_green',c:0.15},
+            {k:'potion_brave',c:0.05},
+            {k:'cookie_elf',c:0.05},
+            {k:'potion_wisdom',c:0.05}
+        ], 
+        minGold:0, maxGold:0
+    }, 
     
     // Special
     'summon_creature': {name:'召喚獸', hp:2000, exp:0, atk:150, def:20, s:15, c:'#4169e1', aggro:false, drops:[], isPet:true, minGold:0, maxGold:0},
@@ -170,7 +186,7 @@ const MOB_TYPES = {
     
     // 4. 進階區域
     'lizardman': {name:'蜥蜴人 Lv.45', hp:1500, exp:0.225, atk:130, def:12, s:35, c:'#6b8e23', aggro:true, drops:[{k:'glove_leather',c:0.2},{k:'sword_long',c:0.1},{k:'shirt_dex',c:0.005}], minGold:27, maxGold:35}, 
-    'bandit': {name:'奇岩盜賊 Lv.48', hp:1600, exp:0.275, atk:150, def:10, s:32, c:'#d2b48c', aggro:true, drops:[{k:'zel_b',c:0.0002},{k:'sword_tsurugi',c:0.02},{k:'armor_elven',c:0.02}], minGold:30, maxGold:37}, 
+    'bandit': {name:'奇岩盜賊 Lv.48', hp:1600, exp:0.275, atk:150, def:10, s:32, c:'#d2b48c', aggro:true, drops:[{k:'zel_b',c:0.002},{k:'sword_tsurugi',c:0.02},{k:'armor_elven',c:0.02}], minGold:30, maxGold:37}, 
     'yeti': {name:'雪怪 Lv.50', hp:2000, exp:0.3, atk:180, def:15, s:45, c:'#f0ffff', aggro:true, drops:[{k:'potion_white',c:0.5},{k:'glove_power',c:0.05},{k:'boot_iron',c:0.05}], minGold:32, maxGold:40},
     'elmore_soldier': {name:'艾爾摩士兵 Lv.52', hp:2200, exp:0.35, atk:170, def:18, s:35, c:'#8b4513', aggro:true, drops:[{k:'armor_plate',c:0.1},{k:'dai',c:0.0008},{k:'helm_iron',c:0.1}], minGold:33, maxGold:41}, 
     

@@ -1,5 +1,5 @@
 /**
- * Lineage M v77.87 Assets Module (Visual Fixes & Performance)
+ * Lineage M v77.90 Assets Module (Visual Fixes & Performance)
  * ---------------------------------------------------
  * [本階段修正 - 第一階段 v77.83]
  * 1. [優化] effect_meteor_rain: 簡化 SVG 結構以解決瀏覽器 LAG 問題，改用高對比視覺。

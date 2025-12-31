@@ -1,13 +1,19 @@
 /**
- * Lineage M v77.89 Game Engine (Logic Fixes & Stun Redesign)
+ * Lineage M v77.90 Game Engine (Hidden Valley Update)
+ * ---------------------------------------------------
+ * [修正記錄 - v77.90_Fix_UI]
+ * 1. [修正] 修復 HP 血條顯示錯誤，解決出現 "Math.floor..." 文字的問題。
+ * ---------------------------------------------------
+ * [修正記錄 - v77.90_HiddenValley]
+ * 1. [生態] 隱藏之谷 (Map 0) 怪物上限由 600 提升至 900。
+ * 2. [機制] 解鎖隱藏之谷的自動重生機制，現在怪物會無限重生。
+ * 3. [平衡] 隱藏之谷的「紅色藥水」掉落率提升 2 倍 (新手福利)。
  * ---------------------------------------------------
  * [修正記錄 - v77.89_Fix2]
  * 1. [修正] 補上檔案末尾缺失的閉合括號，解決 "Unexpected end of input" 錯誤。
  * ---------------------------------------------------
  * [更新記錄 - v77.89_BGM]
- * 1. [音效] 新增自動背景音樂功能：
- * - 遊戲啟動時自動嘗試讀取並播放同目錄下的 'lineage.mp3'。
- * - 若玩家手動上傳音樂，會自動停止預設音樂並切換。
+ * 1. [音效] 新增自動背景音樂功能。
  * ---------------------------------------------------
  */
 
@@ -291,7 +297,7 @@ function initMap(id) {
     if (id == 0) { for(let i=0; i<5; i++) entities.push({name:'新手導師', hp:1000, maxHp:1000, s:24, c:'#aaa', x:600+(Math.random()-0.5)*200, y:900+(Math.random()-0.5)*200, isFakePlayer:true, chatTimer:0, chatText:''}); } 
     
     // [Fix v77.88] 調整怪物基礎數量
-    // Map 0 (隱藏之谷) 提升至 600 (3倍), 一般地圖為 350 或 200
+    // Map 0 (隱藏之谷) 提升至 900 (v77.90 Update), 一般地圖為 350 或 200
     var baseMobCount = (id === 0) ? 900 : ((mapInfo.w && mapInfo.w > 100) ? 350 : 200); 
     
     var mobCount = baseMobCount * GM_SPAWN_MULT; 
@@ -447,11 +453,14 @@ function update() {
 
     if (now - player.lastRegenTime > 3000) { player.lastRegenTime = now; if (player.hp > 0) { var stats = getPlayerStats(); var hpRegen = Math.floor(player.lvl / 2) + stats.con; player.hp = Math.min(player.maxHp, player.hp + hpRegen); var mpRegen = Math.floor(player.lvl / 3) + stats.int; if (player.buffs.blue_potion) mpRegen += 5; if (player.equip.armor && player.equip.armor.key === 'armor_robe') mpRegen += 5; if (player.equip.weapon && player.equip.weapon.key === 'staff_crystal') mpRegen += 5; player.mp = Math.min(player.maxMp, player.mp + mpRegen); } if (MAPS[currentMapId].boss) checkAndSpawnBoss(MAPS[currentMapId].boss); }
     
-    // [Fix v77.88] 更新 Map 0 的怪物上限判斷 (配合 initMap 的修改)
-    var baseMaxMobs = (currentMapId === 0) ? 600 : ((MAPS[currentMapId].w > 100) ? 350 : 200); 
+    // [Mod v77.90] 更新 Map 0 的怪物上限與重生邏輯
+    // Map 0: 900, Map W>100: 350, Others: 200
+    var baseMaxMobs = (currentMapId === 0) ? 900 : ((MAPS[currentMapId].w > 100) ? 350 : 200); 
     
     var maxMobs = baseMaxMobs * GM_SPAWN_MULT; if (maxMobs > 3000) maxMobs = 3000;
-    if(entities.length < maxMobs && Math.random()>0.9 && currentMapId != 0) spawnMob();
+    
+    // [Mod v77.90] 移除 currentMapId != 0 限制，允許隱藏之谷重生
+    if(entities.length < maxMobs && Math.random()>0.9) spawnMob();
     
     var speed = player.buffs.haste ? 9 : 6; if (player.lvl >= 52) speed += 1; if (player.lvl >= 60) speed += 1; if (player.lvl >= 70) speed += 1;
     var isBow = player.equip.weapon && ITEMS[player.equip.weapon.key].icon === '🏹'; var attackRange = isBow ? 400 : 50; 
@@ -659,7 +668,23 @@ function hit(m, extra=0, effect=null, source=null) {
             player.exp += expGain; player.gold += goldDrop; 
             addFloat(player.x, player.y-60, "+"+expGain+" XP", "#fd0"); 
             if (goldDrop > 0) { addFloat(player.x, player.y-80, "+$"+goldDrop, "#ff0"); logMsg(`獲得金幣: ${goldDrop}`, "#ff0"); }
-            if(m.drops) { m.drops.forEach(d => { var rate = d.c; var itemInfo = ITEMS[d.k]; if (itemInfo) { if (itemInfo.price > 10000) rate *= GM_DROP_MULT_RARE; else if (itemInfo.type === 'equip') rate *= GM_DROP_MULT_EQUIP; else rate *= GM_DROP_MULT_USE; } if(Math.random() < rate) { addItem(d.k, 1); logMsg(m.name + " 給你: " + itemInfo.name, "#0f0"); } }); } 
+            if(m.drops) { 
+                m.drops.forEach(d => { 
+                    var rate = d.c; 
+                    var itemInfo = ITEMS[d.k]; 
+                    if (itemInfo) { 
+                        if (itemInfo.price > 10000) rate *= GM_DROP_MULT_RARE; 
+                        else if (itemInfo.type === 'equip') rate *= GM_DROP_MULT_EQUIP; 
+                        else rate *= GM_DROP_MULT_USE; 
+                        
+                        // [Mod v77.90] 隱藏之谷(Map 0) 紅色藥水掉落率加倍
+                        if (currentMapId === 0 && d.k === 'potion') {
+                            rate *= 2;
+                        }
+                    } 
+                    if(Math.random() < rate) { addItem(d.k, 1); logMsg(m.name + " 給你: " + itemInfo.name, "#0f0"); } 
+                }); 
+            } 
             if(player.exp >= player.nextExp) { 
                 player.exp -= player.nextExp; player.lvl++; 
                 var multiplier = 1.1; if (player.lvl >= 45) multiplier = 1.3; if (player.lvl >= 52) multiplier = 1.6; if (player.lvl >= 60) multiplier = 2.2; if (player.lvl >= 70) multiplier = 3.0;
@@ -714,7 +739,10 @@ function updateUI() {
     document.getElementById('ui-class').innerText=(player.class==='knight'?'騎士':(player.class==='elf'?'妖精':'法師')); 
     document.getElementById('bar-exp').style.width = Math.min(100, (player.exp / player.nextExp * 100)) + "%"; 
     document.getElementById('bar-hp').style.width = Math.min(100, (player.hp/player.maxHp*100))+"%"; 
+    
+    // [Fix] 修正血量文字顯示錯誤
     document.getElementById('txt-hp').innerText=Math.floor(player.hp)+"/"+Math.floor(player.maxHp); 
+    
     document.getElementById('bar-mp').style.width = Math.min(100, (player.mp/player.maxMp*100))+"%"; 
     document.getElementById('txt-mp').innerText=Math.floor(player.mp)+"/"+Math.floor(player.maxMp); 
     document.getElementById('ui-gold').innerText=Math.floor(player.gold); 
