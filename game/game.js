@@ -1,5 +1,11 @@
 /**
- * Lineage M v77.90 Game Engine (Hidden Valley Update)
+ * Lineage M v77.90 Game Engine (Progressive EXP Update)
+ * ---------------------------------------------------
+ * [更新記錄 - v77.90_MapExpBonus]
+ * 1. [平衡] 實裝地圖階梯式經驗值加成系統。
+ * - 從 Map 8 (象牙塔) 開始，每張地圖經驗值提升 10% (1.1x)。
+ * - 依序遞增至 Map 17 (異界裂縫) 為 2.0x 經驗值。
+ * - 此加成針對怪物「生成時」的基礎經驗值進行運算，可與 GM 倍率疊加。
  * ---------------------------------------------------
  * [修正記錄 - v77.90_Fix_UI]
  * 1. [修正] 修復 HP 血條顯示錯誤，解決出現 "Math.floor..." 文字的問題。
@@ -8,12 +14,6 @@
  * 1. [生態] 隱藏之谷 (Map 0) 怪物上限由 600 提升至 900。
  * 2. [機制] 解鎖隱藏之谷的自動重生機制，現在怪物會無限重生。
  * 3. [平衡] 隱藏之谷的「紅色藥水」掉落率提升 2 倍 (新手福利)。
- * ---------------------------------------------------
- * [修正記錄 - v77.89_Fix2]
- * 1. [修正] 補上檔案末尾缺失的閉合括號，解決 "Unexpected end of input" 錯誤。
- * ---------------------------------------------------
- * [更新記錄 - v77.89_BGM]
- * 1. [音效] 新增自動背景音樂功能。
  * ---------------------------------------------------
  */
 
@@ -331,6 +331,21 @@ function checkAndSpawnBoss(bossKey) {
     if (!nextSpawn || Date.now() >= nextSpawn) spawnBoss(bossKey); 
 }
 
+// [v77.91] 地圖經驗值加成計算函式
+function getMapExpBonus(mapId) {
+    if (mapId === 8) return 1.1; // 象牙塔
+    if (mapId === 9) return 1.2; // 龍之谷
+    if (mapId === 10) return 1.3; // 火龍窟
+    if (mapId === 11) return 1.4; // 傲慢塔
+    if (mapId === 12) return 1.5; // 古魯丁7F
+    if (mapId === 13) return 1.6; // 遺忘之島
+    if (mapId === 14) return 1.7; // 拉斯塔巴德
+    if (mapId === 15) return 1.8; // 提卡爾
+    if (mapId === 16) return 1.9; // 底比斯
+    if (mapId === 17) return 2.0; // 異界裂縫
+    return 1.0; // 其他地圖無加成
+}
+
 function spawnMob(isInitial = false) { 
     if (entities.length >= 3000) return; 
     if (currentMapId == 0 && Math.random() > 0.6) return; 
@@ -348,7 +363,11 @@ function spawnMob(isInitial = false) {
     var multiplier = (currentMapId >= 2) ? 2 : 1;
     var finalHp = Math.floor(t.hp * multiplier);
     
-    entities.push({ name:t.name, hp:finalHp, maxHp:finalHp, exp:t.exp, s:t.s, c:t.c, isBoss:false, type:mobKey, drops:t.drops, x:mx, y:my, atkTimer:0, aggro: false, magic: t.magic, stunTimer: 0, direction: 1 }); 
+    // [v77.91] 應用地圖經驗值加成
+    var expBonus = getMapExpBonus(currentMapId);
+    var finalExp = t.exp * expBonus;
+    
+    entities.push({ name:t.name, hp:finalHp, maxHp:finalHp, exp:finalExp, s:t.s, c:t.c, isBoss:false, type:mobKey, drops:t.drops, x:mx, y:my, atkTimer:0, aggro: false, magic: t.magic, stunTimer: 0, direction: 1 }); 
 }
 
 function spawnBoss(key) { 
@@ -361,7 +380,11 @@ function spawnBoss(key) {
     var multiplier = (currentMapId >= 2) ? 2 : 1;
     var finalHp = Math.floor(t.hp * multiplier);
 
-    entities.push({ name: t.name, hp: finalHp, maxHp: finalHp, exp: t.exp, s: t.s, c: t.c, isBoss: true, type: key, drops: t.drops, x: Math.cos(a)*d, y: Math.sin(a)*d, atkTimer: 0, aggro: t.aggro, magic: t.magic, scale: t.scale || 2.0, stunTimer: 0, direction: 1 }); 
+    // [v77.91] 應用地圖經驗值加成 (BOSS 同步加成)
+    var expBonus = getMapExpBonus(currentMapId);
+    var finalExp = t.exp * expBonus;
+
+    entities.push({ name: t.name, hp: finalHp, maxHp: finalHp, exp: finalExp, s: t.s, c: t.c, isBoss: true, type: key, drops: t.drops, x: Math.cos(a)*d, y: Math.sin(a)*d, atkTimer: 0, aggro: t.aggro, magic: t.magic, scale: t.scale || 2.0, stunTimer: 0, direction: 1 }); 
     logMsg("BOSS 出現了: " + t.name, "#f0f"); 
 }
 
