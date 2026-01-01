@@ -687,7 +687,7 @@ function hit(m, extra=0, effect=null, source=null) {
             } 
             if(player.exp >= player.nextExp) { 
                 player.exp -= player.nextExp; player.lvl++; 
-                var multiplier = 1.1; if (player.lvl >= 45) multiplier = 1.3; if (player.lvl >= 52) multiplier = 1.6; if (player.lvl >= 60) multiplier = 2.2; if (player.lvl >= 70) multiplier = 3.0;
+                var multiplier = 1.1; if (player.lvl >= 45) multiplier = 1.3; if (player.lvl >= 52) multiplier = 1.4; if (player.lvl >= 60) multiplier = 1.5; if (player.lvl >= 70) multiplier = 1.8;
                 player.nextExp = Math.floor(player.nextExp * multiplier); 
                 player.points+=3; player.skillPoints+=1; 
                 player.baseMaxHp += (player.con * 2); player.maxHp = player.baseMaxHp; player.hp = player.maxHp; 
