@@ -1,21 +1,22 @@
 <!-- 
-Lineage M v77.90 (Pottery & Glaze Integration)
+Lineage M v77.125 (Tier Borders)
 ----------------------------------------
 [版本資訊]
-* Core: v77.87 (Audio/FX/Visual Swap/AOE Fix/Balance)
-* UI: v77.89 (Pottery Website Intro Added)
+* Core: v77.103 (Def Fix)
+* UI: v77.104 (Tier Borders)
 ----------------------------------------
-[修正記錄]
-* Fix: 在啟動畫面左上角新增「陶藝與釉藥調配」網站推廣區塊。
-* Fix: 整合 FontAwesome 圖示庫以支援新介面圖示。
+[更新記錄 - v77.104_TierBorders]
+* 1. [CSS] 新增 .tier-* 系列樣式，定義 6 種階級的邊框顏色與光暈。
+* - 白/黃/綠/藍/紅/紫，對應 data.js 中的套裝設定。
+----------------------------------------
 -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lineage M v77.89: Pottery Edition</title>
-    <!-- 引入 FontAwesome (參考 welcome.html) -->
+    <title>Lineage M v77.125: Pottery Edition</title>
+    <!-- 引入 FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Noto+Serif+TC:wght@500;900&display=swap" rel="stylesheet">
     <style>
@@ -152,11 +153,27 @@ Lineage M v77.90 (Pottery & Glaze Integration)
         .ic-life { color: #9d4edd; }
         .ic-game { color: #4caf50; }
 
-        #inv-info, #shop-info { background: #111; color: #888; padding: 5px; font-size: 12px; font-weight: bold; border-top: 1px solid #444; height: 35px; display: flex; align-items: center; justify-content: center; text-shadow: 0 0 5px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        /* [Updated] Inv/Shop Info Box - Auto Height */
+        #inv-info, #shop-info { 
+            background: #111; color: #888; padding: 8px; font-size: 11px; font-weight: bold; 
+            border-top: 1px solid #444; 
+            min-height: 35px; height: auto; /* Changed from fixed height */
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            text-align: center; line-height: 1.4;
+            text-shadow: 0 0 5px rgba(0,0,0,0.8); letter-spacing: 1px; 
+        }
         .item-row { display: flex; justify-content: space-between; padding: 6px; border-bottom: 1px solid #333; align-items: center; background: rgba(0,0,0,0.2); }
         .item-icon { width: 28px; height: 28px; background: #111; border: 1px solid #444; margin-right: 8px; border-radius: 2px; display:flex; align-items:center; justify-content:center; font-size:16px; cursor: pointer; flex-shrink: 0;}
         .item-icon:hover { border-color: #d4af37; box-shadow: 0 0 5px #d4af37; }
         
+        /* [New] 階級邊框樣式 (Tier Borders) */
+        .item-icon.tier-white { border: 1px solid #ccc; box-shadow: 0 0 2px #fff; }
+        .item-icon.tier-yellow { border: 1px solid #ffd700; box-shadow: 0 0 4px #ffd700; }
+        .item-icon.tier-green { border: 1px solid #0f0; box-shadow: 0 0 4px #0f0; }
+        .item-icon.tier-blue { border: 1px solid #0bf; box-shadow: 0 0 4px #0bf; }
+        .item-icon.tier-red { border: 1px solid #f44; box-shadow: 0 0 4px #f00; }
+        .item-icon.tier-purple { border: 1px solid #d0f; box-shadow: 0 0 6px #d0f; }
+
         #joy-zone { position: absolute; bottom: 40px; left: 30px; width: 100px; height: 100px; pointer-events: auto; opacity: 0.5; }
         #joy-base { width: 100%; height: 100%; border: 2px solid #555; border-radius: 50%; }
         #joy-stick { width: 40px; height: 40px; background: #888; border-radius: 50%; position: absolute; top: 30px; left: 30px; }
@@ -205,7 +222,7 @@ Lineage M v77.90 (Pottery & Glaze Integration)
         </div>
 
         <h1 style="color:#d9a040; font-family:'Cinzel'; margin-bottom:5px; font-size:48px; text-shadow:0 0 20px #a60; letter-spacing: 4px;">LINEAGE M</h1>
-        <p style="color:#666; font-size:12px; margin-bottom:20px; letter-spacing: 4px;">v77.81 AUDIO & VISUAL OVERHAUL</p>
+        <p style="color:#666; font-size:12px; margin-bottom:20px; letter-spacing: 4px;">v77.104 TIER UI EDITION</p>
         <div id="login-box-main" class="login-box">
             <div style="color:#888; font-size:12px; margin-bottom:5px;">帳號 (ID)</div>
             <input type="text" id="login-id" class="login-input" placeholder="User ID">
@@ -377,7 +394,14 @@ Lineage M v77.90 (Pottery & Glaze Integration)
                 <label><input type="checkbox" onchange="updateSettings(this.checked, 'auto_blue')" id="cb_blue"> 藍色藥水 (MP Buff)</label>
                 <div style="margin:10px 0;">
                     自動治癒 (法/妖):<br>
-                    <select onchange="updateSettings(this.value, 'auto_heal_skill')" style="background:#222; color:#fff; width:100%; margin-bottom:5px;"><option value="none">關閉</option><option value="heal_1">初級治癒</option><option value="heal_2">中級治癒</option><option value="heal_3">高級治癒</option><option value="e_heal">精靈治癒</option></select>
+                    <!-- [Update] 修改為通用治癒術選單 -->
+                    <select onchange="updateSettings(this.value, 'auto_heal_skill')" style="background:#222; color:#fff; width:100%; margin-bottom:5px;">
+                        <option value="none">關閉</option>
+                        <option value="heal_1">初級治癒術 (Lv.1)</option>
+                        <option value="heal_2">中級治癒術 (Lv.2)</option>
+                        <option value="heal_3">高級治癒術 (Lv.3)</option>
+                        <option value="e_heal">精靈治癒 (舊版相容)</option>
+                    </select>
                     <br>HP < <input type="number" style="width:40px;background:#111;color:#fff;border:1px solid #444" value="60" onchange="updateSettings(this.value, 'auto_heal_val')">% 且 MP > <input type="number" style="width:40px;background:#111;color:#fff;border:1px solid #444" value="20" onchange="updateSettings(this.value, 'auto_heal_mp_limit')">%
                 </div>
             </div>
@@ -450,9 +474,10 @@ Lineage M v77.90 (Pottery & Glaze Integration)
         <button class="glass-btn" style="width:100%; margin-top:10px; border-color:#644;" onclick="closeTeleport()">關閉選單</button>
     </div>
 </div>
-<!-- Scripts Order: Data -> Assets -> Game -->
+<!-- Scripts Order: Data -> Assets -> UI -> Game -->
 <script src="data.js"></script>
 <script src="assets.js"></script>
+<script src="ui.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
