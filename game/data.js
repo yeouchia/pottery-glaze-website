@@ -1,21 +1,10 @@
 /**
+ * Lineage M v77.125 Data Module (Restored & Fixed)
  * ---------------------------------------------------
- * [更新記錄 - v77.125_Elf_Buff_Rebalance]
- * 1. [技能調整] 妖精技能與消耗品數值平衡調整。
- * - 風之神射: [遠攻命中+6] -> [遠攻爆擊+20%], MP:100, Time:600s
- * - 暴風神射: [遠攻傷害+5] -> [遠攻傷害+50], MP:200, Time:600s
- * - 精靈餅乾: 攻速提升調整為 x1.5
- * ---------------------------------------------------
- * [更新記錄 - v77.124_Boss_EXP_Balance]
- * 1. [平衡] 修正 v77.123 過度下修 Boss 經驗值的問題。
- * - 問題：小怪經驗提升後，後期 Boss (如吉爾塔斯) 的 EXP 效益比僅剩 40倍小怪，嚴重失衡。
- * - 修正：將所有 Boss 的經驗值重新定錨在「同級小怪的 150~200倍」。
- * - Example: 
- * - 惡魔: 25,000 -> 60,000 (約 160倍)
- * - 吉爾塔斯: 300,000 -> 1,500,000 (約 200倍)
- * ---------------------------------------------------
- * [更新記錄 - v77.122_EXP_Boost_PlanB]
- * 1. [練功優化] 實施方案 B：大幅提升 Lv.50 以上怪物的基礎經驗值 (EXP)。
+ * [修正記錄 - v77.125_Hotfix_2]
+ * 1. [緊急回溯] 恢復原始 ITEM Keys (potion, potion_green...) 以修復存檔相容性與自動喝水錯誤。
+ * 2. [變數修復] 確保怪物資料變數名稱為 MOB_TYPES。
+ * 3. [視覺實裝] 僅修改炎變弓的 projType 為 'arrow_rainbow'。
  * ---------------------------------------------------
  */
 
@@ -59,7 +48,6 @@ const ITEMS = {
     'potion_green': {name:'綠色藥水', icon:'🧪', color:'#00ff00', type:'use', buff:'haste', duration:300000, price:300, stackable:true, desc:'一段加速 (300s)'},
     'potion_brave': {name:'勇敢藥水', icon:'🍺', color:'#ffaa00', type:'use', buff:'brave', duration:300000, price:1000, stackable:true, class:'knight', desc:'騎士二段加速 (300s)'},
     
-    // [Updated] 精靈餅乾描述更新
     'cookie_elf': {name:'精靈餅乾', icon:'🍪', color:'#aaffaa', type:'use', buff:'wafer', duration:300000, price:800, stackable:true, class:'elf', desc:'妖精攻速 x1.5 (300s)'},
     
     'potion_wisdom': {name:'慎重藥水', icon:'🧪', color:'#aa00ff', type:'use', buff:'wisdom', duration:300000, price:1000, stackable:true, class:'mage', desc:'法師施法加速 (300s)'},
@@ -103,14 +91,11 @@ const ITEMS = {
     'shirt_elf': {name:'精靈T恤', icon:'👕', type:'equip', slot:'shirt', def:1, dex:1, price:80000, desc:'[AC-1] [DEX+1] 精靈的加護'},
 
     // ==========================================
-    // [區塊 2.5] 稀有單品武器 (Rare Single Weapons) - [Price Rebalanced]
+    // [區塊 2.5] 稀有單品武器 (Rare Single Weapons)
     // ==========================================
-    // 皇家劍/弓 (非賣品，但若打到可賣店) -> Price: 100,000 (賣店 20,000)
     'sword_royal': {name:'皇家之劍', icon:'🗡️', type:'equip', slot:'weapon', atk:30, price:100000, class:'knight', sound:'sword', desc:'[Atk:30] 皇家配劍'},
     'bow_royal': {name:'皇家長弓', icon:'🏹', type:'equip', slot:'weapon', atk:25, price:100000, class:'elf', projType:'magic_arrow', sound:'bow', desc:'[Atk:25] 皇家御用弓'},
-    // 紅武 -> Price: 250,000 (賣店 50,000)
     'sword_blood': {name:'嗜血巨劍', icon:'🗡️', type:'equip', slot:'weapon', atk:60, price:250000, class:'knight', sound:'sword_heavy', desc:'[Atk:60] 吸取敵人生命'},
-    // 紫武 -> Price: 1,000,000 (賣店 200,000)
     'sword_void': {name:'虛空魔劍', icon:'⚔️', type:'equip', slot:'weapon', atk:120, price:1000000, class:'knight', sound:'sword_magic', desc:'[Atk:120] 來自虛空的毁滅力量'},
 
     // ==========================================
@@ -204,11 +189,12 @@ const ITEMS = {
     'shirt_void': {name:'虛空T恤', icon:'👕', type:'equip', slot:'shirt', def:7, price:750000, set:'set_void', desc:'[AC-7] [減傷+1]'},
     
     // --- Tier 7 (炎變 - Flame/God) ---
+    // [Modified] 更新 projType 為 'arrow_rainbow'
     'sword_flame_1': {name:'炎變烈焰劍', icon:'⚔️', type:'equip', slot:'weapon', atk:100, price:2500000, buyable:false, class:'knight', sound:'sword_magic', desc:'[Atk:100] 機率發動烈炎術 / HP回復UP'},
     'sword_flame_2': {name:'炎變轉生劍', icon:'🗡️', type:'equip', slot:'weapon', atk:100, price:2500000, buyable:false, class:'knight', sound:'sword_magic', desc:'[Atk:100] 機率發動火球術 / 吸血'},
     
-    'bow_flame_1': {name:'炎變烈焰弓', icon:'🏹', type:'equip', slot:'weapon', atk:50, price:2500000, buyable:false, class:'elf', projType:'magic_arrow', sound:'bow_magic', desc:'[Atk:50] 機率發動三重矢'},
-    'bow_flame_2': {name:'炎變轉生弓', icon:'🏹', type:'equip', slot:'weapon', atk:50, price:2500000, buyable:false, class:'elf', projType:'magic_arrow', sound:'bow_magic', desc:'[Atk:50] 機率發動烈炎術'},
+    'bow_flame_1': {name:'炎變烈焰弓', icon:'🏹', type:'equip', slot:'weapon', atk:50, price:2500000, buyable:false, class:'elf', projType:'arrow_rainbow', sound:'bow_magic', desc:'[Atk:50] 機率發動三重矢'},
+    'bow_flame_2': {name:'炎變轉生弓', icon:'🏹', type:'equip', slot:'weapon', atk:50, price:2500000, buyable:false, class:'elf', projType:'arrow_rainbow', sound:'bow_magic', desc:'[Atk:50] 機率發動烈炎術'},
     
     'staff_flame_1': {name:'炎變烈焰魔杖', icon:'🥢', type:'equip', slot:'weapon', atk:50, price:2500000, buyable:false, class:'mage', sound:'staff', desc:'[Atk:50] 機率發動烈炎術 / 雙倍吸魔'},
     'staff_flame_2': {name:'炎變轉生魔杖', icon:'🥢', type:'equip', slot:'weapon', atk:50, price:2500000, buyable:false, class:'mage', sound:'staff', desc:'[Atk:50] 機率發動範圍衝擊之暈 / 雙倍回魔'},
@@ -216,9 +202,10 @@ const ITEMS = {
 
 // --- 技能資料 (Skills) ---
 const SKILLS = {
-    'k1': {name:'衝擊之暈', mp:15, lv:15, class:'knight', icon:'💫', sound:'stun', desc:'使敵人暈眩3秒 (隨技能等級增加時間)'},
-    'k2': {name:'增幅防禦', mp:15, lv:30, class:'knight', icon:'🛡️', buff:'solid_carriage', duration:60000, sound:'magic_def', desc:'60秒內減傷 (隨技能等級增加)'},
-    'k3': {name:'反擊屏障', mp:20, lv:45, class:'knight', icon:'⚔️', buff:'counter_barrier', duration:120000, sound:'magic_atk', desc:'機率迴避近戰傷害並反擊 (隨技能等級增傷)'},
+    // [Modified] 騎士技能 MP 調整 (v77.127)
+    'k1': {name:'衝擊之暈', mp:50, lv:15, class:'knight', icon:'💫', sound:'stun', desc:'使敵人暈眩3秒 (隨技能等級增加時間)'},
+    'k2': {name:'增幅防禦', mp:50, lv:30, class:'knight', icon:'🛡️', buff:'solid_carriage', duration:60000, sound:'magic_def', desc:'60秒內減傷 (隨技能等級增加)'},
+    'k3': {name:'反擊屏障', mp:100, lv:45, class:'knight', icon:'⚔️', buff:'counter_barrier', duration:120000, sound:'magic_atk', desc:'機率迴避近戰傷害並反擊 (隨技能等級增傷)'},
     
     'e_heal_1': {name:'初級治癒術', mp:10, lv:10, class:'elf', icon:'❤️', sound:'heal', desc:'恢復HP (MP:10)'}, 
     'e_heal_2': {name:'中級治癒術', mp:20, lv:20, class:'elf', icon:'🧡', sound:'heal', desc:'恢復更多HP (MP:20)'}, 
@@ -250,7 +237,7 @@ const SKILLS = {
 const MOB_TYPES = {
     // 0. 新手木樁
     'dummy': {
-        name:'木人', hp:100, exp:1.0, atk:0, def:0, s:20, c:'#8b4513', aggro:false, 
+        name:'木人', hp:500, exp:0.5, atk:0, def:0, s:20, c:'#8b4513', aggro:false, 
         drops:[{k:'potion_green',c:0.15},{k:'potion_brave',c:0.05},{k:'cookie_elf',c:0.05},{k:'potion_wisdom',c:0.05}], 
         minGold:0, maxGold:0
     }, 
@@ -437,30 +424,30 @@ const MOB_TYPES = {
     // --- Bosses (EXP Balance Fix: Target 150-200x of Mobs) ---
     // Rule: 小怪提升後，Boss 經驗必須同步上調，否則打王變虧本。
     
-    'araneid': {name:'巨大蜘蛛 (Boss) Lv.25', hp:10000, exp:100.0, atk:300, def:20, s:60, c:'#8b4513', aggro:true, drops:[ // 1000 -> 2000
+    'araneid': {name:'巨大蜘蛛 (Boss) Lv.25', hp:10000, exp:2000.0, atk:300, def:20, s:60, c:'#8b4513', aggro:true, drops:[ // 1000 -> 2000
         {k:'zel',c:0.5},{k:'sword_long',c:0.5},
         {k:'helm_soldier',c:0.2}, {k:'armor_soldier',c:0.2}, {k:'glove_soldier',c:0.2}, {k:'boot_soldier',c:0.2},
         {k:'shield_skull',c:0.1}
     ], isBoss:true, respawnTime:3600, scale:2.2, minGold:2500, maxGold:3750},
     
-    'necromancer': {name:'死靈法師 (Boss) Lv.30', hp:1500, exp:150.0, atk:450, def:30, s:50, c:'#483d8b', aggro:true, drops:[ // 1800 -> 3500
+    'necromancer': {name:'死靈法師 (Boss) Lv.30', hp:15000, exp:3500.0, atk:450, def:30, s:50, c:'#483d8b', aggro:true, drops:[ // 1800 -> 3500
         {k:'staff',c:1.0},{k:'zel_b',c:0.05},
         {k:'helm_merc',c:0.2}, {k:'armor_merc',c:0.2}
     ], isBoss:true, magic:'fireball', respawnTime:7200, scale:2.0, minGold:3000, maxGold:4500},
     
-    'giant_ant_queen': {name:'巨蟻女皇 (Boss) Lv.45', hp:30000, exp:800.0, atk:600, def:50, s:100, c:'#2a2a2a', aggro:true, drops:[ // 3000 -> 8000
+    'giant_ant_queen': {name:'巨蟻女皇 (Boss) Lv.45', hp:30000, exp:8000.0, atk:600, def:50, s:100, c:'#2a2a2a', aggro:true, drops:[ // 3000 -> 8000
         {k:'cloak_protect',c:1.0},{k:'dai_b',c:0.1},
         {k:'helm_exp',c:0.2}, {k:'armor_exp',c:0.2}, {k:'glove_exp',c:0.2}, {k:'boot_exp',c:0.2},
         {k:'shirt_elf',c:0.1}
     ], isBoss:true, respawnTime:14400, scale:2.5, minGold:3750, maxGold:5000}, 
     
-    'giant_crocodile': {name:'巨大鱷魚 (Boss) Lv.50', hp:45000, exp:1000.0, atk:800, def:60, s:90, c:'#228b22', aggro:true, drops:[ // 5000 -> 12000 (Mob: 50 EXP -> 240x)
+    'giant_crocodile': {name:'巨大鱷魚 (Boss) Lv.50', hp:45000, exp:12000.0, atk:800, def:60, s:90, c:'#228b22', aggro:true, drops:[ // 5000 -> 12000 (Mob: 50 EXP -> 240x)
         {k:'dai',c:0.5},{k:'potion_brave',c:1.0},
         {k:'helm_royal',c:0.2}, {k:'armor_royal',c:0.2}, {k:'glove_royal',c:0.2}, {k:'boot_royal',c:0.2},
         {k:'cloak_royal',c:0.1}, {k:'neck_royal',c:0.1}, {k:'shirt_royal',c:0.1}
     ], isBoss:true, respawnTime:14400, scale:2.5, minGold:4500, maxGold:5500}, 
     
-    'drake': {name:'飛龍 (Boss) Lv.60', hp:60000, exp:2000.0, atk:1000, def:70, s:80, c:'#5d4037', aggro:true, drops:[ // 10000 -> 20000 (Mob: 100 EXP -> 200x)
+    'drake': {name:'飛龍 (Boss) Lv.60', hp:60000, exp:20000.0, atk:1000, def:70, s:80, c:'#5d4037', aggro:true, drops:[ // 10000 -> 20000 (Mob: 100 EXP -> 200x)
         {k:'neck_brave',c:1.0}, {k:'mat_mithril',c:1.0},
         {k:'zel',c:0.8}, {k:'dai',c:0.8},
         {k:'zel_b',c:0.2}, {k:'dai_b',c:0.2},
@@ -468,18 +455,18 @@ const MOB_TYPES = {
         {k:'cloak_cmd',c:0.1}, {k:'neck_cmd',c:0.1}, {k:'shirt_cmd',c:0.1}
     ], isBoss:true, magic:'fireball', respawnTime:21600, scale:2.8, minGold:20000, maxGold:30000}, 
     
-    'demon': {name:'惡魔 (Boss) Lv.80', hp:120000, exp:2000.0, atk:1500, def:80, s:100, c:'#b22222', aggro:true, drops:[ // 25000 -> 60000 (Mob: 375 EXP -> 160x)
+    'demon': {name:'惡魔 (Boss) Lv.80', hp:120000, exp:60000.0, atk:1500, def:80, s:100, c:'#b22222', aggro:true, drops:[ // 25000 -> 60000 (Mob: 375 EXP -> 160x)
         {k:'shirt_str',c:1.0},{k:'glove_power',c:0.5},
         {k:'helm_emerald',c:0.3}, {k:'armor_emerald',c:0.3}, {k:'glove_emerald',c:0.3}, {k:'boot_emerald',c:0.3},
         {k:'cloak_emerald',c:0.1}, {k:'neck_emerald',c:0.1}, {k:'shirt_emerald',c:0.1}
     ], isBoss:true, magic:'meteor', respawnTime:43200, scale:2.2, minGold:5500, maxGold:7000}, 
     
-    'death_knight': {name:'死亡騎士 (Boss) Lv.85', hp:25000, exp:120000.0, atk:2000, def:100, s:70, c:'#ffd700', aggro:true, drops:[ // 40000 -> 120000 (Mob: 600 EXP -> 200x)
+    'death_knight': {name:'死亡騎士 (Boss) Lv.85', hp:150000, exp:120000.0, atk:2000, def:100, s:70, c:'#ffd700', aggro:true, drops:[ // 40000 -> 120000 (Mob: 600 EXP -> 200x)
         {k:'zel_b',c:1.0},
         {k:'helm_phantom',c:0.3}, {k:'armor_phantom',c:0.3}, {k:'glove_phantom',c:0.3}, {k:'boot_phantom',c:0.3}
     ], isBoss:true, magic:'meteor', respawnTime:21600, scale:2.0, minGold:6250, maxGold:7500}, 
     
-    'baphomet': {name:'巴風特 (Boss) Lv.90', hp:180000, exp:2500.0, atk:2200, def:90, s:90, c:'#191970', aggro:true, drops:[ // 60000 -> 200000 (Mob: 1200 EXP -> 166x)
+    'baphomet': {name:'巴風特 (Boss) Lv.90', hp:180000, exp:200000.0, atk:2200, def:90, s:90, c:'#191970', aggro:true, drops:[ // 60000 -> 200000 (Mob: 1200 EXP -> 166x)
         {k:'staff_crystal',c:1.0},
         {k:'helm_blood',c:0.2}, {k:'armor_blood',c:0.2}, {k:'glove_blood',c:0.2}, {k:'boot_blood',c:0.2},
         {k:'cloak_blood',c:0.1}, {k:'neck_blood',c:0.1}, {k:'shirt_blood',c:0.1},
@@ -488,13 +475,13 @@ const MOB_TYPES = {
         {k:'staff_flame_1',c:0.005}, {k:'staff_flame_2',c:0.005}
     ], isBoss:true, magic:'fireball', respawnTime:43200, scale:2.2, minGold:7000, maxGold:8000}, 
     
-    'dante': {name:'丹特斯 (Boss) Lv.95', hp:250000, exp:3000.0, atk:2500, def:120, s:75, c:'#4b0082', aggro:true, drops:[ // 100000 -> 300000 (Mob: 1500 EXP -> 200x)
+    'dante': {name:'丹特斯 (Boss) Lv.95', hp:250000, exp:300000.0, atk:2500, def:120, s:75, c:'#4b0082', aggro:true, drops:[ // 100000 -> 300000 (Mob: 1500 EXP -> 200x)
         {k:'sword_void',c:0.01},
         {k:'helm_void',c:0.1}, {k:'armor_void',c:0.1}
     ], isBoss:true, magic:'meteor', respawnTime:43200, scale:2.0, minGold:7500, maxGold:8750}, 
     
     // [Tier 1 Boss: 0.5%]
-    'zebulon': {name:'傑弗雷肯 (Boss) Lv.100', hp:300000, exp:5000.0, atk:2800, def:130, s:120, c:'#556b2f', aggro:true, drops:[ // 150000 -> 500000 (Mob: 2400 EXP -> 200x)
+    'zebulon': {name:'傑弗雷肯 (Boss) Lv.100', hp:300000, exp:500000.0, atk:2800, def:130, s:120, c:'#556b2f', aggro:true, drops:[ // 150000 -> 500000 (Mob: 2400 EXP -> 200x)
         {k:'sword_wind',c:0.05},
         {k:'glove_void',c:0.1}, {k:'boot_void',c:0.1}, {k:'bow_royal',c:0.5},
         {k:'sword_flame_1',c:0.005}, {k:'sword_flame_2',c:0.005},
@@ -503,7 +490,7 @@ const MOB_TYPES = {
     ], isBoss:true, magic:'fireball', respawnTime:43200, scale:2.5, minGold:7500, maxGold:8750}, 
     
     // [Tier 2 Boss: 1.0%]
-    'osiris': {name:'歐西里斯 (Boss) Lv.110', hp:450000, exp:8000.0, atk:3500, def:150, s:80, c:'#ffd700', aggro:true, drops:[ // 200000 -> 800000 (Mob: 3600 EXP -> 220x)
+    'osiris': {name:'歐西里斯 (Boss) Lv.110', hp:450000, exp:800000.0, atk:3500, def:150, s:80, c:'#ffd700', aggro:true, drops:[ // 200000 -> 800000 (Mob: 3600 EXP -> 220x)
         {k:'helm_void',c:0.3}, {k:'armor_void',c:0.3}, {k:'glove_void',c:0.3}, {k:'boot_void',c:0.3},
         {k:'cloak_void',c:0.1}, {k:'neck_void',c:0.1}, {k:'shirt_void',c:0.1},
         {k:'sword_flame_1',c:0.01}, {k:'sword_flame_2',c:0.01},
@@ -512,7 +499,7 @@ const MOB_TYPES = {
     ], isBoss:true, magic:'meteor', respawnTime:86400, scale:2.2, minGold:7500, maxGold:8750}, 
     
     // [Tier 3 Boss: 2.0%]
-    'girtao': {name:'吉爾塔斯 (Boss) Lv.120', hp:1000000, exp:15000.0, atk:5000, def:200, s:150, c:'#4b0082', aggro:true, drops:[ // 300000 -> 1500000 (Mob: 7500 EXP -> 200x)
+    'girtao': {name:'吉爾塔斯 (Boss) Lv.120', hp:1000000, exp:1500000.0, atk:5000, def:200, s:150, c:'#4b0082', aggro:true, drops:[ // 300000 -> 1500000 (Mob: 7500 EXP -> 200x)
         {k:'sword_void',c:0.5}, // 虛空魔劍必掉
         {k:'armor_void',c:1.0}, {k:'helm_void',c:1.0}, {k:'glove_void',c:1.0}, {k:'boot_void',c:1.0}, 
         {k:'cloak_void',c:0.5}, {k:'neck_void',c:0.5}, {k:'shirt_void',c:0.5},

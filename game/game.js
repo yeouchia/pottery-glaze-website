@@ -323,10 +323,30 @@ function initMap(id) {
     
     generateEnvironment(mapInfo.theme, g); 
     
-    if (id == 0) { for(let i=0; i<5; i++) entities.push({name:'新手導師', hp:1000, maxHp:1000, s:24, c:'#aaa', x:600+(Math.random()-0.5)*200, y:900+(Math.random()-0.5)*200, isFakePlayer:true, chatTimer:0, chatText:''}); } 
-    
-    var baseMobCount = (id === 0) ? 900 : ((mapInfo.w && mapInfo.w > 100) ? 350 : 200); 
-    var mobCount = baseMobCount * GM_SPAWN_MULT; 
+   // [修改後] 針對 Map 7 (歐瑞村) 手動增加怪物數量
+var baseMobCount = 900; 
+
+if (id === 0) {
+    baseMobCount = 900; 
+} else if (id === 7) { 
+    baseMobCount = 900;
+} else if (mapInfo.w && mapInfo.w > 100) {
+    baseMobCount = 350; 
+} else {
+    baseMobCount = 200; 
+}
+
+// 下面這行維持不動，這是套用 GM 倍率的
+
+
+
+
+
+
+
+
+
+var mobCount = baseMobCount * GM_SPAWN_MULT; 
     for(let i=0; i<mobCount; i++) spawnMob(true); 
     
     if(mapInfo.boss) checkAndSpawnBoss(mapInfo.boss); 

@@ -6,6 +6,9 @@
  * - 解決 Canvas 在沙盒環境下無法讀取 Blob URL 導致畫面變方塊的問題。
  * 2. [確認] 確保炎變系列武器 (Flame Weapons) 與特效 (Magic Effects) 資源完整。
  * ---------------------------------------------------
+ * [更新記錄 - v77.126_Rainbow_Arrow]
+ * 1. [新增] proj_arrow_rainbow: 七彩霓光箭矢特效，專供炎變系列弓使用。
+ * ---------------------------------------------------
  */
 
 // 全域資源儲存庫
@@ -124,6 +127,9 @@ function initAssets() {
     createSvgAsset('effect_meteor_rain', `<defs><linearGradient id="gMet" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#fd0"/><stop offset="100%" stop-color="#f00"/></linearGradient></defs><g><rect x="58" y="0" width="4" height="80" fill="url(#gMet)" opacity="0.8" /><circle cx="60" cy="85" r="15" fill="#fff" /><circle cx="60" cy="85" r="25" fill="none" stroke="#f80" stroke-width="2" /></g>`);
     createSvgAsset('effect_slash', `<path d="M60,60 Q100,20 110,60 L100,70 Q90,30 60,60 Z" fill="#fff" opacity="0.8"><animate attributeName="opacity" values="0.8;0" dur="0.3s" fill="freeze"/></path><path d="M60,60 Q90,10 120,50" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.5"/>`);
     createSvgAsset('effect_staff_swing', `<path d="M60,60 Q90,20 110,70" fill="none" stroke="#0ff" stroke-width="8" stroke-linecap="round" opacity="0.7"><animate attributeName="opacity" values="0.7;0" dur="0.4s" fill="freeze"/></path><circle cx="110" cy="70" r="5" fill="#fff" filter="drop-shadow(0 0 5px #0ff)"/>`);
+    
+    // [Phase 1: New Rainbow Arrow Asset]
+    createSvgAsset('proj_arrow_rainbow', `<defs><linearGradient id="gradRainbow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f00"><animate attributeName="stop-color" values="#f00;#ff0;#0f0;#0ff;#00f;#f0f;#f00" dur="2s" repeatCount="indefinite"/></stop><stop offset="50%" stop-color="#0f0"><animate attributeName="stop-color" values="#0f0;#0ff;#00f;#f0f;#f00;#ff0;#0f0" dur="2s" repeatCount="indefinite"/></stop><stop offset="100%" stop-color="#00f"><animate attributeName="stop-color" values="#00f;#f0f;#f00;#ff0;#0f0;#0ff;#00f" dur="2s" repeatCount="indefinite"/></stop></linearGradient></defs><g><line x1="10" y1="60" x2="110" y2="60" stroke="url(#gradRainbow)" stroke-width="6" stroke-linecap="round"/><path d="M110,60 L80,50 L80,70 Z" fill="url(#gradRainbow)"/><path d="M20,60 L10,50 M20,60 L10,70" stroke="url(#gradRainbow)" stroke-width="3"/></g><circle cx="60" cy="60" r="40" fill="none" stroke="url(#gradRainbow)" stroke-width="2" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="0.5s" repeatCount="indefinite"/><animate attributeName="r" values="30;50;30" dur="1s" repeatCount="indefinite"/></circle>`);
 
     // --- 樹木與造景 (Original) ---
     function createTree(key, leavesColor) { createSvgAsset(key, `<ellipse cx="60" cy="110" rx="20" ry="6" fill="rgba(0,0,0,0.3)" /><rect x="52" y="80" width="16" height="30" fill="#543" /><path d="M20,80 L100,80 L60,40 Z" fill="${leavesColor[0]}" /><path d="M25,60 L95,60 L60,20 Z" fill="${leavesColor[1]}" />`); }
@@ -219,7 +225,7 @@ function initAssets() {
 
     // 更新載入狀態顯示
     if(document.getElementById('asset-status')) {
-        document.getElementById('asset-status').innerText = "V77.113 美術資源(DataURI)載入完成";
+        document.getElementById('asset-status').innerText = "V77.126 美術資源(DataURI)載入完成";
     }
 }
 
