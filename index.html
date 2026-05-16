@@ -4,21 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- === SEO 關鍵優化設定 === -->
     <title>陶藝與釉藥調配 - 專業釉式計算、賽格式計算與教學工具</title>
     <meta name="description" content="專為陶藝愛好者設計的免費釉藥計算工具。提供原料轉釉式、釉式轉原料、賽格式計算、三角座標分析等功能。內含豐富的陶藝教學影片與原料資料庫，助您精準調配完美釉方。">
     <meta name="keywords" content="陶藝, 釉藥, 釉藥計算, 賽格式, 釉式計算, 陶藝教學, 陶瓷原料, 釉藥配方, 陶藝課程, 釉藥分析">
     <meta name="author" content="陶藝與釉藥調配">
 
-    <!-- === Open Graph (OG) 社群分享設定 === -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="陶藝與釉藥調配 - 專業計算工具">
     <meta property="og:description" content="免費的陶藝釉藥計算器！支援賽格式、三角座標與原料分析，陶藝人必備的數位工具。">
     <meta property="og:url" content="https://aawenhuang.github.io/glaze-calculator/"> 
     <meta property="og:image" content="https://aawenhuang.github.io/glaze-calculator/preview.jpg">
-    <meta property="og:site_name" content="陶藝與釉藥調配">
+    <meta property="og:site_name" content="陶藝與AAA釉藥調配">
 
-    <!-- 引入 Font Awesome 用於圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="robots" content="index, follow">
 
@@ -36,6 +33,10 @@
             --blue-light: #e0f7fa; --blue-hover: #b3e5fc; --blue-icon: #0277bd;
             --green-light: #e0f2f1; --green-hover: #b2dfdb; --green-icon: #00695c;
             --pink-light: #fce4ec; --pink-hover: #f8bbd0; --pink-icon: #ad1457;
+            
+            /* 其他應用專用：紫色與灰色系配色 */
+            --purple-light: #f3e5f5; --purple-hover: #e1bee7; --purple-icon: #7b1fa2;
+            --gray-light: #eceff1; --gray-hover: #cfd8dc; --gray-icon: #455a64;
         }
 
         /* --- 2. 核心佈局設定 --- */
@@ -213,6 +214,20 @@
         }
         .nav-btn.guestbook:hover i { color: #f72585; }
 
+        /* 其他應用按鈕（酷炫橘藍綠黃漸層） */
+        .nav-btn.others {
+            background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 30%, #2ec4b6 70%, #cbf3f0 100%);
+            color: #14213d;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-btn.others:hover {
+            background: white;
+            color: #ff9f1c;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
+        }
+
         /* --- Icon 按鈕樣式 --- */
         .icon-btn {
             width: 32px; height: 32px; border-radius: 50%;
@@ -290,6 +305,15 @@
         .dropdown-item.item-pink i { color: var(--pink-icon); }
         .dropdown-item.item-pink:hover { background-color: var(--pink-hover); padding-left: 25px; }
 
+        /* 其他應用選單顏色樣式 */
+        .dropdown-item.item-purple { background-color: var(--purple-light); border-left-color: var(--purple-icon); }
+        .dropdown-item.item-purple i { color: var(--purple-icon); }
+        .dropdown-item.item-purple:hover { background-color: var(--purple-hover); padding-left: 25px; }
+
+        .dropdown-item.item-gray { background-color: var(--gray-light); border-left-color: var(--gray-icon); }
+        .dropdown-item.item-gray i { color: var(--gray-icon); }
+        .dropdown-item.item-gray:hover { background-color: var(--gray-hover); padding-left: 25px; }
+
         /* 分享選單項目顏色 */
         .dropdown-item.item-line { background-color: #f0fff0; border-left-color: #00c300; }
         .dropdown-item.item-line i { color: #00c300; }
@@ -349,7 +373,6 @@
             </button>
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
-                    <!-- ... 其他工具按鈕 ... -->
                     <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-flask"></i> 原料轉釉式
                     </a>
@@ -383,10 +406,28 @@
                     <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-comments"></i> 留言交流板
                     </a>
+
+                    <div class="dropdown">
+                        <a href="#" class="nav-btn others" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                            <i class="fa-solid fa-cubes"></i> 其他應用 <i class="fa-solid fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-inner">
+                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> 相片編輯器
+                                </a>
+                                <a href="#" onclick="alert('新應用開發中，敬請期待！'); return false;" class="dropdown-item item-gray" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i> 開發中 a
+                                </a>
+                                <a href="#" onclick="alert('新應用開發中，敬請期待！'); return false;" class="dropdown-item item-gray" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i> 開發中 b
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="social-group" style="position: relative;">
-                    <!-- 社群 Icon -->
                     <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
@@ -403,27 +444,21 @@
                         <i class="fa-solid fa-fire"></i>
                     </a>
 
-                    <!-- 分享本站按鈕 (加入下拉選單功能) -->
                     <button class="icon-btn share" title="分享本站" onclick="toggleShareMenu(event); playClickSound();" onmouseenter="playHoverSound()">
                         <i class="fa-solid fa-share-nodes"></i>
                     </button>
 
-                    <!-- 分享下拉選單 -->
                     <div id="shareDropdown" class="share-dropdown-content">
                         <div class="dropdown-inner">
-                            <!-- [修改] 1. FB 分享 (第一位) -->
                             <a href="#" onclick="shareToFB(); return false;" class="dropdown-item item-fb" onmouseenter="playHoverSound()">
                                 <i class="fa-brands fa-facebook"></i> 分享到 FB
                             </a>
-                            <!-- [修改] 2. LINE 分享 (第二位) -->
                             <a href="#" onclick="shareToLine(); return false;" class="dropdown-item item-line" onmouseenter="playHoverSound()">
                                 <i class="fa-brands fa-line"></i> 分享到 LINE
                             </a>
-                            <!-- 3. 複製連結 -->
                             <a href="#" onclick="copyLink(); return false;" class="dropdown-item item-copy" onmouseenter="playHoverSound()">
                                 <i class="fa-solid fa-link"></i> 複製連結
                             </a>
-                            <!-- 4. 更多 (原生) -->
                             <a href="#" onclick="shareNative(); return false;" class="dropdown-item item-copy" id="nativeShareBtn" style="display:none;" onmouseenter="playHoverSound()">
                                 <i class="fa-solid fa-share-alt"></i> 更多選項...
                             </a>
@@ -446,7 +481,6 @@
         &copy; 2025 陶藝與釉藥調配 by 黃明文
     </footer>
 
-    <!-- 音效標籤 -->
     <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
     <audio id="clickSound" src="click.wav" preload="auto"></audio>
     <audio id="bgMusic" src="good.mp3" loop preload="auto"></audio>
@@ -490,32 +524,25 @@
         const currentUrl = encodeURIComponent(window.location.href);
         const pageTitle = encodeURIComponent("推薦！陶藝與釉藥調配專業工具網站");
 
-        // 1. 切換顯示分享選單
         function toggleShareMenu(event) {
-            event.stopPropagation(); // 防止冒泡觸發 document click
+            event.stopPropagation();
             const menu = document.getElementById('shareDropdown');
             menu.classList.toggle('show');
-            
-            // 檢查是否支援原生分享，若是則顯示「更多選項」
             if (navigator.share) {
                 document.getElementById('nativeShareBtn').style.display = 'flex';
             }
         }
 
-        // 2. LINE 分享
         function shareToLine() {
-            // LINE 分享連結格式
             window.open(`https://social-plugins.line.me/lineit/share?url=${currentUrl}`, '_blank');
             document.getElementById('shareDropdown').classList.remove('show');
         }
 
-        // 3. Facebook 分享
         function shareToFB() {
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`, '_blank');
             document.getElementById('shareDropdown').classList.remove('show');
         }
 
-        // 4. 複製連結
         function copyLink() {
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
@@ -526,7 +553,6 @@
             document.getElementById('shareDropdown').classList.remove('show');
         }
 
-        // 5. 原生分享 (更多選項)
         async function shareNative() {
             if (navigator.share) {
                 try {
