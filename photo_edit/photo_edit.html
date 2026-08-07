@@ -2,55 +2,118 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陶瓷專業影像工坊 Pro v2.4.1 (多重標靶視覺化定位)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>電腦版專業影像工坊 Pro v4.1.0 (聯合防護網與動態 UI)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #1a1a1a; color: #e5e5e5; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #2d2d2d; }
-        ::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #777; }
+        body { font-family: 'Inter', sans-serif; background-color: #121212; color: #e5e5e5; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 2px; }
+        
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; height: 4px; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: #60a5fa; cursor: pointer; margin-top: -5px; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #404040; border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #3b82f6; cursor: pointer; margin-top: -6px; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #4b5563; border-radius: 2px; }
         
-        .layout-container { display: flex; height: 100vh; overflow: hidden; }
-        .canvas-section { flex: 1; display: flex; justify-content: center; align-items: center; background-color: #111; position: relative; overflow: hidden; }
-        .control-section { width: 340px; background-color: #262626; border-left: 1px solid #404040; display: flex; flex-direction: column; overflow-y: auto; padding: 12px; gap: 10px; font-size: 12px; }
+        .layout-container { display: flex; flex-direction: row; height: 100vh; overflow: hidden; }
+        .canvas-section { flex: 1; display: flex; justify-content: center; align-items: center; background-color: #000; position: relative; overflow: hidden; z-index: 10; }
         
-        .panel { background-color: #333; padding: 10px; border-radius: 8px; border: 1px solid #404040; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .panel-title { font-size: 12px; font-weight: bold; color: #a3a3a3; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-        .btn { padding: 6px 10px; border-radius: 5px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; user-select: none;}
+        .control-section { 
+            width: 380px; 
+            flex-shrink: 0;
+            background-color: #1a1a1a; 
+            border-left: 1px solid #333;
+            overflow-y: auto; 
+            padding: 16px; 
+            padding-bottom: 40px; 
+            font-size: 12px;
+            display: block; 
+        }
+        
+        details.panel { 
+            background-color: #252525; 
+            border-radius: 10px; 
+            border: 1px solid #333; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); 
+            margin-bottom: 12px; 
+            display: block;
+        }
+        details.panel > summary { 
+            padding: 12px; background-color: #2a2a2a; font-size: 13px; font-weight: bold; color: #d4d4d4; 
+            cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none;
+            border-radius: 10px;
+        }
+        details.panel > summary::-webkit-details-marker { display: none; }
+        details.panel[open] > summary { border-bottom: 1px solid #333; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background-color: #303030; }
+        
+        .panel-content { padding: 12px; }
+        
+        .btn { padding: 8px 10px; border-radius: 6px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; user-select: none; }
         .btn:active { transform: scale(0.96); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .btn-primary { background-color: #3b82f6; color: white; }
         .btn-primary:hover { background-color: #2563eb; }
         .btn-success { background-color: #10b981; color: white; }
         .btn-success:hover { background-color: #059669; }
         .btn-danger { background-color: #ef4444; color: white; }
-        .btn-outline { background-color: #404040; color: #e5e5e5; border: 1px solid #4b5563; }
-        .btn-outline:hover { background-color: #525252; }
+        .btn-outline { background-color: #333; color: #e5e5e5; border: 1px solid #4b5563; }
+        .btn-outline:hover { background-color: #444; }
         .btn-active { background-color: #3b82f6; color: white; box-shadow: 0 0 8px rgba(59,130,246,0.5); border-color: #2563eb; }
         
         .filter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        
         .slider-group { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-        .slider-label { width: 65px; color: #d4d4d4; font-size: 11px; }
+        .slider-label { width: 75px; color: #d4d4d4; font-size: 11px; flex-shrink: 0; }
         .slider-ctrl { flex: 1; display: flex; align-items: center; gap: 4px; }
-        .slider-val { text-align: right; color: #9ca3af; font-family: monospace; font-size: 11px; }
-        .arrow-btn { background: #404040; border: none; color: #e5e5e5; cursor: pointer; font-size: 10px; padding: 3px 6px; border-radius: 3px; }
+        .arrow-btn { background: #404040; border: none; color: #e5e5e5; cursor: pointer; font-size: 10px; padding: 3px 6px; border-radius: 3px; flex-shrink: 0; }
         .arrow-btn:hover { background: #525252; color: #fff; }
+        
+        .slider-val-container { display: flex; align-items: center; justify-content: flex-end; gap: 4px; width: 45px; flex-shrink: 0;}
+        .slider-val { text-align: right; color: #9ca3af; font-family: monospace; font-size: 11px; min-width: 20px;}
+        .reset-icon { color: #888; cursor: pointer; font-size: 12px; user-select: none; }
+        .reset-icon:hover { color: #ef4444; }
+        
+        .color-tabs { display: flex; gap: 2px; margin-bottom: 8px; background: #222; padding: 2px; border-radius: 6px; }
+        .tab-btn { flex: 1; text-align: center; padding: 6px 0; border-radius: 4px; cursor: pointer; color: #999; transition: 0.2s; font-size: 11px; }
+        .tab-btn.active { background: #3a3a3a; color: white; font-weight: bold; box-shadow: inset 0 0 5px rgba(0,0,0,0.5); }
+        
+        .bgfx-tab-btn.active {
+            background-color: #9333ea !important;
+            border: 1px solid #d8b4fe;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6) !important;
+        }
+        .bgfx-tab-btn.active span {
+            color: #ffffff !important;
+            font-weight: 900;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        }
+        
+        /* 局部精細遮罩 (A~F區) 專屬高亮狀態 */
+        .local-mask-tab.active {
+            background-color: #0ea5e9 !important; 
+            border: 1px solid #7dd3fc;
+            box-shadow: 0 0 12px rgba(14, 165, 233, 0.7) !important;
+            color: #ffffff !important;
+            font-weight: 900;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        }
 
-        .color-tabs { display: flex; gap: 2px; margin-bottom: 8px; background: #262626; padding: 2px; border-radius: 6px; }
-        .tab-btn { flex: 1; text-align: center; padding: 4px 0; border-radius: 4px; cursor: pointer; color: #a3a3a3; transition: 0.2s; font-size: 11px; }
-        .tab-btn.active { background: #404040; color: white; font-weight: bold; box-shadow: inset 0 0 5px rgba(0,0,0,0.5); }
-        #canvas { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: transform 0.05s linear; transform-origin: center center; }
-        #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 1000; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        #loading-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.7); z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-        .cursor-crosshair { cursor: crosshair !important; }
-        .cursor-heal { cursor: crosshair !important; } 
+        /* 單色精準控制 專屬高亮狀態 (利用 CSS 變數動態變色) */
+        .color-picker-tab { color: var(--c); }
+        .color-picker-tab.active {
+            background-color: var(--c) !important;
+            color: #000000 !important;
+            font-weight: 900;
+            box-shadow: 0 0 12px var(--c) !important;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        
+        #canvas { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 4px 20px rgba(0,0,0,0.8); transition: transform 0.05s linear; transform-origin: center center; }
+        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 1000; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        #loading-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     </style>
 </head>
 <body>
@@ -59,198 +122,249 @@
         <div class="text-lg font-bold" id="loading-msg">高畫質運算中...</div>
     </div>
 
+    <!-- 電腦版橫向左右佈局 -->
     <div class="layout-container">
+        <!-- 畫布區 (左半部) -->
         <div class="canvas-section" id="canvas-wrapper">
-            <div id="img-info-badge" class="absolute top-4 left-4 bg-black/80 text-white px-3 py-1 rounded-md text-[11px] hidden z-10 shadow-lg border border-gray-600 pointer-events-none"></div>
+            <div id="img-info-badge" class="absolute top-4 left-4 bg-black/80 text-white px-3 py-1.5 rounded-md text-[11px] hidden z-10 shadow-lg border border-gray-600 pointer-events-none"></div>
             <canvas id="canvas" class="hidden"></canvas>
-            <div id="placeholder" class="text-gray-500 text-sm flex flex-col items-center">
-                <span class="text-5xl mb-3">📷</span>
-                <span class="text-lg">點擊右側「載入照片」開始編輯</span>
-                <span class="text-xs mt-2 text-gray-600">已啟用雙軌引擎 (支援高畫質無延遲編輯)</span>
+            <div id="placeholder" class="text-gray-500 text-sm flex flex-col items-center p-4 text-center">
+                <span class="text-6xl mb-4 text-gray-600">📷</span>
+                <span class="text-lg font-bold text-gray-400">點擊右側「載入」開始編輯</span>
+                <span class="text-xs mt-2 text-gray-600">升級：聯合防護網 (絕對屏蔽特效溢出)</span>
             </div>
         </div>
 
+        <!-- 操作控制區 (右半部) -->
         <div class="control-section">
             <input type="file" id="file-input" accept="image/*" class="hidden">
             
-            <div class="flex gap-2">
-                <button id="upload-btn" class="btn btn-primary flex-1">📷 載入</button>
-                <button id="set-dir-btn" class="btn btn-outline flex-1 truncate" title="設定資料夾">📂 設輸出夾</button>
-                <button id="download-btn" class="btn btn-success flex-1" disabled>💾 存檔(高畫質)</button>
+            <div class="grid grid-cols-3 gap-2 mb-2">
+                <button id="upload-btn" class="btn btn-primary flex flex-col py-2">📷 載入</button>
+                <button id="set-dir-btn" class="btn btn-outline flex flex-col py-2 truncate" title="設定資料夾">📂 設輸出夾</button>
+                <button id="download-btn" class="btn btn-success flex flex-col py-2" disabled>💾 存檔</button>
             </div>
-            <div class="flex gap-2">
-                <button id="compare-btn" class="btn btn-outline flex-1" disabled title="按住不放檢視原圖">👀 原圖(按住)</button>
-                <button id="undo-btn" class="btn btn-outline flex-1" disabled title="返回上一步">↩ 返回 (0)</button>
-                <button id="reset-all-btn" class="btn btn-danger" title="重設所有狀態">↺ 重設全部</button>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+                <button id="compare-btn" class="btn btn-outline py-2" disabled title="按住不放檢視原圖">👀 原圖</button>
+                <button id="undo-btn" class="btn btn-outline py-2" disabled title="返回上一步">↩ 復原(0)</button>
+                <button id="reset-all-btn" class="btn btn-danger py-2" title="重設所有狀態">↺ 重設全部</button>
             </div>
 
-            <div class="panel">
-                <div class="flex gap-2 w-full mb-2" id="normal-tools-1">
-                    <button id="crop-btn" class="btn btn-outline flex-1" disabled>◩ 裁切</button>
-                    <button id="heal-btn" class="btn btn-outline flex-1" disabled>🩹 污點修復</button>
-                </div>
-                <div class="flex gap-2 w-full" id="normal-tools-2">
-                    <button id="rot-l-btn" class="btn btn-outline flex-1 px-1" disabled>↺ 左轉</button>
-                    <button id="rot-r-btn" class="btn btn-outline flex-1 px-1" disabled>↻ 右轉</button>
-                    <button id="flip-btn" class="btn btn-outline flex-1 px-1" disabled>↔ 鏡像</button>
-                    <button id="zoom-in-btn" class="btn btn-outline flex-1 px-1" disabled>🔍 放大</button>
-                    <button id="zoom-out-btn" class="btn btn-outline flex-1 px-1" disabled>🔍 縮小</button>
-                </div>
-                
-                <div class="flex flex-col gap-2 hidden w-full mt-2 border-t border-[#404040] pt-2" id="crop-tools">
-                    <div class="panel-title text-blue-400 mb-0">裁切模式</div>
-                    <div class="flex gap-1">
-                        <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="NaN">自由</button>
-                        <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="1">1:1</button>
-                        <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="1.333">4:3</button>
-                        <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="1.777">16:9</button>
-                        <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="0.5625">9:16</button>
+            <!-- 面板 1：基本工具 -->
+            <details class="panel" open>
+                <summary>
+                    <div class="flex items-center gap-2">🛠 基本編輯工具</div>
+                    <span class="chevron">▼</span>
+                </summary>
+                <div class="panel-content border-t border-gray-700">
+                    <div class="flex gap-2 w-full mb-2" id="normal-tools-1">
+                        <button id="crop-btn" class="btn btn-outline flex-1" disabled>◩ 裁切</button>
+                        <button id="heal-btn" class="btn btn-outline flex-1" disabled>🩹 污點修復</button>
                     </div>
-                    <div class="flex gap-1 mt-1">
-                        <button id="crop-apply" class="btn btn-success flex-1">✔ 確認裁切</button>
-                        <button id="crop-cancel" class="btn btn-danger flex-1">✖ 取消</button>
+                    <div class="grid grid-cols-5 gap-1 w-full" id="normal-tools-2">
+                        <button id="rot-l-btn" class="btn btn-outline px-0 py-2" disabled>↺ 左轉</button>
+                        <button id="rot-r-btn" class="btn btn-outline px-0 py-2" disabled>↻ 右轉</button>
+                        <button id="flip-btn" class="btn btn-outline px-0 py-2" disabled>↔ 鏡像</button>
+                        <button id="zoom-in-btn" class="btn btn-outline px-0 py-2" disabled>🔍 放大</button>
+                        <button id="zoom-out-btn" class="btn btn-outline px-0 py-2" disabled>🔍 縮小</button>
                     </div>
-                </div>
-
-                <div class="flex flex-col gap-2 hidden w-full mt-2 border-t border-[#404040] pt-2" id="heal-tools">
-                    <div class="panel-title text-pink-400 mb-0">污點修復模式 (點擊照片消除雜點)</div>
-                    <div class="slider-group">
-                        <div class="slider-label">畫筆大小</div>
-                        <div class="slider-ctrl">
-                            <input type="range" id="heal-size" min="5" max="100" value="20" oninput="document.getElementById('heal-size-val').innerText=this.value">
+                    
+                    <div class="flex flex-col gap-2 hidden w-full mt-3 border-t border-[#404040] pt-3" id="crop-tools">
+                        <div class="text-blue-400 font-bold text-xs mb-1">裁切模式</div>
+                        <div class="flex gap-1">
+                            <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="NaN">自由</button>
+                            <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="1">1:1</button>
+                            <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="1.333">4:3</button>
+                            <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="1.777">16:9</button>
+                            <button class="btn btn-outline flex-1 crop-ratio text-[10px]" data-ratio="0.5625">9:16</button>
                         </div>
-                        <div class="slider-val w-[25px]" id="heal-size-val">20</div>
+                        <div class="flex gap-2 mt-2">
+                            <button id="crop-apply" class="btn btn-success flex-1">✔ 確認裁切</button>
+                            <button id="crop-cancel" class="btn btn-danger flex-1">✖ 取消</button>
+                        </div>
                     </div>
-                    <button id="heal-cancel" class="btn btn-outline w-full">✔ 退出修復模式</button>
-                </div>
-            </div>
 
-            <div class="panel">
-                <div class="panel-title">風格濾鏡</div>
-                <div class="filter-grid">
-                    <button class="btn btn-outline filter-btn btn-active" data-filter="normal">原圖</button>
-                    <button class="btn btn-outline filter-btn" data-filter="glaze">釉光增強</button>
-                    <button class="btn btn-outline filter-btn" data-filter="vibrant">色彩飽和</button>
-                    <button class="btn btn-outline filter-btn" data-filter="sharpen">立體銳化</button>
-                    <button class="btn btn-outline filter-btn" data-filter="vintage">復古窯燒</button>
-                    <button class="btn btn-outline filter-btn" data-filter="glaze-spot">釉光聚光</button>
-                    <button class="btn btn-outline filter-btn" data-filter="vib-spot">鮮彩聚光</button>
+                    <div class="flex flex-col gap-2 hidden w-full mt-3 border-t border-[#404040] pt-3" id="heal-tools">
+                        <div class="text-pink-400 font-bold text-xs mb-1">污點修復模式 (點擊左側照片消除雜點)</div>
+                        <div class="slider-group">
+                            <div class="slider-label">畫筆大小</div>
+                            <div class="slider-ctrl">
+                                <input type="range" id="heal-size" min="5" max="100" value="20" oninput="document.getElementById('heal-size-val').innerText=this.value">
+                            </div>
+                            <div class="slider-val-container"><div class="slider-val" id="heal-size-val">20</div></div>
+                        </div>
+                        <button id="heal-cancel" class="btn btn-outline w-full mt-2">✔ 退出修復模式</button>
+                    </div>
                 </div>
-            </div>
+            </details>
 
-            <div class="panel">
-                <div class="panel-title">
-                    <div class="flex items-center gap-2">
-                        <span>全域色彩微調</span>
-                        <button id="wb-btn" class="btn btn-outline px-1 py-0 text-[10px] bg-[#4a4a4a]">🖌 白平衡</button>
+            <!-- 面板 2：風格濾鏡 -->
+            <details class="panel" open>
+                <summary>
+                    <div class="flex items-center gap-2">✨ 風格濾鏡</div>
+                    <span class="chevron">▼</span>
+                </summary>
+                <div class="panel-content border-t border-gray-700">
+                    <div class="filter-grid">
+                        <button class="btn btn-outline filter-btn btn-active" data-filter="normal">原圖</button>
+                        <button class="btn btn-outline filter-btn" data-filter="glaze">釉光增強</button>
+                        <button class="btn btn-outline filter-btn" data-filter="vibrant">色彩飽和</button>
+                        <button class="btn btn-outline filter-btn" data-filter="sharpen">立體銳化</button>
+                        <button class="btn btn-outline filter-btn" data-filter="vintage">復古窯燒</button>
+                        <button class="btn btn-outline filter-btn" data-filter="glaze-spot">釉光聚光</button>
+                        <button class="btn btn-outline filter-btn" data-filter="vib-spot">鮮彩聚光</button>
                     </div>
-                    <button id="reset-global-color" class="text-[#ef4444] text-[11px] hover:text-red-400">↺ 重設區塊</button>
                 </div>
-                <div id="global-sliders"></div>
-            </div>
+            </details>
 
-            <div class="panel border-l-4 border-sky-500">
-                <div class="panel-title">
-                    <span class="text-sky-300 tracking-wide">局部精細遮罩 (6通道)</span>
-                    <button id="reset-local-mask" class="text-[#ef4444] text-[11px] hover:text-red-400">↺ 重設區塊</button>
-                </div>
-                <div class="color-tabs mb-2">
-                    <div class="tab-btn local-mask-tab active" data-idx="0">A區</div>
-                    <div class="tab-btn local-mask-tab" data-idx="1">B區</div>
-                    <div class="tab-btn local-mask-tab" data-idx="2">C區</div>
-                    <div class="tab-btn local-mask-tab" data-idx="3">D區</div>
-                    <div class="tab-btn local-mask-tab" data-idx="4">E區</div>
-                    <div class="tab-btn local-mask-tab" data-idx="5">F區</div>
-                </div>
-                <div class="flex flex-col gap-1 mb-2 border border-[#404040] rounded p-1">
-                    <div class="flex gap-1">
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="radial" title="圓形區域">⭕</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="rect" title="矩形區域">🔲</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-t" title="由上往下">⬇</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-b" title="由下往上">⬆</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-l" title="由左往右">➡</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-r" title="由右往左">⬅</button>
+            <!-- 面板 3：全域色彩 -->
+            <details class="panel" open>
+                <summary>
+                    <div class="flex items-center gap-2">🎚 全域色彩微調</div>
+                    <div class="flex items-center gap-3">
+                        <button id="wb-btn" class="btn btn-outline px-2 py-1 text-[10px] bg-[#4a4a4a]" onclick="event.stopPropagation()">🖌 白平衡</button>
+                        <span class="chevron">▼</span>
                     </div>
-                    <div class="flex gap-1">
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-tl" title="左上到右下">↘</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-tr" title="右上到左下">↙</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-bl" title="左下到右上">↗</button>
-                        <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-br" title="右下到左上">↖</button>
+                </summary>
+                <div class="panel-content border-t border-gray-700">
+                    <div class="flex justify-end mb-2">
+                        <button id="reset-global-color" class="text-[#ef4444] text-[11px] hover:text-red-400">↺ 重設此區塊</button>
                     </div>
-                    <div class="flex gap-1 mt-1 items-center">
-                        <label class="flex-[1] flex items-center justify-center gap-1 text-[11px] cursor-pointer text-emerald-300 font-bold bg-[#333] border border-[#555] px-1 py-1 rounded">
-                            <input type="checkbox" id="lm-active-checkbox"> 啟用此區
-                        </label>
-                        <button id="toggle-local-track" class="btn btn-outline flex-[1.2] px-1 py-1 text-[10px] bg-blue-900/30 font-bold" title="拖曳紅色標靶定位">📍 定位顯示(關)</button>
-                    </div>
+                    <div id="global-sliders"></div>
                 </div>
-                <div id="local-mask-sliders"></div>
-            </div>
+            </details>
 
-            <div class="panel border-l-4 border-purple-500 bg-[#2d2535]">
-                <div class="panel-title">
-                    <span class="text-purple-300 font-bold tracking-wide">景深特效 (反向背景保護圈)</span>
+            <!-- 面板 4：局部遮罩 -->
+            <details class="panel" style="border-left: 3px solid #0ea5e9;" open>
+                <summary>
+                    <div class="flex items-center gap-2 text-sky-400">🎯 局部精細遮罩 (6通道)</div>
+                    <div class="flex items-center gap-3">
+                        <button id="reset-local-mask" class="text-[#ef4444] text-[11px] hover:text-red-400" onclick="event.stopPropagation()">↺ 重設</button>
+                        <span class="chevron text-gray-500">▼</span>
+                    </div>
+                </summary>
+                <div class="panel-content border-t border-gray-700">
+                    <div class="color-tabs mb-2">
+                        <div class="tab-btn local-mask-tab active" data-idx="0">A區</div>
+                        <div class="tab-btn local-mask-tab" data-idx="1">B區</div>
+                        <div class="tab-btn local-mask-tab" data-idx="2">C區</div>
+                        <div class="tab-btn local-mask-tab" data-idx="3">D區</div>
+                        <div class="tab-btn local-mask-tab" data-idx="4">E區</div>
+                        <div class="tab-btn local-mask-tab" data-idx="5">F區</div>
+                    </div>
+                    <div class="flex flex-col gap-1 mb-3 border border-[#404040] rounded p-1 bg-[#222]">
+                        <div class="flex gap-1 w-full">
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="radial" title="圓形/橢圓">⭕</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="rect" title="矩形/梯形">🔲</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="triangle" title="三角形/透視多邊形">🔺</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-t" title="由上往下">⬇</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-b" title="由下往上">⬆</button>
+                        </div>
+                        <div class="flex gap-1 w-full">
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-l" title="由左往右">➡</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-r" title="由右往左">⬅</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-tl" title="左上到右下">↘</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-tr" title="右上到左下">↙</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-bl" title="左下到右上">↗</button>
+                            <button class="btn btn-outline flex-1 local-type-btn px-0 py-1 text-[10px]" data-type="linear-br" title="右下到左上">↖</button>
+                        </div>
+                        <div class="flex gap-1 mt-1 items-center">
+                            <label class="flex-[1] flex items-center justify-center gap-1 text-[11px] cursor-pointer text-emerald-400 font-bold bg-[#333] border border-[#555] py-1.5 rounded">
+                                <input type="checkbox" id="lm-active-checkbox" class="w-4 h-4 accent-emerald-500"> 啟用此區
+                            </label>
+                            <button id="toggle-local-track" class="btn btn-outline flex-[1.5] py-1.5 text-[11px] bg-blue-900/30 font-bold text-yellow-400 border-yellow-600">📍 定位顯示(開)</button>
+                        </div>
+                    </div>
+                    <div id="local-mask-sliders"></div>
                 </div>
-                <div class="grid grid-cols-2 gap-1 mb-2">
-                    <div class="tab-btn bgfx-tab-btn active flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="radialA">
-                        <span class="text-[11px] pointer-events-none">⭕ 圓形 A</span>
-                        <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer"><input type="checkbox" id="bgfx-radialA-active" checked> 啟用</label>
-                    </div>
-                    <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="radialB">
-                        <span class="text-[11px] pointer-events-none">⭕ 圓形 B</span>
-                        <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer"><input type="checkbox" id="bgfx-radialB-active"> 啟用</label>
-                    </div>
-                    <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="rectA">
-                        <span class="text-[11px] pointer-events-none">🔲 矩形 A</span>
-                        <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer"><input type="checkbox" id="bgfx-rectA-active"> 啟用</label>
-                    </div>
-                    <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="rectB">
-                        <span class="text-[11px] pointer-events-none">🔲 矩形 B</span>
-                        <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer"><input type="checkbox" id="bgfx-rectB-active"> 啟用</label>
-                    </div>
-                </div>
-                <button id="toggle-bgfx-track" class="btn btn-outline w-full mb-2 text-[10px] px-2 py-1 font-bold">📍 定位顯示(關)</button>
-                <div class="text-[10px] text-gray-400 mb-2 leading-tight">提示：點擊上方分頁即可切換控制對象。開啟「定位顯示」後，畫面上會顯示所有已啟用對象的位置標靶！</div>
-                
-                <div class="panel-title text-purple-400 text-[11px] mb-1">👇 以下設定套用於【當前選取形狀】</div>
-                <div id="bgfx-shape-sliders"></div>
-                
-                <div class="panel-title text-purple-400 text-[11px] mt-2 mb-1 border-t border-purple-800 pt-2">👇 以下設定套用於【整個背景】(所有形狀外圍)</div>
-                <div id="bgfx-global-sliders"></div>
-            </div>
+            </details>
 
-            <div class="panel">
-                <div class="panel-title">
-                    <span>單色精準控制：<span id="current-tab-name" class="text-red-400 text-[12px] font-bold">紅</span></span>
-                    <button id="reset-specific-color" class="text-[#ef4444] text-[11px] hover:text-red-400">↺ 重設區塊</button>
-                </div>
-                <div class="color-tabs">
-                    <div class="tab-btn active" data-color="red" style="color:#f87171">紅</div>
-                    <div class="tab-btn" data-color="orange" style="color:#fb923c">橙</div>
-                    <div class="tab-btn" data-color="yellow" style="color:#facc15">黃</div>
-                    <div class="tab-btn" data-color="green" style="color:#4ade80">綠</div>
-                    <div class="tab-btn" data-color="cyan" style="color:#2dd4bf">青</div>
-                    <div class="tab-btn" data-color="blue" style="color:#60a5fa">藍</div>
-                    <div class="tab-btn" data-color="purple" style="color:#c084fc">紫</div>
-                    <div class="tab-btn flex items-center justify-center text-[10px]" data-color="custom">吸管</div>
-                </div>
-                <div id="custom-color-picker" class="hidden mb-2 bg-[#2a2a2a] p-2 rounded-md flex flex-col gap-2 border border-gray-600">
-                    <button id="eyedropper-btn" class="btn btn-outline w-full text-[11px]">🖌 點擊此處，再去照片上吸取顏色</button>
-                    <div class="flex items-center justify-center gap-2 text-[11px] text-gray-300">
-                        目標色: <div id="custom-color-preview" class="w-4 h-4 rounded shadow-sm bg-gray-500"></div>
-                        色相 <span id="custom-hue-val" class="text-white font-mono">--</span>
+            <!-- 面板 5：景深特效 (恢復聯合防護網) -->
+            <details class="panel" style="border-left: 3px solid #a855f7;" open>
+                <summary>
+                    <div class="flex items-center gap-2 text-purple-400">🧿 景深特效 (反向保護圈)</div>
+                    <span class="chevron text-gray-500">▼</span>
+                </summary>
+                <div class="panel-content border-t border-gray-700 bg-[#2d2535]">
+                    <div class="grid grid-cols-2 gap-1 mb-2">
+                        <div class="tab-btn bgfx-tab-btn active flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="radialA">
+                            <span class="text-[11px] pointer-events-none text-gray-200">⭕ 圓/橢圓 A</span>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-radialA-active" checked> 啟用</label>
+                        </div>
+                        <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="radialB">
+                            <span class="text-[11px] pointer-events-none text-gray-200">⭕ 圓/橢圓 B</span>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-radialB-active"> 啟用</label>
+                        </div>
+                        <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="rectA">
+                            <span class="text-[11px] pointer-events-none text-gray-200">🔲 矩形/梯形 A</span>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-rectA-active"> 啟用</label>
+                        </div>
+                        <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="rectB">
+                            <span class="text-[11px] pointer-events-none text-gray-200">🔲 矩形/梯形 B</span>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-rectB-active"> 啟用</label>
+                        </div>
+                        <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="triA">
+                            <span class="text-[11px] pointer-events-none text-gray-200">🔺 三角形 A</span>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-triA-active"> 啟用</label>
+                        </div>
+                        <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="triB">
+                            <span class="text-[11px] pointer-events-none text-gray-200">🔺 三角形 B</span>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-triB-active"> 啟用</label>
+                        </div>
                     </div>
-                </div>
-                <div id="specific-sliders"></div>
-            </div>
+                    <button id="toggle-bgfx-track" class="btn btn-outline w-full mb-3 text-[12px] py-2 font-bold bg-[#3a2e45] text-yellow-400 border-yellow-600">📍 定位顯示(關)</button>
+                    
+                    <div class="text-[10px] text-emerald-400 mb-2 leading-tight">⭐ 聯合防護網：所有打勾啟用的形狀，其內部將會受到「絕對保護」。下方的【整個背景】特效絕對不會滲透進去！</div>
 
-            <div class="panel">
-                <div class="panel-title">
-                    <span class="text-emerald-400">自訂風格配方 (Presets)</span>
-                    <button id="save-preset-btn" class="btn btn-success text-[10px] px-2 py-1">💾 儲存配方</button>
+                    <div class="text-purple-300 font-bold text-[11px] mb-2 border-b border-purple-800 pb-1">👇 設定【當前選取形狀】大小與透視</div>
+                    <div id="bgfx-shape-sliders" class="mb-4"></div>
+                    
+                    <div class="text-purple-300 font-bold text-[11px] mb-2 border-b border-purple-800 pb-1">👇 設定【整個背景】(所有形狀外圍)</div>
+                    <div id="bgfx-global-sliders"></div>
                 </div>
-                <div id="preset-list" class="flex flex-wrap gap-2 mt-2"></div>
-            </div>
+            </details>
+
+            <!-- 面板 6：單色控制 -->
+            <details class="panel" open>
+                <summary>
+                    <div class="flex items-center gap-2">🎨 單色精準控制：<span id="current-tab-name" class="text-red-400">紅</span></div>
+                    <div class="flex items-center gap-3">
+                        <button id="reset-specific-color" class="text-[#ef4444] text-[11px] hover:text-red-400" onclick="event.stopPropagation()">↺ 重設</button>
+                        <span class="chevron text-gray-500">▼</span>
+                    </div>
+                </summary>
+                <div class="panel-content border-t border-gray-700">
+                    <div class="color-tabs mb-3">
+                        <div class="tab-btn color-picker-tab active" data-color="red" style="--c:#f87171">紅</div>
+                        <div class="tab-btn color-picker-tab" data-color="orange" style="--c:#fb923c">橙</div>
+                        <div class="tab-btn color-picker-tab" data-color="yellow" style="--c:#facc15">黃</div>
+                        <div class="tab-btn color-picker-tab" data-color="green" style="--c:#4ade80">綠</div>
+                        <div class="tab-btn color-picker-tab" data-color="cyan" style="--c:#2dd4bf">青</div>
+                        <div class="tab-btn color-picker-tab" data-color="blue" style="--c:#60a5fa">藍</div>
+                        <div class="tab-btn color-picker-tab" data-color="purple" style="--c:#c084fc">紫</div>
+                        <div class="tab-btn color-picker-tab flex items-center justify-center text-[10px]" data-color="custom" style="--c:#e5e5e5">吸管</div>
+                    </div>
+                    <div id="custom-color-picker" class="hidden mb-4 bg-[#222] p-3 rounded-md flex flex-col gap-2 border border-gray-600">
+                        <button id="eyedropper-btn" class="btn btn-outline w-full text-[12px] py-2 bg-blue-900/30 font-bold border-blue-500/50">🖌 點此開啟，再去左側照片吸取顏色</button>
+                        <div class="flex items-center justify-center gap-3 text-[12px] text-gray-300 mt-1">
+                            當前目標色: <div id="custom-color-preview" class="w-6 h-6 rounded shadow-sm bg-gray-500 border border-gray-400"></div>
+                            色相 <span id="custom-hue-val" class="text-white font-mono bg-black px-2 py-1 rounded">--</span>
+                        </div>
+                    </div>
+                    <div id="specific-sliders"></div>
+                </div>
+            </details>
+
+            <!-- 面板 7：配方存檔 -->
+            <details class="panel" open>
+                <summary>
+                    <div class="flex items-center gap-2 text-emerald-400">⭐ 自訂風格配方 (Presets)</div>
+                    <button id="save-preset-btn" class="btn btn-success text-[10px] px-2 py-1" onclick="event.stopPropagation()">💾 儲存</button>
+                </summary>
+                <div class="panel-content border-t border-gray-700">
+                    <div id="preset-list" class="flex flex-wrap gap-2"></div>
+                </div>
+            </details>
         </div>
     </div>
     
@@ -277,21 +391,26 @@
 
         let isLocatingLocal = false; let isLocatingBgFx = false; let isDraggingLocation = false;
 
+        // 全域狀態初始化 (恢復全域背景特效)
         let state = {
             filter: 'normal', wb: { r: 1, g: 1, b: 1, active: false },
             global: { hue: 0, sat: 0, light: 0, temp: 0, cont: 0 },
             localMasks: [
-                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 50, feather: 50, x: 0.5, y: 0.5 },
-                { active: true, type: 'linear-t', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 30, feather: 50, x: 0.5, y: 0.5 },
-                { active: true, type: 'linear-b', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 30, feather: 50, x: 0.5, y: 0.5 },
-                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 50, feather: 50, x: 0.5, y: 0.5 },
-                { active: true, type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5 },
-                { active: true, type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5 }
+                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 50, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'linear-t', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 30, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'linear-b', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 30, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 50, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'triangle', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 }
             ],
             activeLmIdx: 0,
             bgFx: {
-                radialA: { active: true, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 }, radialB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 },
-                rectA: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 }, rectB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 },
+                radialA: { active: true, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, angle: 0 }, 
+                radialB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, angle: 0 },
+                rectA: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 }, 
+                rectB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 },
+                triA: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 }, 
+                triB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 },
                 blur: 0, zoom: 0, lightness: 0, saturation: 0, contrast: 0, activeTab: 'radialA'
             },
             colors: {
@@ -301,28 +420,50 @@
             activeTab: 'red', pickingColor: false, pickingWb: false
         };
 
+        // 狀態遷移與修正 (自動將舊版分散的背景特效抽回為全域)
         function migrateState(s) {
-            if(!s.localMasks[4]) s.localMasks.push({ type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5 });
-            if(!s.localMasks[5]) s.localMasks.push({ type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5 });
+            if(!s.localMasks[4]) s.localMasks.push({ type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 });
+            if(!s.localMasks[5]) s.localMasks.push({ type: 'triangle', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 });
             
             s.localMasks.forEach(m => { 
                 m.light = m.light || 0; m.sat = m.sat || 0; 
                 if (m.active === undefined) m.active = true; 
                 if (m.w === undefined) m.w = m.size || 50;
                 if (m.h === undefined) m.h = m.size || 50;
+                if (m.perspY === undefined) m.perspY = 0;
+                if (m.perspX === undefined) m.perspX = 0;
+                if (m.angle === undefined) m.angle = 0;
             });
 
-            if (s.bgFx && s.bgFx.type) {
-                const o = s.bgFx.type; const gf = s.bgFx.feather !== undefined ? s.bgFx.feather : 30;
-                s.bgFx = { radialA: { active: o === 'radial', x: s.bgFx.x||0.5, y: s.bgFx.y||0.5, w: s.bgFx.w||35, h: s.bgFx.h||35, feather: gf }, radialB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: gf }, rectA: { active: o === 'rect', x: s.bgFx.x||0.5, y: s.bgFx.y||0.5, w: s.bgFx.w||35, h: s.bgFx.h||35, feather: gf }, rectB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: gf }, blur: s.bgFx.blur||0, zoom: s.bgFx.zoom||0, lightness: s.bgFx.lightness||0, saturation: s.bgFx.saturation||0, contrast: s.bgFx.contrast||0, activeTab: o === 'radial' ? 'radialA' : 'rectA' };
-            } else if (s.bgFx && s.bgFx.radial && !s.bgFx.radialA) {
-                const gf = s.bgFx.feather !== undefined ? s.bgFx.feather : 30;
-                s.bgFx = { radialA: { active: s.bgFx.radial.active, x: s.bgFx.radial.x, y: s.bgFx.radial.y, w: s.bgFx.radial.w, h: s.bgFx.radial.h, feather: gf }, radialB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: gf }, rectA: { active: s.bgFx.rect.active, x: s.bgFx.rect.x, y: s.bgFx.rect.y, w: s.bgFx.rect.w, h: s.bgFx.rect.h, feather: gf }, rectB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: gf }, blur: s.bgFx.blur, zoom: s.bgFx.zoom, lightness: s.bgFx.lightness, saturation: s.bgFx.saturation||0, contrast: s.bgFx.contrast||0, activeTab: s.bgFx.activeTab === 'radial' ? 'radialA' : (s.bgFx.activeTab === 'rect' ? 'rectA' : s.bgFx.activeTab) };
-            } else if (s.bgFx && s.bgFx.radialA && s.bgFx.radialA.feather === undefined) {
-                const gf = s.bgFx.feather !== undefined ? s.bgFx.feather : 30;
-                s.bgFx.radialA.feather = gf; s.bgFx.radialB.feather = gf; s.bgFx.rectA.feather = gf; s.bgFx.rectB.feather = gf;
+            if (s.bgFx) {
+                // 將 v4.0 分散在各形狀的背景特效，統整回全域 (只抓第一個啟用的形狀參數當代表)
+                let foundGlobal = false;
+                ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
+                    if(!s.bgFx[k]) s.bgFx[k] = { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 };
+                    
+                    if (s.bgFx[k].active && !foundGlobal && s.bgFx[k].lightness !== undefined) {
+                        s.bgFx.lightness = s.bgFx[k].lightness;
+                        s.bgFx.saturation = s.bgFx[k].saturation;
+                        s.bgFx.contrast = s.bgFx[k].contrast;
+                        s.bgFx.blur = s.bgFx[k].blur;
+                        s.bgFx.zoom = s.bgFx[k].zoom;
+                        foundGlobal = true;
+                    }
+                    
+                    // 刪除錯誤綁定在形狀上的全域特效
+                    delete s.bgFx[k].lightness; delete s.bgFx[k].saturation; delete s.bgFx[k].contrast; delete s.bgFx[k].blur; delete s.bgFx[k].zoom;
+                    
+                    if(s.bgFx[k].angle === undefined) s.bgFx[k].angle = 0;
+                    if(s.bgFx[k].perspY === undefined) s.bgFx[k].perspY = 0;
+                    if(s.bgFx[k].perspX === undefined) s.bgFx[k].perspX = 0;
+                });
+                
+                s.bgFx.lightness = s.bgFx.lightness || 0;
+                s.bgFx.saturation = s.bgFx.saturation || 0;
+                s.bgFx.contrast = s.bgFx.contrast || 0;
+                s.bgFx.blur = s.bgFx.blur || 0;
+                s.bgFx.zoom = s.bgFx.zoom || 0;
             }
-            if(s.bgFx) s.bgFx.contrast = s.bgFx.contrast || 0;
             return s;
         }
 
@@ -337,7 +478,7 @@
 
         function updateUndoUI() {
             const btn = document.getElementById('undo-btn'); const steps = actionHistory.length - 1;
-            btn.disabled = steps <= 0; btn.innerText = steps > 0 ? `↩ 返回 (${steps})` : `↩ 返回 (0)`;
+            btn.disabled = steps <= 0; btn.innerText = steps > 0 ? `↩ 復原(${steps})` : `↩ 復原(0)`;
             if(steps > 0) btn.classList.add('text-yellow-400', 'border-yellow-400'); else btn.classList.remove('text-yellow-400', 'border-yellow-400');
         }
 
@@ -366,7 +507,18 @@
 
         function createSlider(id, label, min, max, val, isPurple=false) {
             const colorClass = isPurple ? 'text-purple-300' : 'text-[#d4d4d4]';
-            return `<div class="slider-group"><div class="slider-label ${colorClass}" title="${label}">${label}</div><div class="slider-ctrl"><button class="arrow-btn" onclick="adjSlider('${id}', -1)">◀</button><input type="range" id="${id}" min="${min}" max="${max}" value="${val}"><button class="arrow-btn" onclick="adjSlider('${id}', 1)">▶</button></div><div class="flex items-center gap-1 w-[45px] justify-end"><div class="slider-val" style="width:auto;min-width:20px" id="${id}-val">${val}</div><button class="text-[#888] hover:text-[#ef4444] text-[11px] leading-none" onclick="resetSingleSlider('${id}')" title="歸零此設定">↺</button></div></div>`;
+            return `<div class="slider-group">
+                        <div class="slider-label ${colorClass}" title="${label}">${label}</div>
+                        <div class="slider-ctrl">
+                            <button class="arrow-btn" onclick="adjSlider('${id}', -1)">◀</button>
+                            <input type="range" id="${id}" min="${min}" max="${max}" value="${val}">
+                            <button class="arrow-btn" onclick="adjSlider('${id}', 1)">▶</button>
+                        </div>
+                        <div class="slider-val-container">
+                            <div class="slider-val" id="${id}-val">${val}</div>
+                            <div class="reset-icon" onclick="resetSingleSlider('${id}')" title="歸零此設定">↺</div>
+                        </div>
+                    </div>`;
         }
         
         function adjSlider(id, dir) { const el = document.getElementById(id); if (el) { el.value = parseInt(el.value) + dir; el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change')); } }
@@ -376,6 +528,7 @@
             if (id === 'bg-w' || id === 'bg-h') defaultVal = 35;
             else if (id === 'bg-feath') defaultVal = 30;
             else if (id === 'lm-size' || id === 'lm-w' || id === 'lm-h' || id === 'lm-feath') defaultVal = 50;
+            else if (id === 'bg-angle' || id === 'lm-angle' || id === 'bg-persp-y' || id === 'bg-persp-x' || id === 'lm-persp-y' || id === 'lm-persp-x') defaultVal = 0;
             
             const el = document.getElementById(id);
             if (el) {
@@ -386,16 +539,42 @@
             }
         }
 
+        // 動態生成選中景深形狀的專屬滑桿 (僅針對形狀，背景全域獨立)
+        function updateBgFxSliders() {
+            const act = state.bgFx[state.bgFx.activeTab];
+            let sliders = createSlider('bg-w', '保護寬度 ↔', 0, 100, act.w, true) + 
+                          createSlider('bg-h', '保護高度 ↕', 0, 100, act.h, true);
+            
+            if (state.bgFx.activeTab.startsWith('rect') || state.bgFx.activeTab.startsWith('tri')) {
+                sliders += createSlider('bg-persp-y', '垂直透視', -100, 100, act.perspY || 0, true) +
+                           createSlider('bg-persp-x', '水平透視', -100, 100, act.perspX || 0, true);
+            }
+            if (state.bgFx.activeTab.startsWith('rect') || state.bgFx.activeTab.startsWith('radial') || state.bgFx.activeTab.startsWith('tri')) {
+                sliders += createSlider('bg-angle', '旋轉角度', -180, 180, act.angle || 0, true);
+            }
+            
+            sliders += createSlider('bg-feath', '邊緣羽化', 0, 100, act.feather, true);
+            document.getElementById('bgfx-shape-sliders').innerHTML = sliders;
+
+            // 全域背景特效滑桿
+            const globalSliders = createSlider('bg-blur', '背景模糊', 0, 50, state.bgFx.blur || 0, true) + 
+                                  createSlider('bg-zoom', '放射動感', 0, 100, state.bgFx.zoom || 0, true) + 
+                                  createSlider('bg-cont', '背景對比', -100, 100, state.bgFx.contrast || 0, true) + 
+                                  createSlider('bg-light', '背景明暗', -100, 100, state.bgFx.lightness || 0, true) + 
+                                  createSlider('bg-sat', '背景飽和', -100, 100, state.bgFx.saturation || 0, true);
+            document.getElementById('bgfx-global-sliders').innerHTML = globalSliders;
+            
+            bindSliders();
+        }
+
         function syncUIWithState() {
             const setVal = (id, val) => { const el = document.getElementById(id); if(el) { el.value = val; document.getElementById(`${id}-val`).innerText = val; }};
             setVal('g-hue', state.global.hue); setVal('g-sat', state.global.sat); setVal('g-light', state.global.light); setVal('g-temp', state.global.temp); setVal('g-cont', state.global.cont);
             
-            const activeBg = state.bgFx[state.bgFx.activeTab];
-            setVal('bg-w', activeBg.w); setVal('bg-h', activeBg.h); setVal('bg-feath', activeBg.feather); 
-            setVal('bg-blur', state.bgFx.blur); setVal('bg-zoom', state.bgFx.zoom); setVal('bg-light', state.bgFx.lightness); setVal('bg-sat', state.bgFx.saturation); setVal('bg-cont', state.bgFx.contrast);
+            updateBgFxSliders(); 
             
             document.querySelectorAll('.bgfx-tab-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.type === state.bgFx.activeTab));
-            ['radialA', 'radialB', 'rectA', 'rectB'].forEach(id => {
+            ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(id => {
                 const cb = document.getElementById(`bgfx-${id}-active`);
                 if(cb) cb.checked = state.bgFx[id].active;
             });
@@ -410,10 +589,11 @@
 
             document.querySelectorAll('.tab-btn[data-color]').forEach(btn => {
                 btn.onclick = () => {
-                    document.querySelectorAll('.tab-btn[data-color]').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-btn[data-color]').forEach(b => b.classList.remove('active', 'bg-[#333]'));
                     btn.classList.add('active'); state.activeTab = btn.dataset.color;
+                    if(state.activeTab === 'custom') btn.classList.add('bg-[#333]');
                     document.getElementById('current-tab-name').innerText = btn.innerText;
-                    document.getElementById('current-tab-name').style.color = btn.style.color || '#e5e5e5';
+                    document.getElementById('current-tab-name').style.color = btn.style.getPropertyValue('--c').trim() || '#e5e5e5';
                     updateSpecificSliders();
                 };
             });
@@ -438,29 +618,23 @@
                 syncUIWithState(); renderCanvas(); saveHistory(); showToast('該單色已重設');
             };
             document.getElementById('reset-local-mask').onclick = () => {
-                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=50; z.h=50; z.size=50; z.feather=50; z.tracking=false; });
+                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=50; z.h=50; z.size=50; z.feather=50; z.perspY=0; z.perspX=0; z.angle=0; z.tracking=false; });
                 updateLocalMaskUI(); renderCanvas(); saveHistory(); showToast('局部遮罩已重設');
             };
             document.getElementById('reset-all-btn').onclick = () => {
                 state.filter = 'normal'; state.global = { hue: 0, sat: 0, light: 0, temp: 0, cont: 0 }; state.wb = { r: 1, g: 1, b: 1, active: false };
                 Object.keys(state.colors).forEach(k => { state.colors[k] = { h:0, s:0, l:0 }; }); state.colors.custom.active = false;
-                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=50; z.h=50; z.size=50; z.feather=50; z.tracking=false; });
-                state.bgFx = {
-                    radialA: { active: true, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 }, radialB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 },
-                    rectA: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 }, rectB: { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30 },
-                    blur: 0, zoom: 0, lightness: 0, saturation: 0, contrast: 0, activeTab: 'radialA'
-                };
+                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=50; z.h=50; z.size=50; z.feather=50; z.perspY=0; z.perspX=0; z.angle=0; z.tracking=false; });
+                
+                ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
+                    state.bgFx[k] = { active: k==='radialA', x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 };
+                });
+                state.bgFx.blur = 0; state.bgFx.zoom = 0; state.bgFx.lightness = 0; state.bgFx.saturation = 0; state.bgFx.contrast = 0;
+                state.bgFx.activeTab = 'radialA';
+                
                 currentScale = 1; panX = 0; panY = 0; updateTransform(); syncUIWithState(); renderCanvas(); saveHistory(); showToast('已全部重設');
             };
-        }
 
-        function initUI() {
-            document.getElementById('global-sliders').innerHTML = createSlider('g-hue', '整體色相', -180, 180, state.global.hue) + createSlider('g-sat', '整體飽和', -100, 100, state.global.sat) + createSlider('g-light', '整體明亮', -100, 100, state.global.light) + createSlider('g-temp', '整體色溫', -100, 100, state.global.temp) + createSlider('g-cont', '整體對比', -100, 100, state.global.cont);
-            document.getElementById('bgfx-shape-sliders').innerHTML = createSlider('bg-w', '保護寬度 ↔', 0, 100, state.bgFx[state.bgFx.activeTab].w, true) + createSlider('bg-h', '保護高度 ↕', 0, 100, state.bgFx[state.bgFx.activeTab].h, true) + createSlider('bg-feath', '邊緣羽化', 0, 100, state.bgFx[state.bgFx.activeTab].feather, true);
-            document.getElementById('bgfx-global-sliders').innerHTML = createSlider('bg-blur', '背景模糊', 0, 50, state.bgFx.blur, true) + createSlider('bg-zoom', '放射動感', 0, 100, state.bgFx.zoom, true) + createSlider('bg-cont', '背景對比', -100, 100, state.bgFx.contrast, true) + createSlider('bg-light', '背景明暗', -100, 100, state.bgFx.lightness, true) + createSlider('bg-sat', '背景飽和', -100, 100, state.bgFx.saturation, true);
-
-            updateSpecificSliders(); updateLocalMaskUI(); bindSliders(); loadPresets(); attachEvents();
-            
             document.querySelectorAll('.bgfx-tab-btn').forEach(btn => { 
                 btn.addEventListener('click', (e) => { 
                     if(state.bgFx.activeTab !== btn.dataset.type) {
@@ -469,18 +643,32 @@
                     }
                 }); 
             });
-            ['radialA', 'radialB', 'rectA', 'rectB'].forEach(id => { 
-                document.getElementById(`bgfx-${id}-active`).onchange = (e) => { 
-                    state.bgFx[id].active = e.target.checked; 
-                    renderCanvas(); saveHistory(); 
-                }; 
+
+            ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(id => { 
+                const cb = document.getElementById(`bgfx-${id}-active`);
+                if(cb) {
+                    cb.onchange = (e) => { state.bgFx[id].active = e.target.checked; renderCanvas(); saveHistory(); }; 
+                }
             });
+        }
+
+        function initUI() {
+            document.getElementById('global-sliders').innerHTML = createSlider('g-hue', '整體色相', -180, 180, state.global.hue) + createSlider('g-sat', '整體飽和', -100, 100, state.global.sat) + createSlider('g-light', '整體明亮', -100, 100, state.global.light) + createSlider('g-temp', '整體色溫', -100, 100, state.global.temp) + createSlider('g-cont', '整體對比', -100, 100, state.global.cont);
+            
+            updateBgFxSliders(); 
+
+            updateSpecificSliders(); 
+            updateLocalMaskUI(); 
+            bindSliders(); 
+            loadPresets(); 
+            attachEvents();
         }
 
         function updateSpecificSliders() {
             const c = state.colors[state.activeTab];
             document.getElementById('specific-sliders').innerHTML = createSlider('c-hue', '色相偏移', -180, 180, c.h) + createSlider('c-sat', '修改飽和', -100, 100, c.s) + createSlider('c-light', '修改明亮', -100, 100, c.l);
-            document.getElementById('custom-color-picker').classList.toggle('hidden', state.activeTab !== 'custom'); bindSliders();
+            document.getElementById('custom-color-picker').classList.toggle('hidden', state.activeTab !== 'custom'); 
+            bindSliders();
         }
 
         function updateLocalMaskUI() {
@@ -488,15 +676,21 @@
             document.querySelectorAll('.local-mask-tab').forEach(btn => btn.classList.toggle('active', parseInt(btn.dataset.idx) === state.activeLmIdx));
             document.querySelectorAll('.local-type-btn').forEach(btn => btn.classList.toggle('btn-active', btn.dataset.type === z.type));
             const tBtn = document.getElementById('toggle-local-track');
-            if (z.type === 'radial' || z.type === 'rect') { tBtn.classList.remove('hidden'); } else { tBtn.classList.add('hidden'); }
+            if (z.type === 'radial' || z.type === 'rect' || z.type === 'triangle') { tBtn.classList.remove('hidden'); } else { tBtn.classList.add('hidden'); }
             
             document.getElementById('lm-active-checkbox').checked = z.active;
             
             let shapeSliders = '';
-            if (z.type === 'radial' || z.type === 'rect') {
+            if (z.type === 'radial' || z.type === 'rect' || z.type === 'triangle') {
                 const wVal = z.w !== undefined ? z.w : (z.size !== undefined ? z.size : 50);
                 const hVal = z.h !== undefined ? z.h : (z.size !== undefined ? z.size : 50);
                 shapeSliders = createSlider('lm-w', '寬度 ↔', 0, 100, wVal) + createSlider('lm-h', '高度 ↕', 0, 100, hVal);
+                
+                if (z.type === 'rect' || z.type === 'triangle') {
+                    shapeSliders += createSlider('lm-persp-y', '垂直透視', -100, 100, z.perspY || 0);
+                    shapeSliders += createSlider('lm-persp-x', '水平透視', -100, 100, z.perspX || 0);
+                }
+                shapeSliders += createSlider('lm-angle', '旋轉角度', -180, 180, z.angle || 0);
             } else {
                 shapeSliders = createSlider('lm-size', '影響範圍', 0, 100, z.size !== undefined ? z.size : 50);
             }
@@ -513,7 +707,12 @@
         }
 
         function bindSliders() {
-            const ids = ['g-hue','g-sat','g-light','g-temp','g-cont', 'bg-w','bg-h','bg-feath','bg-blur','bg-zoom','bg-light','bg-sat','bg-cont', 'c-hue','c-sat','c-light', 'lm-temp','lm-sat','lm-light','lm-cont','lm-sharp','lm-size','lm-w','lm-h','lm-feath'];
+            const ids = [
+                'g-hue','g-sat','g-light','g-temp','g-cont', 
+                'bg-w','bg-h','bg-feath','bg-persp-y','bg-persp-x','bg-angle','bg-blur','bg-zoom','bg-light','bg-sat','bg-cont', 
+                'c-hue','c-sat','c-light', 
+                'lm-temp','lm-sat','lm-light','lm-cont','lm-sharp','lm-size','lm-w','lm-h','lm-feath','lm-persp-y','lm-persp-x','lm-angle'
+            ];
             ids.forEach(id => { const el = document.getElementById(id); if (el) { el.oninput = (e) => { document.getElementById(`${id}-val`).innerText = e.target.value; updateStateFromUI(); }; el.onchange = () => { saveHistory(); }; }});
         }
 
@@ -521,8 +720,19 @@
             const getV = (id) => { const e=document.getElementById(id); return e?parseInt(e.value):0; };
             state.global.hue = getV('g-hue'); state.global.sat = getV('g-sat'); state.global.light = getV('g-light'); state.global.temp = getV('g-temp'); state.global.cont = getV('g-cont');
             
-            const act = state.bgFx[state.bgFx.activeTab]; act.w = getV('bg-w'); act.h = getV('bg-h'); act.feather = getV('bg-feath');
-            state.bgFx.blur = getV('bg-blur'); state.bgFx.zoom = getV('bg-zoom'); state.bgFx.lightness = getV('bg-light'); state.bgFx.saturation = getV('bg-sat'); state.bgFx.contrast = getV('bg-cont');
+            const act = state.bgFx[state.bgFx.activeTab]; 
+            if(document.getElementById('bg-w')) act.w = getV('bg-w'); 
+            if(document.getElementById('bg-h')) act.h = getV('bg-h'); 
+            if(document.getElementById('bg-feath')) act.feather = getV('bg-feath');
+            if(document.getElementById('bg-persp-y')) act.perspY = getV('bg-persp-y');
+            if(document.getElementById('bg-persp-x')) act.perspX = getV('bg-persp-x');
+            if(document.getElementById('bg-angle')) act.angle = getV('bg-angle');
+            
+            if(document.getElementById('bg-blur')) state.bgFx.blur = getV('bg-blur'); 
+            if(document.getElementById('bg-zoom')) state.bgFx.zoom = getV('bg-zoom'); 
+            if(document.getElementById('bg-light')) state.bgFx.lightness = getV('bg-light'); 
+            if(document.getElementById('bg-sat')) state.bgFx.saturation = getV('bg-sat'); 
+            if(document.getElementById('bg-cont')) state.bgFx.contrast = getV('bg-cont');
             
             const c = state.colors[state.activeTab]; c.h = getV('c-hue'); c.s = getV('c-sat'); c.l = getV('c-light');
             
@@ -531,10 +741,14 @@
             if(document.getElementById('lm-size')) z.size = getV('lm-size');
             if(document.getElementById('lm-w')) z.w = getV('lm-w');
             if(document.getElementById('lm-h')) z.h = getV('lm-h');
+            if(document.getElementById('lm-persp-y')) z.perspY = getV('lm-persp-y');
+            if(document.getElementById('lm-persp-x')) z.perspX = getV('lm-persp-x');
+            if(document.getElementById('lm-angle')) z.angle = getV('lm-angle');
             
             renderCanvas();
         }
 
+        // 色彩與數學工具函數
         function rgbToHsl(r, g, b) {
             r /= 255, g /= 255, b /= 255; let max = Math.max(r, g, b), min = Math.min(r, g, b); let h, s, l = (max + min) / 2;
             if (max == min) h = s = 0; else {
@@ -552,40 +766,69 @@
             } return [r * 255, g * 255, b * 255];
         }
 
+        function calcTriWeight(dx_rot, dy_rot, rx_base, ry_base, p_x, p_y, f_lt) {
+            let current_rx = rx_base * (1 + p_y * (dy_rot / Math.max(ry_base, 1)));
+            let current_ry = ry_base * (1 + p_x * (dx_rot / Math.max(rx_base, 1)));
+            current_rx = Math.max(0.1, current_rx); current_ry = Math.max(0.1, current_ry);
+
+            const px_abs = Math.abs(dx_rot); const py_shift = dy_rot + current_ry; 
+            const e1_x = current_rx; const e1_y = 2 * current_ry;
+            const t1 = Math.max(0, Math.min(1, (px_abs * e1_x + py_shift * e1_y) / (e1_x*e1_x + e1_y*e1_y)));
+            const d1_x = px_abs - t1 * e1_x; const d1_y = py_shift - t1 * e1_y;
+            const distSq1 = d1_x*d1_x + d1_y*d1_y;
+
+            let distSq2 = 0;
+            if (px_abs < current_rx) { distSq2 = (py_shift - 2*current_ry)*(py_shift - 2*current_ry); } 
+            else { distSq2 = (px_abs - current_rx)*(px_abs - current_rx) + (py_shift - 2*current_ry)*(py_shift - 2*current_ry); }
+
+            const isOutside = (px_abs * 2*current_ry - py_shift * current_rx > 0) || (py_shift > 2*current_ry) || (py_shift < 0);
+            const dist = (isOutside ? 1 : -1) * Math.sqrt(Math.min(distSq1, distSq2));
+
+            if (dist <= 0) return 1;
+            if (dist < f_lt) return 1 - (dist / f_lt);
+            return 0;
+        }
+
         function getMaskWeight(z, px, py, w, h, maxDist) {
             if (z.temp === 0 && z.cont === 0 && z.sharp === 0 && z.light === 0 && z.sat === 0) return 0;
-            let weight = 0; const zx = w * z.x, zy = h * z.y;
+            let weight = 0; 
             
             if (z.type === 'radial') {
                 const rx = maxDist * ((z.w !== undefined ? z.w : z.size) / 100);
                 const ry = maxDist * ((z.h !== undefined ? z.h : z.size) / 100);
                 const f_lt = maxDist * (z.feather / 100) + 1;
-                const dx = Math.abs(px - zx); const dy = Math.abs(py - zy);
-                
+                const dx = px - z._zx; const dy = py - z._zy;
+                const dx_rot = dx * z._cosA + dy * z._sinA; const dy_rot = -dx * z._sinA + dy * z._cosA;
+
                 if (rx === 0 || ry === 0) weight = 0;
                 else {
-                    const normDist = Math.sqrt((dx/rx)**2 + (dy/ry)**2);
+                    const normDist = Math.sqrt((dx_rot/rx)**2 + (dy_rot/ry)**2);
                     if (normDist <= 1) weight = 1;
-                    else {
-                        const avgR = (rx + ry) / 2;
-                        const normFeather = f_lt / avgR;
-                        if (normDist < 1 + normFeather) {
-                            weight = 1 - ((normDist - 1) / normFeather);
-                        }
-                    }
+                    else { const normFeather = f_lt / ((rx + ry) / 2); if (normDist < 1 + normFeather) weight = 1 - ((normDist - 1) / normFeather); }
                 }
-            } else if (z.type === 'rect') {
-                const rx = maxDist * ((z.w !== undefined ? z.w : z.size) / 100);
-                const ry = maxDist * ((z.h !== undefined ? z.h : z.size) / 100);
+            } else if (z.type === 'rect' || z.type === 'triangle') {
+                const rx_base = maxDist * ((z.w !== undefined ? z.w : z.size) / 100);
+                const ry_base = maxDist * ((z.h !== undefined ? z.h : z.size) / 100);
                 const f_lt = maxDist * (z.feather / 100) + 1;
-                const dx = Math.abs(px - zx), dy = Math.abs(py - zy);
-                
-                if (dx < rx && dy < ry) weight = 1; 
-                else if (dx < rx + f_lt && dy < ry + f_lt) {
-                    const distToEdgeX = Math.max(0, dx - rx); 
-                    const distToEdgeY = Math.max(0, dy - ry);
-                    const distToEdge = Math.sqrt(distToEdgeX**2 + distToEdgeY**2);
-                    if(distToEdge < f_lt) weight = 1 - (distToEdge / f_lt);
+                const p_y = (z.perspY || 0) / 100; const p_x = (z.perspX || 0) / 100;
+
+                const dx = px - z._zx; const dy = py - z._zy;
+                const dx_rot = dx * z._cosA + dy * z._sinA; const dy_rot = -dx * z._sinA + dy * z._cosA;
+
+                if (z.type === 'triangle') {
+                    weight = calcTriWeight(dx_rot, dy_rot, rx_base, ry_base, p_x, p_y, f_lt);
+                } else {
+                    let current_rx = rx_base * (1 + p_y * (dy_rot / Math.max(ry_base, 1)));
+                    let current_ry = ry_base * (1 + p_x * (dx_rot / Math.max(rx_base, 1)));
+                    current_rx = Math.max(0, current_rx); current_ry = Math.max(0, current_ry);
+
+                    const adx = Math.abs(dx_rot), ady = Math.abs(dy_rot);
+                    if (adx < current_rx && ady < current_ry) weight = 1; 
+                    else if (adx < current_rx + f_lt && ady < current_ry + f_lt) {
+                        const distToEdgeX = Math.max(0, adx - current_rx); const distToEdgeY = Math.max(0, ady - current_ry);
+                        const distToEdge = Math.sqrt(distToEdgeX**2 + distToEdgeY**2);
+                        if(distToEdge < f_lt) weight = 1 - (distToEdge / f_lt);
+                    }
                 }
             } else {
                 let val = 0;
@@ -597,8 +840,63 @@
             return Math.max(0, Math.min(1, weight));
         }
 
-        // 核心渲染引擎
+        const calcShapeProtection = (obj, px, py, w, h, maxDist, isTri=false) => {
+            if (!obj.active) return 0;
+            const rx_base = maxDist * (obj.w / 100), ry_base = maxDist * (obj.h / 100);
+            const f_lt = maxDist * (obj.feather / 100) + 1;
+            const p_y = (obj.perspY || 0) / 100; const p_x = (obj.perspX || 0) / 100;
+            
+            const dx = px - obj._zx; const dy = py - obj._zy;
+            const dx_rot = dx * obj._cosA + dy * obj._sinA; const dy_rot = -dx * obj._sinA + dy * obj._cosA;
+
+            if (isTri) {
+                return calcTriWeight(dx_rot, dy_rot, rx_base, ry_base, p_x, p_y, f_lt);
+            } else {
+                let current_rx = rx_base * (1 + p_y * (dy_rot / Math.max(ry_base, 1)));
+                let current_ry = ry_base * (1 + p_x * (dx_rot / Math.max(rx_base, 1)));
+                current_rx = Math.max(0, current_rx); current_ry = Math.max(0, current_ry);
+
+                const adx = Math.abs(dx_rot), ady = Math.abs(dy_rot);
+                if (adx < current_rx && ady < current_ry) return 1;
+                if (adx < current_rx + f_lt && ady < current_ry + f_lt) {
+                    const distToEdgeX = Math.max(0, adx - current_rx); const distToEdgeY = Math.max(0, ady - current_ry);
+                    const distToEdge = Math.sqrt(distToEdgeX**2 + distToEdgeY**2);
+                    if (distToEdge < f_lt) return 1 - (distToEdge / f_lt);
+                }
+                return 0;
+            }
+        };
+
+        const calcRadialProtection = (obj, px, py, w, h, maxDist) => {
+            if (!obj.active) return 0;
+            const rx = maxDist * (obj.w / 100), ry = maxDist * (obj.h / 100);
+            const f_lt = maxDist * (obj.feather / 100) + 1;
+            
+            const dx = px - obj._zx; const dy = py - obj._zy;
+            const dx_rot = dx * obj._cosA + dy * obj._sinA; const dy_rot = -dx * obj._sinA + dy * obj._cosA;
+
+            if (rx === 0 || ry === 0) return 0;
+            const normDist = Math.sqrt((dx_rot/rx)**2 + (dy_rot/ry)**2);
+            if (normDist <= 1) return 1;
+            const normFeather = f_lt / ((rx + ry) / 2);
+            if (normDist < 1 + normFeather) return 1 - ((normDist - 1) / normFeather);
+            return 0;
+        };
+
+        // 核心渲染引擎 (搭載聯合防護網)
         function applyFiltersToContext(sourceImg, targetCtx, w, h) {
+            state.localMasks.forEach(z => {
+                const a = (z.angle || 0) * Math.PI / 180;
+                z._cosA = Math.cos(a); z._sinA = Math.sin(a);
+                z._zx = w * z.x; z._zy = h * z.y;
+            });
+            ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(key => {
+                const shape = state.bgFx[key];
+                const a = (shape.angle || 0) * Math.PI / 180;
+                shape._cosA = Math.cos(a); shape._sinA = Math.sin(a);
+                shape._zx = w * shape.x; shape._zy = h * shape.y;
+            });
+
             targetCtx.globalCompositeOperation = 'source-over'; targetCtx.drawImage(sourceImg, 0, 0, w, h);
             const imgData = targetCtx.getImageData(0, 0, w, h); const data = imgData.data; 
             const maxDist = Math.max(w, h) / 2; 
@@ -607,42 +905,24 @@
             let localSharpActive = state.localMasks.some(m => m.sharp > 0 && m.active);
 
             const bgLightnessFactor = state.bgFx.lightness / 100;
-            let bgMaskData = null;
-
-            if (state.bgFx.lightness !== 0 || state.bgFx.blur > 0 || state.bgFx.zoom > 0 || state.bgFx.saturation !== 0 || state.bgFx.contrast !== 0) {
-                const maskCanvas = document.createElement('canvas'); maskCanvas.width = w; maskCanvas.height = h;
-                const mCtx = maskCanvas.getContext('2d', { willReadFrequently: true });
-                mCtx.fillStyle = 'rgba(0,0,0,1)'; mCtx.fillRect(0, 0, w, h);
-                mCtx.globalCompositeOperation = 'destination-out'; 
-                
-                const drawRadial = (obj) => { 
-                    if (obj.active) { 
-                        const blurPx = maxDist*(obj.feather/100);
-                        mCtx.filter = `blur(${blurPx}px)`; mCtx.fillStyle = 'rgba(0,0,0,1)';
-                        mCtx.beginPath(); 
-                        mCtx.ellipse(w*obj.x, h*obj.y, maxDist*(obj.w/100) + blurPx/2, maxDist*(obj.h/100) + blurPx/2, 0, 0, Math.PI*2); 
-                        mCtx.fill(); 
-                    } 
-                };
-                const drawRect = (obj) => { 
-                    if (obj.active) { 
-                        const blurPx = maxDist*(obj.feather/100);
-                        mCtx.filter = `blur(${blurPx}px)`; mCtx.fillStyle = 'rgba(0,0,0,1)';
-                        const rw = maxDist*(obj.w/100) + blurPx/2, rh = maxDist*(obj.h/100) + blurPx/2; 
-                        mCtx.fillRect((w*obj.x)-rw, (h*obj.y)-rh, rw*2, rh*2); 
-                    } 
-                };
-                drawRadial(state.bgFx.radialA); drawRadial(state.bgFx.radialB); drawRect(state.bgFx.rectA); drawRect(state.bgFx.rectB);
-                mCtx.filter = 'none'; bgMaskData = mCtx.getImageData(0, 0, w, h).data;
-            }
+            const hasBgFx = (bgLightnessFactor !== 0 || state.bgFx.blur > 0 || state.bgFx.zoom > 0 || state.bgFx.saturation !== 0 || state.bgFx.contrast !== 0);
+            let bgMaskArray = hasBgFx ? new Uint8ClampedArray(w * h) : null;
 
             for (let i = 0; i < data.length; i += 4) {
                 let r = data[i], g = data[i+1], b = data[i+2]; const px = (i/4)%w, py = Math.floor((i/4)/w);
+                
                 if (state.wb.active) { r = Math.min(255, r * state.wb.r); g = Math.min(255, g * state.wb.g); b = Math.min(255, b * state.wb.b); }
-                if (state.filter === 'glaze' || state.filter === 'glaze-spot') { r = Math.min(255, r*1.1); g = Math.min(255, g*1.1); b = Math.min(255, b*1.15); } 
-                else if (state.filter === 'vibrant' || state.filter === 'vib-spot') { const max = Math.max(r, g, b); if(max===r) r=Math.min(255, r*1.2); else if(max===g) g=Math.min(255, g*1.2); else b=Math.min(255, b*1.2); } 
+                
+                if (state.filter === 'glaze' || state.filter === 'glaze-spot') { 
+                    r = Math.min(255, r*1.08); g = Math.min(255, g*1.08); b = Math.min(255, b*1.1); 
+                } 
+                else if (state.filter === 'vibrant' || state.filter === 'vib-spot') { 
+                    r = Math.min(255, r * 1.05); g = Math.min(255, g * 1.05); b = Math.min(255, b * 1.05);
+                    const max = Math.max(r, g, b); 
+                    if(max===r) r=Math.min(255, r*1.03); else if(max===g) g=Math.min(255, g*1.03); else b=Math.min(255, b*1.03); 
+                } 
                 else if (state.filter === 'vintage') { r = Math.min(255, r*1.1); b *= 0.8; }
-
+                
                 r = contFactor*(r-128)+128; g = contFactor*(g-128)+128; b = contFactor*(b-128)+128;
                 
                 let localTempOffset = 0, localContOffset = 0, localLightOffset = 0, localSatOffset = 0;
@@ -656,11 +936,30 @@
                 const finalTemp = state.global.temp + localTempOffset; r += finalTemp; b -= finalTemp;
                 r = Math.max(0, Math.min(255, r)); g = Math.max(0, Math.min(255, g)); b = Math.max(0, Math.min(255, b));
 
-                let bgWeight = 0; if (bgMaskData && (bgLightnessFactor !== 0 || state.bgFx.blur > 0 || state.bgFx.zoom > 0 || state.bgFx.saturation !== 0 || state.bgFx.contrast !== 0)) bgWeight = bgMaskData[i+3]/255;
+                // 全新聯合防護網：計算所有啟動形狀的最大保護值
+                let bgWeight = 0; 
+                if (hasBgFx) {
+                    let maxProtection = 0;
+                    if (state.bgFx.radialA.active) maxProtection = Math.max(maxProtection, calcRadialProtection(state.bgFx.radialA, px, py, w, h, maxDist));
+                    if (state.bgFx.radialB.active) maxProtection = Math.max(maxProtection, calcRadialProtection(state.bgFx.radialB, px, py, w, h, maxDist));
+                    if (state.bgFx.rectA.active) maxProtection = Math.max(maxProtection, calcShapeProtection(state.bgFx.rectA, px, py, w, h, maxDist, false));
+                    if (state.bgFx.rectB.active) maxProtection = Math.max(maxProtection, calcShapeProtection(state.bgFx.rectB, px, py, w, h, maxDist, false));
+                    if (state.bgFx.triA.active) maxProtection = Math.max(maxProtection, calcShapeProtection(state.bgFx.triA, px, py, w, h, maxDist, true));
+                    if (state.bgFx.triB.active) maxProtection = Math.max(maxProtection, calcShapeProtection(state.bgFx.triB, px, py, w, h, maxDist, true));
+                    
+                    // 只要受到任何形狀保護 (maxProtection = 1)，背景影響力 (bgWeight) 就歸零
+                    bgWeight = 1 - maxProtection; 
+                    bgMaskArray[i/4] = Math.round(bgWeight * 255);
+                }
+
                 let [H, S, L] = rgbToHsl(r, g, b); H = (H + state.global.hue + 360) % 360; 
                 S = Math.max(0, Math.min(100, S + state.global.sat + localSatOffset)); 
                 L = Math.max(0, Math.min(100, L + state.global.light + localLightOffset));
-                if (bgWeight > 0 && state.bgFx.saturation !== 0) S = Math.max(0, Math.min(100, S + (state.bgFx.saturation * bgWeight)));
+
+                // 受到背景飽和度影響 (例如：抽色)
+                if (bgWeight > 0 && state.bgFx.saturation !== 0) {
+                    S = Math.max(0, Math.min(100, S + (state.bgFx.saturation * bgWeight)));
+                }
 
                 let matched = false;
                 if (state.colors.custom.active) {
@@ -673,17 +972,20 @@
                         if (dH < z.range) { let wt = Math.max(0, 1-(dH/z.range)); const tc = state.colors[z.key]; H = (H+(tc.h*wt)+360)%360; S = Math.max(0, Math.min(100, S+(tc.s*wt))); L = Math.max(0, Math.min(100, L+(tc.l*wt))); break; }
                     }
                 }
+                
                 let [nr, ng, nb] = hslToRgb(H, S, L);
 
-                if (state.bgFx.contrast !== 0 && bgWeight > 0) {
-                    const cVal = state.bgFx.contrast * bgWeight;
-                    const bcf = (259 * (cVal + 255)) / (255 * (259 - cVal));
-                    nr = bcf * (nr - 128) + 128; ng = bcf * (ng - 128) + 128; nb = bcf * (nb - 128) + 128;
-                }
-
-                if (bgLightnessFactor !== 0 && bgWeight > 0) {
-                    let fx = bgLightnessFactor * bgWeight;
-                    if (fx < 0) { nr *= (1+fx); ng *= (1+fx); nb *= (1+fx); } else { nr += (255-nr)*fx; ng += (255-ng)*fx; nb += (255-nb)*fx; }
+                // 受到背景對比與明暗影響
+                if (bgWeight > 0) {
+                    if (state.bgFx.contrast !== 0) {
+                        const cVal = state.bgFx.contrast * bgWeight;
+                        const bcf = (259 * (cVal + 255)) / (255 * (259 - cVal));
+                        nr = bcf * (nr - 128) + 128; ng = bcf * (ng - 128) + 128; nb = bcf * (nb - 128) + 128;
+                    }
+                    if (bgLightnessFactor !== 0) {
+                        let fx = bgLightnessFactor * bgWeight;
+                        if (fx < 0) { nr *= (1+fx); ng *= (1+fx); nb *= (1+fx); } else { nr += (255-nr)*fx; ng += (255-ng)*fx; nb += (255-nb)*fx; }
+                    }
                 }
                 data[i] = Math.max(0, Math.min(255, nr)); data[i+1] = Math.max(0, Math.min(255, ng)); data[i+2] = Math.max(0, Math.min(255, nb));
             }
@@ -714,25 +1016,111 @@
             }
             targetCtx.putImageData(imgData, 0, 0);
 
-            if ((state.bgFx.blur > 0 || state.bgFx.zoom > 0) && bgMaskData) {
+            // 聯合背景模糊與放射動感處理
+            if ((state.bgFx.blur > 0 || state.bgFx.zoom > 0) && bgMaskArray) {
+                const mCan = document.createElement('canvas'); mCan.width=w; mCan.height=h; 
+                const mCtx = mCan.getContext('2d'); 
+                const mData = mCtx.createImageData(w, h); 
+                for(let i=0; i<w*h; i++) {
+                    mData.data[i*4] = 0; mData.data[i*4+1] = 0; mData.data[i*4+2] = 0;
+                    mData.data[i*4+3] = bgMaskArray[i]; // 全域背景遮罩矩陣
+                }
+                mCtx.putImageData(mData, 0, 0);
+                
                 const tCan = document.createElement('canvas'); tCan.width=w; tCan.height=h; const tCtx = tCan.getContext('2d'); tCtx.drawImage(targetCtx.canvas, 0, 0);
                 const fCan = document.createElement('canvas'); fCan.width=w; fCan.height=h; const fCtx = fCan.getContext('2d');
-                if (state.bgFx.blur > 0) { fCtx.filter = `blur(${state.bgFx.blur/2}px)`; fCtx.drawImage(tCan, 0, 0); fCtx.filter = 'none'; tCtx.clearRect(0,0,w,h); tCtx.drawImage(fCan,0,0); } else { fCtx.drawImage(tCan, 0, 0); }
+                
+                if (state.bgFx.blur > 0) { fCtx.filter = `blur(${state.bgFx.blur/2}px)`; fCtx.drawImage(tCan, 0, 0); fCtx.filter = 'none'; tCtx.clearRect(0,0,w,h); tCtx.drawImage(fCan,0,0); } 
+                else { fCtx.drawImage(tCan, 0, 0); }
+                
                 if (state.bgFx.zoom > 0) {
                     fCtx.clearRect(0,0,w,h); const steps=15; fCtx.globalAlpha=1/steps; const maxZoom=state.bgFx.zoom/100;
-                    let zx=w/2, zy=h/2;
-                    let activeShape = state.bgFx[state.bgFx.activeTab];
-                    if (activeShape.active) { zx=w*activeShape.x; zy=h*activeShape.y; }
-                    else if(state.bgFx.radialA.active){zx=w*state.bgFx.radialA.x; zy=h*state.bgFx.radialA.y;} 
-                    else if(state.bgFx.radialB.active){zx=w*state.bgFx.radialB.x; zy=h*state.bgFx.radialB.y;} 
-                    else if(state.bgFx.rectA.active){zx=w*state.bgFx.rectA.x; zy=h*state.bgFx.rectA.y;} 
-                    else if(state.bgFx.rectB.active){zx=w*state.bgFx.rectB.x; zy=h*state.bgFx.rectB.y;}
-                    for(let i=0; i<steps; i++) { const sc = 1+(i/steps)*maxZoom; fCtx.save(); fCtx.translate(zx,zy); fCtx.scale(sc,sc); fCtx.translate(-zx,-zy); fCtx.drawImage(tCan,0,0); fCtx.restore(); } fCtx.globalAlpha=1.0;
+                    
+                    // 自動運算：以所有啟動形狀的中心點平均值，作為放射縮放中心
+                    let zx = 0, zy = 0, zCount = 0;
+                    ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
+                        if (state.bgFx[k].active) { zx += state.bgFx[k]._zx; zy += state.bgFx[k]._zy; zCount++; }
+                    });
+                    if (zCount > 0) { zx /= zCount; zy /= zCount; } else { zx = w/2; zy = h/2; }
+                    
+                    for(let i=0; i<steps; i++) { const sc = 1+(i/steps)*maxZoom; fCtx.save(); fCtx.translate(zx, zy); fCtx.scale(sc,sc); fCtx.translate(-zx, -zy); fCtx.drawImage(tCan,0,0); fCtx.restore(); } 
+                    fCtx.globalAlpha=1.0;
                 }
-                const mCan = document.createElement('canvas'); mCan.width=w; mCan.height=h; const mCtx = mCan.getContext('2d'); const mData = mCtx.createImageData(w, h); mData.data.set(bgMaskData); mCtx.putImageData(mData, 0, 0);
-                fCtx.globalCompositeOperation = 'destination-in'; fCtx.drawImage(mCan, 0, 0); targetCtx.globalCompositeOperation = 'source-over'; targetCtx.drawImage(fCan, 0, 0);
+                
+                fCtx.globalCompositeOperation = 'destination-in'; fCtx.drawImage(mCan, 0, 0); 
+                targetCtx.globalCompositeOperation = 'source-over'; targetCtx.drawImage(fCan, 0, 0);
             }
         }
+
+        const drawShapeBoundary = (obj, isActiveTab, label) => {
+            const cx = canvas.width * obj.x; const cy = canvas.height * obj.y;
+            const maxDist = Math.max(canvas.width, canvas.height) / 2;
+            
+            ctx.save();
+            ctx.translate(cx, cy);
+            const a = (obj.angle || 0) * Math.PI / 180;
+            ctx.rotate(a); 
+
+            ctx.beginPath();
+            if (obj.type === 'triangle' || obj.type === 'triA' || obj.type === 'triB') {
+                const rx_base = maxDist * (obj.w / 100);
+                const ry_base = maxDist * (obj.h / 100);
+                const p_y = (obj.perspY || 0) / 100;
+                const p_x = (obj.perspX || 0) / 100;
+                
+                const top_x = 0; const top_y = -ry_base;
+                const br_x = rx_base * (1 + p_y); const br_y = ry_base * (1 + p_x);
+                const bl_x = -rx_base * (1 + p_y); const bl_y = ry_base * (1 - p_x);
+
+                ctx.moveTo(top_x, top_y); ctx.lineTo(br_x, br_y); ctx.lineTo(bl_x, bl_y);
+            }
+            else if (obj.type === 'rect' || obj.type === 'rectA' || obj.type === 'rectB') {
+                const rx_base = maxDist * (obj.w / 100);
+                const ry_base = maxDist * (obj.h / 100);
+                const p_y = (obj.perspY || 0) / 100;
+                const p_x = (obj.perspX || 0) / 100;
+                
+                const tl_x = -rx_base * (1 - p_y); const tl_y = -ry_base * (1 - p_x);
+                const tr_x =  rx_base * (1 - p_y); const tr_y = -ry_base * (1 + p_x);
+                const br_x =  rx_base * (1 + p_y); const br_y =  ry_base * (1 + p_x);
+                const bl_x = -rx_base * (1 + p_y); const bl_y =  ry_base * (1 - p_x);
+
+                ctx.moveTo(tl_x, tl_y); ctx.lineTo(tr_x, tr_y);
+                ctx.lineTo(br_x, br_y); ctx.lineTo(bl_x, bl_y);
+            } else if (obj.type === 'radial' || obj.type === 'radialA' || obj.type === 'radialB') {
+                const rx = maxDist * (obj.w !== undefined ? obj.w : obj.size) / 100;
+                const ry = maxDist * (obj.h !== undefined ? obj.h : obj.size) / 100;
+                ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI*2);
+            }
+            ctx.closePath();
+
+            ctx.setLineDash([]); 
+            ctx.strokeStyle = isActiveTab ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.3)';
+            ctx.lineWidth = isActiveTab ? 3 : 2;
+            ctx.stroke();
+
+            ctx.setLineDash([6, 4]); 
+            ctx.strokeStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.6)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.restore();
+
+            ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2); 
+            ctx.fillStyle = isActiveTab ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.3)'; ctx.fill();
+            ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI*2); 
+            ctx.fillStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.6)'; ctx.fill();
+            
+            if(label) {
+                ctx.fillStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.7)';
+                ctx.font = 'bold 12px sans-serif';
+                ctx.shadowColor = 'white'; ctx.shadowBlur = 4;
+                if(!isActiveTab){ ctx.shadowColor = 'black'; }
+                ctx.fillText(label, cx + 10, cy - 10);
+                ctx.shadowBlur = 0;
+            }
+        };
 
         function renderCanvas() {
             if (!originalProxyImage || isCropping) return;
@@ -743,34 +1131,33 @@
                 if (isLocatingLocal) {
                     state.localMasks.forEach((z, idx) => {
                         if (z.active || idx === state.activeLmIdx) {
-                            const cx = canvas.width * z.x; const cy = canvas.height * z.y;
-                            const isActiveTab = (idx === state.activeLmIdx);
-                            ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI*2); ctx.moveTo(cx-20, cy); ctx.lineTo(cx+20, cy); ctx.moveTo(cx, cy-20); ctx.lineTo(cx, cy+20);
-                            ctx.strokeStyle = isActiveTab ? 'rgba(239, 68, 68, 0.9)' : 'rgba(255, 255, 255, 0.5)';
-                            ctx.lineWidth = 2; ctx.stroke();
-                            ctx.beginPath(); ctx.arc(cx, cy, 13, 0, Math.PI*2); ctx.strokeStyle = 'rgba(0,0,0,0.6)'; ctx.lineWidth = 1; ctx.stroke();
-                            
-                            ctx.fillStyle = isActiveTab ? 'rgba(239, 68, 68, 0.9)' : 'rgba(255, 255, 255, 0.7)';
-                            ctx.font = 'bold 12px sans-serif';
-                            ctx.fillText(['A','B','C','D','E','F'][idx] + '區', cx + 15, cy - 15);
+                            if(z.type === 'radial' || z.type === 'rect' || z.type === 'triangle') {
+                                drawShapeBoundary(z, idx === state.activeLmIdx, ['A','B','C','D','E','F'][idx] + '區');
+                            } else {
+                                const cx = canvas.width * z.x; const cy = canvas.height * z.y;
+                                const isActiveTab = (idx === state.activeLmIdx);
+                                ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI*2); ctx.moveTo(cx-20, cy); ctx.lineTo(cx+20, cy); ctx.moveTo(cx, cy-20); ctx.lineTo(cx, cy+20);
+                                ctx.strokeStyle = isActiveTab ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0,0,0,0.3)';
+                                ctx.lineWidth = 4; ctx.stroke();
+                                ctx.strokeStyle = isActiveTab ? '#ff0000' : 'rgba(255,255,255,0.6)';
+                                ctx.lineWidth = 1.5; ctx.stroke();
+                                
+                                ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI*2); ctx.strokeStyle = 'rgba(0,0,0,0.4)'; ctx.lineWidth = 1; ctx.stroke();
+                                
+                                ctx.fillStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.7)';
+                                ctx.font = 'bold 12px sans-serif'; 
+                                ctx.shadowColor = 'white'; ctx.shadowBlur = 4; if(!isActiveTab) ctx.shadowColor = 'black';
+                                ctx.fillText(['A','B','C','D','E','F'][idx] + '區', cx + 15, cy - 15);
+                                ctx.shadowBlur = 0;
+                            }
                         }
                     });
                 } else if (isLocatingBgFx) {
-                    ['radialA', 'radialB', 'rectA', 'rectB'].forEach(key => {
+                    ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(key => {
                         const shape = state.bgFx[key];
                         if (shape.active || key === state.bgFx.activeTab) {
-                            const cx = canvas.width * shape.x; const cy = canvas.height * shape.y;
-                            const isActiveTab = (key === state.bgFx.activeTab);
-                            
-                            ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI*2); ctx.moveTo(cx-20, cy); ctx.lineTo(cx+20, cy); ctx.moveTo(cx, cy-20); ctx.lineTo(cx, cy+20);
-                            ctx.strokeStyle = isActiveTab ? 'rgba(239, 68, 68, 0.9)' : 'rgba(255, 255, 255, 0.5)';
-                            ctx.lineWidth = 2; ctx.stroke();
-                            ctx.beginPath(); ctx.arc(cx, cy, 13, 0, Math.PI*2); ctx.strokeStyle = 'rgba(0,0,0,0.6)'; ctx.lineWidth = 1; ctx.stroke();
-                            
-                            ctx.fillStyle = isActiveTab ? 'rgba(239, 68, 68, 0.9)' : 'rgba(255, 255, 255, 0.7)';
-                            ctx.font = 'bold 12px sans-serif';
-                            const label = key.replace('radial', '圓').replace('rect', '方');
-                            ctx.fillText(label, cx + 15, cy - 15);
+                            let label = key.replace('radial', '圓').replace('rect', '方').replace('tri', '三角');
+                            drawShapeBoundary(shape, key === state.bgFx.activeTab, label);
                         }
                     });
                 }
@@ -801,16 +1188,17 @@
             if(!originalFullImage) return;
             const w = originalFullImage.width, h = originalFullImage.height, ratio = (w/h).toFixed(2); let rStr = "自訂比例";
             if(ratio == "1.33") rStr = "4:3"; else if(ratio == "1.78" || ratio == "1.77") rStr = "16:9"; else if(ratio == "1.50") rStr = "3:2"; else if(ratio == "1.00") rStr = "1:1"; else if(ratio == "0.56") rStr = "9:16";
-            imgInfoBadge.innerText = `最終輸出: ${w}x${h} | ${rStr}`; imgInfoBadge.classList.remove('hidden');
+            imgInfoBadge.innerText = `輸出: ${w}x${h} | ${rStr}`; imgInfoBadge.classList.remove('hidden');
         }
 
         function updateToolButtons() {
             document.getElementById('eyedropper-btn').classList.toggle('btn-primary', state.pickingColor);
+            document.getElementById('wb-btn').classList.toggle('bg-[#4a4a4a]', !state.pickingWb);
             document.getElementById('wb-btn').classList.toggle('bg-blue-600', state.pickingWb);
             const lBtn = document.getElementById('toggle-local-track');
-            if(lBtn) { lBtn.innerText = isLocatingLocal ? '📍 定位顯示(開)' : '📍 定位顯示(關)'; lBtn.classList.toggle('text-yellow-400', isLocatingLocal); }
+            if(lBtn) { lBtn.innerText = isLocatingLocal ? '📍 定位顯示(開)' : '📍 定位顯示(關)'; lBtn.classList.toggle('text-yellow-400', isLocatingLocal); lBtn.classList.toggle('border-yellow-600', isLocatingLocal); }
             const bBtn = document.getElementById('toggle-bgfx-track');
-            if(bBtn) { bBtn.innerText = isLocatingBgFx ? '📍 定位顯示(開)' : '📍 定位顯示(關)'; bBtn.classList.toggle('text-yellow-400', isLocatingBgFx); }
+            if(bBtn) { bBtn.innerText = isLocatingBgFx ? '📍 點此關閉定位標靶' : '📍 定位顯示(關)'; bBtn.classList.toggle('text-yellow-400', isLocatingBgFx); bBtn.classList.toggle('border-yellow-600', isLocatingBgFx); }
             
             if(isLocatingLocal || isLocatingBgFx) canvas.style.cursor = 'crosshair';
             else if(isHealing || state.pickingColor || state.pickingWb) canvas.style.cursor = 'crosshair';
@@ -830,7 +1218,7 @@
 
         document.getElementById('toggle-local-track').onclick = () => setInteractionState('local');
         document.getElementById('toggle-bgfx-track').onclick = () => setInteractionState('bgfx');
-        document.getElementById('eyedropper-btn').onclick = (e) => { setInteractionState('color'); e.target.innerText = state.pickingColor ? '請在左側照片上點擊...' : '🖌 吸取顏色'; };
+        document.getElementById('eyedropper-btn').onclick = (e) => { setInteractionState('color'); e.target.innerText = state.pickingColor ? '請在上方照片點擊...' : '🖌 點此開啟，再去上方照片吸取顏色'; };
         document.getElementById('wb-btn').onclick = () => { setInteractionState('wb'); if(state.pickingWb) showToast('請點擊照片中「應該要是純白或灰色」的區域'); };
         document.getElementById('heal-btn').onclick = () => { if(!originalProxyImage) return; setInteractionState('heal'); document.getElementById('normal-tools-1').classList.add('hidden'); document.getElementById('normal-tools-2').classList.add('hidden'); document.getElementById('heal-tools').classList.remove('hidden'); showToast('進入修復模式！請點擊污點'); };
         document.getElementById('heal-cancel').onclick = () => setInteractionState('none');
@@ -841,33 +1229,94 @@
         document.getElementById('zoom-out-btn').onclick = () => { currentScale = Math.max(0.1, currentScale * 0.8); updateTransform(); };
         canvasWrapper.addEventListener('wheel', (e) => { if (!originalProxyImage || isCropping) return; e.preventDefault(); if (e.deltaY < 0) currentScale *= 1.1; else currentScale *= 0.9; currentScale = Math.max(0.1, Math.min(5, currentScale)); updateTransform(); }, { passive: false });
 
+        function getEventXY(e) {
+            if (e.touches && e.touches.length > 0) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            if (e.changedTouches && e.changedTouches.length > 0) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+            return { x: e.clientX, y: e.clientY };
+        }
+
+        function getCanvasPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const pos = getEventXY(e);
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            return {
+                x: (pos.x - rect.left) * scaleX,
+                y: (pos.y - rect.top) * scaleY
+            };
+        }
+
         function updateLocationFromEvent(e) {
-            const rect = canvas.getBoundingClientRect(); 
-            const realX = (e.clientX - rect.left) * (canvas.width / rect.width) / currentScale - (panX / currentScale); 
-            const realY = (e.clientY - rect.top) * (canvas.height / rect.height) / currentScale - (panY / currentScale);
-            const pctX = Math.max(0, Math.min(1, realX / canvas.width)); const pctY = Math.max(0, Math.min(1, realY / canvas.height));
+            const { x: realX, y: realY } = getCanvasPos(e);
+            const pctX = Math.max(0, Math.min(1, realX / canvas.width)); 
+            const pctY = Math.max(0, Math.min(1, realY / canvas.height));
             if (isLocatingLocal) { state.localMasks[state.activeLmIdx].x = pctX; state.localMasks[state.activeLmIdx].y = pctY; } 
             else if (isLocatingBgFx) { state.bgFx[state.bgFx.activeTab].x = pctX; state.bgFx[state.bgFx.activeTab].y = pctY; }
             renderCanvas();
         }
 
-        canvasWrapper.addEventListener('mousedown', (e) => {
+        const onDragStart = (e) => {
             if (!originalProxyImage || isCropping || e.target !== canvas) return;
-            if (isLocatingLocal || isLocatingBgFx) { isDraggingLocation = true; hasDragged = true; updateLocationFromEvent(e); return; }
-            isDragging = true; hasDragged = false; dragStartX = e.clientX - panX; dragStartY = e.clientY - panY;
-            if(!state.pickingColor && !state.pickingWb && !isHealing) canvas.style.cursor = 'grabbing';
-        });
+            if (e.type === 'touchstart') e.preventDefault(); 
 
-        window.addEventListener('mousemove', (e) => {
+            if (isLocatingLocal || isLocatingBgFx) { isDraggingLocation = true; hasDragged = true; updateLocationFromEvent(e); return; }
+            
+            const rect = canvas.getBoundingClientRect();
+            const pos = getEventXY(e);
+            const realX = (pos.x - rect.left) * (canvas.width / rect.width) / currentScale - (panX / currentScale); 
+            const realY = (pos.y - rect.top) * (canvas.height / rect.height) / currentScale - (panY / currentScale);
+
+            if (isHealing) {
+                const ratio = originalFullImage.width / originalProxyImage.width;
+                healBlemish(realX, realY);
+                return;
+            }
+            
+            if (state.pickingColor) {
+                const px = Math.floor(realX); const py = Math.floor(realY);
+                if(px>=0 && px<canvas.width && py>=0 && py<canvas.height) {
+                    const imgData = ctx.getImageData(px, py, 1, 1).data;
+                    const [h,s,l] = rgbToHsl(imgData[0], imgData[1], imgData[2]);
+                    state.colors.custom.baseH = h; state.colors.custom.active = true;
+                    document.getElementById('custom-hue-val').innerText = Math.round(h);
+                    document.getElementById('custom-color-preview').style.backgroundColor = `rgb(${imgData[0]},${imgData[1]},${imgData[2]})`;
+                    showToast('已吸取目標顏色！'); setInteractionState('none'); renderCanvas();
+                }
+                return;
+            }
+
+            if (state.pickingWb) {
+                const px = Math.floor(realX); const py = Math.floor(realY);
+                if(px>=0 && px<canvas.width && py>=0 && py<canvas.height) {
+                    const imgData = ctx.getImageData(px, py, 1, 1).data;
+                    const r = imgData[0], g = imgData[1], b = imgData[2]; const max = Math.max(r, g, b);
+                    if(r>0 && g>0 && b>0) { state.wb.r = max/r; state.wb.g = max/g; state.wb.b = max/b; state.wb.active = true; showToast('白平衡已校正！'); renderCanvas(); saveHistory(); }
+                    setInteractionState('none');
+                }
+                return;
+            }
+
+            isDragging = true; hasDragged = false; dragStartX = pos.x - panX; dragStartY = pos.y - panY;
+            if(!state.pickingColor && !state.pickingWb && !isHealing) canvas.style.cursor = 'grabbing';
+        };
+
+        const onDragMove = (e) => {
             if (!originalProxyImage) return;
             if (isDraggingLocation) { updateLocationFromEvent(e); return; }
-            if (isDragging) { hasDragged = true; panX = e.clientX - dragStartX; panY = e.clientY - dragStartY; updateTransform(); return; }
-        });
+            if (isDragging) { hasDragged = true; const pos = getEventXY(e); panX = pos.x - dragStartX; panY = pos.y - dragStartY; updateTransform(); return; }
+        };
 
-        window.addEventListener('mouseup', () => { 
+        const onDragEnd = () => { 
             if (isDraggingLocation) { isDraggingLocation = false; saveHistory(); }
             if (isDragging) { isDragging = false; updateTransform(); } 
-        });
+        };
+
+        canvasWrapper.addEventListener('mousedown', onDragStart);
+        canvasWrapper.addEventListener('touchstart', onDragStart, { passive: false });
+        window.addEventListener('mousemove', onDragMove);
+        window.addEventListener('touchmove', onDragMove, { passive: false });
+        window.addEventListener('mouseup', onDragEnd);
+        window.addEventListener('touchend', onDragEnd);
 
         compareBtn.onmousedown = compareBtn.ontouchstart = () => { if(!originalProxyImage) return; ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(originalProxyImage, 0, 0); };
         compareBtn.onmouseup = compareBtn.ontouchend = compareBtn.onmouseleave = () => { if(originalProxyImage) renderCanvas(); };
@@ -902,6 +1351,10 @@
             const img = new Image(); img.onload = () => { originalFullImage = img; createSizedImage(originalFullImage, PROXY_MAX_SIZE, (newProxy) => { originalProxyImage = newProxy; renderCanvas(); saveHistory(); hideOverlay(); }); }; img.src = temp.toDataURL('image/jpeg', 0.98);
         }
 
+        document.getElementById('rot-l-btn').onclick = () => rotateImg(-90);
+        document.getElementById('rot-r-btn').onclick = () => rotateImg(90);
+        document.getElementById('flip-btn').onclick = () => flipImg();
+
         function healBlemish(x, y) {
             if (!originalFullImage) return;
             showOverlay('高畫質運算中...');
@@ -930,6 +1383,7 @@
             img.src = temp.toDataURL('image/jpeg', 0.98);
         }
 
+        // 配方系統
         document.getElementById('save-preset-btn').onclick = () => {
             const name = prompt('請輸入此配方的名稱 (例如: 天目釉專用)\n\n💡 提示：若輸入「已存在」的配方名稱，將會直接覆蓋(更新)該配方的數據。'); 
             if(!name) return;
@@ -937,6 +1391,7 @@
             if(presets[name] && !confirm(`配方「${name}」已經存在，請問要覆蓋更新它嗎？`)) return; 
             const s = JSON.parse(JSON.stringify(state)); 
             s.bgFx.radialA.tracking = false; s.bgFx.radialB.tracking = false; s.bgFx.rectA.tracking = false; s.bgFx.rectB.tracking = false; 
+            s.bgFx.triA.tracking = false; s.bgFx.triB.tracking = false;
             s.pickingColor = false; s.pickingWb = false; s.localMasks.forEach(z=>z.tracking=false);
             presets[name] = s; localStorage.setItem('pottery_presets', JSON.stringify(presets)); loadPresets(); showToast('💾 配方儲存成功！');
         };
@@ -945,19 +1400,20 @@
             const container = document.getElementById('preset-list'); let presets = JSON.parse(localStorage.getItem('pottery_presets') || '{}'); container.innerHTML = '';
             Object.keys(presets).forEach(name => {
                 const wrapper = document.createElement('div'); wrapper.className = 'flex items-center gap-1 bg-[#404040] border border-[#4b5563] rounded pl-2 pr-1 py-1 shadow-sm';
-                const applyBtn = document.createElement('button'); applyBtn.className = 'text-[10px] text-gray-200 hover:text-white truncate max-w-[80px] text-left'; applyBtn.innerText = name; applyBtn.title = "套用 " + name;
+                const applyBtn = document.createElement('button'); applyBtn.className = 'text-[11px] text-gray-200 hover:text-white truncate max-w-[80px] text-left'; applyBtn.innerText = name; applyBtn.title = "套用 " + name;
                 applyBtn.onclick = () => { state = migrateState(JSON.parse(JSON.stringify(presets[name]))); syncUIWithState(); renderCanvas(); saveHistory(); showToast(`已套用配方: ${name}`); };
                 const delBtn = document.createElement('button'); delBtn.className = 'text-red-400 hover:text-red-300 text-[10px] px-1 cursor-pointer font-bold'; delBtn.innerText = '✖'; delBtn.title = "刪除此配方";
                 delBtn.onclick = (e) => { e.stopPropagation(); if(confirm(`確定要永久刪除配方「${name}」嗎？`)) { delete presets[name]; localStorage.setItem('pottery_presets', JSON.stringify(presets)); loadPresets(); showToast(`已刪除配方: ${name}`); } };
                 wrapper.appendChild(applyBtn); wrapper.appendChild(delBtn); container.appendChild(wrapper);
             });
-            if(Object.keys(presets).length === 0) container.innerHTML = '<span class="text-gray-500 text-[10px]">尚無配方，調配後點擊儲存</span>';
+            if(Object.keys(presets).length === 0) container.innerHTML = '<span class="text-gray-500 text-[11px]">尚無配方，調配後點擊儲存</span>';
         }
 
+        // 存檔與輸出系統
         document.getElementById('set-dir-btn').onclick = async () => {
-            if (!window.showDirectoryPicker) { showToast('不支援此功能，請使用 Chrome/Edge'); return; }
+            if (!window.showDirectoryPicker) { showToast('當前瀏覽器環境可能不支援此功能'); return; }
             try { let opts = { id: 'pottery_app_batch_dir', mode: 'readwrite' }; if (targetDirHandle) opts.startIn = targetDirHandle;
-                targetDirHandle = await window.showDirectoryPicker(opts); const btn = document.getElementById('set-dir-btn'); btn.innerText = `📁 ${targetDirHandle.name}`; btn.classList.add('bg-emerald-700', 'text-white', 'border-none'); showToast('設定成功！');
+                targetDirHandle = await window.showDirectoryPicker(opts); const btn = document.getElementById('set-dir-btn'); btn.innerHTML = `📁 ${targetDirHandle.name}`; btn.classList.add('bg-emerald-700', 'text-white', 'border-none'); showToast('設定成功！');
             } catch (err) {}
         };
 
@@ -984,12 +1440,12 @@
                                 }
                             } catch (e) {} 
                             const fileHandle = await targetDirHandle.getFileHandle(finalName, { create: true }); const writable = await fileHandle.createWritable(); await writable.write(blob); await writable.close();
-                            btn.innerText = '✔ 儲存成功'; setTimeout(()=>btn.innerText='💾 存檔(高畫質)', 1500); return;
+                            btn.innerText = '✔ 儲存成功'; setTimeout(()=>btn.innerText='💾 存檔', 1500); return;
                         } catch (err) { showToast('寫入失敗'); }
                     }
                     if (window.showSaveFilePicker) {
                         try { const handle = await window.showSaveFilePicker({ id: 'pottery_app_save_dir', suggestedName: finalName, types: [{ description: 'JPEG 影像', accept: { 'image/jpeg': ['.jpg'] } }] });
-                            const writable = await handle.createWritable(); await writable.write(blob); await writable.close(); btn.innerText = '✔ 儲存成功'; setTimeout(()=>btn.innerText='💾 存檔(高畫質)', 1500); return;
+                            const writable = await handle.createWritable(); await writable.write(blob); await writable.close(); btn.innerText = '✔ 儲存成功'; setTimeout(()=>btn.innerText='💾 存檔', 1500); return;
                         } catch (err) { return; }
                     }
                     const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = finalName; a.click(); URL.revokeObjectURL(url);
@@ -997,7 +1453,9 @@
             }, 50);
         };
 
+        // ====== 啟動系統 ======
         initUI();
+
     </script>
 </body>
 </html>
