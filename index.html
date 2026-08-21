@@ -229,7 +229,19 @@
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
         }
-
+/* 陶釉講義按鈕：活力珊瑚橘漸層 */
+        .nav-btn.lecture-btn {
+            background: linear-gradient(135deg, #ff5e62 0%, #ff9966 100%);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-btn.lecture-btn:hover {
+            background: white;
+            color: #ff5e62;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 94, 98, 0.4);
+        }
         /* --- Icon 按鈕樣式 --- */
         .icon-btn {
             width: 32px; height: 32px; border-radius: 50%;
@@ -447,11 +459,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
-
-
-
+              
+               
+<!-- 陶釉講義 按鈕 -->
+                    <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                        <i class="fa-solid fa-book-open-reader"></i> 陶釉講義
+                    </a>
+  </div>
 
 
 
