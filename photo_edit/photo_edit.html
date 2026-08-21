@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>電腦版專業影像工坊 Pro v4.1.0 (聯合防護網與動態 UI)</title>
+    <title>陶瓷專業影像工坊 Pro v4.3.4 (完美幾何引擎與色彩負片)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exifr/dist/lite.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/piexifjs/1.0.6/piexif.min.js"></script>
     
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #121212; color: #e5e5e5; }
@@ -91,7 +93,6 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.6);
         }
         
-        /* 局部精細遮罩 (A~F區) 專屬高亮狀態 */
         .local-mask-tab.active {
             background-color: #0ea5e9 !important; 
             border: 1px solid #7dd3fc;
@@ -101,7 +102,6 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.6);
         }
 
-        /* 單色精準控制 專屬高亮狀態 (利用 CSS 變數動態變色) */
         .color-picker-tab { color: var(--c); }
         .color-picker-tab.active {
             background-color: var(--c) !important;
@@ -122,20 +122,19 @@
         <div class="text-lg font-bold" id="loading-msg">高畫質運算中...</div>
     </div>
 
-    <!-- 電腦版橫向左右佈局 -->
     <div class="layout-container">
-        <!-- 畫布區 (左半部) -->
+        <!-- 畫布區 -->
         <div class="canvas-section" id="canvas-wrapper">
             <div id="img-info-badge" class="absolute top-4 left-4 bg-black/80 text-white px-3 py-1.5 rounded-md text-[11px] hidden z-10 shadow-lg border border-gray-600 pointer-events-none"></div>
             <canvas id="canvas" class="hidden"></canvas>
             <div id="placeholder" class="text-gray-500 text-sm flex flex-col items-center p-4 text-center">
                 <span class="text-6xl mb-4 text-gray-600">📷</span>
                 <span class="text-lg font-bold text-gray-400">點擊右側「載入」開始編輯</span>
-                <span class="text-xs mt-2 text-gray-600">升級：聯合防護網 (絕對屏蔽特效溢出)</span>
+                <span class="text-xs mt-2 text-gray-600">升級：精準幾何引擎與色彩負片</span>
             </div>
         </div>
 
-        <!-- 操作控制區 (右半部) -->
+        <!-- 操作控制區 -->
         <div class="control-section">
             <input type="file" id="file-input" accept="image/*" class="hidden">
             
@@ -205,7 +204,7 @@
                     <span class="chevron">▼</span>
                 </summary>
                 <div class="panel-content border-t border-gray-700">
-                    <div class="filter-grid">
+                    <div class="filter-grid" style="grid-template-columns: repeat(3, 1fr);">
                         <button class="btn btn-outline filter-btn btn-active" data-filter="normal">原圖</button>
                         <button class="btn btn-outline filter-btn" data-filter="glaze">釉光增強</button>
                         <button class="btn btn-outline filter-btn" data-filter="vibrant">色彩飽和</button>
@@ -213,6 +212,11 @@
                         <button class="btn btn-outline filter-btn" data-filter="vintage">復古窯燒</button>
                         <button class="btn btn-outline filter-btn" data-filter="glaze-spot">釉光聚光</button>
                         <button class="btn btn-outline filter-btn" data-filter="vib-spot">鮮彩聚光</button>
+                        <button class="btn btn-outline filter-btn" data-filter="bnw">純粹黑白</button>
+                        <button class="btn btn-outline filter-btn text-yellow-400 border-yellow-600/50 hover:bg-yellow-900/30" data-filter="color-splash" title="保留當前選中標籤的單一顏色">單色凝視</button>
+                        <button class="btn btn-outline filter-btn text-orange-400 border-orange-600/50 hover:bg-orange-900/30" data-filter="multi-splash-2" title="以紅、綠、藍順序保留前兩個顏色">雙彩保留</button>
+                        <button class="btn btn-outline filter-btn text-pink-400 border-pink-600/50 hover:bg-pink-900/30" data-filter="multi-splash-3" title="以紅、綠、藍順序保留前三個顏色">三彩保留</button>
+                        <button class="btn btn-outline filter-btn text-cyan-400 border-cyan-600/50 hover:bg-cyan-900/30" data-filter="negative" title="全彩負片反轉">色彩負片</button>
                     </div>
                 </div>
             </details>
@@ -279,37 +283,40 @@
                 </div>
             </details>
 
-            <!-- 面板 5：景深特效 (恢復聯合防護網) -->
+            <!-- 面板 5：景深特效 -->
             <details class="panel" style="border-left: 3px solid #a855f7;" open>
                 <summary>
                     <div class="flex items-center gap-2 text-purple-400">🧿 景深特效 (反向保護圈)</div>
-                    <span class="chevron text-gray-500">▼</span>
+                    <div class="flex items-center gap-3">
+                        <button id="reset-bgfx" class="text-[#ef4444] text-[11px] hover:text-red-400" onclick="event.stopPropagation()">↺ 重設</button>
+                        <span class="chevron text-gray-500">▼</span>
+                    </div>
                 </summary>
                 <div class="panel-content border-t border-gray-700 bg-[#2d2535]">
                     <div class="grid grid-cols-2 gap-1 mb-2">
                         <div class="tab-btn bgfx-tab-btn active flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="radialA">
                             <span class="text-[11px] pointer-events-none text-gray-200">⭕ 圓/橢圓 A</span>
-                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-radialA-active" checked> 啟用</label>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300" onclick="event.stopPropagation()"><input type="checkbox" id="bgfx-radialA-active" checked> 啟用</label>
                         </div>
                         <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="radialB">
                             <span class="text-[11px] pointer-events-none text-gray-200">⭕ 圓/橢圓 B</span>
-                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-radialB-active"> 啟用</label>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300" onclick="event.stopPropagation()"><input type="checkbox" id="bgfx-radialB-active"> 啟用</label>
                         </div>
                         <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="rectA">
                             <span class="text-[11px] pointer-events-none text-gray-200">🔲 矩形/梯形 A</span>
-                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-rectA-active"> 啟用</label>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300" onclick="event.stopPropagation()"><input type="checkbox" id="bgfx-rectA-active"> 啟用</label>
                         </div>
                         <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="rectB">
                             <span class="text-[11px] pointer-events-none text-gray-200">🔲 矩形/梯形 B</span>
-                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-rectB-active"> 啟用</label>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300" onclick="event.stopPropagation()"><input type="checkbox" id="bgfx-rectB-active"> 啟用</label>
                         </div>
                         <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="triA">
                             <span class="text-[11px] pointer-events-none text-gray-200">🔺 三角形 A</span>
-                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-triA-active"> 啟用</label>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300" onclick="event.stopPropagation()"><input type="checkbox" id="bgfx-triA-active"> 啟用</label>
                         </div>
                         <div class="tab-btn bgfx-tab-btn flex flex-col justify-center gap-1 p-1 rounded-md cursor-pointer hover:bg-[#525252]" data-type="triB">
                             <span class="text-[11px] pointer-events-none text-gray-200">🔺 三角形 B</span>
-                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300"><input type="checkbox" id="bgfx-triB-active"> 啟用</label>
+                            <label class="flex items-center justify-center gap-1 text-[10px] cursor-pointer text-gray-300" onclick="event.stopPropagation()"><input type="checkbox" id="bgfx-triB-active"> 啟用</label>
                         </div>
                     </div>
                     <button id="toggle-bgfx-track" class="btn btn-outline w-full mb-3 text-[12px] py-2 font-bold bg-[#3a2e45] text-yellow-400 border-yellow-600">📍 定位顯示(關)</button>
@@ -371,6 +378,47 @@
     <div id="toast">訊息</div>
 
     <script>
+        // ==========================================
+        // 🛡️ 智慧財產權防護：網域鎖定引擎 (Domain Lock)
+        // ==========================================
+        (function() {
+            // 允許運行的官方白名單 (您可以隨時新增其他網域)
+            // 'localhost' 和 '127.0.0.1' 是為了讓您自己在開發測試時不會被鎖住
+            const allowedDomains = [
+                'yeouchia.github.io', 
+                'localhost', 
+                '127.0.0.1',
+                'usercontent.goog' // 加入此行：允許在這個 AI 預覽視窗中進行測試
+            ];
+
+            // 改用完整網址 (href) 來檢查，避免 blob: 沙盒環境的主機名為空導致誤判
+            const currentUrl = window.location.href;
+            const protocol = window.location.protocol;
+
+            // 檢查 1：是否被另存成檔案在電腦上離線打開？(file://)
+            const isLocalFile = (protocol === 'file:');
+            
+            // 檢查 2：是否在未授權的網域運行？
+            const isUnauthorizedDomain = !isLocalFile && !allowedDomains.some(domain => currentUrl.includes(domain));
+
+            if (isLocalFile || isUnauthorizedDomain) {
+                // 如果觸發防護機制，立刻清空畫面並鎖死
+                document.body.innerHTML = `
+                    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background-color:#111;color:white;font-family:sans-serif;text-align:center;padding:20px;">
+                        <h1 style="color:#ef4444;margin-bottom:10px;">⚠️ 未授權的執行環境</h1>
+                        <p style="color:#a1a1aa;margin-bottom:30px;line-height:1.5;">您目前正在非官方授權的環境中使用《照片濾鏡工坊 Pro》。<br>為保障軟體完整性與您的資訊安全，請前往官方網站使用最新版本。</p>
+                        <a href="https://yeouchia.github.io/pottery-glaze-website/" style="padding:12px 24px;background-color:#3b82f6;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:0.2s;">返回官方網站</a>
+                    </div>
+                `;
+                
+                // 放棄執行後續的所有 JavaScript
+                throw new Error("執行環境未授權，已終止系統。"); 
+            }
+        })();
+        // ==========================================
+
+
+        // 核心元素變數宣告
         const fileInput = document.getElementById('file-input');
         const uploadBtn = document.getElementById('upload-btn');
         const canvas = document.getElementById('canvas');
@@ -390,18 +438,21 @@
         let currentScale = 1; let panX = 0, panY = 0; let isDragging = false, hasDragged = false, dragStartX = 0, dragStartY = 0;
 
         let isLocatingLocal = false; let isLocatingBgFx = false; let isDraggingLocation = false;
+        
+        let originalExifObj = null; 
+        let capturedDateTime = null; 
 
-        // 全域狀態初始化 (恢復全域背景特效)
+        // 全域狀態初始化 (包含 20/15 預設值更新)
         let state = {
             filter: 'normal', wb: { r: 1, g: 1, b: 1, active: false },
             global: { hue: 0, sat: 0, light: 0, temp: 0, cont: 0 },
             localMasks: [
-                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 50, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
-                { active: true, type: 'linear-t', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 30, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
-                { active: true, type: 'linear-b', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 30, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
-                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 50, h: 50, size: 50, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
-                { active: true, type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
-                { active: true, type: 'triangle', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 }
+                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'linear-t', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'linear-b', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'radial', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 },
+                { active: true, type: 'triangle', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 }
             ],
             activeLmIdx: 0,
             bgFx: {
@@ -420,49 +471,32 @@
             activeTab: 'red', pickingColor: false, pickingWb: false
         };
 
-        // 狀態遷移與修正 (自動將舊版分散的背景特效抽回為全域)
         function migrateState(s) {
-            if(!s.localMasks[4]) s.localMasks.push({ type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 });
-            if(!s.localMasks[5]) s.localMasks.push({ type: 'triangle', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 40, h: 40, size: 40, feather: 50, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 });
+            if(!s.localMasks[4]) s.localMasks.push({ type: 'rect', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 });
+            if(!s.localMasks[5]) s.localMasks.push({ type: 'triangle', temp: 0, sat: 0, light: 0, cont: 0, sharp: 0, w: 20, h: 20, size: 20, feather: 15, x: 0.5, y: 0.5, perspY: 0, perspX: 0, angle: 0 });
             
             s.localMasks.forEach(m => { 
                 m.light = m.light || 0; m.sat = m.sat || 0; 
                 if (m.active === undefined) m.active = true; 
-                if (m.w === undefined) m.w = m.size || 50;
-                if (m.h === undefined) m.h = m.size || 50;
+                if (m.w === undefined) m.w = m.size || 20;
+                if (m.h === undefined) m.h = m.size || 20;
+                if (m.feather === undefined || m.feather === 50) m.feather = 15;
                 if (m.perspY === undefined) m.perspY = 0;
                 if (m.perspX === undefined) m.perspX = 0;
                 if (m.angle === undefined) m.angle = 0;
             });
 
             if (s.bgFx) {
-                // 將 v4.0 分散在各形狀的背景特效，統整回全域 (只抓第一個啟用的形狀參數當代表)
                 let foundGlobal = false;
                 ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
                     if(!s.bgFx[k]) s.bgFx[k] = { active: false, x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 };
-                    
                     if (s.bgFx[k].active && !foundGlobal && s.bgFx[k].lightness !== undefined) {
-                        s.bgFx.lightness = s.bgFx[k].lightness;
-                        s.bgFx.saturation = s.bgFx[k].saturation;
-                        s.bgFx.contrast = s.bgFx[k].contrast;
-                        s.bgFx.blur = s.bgFx[k].blur;
-                        s.bgFx.zoom = s.bgFx[k].zoom;
-                        foundGlobal = true;
+                        s.bgFx.lightness = s.bgFx[k].lightness; s.bgFx.saturation = s.bgFx[k].saturation; s.bgFx.contrast = s.bgFx[k].contrast; s.bgFx.blur = s.bgFx[k].blur; s.bgFx.zoom = s.bgFx[k].zoom; foundGlobal = true;
                     }
-                    
-                    // 刪除錯誤綁定在形狀上的全域特效
                     delete s.bgFx[k].lightness; delete s.bgFx[k].saturation; delete s.bgFx[k].contrast; delete s.bgFx[k].blur; delete s.bgFx[k].zoom;
-                    
-                    if(s.bgFx[k].angle === undefined) s.bgFx[k].angle = 0;
-                    if(s.bgFx[k].perspY === undefined) s.bgFx[k].perspY = 0;
-                    if(s.bgFx[k].perspX === undefined) s.bgFx[k].perspX = 0;
+                    if(s.bgFx[k].angle === undefined) s.bgFx[k].angle = 0; if(s.bgFx[k].perspY === undefined) s.bgFx[k].perspY = 0; if(s.bgFx[k].perspX === undefined) s.bgFx[k].perspX = 0;
                 });
-                
-                s.bgFx.lightness = s.bgFx.lightness || 0;
-                s.bgFx.saturation = s.bgFx.saturation || 0;
-                s.bgFx.contrast = s.bgFx.contrast || 0;
-                s.bgFx.blur = s.bgFx.blur || 0;
-                s.bgFx.zoom = s.bgFx.zoom || 0;
+                s.bgFx.lightness = s.bgFx.lightness || 0; s.bgFx.saturation = s.bgFx.saturation || 0; s.bgFx.contrast = s.bgFx.contrast || 0; s.bgFx.blur = s.bgFx.blur || 0; s.bgFx.zoom = s.bgFx.zoom || 0;
             }
             return s;
         }
@@ -527,7 +561,8 @@
             let defaultVal = 0;
             if (id === 'bg-w' || id === 'bg-h') defaultVal = 35;
             else if (id === 'bg-feath') defaultVal = 30;
-            else if (id === 'lm-size' || id === 'lm-w' || id === 'lm-h' || id === 'lm-feath') defaultVal = 50;
+            else if (id === 'lm-w' || id === 'lm-h') defaultVal = 20;
+            else if (id === 'lm-feath') defaultVal = 15;
             else if (id === 'bg-angle' || id === 'lm-angle' || id === 'bg-persp-y' || id === 'bg-persp-x' || id === 'lm-persp-y' || id === 'lm-persp-x') defaultVal = 0;
             
             const el = document.getElementById(id);
@@ -539,7 +574,6 @@
             }
         }
 
-        // 動態生成選中景深形狀的專屬滑桿 (僅針對形狀，背景全域獨立)
         function updateBgFxSliders() {
             const act = state.bgFx[state.bgFx.activeTab];
             let sliders = createSlider('bg-w', '保護寬度 ↔', 0, 100, act.w, true) + 
@@ -556,7 +590,6 @@
             sliders += createSlider('bg-feath', '邊緣羽化', 0, 100, act.feather, true);
             document.getElementById('bgfx-shape-sliders').innerHTML = sliders;
 
-            // 全域背景特效滑桿
             const globalSliders = createSlider('bg-blur', '背景模糊', 0, 50, state.bgFx.blur || 0, true) + 
                                   createSlider('bg-zoom', '放射動感', 0, 100, state.bgFx.zoom || 0, true) + 
                                   createSlider('bg-cont', '背景對比', -100, 100, state.bgFx.contrast || 0, true) + 
@@ -618,13 +651,22 @@
                 syncUIWithState(); renderCanvas(); saveHistory(); showToast('該單色已重設');
             };
             document.getElementById('reset-local-mask').onclick = () => {
-                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=50; z.h=50; z.size=50; z.feather=50; z.perspY=0; z.perspX=0; z.angle=0; z.tracking=false; });
+                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=20; z.h=20; z.size=20; z.feather=15; z.perspY=0; z.perspX=0; z.angle=0; z.tracking=false; });
                 updateLocalMaskUI(); renderCanvas(); saveHistory(); showToast('局部遮罩已重設');
             };
+            document.getElementById('reset-bgfx').onclick = () => {
+                ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
+                    state.bgFx[k] = { active: k==='radialA', x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 };
+                });
+                state.bgFx.blur = 0; state.bgFx.zoom = 0; state.bgFx.lightness = 0; state.bgFx.saturation = 0; state.bgFx.contrast = 0;
+                state.bgFx.activeTab = 'radialA';
+                syncUIWithState(); renderCanvas(); saveHistory(); showToast('景深特效已重設');
+            };
+            
             document.getElementById('reset-all-btn').onclick = () => {
                 state.filter = 'normal'; state.global = { hue: 0, sat: 0, light: 0, temp: 0, cont: 0 }; state.wb = { r: 1, g: 1, b: 1, active: false };
                 Object.keys(state.colors).forEach(k => { state.colors[k] = { h:0, s:0, l:0 }; }); state.colors.custom.active = false;
-                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=50; z.h=50; z.size=50; z.feather=50; z.perspY=0; z.perspX=0; z.angle=0; z.tracking=false; });
+                state.localMasks.forEach(z => { z.active=true; z.temp=0; z.sat=0; z.light=0; z.cont=0; z.sharp=0; z.w=20; z.h=20; z.size=20; z.feather=15; z.perspY=0; z.perspX=0; z.angle=0; z.tracking=false; });
                 
                 ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
                     state.bgFx[k] = { active: k==='radialA', x: 0.5, y: 0.5, w: 35, h: 35, feather: 30, perspY: 0, perspX: 0, angle: 0 };
@@ -676,24 +718,25 @@
             document.querySelectorAll('.local-mask-tab').forEach(btn => btn.classList.toggle('active', parseInt(btn.dataset.idx) === state.activeLmIdx));
             document.querySelectorAll('.local-type-btn').forEach(btn => btn.classList.toggle('btn-active', btn.dataset.type === z.type));
             const tBtn = document.getElementById('toggle-local-track');
-            if (z.type === 'radial' || z.type === 'rect' || z.type === 'triangle') { tBtn.classList.remove('hidden'); } else { tBtn.classList.add('hidden'); }
+            
+            // 所有形狀皆可拖曳定位
+            tBtn.classList.remove('hidden'); 
             
             document.getElementById('lm-active-checkbox').checked = z.active;
             
             let shapeSliders = '';
             if (z.type === 'radial' || z.type === 'rect' || z.type === 'triangle') {
-                const wVal = z.w !== undefined ? z.w : (z.size !== undefined ? z.size : 50);
-                const hVal = z.h !== undefined ? z.h : (z.size !== undefined ? z.size : 50);
+                const wVal = z.w !== undefined ? z.w : (z.size !== undefined ? z.size : 20);
+                const hVal = z.h !== undefined ? z.h : (z.size !== undefined ? z.size : 20);
                 shapeSliders = createSlider('lm-w', '寬度 ↔', 0, 100, wVal) + createSlider('lm-h', '高度 ↕', 0, 100, hVal);
                 
                 if (z.type === 'rect' || z.type === 'triangle') {
                     shapeSliders += createSlider('lm-persp-y', '垂直透視', -100, 100, z.perspY || 0);
                     shapeSliders += createSlider('lm-persp-x', '水平透視', -100, 100, z.perspX || 0);
                 }
-                shapeSliders += createSlider('lm-angle', '旋轉角度', -180, 180, z.angle || 0);
-            } else {
-                shapeSliders = createSlider('lm-size', '影響範圍', 0, 100, z.size !== undefined ? z.size : 50);
-            }
+            } 
+            // 只要不是封閉形狀，一定會有角度可以轉
+            shapeSliders += createSlider('lm-angle', '旋轉角度', -180, 180, z.angle || 0);
 
             document.getElementById('local-mask-sliders').innerHTML = 
                 createSlider('lm-temp', '區域色溫', -100, 100, z.temp) + 
@@ -789,6 +832,7 @@
             return 0;
         }
 
+        // 修改：局部遮罩專用，三角形影響內部
         function getMaskWeight(z, px, py, w, h, maxDist) {
             if (z.temp === 0 && z.cont === 0 && z.sharp === 0 && z.light === 0 && z.sat === 0) return 0;
             let weight = 0; 
@@ -806,7 +850,7 @@
                     if (normDist <= 1) weight = 1;
                     else { const normFeather = f_lt / ((rx + ry) / 2); if (normDist < 1 + normFeather) weight = 1 - ((normDist - 1) / normFeather); }
                 }
-            } else if (z.type === 'rect' || z.type === 'triangle') {
+            } else if (z.type === 'rect') {
                 const rx_base = maxDist * ((z.w !== undefined ? z.w : z.size) / 100);
                 const ry_base = maxDist * ((z.h !== undefined ? z.h : z.size) / 100);
                 const f_lt = maxDist * (z.feather / 100) + 1;
@@ -815,27 +859,86 @@
                 const dx = px - z._zx; const dy = py - z._zy;
                 const dx_rot = dx * z._cosA + dy * z._sinA; const dy_rot = -dx * z._sinA + dy * z._cosA;
 
-                if (z.type === 'triangle') {
-                    weight = calcTriWeight(dx_rot, dy_rot, rx_base, ry_base, p_x, p_y, f_lt);
-                } else {
-                    let current_rx = rx_base * (1 + p_y * (dy_rot / Math.max(ry_base, 1)));
-                    let current_ry = ry_base * (1 + p_x * (dx_rot / Math.max(rx_base, 1)));
-                    current_rx = Math.max(0, current_rx); current_ry = Math.max(0, current_ry);
+                let current_rx = rx_base * (1 + p_y * (dy_rot / Math.max(ry_base, 1)));
+                let current_ry = ry_base * (1 + p_x * (dx_rot / Math.max(rx_base, 1)));
+                current_rx = Math.max(0, current_rx); current_ry = Math.max(0, current_ry);
 
-                    const adx = Math.abs(dx_rot), ady = Math.abs(dy_rot);
-                    if (adx < current_rx && ady < current_ry) weight = 1; 
-                    else if (adx < current_rx + f_lt && ady < current_ry + f_lt) {
-                        const distToEdgeX = Math.max(0, adx - current_rx); const distToEdgeY = Math.max(0, ady - current_ry);
-                        const distToEdge = Math.sqrt(distToEdgeX**2 + distToEdgeY**2);
-                        if(distToEdge < f_lt) weight = 1 - (distToEdge / f_lt);
+                const adx = Math.abs(dx_rot), ady = Math.abs(dy_rot);
+                if (adx < current_rx && ady < current_ry) weight = 1; 
+                else if (adx < current_rx + f_lt && ady < current_ry + f_lt) {
+                    const distToEdgeX = Math.max(0, adx - current_rx); const distToEdgeY = Math.max(0, ady - current_ry);
+                    const distToEdge = Math.sqrt(distToEdgeX**2 + distToEdgeY**2);
+                    if(distToEdge < f_lt) weight = 1 - (distToEdge / f_lt);
+                }
+            } else if (z.type === 'triangle') {
+                // --- 全新獨立的正向三角形演算法 ---
+                const rx_base = maxDist * ((z.w !== undefined ? z.w : z.size) / 100);
+                const ry_base = maxDist * ((z.h !== undefined ? z.h : z.size) / 100);
+                const f_lt = maxDist * (z.feather / 100) + 0.001; 
+                const p_y = (z.perspY || 0) / 100; const p_x = (z.perspX || 0) / 100;
+
+                const dx = px - z._zx; const dy = py - z._zy;
+                // 注意：Canvas Y 軸朝下，所以我們讓 dy_rot 的正向朝下計算
+                const dx_rot = dx * z._cosA + dy * z._sinA; 
+                const dy_rot = -dx * z._sinA + dy * z._cosA;
+
+                // 頂點定義 (中心為 0,0)
+                const v0x = 0, v0y = -ry_base; // 頂端
+                const v1x = -rx_base * (1 + p_y), v1y = ry_base * (1 - p_x); // 左下
+                const v2x = rx_base * (1 + p_y), v2y = ry_base * (1 + p_x);  // 右下
+
+                // 計算 Barycentric Coordinates 來判斷是否在三角形內
+                const denom = (v1y - v2y) * (v0x - v2x) + (v2x - v1x) * (v0y - v2y);
+                const w0 = ((v1y - v2y) * (dx_rot - v2x) + (v2x - v1x) * (dy_rot - v2y)) / denom;
+                const w1 = ((v2y - v0y) * (dx_rot - v2x) + (v0x - v2x) * (dy_rot - v2y)) / denom;
+                const w2 = 1.0 - w0 - w1;
+
+                if (w0 >= 0 && w1 >= 0 && w2 >= 0) {
+                    // 在三角形內部
+                    // 計算點到三個邊的最小距離 (用面積公式)
+                    const dist0 = Math.abs((v2x - v1x) * (v1y - dy_rot) - (v1x - dx_rot) * (v2y - v1y)) / Math.sqrt((v2x-v1x)**2 + (v2y-v1y)**2);
+                    const dist1 = Math.abs((v0x - v2x) * (v2y - dy_rot) - (v2x - dx_rot) * (v0y - v2y)) / Math.sqrt((v0x-v2x)**2 + (v0y-v2y)**2);
+                    const dist2 = Math.abs((v1x - v0x) * (v0y - dy_rot) - (v0x - dx_rot) * (v1y - v0y)) / Math.sqrt((v1x-v0x)**2 + (v1y-v0y)**2);
+                    
+                    const minDistToEdge = Math.min(dist0, dist1, dist2);
+
+                    if (minDistToEdge >= f_lt) {
+                        weight = 1; // 距離邊緣超過羽化值，完全影響
+                    } else {
+                        weight = minDistToEdge / f_lt; // 在羽化範圍內，越靠近邊緣越弱
                     }
+                } else {
+                    // 在三角形外部，絕對為 0
+                    weight = 0;
                 }
             } else {
+                // 直線漸層
                 let val = 0;
-                if (z.type === 'linear-t') val = py / h; else if (z.type === 'linear-b') val = (h - py) / h; else if (z.type === 'linear-l') val = px / w; else if (z.type === 'linear-r') val = (w - px) / w;
-                else if (z.type === 'linear-tl') val = (px/w + py/h) / 2; else if (z.type === 'linear-tr') val = ((w-px)/w + py/h) / 2; else if (z.type === 'linear-bl') val = (px/w + (h-py)/h) / 2; else if (z.type === 'linear-br') val = ((w-px)/w + (h-py)/h) / 2;
-                const edge = (z.size !== undefined ? z.size : 50) / 100; const f_lt = z.feather / 100 + 0.001; 
-                if (val < edge) weight = 1; else if (val < edge + f_lt) weight = 1 - ((val - edge) / f_lt);
+                const baseEdge = (z.size !== undefined ? z.size : 50) / 100;
+                // 改以中心點為基準，因為已經有旋轉角度，所以我們只看 Y 軸 (或 X 軸) 的投影
+                const dx = px - z._zx; const dy = py - z._zy;
+                const dx_rot = dx * z._cosA + dy * z._sinA; const dy_rot = -dx * z._sinA + dy * z._cosA;
+
+                // 為了與旋轉引擎同步，我們統一將所有直線漸層視為「從某個方向推過來的牆」
+                // 我們定義 dy_rot > 0 為牆的內部
+                let distFromCenter = 0;
+                if (z.type === 'linear-t') distFromCenter = dy_rot;
+                else if (z.type === 'linear-b') distFromCenter = -dy_rot;
+                else if (z.type === 'linear-l') distFromCenter = dx_rot;
+                else if (z.type === 'linear-r') distFromCenter = -dx_rot;
+                else if (z.type === 'linear-tl') distFromCenter = (dx_rot + dy_rot) * 0.707;
+                else if (z.type === 'linear-tr') distFromCenter = (-dx_rot + dy_rot) * 0.707;
+                else if (z.type === 'linear-bl') distFromCenter = (dx_rot - dy_rot) * 0.707;
+                else if (z.type === 'linear-br') distFromCenter = (-dx_rot - dy_rot) * 0.707;
+
+                const fPx = maxDist * (z.feather / 100);
+                if (distFromCenter <= 0) {
+                    weight = 1; // 完全在牆內
+                } else if (distFromCenter < fPx) {
+                    weight = 1 - (distFromCenter / fPx); // 在羽化區內
+                } else {
+                    weight = 0; // 完全在牆外
+                }
             }
             return Math.max(0, Math.min(1, weight));
         }
@@ -883,7 +986,7 @@
             return 0;
         };
 
-        // 核心渲染引擎 (搭載聯合防護網)
+        // 核心渲染引擎
         function applyFiltersToContext(sourceImg, targetCtx, w, h) {
             state.localMasks.forEach(z => {
                 const a = (z.angle || 0) * Math.PI / 180;
@@ -904,16 +1007,53 @@
             const colorZones = [{ key: 'red', base: 0, range: 25 }, { key: 'orange', base: 25, range: 20 }, { key: 'yellow', base: 45, range: 25 }, { key: 'green', base: 115, range: 45 }, { key: 'cyan', base: 180, range: 30 }, { key: 'blue', base: 235, range: 50 }, { key: 'purple', base: 290, range: 40 }];
             let localSharpActive = state.localMasks.some(m => m.sharp > 0 && m.active);
 
+            let bgMaskArray = null;
+            let anyBgFxActive = ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].some(k => state.bgFx[k].active);
             const bgLightnessFactor = state.bgFx.lightness / 100;
-            const hasBgFx = (bgLightnessFactor !== 0 || state.bgFx.blur > 0 || state.bgFx.zoom > 0 || state.bgFx.saturation !== 0 || state.bgFx.contrast !== 0);
-            let bgMaskArray = hasBgFx ? new Uint8ClampedArray(w * h) : null;
+            const hasBgFx = anyBgFxActive && (bgLightnessFactor !== 0 || state.bgFx.blur > 0 || state.bgFx.zoom > 0 || state.bgFx.saturation !== 0 || state.bgFx.contrast !== 0);
+            
+            if (hasBgFx) bgMaskArray = new Uint8ClampedArray(w * h);
 
             for (let i = 0; i < data.length; i += 4) {
                 let r = data[i], g = data[i+1], b = data[i+2]; const px = (i/4)%w, py = Math.floor((i/4)/w);
                 
                 if (state.wb.active) { r = Math.min(255, r * state.wb.r); g = Math.min(255, g * state.wb.g); b = Math.min(255, b * state.wb.b); }
                 
-                if (state.filter === 'glaze' || state.filter === 'glaze-spot') { 
+                // 黑白與多重凝視特效處理
+                if (state.filter === 'bnw') {
+                    const gray = r * 0.299 + g * 0.587 + b * 0.114;
+                    r = g = b = gray;
+                } else if (state.filter === 'negative') {
+                    // 色彩負片：反轉 RGB
+                    r = 255 - r; g = 255 - g; b = 255 - b;
+                } else if (state.filter.includes('splash')) {
+                    let [pH, pS, pL] = rgbToHsl(r, g, b);
+                    let targetHues = [];
+                    
+                    if (state.filter === 'color-splash') {
+                        if (state.colors.custom.active) { targetHues.push(state.colors.custom.baseH); }
+                        else { const targetZone = colorZones.find(z => z.key === state.activeTab); if (targetZone) targetHues.push(targetZone.base); }
+                    } else if (state.filter === 'multi-splash-2') {
+                        targetHues.push(0); targetHues.push(115); 
+                    } else if (state.filter === 'multi-splash-3') {
+                        targetHues.push(0); targetHues.push(115); targetHues.push(235);
+                    }
+                    
+                    let keepColor = false;
+                    for (let th of targetHues) {
+                        let dH = Math.abs(pH - th); dH = dH > 180 ? 360 - dH : dH;
+                        // 雙重嚴格篩選：色相誤差小於25，且飽和度大於15 (排除膚色)
+                        if (dH < 25 && pS > 15) { keepColor = true; break; }
+                    }
+                    
+                    if (!keepColor) {
+                        const gray = r * 0.299 + g * 0.587 + b * 0.114;
+                        r = g = b = gray;
+                    } else {
+                        r = Math.min(255, r * 1.1); g = Math.min(255, g * 1.1); b = Math.min(255, b * 1.1);
+                    }
+                }
+                else if (state.filter === 'glaze' || state.filter === 'glaze-spot') { 
                     r = Math.min(255, r*1.08); g = Math.min(255, g*1.08); b = Math.min(255, b*1.1); 
                 } 
                 else if (state.filter === 'vibrant' || state.filter === 'vib-spot') { 
@@ -936,7 +1076,6 @@
                 const finalTemp = state.global.temp + localTempOffset; r += finalTemp; b -= finalTemp;
                 r = Math.max(0, Math.min(255, r)); g = Math.max(0, Math.min(255, g)); b = Math.max(0, Math.min(255, b));
 
-                // 全新聯合防護網：計算所有啟動形狀的最大保護值
                 let bgWeight = 0; 
                 if (hasBgFx) {
                     let maxProtection = 0;
@@ -947,7 +1086,6 @@
                     if (state.bgFx.triA.active) maxProtection = Math.max(maxProtection, calcShapeProtection(state.bgFx.triA, px, py, w, h, maxDist, true));
                     if (state.bgFx.triB.active) maxProtection = Math.max(maxProtection, calcShapeProtection(state.bgFx.triB, px, py, w, h, maxDist, true));
                     
-                    // 只要受到任何形狀保護 (maxProtection = 1)，背景影響力 (bgWeight) 就歸零
                     bgWeight = 1 - maxProtection; 
                     bgMaskArray[i/4] = Math.round(bgWeight * 255);
                 }
@@ -956,7 +1094,6 @@
                 S = Math.max(0, Math.min(100, S + state.global.sat + localSatOffset)); 
                 L = Math.max(0, Math.min(100, L + state.global.light + localLightOffset));
 
-                // 受到背景飽和度影響 (例如：抽色)
                 if (bgWeight > 0 && state.bgFx.saturation !== 0) {
                     S = Math.max(0, Math.min(100, S + (state.bgFx.saturation * bgWeight)));
                 }
@@ -966,7 +1103,7 @@
                     let dH = Math.abs(H - state.colors.custom.baseH); dH = dH > 180 ? 360 - dH : dH;
                     if (dH < 20) { let wt = Math.max(0, 1-(dH/20)); const tc = state.colors.custom; H = (H+(tc.h*wt)+360)%360; S = Math.max(0, Math.min(100, S+(tc.s*wt))); L = Math.max(0, Math.min(100, L+(tc.l*wt))); matched = true; }
                 }
-                if (!matched) {
+                if (!matched && !state.filter.includes('splash') && state.filter !== 'bnw' && state.filter !== 'negative') {
                     for (let z of colorZones) {
                         let dH = Math.abs(H - z.base); dH = dH > 180 ? 360 - dH : dH;
                         if (dH < z.range) { let wt = Math.max(0, 1-(dH/z.range)); const tc = state.colors[z.key]; H = (H+(tc.h*wt)+360)%360; S = Math.max(0, Math.min(100, S+(tc.s*wt))); L = Math.max(0, Math.min(100, L+(tc.l*wt))); break; }
@@ -975,7 +1112,6 @@
                 
                 let [nr, ng, nb] = hslToRgb(H, S, L);
 
-                // 受到背景對比與明暗影響
                 if (bgWeight > 0) {
                     if (state.bgFx.contrast !== 0) {
                         const cVal = state.bgFx.contrast * bgWeight;
@@ -1016,14 +1152,13 @@
             }
             targetCtx.putImageData(imgData, 0, 0);
 
-            // 聯合背景模糊與放射動感處理
-            if ((state.bgFx.blur > 0 || state.bgFx.zoom > 0) && bgMaskArray) {
+            if (anyBgFxActive && (state.bgFx.blur > 0 || state.bgFx.zoom > 0) && bgMaskArray) {
                 const mCan = document.createElement('canvas'); mCan.width=w; mCan.height=h; 
                 const mCtx = mCan.getContext('2d'); 
                 const mData = mCtx.createImageData(w, h); 
                 for(let i=0; i<w*h; i++) {
                     mData.data[i*4] = 0; mData.data[i*4+1] = 0; mData.data[i*4+2] = 0;
-                    mData.data[i*4+3] = bgMaskArray[i]; // 全域背景遮罩矩陣
+                    mData.data[i*4+3] = bgMaskArray[i];
                 }
                 mCtx.putImageData(mData, 0, 0);
                 
@@ -1036,7 +1171,6 @@
                 if (state.bgFx.zoom > 0) {
                     fCtx.clearRect(0,0,w,h); const steps=15; fCtx.globalAlpha=1/steps; const maxZoom=state.bgFx.zoom/100;
                     
-                    // 自動運算：以所有啟動形狀的中心點平均值，作為放射縮放中心
                     let zx = 0, zy = 0, zCount = 0;
                     ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(k => {
                         if (state.bgFx[k].active) { zx += state.bgFx[k]._zx; zy += state.bgFx[k]._zy; zCount++; }
@@ -1052,17 +1186,29 @@
             }
         }
 
-        const drawShapeBoundary = (obj, isActiveTab, label) => {
+        const drawShapeBoundary = (obj, isActiveTab, label, shapeType = obj.type) => {
             const cx = canvas.width * obj.x; const cy = canvas.height * obj.y;
             const maxDist = Math.max(canvas.width, canvas.height) / 2;
             
             ctx.save();
             ctx.translate(cx, cy);
+            
+            // 計算斜向漸層的基礎角度補償
+            let baseAngle = 0;
+            if (shapeType === 'linear-t') baseAngle = 0;
+            else if (shapeType === 'linear-b') baseAngle = Math.PI;
+            else if (shapeType === 'linear-l') baseAngle = Math.PI / 2;
+            else if (shapeType === 'linear-r') baseAngle = -Math.PI / 2;
+            else if (shapeType === 'linear-tl') baseAngle = Math.PI / 4;
+            else if (shapeType === 'linear-tr') baseAngle = -Math.PI / 4;
+            else if (shapeType === 'linear-bl') baseAngle = Math.PI * 3 / 4;
+            else if (shapeType === 'linear-br') baseAngle = -Math.PI * 3 / 4;
+            
             const a = (obj.angle || 0) * Math.PI / 180;
-            ctx.rotate(a); 
+            ctx.rotate(a + baseAngle); 
 
             ctx.beginPath();
-            if (obj.type === 'triangle' || obj.type === 'triA' || obj.type === 'triB') {
+            if (shapeType === 'triangle' || shapeType === 'triA' || shapeType === 'triB') {
                 const rx_base = maxDist * (obj.w / 100);
                 const ry_base = maxDist * (obj.h / 100);
                 const p_y = (obj.perspY || 0) / 100;
@@ -1072,9 +1218,9 @@
                 const br_x = rx_base * (1 + p_y); const br_y = ry_base * (1 + p_x);
                 const bl_x = -rx_base * (1 + p_y); const bl_y = ry_base * (1 - p_x);
 
-                ctx.moveTo(top_x, top_y); ctx.lineTo(br_x, br_y); ctx.lineTo(bl_x, bl_y);
+                ctx.moveTo(top_x, top_y); ctx.lineTo(br_x, br_y); ctx.lineTo(bl_x, bl_y); ctx.closePath();
             }
-            else if (obj.type === 'rect' || obj.type === 'rectA' || obj.type === 'rectB') {
+            else if (shapeType === 'rect' || shapeType === 'rectA' || shapeType === 'rectB') {
                 const rx_base = maxDist * (obj.w / 100);
                 const ry_base = maxDist * (obj.h / 100);
                 const p_y = (obj.perspY || 0) / 100;
@@ -1086,38 +1232,47 @@
                 const bl_x = -rx_base * (1 + p_y); const bl_y =  ry_base * (1 - p_x);
 
                 ctx.moveTo(tl_x, tl_y); ctx.lineTo(tr_x, tr_y);
-                ctx.lineTo(br_x, br_y); ctx.lineTo(bl_x, bl_y);
-            } else if (obj.type === 'radial' || obj.type === 'radialA' || obj.type === 'radialB') {
+                ctx.lineTo(br_x, br_y); ctx.lineTo(bl_x, bl_y); ctx.closePath();
+            } else if (shapeType === 'radial' || shapeType === 'radialA' || shapeType === 'radialB') {
                 const rx = maxDist * (obj.w !== undefined ? obj.w : obj.size) / 100;
                 const ry = maxDist * (obj.h !== undefined ? obj.h : obj.size) / 100;
                 ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI*2);
+            } else {
+                // 直線漸層繪製
+                ctx.moveTo(-maxDist*2, 0); ctx.lineTo(maxDist*2, 0);
             }
-            ctx.closePath();
 
             ctx.setLineDash([]); 
-            ctx.strokeStyle = isActiveTab ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.3)';
+            ctx.strokeStyle = isActiveTab ? 'rgba(255, 50, 50, 0.9)' : 'rgba(255, 255, 255, 0.5)';
             ctx.lineWidth = isActiveTab ? 3 : 2;
             ctx.stroke();
 
             ctx.setLineDash([6, 4]); 
-            ctx.strokeStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.6)';
+            ctx.strokeStyle = isActiveTab ? '#ffffff' : 'rgba(255, 255, 255, 0.6)';
             ctx.lineWidth = 1.5;
             ctx.stroke();
             ctx.setLineDash([]);
 
+            // 直線漸層的羽化終點線
+            if (shapeType && shapeType.startsWith('linear')) {
+                const fPx = maxDist * (obj.feather / 100);
+                ctx.beginPath(); ctx.moveTo(-maxDist*2, fPx); ctx.lineTo(maxDist*2, fPx);
+                ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+            }
+
             ctx.restore();
 
-            ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2); 
-            ctx.fillStyle = isActiveTab ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.3)'; ctx.fill();
-            ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI*2); 
-            ctx.fillStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.6)'; ctx.fill();
+            ctx.beginPath(); ctx.arc(cx, cy, 16, 0, Math.PI*2); ctx.moveTo(cx-25, cy); ctx.lineTo(cx+25, cy); ctx.moveTo(cx, cy-25); ctx.lineTo(cx, cy+25);
+            ctx.strokeStyle = isActiveTab ? 'rgba(255, 50, 50, 0.9)' : 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 3; ctx.stroke();
+            ctx.beginPath(); ctx.arc(cx, cy, 17, 0, Math.PI*2); ctx.strokeStyle = 'rgba(0,0,0,0.6)'; ctx.lineWidth = 1.5; ctx.stroke();
             
             if(label) {
-                ctx.fillStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.7)';
-                ctx.font = 'bold 12px sans-serif';
+                ctx.fillStyle = isActiveTab ? '#ff3333' : 'rgba(255, 255, 255, 0.9)';
+                ctx.font = isActiveTab ? 'bold 22px sans-serif' : 'bold 10px sans-serif';
                 ctx.shadowColor = 'white'; ctx.shadowBlur = 4;
                 if(!isActiveTab){ ctx.shadowColor = 'black'; }
-                ctx.fillText(label, cx + 10, cy - 10);
+                ctx.fillText(label, cx + 22, cy - 22);
                 ctx.shadowBlur = 0;
             }
         };
@@ -1130,44 +1285,103 @@
             if (isLocatingLocal || isLocatingBgFx) {
                 if (isLocatingLocal) {
                     state.localMasks.forEach((z, idx) => {
-                        if (z.active || idx === state.activeLmIdx) {
-                            if(z.type === 'radial' || z.type === 'rect' || z.type === 'triangle') {
-                                drawShapeBoundary(z, idx === state.activeLmIdx, ['A','B','C','D','E','F'][idx] + '區');
-                            } else {
-                                const cx = canvas.width * z.x; const cy = canvas.height * z.y;
-                                const isActiveTab = (idx === state.activeLmIdx);
-                                ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI*2); ctx.moveTo(cx-20, cy); ctx.lineTo(cx+20, cy); ctx.moveTo(cx, cy-20); ctx.lineTo(cx, cy+20);
-                                ctx.strokeStyle = isActiveTab ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0,0,0,0.3)';
-                                ctx.lineWidth = 4; ctx.stroke();
-                                ctx.strokeStyle = isActiveTab ? '#ff0000' : 'rgba(255,255,255,0.6)';
-                                ctx.lineWidth = 1.5; ctx.stroke();
-                                
-                                ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI*2); ctx.strokeStyle = 'rgba(0,0,0,0.4)'; ctx.lineWidth = 1; ctx.stroke();
-                                
-                                ctx.fillStyle = isActiveTab ? '#ff0000' : 'rgba(255, 255, 255, 0.7)';
-                                ctx.font = 'bold 12px sans-serif'; 
-                                ctx.shadowColor = 'white'; ctx.shadowBlur = 4; if(!isActiveTab) ctx.shadowColor = 'black';
-                                ctx.fillText(['A','B','C','D','E','F'][idx] + '區', cx + 15, cy - 15);
-                                ctx.shadowBlur = 0;
-                            }
+                        if (z.active) {
+                            drawShapeBoundary(z, idx === state.activeLmIdx, ['A','B','C','D','E','F'][idx] + '區');
                         }
                     });
                 } else if (isLocatingBgFx) {
                     ['radialA', 'radialB', 'rectA', 'rectB', 'triA', 'triB'].forEach(key => {
                         const shape = state.bgFx[key];
-                        if (shape.active || key === state.bgFx.activeTab) {
+                        if (shape.active) {
                             let label = key.replace('radial', '圓').replace('rect', '方').replace('tri', '三角');
-                            drawShapeBoundary(shape, key === state.bgFx.activeTab, label);
+                            drawShapeBoundary(shape, key === state.bgFx.activeTab, label, key);
                         }
                     });
                 }
             }
         }
 
+        // 檔案處理系統
         uploadBtn.onclick = () => fileInput.click();
         
-        fileInput.onchange = (e) => {
-            if (!e.target.files[0]) return; showOverlay('載入與建立雙軌緩存中...'); const reader = new FileReader();
+        fileInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return; 
+            
+            showOverlay('分析影像格式與載入中...');
+
+            originalExifObj = null;
+            capturedDateTime = null;
+            
+            if (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.name.toLowerCase().endsWith('.jpg')) {
+                try {
+                    // 第一道防線：無敵的 exifr 記憶體快抽
+                    if (typeof exifr !== 'undefined') {
+                        try {
+                            const exifData = await exifr.parse(file);
+                            if (exifData) {
+                                let d = exifData.DateTimeOriginal || exifData.DateTime || exifData.CreateDate;
+                                if (d && d instanceof Date) {
+                                    capturedDateTime = `${d.getFullYear()}:${String(d.getMonth()+1).padStart(2,'0')}:${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
+                                    console.log("✅ 透過 exifr 成功捕捉拍攝時間:", capturedDateTime);
+                                } else if (typeof d === 'string' && d.length >= 19) {
+                                    capturedDateTime = d.substring(0, 19);
+                                    console.log("✅ 透過 exifr 捕捉到時間字串:", capturedDateTime);
+                                }
+                            }
+                        } catch(exifrErr) {
+                            console.warn("⚠️ exifr 解析失敗，啟動原生二進位掃描", exifrErr);
+                        }
+                    }
+                    
+                    // 第二道防線：原生二進位字串掃描 (Regex)
+                    if (!capturedDateTime) {
+                        const bufferReader = new FileReader();
+                        bufferReader.onload = function(evt) {
+                            const buffer = evt.target.result;
+                            const view = new Uint8Array(buffer);
+                            // 掃描前 64KB 就好，EXIF 通常在最前面
+                            const length = Math.min(view.length, 65536);
+                            let binaryString = '';
+                            for (let i = 0; i < length; i++) {
+                                binaryString += String.fromCharCode(view[i]);
+                            }
+                            
+                            // 尋找標準 EXIF 時間格式 YYYY:MM:DD HH:MM:SS
+                            const timeRegex = /([0-9]{4}):([0-9]{2}):([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/;
+                            const match = binaryString.match(timeRegex);
+                            
+                            if (match) {
+                                capturedDateTime = match[0];
+                                console.log("🟢 透過原生二進位掃描成功捕捉時間:", capturedDateTime);
+                            } else {
+                                console.log("⚪ 檔案內部未發現標準時間字串");
+                                setTimeout(() => showToast('⚠️ 提醒：此原始照片不含拍攝時間紀錄'), 1500);
+                            }
+                        };
+                        bufferReader.readAsArrayBuffer(file);
+                    }
+                    
+                    // 準備 piexifjs 的骨架
+                    const readerForPiexif = new FileReader();
+                    readerForPiexif.onload = function(evt) {
+                        try {
+                            if (typeof piexif !== 'undefined') {
+                                originalExifObj = piexif.load(evt.target.result);
+                                delete originalExifObj.thumbnail; 
+                                if(originalExifObj["0th"]) delete originalExifObj["0th"][piexif.ImageIFD.Orientation];
+                                if(originalExifObj["Exif"]) delete originalExifObj["Exif"][piexif.ExifIFD.MakerNote];
+                            }
+                        } catch(ex) { console.warn('建立 EXIF 空殼失敗，將在存檔時自動生成'); }
+                    };
+                    readerForPiexif.readAsDataURL(file);
+                } catch(err) {
+                    console.error("EXIF 萃取過程發生未知錯誤", err);
+                }
+            }
+
+            // 啟動畫布渲染軌道
+            const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
                 img.onload = () => {
@@ -1181,7 +1395,8 @@
                         });
                     });
                 }; img.src = event.target.result;
-            }; reader.readAsDataURL(e.target.files[0]);
+            }; 
+            reader.readAsDataURL(file);
         };
 
         function updateBadge() {
@@ -1191,6 +1406,7 @@
             imgInfoBadge.innerText = `輸出: ${w}x${h} | ${rStr}`; imgInfoBadge.classList.remove('hidden');
         }
 
+        // 互動工具條狀態管理
         function updateToolButtons() {
             document.getElementById('eyedropper-btn').classList.toggle('btn-primary', state.pickingColor);
             document.getElementById('wb-btn').classList.toggle('bg-[#4a4a4a]', !state.pickingWb);
@@ -1216,9 +1432,10 @@
             updateToolButtons(); renderCanvas();
         }
 
+        // 基本控制事件監聽
         document.getElementById('toggle-local-track').onclick = () => setInteractionState('local');
         document.getElementById('toggle-bgfx-track').onclick = () => setInteractionState('bgfx');
-        document.getElementById('eyedropper-btn').onclick = (e) => { setInteractionState('color'); e.target.innerText = state.pickingColor ? '請在上方照片點擊...' : '🖌 點此開啟，再去上方照片吸取顏色'; };
+        document.getElementById('eyedropper-btn').onclick = (e) => { setInteractionState('color'); e.target.innerText = state.pickingColor ? '請在左側照片點擊...' : '🖌 點此開啟，再去左側照片吸取顏色'; };
         document.getElementById('wb-btn').onclick = () => { setInteractionState('wb'); if(state.pickingWb) showToast('請點擊照片中「應該要是純白或灰色」的區域'); };
         document.getElementById('heal-btn').onclick = () => { if(!originalProxyImage) return; setInteractionState('heal'); document.getElementById('normal-tools-1').classList.add('hidden'); document.getElementById('normal-tools-2').classList.add('hidden'); document.getElementById('heal-tools').classList.remove('hidden'); showToast('進入修復模式！請點擊污點'); };
         document.getElementById('heal-cancel').onclick = () => setInteractionState('none');
@@ -1229,6 +1446,7 @@
         document.getElementById('zoom-out-btn').onclick = () => { currentScale = Math.max(0.1, currentScale * 0.8); updateTransform(); };
         canvasWrapper.addEventListener('wheel', (e) => { if (!originalProxyImage || isCropping) return; e.preventDefault(); if (e.deltaY < 0) currentScale *= 1.1; else currentScale *= 0.9; currentScale = Math.max(0.1, Math.min(5, currentScale)); updateTransform(); }, { passive: false });
 
+        // 座標換算與拖曳邏輯
         function getEventXY(e) {
             if (e.touches && e.touches.length > 0) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
             if (e.changedTouches && e.changedTouches.length > 0) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
@@ -1261,13 +1479,10 @@
 
             if (isLocatingLocal || isLocatingBgFx) { isDraggingLocation = true; hasDragged = true; updateLocationFromEvent(e); return; }
             
-            const rect = canvas.getBoundingClientRect();
             const pos = getEventXY(e);
-            const realX = (pos.x - rect.left) * (canvas.width / rect.width) / currentScale - (panX / currentScale); 
-            const realY = (pos.y - rect.top) * (canvas.height / rect.height) / currentScale - (panY / currentScale);
+            const { x: realX, y: realY } = getCanvasPos(e);
 
             if (isHealing) {
-                const ratio = originalFullImage.width / originalProxyImage.width;
                 healBlemish(realX, realY);
                 return;
             }
@@ -1429,11 +1644,34 @@
                 const expCtx = expCanvas.getContext('2d', { willReadFrequently: true });
                 applyFiltersToContext(originalFullImage, expCtx, expCanvas.width, expCanvas.height);
 
-                expCanvas.toBlob(async (blob) => {
+                let finalJpegUrl = expCanvas.toDataURL('image/jpeg', 0.95);
+                if (typeof piexif !== 'undefined') {
+                    try {
+                        if (!originalExifObj) originalExifObj = { "0th": {}, "Exif": {}, "GPS": {}, "Interop": {}, "1st": {} };
+                        if (capturedDateTime) {
+                            if (!originalExifObj["0th"]) originalExifObj["0th"] = {};
+                            if (!originalExifObj["Exif"]) originalExifObj["Exif"] = {};
+                            
+                            originalExifObj["0th"][piexif.ImageIFD.DateTime] = capturedDateTime;
+                            originalExifObj["Exif"][piexif.ExifIFD.DateTimeOriginal] = capturedDateTime;
+                            originalExifObj["Exif"][piexif.ExifIFD.DateTimeDigitized] = capturedDateTime;
+                        }
+                        const exifStr = piexif.dump(originalExifObj);
+                        finalJpegUrl = piexif.insert(exifStr, finalJpegUrl);
+                    } catch(e) { console.error("EXIF 寫入失敗", e); }
+                }
+
+                fetch(finalJpegUrl).then(res => res.blob()).then(async (blob) => {
                     hideOverlay();
                     if (!blob) return;
                     if (targetDirHandle) {
                         try {
+                            const options = { mode: 'readwrite' };
+                            if ((await targetDirHandle.queryPermission(options)) !== 'granted') {
+                                if ((await targetDirHandle.requestPermission(options)) !== 'granted') {
+                                    throw new Error('Permission denied');
+                                }
+                            }
                             try { await targetDirHandle.getFileHandle(finalName);
                                 if (!window.confirm(`檔案 "${finalName}" 已經存在。\n\n按「確定」覆蓋舊檔。\n按「取消」自動另存新檔。`)) {
                                     const base = finalName.substring(0, finalName.lastIndexOf('.')); const ext = finalName.substring(finalName.lastIndexOf('.')); finalName = `${base}_${Math.floor(Date.now() / 1000).toString().slice(-4)}${ext}`;
@@ -1441,7 +1679,10 @@
                             } catch (e) {} 
                             const fileHandle = await targetDirHandle.getFileHandle(finalName, { create: true }); const writable = await fileHandle.createWritable(); await writable.write(blob); await writable.close();
                             btn.innerText = '✔ 儲存成功'; setTimeout(()=>btn.innerText='💾 存檔', 1500); return;
-                        } catch (err) { showToast('寫入失敗'); }
+                        } catch (err) { 
+                            showToast('寫入失敗'); 
+                            return; 
+                        }
                     }
                     if (window.showSaveFilePicker) {
                         try { const handle = await window.showSaveFilePicker({ id: 'pottery_app_save_dir', suggestedName: finalName, types: [{ description: 'JPEG 影像', accept: { 'image/jpeg': ['.jpg'] } }] });
@@ -1449,7 +1690,7 @@
                         } catch (err) { return; }
                     }
                     const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = finalName; a.click(); URL.revokeObjectURL(url);
-                }, 'image/jpeg', 0.95);
+                });
             }, 50);
         };
 
