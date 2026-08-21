@@ -66,6 +66,24 @@ header h1 {
 
 /* --- 標記: 個別按鈕顏色定義 (核心修改) --- */
 
+
+/* 鶯歌工商教學網按鈕：採用留言交流板的紫桃漸層 */
+.icon-btn.school {
+    background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
+    color: white;
+}
+.icon-btn.school:hover {
+    background: white;
+    color: #7b2cbf;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 4px 12px rgba(247, 37, 133, 0.5);
+}
+
+
+
+
+
+
 /* Facebook (FB 藍) */
 .facebook-btn {
     background-color: #1877F2;

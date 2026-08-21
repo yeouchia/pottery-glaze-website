@@ -252,6 +252,26 @@
         .icon-btn.fire:hover { background-color: white; color: #FFC107; transform: translateY(-3px) scale(1.1); }
 
         /* 分享按鈕樣式 */
+
+/* 鶯歌工商教學網按鈕：紫色到桃紅漸層 */
+        .icon-btn.school {
+            background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
+            color: white;
+        }
+        .icon-btn.school:hover {
+            background: white;
+            color: #7b2cbf;
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 4px 12px rgba(247, 37, 133, 0.5);
+        }
+
+
+
+
+
+
+
+
         .icon-btn.share {
             background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); /* 亮粉到深紫 */
             color: white;
@@ -429,8 +449,23 @@
                     </div>
                 </div>
                 
-                <div class="social-group" style="position: relative;">
-                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
+
+
+
+
+
+
+
+
+        
+                   
+<div class="social-group" style="position: relative;">
+    <!-- 鶯歌工商 黃明文教學網站（YouTube 左側） -->
+    <a href="https://sites.google.com/view/t244/" target="_blank" class="icon-btn school" title="鶯歌工商-黃明文教學網站" onmouseenter="playHoverSound()" onclick="playClickSound()">
+        <i class="fa-solid fa-graduation-cap"></i>
+    </a>
+
+ <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲" onmouseenter="playHoverSound()" onclick="playClickSound()">
