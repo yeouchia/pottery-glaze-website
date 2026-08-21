@@ -1066,11 +1066,33 @@
             sidebar.classList.toggle('collapsed');
             
             if (sidebar.classList.contains('collapsed')) {
-                toggleText.textContent = '開啟側欄';
+                toggleText.textContent = '開啟目錄';
             } else {
-                toggleText.textContent = '關閉側欄';
+                toggleText.textContent = '關閉目錄';
             }
         }
+
+        // 手機版點擊目錄任一節時，自動滾動並自動關閉目錄抽屜
+        document.querySelectorAll('.section-item a, .chapter-title').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    const sidebar = document.getElementById('sidebar');
+                    const toggleText = document.getElementById('toggleText');
+                    sidebar.classList.add('collapsed');
+                    toggleText.textContent = '開啟目錄';
+                }
+            });
+        });
+
+        // 手機版載入時預設收合目錄
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const toggleText = document.getElementById('toggleText');
+                sidebar.classList.add('collapsed');
+                toggleText.textContent = '開啟目錄';
+            }
+        });
     </script>
 </body>
 </html>

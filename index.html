@@ -9,39 +9,33 @@
     <title>陶藝與釉藥調配 - 專業釉式計算、賽格式計算與教學工具</title>
     <meta name="description" content="專為陶藝愛好者設計的免費釉藥計算工具。提供原料轉釉式、釉式轉原料、賽格式計算、三角座標分析等功能。內含豐富的陶藝教學影片與原料資料庫，助您精準調配完美釉方。">
     <meta name="keywords" content="陶藝, 釉藥, 釉藥計算, 賽格式, 釉式計算, 陶藝教學, 陶瓷原料, 釉藥配方, 陶藝課程, 釉藥分析">
-    <meta name="author" content="陶藝與釉藥調配">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="陶藝與釉藥調配 - 專業計算工具">
     <meta property="og:description" content="免費的陶藝釉藥計算器！支援賽格式、三角座標與原料分析，陶藝人必備的數位工具。">
     <meta property="og:url" content="https://yeouchia.github.io/pottery-glaze-website/"> 
     <meta property="og:image" content="https://yeouchia.github.io/pottery-glaze-website/preview.jpg">
-    <meta property="og:site_name" content="陶藝與AAA釉藥調配">
+    <meta property="og:site_name" content="陶藝與釉藥調配">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="robots" content="index, follow">
 
     <style>
-        /* --- CSS 樣式 --- */
-        /* --- 1. 全局變數定義 --- */
         :root {
-            --primary-bg: #14213d;      /* 主色：深海軍藍 */
-            --accent-color: #fca311;    /* 基礎工具：琥珀金 */
-            --text-light: #e5e5e5;      /* 淺色文字 */
-            --bg-color: #f4f6f8;        /* 網頁背景 */
-            --header-height: 64px;      /* Header 高度 */
+            --primary-bg: #14213d;
+            --accent-color: #fca311;
+            --text-light: #e5e5e5;
+            --bg-color: #f4f6f8;
+            --header-height: 64px;
             
-            /* 下拉選單配色系統 */
             --blue-light: #e0f7fa; --blue-hover: #b3e5fc; --blue-icon: #0277bd;
             --green-light: #e0f2f1; --green-hover: #b2dfdb; --green-icon: #00695c;
             --pink-light: #fce4ec; --pink-hover: #f8bbd0; --pink-icon: #ad1457;
             
-            /* 其他應用專用：紫色與灰色系配色 */
             --purple-light: #f3e5f5; --purple-hover: #e1bee7; --purple-icon: #7b1fa2;
             --gray-light: #eceff1; --gray-hover: #cfd8dc; --gray-icon: #455a64;
         }
 
-        /* --- 2. 核心佈局設定 --- */
         * { box-sizing: border-box; }
         
         html, body {
@@ -55,7 +49,6 @@
             flex-direction: column;
         }
 
-        /* --- 3. 頂部導航列 --- */
         header {
             flex-shrink: 0;
             background-color: var(--primary-bg);
@@ -76,7 +69,6 @@
             align-items: center;
         }
 
-        /* Logo 樣式 */
         .brand {
             display: flex;
             align-items: center;
@@ -91,18 +83,11 @@
         }
         
         .brand h1 { margin: 0; font-size: 1.2rem; font-weight: 700; white-space: nowrap;}
-        
-        .brand i { 
-            font-size: 1.4rem; 
-            color: var(--accent-color); 
-            transition: color 0.3s ease;
-        }
-
+        .brand i { font-size: 1.4rem; color: var(--accent-color); transition: color 0.3s ease; }
         .brand:hover { background-color: rgba(255, 255, 255, 0.1); }
         .brand:hover h1 { color: var(--accent-color); }
         .brand:hover i { color: white; transform: scale(1.1); }
 
-        /* 導航選單 */
         .nav-menu {
             display: flex;
             align-items: center;
@@ -121,7 +106,6 @@
             margin-left: 15px;
         }
 
-        /* --- 按鈕樣式 --- */
         .nav-btn {
             text-decoration: none;
             color: var(--text-light);
@@ -137,56 +121,44 @@
             cursor: pointer;
         }
 
-        /* 1. 原料轉釉式 */
         .nav-btn.grad-gold-white {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
             color: var(--primary-bg);
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent; 
         }
-        .nav-btn.grad-gold-white i { color: #ff0000; font-size: 1.1em; text-shadow: 0 0 1px rgba(0,0,0,0.1); }
+        .nav-btn.grad-gold-white i { color: #ff0000; font-size: 1.1em; }
         .nav-btn.grad-gold-white:hover {
-            background: white; color: var(--accent-color); border-color: var(--accent-color);
+            background: white; color: var(--accent-color);
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
         }
-        .nav-btn.grad-gold-white:hover i { color: #ff0000; }
 
-        /* 2. 釉式轉原料 */
         .nav-btn.grad-white-gold {
             background: linear-gradient(90deg, #ffffff 0%, var(--accent-color) 100%);
             color: var(--primary-bg);
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent;
         }
-        .nav-btn.grad-white-gold i { color: #00b300; font-size: 1.1em; text-shadow: 0 0 1px rgba(0,0,0,0.1); }
+        .nav-btn.grad-white-gold i { color: #00b300; font-size: 1.1em; }
         .nav-btn.grad-white-gold:hover {
-            background: white; color: var(--accent-color); border-color: var(--accent-color);
+            background: white; color: var(--accent-color);
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4);
         }
-        .nav-btn.grad-white-gold:hover i { color: #00b300; }
 
-        /* 3. 雙向轉換 */
         .nav-btn.double {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
             color: var(--primary-bg);
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent;
         }
         .nav-btn.double:hover {
-            background: white; color: var(--accent-color); border-color: var(--accent-color);   
+            background: white; color: var(--accent-color);
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
         }
-        .nav-btn.double i:first-child { color: #ff0000; font-size: 1rem; text-shadow: 0 0 1px rgba(255,255,255,0.8); }
+        .nav-btn.double i:first-child { color: #ff0000; }
         .nav-btn.double span { color: rgba(20, 33, 61, 0.6); }
-        .nav-btn.double:hover span { color: #ccc; }
-        .nav-btn.double i:last-child { color: #00b300; font-size: 1rem; text-shadow: 0 0 1px rgba(255,255,255,0.8); }
-        .nav-btn.double:hover i:first-child { color: #ff0000; }
-        .nav-btn.double:hover i:last-child { color: #00b300; }
+        .nav-btn.double i:last-child { color: #00b300; }
 
-        /* 計算教學按鈕 */
         .nav-btn.learn {
             background: linear-gradient(135deg, #4CC9F0 0%, #2EC4B6 100%);
             color: #14213d; 
@@ -198,25 +170,18 @@
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* 留言交流板按鈕 */
         .nav-btn.guestbook {
-            background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%); /* 紫色到桃紅漸層 */
+            background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
             color: white;
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        .nav-btn.guestbook i { color: #ffd700; /* 金黃色圖示 */ }
+        .nav-btn.guestbook i { color: #ffd700; }
         .nav-btn.guestbook:hover {
-            background: white;
-            color: #7b2cbf;
-            border-color: #7b2cbf;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4); /* 桃紅色光暈 */
+            background: white; color: #7b2cbf;
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
         }
-        .nav-btn.guestbook:hover i { color: #f72585; }
 
-        /* 其他應用按鈕（酷炫橘藍綠黃漸層） */
         .nav-btn.others {
             background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 30%, #2ec4b6 70%, #cbf3f0 100%);
             color: #14213d;
@@ -224,12 +189,10 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .nav-btn.others:hover {
-            background: white;
-            color: #ff9f1c;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
+            background: white; color: #ff9f1c;
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
         }
-/* 陶釉講義按鈕：活力珊瑚橘漸層 */
+
         .nav-btn.lecture-btn {
             background: linear-gradient(135deg, #ff5e62 0%, #ff9966 100%);
             color: white;
@@ -237,20 +200,17 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .nav-btn.lecture-btn:hover {
-            background: white;
-            color: #ff5e62;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 94, 98, 0.4);
+            background: white; color: #ff5e62;
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(255, 94, 98, 0.4);
         }
-        /* --- Icon 按鈕樣式 --- */
+
         .icon-btn {
             width: 32px; height: 32px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: white; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none; font-size: 1.1rem;
             box-shadow: 0 3px 6px rgba(0,0,0,0.3); position: relative;
-            cursor: pointer; 
-            border: none;    
+            cursor: pointer; border: none;    
         }
         .icon-btn.yt { background-color: #FF0000; }
         .icon-btn.yt:hover { background-color: white; color: #FF0000; transform: translateY(-3px) scale(1.1); }
@@ -262,49 +222,20 @@
         .icon-btn.ig:hover { background: white; color: #C13584; transform: translateY(-3px) scale(1.1); }
         .icon-btn.fire { background-color: #FFC107; color: #14213d; }
         .icon-btn.fire:hover { background-color: white; color: #FFC107; transform: translateY(-3px) scale(1.1); }
+        .icon-btn.school { background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%); color: white; }
+        .icon-btn.school:hover { background: white; color: #7b2cbf; transform: translateY(-3px) scale(1.1); }
 
-        /* 分享按鈕樣式 */
+        .icon-btn.share { background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; }
+        .icon-btn.share:hover { background: white; color: #ff006e; transform: translateY(-3px) scale(1.1); }
 
-/* 鶯歌工商教學網按鈕：紫色到桃紅漸層 */
-        .icon-btn.school {
-            background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
-            color: white;
-        }
-        .icon-btn.school:hover {
-            background: white;
-            color: #7b2cbf;
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 4px 12px rgba(247, 37, 133, 0.5);
-        }
-
-
-
-
-
-
-
-
-        .icon-btn.share {
-            background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); /* 亮粉到深紫 */
-            color: white;
-        }
-        .icon-btn.share:hover {
-            background: white;
-            color: #ff006e; 
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 0 15px rgba(255, 0, 110, 0.6); 
-        }
-
-        /* --- 下拉選單樣式 --- */
-        .dropdown { position: relative; padding-bottom: 0; }
+        .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; left: 0; top: 100%; margin-top: 0;
-            padding-top: 5px; background-color: transparent; min-width: 220px; z-index: 100;
+            padding-top: 5px; min-width: 220px; z-index: 100;
         }
-        /* 分享選單專用樣式 */
         .share-dropdown-content {
             display: none; position: absolute; right: 0; top: 100%; margin-top: 10px;
-            padding-top: 0; background-color: transparent; min-width: 180px; z-index: 100;
+            min-width: 180px; z-index: 100;
         }
         .share-dropdown-content.show { display: block; animation: fadeIn 0.2s ease; }
 
@@ -317,79 +248,141 @@
         .dropdown:hover .dropdown-content { display: block; }
 
         .dropdown-item {
-            color: #000; padding: 15px 20px; text-decoration: none; 
-            display: flex; align-items: center; gap: 15px;     
-            font-size: 0.95rem; font-weight: 700; white-space: nowrap; 
+            color: #000; padding: 12px 18px; text-decoration: none; 
+            display: flex; align-items: center; gap: 12px;     
+            font-size: 0.92rem; font-weight: 700; white-space: nowrap; 
             transition: all 0.2s ease; border-left: 6px solid transparent; 
-            background-color: #f9f9f9;
-            cursor: pointer;
+            background-color: #f9f9f9; cursor: pointer; border-bottom: 1px solid #eee;
         }
-        .dropdown-item i { width: 24px; text-align: center; font-size: 1.2em; transition: all 0.2s; flex-shrink: 0; opacity: 0.8; }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item i { width: 20px; text-align: center; font-size: 1.1em; flex-shrink: 0; opacity: 0.85; }
 
-        /* 一般教學選單顏色 */
         .dropdown-item.item-blue { background-color: var(--blue-light); border-left-color: var(--blue-icon); }
         .dropdown-item.item-blue i { color: var(--blue-icon); } 
-        .dropdown-item.item-blue:hover { background-color: var(--blue-hover); padding-left: 25px; }
+        .dropdown-item.item-blue:hover { background-color: var(--blue-hover); padding-left: 22px; }
         
         .dropdown-item.item-green { background-color: var(--green-light); border-left-color: var(--green-icon); }
         .dropdown-item.item-green i { color: var(--green-icon); }
-        .dropdown-item.item-green:hover { background-color: var(--green-hover); padding-left: 25px; }
+        .dropdown-item.item-green:hover { background-color: var(--green-hover); padding-left: 22px; }
 
         .dropdown-item.item-pink { background-color: var(--pink-light); border-left-color: var(--pink-icon); }
         .dropdown-item.item-pink i { color: var(--pink-icon); }
-        .dropdown-item.item-pink:hover { background-color: var(--pink-hover); padding-left: 25px; }
+        .dropdown-item.item-pink:hover { background-color: var(--pink-hover); padding-left: 22px; }
 
-        /* 其他應用選單顏色樣式 */
         .dropdown-item.item-purple { background-color: var(--purple-light); border-left-color: var(--purple-icon); }
         .dropdown-item.item-purple i { color: var(--purple-icon); }
-        .dropdown-item.item-purple:hover { background-color: var(--purple-hover); padding-left: 25px; }
+        .dropdown-item.item-purple:hover { background-color: var(--purple-hover); padding-left: 22px; }
 
         .dropdown-item.item-gray { background-color: var(--gray-light); border-left-color: var(--gray-icon); }
         .dropdown-item.item-gray i { color: var(--gray-icon); }
-        .dropdown-item.item-gray:hover { background-color: var(--gray-hover); padding-left: 25px; }
+        .dropdown-item.item-gray:hover { background-color: var(--gray-hover); padding-left: 22px; }
 
-        /* 分享選單項目顏色 */
         .dropdown-item.item-line { background-color: #f0fff0; border-left-color: #00c300; }
         .dropdown-item.item-line i { color: #00c300; }
-        .dropdown-item.item-line:hover { background-color: #dcfce7; padding-left: 25px; }
-
         .dropdown-item.item-fb { background-color: #f0f7ff; border-left-color: #1877f2; }
         .dropdown-item.item-fb i { color: #1877f2; }
-        .dropdown-item.item-fb:hover { background-color: #dbeafe; padding-left: 25px; }
-
         .dropdown-item.item-copy { background-color: #f3f4f6; border-left-color: #6b7280; }
         .dropdown-item.item-copy i { color: #6b7280; }
-        .dropdown-item.item-copy:hover { background-color: #e5e7eb; padding-left: 25px; }
-        
-        .dropdown-item { border-bottom: 2px solid #fff; }
-        .dropdown-item:last-child { border-bottom: none; }
 
-        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 5px; }
 
-        /* --- 主要內容區 --- */
         main { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; background-color: white; position: relative; }
-        .iframe-container { width: 100%; height: 100%; flex: 1; border: none; box-shadow: none; }
+        .iframe-container { width: 100%; height: 100%; flex: 1; border: none; }
         iframe { width: 100%; height: 100%; border: none; display: block; }
 
-        /* --- 底部區 --- */
-        footer { flex-shrink: 0; background-color: #0f1a2e; color: #666; padding: 5px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
+        footer { flex-shrink: 0; background-color: #0f1a2e; color: #888; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
 
-        /* --- RWD --- */
+        /* ====================================================
+           手機與平板專屬響應式設計 (RWD) 
+           ==================================================== */
         @media (max-width: 1250px) {
-            .nav-menu { display: none; position: absolute; top: var(--header-height); left: 0; width: 100%; background-color: var(--primary-bg); flex-direction: column; padding: 10px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); align-items: stretch; }
-            .nav-menu.active { display: flex; }
-            .tools-group, .social-group { flex-direction: column; width: 100%; gap: 0; margin: 0; padding: 0; border: none; }
-            .nav-btn, .icon-btn { width: 100%; justify-content: flex-start; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; }
-            .icon-btn { width: 100%; height: auto; border-radius: 0; background-color: transparent !important; color: var(--text-light) !important; gap: 10px; box-shadow: none; }
-            .icon-btn:hover { background-color: rgba(255,255,255,0.1) !important; color: white !important; transform: none; }
-            .icon-btn.yt i { color: #FF0000; } .icon-btn.game i { color: #4CAF50; } .icon-btn.fb i { color: #1877F2; } .icon-btn.ig i { color: #E1306C; } .icon-btn.fire i { color: #FFC107; }
-            .dropdown-item { padding-left: 20px; } .dropdown-item:hover { padding-left: 25px; }
-            .icon-btn::after { content: attr(title); font-size: 0.9rem; }
             .mobile-menu-btn { display: block; }
-            /* RWD 時分享選單的定位 */
-            .share-dropdown-content { position: static; width: 100%; display: none; animation: none; padding-top: 0; margin-top: 0; }
-            .share-dropdown-content.show { display: block; }
-            .dropdown-inner { box-shadow: none; border-radius: 0; }
+            
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                height: calc(100vh - var(--header-height));
+                background-color: #14213d;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 15px 20px 40px 20px;
+                overflow-y: auto;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+                z-index: 9999;
+            }
+
+            .nav-menu.active { display: flex; animation: slideDown 0.3s ease; }
+            @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+            .tools-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 12px 18px;
+                font-size: 0.95rem;
+                border-radius: 8px;
+            }
+
+            /* 手機版下拉選單改為整齊展開之二級清單 */
+            .dropdown { width: 100%; }
+            .dropdown:hover .dropdown-content { display: none; }
+            .dropdown.mobile-open .dropdown-content { display: block; }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                padding: 6px 0 6px 12px;
+                box-shadow: none;
+            }
+            .dropdown-inner {
+                background: transparent;
+                box-shadow: none;
+                border-radius: 6px;
+                overflow: visible;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+            .dropdown-item {
+                border-radius: 6px;
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+
+            /* 手機版社群與外部按鈕橫向平鋪 */
+            .social-group {
+                border-left: none;
+                border-top: 1px solid rgba(255,255,255,0.15);
+                padding-left: 0;
+                margin-left: 0;
+                margin-top: 20px;
+                padding-top: 20px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .icon-btn { width: 38px; height: 38px; font-size: 1.2rem; }
+            .icon-btn::after { display: none; }
+
+            .share-dropdown-content {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                top: auto;
+                width: auto;
+            }
         }
     </style>
 </head>
@@ -402,84 +395,78 @@
                 <h1>陶藝與釉藥調配</h1>
             </a>
 
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <i class="fa-solid fa-bars"></i>
+            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="切換選單">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
             </button>
+
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
-                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-flask"></i> 原料轉釉式
                     </a>
-                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-calculator"></i> 釉式轉原料
                     </a>
-                    <a href="./welcome-2.html" target="content_frame" class="nav-btn double protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <a href="./welcome-2.html" target="content_frame" class="nav-btn double protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-flask"></i> <span style="font-size: 0.8em;">+</span> <i class="fa-solid fa-calculator"></i>
                         雙向轉換
                     </a>
 
-                    <div class="dropdown">
-                        <a href="#" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <!-- 計算教學下拉選單 -->
+                    <div class="dropdown" id="learnDropdown">
+                        <a href="javascript:void(0)" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
                             <i class="fa-solid fa-book-open"></i> 計算教學 <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="./jiaoxue/sanjiao.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                <a href="./jiaoxue/sanjiao.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-shapes"></i> 三角座標計算
                                 </a>
-                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-table-cells"></i> 賽格式計算
                                 </a>
-                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-pink" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-pink" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-store"></i> 原料廠商資訊
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-comments"></i> 留言交流板
                     </a>
 
-                    <div class="dropdown">
-                        <a href="#" class="nav-btn others" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <!-- 其他應用下拉選單 -->
+                    <div class="dropdown" id="otherDropdown">
+                        <a href="javascript:void(0)" class="nav-btn others" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
                             <i class="fa-solid fa-cubes"></i> 其他應用 <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> 電腦版影像編輯器
                                 </a>
-                                <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                                <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> 手機版影像編輯器
                                 </a>
-                                <a href="#" onclick="alert('新應用開發中，敬請期待！'); return false;" class="dropdown-item item-gray" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i> 開發中 b
+                                <a href="#" onclick="alert('新應用開發中，敬請期待！'); return false;" class="dropdown-item item-gray" onmouseenter="playHoverSound()">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i> 開發中功能
                                 </a>
                             </div>
                         </div>
                     </div>
-              
-               
-<!-- 陶釉講義 按鈕 -->
-                    <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="playClickSound()">
+
+                    <!-- 陶釉講義按鈕 -->
+                    <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-book-open-reader"></i> 陶釉講義
                     </a>
-  </div>
+                </div>
 
-
-
-
-
-        
-                   
-<div class="social-group" style="position: relative;">
-    <!-- 鶯歌工商 黃明文教學網站（YouTube 左側） -->
-    <a href="https://sites.google.com/view/t244/" target="_blank" class="icon-btn school" title="鶯歌工商-黃明文教學網站" onmouseenter="playHoverSound()" onclick="playClickSound()">
-        <i class="fa-solid fa-graduation-cap"></i>
-    </a>
-
- <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                <div class="social-group">
+                    <a href="https://sites.google.com/view/t244/" target="_blank" class="icon-btn school" title="鶯歌工商-黃明文教學網站" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲" onmouseenter="playHoverSound()" onclick="playClickSound()">
@@ -494,24 +481,20 @@
                     <a href="https://www.facebook.com/profile.php?id=100063821328990" target="_blank" class="icon-btn fire" title="炎變の燒" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-fire"></i>
                     </a>
-
                     <button class="icon-btn share" title="分享本站" onclick="toggleShareMenu(event); playClickSound();" onmouseenter="playHoverSound()">
                         <i class="fa-solid fa-share-nodes"></i>
                     </button>
 
                     <div id="shareDropdown" class="share-dropdown-content">
                         <div class="dropdown-inner">
-                            <a href="#" onclick="shareToFB(); return false;" class="dropdown-item item-fb" onmouseenter="playHoverSound()">
+                            <a href="#" onclick="shareToFB(); return false;" class="dropdown-item item-fb">
                                 <i class="fa-brands fa-facebook"></i> 分享到 FB
                             </a>
-                            <a href="#" onclick="shareToLine(); return false;" class="dropdown-item item-line" onmouseenter="playHoverSound()">
+                            <a href="#" onclick="shareToLine(); return false;" class="dropdown-item item-line">
                                 <i class="fa-brands fa-line"></i> 分享到 LINE
                             </a>
-                            <a href="#" onclick="copyLink(); return false;" class="dropdown-item item-copy" onmouseenter="playHoverSound()">
+                            <a href="#" onclick="copyLink(); return false;" class="dropdown-item item-copy">
                                 <i class="fa-solid fa-link"></i> 複製連結
-                            </a>
-                            <a href="#" onclick="shareNative(); return false;" class="dropdown-item item-copy" id="nativeShareBtn" style="display:none;" onmouseenter="playHoverSound()">
-                                <i class="fa-solid fa-share-alt"></i> 更多選項...
                             </a>
                         </div>
                     </div>
@@ -529,7 +512,7 @@
     </main>
 
     <footer>
-        &copy; 2025 陶藝與釉藥調配 by 黃明文
+        &copy; 2026 陶藝與釉藥調配 ｜ 開發與維護：黃明文老師 (Ming-Win Huang)
     </footer>
 
     <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
@@ -537,51 +520,49 @@
     <audio id="bgMusic" src="good.mp3" loop preload="auto"></audio>
 
     <script>
-        // 切換導航選單 (Mobile)
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
+            const icon = document.getElementById('menuIcon');
             menu.classList.toggle('active');
+            if (menu.classList.contains('active')) {
+                icon.className = "fa-solid fa-xmark";
+            } else {
+                icon.className = "fa-solid fa-bars";
+            }
         }
-        
-        // 點擊連結收合選單 (Mobile)
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 1250) {
-                    document.getElementById('navMenu').classList.remove('active');
-                }
-            });
-        });
 
-        // 監聽點擊關閉分享選單
+        function toggleDropdown(id) {
+            if (window.innerWidth <= 1250) {
+                const target = document.getElementById(id);
+                target.classList.toggle('mobile-open');
+            }
+        }
+
+        function handleMobileClick(event) {
+            playClickSound();
+            if (window.innerWidth <= 1250) {
+                const menu = document.getElementById('navMenu');
+                const icon = document.getElementById('menuIcon');
+                menu.classList.remove('active');
+                icon.className = "fa-solid fa-bars";
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('mobile-open'));
+            }
+        }
+
         document.addEventListener('click', function(e) {
             const shareDropdown = document.getElementById('shareDropdown');
             const shareBtn = document.querySelector('.icon-btn.share');
-            if (!shareDropdown.contains(e.target) && !shareBtn.contains(e.target)) {
+            if (shareDropdown && !shareDropdown.contains(e.target) && !shareBtn.contains(e.target)) {
                 shareDropdown.classList.remove('show');
             }
         });
 
-        // 防止右鍵
-        document.querySelectorAll('.protected-link').forEach(link => {
-            link.addEventListener('contextmenu', function(e) {
-                e.preventDefault(); 
-                alert('為確保計算功能正常運作，\n請使用「左鍵」點擊於當前頁面操作。');
-            });
-        });
-
-        // ==========================================
-        //  分享功能邏輯
-        // ==========================================
         const currentUrl = encodeURIComponent(window.location.href);
-        const pageTitle = encodeURIComponent("推薦！陶藝與釉藥調配專業工具網站");
 
         function toggleShareMenu(event) {
             event.stopPropagation();
             const menu = document.getElementById('shareDropdown');
             menu.classList.toggle('show');
-            if (navigator.share) {
-                document.getElementById('nativeShareBtn').style.display = 'flex';
-            }
         }
 
         function shareToLine() {
@@ -595,79 +576,40 @@
         }
 
         function copyLink() {
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('✨ 網址已複製！\n\n快去貼上分享給您的陶藝好友吧！');
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('✨ 網址已複製！快去分享給陶藝好友吧！');
             }).catch(() => {
                 alert('複製失敗，請手動複製網址。');
             });
             document.getElementById('shareDropdown').classList.remove('show');
         }
 
-        async function shareNative() {
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: '陶藝與釉藥調配',
-                        text: '推薦這個超棒的陶藝釉藥計算工具與教學網站！',
-                        url: window.location.href
-                    });
-                } catch (err) {
-                    console.log('分享取消');
-                }
-            }
-            document.getElementById('shareDropdown').classList.remove('show');
-        }
-
-        // ==========================================
-        //  音效邏輯
-        // ==========================================
         var hoverAudio = document.getElementById("hoverSound");
         var clickAudio = document.getElementById("clickSound");
         var bgMusic = document.getElementById("bgMusic");
         
         function unlockAudio() {
-            if(hoverAudio) {
-                hoverAudio.play().then(() => {
-                    hoverAudio.pause();
-                    hoverAudio.currentTime = 0;
-                }).catch((e) => {});
-            }
-            if(clickAudio) {
-                clickAudio.play().then(() => {
-                    clickAudio.pause();
-                    clickAudio.currentTime = 0;
-                }).catch((e) => {});
-            }
-            if(bgMusic) {
-                bgMusic.volume = 0.3; 
-                bgMusic.play().catch((e) => {
-                    console.log("Background music blocked:", e);
-                });
-            }
+            if(hoverAudio) { hoverAudio.play().then(() => { hoverAudio.pause(); hoverAudio.currentTime = 0; }).catch((e) => {}); }
+            if(clickAudio) { clickAudio.play().then(() => { clickAudio.pause(); clickAudio.currentTime = 0; }).catch((e) => {}); }
+            if(bgMusic) { bgMusic.volume = 0.3; bgMusic.play().catch((e) => {}); }
             document.body.onclick = null;
         }
 
         function playHoverSound() {
             if (hoverAudio) {
-                hoverAudio.currentTime = 0;
-                hoverAudio.volume = 0.5;
-                var promise = hoverAudio.play();
-                if (promise !== undefined) { promise.catch(function(error) {}); }
+                hoverAudio.currentTime = 0; hoverAudio.volume = 0.5;
+                var p = hoverAudio.play();
+                if (p !== undefined) { p.catch(() => {}); }
             }
         }
 
         function playClickSound() {
             if (clickAudio) {
-                clickAudio.currentTime = 0;
-                clickAudio.volume = 0.5;
-                var promise = clickAudio.play();
-                if (promise !== undefined) { promise.catch(function(error) {}); }
+                clickAudio.currentTime = 0; clickAudio.volume = 0.5;
+                var p = clickAudio.play();
+                if (p !== undefined) { p.catch(() => {}); }
             }
         }
     </script>
-<footer style="text-align: center; padding: 20px; font-size: 14px; color: #666;">
-    <p>© 2026 陶藝與釉藥調配 | 開發與維護：黃明文老師 (Ming-Win Huang)</p>
-</footer>
 </body>
 </html>
