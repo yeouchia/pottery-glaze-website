@@ -423,8 +423,18 @@
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`, '_blank');
         }
 
+        // 修改為：判斷手機直接喚醒 LINE App，電腦則開網頁版分享
         function shareToLine() {
-            window.open(`https://social-plugins.line.me/lineit/share?url=${siteUrl}`, '_blank');
+            const textToShare = encodeURIComponent('推薦這個實用的陶藝與釉藥調配工具：\n') + siteUrl;
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                // 手機版：使用深度連結，直接喚醒 LINE App
+                window.location.href = `https://line.me/R/msg/text/?${textToShare}`;
+            } else {
+                // 電腦版：維持原本的網頁版分享視窗
+                window.open(`https://social-plugins.line.me/lineit/share?url=${siteUrl}`, '_blank');
+            }
         }
 
         function copyCurrentLink() {
