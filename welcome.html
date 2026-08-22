@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="author" content="黃明文 Ming-Win Huang">
     <!-- 0. 響應式 Viewport 設定 --開始 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- 0. 響應式 Viewport 設定 --結束 -->
     <title>歡迎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; }
 
-        /* 1. 電腦版原始標準排版樣式 --開始 */
+        /* 1. 電腦版原始標準排版樣式（嚴格保持 1-2.jpg 原始結構與大小） --開始 */
         body {
             font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -26,6 +26,8 @@
             align-items: center;
             color: #14213d;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         @keyframes gradientBG {
@@ -213,10 +215,10 @@
             margin-right: auto;
         }
         .footer-note i { color: #fca311; margin-right: 8px; }
-        /* 1. 電腦版原始標準排版樣式 --結束 */
+        /* 1. 電腦版原始標準排版樣式（嚴格保持 1-2.jpg 原始結構與大小） --結束 */
 
         /* 2. 平板專屬樣式 (螢幕寬度 601px ~ 1024px) --開始 */
-        @media (max-width: 1024px) {
+        @media (min-width: 601px) and (max-width: 1024px) {
             body { height: auto; padding: 20px 0; }
             .hero-section { flex-direction: column; text-align: center; }
             .hero-content-left { flex-direction: column; text-align: center; }
@@ -225,102 +227,117 @@
         }
         /* 2. 平板專屬樣式 (螢幕寬度 601px ~ 1024px) --結束 */
 
-        /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 600px 觸發） --開始 */
-        @media (max-width: 600px) {
+        /* 3. 手機版 Chrome/Safari 專屬等比飽滿放大樣式（僅在 ≤ 600px 觸發） --開始 */
+        @media screen and (max-width: 600px) {
             body {
-                justify-content: flex-start;
-                padding: 15px 0 60px 0;
+                justify-content: flex-start !important;
+                padding: 16px 0 80px 0 !important;
+                height: auto !important;
             }
 
             .container {
-                width: 100%;
-                padding: 0 12px;
+                width: 100% !important;
+                padding: 0 14px !important;
             }
 
             .hero-section {
-                padding: 18px 15px;
-                gap: 15px;
-                border-radius: 14px;
-                margin-bottom: 15px;
+                flex-direction: column !important;
+                padding: 22px 18px !important;
+                gap: 18px !important;
+                border-radius: 16px !important;
+                margin-bottom: 16px !important;
+                text-align: center !important;
+            }
+
+            .hero-content-left {
+                flex-direction: column !important;
+                gap: 12px !important;
+                text-align: center !important;
             }
 
             .main-icon {
-                font-size: 3.8em;
+                font-size: 4.2em !important;
             }
 
             h2 {
-                font-size: 1.6em;
-                margin-bottom: 6px;
+                font-size: 1.75em !important;
+                margin-bottom: 8px !important;
             }
 
             .subtitle {
-                font-size: 1.05rem;
-                line-height: 1.6;
+                font-size: 1.12rem !important;
+                line-height: 1.65 !important;
             }
 
             .hero-share-right {
-                padding: 14px 16px;
-                border-radius: 12px;
-                gap: 10px;
+                width: 100% !important;
+                padding: 16px !important;
+                border-radius: 14px !important;
+                gap: 14px !important;
             }
 
             .share-title {
-                font-size: 1.05rem;
+                font-size: 1.15rem !important;
+            }
+
+            .share-buttons {
+                gap: 16px !important;
             }
 
             .share-btn {
-                width: 44px;
-                height: 44px;
-                font-size: 1.3rem;
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 1.45rem !important;
             }
 
             .features-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
+                grid-template-columns: 1fr !important;
+                gap: 18px !important;
             }
 
             .feature-card {
-                padding: 18px 16px;
-                border-radius: 14px;
-                border-left-width: 6px;
+                padding: 24px 20px !important;
+                border-radius: 16px !important;
+                border-left-width: 8px !important;
             }
 
             .card-header {
-                gap: 12px;
-                margin-bottom: 8px;
+                gap: 14px !important;
+                margin-bottom: 12px !important;
             }
 
             .card-icon {
-                font-size: 1.8em;
+                font-size: 2.2em !important;
             }
 
             .card-title {
-                font-size: 1.3em;
+                font-size: 1.45em !important;
             }
 
             .card-desc {
-                font-size: 1.05rem;
-                line-height: 1.5;
-                margin-bottom: 10px;
+                font-size: 1.18rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 14px !important;
             }
 
             .card-links li {
-                font-size: 1.05rem;
-                margin-bottom: 8px;
-                gap: 10px;
+                font-size: 1.15rem !important;
+                margin-bottom: 10px !important;
+                gap: 12px !important;
             }
 
             .card-links li i {
-                font-size: 1.15em;
+                font-size: 1.25em !important;
+                width: 24px !important;
             }
 
             .footer-note {
-                font-size: 0.95em;
-                padding: 10px 20px;
-                margin-top: 15px;
+                font-size: 1.05em !important;
+                padding: 12px 24px !important;
+                margin-top: 20px !important;
             }
         }
-        /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 600px 觸發） --結束 */
+        /* 3. 手機版 Chrome/Safari 專屬等比飽滿放大樣式（僅在 ≤ 600px 觸發） --結束 */
     </style>
 </head>
 <body>
