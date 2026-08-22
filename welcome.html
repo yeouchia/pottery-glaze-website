@@ -11,7 +11,7 @@
     <style>
         * { box-sizing: border-box; }
 
-        /* 1. 電腦版原始標準排版樣式（嚴格保持 1-2.jpg 原始結構與大小） --開始 */
+        /* 1. 電腦版原始標準排版樣式（嚴格保持原版無任何變動） --開始 */
         body {
             font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -215,24 +215,15 @@
             margin-right: auto;
         }
         .footer-note i { color: #fca311; margin-right: 8px; }
-        /* 1. 電腦版原始標準排版樣式（嚴格保持 1-2.jpg 原始結構與大小） --結束 */
+        /* 1. 電腦版原始標準排版樣式（嚴格保持原版無任何變動） --結束 */
 
-        /* 2. 平板專屬樣式 (螢幕寬度 601px ~ 1024px) --開始 */
-        @media (min-width: 601px) and (max-width: 1024px) {
-            body { height: auto; padding: 20px 0; }
-            .hero-section { flex-direction: column; text-align: center; }
-            .hero-content-left { flex-direction: column; text-align: center; }
-            .hero-share-right { width: 100%; }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        /* 2. 平板專屬樣式 (螢幕寬度 601px ~ 1024px) --結束 */
-
-        /* 3. 手機版 Chrome/Safari 專屬等比飽滿放大樣式（僅在 ≤ 600px 觸發） --開始 */
-        @media screen and (max-width: 600px) {
+        /* 2. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 768px 觸發，電腦端絕不受影響） --開始 */
+        @media screen and (max-width: 768px) {
             body {
                 justify-content: flex-start !important;
                 padding: 16px 0 80px 0 !important;
                 height: auto !important;
+                min-height: 100% !important;
             }
 
             .container {
@@ -242,8 +233,8 @@
 
             .hero-section {
                 flex-direction: column !important;
-                padding: 22px 18px !important;
-                gap: 18px !important;
+                padding: 20px 16px !important;
+                gap: 16px !important;
                 border-radius: 16px !important;
                 margin-bottom: 16px !important;
                 text-align: center !important;
@@ -251,93 +242,94 @@
 
             .hero-content-left {
                 flex-direction: column !important;
-                gap: 12px !important;
+                gap: 10px !important;
                 text-align: center !important;
             }
 
             .main-icon {
-                font-size: 4.2em !important;
+                font-size: 3.8em !important;
             }
 
             h2 {
-                font-size: 1.75em !important;
-                margin-bottom: 8px !important;
+                font-size: 1.65em !important;
+                margin-bottom: 6px !important;
             }
 
             .subtitle {
-                font-size: 1.12rem !important;
-                line-height: 1.65 !important;
+                font-size: 1.05rem !important;
+                line-height: 1.6 !important;
             }
 
             .hero-share-right {
                 width: 100% !important;
-                padding: 16px !important;
+                padding: 14px !important;
                 border-radius: 14px !important;
-                gap: 14px !important;
+                gap: 12px !important;
+                min-width: unset !important;
             }
 
             .share-title {
-                font-size: 1.15rem !important;
+                font-size: 1.1rem !important;
             }
 
             .share-buttons {
-                gap: 16px !important;
+                gap: 14px !important;
             }
 
             .share-btn {
-                width: 48px !important;
-                height: 48px !important;
-                font-size: 1.45rem !important;
+                width: 46px !important;
+                height: 46px !important;
+                font-size: 1.35rem !important;
             }
 
             .features-grid {
                 grid-template-columns: 1fr !important;
-                gap: 18px !important;
+                gap: 16px !important;
             }
 
             .feature-card {
-                padding: 24px 20px !important;
+                padding: 22px 18px !important;
                 border-radius: 16px !important;
                 border-left-width: 8px !important;
             }
 
             .card-header {
-                gap: 14px !important;
-                margin-bottom: 12px !important;
+                gap: 12px !important;
+                margin-bottom: 10px !important;
             }
 
             .card-icon {
-                font-size: 2.2em !important;
+                font-size: 2em !important;
             }
 
             .card-title {
-                font-size: 1.45em !important;
+                font-size: 1.35em !important;
             }
 
             .card-desc {
-                font-size: 1.18rem !important;
+                font-size: 1.1rem !important;
                 line-height: 1.6 !important;
-                margin-bottom: 14px !important;
+                margin-bottom: 12px !important;
             }
 
             .card-links li {
-                font-size: 1.15rem !important;
+                font-size: 1.08rem !important;
                 margin-bottom: 10px !important;
-                gap: 12px !important;
+                gap: 10px !important;
             }
 
             .card-links li i {
-                font-size: 1.25em !important;
-                width: 24px !important;
+                font-size: 1.2em !important;
+                width: 22px !important;
             }
 
             .footer-note {
-                font-size: 1.05em !important;
-                padding: 12px 24px !important;
-                margin-top: 20px !important;
+                font-size: 1rem !important;
+                padding: 10px 22px !important;
+                margin-top: 18px !important;
             }
         }
-        /* 3. 手機版 Chrome/Safari 專屬等比飽滿放大樣式（僅在 ≤ 600px 觸發） --結束 */
+        /* 2. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 768px 觸發，電腦端絕不受影響） --結束 */
     </style>
 </head>
 <body>
@@ -345,7 +337,7 @@
     <i class="fa-solid fa-fire bg-icon"></i>
 
     <div class="container">
-        <!-- 4. 頂部 Banner 與分享區塊 --開始 -->
+        <!-- 3. 頂部 Banner 與分享區塊 --開始 -->
         <div class="hero-section">
             <div class="hero-content-left">
                 <div class="main-icon"><i class="fa-solid fa-layer-group"></i></div>
@@ -367,9 +359,9 @@
                 </div>
             </div>
         </div>
-        <!-- 4. 頂部 Banner 與分享區塊 --結束 -->
+        <!-- 3. 頂部 Banner 與分享區塊 --結束 -->
 
-        <!-- 5. 四大功能卡片網格 --開始 -->
+        <!-- 4. 四大功能卡片網格 --開始 -->
         <div class="features-grid">
             <div class="feature-card card-calc">
                 <div class="card-header"><i class="fa-solid fa-calculator card-icon"></i><span class="card-title">精準釉藥計算</span></div>
@@ -413,7 +405,7 @@
                 </ul>
             </div>
         </div>
-        <!-- 5. 四大功能卡片網格 --結束 -->
+        <!-- 4. 四大功能卡片網格 --結束 -->
 
         <div class="footer-note">
             <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
