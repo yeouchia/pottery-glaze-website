@@ -49,8 +49,8 @@
             background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
-            -webkit-text-size-adjust: 100%; /* 防止 iOS Chrome / Safari 自動縮小文字 */
-            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
             -webkit-tap-highlight-color: transparent;
         }
         /* <!-- 0. 跨瀏覽器文字大小防縮放與核心基礎設定 --結束> */
@@ -366,11 +366,15 @@
 
         footer { flex-shrink: 0; background-color: #0f1a2e; color: #888; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
 
-        /* <!-- 6. 手機版響應式 RWD 核心樣式 --開始> */
+        /* <!-- 6. 手機版響應式 RWD 核心樣式（特大飽滿版） --開始> */
         @media (max-width: 1250px) {
             .header-bg-overlay { display: none !important; }
             .mobile-menu-btn { display: block !important; }
             
+            .brand-icon { font-size: 7.5vw !important; }
+            .brand-text h1 { font-size: 5.4vw !important; }
+            .brand-text .sub-en { font-size: 2.7vw !important; }
+
             .nav-menu {
                 display: none;
                 position: fixed !important;
@@ -381,7 +385,7 @@
                 background-color: #14213d !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
-                padding: 5vw 5vw 12vw 5vw !important;
+                padding: 6vw 5vw 15vw 5vw !important;
                 overflow-y: auto !important;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
                 z-index: 99999 !important;
@@ -393,21 +397,22 @@
             .tools-group {
                 flex-direction: column !important;
                 width: 100% !important;
-                gap: 3.5vw !important;
+                gap: 4vw !important;
                 align-items: stretch !important;
             }
 
-            /* 手機版主要功能按鈕等比放大 */
+            /* 手機版主要功能按鈕超特大飽滿化 */
             .nav-btn {
                 width: 100% !important;
                 justify-content: flex-start !important;
-                padding: 3.8vw 5vw !important;
-                font-size: 4.8vw !important;
+                padding: 4.8vw 6vw !important;
+                font-size: 5.8vw !important;
                 font-weight: 800 !important;
-                border-radius: 12px !important;
-                gap: 3.5vw !important;
+                border-radius: 14px !important;
+                gap: 4vw !important;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.2) !important;
             }
-            .nav-btn i { font-size: 5.5vw !important; }
+            .nav-btn i { font-size: 6.8vw !important; }
 
             .dropdown { width: 100% !important; }
             .dropdown:hover .dropdown-content { display: none !important; }
@@ -416,45 +421,45 @@
             .dropdown-content {
                 position: static !important;
                 width: 100% !important;
-                padding: 2vw 0 2vw 3vw !important;
+                padding: 2.5vw 0 2.5vw 4vw !important;
                 box-shadow: none !important;
             }
             .dropdown-inner {
                 background: transparent !important;
                 box-shadow: none !important;
-                border-radius: 8px !important;
+                border-radius: 10px !important;
                 overflow: visible !important;
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 2vw !important;
+                gap: 2.5vw !important;
                 border: none !important;
             }
             .dropdown-item {
-                border-radius: 10px !important;
-                padding: 3.2vw 4.5vw !important;
-                font-size: 4.2vw !important;
-                font-weight: 700 !important;
+                border-radius: 12px !important;
+                padding: 4.2vw 5.5vw !important;
+                font-size: 5.2vw !important;
+                font-weight: 800 !important;
             }
-            .dropdown-item i { font-size: 4.8vw !important; }
+            .dropdown-item i { font-size: 6vw !important; }
 
             .social-group {
                 border-left: none !important;
                 border-top: 1px solid rgba(255,255,255,0.15) !important;
                 padding-left: 0 !important;
                 margin-left: 0 !important;
-                margin-top: 6vw !important;
-                padding-top: 5vw !important;
+                margin-top: 7vw !important;
+                padding-top: 6vw !important;
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: row !important;
                 flex-wrap: wrap !important;
                 justify-content: center !important;
-                gap: 4vw !important;
+                gap: 4.5vw !important;
             }
             .icon-btn { 
-                width: 13.5vw !important; 
-                height: 13.5vw !important; 
-                font-size: 5.8vw !important; 
+                width: 15vw !important; 
+                height: 15vw !important; 
+                font-size: 6.8vw !important; 
             }
             .icon-btn::after { display: none !important; }
 
@@ -467,7 +472,7 @@
                 width: auto !important;
             }
         }
-        /* <!-- 6. 手機版響應式 RWD 核心樣式 --結束> */
+        /* <!-- 6. 手機版響應式 RWD 核心樣式（特大飽滿版） --結束> */
     </style>
 </head>
 <body onclick="unlockAudio()">
