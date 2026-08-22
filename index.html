@@ -739,7 +739,7 @@
         function unlockAudio() {
             if(hoverAudio) { hoverAudio.play().then(() => { hoverAudio.pause(); hoverAudio.currentTime = 0; }).catch((e) => {}); }
             if(clickAudio) { clickAudio.play().then(() => { clickAudio.pause(); clickAudio.currentTime = 0; }).catch((e) => {}); }
-            if(bgMusic) { bgMusic.volume = 0.3; bgMusic.play().catch((e) => {}); }
+            if(bgMusic) { bgMusic.volume = 0.15; bgMusic.play().catch((e) => {}); }
             document.body.onclick = null;
         }
 
