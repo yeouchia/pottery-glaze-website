@@ -22,16 +22,18 @@
 
     <style>
         :root {
-            --primary-bg: #14213d;
-            --accent-color: #fca311;
-            --text-light: #e5e5e5;
-            --bg-color: #f4f6f8;
-            --header-height: 64px;
+            --primary-bg: #14213d;      /* 主色：深海軍藍 */
+            --accent-color: #fca311;    /* 基礎工具：琥珀金 */
+            --text-light: #e5e5e5;      /* 淺色文字 */
+            --bg-color: #f4f6f8;        /* 網頁背景 */
+            --header-height: 64px;      /* Header 高度 */
             
+            /* 下拉選單配色系統 */
             --blue-light: #e0f7fa; --blue-hover: #b3e5fc; --blue-icon: #0277bd;
             --green-light: #e0f2f1; --green-hover: #b2dfdb; --green-icon: #00695c;
             --pink-light: #fce4ec; --pink-hover: #f8bbd0; --pink-icon: #ad1457;
             
+            /* 其他應用專用：紫色與灰色系配色 */
             --purple-light: #f3e5f5; --purple-hover: #e1bee7; --purple-icon: #7b1fa2;
             --gray-light: #eceff1; --gray-hover: #cfd8dc; --gray-icon: #455a64;
         }
@@ -121,44 +123,51 @@
             cursor: pointer;
         }
 
-        .nav-btn.grad-gold-white {
-            background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
-            color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .nav-btn.grad-gold-white i { color: #ff0000; font-size: 1.1em; }
-        .nav-btn.grad-gold-white:hover {
-            background: white; color: var(--accent-color);
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
-        }
-
-        .nav-btn.grad-white-gold {
-            background: linear-gradient(90deg, #ffffff 0%, var(--accent-color) 100%);
-            color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .nav-btn.grad-white-gold i { color: #00b300; font-size: 1.1em; }
-        .nav-btn.grad-white-gold:hover {
-            background: white; color: var(--accent-color);
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4);
-        }
-
+        /* 1. 雙向轉換 (放首位，強烈琥珀金漸層) */
         .nav-btn.double {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
             color: var(--primary-bg);
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 1px solid transparent;
         }
         .nav-btn.double:hover {
-            background: white; color: var(--accent-color);
+            background: white; color: var(--accent-color); border-color: var(--accent-color);   
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
         }
-        .nav-btn.double i:first-child { color: #ff0000; }
+        .nav-btn.double i:first-child { color: #ff0000; font-size: 1rem; }
         .nav-btn.double span { color: rgba(20, 33, 61, 0.6); }
-        .nav-btn.double i:last-child { color: #00b300; }
+        .nav-btn.double i:last-child { color: #00b300; font-size: 1rem; }
 
+        /* 2. 原料轉釉式 (琥珀金漸層) */
+        .nav-btn.grad-gold-white {
+            background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
+            color: var(--primary-bg);
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 1px solid transparent; 
+        }
+        .nav-btn.grad-gold-white i { color: #ff0000; font-size: 1.1em; }
+        .nav-btn.grad-gold-white:hover {
+            background: white; color: var(--accent-color); border-color: var(--accent-color);
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
+        }
+
+        /* 3. 釉式轉原料 (白轉琥珀金漸層) */
+        .nav-btn.grad-white-gold {
+            background: linear-gradient(90deg, #ffffff 0%, var(--accent-color) 100%);
+            color: var(--primary-bg);
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 1px solid transparent;
+        }
+        .nav-btn.grad-white-gold i { color: #00b300; font-size: 1.1em; }
+        .nav-btn.grad-white-gold:hover {
+            background: white; color: var(--accent-color); border-color: var(--accent-color);
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4);
+        }
+
+        /* 4. 計算教學 (藍綠漸層) */
         .nav-btn.learn {
             background: linear-gradient(135deg, #4CC9F0 0%, #2EC4B6 100%);
             color: #14213d; 
@@ -166,10 +175,35 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .nav-btn.learn:hover {
-            background: white; color: #F72585; 
+            background: white; color: #0277bd; 
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
+        /* 5. 陶釉講義 (與計算教學同系之藍綠漸層，強調知識體系) */
+        .nav-btn.lecture-btn {
+            background: linear-gradient(135deg, #2EC4B6 0%, #4CC9F0 100%);
+            color: #14213d;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-btn.lecture-btn:hover {
+            background: white; color: #00695c;
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.4);
+        }
+
+        /* 6. 其他應用 (彩虹多樣色漸層) */
+        .nav-btn.others {
+            background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 30%, #2ec4b6 70%, #cbf3f0 100%);
+            color: #14213d;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-btn.others:hover {
+            background: white; color: #ff9f1c;
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
+        }
+
+        /* 7. 留言交流板 (移動至其他應用後，優雅紫桃漸層) */
         .nav-btn.guestbook {
             background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
             color: white;
@@ -182,28 +216,7 @@
             transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
         }
 
-        .nav-btn.others {
-            background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 30%, #2ec4b6 70%, #cbf3f0 100%);
-            color: #14213d;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .nav-btn.others:hover {
-            background: white; color: #ff9f1c;
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
-        }
-
-        .nav-btn.lecture-btn {
-            background: linear-gradient(135deg, #ff5e62 0%, #ff9966 100%);
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .nav-btn.lecture-btn:hover {
-            background: white; color: #ff5e62;
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(255, 94, 98, 0.4);
-        }
-
+        /* 右側社群與外部按鈕 */
         .icon-btn {
             width: 32px; height: 32px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -228,6 +241,7 @@
         .icon-btn.share { background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; }
         .icon-btn.share:hover { background: white; color: #ff006e; transform: translateY(-3px) scale(1.1); }
 
+        /* 下拉選單 */
         .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; left: 0; top: 100%; margin-top: 0;
@@ -332,7 +346,6 @@
                 border-radius: 8px;
             }
 
-            /* 手機版下拉選單改為整齊展開之二級清單 */
             .dropdown { width: 100%; }
             .dropdown:hover .dropdown-content { display: none; }
             .dropdown.mobile-open .dropdown-content { display: block; }
@@ -357,7 +370,6 @@
                 font-size: 0.9rem;
             }
 
-            /* 手機版社群與外部按鈕橫向平鋪 */
             .social-group {
                 border-left: none;
                 border-top: 1px solid rgba(255,255,255,0.15);
@@ -401,18 +413,23 @@
 
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
-                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-flask"></i> 原料轉釉式
-                    </a>
-                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-calculator"></i> 釉式轉原料
-                    </a>
+                    <!-- 1. 雙向轉換 -->
                     <a href="./welcome-2.html" target="content_frame" class="nav-btn double protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-flask"></i> <span style="font-size: 0.8em;">+</span> <i class="fa-solid fa-calculator"></i>
                         雙向轉換
                     </a>
 
-                    <!-- 計算教學下拉選單 -->
+                    <!-- 2. 原料轉釉式 -->
+                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                        <i class="fa-solid fa-flask"></i> 原料轉釉式
+                    </a>
+
+                    <!-- 3. 釉式轉原料 -->
+                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                        <i class="fa-solid fa-calculator"></i> 釉式轉原料
+                    </a>
+
+                    <!-- 4. 計算教學下拉選單 -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
                             <i class="fa-solid fa-book-open"></i> 計算教學 <i class="fa-solid fa-caret-down"></i>
@@ -432,11 +449,12 @@
                         </div>
                     </div>
 
-                    <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-comments"></i> 留言交流板
+                    <!-- 5. 陶釉講義按鈕 -->
+                    <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                        <i class="fa-solid fa-book-open-reader"></i> 陶釉講義
                     </a>
 
-                    <!-- 其他應用下拉選單 -->
+                    <!-- 6. 其他應用下拉選單 -->
                     <div class="dropdown" id="otherDropdown">
                         <a href="javascript:void(0)" class="nav-btn others" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
                             <i class="fa-solid fa-cubes"></i> 其他應用 <i class="fa-solid fa-caret-down"></i>
@@ -456,9 +474,9 @@
                         </div>
                     </div>
 
-                    <!-- 陶釉講義按鈕 -->
-                    <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-book-open-reader"></i> 陶釉講義
+                    <!-- 7. 留言交流板按鈕 -->
+                    <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                        <i class="fa-solid fa-comments"></i> 留言交流板
                     </a>
                 </div>
 
