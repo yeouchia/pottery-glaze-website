@@ -416,20 +416,26 @@
 
     </div>
 
-    <script>
+   <script>
         const siteUrl = encodeURIComponent(window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html'));
 
         function shareToFB() {
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`, '_blank');
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                // 手機版：改用 m.facebook.com，避免被臉書 App 錯誤攔截導致沒有進入發文畫面
+                window.open(`https://m.facebook.com/sharer.php?u=${siteUrl}`, '_blank');
+            } else {
+                // 電腦版：維持原本的分享視窗
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`, '_blank');
+            }
         }
 
-        // 修改為：判斷手機直接喚醒 LINE App，電腦則開網頁版分享
         function shareToLine() {
             const textToShare = encodeURIComponent('推薦這個實用的陶藝與釉藥調配工具：\n') + siteUrl;
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
             if (isMobile) {
-                // 手機版：使用深度連結，直接喚醒 LINE App
+                // 手機版：使用深度連結，直接喚醒 LINE App 的傳送畫面
                 window.location.href = `https://line.me/R/msg/text/?${textToShare}`;
             } else {
                 // 電腦版：維持原本的網頁版分享視窗
