@@ -39,7 +39,7 @@
         /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --結束 */
 
         .welcome-wrapper {
-            max-width: 1300px; /* 增加最大寬度以容納 4 欄並排 */
+            max-width: 1300px;
             margin: 0 auto;
             padding: 30px 20px 80px 20px;
             display: flex;
@@ -47,7 +47,7 @@
             align-items: center;
         }
 
-        /* --- 恢復原本的頂部 Banner 區塊 --- */
+        /* --- 頂部 Banner 區塊 --- */
         .top-banner {
             background: var(--card-bg);
             width: 100%;
@@ -128,15 +128,14 @@
         .share-circle-btn.line { background-color: #00c300; }
         .share-circle-btn.copy { background-color: #64748b; }
 
-        /* 3. 功能導覽卡片區（電腦版強制 4 欄排列，恢復原狀） --開始 */
+        /* 功能導覽卡片區（電腦版 4 欄排列） */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 強制鎖定為 4 欄 */
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             width: 100%;
             margin-bottom: 40px;
         }
-        /* 3. 功能導覽卡片區（電腦版強制 4 欄排列，恢復原狀） --結束 */
 
         .feature-card {
             background: var(--card-bg);
@@ -216,7 +215,6 @@
             text-align: center;
         }
 
-        /* 恢復原本的底部提示按鈕 */
         .bottom-hint {
             background: #fff8e7;
             color: #b45309;
@@ -260,7 +258,7 @@
             .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
             .cards-grid {
-                grid-template-columns: 1fr !important; /* 手機單欄 */
+                grid-template-columns: 1fr !important;
                 gap: 5vw !important;
                 margin-bottom: 6vw !important;
             }
@@ -323,7 +321,7 @@
 
     <div class="welcome-wrapper">
         
-        <!-- 恢復原本的頂部 Banner 區塊 -->
+        <!-- 頂部 Banner 區塊 -->
         <div class="top-banner">
             <div class="banner-left">
                 <i class="fa-solid fa-layer-group banner-icon"></i>
@@ -342,7 +340,7 @@
             </div>
         </div>
 
-        <!-- 恢復原本的 4 欄功能特色卡片網格 -->
+        <!-- 功能特色卡片網格 -->
         <div class="cards-grid">
             <!-- 3. 精準釉藥計算卡片 --開始 -->
             <div class="feature-card card-calc">
@@ -409,54 +407,57 @@
             <!-- 6. 陶藝生活與靈感卡片 --結束 -->
         </div>
 
-        <!-- 恢復原本的底部提示 -->
         <div class="bottom-hint">
             <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
         </div>
 
     </div>
 
-    <!-- 修復手機版分享連結 Bug 的 JavaScript 區塊 -->
+    <!-- 7. 直開 FB / LINE 應用程式發文之精準 JavaScript --開始 -->
     <script>
-        // --- 取得乾淨的主網址 ---
-        function getSiteUrl() {
-            return window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
-        }
+        // 取得首頁完整乾淨網址
+        const rawUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
+        const encodedUrl = encodeURIComponent(rawUrl);
 
-        // --- 導入手機系統原生分享 (Web Share API) ---
-        function triggerNativeShare(platform) {
-            const url = getSiteUrl();
-            const text = '推薦這個實用的陶藝與釉藥調配工具：\n';
+        function shareToFB() {
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-            // 若為手機且支援原生分享，呼叫系統內建分享面板
-            if (isMobile && navigator.share) {
-                navigator.share({
-                    title: '陶藝與釉藥調配',
-                    text: text,
-                    url: url
-                }).catch((e) => console.log('分享取消或失敗', e));
+            
+            if (isMobile) {
+                // 手機版：直接呼叫 Facebook 深度發文協議，直達「建立貼文」視窗
+                const targetUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+                window.location.href = `fb://facewebmodal/f?href=${encodeURIComponent(targetUrl)}`;
+                
+                // 若手機未裝 FB App 或無法喚醒，1秒後平順備援開啟手機網頁發文
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 1000);
             } else {
-                // 電腦版：使用彈出視窗
-                const encodedUrl = encodeURIComponent(url);
-                if (platform === 'fb') {
-                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'width=600,height=400');
-                } else if (platform === 'line') {
-                    window.open(`https://social-plugins.line.me/lineit/share?url=${encodedUrl}`, '_blank', 'width=500,height=500');
-                }
+                // 電腦版：標準彈出小視窗
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'width=600,height=400');
             }
         }
 
-        function shareToFB() { triggerNativeShare('fb'); }
-        function shareToLine() { triggerNativeShare('line'); }
+        function shareToLine() {
+            const textToShare = encodeURIComponent('推薦這個實用的陶藝與釉藥調配工具：\n' + rawUrl);
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                // 手機版：直接喚醒 LINE App 選擇對象
+                window.location.href = `https://line.me/R/msg/text/?${textToShare}`;
+            } else {
+                // 電腦版：標準彈出小視窗
+                window.open(`https://social-plugins.line.me/lineit/share?url=${encodedUrl}`, '_blank', 'width=500,height=500');
+            }
+        }
 
         function copyCurrentLink() {
-            navigator.clipboard.writeText(getSiteUrl()).then(() => {
+            navigator.clipboard.writeText(rawUrl).then(() => {
                 alert('✨ 網站網址已複製！快去分享給陶藝好友吧！');
             }).catch(() => {
                 alert('複製失敗，請手動複製網址。');
             });
         }
     </script>
+    <!-- 7. 直開 FB / LINE 應用程式發文之精準 JavaScript --結束 -->
 </body>
 </html>
