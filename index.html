@@ -366,7 +366,7 @@
 
         footer { flex-shrink: 0; background-color: #0f1a2e; color: #888; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
 
-        /* <!-- 6. 手機版響應式 RWD 核心樣式（特大飽滿版） --開始> */
+        /* <!-- 6. 手機版響應式 RWD 核心樣式（修復滑動與飽滿版） --開始> */
         @media (max-width: 1250px) {
             .header-bg-overlay { display: none !important; }
             .mobile-menu-btn { display: block !important; }
@@ -380,13 +380,18 @@
                 position: fixed !important;
                 top: var(--header-height) !important;
                 left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
                 width: 100% !important;
-                height: calc(100vh - var(--header-height)) !important;
+                height: auto !important;
+                max-height: calc(100vh - var(--header-height)) !important;
                 background-color: #14213d !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
-                padding: 6vw 5vw 15vw 5vw !important;
-                overflow-y: auto !important;
+                padding: 6vw 5vw 35vw 5vw !important;
+                overflow-y: scroll !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-y !important;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
                 z-index: 99999 !important;
             }
@@ -449,6 +454,7 @@
                 margin-left: 0 !important;
                 margin-top: 7vw !important;
                 padding-top: 6vw !important;
+                padding-bottom: 12vw !important;
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: row !important;
@@ -472,7 +478,7 @@
                 width: auto !important;
             }
         }
-        /* <!-- 6. 手機版響應式 RWD 核心樣式（特大飽滿版） --結束> */
+        /* <!-- 6. 手機版響應式 RWD 核心樣式（修復滑動與飽滿版） --結束> */
     </style>
 </head>
 <body onclick="unlockAudio()">
@@ -638,8 +644,10 @@
             menu.classList.toggle('active');
             if (menu.classList.contains('active')) {
                 icon.className = "fa-solid fa-xmark";
+                document.body.style.overflow = 'hidden';
             } else {
                 icon.className = "fa-solid fa-bars";
+                document.body.style.overflow = '';
             }
         }
 
@@ -657,6 +665,7 @@
                 const icon = document.getElementById('menuIcon');
                 menu.classList.remove('active');
                 icon.className = "fa-solid fa-bars";
+                document.body.style.overflow = '';
                 document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('mobile-open'));
             }
         }
