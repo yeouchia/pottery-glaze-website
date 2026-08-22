@@ -735,25 +735,25 @@
         var hoverAudio = document.getElementById("hoverSound");
         var clickAudio = document.getElementById("clickSound");
         var bgMusic = document.getElementById("bgMusic");
-        
+// 背景音效    目前是 10% 音量    
         function unlockAudio() {
             if(hoverAudio) { hoverAudio.play().then(() => { hoverAudio.pause(); hoverAudio.currentTime = 0; }).catch((e) => {}); }
             if(clickAudio) { clickAudio.play().then(() => { clickAudio.pause(); clickAudio.currentTime = 0; }).catch((e) => {}); }
-            if(bgMusic) { bgMusic.volume = 0.15; bgMusic.play().catch((e) => {}); }
+            if(bgMusic) { bgMusic.volume = 0.1; bgMusic.play().catch((e) => {}); }
             document.body.onclick = null;
         }
-
+// 滑鼠懸停音效目前是 20% 音量
         function playHoverSound() {
             if (hoverAudio) {
-                hoverAudio.currentTime = 0; hoverAudio.volume = 0.5;
+                hoverAudio.currentTime = 0; hoverAudio.volume = 0.2;
                 var p = hoverAudio.play();
                 if (p !== undefined) { p.catch(() => {}); }
             }
         }
-
+// 點擊音效目前是 20% 音量
         function playClickSound() {
             if (clickAudio) {
-                clickAudio.currentTime = 0; clickAudio.volume = 0.5;
+                clickAudio.currentTime = 0; clickAudio.volume = 0.2;
                 var p = clickAudio.play();
                 if (p !== undefined) { p.catch(() => {}); }
             }
