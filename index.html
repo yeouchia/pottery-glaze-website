@@ -176,7 +176,7 @@
             cursor: pointer;
         }
 
-        /* 1. 釉藥計算工具 (琥珀金漸層) */
+        /* 1. 釉藥計算工具 (琥珀金漸層主按鈕) */
         .nav-btn.calc-main {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
             color: var(--primary-bg);
@@ -357,98 +357,106 @@
         footer { flex-shrink: 0; background-color: #0f1a2e; color: #888; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
 
         /* ====================================================
-           手機與平板專屬響應式設計 (RWD 優化版) 
+           手機與平板專屬響應式設計 (強化放大並加入 !important)
            ==================================================== */
         @media (max-width: 1250px) {
-            .header-bg-overlay { display: none; }
-            .mobile-menu-btn { display: block; }
+            .header-bg-overlay { display: none !important; }
+            .mobile-menu-btn { display: block !important; }
             
             .nav-menu {
                 display: none;
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                height: calc(100vh - var(--header-height));
-                background-color: #14213d;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 20px 20px 50px 20px;
-                overflow-y: auto;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-                z-index: 99999;
+                position: fixed !important;
+                top: var(--header-height) !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: calc(100vh - var(--header-height)) !important;
+                background-color: #14213d !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                padding: 20px 20px 50px 20px !important;
+                overflow-y: auto !important;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+                z-index: 99999 !important;
             }
 
-            .nav-menu.active { display: flex; animation: slideDown 0.3s ease; }
+            .nav-menu.active { display: flex !important; animation: slideDown 0.3s ease; }
             @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
             .tools-group {
-                flex-direction: column;
-                width: 100%;
-                gap: 12px;
-                align-items: stretch;
+                flex-direction: column !important;
+                width: 100% !important;
+                gap: 14px !important;
+                align-items: stretch !important;
             }
 
-            /* 手機版按鈕放大、易於觸控 */
+            /* 手機版主要功能按鈕放大 */
             .nav-btn {
-                width: 100%;
-                justify-content: flex-start;
-                padding: 14px 18px;
-                font-size: 1.05rem;
-                font-weight: 700;
-                border-radius: 10px;
+                width: 100% !important;
+                justify-content: flex-start !important;
+                padding: 16px 22px !important;
+                font-size: 1.18rem !important;
+                font-weight: 800 !important;
+                border-radius: 12px !important;
+                gap: 14px !important;
             }
-            .nav-btn i { font-size: 1.15em; }
+            .nav-btn i { font-size: 1.35rem !important; }
 
-            .dropdown { width: 100%; }
-            .dropdown:hover .dropdown-content { display: none; }
-            .dropdown.mobile-open .dropdown-content { display: block; }
+            .dropdown { width: 100% !important; }
+            .dropdown:hover .dropdown-content { display: none !important; }
+            .dropdown.mobile-open .dropdown-content { display: block !important; }
+            
             .dropdown-content {
-                position: static;
-                width: 100%;
-                padding: 8px 0 8px 12px;
-                box-shadow: none;
+                position: static !important;
+                width: 100% !important;
+                padding: 8px 0 8px 12px !important;
+                box-shadow: none !important;
             }
             .dropdown-inner {
-                background: transparent;
-                box-shadow: none;
-                border-radius: 8px;
-                overflow: visible;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                border: none;
+                background: transparent !important;
+                box-shadow: none !important;
+                border-radius: 8px !important;
+                overflow: visible !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+                border: none !important;
             }
             .dropdown-item {
-                border-radius: 8px;
-                padding: 12px 16px;
-                font-size: 0.98rem;
+                border-radius: 10px !important;
+                padding: 14px 18px !important;
+                font-size: 1.08rem !important;
+                font-weight: 700 !important;
             }
+            .dropdown-item i { font-size: 1.25rem !important; }
 
             .social-group {
-                border-left: none;
-                border-top: 1px solid rgba(255,255,255,0.15);
-                padding-left: 0;
-                margin-left: 0;
-                margin-top: 25px;
-                padding-top: 20px;
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 16px;
+                border-left: none !important;
+                border-top: 1px solid rgba(255,255,255,0.15) !important;
+                padding-left: 0 !important;
+                margin-left: 0 !important;
+                margin-top: 25px !important;
+                padding-top: 20px !important;
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 16px !important;
             }
-            .icon-btn { width: 44px; height: 44px; font-size: 1.25rem; }
-            .icon-btn::after { display: none; }
+            .icon-btn { 
+                width: 48px !important; 
+                height: 48px !important; 
+                font-size: 1.35rem !important; 
+            }
+            .icon-btn::after { display: none !important; }
 
             .share-dropdown-content {
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-                right: 20px;
-                top: auto;
-                width: auto;
+                position: fixed !important;
+                bottom: 20px !important;
+                left: 20px !important;
+                right: 20px !important;
+                top: auto !important;
+                width: auto !important;
             }
         }
     </style>
