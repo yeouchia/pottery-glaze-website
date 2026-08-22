@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="黃明文 Ming-Win Huang">
+    <!-- 0. 響應式 Viewport 設定 --開始 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 0. 響應式 Viewport 設定 --結束 -->
     <title>歡迎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; }
+
+        /* 1. 電腦版原始標準排版樣式 --開始 */
         body {
             font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -209,7 +213,9 @@
             margin-right: auto;
         }
         .footer-note i { color: #fca311; margin-right: 8px; }
+        /* 1. 電腦版原始標準排版樣式 --結束 */
 
+        /* 2. 平板專屬樣式 (螢幕寬度 601px ~ 1024px) --開始 */
         @media (max-width: 1024px) {
             body { height: auto; padding: 20px 0; }
             .hero-section { flex-direction: column; text-align: center; }
@@ -217,12 +223,104 @@
             .hero-share-right { width: 100%; }
             .features-grid { grid-template-columns: repeat(2, 1fr); }
         }
+        /* 2. 平板專屬樣式 (螢幕寬度 601px ~ 1024px) --結束 */
 
+        /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 600px 觸發） --開始 */
         @media (max-width: 600px) {
-            .features-grid { grid-template-columns: 1fr; }
-            h2 { font-size: 1.4em; }
-            .container { padding: 10px; width: 100%; }
+            body {
+                justify-content: flex-start;
+                padding: 15px 0 60px 0;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 12px;
+            }
+
+            .hero-section {
+                padding: 18px 15px;
+                gap: 15px;
+                border-radius: 14px;
+                margin-bottom: 15px;
+            }
+
+            .main-icon {
+                font-size: 3.8em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+                margin-bottom: 6px;
+            }
+
+            .subtitle {
+                font-size: 1.05rem;
+                line-height: 1.6;
+            }
+
+            .hero-share-right {
+                padding: 14px 16px;
+                border-radius: 12px;
+                gap: 10px;
+            }
+
+            .share-title {
+                font-size: 1.05rem;
+            }
+
+            .share-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .feature-card {
+                padding: 18px 16px;
+                border-radius: 14px;
+                border-left-width: 6px;
+            }
+
+            .card-header {
+                gap: 12px;
+                margin-bottom: 8px;
+            }
+
+            .card-icon {
+                font-size: 1.8em;
+            }
+
+            .card-title {
+                font-size: 1.3em;
+            }
+
+            .card-desc {
+                font-size: 1.05rem;
+                line-height: 1.5;
+                margin-bottom: 10px;
+            }
+
+            .card-links li {
+                font-size: 1.05rem;
+                margin-bottom: 8px;
+                gap: 10px;
+            }
+
+            .card-links li i {
+                font-size: 1.15em;
+            }
+
+            .footer-note {
+                font-size: 0.95em;
+                padding: 10px 20px;
+                margin-top: 15px;
+            }
         }
+        /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 600px 觸發） --結束 */
     </style>
 </head>
 <body>
@@ -230,6 +328,7 @@
     <i class="fa-solid fa-fire bg-icon"></i>
 
     <div class="container">
+        <!-- 4. 頂部 Banner 與分享區塊 --開始 -->
         <div class="hero-section">
             <div class="hero-content-left">
                 <div class="main-icon"><i class="fa-solid fa-layer-group"></i></div>
@@ -251,7 +350,9 @@
                 </div>
             </div>
         </div>
+        <!-- 4. 頂部 Banner 與分享區塊 --結束 -->
 
+        <!-- 5. 四大功能卡片網格 --開始 -->
         <div class="features-grid">
             <div class="feature-card card-calc">
                 <div class="card-header"><i class="fa-solid fa-calculator card-icon"></i><span class="card-title">精準釉藥計算</span></div>
@@ -295,6 +396,7 @@
                 </ul>
             </div>
         </div>
+        <!-- 5. 四大功能卡片網格 --結束 -->
 
         <div class="footer-note">
             <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
