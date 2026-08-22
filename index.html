@@ -678,7 +678,9 @@
             }
         });
 
-        const currentUrl = encodeURIComponent(window.location.href);
+        // 取得乾淨的主網址，確保分享出去的是首頁
+        const siteMainUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
+        const encodedUrl = encodeURIComponent(siteMainUrl);
 
         function toggleShareMenu(event) {
             event.stopPropagation();
@@ -686,18 +688,39 @@
             menu.classList.toggle('show');
         }
 
+        // LINE 分享修復：手機版深度連結直開 App
         function shareToLine() {
-            window.open(`https://social-plugins.line.me/lineit/share?url=${currentUrl}`, '_blank');
+            const textToShare = encodeURIComponent('推薦這個實用的陶藝與釉藥調配工具：\n' + siteMainUrl);
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                window.location.href = `https://line.me/R/msg/text/?${textToShare}`;
+            } else {
+                window.open(`https://social-plugins.line.me/lineit/share?url=${encodedUrl}`, '_blank', 'width=500,height=500');
+            }
             document.getElementById('shareDropdown').classList.remove('show');
         }
 
+        // FB 分享修復：手機版當前頁跳轉並使用 m.facebook.com 避免攔截 Bug
         function shareToFB() {
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`, '_blank');
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            const fbUrl = isMobile 
+                ? `https://m.facebook.com/sharer.php?u=${encodedUrl}`
+                : `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+            if (isMobile) {
+                // 手機版：在當前分頁跳轉，OS會順暢攔截喚醒App，不會產生空白頁
+                window.location.href = fbUrl;
+            } else {
+                // 電腦版：維持原本的彈出分享視窗
+                window.open(fbUrl, '_blank', 'width=600,height=400');
+            }
             document.getElementById('shareDropdown').classList.remove('show');
         }
 
         function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
+            navigator.clipboard.writeText(siteMainUrl).then(() => {
                 alert('✨ 網址已複製！快去分享給陶藝好友吧！');
             }).catch(() => {
                 alert('複製失敗，請手動複製網址。');
