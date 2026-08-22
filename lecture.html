@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>陶藝與釉藥調配：教學講義</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -18,14 +18,19 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
+        /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --開始 */
+        html, body {
+            height: 100%;
             font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
             color: var(--text-main);
             background-color: #ffffff;
             display: flex;
-            height: 100vh;
             overflow: hidden;
+            -webkit-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
+            -webkit-tap-highlight-color: transparent;
         }
+        /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --結束 */
 
         /* 左側目錄側邊欄 */
         #sidebar {
@@ -60,7 +65,6 @@
             gap: 8px;
         }
 
-        /* 手機版專屬關閉按鈕 */
         .close-sidebar-mobile {
             background: none;
             border: none;
@@ -253,24 +257,111 @@
             color: var(--primary-bg);
         }
 
-        /* 手機版響應式設定 */
-        @media (max-width: 768px) {
+        /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --開始 */
+        @media (max-width: 1250px) {
             #sidebar {
                 position: absolute;
                 height: 100%;
-                width: 85vw; /* 手機上佔畫面大部分但留有空間 */
-                max-width: 320px;
+                width: 90vw !important; /* 增加目錄側欄寬度 */
+                max-width: 400px !important;
                 box-shadow: 4px 0 25px rgba(0,0,0,0.2);
             }
             #sidebar.collapsed {
-                margin-left: -100%;
+                margin-left: -100% !important;
+            }
+            
+            /* 放大型目錄 UI */
+            .sidebar-header {
+                padding: 4vw 5vw !important;
+            }
+            .sidebar-header h3 {
+                font-size: 5.5vw !important;
             }
             .close-sidebar-mobile {
-                display: block; /* 手機版顯示關閉按鈕 */
+                display: block !important;
+                font-size: 7vw !important;
+                padding: 2vw 3vw !important;
             }
-            .reader-body { padding: 25px 20px; }
-            .main-title { font-size: 1.8rem; }
+            .sidebar-content {
+                padding: 4vw 3vw !important;
+            }
+            .chapter-title {
+                font-size: 4.8vw !important;
+                padding: 3.5vw 4vw !important;
+                border-radius: 8px !important;
+                margin-bottom: 2vw !important;
+            }
+            .section-item a {
+                font-size: 4.2vw !important;
+                padding: 3vw 4vw !important;
+                line-height: 1.6 !important;
+            }
+
+            /* 放大型閱讀區 UI */
+            .top-toolbar {
+                height: 14vw !important;
+                padding: 0 4vw !important;
+            }
+            .toggle-btn {
+                font-size: 4.5vw !important;
+                padding: 2.5vw 4vw !important;
+                border-radius: 8px !important;
+            }
+
+            /* 放大型內文字體與間距 */
+            .reader-body { 
+                padding: 6vw 5vw 25vw 5vw !important; 
+            }
+            .main-title { 
+                font-size: 7vw !important; 
+                margin-bottom: 3vw !important;
+                padding-bottom: 3vw !important;
+            }
+            .author-tag { 
+                font-size: 3.8vw !important; 
+                margin-bottom: 6vw !important;
+                line-height: 1.6 !important;
+            }
+            h2.chapter-heading {
+                font-size: 5.8vw !important;
+                margin-top: 10vw !important;
+                margin-bottom: 5vw !important;
+                padding: 3vw 4vw !important;
+                border-left-width: 8px !important;
+            }
+            h3.section-heading {
+                font-size: 5.2vw !important;
+                margin-top: 8vw !important;
+                margin-bottom: 4vw !important;
+                padding-bottom: 2vw !important;
+            }
+            h4.subsection-heading {
+                font-size: 4.8vw !important;
+                margin-top: 6vw !important;
+                margin-bottom: 3vw !important;
+            }
+            h5.item-heading {
+                font-size: 4.5vw !important;
+                margin-top: 5vw !important;
+                margin-bottom: 2vw !important;
+            }
+            p { 
+                font-size: 4.5vw !important; /* 強制放大段落文字 */
+                line-height: 1.8 !important; 
+                margin-bottom: 4.5vw !important;
+            }
+            .info-box {
+                padding: 5vw !important;
+                margin: 6vw 0 !important;
+                border-left-width: 6px !important;
+            }
+            .formula-box {
+                font-size: 4.8vw !important;
+                padding: 4vw !important;
+                margin: 6vw 0 !important;
+            }
         }
+        /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --結束 */
     </style>
 </head>
 <body>
@@ -1022,7 +1113,7 @@
                 <strong>九、維護良好的工作環境：</strong>(一) 工作室佈局和設計（分區規劃、設備合理擺放、急救滅火設施）；(二) 保持工作環境整潔（每日清潔、化學品密封標籤存放、工作台即時清理）；(三) 空氣質量和通風（設計抽風系統、佩戴防塵口罩與防護裝備）；(四) 噪音和震動控制（維護機具、吸音隔音、佩戴耳塞耳罩、適當休息）；(五) 照明和視覺保護（均勻照明防刺眼、處理原料佩戴護目鏡、定時休息放鬆眼睛）。</p>
 
                 <h3 id="ch5-2" class="section-heading">第二節 陶瓷成形方式與技法</h3>
-                <p>本節將深入瞭解陶瓷成形的不同技法和方式。我們將探討手捏成形、拉坯成形、注漿成形、模具翻印成形等多種陶瓷成形技巧。這些方法涵蓋了從基本的手工成形到使用模具和機器的高度精確性工藝，讓您能更好地理解如何將黏土轉化為各種陶瓷形狀。無論您是新手還是經驗豐富的陶藝家，這一節都將為您提供關於陶瓷成形技法的重要知識，幫助您探索創意和實珸藝術品的可能性。<br>
+                <p>本節將深入瞭解陶瓷成形的不同技法和方式。我們將探討手捏成形、拉坯成形、注漿成形、模具翻印成形等多種陶瓷成形技巧。這些方法涵蓋了從基本手工成形到使用模具和機器的高度精確性工藝，讓您能更好地理解如何將黏土轉化為各種陶瓷形狀。無論您是新手還是經驗豐富的陶藝家，這一節都將為您提供關於陶瓷成形技法的重要知識，幫助您探索創意和實珸藝術品的可能性。<br>
                 <strong>手工捏塑成形：</strong>(一) 基本原理（手勢包括捏, 撚, 捆, 拍, 壓，掌握均勻與對稱）；(二) 基本技巧：1. 泥條盤築法（最具彈性，逐層盤繞堆積成花瓶、壺、人物）；2. 陶片捏塑技巧（精確接合陶板製作壁畫與幾何器物）；3. 生活小品捏塑（一團泥土徒手捏製碗盤茶杯）。<br>
                 <strong>拉坯成型的技巧：</strong>(一) 準備工作和工具（泥料選擇、整潔工作區、備妥拉坯機、海綿、水桶、木質整形刮片）；(二) 基本拉坯技巧：1. 小型造型（杯、盤、碗之定中心定位、升高外擴、海綿保濕）；2. 中型造型（花瓶、甕之高度比例與厚薄均勻控制）；3. 大型造型（水缸之穩定性、多次拉坯、謹慎陰乾修坯）；4. 陰乾和修坯（均勻旋轉陰乾、工具修整外觀細節）；(三) 創建個人風格：黏貼造型坯體、壓捏造形坯體、組合不同形狀尺寸坯體。<br>
                 <strong>注漿成型：</strong>適用於精確複雜且大批量生產之器皿。(一) 石膏模注漿（石膏模吸水固化後倒出餘漿）；(二) 高壓石膏模注漿（高壓注入泥漿，消除空隙缺陷，品質精度極高）。<br>
