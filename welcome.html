@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="黃明文 Ming-Win Huang">
-    <!-- 0. 響應式 Viewport 設定 --開始 -->
+    /* 0. 響應式 Viewport 設定 --開始 */
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- 0. 響應式 Viewport 設定 --結束 -->
+    /* 0. 響應式 Viewport 設定 --結束 */
     <title>歡迎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; }
 
-        /* 1. 電腦版原始標準排版樣式（完全鎖定原版數值與樣式架構） --開始 */
+        /* 1. 電腦版原始標準排版樣式（100% 鎖定原版數值與架構） --開始 */
         body {
             font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -26,8 +26,8 @@
             align-items: center;
             color: #14213d;
             overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
         }
 
         @keyframes gradientBG {
@@ -215,7 +215,7 @@
             margin-right: auto;
         }
         .footer-note i { color: #fca311; margin-right: 8px; }
-        /* 1. 電腦版原始標準排版樣式（完全鎖定原版數值與樣式架構） --結束 */
+        /* 1. 電腦版原始標準排版樣式（100% 鎖定原版數值與架構） --結束 */
 
         /* 2. 平板專屬樣式 (螢幕寬度 769px ~ 1024px) --開始 */
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -228,115 +228,119 @@
         /* 2. 平板專屬樣式 (螢幕寬度 769px ~ 1024px) --結束 */
 
         /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 768px 觸發，電腦端絕不受影響） --開始 */
+        /* 放棄 vw，全面改用 rem 和 px 強制指定大字級，避開 Chrome iframe 縮放 bug */
         @media screen and (max-width: 768px) {
             body {
                 justify-content: flex-start !important;
-                padding: 4vw 0 18vw 0 !important;
+                padding: 20px 0 60px 0 !important;
                 height: auto !important;
                 min-height: 100% !important;
             }
 
             .container {
                 width: 100% !important;
-                padding: 0 4vw !important;
+                padding: 0 15px !important;
             }
 
             .hero-section {
                 flex-direction: column !important;
-                padding: 5.5vw 4.5vw !important;
-                gap: 4vw !important;
+                padding: 25px 20px !important;
+                gap: 15px !important;
                 border-radius: 16px !important;
-                margin-bottom: 4vw !important;
+                margin-bottom: 20px !important;
                 text-align: center !important;
             }
 
             .hero-content-left {
                 flex-direction: column !important;
-                gap: 2vw !important;
+                gap: 10px !important;
                 text-align: center !important;
             }
 
             .main-icon {
-                font-size: 14vw !important;
+                font-size: 3.5rem !important;
             }
 
             h2 {
-                font-size: 6.6vw !important;
-                margin-bottom: 2vw !important;
+                font-size: 1.8rem !important;
+                margin-bottom: 5px !important;
             }
 
             .subtitle {
-                font-size: 4.4vw !important;
-                line-height: 1.65 !important;
+                font-size: 1.1rem !important;
+                line-height: 1.6 !important;
             }
 
             .hero-share-right {
                 width: 100% !important;
-                padding: 4.5vw !important;
+                padding: 15px !important;
                 border-radius: 14px !important;
-                gap: 3vw !important;
+                gap: 15px !important;
                 min-width: unset !important;
             }
 
             .share-title {
-                font-size: 4.8vw !important;
+                font-size: 1.1rem !important;
             }
 
             .share-buttons {
-                gap: 4vw !important;
+                gap: 15px !important;
             }
 
             .share-btn {
-                width: 14vw !important;
-                height: 14vw !important;
-                font-size: 6.5vw !important;
+                width: 55px !important;
+                height: 55px !important;
+                font-size: 1.6rem !important;
             }
 
             .features-grid {
                 grid-template-columns: 1fr !important;
-                gap: 5vw !important;
+                gap: 20px !important;
             }
 
             .feature-card {
-                padding: 6vw 5.5vw !important;
+                padding: 25px 20px !important;
                 border-radius: 16px !important;
                 border-left-width: 8px !important;
             }
 
             .card-header {
-                gap: 3.5vw !important;
-                margin-bottom: 3vw !important;
+                gap: 15px !important;
+                margin-bottom: 15px !important;
             }
 
             .card-icon {
-                font-size: 8vw !important;
+                font-size: 2.2rem !important;
+                width: 55px !important;
+                height: 55px !important;
+                border-radius: 14px !important;
             }
 
             .card-title {
-                font-size: 6.2vw !important;
+                font-size: 1.5rem !important;
             }
 
             .card-desc {
-                font-size: 4.8vw !important;
+                font-size: 1.1rem !important;
                 line-height: 1.6 !important;
-                margin-bottom: 3.5vw !important;
+                margin-bottom: 15px !important;
             }
 
             .card-links li {
-                font-size: 4.8vw !important;
-                margin-bottom: 3vw !important;
-                gap: 3.5vw !important;
+                font-size: 1.1rem !important;
+                margin-bottom: 12px !important;
+                gap: 12px !important;
             }
 
             .card-links li i {
-                font-size: 5.5vw !important;
-                width: 6.5vw !important;
+                font-size: 1.3rem !important;
+                width: 25px !important;
             }
 
             .footer-note {
-                font-size: 4.4vw !important;
-                padding: 3.5vw 6.5vw !important;
-                margin-top: 5vw !important;
+                font-size: 1.05rem !important;
+                padding: 12px 25px !important;
+                margin-top: 20px !important;
                 border-radius: 30px !important;
             }
         }
