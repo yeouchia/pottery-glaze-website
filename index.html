@@ -26,14 +26,13 @@
             --accent-color: #fca311;    /* 基礎工具：琥珀金 */
             --text-light: #e5e5e5;      /* 淺色文字 */
             --bg-color: #f4f6f8;        /* 網頁背景 */
-            --header-height: 64px;      /* Header 高度 */
+            --header-height: 68px;      /* Header 高度 */
             
             /* 下拉選單配色系統 */
+            --gold-light: #fff8e7; --gold-hover: #ffeed0; --gold-icon: #fca311;
             --blue-light: #e0f7fa; --blue-hover: #b3e5fc; --blue-icon: #0277bd;
             --green-light: #e0f2f1; --green-hover: #b2dfdb; --green-icon: #00695c;
             --pink-light: #fce4ec; --pink-hover: #f8bbd0; --pink-icon: #ad1457;
-            
-            /* 其他應用專用：紫色與灰色系配色 */
             --purple-light: #f3e5f5; --purple-hover: #e1bee7; --purple-icon: #7b1fa2;
             --gray-light: #eceff1; --gray-hover: #cfd8dc; --gray-icon: #455a64;
         }
@@ -51,6 +50,7 @@
             flex-direction: column;
         }
 
+        /* --- 頂部導航列 --- */
         header {
             flex-shrink: 0;
             background-color: var(--primary-bg);
@@ -58,9 +58,29 @@
             height: var(--header-height);
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 0 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
             z-index: 1000;
+            position: relative;
+            /* 修正關鍵：絕不可設定 overflow: hidden，否則下拉選單會被切掉 */
+        }
+
+        /* 導覽列中間羽化工作試片背景 (讀取根目錄 header_bg.jpg) */
+        .header-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 200px;
+            right: 480px;
+            height: 100%;
+            background-image: url('./header_bg.jpg'); /* 您放一張 header_bg.jpg 在根目錄即可 */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.42;
+            pointer-events: none;
+            /* 兩側完美羽化淡入深藍背景 */
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+            z-index: 1;
         }
 
         .header-container {
@@ -69,32 +89,67 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 10; /* 確保按鈕與文字在背景上方 */
         }
 
+        /* Logo 區域與英文副標題 */
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             color: white; 
-            margin-right: 20px;
+            margin-right: 25px;
             cursor: pointer;
             transition: all 0.3s ease; 
-            padding: 5px 10px; 
-            border-radius: 4px;
+            padding: 4px 8px; 
+            border-radius: 6px;
+            flex-shrink: 0;
         }
         
-        .brand h1 { margin: 0; font-size: 1.2rem; font-weight: 700; white-space: nowrap;}
-        .brand i { font-size: 1.4rem; color: var(--accent-color); transition: color 0.3s ease; }
-        .brand:hover { background-color: rgba(255, 255, 255, 0.1); }
-        .brand:hover h1 { color: var(--accent-color); }
-        .brand:hover i { color: white; transform: scale(1.1); }
+        .brand-icon {
+            font-size: 1.9rem; 
+            color: var(--accent-color); 
+            transition: transform 0.3s ease;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-text h1 { 
+            margin: 0; 
+            font-size: 1.25rem; 
+            font-weight: 800; 
+            letter-spacing: 1px;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+        
+        .brand-text .sub-en {
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.7);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 1px;
+            white-space: nowrap;
+        }
+
+        .brand:hover { background-color: rgba(255, 255, 255, 0.08); }
+        .brand:hover .brand-text h1 { color: var(--accent-color); }
+        .brand:hover .brand-icon { transform: scale(1.1) rotate(-5deg); }
 
         .nav-menu {
             display: flex;
             align-items: center;
             flex-grow: 1;
-            justify-content: space-between;
+            justify-content: flex-end;
+            gap: 16px;
         }
 
         .tools-group { display: flex; gap: 10px; align-items: center; }
@@ -104,16 +159,16 @@
             gap: 12px;
             align-items: center;
             border-left: 1px solid rgba(255,255,255,0.2);
-            padding-left: 15px;
-            margin-left: 15px;
+            padding-left: 18px;
+            flex-shrink: 0;
         }
 
         .nav-btn {
             text-decoration: none;
             color: var(--text-light);
-            font-size: 0.9rem;
-            padding: 8px 14px; 
-            border-radius: 4px;
+            font-size: 0.92rem;
+            padding: 8px 15px; 
+            border-radius: 6px;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
@@ -123,51 +178,22 @@
             cursor: pointer;
         }
 
-        /* 1. 雙向轉換 (放首位，強烈琥珀金漸層) */
-        .nav-btn.double {
-            background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
-            color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent;
-        }
-        .nav-btn.double:hover {
-            background: white; color: var(--accent-color); border-color: var(--accent-color);   
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
-        }
-        .nav-btn.double i:first-child { color: #ff0000; font-size: 1rem; }
-        .nav-btn.double span { color: rgba(20, 33, 61, 0.6); }
-        .nav-btn.double i:last-child { color: #00b300; font-size: 1rem; }
-
-        /* 2. 原料轉釉式 (琥珀金漸層) */
-        .nav-btn.grad-gold-white {
+        /* 1. 釉藥計算工具 (琥珀金漸層) */
+        .nav-btn.calc-main {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
             color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border: 1px solid transparent; 
-        }
-        .nav-btn.grad-gold-white i { color: #ff0000; font-size: 1.1em; }
-        .nav-btn.grad-gold-white:hover {
-            background: white; color: var(--accent-color); border-color: var(--accent-color);
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4); 
-        }
-
-        /* 3. 釉式轉原料 (白轉琥珀金漸層) */
-        .nav-btn.grad-white-gold {
-            background: linear-gradient(90deg, #ffffff 0%, var(--accent-color) 100%);
-            color: var(--primary-bg);
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 800;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
             border: 1px solid transparent;
         }
-        .nav-btn.grad-white-gold i { color: #00b300; font-size: 1.1em; }
-        .nav-btn.grad-white-gold:hover {
+        .nav-btn.calc-main i:first-child { color: #ff0000; font-size: 1.05em; }
+        .nav-btn.calc-main:hover {
             background: white; color: var(--accent-color); border-color: var(--accent-color);
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4);
+            transform: translateY(-3px) scale(1.04); 
+            box-shadow: 0 4px 14px rgba(252, 163, 17, 0.45);
         }
 
-        /* 4. 計算教學 (藍綠漸層) */
+        /* 2. 計算教學 (藍綠漸層) */
         .nav-btn.learn {
             background: linear-gradient(135deg, #4CC9F0 0%, #2EC4B6 100%);
             color: #14213d; 
@@ -176,10 +202,10 @@
         }
         .nav-btn.learn:hover {
             background: white; color: #0277bd; 
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 10px rgba(76, 201, 240, 0.4);
         }
 
-        /* 5. 陶釉講義 (與計算教學同系之藍綠漸層，強調知識體系) */
+        /* 3. 陶釉講義 (藍綠同色系漸層) */
         .nav-btn.lecture-btn {
             background: linear-gradient(135deg, #2EC4B6 0%, #4CC9F0 100%);
             color: #14213d;
@@ -188,10 +214,10 @@
         }
         .nav-btn.lecture-btn:hover {
             background: white; color: #00695c;
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.4);
+            transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 10px rgba(46, 196, 182, 0.4);
         }
 
-        /* 6. 其他應用 (彩虹多樣色漸層) */
+        /* 4. 其他應用 (彩虹漸層) */
         .nav-btn.others {
             background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 30%, #2ec4b6 70%, #cbf3f0 100%);
             color: #14213d;
@@ -200,10 +226,10 @@
         }
         .nav-btn.others:hover {
             background: white; color: #ff9f1c;
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
+            transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
         }
 
-        /* 7. 留言交流板 (移動至其他應用後，優雅紫桃漸層) */
+        /* 5. 留言交流板 (深紫至桃紅漸層) */
         .nav-btn.guestbook {
             background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
             color: white;
@@ -213,7 +239,7 @@
         .nav-btn.guestbook i { color: #ffd700; }
         .nav-btn.guestbook:hover {
             background: white; color: #7b2cbf;
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
+            transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
         }
 
         /* 右側社群與外部按鈕 */
@@ -241,35 +267,61 @@
         .icon-btn.share { background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; }
         .icon-btn.share:hover { background: white; color: #ff006e; transform: translateY(-3px) scale(1.1); }
 
-        /* 下拉選單 */
+        /* 下拉選單樣式 (修正為最高層級，絕不被遮擋) */
         .dropdown { position: relative; }
         .dropdown-content {
-            display: none; position: absolute; left: 0; top: 100%; margin-top: 0;
-            padding-top: 5px; min-width: 220px; z-index: 100;
+            display: none; 
+            position: absolute; 
+            left: 0; 
+            top: 100%; 
+            padding-top: 8px; 
+            min-width: 220px; 
+            z-index: 999999;
         }
         .share-dropdown-content {
-            display: none; position: absolute; right: 0; top: 100%; margin-top: 10px;
-            min-width: 180px; z-index: 100;
+            display: none; 
+            position: absolute; 
+            right: 0; 
+            top: 100%; 
+            padding-top: 8px; 
+            min-width: 180px; 
+            z-index: 999999;
         }
         .share-dropdown-content.show { display: block; animation: fadeIn 0.2s ease; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
         .dropdown-inner {
-            background-color: #fff; box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-            border-radius: 6px; overflow: hidden;
+            background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-radius: 8px; 
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.08);
         }
         .dropdown:hover .dropdown-content { display: block; }
 
         .dropdown-item {
-            color: #000; padding: 12px 18px; text-decoration: none; 
-            display: flex; align-items: center; gap: 12px;     
-            font-size: 0.92rem; font-weight: 700; white-space: nowrap; 
-            transition: all 0.2s ease; border-left: 6px solid transparent; 
-            background-color: #f9f9f9; cursor: pointer; border-bottom: 1px solid #eee;
+            color: #14213d; 
+            padding: 12px 18px; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;     
+            font-size: 0.92rem; 
+            font-weight: 700; 
+            white-space: nowrap; 
+            transition: all 0.2s ease; 
+            border-left: 6px solid transparent; 
+            background-color: #f9f9f9; 
+            cursor: pointer; 
+            border-bottom: 1px solid #eee;
         }
         .dropdown-item:last-child { border-bottom: none; }
-        .dropdown-item i { width: 20px; text-align: center; font-size: 1.1em; flex-shrink: 0; opacity: 0.85; }
+        .dropdown-item i { width: 20px; text-align: center; font-size: 1.1em; flex-shrink: 0; }
+
+        .dropdown-item.item-gold { background-color: var(--gold-light); border-left-color: var(--gold-icon); }
+        .dropdown-item.item-gold i { color: #d97706; }
+        .dropdown-item.item-gold:hover { background-color: var(--gold-hover); padding-left: 22px; }
 
         .dropdown-item.item-blue { background-color: var(--blue-light); border-left-color: var(--blue-icon); }
         .dropdown-item.item-blue i { color: var(--blue-icon); } 
@@ -310,6 +362,7 @@
            手機與平板專屬響應式設計 (RWD) 
            ==================================================== */
         @media (max-width: 1250px) {
+            .header-bg-overlay { display: none; }
             .mobile-menu-btn { display: block; }
             
             .nav-menu {
@@ -325,7 +378,7 @@
                 padding: 15px 20px 40px 20px;
                 overflow-y: auto;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-                z-index: 9999;
+                z-index: 99999;
             }
 
             .nav-menu.active { display: flex; animation: slideDown 0.3s ease; }
@@ -363,6 +416,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 6px;
+                border: none;
             }
             .dropdown-item {
                 border-radius: 6px;
@@ -401,10 +455,17 @@
 <body onclick="unlockAudio()">
 
     <header>
+        <!-- 羽化試片背景圖層（預設讀取根目錄下的 header_bg.jpg） -->
+        <div class="header-bg-overlay"></div>
+
         <div class="header-container">
+            <!-- Logo 區域（含英文副標題） -->
             <a href="./welcome.html" target="content_frame" class="brand" onclick="playClickSound()" onmouseenter="playHoverSound()">
-                <i class="fa-solid fa-jar"></i>
-                <h1>陶藝與釉藥調配</h1>
+                <i class="fa-solid fa-jar brand-icon"></i>
+                <div class="brand-text">
+                    <h1>陶藝與釉藥調配</h1>
+                    <span class="sub-en">POTTERY GLAZE CALCULATION</span>
+                </div>
             </a>
 
             <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="切換選單">
@@ -413,23 +474,27 @@
 
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
-                    <!-- 1. 雙向轉換 -->
-                    <a href="./welcome-2.html" target="content_frame" class="nav-btn double protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-flask"></i> <span style="font-size: 0.8em;">+</span> <i class="fa-solid fa-calculator"></i>
-                        雙向轉換
-                    </a>
+                    <!-- 1. 釉藥計算工具 (琥珀金漸層主按鈕) -->
+                    <div class="dropdown" id="calcDropdown">
+                        <a href="javascript:void(0)" class="nav-btn calc-main" onmouseenter="playHoverSound()" onclick="toggleDropdown('calcDropdown')">
+                            <i class="fa-solid fa-flask"></i> 釉藥計算工具 <i class="fa-solid fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-inner">
+                                <a href="./yuanliao/index.html" target="content_frame" class="dropdown-item item-gold protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-flask"></i> 原料轉釉式
+                                </a>
+                                <a href="./youzhi/index.html" target="content_frame" class="dropdown-item item-gold protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-calculator"></i> 釉式轉原料
+                                </a>
+                                <a href="./welcome-2.html" target="content_frame" class="dropdown-item item-gold protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-right-left"></i> 雙向精準轉換
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- 2. 原料轉釉式 -->
-                    <a href="./yuanliao/index.html" target="content_frame" class="nav-btn grad-gold-white protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-flask"></i> 原料轉釉式
-                    </a>
-
-                    <!-- 3. 釉式轉原料 -->
-                    <a href="./youzhi/index.html" target="content_frame" class="nav-btn grad-white-gold protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <i class="fa-solid fa-calculator"></i> 釉式轉原料
-                    </a>
-
-                    <!-- 4. 計算教學下拉選單 -->
+                    <!-- 2. 計算教學下拉選單 -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
                             <i class="fa-solid fa-book-open"></i> 計算教學 <i class="fa-solid fa-caret-down"></i>
@@ -449,12 +514,12 @@
                         </div>
                     </div>
 
-                    <!-- 5. 陶釉講義按鈕 -->
+                    <!-- 3. 陶釉講義按鈕 -->
                     <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-book-open-reader"></i> 陶釉講義
                     </a>
 
-                    <!-- 6. 其他應用下拉選單 -->
+                    <!-- 4. 其他應用下拉選單 -->
                     <div class="dropdown" id="otherDropdown">
                         <a href="javascript:void(0)" class="nav-btn others" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
                             <i class="fa-solid fa-cubes"></i> 其他應用 <i class="fa-solid fa-caret-down"></i>
@@ -474,12 +539,13 @@
                         </div>
                     </div>
 
-                    <!-- 7. 留言交流板按鈕 -->
+                    <!-- 5. 留言交流板按鈕 -->
                     <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-comments"></i> 留言交流板
                     </a>
                 </div>
 
+                <!-- 右側社群與外部按鈕組 -->
                 <div class="social-group">
                     <a href="https://sites.google.com/view/t244/" target="_blank" class="icon-btn school" title="鶯歌工商-黃明文教學網站" onmouseenter="playHoverSound()" onclick="playClickSound()">
                         <i class="fa-solid fa-graduation-cap"></i>
