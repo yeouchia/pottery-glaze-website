@@ -335,9 +335,9 @@
             <div class="banner-right">
                 <div class="share-title"><i class="fa-solid fa-share-nodes"></i> 分享給好友</div>
                 <div class="share-buttons">
-                    <button onclick="shareToFB()" class="share-circle-btn fb"><i class="fa-brands fa-facebook-f"></i></button>
-                    <button onclick="shareToLine()" class="share-circle-btn line"><i class="fa-brands fa-line"></i></button>
-                    <button onclick="copyCurrentLink()" class="share-circle-btn copy"><i class="fa-solid fa-link"></i></button>
+                    <button onclick="shareToFB()" class="share-circle-btn fb" title="分享到 Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button onclick="shareToLine()" class="share-circle-btn line" title="分享到 LINE"><i class="fa-brands fa-line"></i></button>
+                    <button onclick="copyCurrentLink()" class="share-circle-btn copy" title="複製連結"><i class="fa-solid fa-link"></i></button>
                 </div>
             </div>
         </div>
@@ -416,17 +416,20 @@
 
     </div>
 
-   <script>
+    <!-- 修復手機版分享連結 Bug 的 JavaScript 區塊 -->
+    <script>
         const siteUrl = encodeURIComponent(window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html'));
 
         function shareToFB() {
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`;
+            
             if (isMobile) {
-                // 手機版：改用 m.facebook.com，避免被臉書 App 錯誤攔截導致沒有進入發文畫面
-                window.open(`https://m.facebook.com/sharer.php?u=${siteUrl}`, '_blank');
+                // 手機版：直接在當前分頁跳轉，完美交接給臉書 App，避免產生空白分頁
+                window.location.href = fbShareUrl;
             } else {
-                // 電腦版：維持原本的分享視窗
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`, '_blank');
+                // 電腦版：維持原本的彈出分享視窗
+                window.open(fbShareUrl, '_blank', 'width=600,height=400');
             }
         }
 
@@ -435,11 +438,11 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
             if (isMobile) {
-                // 手機版：使用深度連結，直接喚醒 LINE App 的傳送畫面
+                // 手機版：使用深度連結，直接喚醒 LINE App
                 window.location.href = `https://line.me/R/msg/text/?${textToShare}`;
             } else {
-                // 電腦版：維持原本的網頁版分享視窗
-                window.open(`https://social-plugins.line.me/lineit/share?url=${siteUrl}`, '_blank');
+                // 電腦版：維持原本的彈出分享視窗
+                window.open(`https://social-plugins.line.me/lineit/share?url=${siteUrl}`, '_blank', 'width=500,height=500');
             }
         }
 
