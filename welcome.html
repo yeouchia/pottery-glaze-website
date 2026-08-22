@@ -2,437 +2,438 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="黃明文 Ming-Win Huang">
-    /* 0. 響應式 Viewport 設定 --開始 */
+    <!-- 0. 跨瀏覽器 Viewport 與文字防縮放設定 --開始 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    /* 0. 響應式 Viewport 設定 --結束 */
-    <title>歡迎</title>
+    <!-- 0. 跨瀏覽器 Viewport 與文字防縮放設定 --結束 -->
+    
+    <title>歡迎使用陶藝與釉藥調配工具</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        * { box-sizing: border-box; }
+        :root {
+            --primary-color: #14213d;
+            --accent-color: #fca311;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
 
-        /* 1. 電腦版原始標準排版樣式（100% 鎖定原版數值與架構） --開始 */
-        body {
-            font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #f8f9fa, #e3f2fd, #fff8e1, #f3e5f5);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #14213d;
-            overflow-x: hidden;
+        }
+
+        /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --開始 */
+        html, body {
+            height: 100%;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-y: auto;
             -webkit-text-size-adjust: 100% !important;
             text-size-adjust: 100% !important;
+            -webkit-tap-highlight-color: transparent;
         }
+        /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --結束 */
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .bg-icon {
-            position: fixed;
-            color: rgba(20, 33, 61, 0.03);
-            z-index: 0;
-            animation: floatBackground 20s linear infinite;
-            pointer-events: none;
-        }
-        .bg-icon:nth-child(1) { top: 5%; left: 5%; font-size: 6em; }
-        .bg-icon:nth-child(2) { top: 10%; right: 8%; font-size: 8em; }
-
-        @keyframes floatBackground {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(20px, 20px) rotate(10deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
-
-        .container {
-            position: relative;
-            z-index: 10;
-            width: 95%;
-            max-width: 1400px;
-            text-align: center;
-            padding: 20px; 
+        .welcome-wrapper {
+            max-width: 1300px; /* 增加最大寬度以容納 4 欄並排 */
+            margin: 0 auto;
+            padding: 30px 20px 80px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-section {
-            margin-bottom: 20px; 
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 25px;
-            text-align: left;
-            background: rgba(255,255,255,0.75);
-            backdrop-filter: blur(8px);
-            padding: 22px 30px; 
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
         }
 
-        .hero-content-left {
+        /* --- 恢復原本的頂部 Banner 區塊 --- */
+        .top-banner {
+            background: var(--card-bg);
+            width: 100%;
+            border-radius: 16px;
+            padding: 30px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .banner-left {
             display: flex;
             align-items: center;
             gap: 20px;
-            flex: 2;
         }
 
-        .main-icon {
-            font-size: 3.2em; 
-            background: linear-gradient(135deg, #fca311, #fb8500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: floatIcon 3s ease-in-out infinite;
+        .banner-icon {
+            font-size: 3.8rem;
+            color: #fca311;
+        }
+
+        .banner-text h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .banner-text p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .banner-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
             flex-shrink: 0;
         }
 
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        h2 {
-            font-size: 1.8em; 
-            margin: 0 0 5px 0;
-            color: #14213d;
-            font-weight: 800;
-        }
-
-        .subtitle {
-            font-size: 0.95rem; 
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .hero-share-right {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 18px;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            min-width: 230px;
-        }
-
         .share-title {
-            font-size: 0.9rem; 
-            color: #14213d;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
+
         .share-title i { color: #fca311; }
 
-        .share-buttons { display: flex; gap: 10px; }
-
-        .share-btn {
-            width: 38px; height: 38px; border-radius: 50%;
-            border: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem; color: white;
-            transition: all 0.3s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        .share-buttons {
+            display: flex;
+            gap: 12px;
         }
-        .share-btn:hover { transform: translateY(-2px) scale(1.1); }
-        .btn-fb { background: #1877f2; }
-        .btn-line { background: #00c300; }
-        .btn-copy { background: #6b7280; }
 
-        .features-grid {
+        .share-circle-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .share-circle-btn:hover { transform: scale(1.1); }
+        .share-circle-btn.fb { background-color: #1877f2; }
+        .share-circle-btn.line { background-color: #00c300; }
+        .share-circle-btn.copy { background-color: #64748b; }
+
+        /* 3. 功能導覽卡片區（電腦版強制 4 欄排列，恢復原狀） --開始 */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(4, 1fr); /* 強制鎖定為 4 欄 */
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        /* 3. 功能導覽卡片區（電腦版強制 4 欄排列，恢復原狀） --結束 */
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border-left: 6px solid var(--accent-color);
+        }
+
+        .feature-card.card-calc { border-left-color: #fca311; }
+        .feature-card.card-video { border-left-color: #ef4444; }
+        .feature-card.card-lecture { border-left-color: #2ec4b6; }
+        .feature-card.card-life { border-left-color: #8b5cf6; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+        }
+
+        .card-calc .card-icon { color: #fca311; background: #fff8e7; }
+        .card-video .card-icon { color: #ef4444; background: #fee2e2; }
+        .card-lecture .card-icon { color: #2ec4b6; background: #e0f2f1; }
+        .card-life .card-icon { color: #8b5cf6; background: #f3e8ff; }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .card-list li i {
+            font-size: 1.05rem;
+            color: #64748b;
+            width: 18px;
+            text-align: center;
+        }
+
+        /* 恢復原本的底部提示按鈕 */
+        .bottom-hint {
+            background: #fff8e7;
+            color: #b45309;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-top: 10px;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px; 
-            border-radius: 14px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
-            border: 1px solid rgba(255,255,255,0.8);
-            transition: all 0.3s ease;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-        }
-
-        .feature-card::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-        }
-        .card-calc::before { background: #fca311; }
-        .card-video::before { background: #ff0000; }
-        .card-life::before { background: #9d4edd; }
-        .card-fun::before { background: #4caf50; }
-
-        .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .card-icon { font-size: 1.4em; }
-        .card-calc .card-icon { color: #fca311; }
-        .card-video .card-icon { color: #ff0000; }
-        .card-life .card-icon { color: #9d4edd; }
-        .card-fun .card-icon { color: #4caf50; }
-
-        .card-title { font-size: 1.05em; font-weight: 700; color: #14213d; }
-        .card-desc { font-size: 0.86rem; color: #666; line-height: 1.4; margin-bottom: 8px; }
-
-        .card-links { list-style: none; padding: 0; margin: 0; }
-        .card-links li { margin-bottom: 4px; font-size: 0.82rem; color: #555; display: flex; align-items: center; gap: 6px; }
-
-        .footer-note {
-            margin-top: 20px; 
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 20px;
-            background-color: #fff;
-            border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            font-size: 0.85em;
-            color: #555;
-            font-weight: bold;
-            border: 1px solid #eee;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .footer-note i { color: #fca311; margin-right: 8px; }
-        /* 1. 電腦版原始標準排版樣式（100% 鎖定原版數值與架構） --結束 */
-
-        /* 2. 平板專屬樣式 (螢幕寬度 769px ~ 1024px) --開始 */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            body { height: auto; padding: 20px 0; }
-            .hero-section { flex-direction: column; text-align: center; }
-            .hero-content-left { flex-direction: column; text-align: center; }
-            .hero-share-right { width: 100%; }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        /* 2. 平板專屬樣式 (螢幕寬度 769px ~ 1024px) --結束 */
-
-        /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 768px 觸發，電腦端絕不受影響） --開始 */
-        /* 放棄 vw，全面改用 rem 和 px 強制指定大字級，避開 Chrome iframe 縮放 bug */
-        @media screen and (max-width: 768px) {
-            body {
-                justify-content: flex-start !important;
-                padding: 20px 0 60px 0 !important;
-                height: auto !important;
-                min-height: 100% !important;
+        /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --開始 */
+        @media (max-width: 1250px) {
+            .welcome-wrapper {
+                padding: 4vw 4vw 35vw 4vw !important;
             }
 
-            .container {
-                width: 100% !important;
-                padding: 0 15px !important;
-            }
-
-            .hero-section {
+            .top-banner {
                 flex-direction: column !important;
-                padding: 25px 20px !important;
-                gap: 15px !important;
+                text-align: center !important;
+                padding: 6vw !important;
+                gap: 5vw !important;
                 border-radius: 16px !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
+                margin-bottom: 5vw !important;
             }
 
-            .hero-content-left {
+            .banner-left {
                 flex-direction: column !important;
-                gap: 10px !important;
-                text-align: center !important;
+                gap: 3vw !important;
             }
 
-            .main-icon {
-                font-size: 3.5rem !important;
-            }
+            .banner-icon { font-size: 14vw !important; }
+            .banner-text h1 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
+            .banner-text p { font-size: 4vw !important; line-height: 1.6 !important; }
 
-            h2 {
-                font-size: 1.8rem !important;
-                margin-bottom: 5px !important;
-            }
+            .share-title { font-size: 4.5vw !important; margin-bottom: 2vw !important; justify-content: center !important; }
+            .share-buttons { gap: 4vw !important; }
+            .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
-            .subtitle {
-                font-size: 1.1rem !important;
-                line-height: 1.6 !important;
-            }
-
-            .hero-share-right {
-                width: 100% !important;
-                padding: 15px !important;
-                border-radius: 14px !important;
-                gap: 15px !important;
-                min-width: unset !important;
-            }
-
-            .share-title {
-                font-size: 1.1rem !important;
-            }
-
-            .share-buttons {
-                gap: 15px !important;
-            }
-
-            .share-btn {
-                width: 55px !important;
-                height: 55px !important;
-                font-size: 1.6rem !important;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr !important;
-                gap: 20px !important;
+            .cards-grid {
+                grid-template-columns: 1fr !important; /* 手機單欄 */
+                gap: 5vw !important;
+                margin-bottom: 6vw !important;
             }
 
             .feature-card {
-                padding: 25px 20px !important;
-                border-radius: 16px !important;
-                border-left-width: 8px !important;
+                padding: 6.5vw 6vw !important;
+                border-radius: 18px !important;
+                border-left-width: 10px !important;
+                box-shadow: 0 4px 18px rgba(0,0,0,0.08) !important;
             }
 
             .card-header {
-                gap: 15px !important;
-                margin-bottom: 15px !important;
+                gap: 4.5vw !important;
+                margin-bottom: 4.5vw !important;
             }
 
             .card-icon {
-                font-size: 2.2rem !important;
-                width: 55px !important;
-                height: 55px !important;
+                font-size: 7.8vw !important;
+                width: 15vw !important;
+                height: 15vw !important;
                 border-radius: 14px !important;
             }
 
             .card-title {
-                font-size: 1.5rem !important;
+                font-size: 6.4vw !important;
+                font-weight: 800 !important;
             }
 
             .card-desc {
-                font-size: 1.1rem !important;
-                line-height: 1.6 !important;
-                margin-bottom: 15px !important;
+                font-size: 4.8vw !important;
+                line-height: 1.8 !important;
+                margin-bottom: 4.5vw !important;
             }
 
-            .card-links li {
-                font-size: 1.1rem !important;
-                margin-bottom: 12px !important;
-                gap: 12px !important;
+            .card-list {
+                gap: 3.8vw !important;
             }
 
-            .card-links li i {
-                font-size: 1.3rem !important;
-                width: 25px !important;
+            .card-list li {
+                font-size: 5vw !important;
+                font-weight: 700 !important;
+                gap: 4vw !important;
             }
 
-            .footer-note {
-                font-size: 1.05rem !important;
-                padding: 12px 25px !important;
-                margin-top: 20px !important;
-                border-radius: 30px !important;
+            .card-list li i {
+                font-size: 5.8vw !important;
+                width: 7vw !important;
+            }
+
+            .bottom-hint {
+                font-size: 4.2vw !important;
+                padding: 3.5vw 5vw !important;
+                border-radius: 50px !important;
             }
         }
-        /* 3. 手機版專屬放大樣式（僅在螢幕寬度 ≤ 768px 觸發，電腦端絕不受影響） --結束 */
+        /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --結束 */
     </style>
 </head>
 <body>
-    <i class="fa-solid fa-flask bg-icon"></i>
-    <i class="fa-solid fa-fire bg-icon"></i>
 
-    <div class="container">
-        <!-- 4. 頂部 Banner 與分享區塊 --開始 -->
-        <div class="hero-section">
-            <div class="hero-content-left">
-                <div class="main-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <div class="hero-text">
-                    <h2>陶藝與釉藥調配</h2>
-                    <div class="subtitle">
-                        這是一個融合科學計算與藝術創作的陶藝學習中心。<br>
-                        分享陶藝的歷史文化、創作靈感與生活美學。
-                    </div>
+    <div class="welcome-wrapper">
+        
+        <!-- 恢復原本的頂部 Banner 區塊 -->
+        <div class="top-banner">
+            <div class="banner-left">
+                <i class="fa-solid fa-layer-group banner-icon"></i>
+                <div class="banner-text">
+                    <h1>陶藝與釉藥調配</h1>
+                    <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
                 </div>
             </div>
-
-            <div class="hero-share-right">
+            <div class="banner-right">
                 <div class="share-title"><i class="fa-solid fa-share-nodes"></i> 分享給好友</div>
                 <div class="share-buttons">
-                    <button class="share-btn btn-fb" onclick="shareToFB()"><i class="fa-brands fa-facebook-f"></i></button>
-                    <button class="share-btn btn-line" onclick="shareToLine()"><i class="fa-brands fa-line"></i></button>
-                    <button class="share-btn btn-copy" onclick="copyLink()"><i class="fa-solid fa-link"></i></button>
+                    <button onclick="shareToFB()" class="share-circle-btn fb"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button onclick="shareToLine()" class="share-circle-btn line"><i class="fa-brands fa-line"></i></button>
+                    <button onclick="copyCurrentLink()" class="share-circle-btn copy"><i class="fa-solid fa-link"></i></button>
                 </div>
             </div>
         </div>
-        <!-- 4. 頂部 Banner 與分享區塊 --結束 -->
 
-        <!-- 5. 四大功能卡片網格 --開始 -->
-        <div class="features-grid">
+        <!-- 恢復原本的 4 欄功能特色卡片網格 -->
+        <div class="cards-grid">
+            <!-- 3. 精準釉藥計算卡片 --開始 -->
             <div class="feature-card card-calc">
-                <div class="card-header"><i class="fa-solid fa-calculator card-icon"></i><span class="card-title">精準釉藥計算</span></div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <div class="card-title">精準釉藥計算</div>
+                </div>
                 <div class="card-desc">科學調配完美釉色之專業工具：</div>
-                <ul class="card-links">
+                <ul class="card-list">
                     <li><i class="fa-solid fa-flask"></i> 原料轉釉式</li>
-                    <li><i class="fa-solid fa-calculator"></i> 釉式轉原料</li>
+                    <li><i class="fa-solid fa-table"></i> 釉式轉原料</li>
                     <li><i class="fa-solid fa-right-left"></i> 雙向精準轉換</li>
                     <li><i class="fa-solid fa-chalkboard-user"></i> 賽格式與三角座標教學</li>
                 </ul>
             </div>
+            <!-- 3. 精準釉藥計算卡片 --結束 -->
 
+            <!-- 4. 豐富影音課程卡片 --開始 -->
             <div class="feature-card card-video">
-                <div class="card-header"><i class="fa-brands fa-youtube card-icon"></i><span class="card-title">豐富影音課程</span></div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <div class="card-title">豐富影音課程</div>
+                </div>
                 <div class="card-desc">完整 YouTube 教學影片庫：</div>
-                <ul class="card-links">
+                <ul class="card-list">
                     <li><i class="fa-solid fa-landmark"></i> 陶瓷歷史與文化介紹</li>
-                    <li><i class="fa-solid fa-hands-holding-circle"></i> 陶瓷拉坯製作過程</li>
+                    <li><i class="fa-solid fa-hands-holding"></i> 陶瓷拉坯製作過程</li>
                     <li><i class="fa-solid fa-paintbrush"></i> 釉色與裝飾技法</li>
                     <li><i class="fa-solid fa-vial"></i> 釉藥調配實務</li>
                 </ul>
             </div>
+            <!-- 4. 豐富影音課程卡片 --結束 -->
 
+            <!-- 5. 陶釉教學講義卡片 --開始 -->
+            <div class="feature-card card-lecture">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                    <div class="card-title">陶釉教學講義</div>
+                </div>
+                <div class="card-desc">完整七大章節陶瓷專書文稿：</div>
+                <ul class="card-list">
+                    <li><i class="fa-solid fa-book-bookmark"></i> 陶瓷歷史與五大名窯</li>
+                    <li><i class="fa-solid fa-cubes-stacked"></i> 14種常用釉藥原料解析</li>
+                    <li><i class="fa-solid fa-shapes"></i> 三角座標與賽格爾式理論</li>
+                    <li><i class="fa-solid fa-fire-burner"></i> 四大窯爐操作與安全規範</li>
+                </ul>
+            </div>
+            <!-- 5. 陶釉教學講義卡片 --結束 -->
+
+            <!-- 6. 陶藝生活與靈感卡片 --開始 -->
             <div class="feature-card card-life">
-                <div class="card-header"><i class="fa-solid fa-heart card-icon"></i><span class="card-title">陶藝生活與靈感</span></div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
+                    <div class="card-title">陶藝生活與靈感</div>
+                </div>
                 <div class="card-desc">關注 FB 與 IG 獲得創作養分：</div>
-                <ul class="card-links">
+                <ul class="card-list">
                     <li><i class="fa-solid fa-palette"></i> 個人原創作品分享</li>
-                    <li><i class="fa-solid fa-landmark"></i> 展覽資訊推薦</li>
-                    <li><i class="fa-solid fa-fire"></i> 陶藝技法與教學</li>
+                    <li><i class="fa-solid fa-fire-flame-curved"></i> 炎變の燒柴燒記錄</li>
+                    <li><i class="fa-solid fa-school"></i> 鶯歌工商教學資源交流</li>
+                    <li><i class="fa-solid fa-comments"></i> 留言板互動提問</li>
                 </ul>
             </div>
-
-            <div class="feature-card card-fun">
-                <div class="card-header"><i class="fa-solid fa-gamepad card-icon"></i><span class="card-title">課後紓壓天地</span></div>
-                <div class="card-desc">創作之餘放鬆心情的小天地：</div>
-                <ul class="card-links">
-                    <li><i class="fa-solid fa-dragon"></i> 經典懷舊天堂遊戲</li>
-                    <li><i class="fa-solid fa-fire-burner"></i> 燒陶體驗小遊戲</li>
-                    <li><i class="fa-solid fa-flask"></i> 配釉趣味互動</li>
-                </ul>
-            </div>
+            <!-- 6. 陶藝生活與靈感卡片 --結束 -->
         </div>
-        <!-- 5. 四大功能卡片網格 --結束 -->
 
-        <div class="footer-note">
+        <!-- 恢復原本的底部提示 -->
+        <div class="bottom-hint">
             <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
         </div>
+
     </div>
 
     <script>
-        const MAIN_URL = "https://yeouchia.github.io/pottery-glaze-website/";
-        function shareToLine() { window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(MAIN_URL)}`, '_blank'); }
-        function shareToFB() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(MAIN_URL)}`, '_blank'); }
-        function copyLink() {
-            navigator.clipboard.writeText(MAIN_URL).then(() => alert('✨ 網址已複製！')).catch(() => alert('複製失敗'));
+        const siteUrl = encodeURIComponent(window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html'));
+
+        function shareToFB() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`, '_blank');
+        }
+
+        function shareToLine() {
+            window.open(`https://social-plugins.line.me/lineit/share?url=${siteUrl}`, '_blank');
+        }
+
+        function copyCurrentLink() {
+            const urlToCopy = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
+            navigator.clipboard.writeText(urlToCopy).then(() => {
+                alert('✨ 網站網址已複製！快去分享給陶藝好友吧！');
+            }).catch(() => {
+                alert('複製失敗，請手動複製網址。');
+            });
         }
     </script>
 </body>
