@@ -176,7 +176,7 @@
             cursor: pointer;
         }
 
-        /* 1. 釉藥計算工具 (琥珀金漸層主按鈕) */
+        /* <!-- 1. 釉藥計算工具樣式 --開始> */
         .nav-btn.calc-main {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
             color: var(--primary-bg);
@@ -190,8 +190,9 @@
             transform: translateY(-3px) scale(1.04); 
             box-shadow: 0 4px 14px rgba(252, 163, 17, 0.45);
         }
+        /* <!-- 1. 釉藥計算工具樣式 --結束> */
 
-        /* 2. 計算教學 (藍綠漸層) */
+        /* <!-- 2. 計算教學樣式 --開始> */
         .nav-btn.learn {
             background: linear-gradient(135deg, #4CC9F0 0%, #2EC4B6 100%);
             color: #14213d; 
@@ -202,8 +203,9 @@
             background: white; color: #0277bd; 
             transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 10px rgba(76, 201, 240, 0.4);
         }
+        /* <!-- 2. 計算教學樣式 --結束> */
 
-        /* 3. 陶釉講義 (藍綠同色系漸層) */
+        /* <!-- 3. 陶釉講義樣式 --開始> */
         .nav-btn.lecture-btn {
             background: linear-gradient(135deg, #2EC4B6 0%, #4CC9F0 100%);
             color: #14213d;
@@ -214,8 +216,9 @@
             background: white; color: #00695c;
             transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 10px rgba(46, 196, 182, 0.4);
         }
+        /* <!-- 3. 陶釉講義樣式 --結束> */
 
-        /* 4. 其他應用 (彩虹漸層) */
+        /* <!-- 4. 其他應用樣式 --開始> */
         .nav-btn.others {
             background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 30%, #2ec4b6 70%, #cbf3f0 100%);
             color: #14213d;
@@ -226,8 +229,9 @@
             background: white; color: #ff9f1c;
             transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 12px rgba(46, 196, 182, 0.5);
         }
+        /* <!-- 4. 其他應用樣式 --結束> */
 
-        /* 5. 留言交流板 (深紫至桃紅漸層) */
+        /* <!-- 5. 留言交流板樣式 --開始> */
         .nav-btn.guestbook {
             background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
             color: white;
@@ -239,6 +243,7 @@
             background: white; color: #7b2cbf;
             transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
         }
+        /* <!-- 5. 留言交流板樣式 --結束> */
 
         /* 右側社群與外部按鈕 */
         .icon-btn {
@@ -356,9 +361,7 @@
 
         footer { flex-shrink: 0; background-color: #0f1a2e; color: #888; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
 
-        /* ====================================================
-           手機與平板專屬響應式設計 (強化放大並加入 !important)
-           ==================================================== */
+        /* <!-- 6. 手機版響應式 RWD 核心樣式 --開始> */
         @media (max-width: 1250px) {
             .header-bg-overlay { display: none !important; }
             .mobile-menu-btn { display: block !important; }
@@ -373,7 +376,7 @@
                 background-color: #14213d !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
-                padding: 20px 20px 50px 20px !important;
+                padding: 5vw 5vw 12vw 5vw !important;
                 overflow-y: auto !important;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
                 z-index: 99999 !important;
@@ -385,21 +388,21 @@
             .tools-group {
                 flex-direction: column !important;
                 width: 100% !important;
-                gap: 14px !important;
+                gap: 3.5vw !important;
                 align-items: stretch !important;
             }
 
-            /* 手機版主要功能按鈕放大 */
+            /* 手機版主要功能按鈕等比放大 */
             .nav-btn {
                 width: 100% !important;
                 justify-content: flex-start !important;
-                padding: 16px 22px !important;
-                font-size: 1.18rem !important;
+                padding: 3.8vw 5vw !important;
+                font-size: 4.8vw !important;
                 font-weight: 800 !important;
                 border-radius: 12px !important;
-                gap: 14px !important;
+                gap: 3.5vw !important;
             }
-            .nav-btn i { font-size: 1.35rem !important; }
+            .nav-btn i { font-size: 5.5vw !important; }
 
             .dropdown { width: 100% !important; }
             .dropdown:hover .dropdown-content { display: none !important; }
@@ -408,7 +411,7 @@
             .dropdown-content {
                 position: static !important;
                 width: 100% !important;
-                padding: 8px 0 8px 12px !important;
+                padding: 2vw 0 2vw 3vw !important;
                 box-shadow: none !important;
             }
             .dropdown-inner {
@@ -418,35 +421,35 @@
                 overflow: visible !important;
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 8px !important;
+                gap: 2vw !important;
                 border: none !important;
             }
             .dropdown-item {
                 border-radius: 10px !important;
-                padding: 14px 18px !important;
-                font-size: 1.08rem !important;
+                padding: 3.2vw 4.5vw !important;
+                font-size: 4.2vw !important;
                 font-weight: 700 !important;
             }
-            .dropdown-item i { font-size: 1.25rem !important; }
+            .dropdown-item i { font-size: 4.8vw !important; }
 
             .social-group {
                 border-left: none !important;
                 border-top: 1px solid rgba(255,255,255,0.15) !important;
                 padding-left: 0 !important;
                 margin-left: 0 !important;
-                margin-top: 25px !important;
-                padding-top: 20px !important;
+                margin-top: 6vw !important;
+                padding-top: 5vw !important;
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: row !important;
                 flex-wrap: wrap !important;
                 justify-content: center !important;
-                gap: 16px !important;
+                gap: 4vw !important;
             }
             .icon-btn { 
-                width: 48px !important; 
-                height: 48px !important; 
-                font-size: 1.35rem !important; 
+                width: 13.5vw !important; 
+                height: 13.5vw !important; 
+                font-size: 5.8vw !important; 
             }
             .icon-btn::after { display: none !important; }
 
@@ -459,6 +462,7 @@
                 width: auto !important;
             }
         }
+        /* <!-- 6. 手機版響應式 RWD 核心樣式 --結束> */
     </style>
 </head>
 <body onclick="unlockAudio()">
@@ -483,7 +487,7 @@
 
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
-                    <!-- 1. 釉藥計算工具 (琥珀金漸層主按鈕) -->
+                    <!-- <!-- 1. 釉藥計算工具下拉選單 --開始> -->
                     <div class="dropdown" id="calcDropdown">
                         <a href="javascript:void(0)" class="nav-btn calc-main" onmouseenter="playHoverSound()" onclick="toggleDropdown('calcDropdown')">
                             <i class="fa-solid fa-flask"></i> 釉藥計算工具 <i class="fa-solid fa-caret-down"></i>
@@ -502,8 +506,9 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <!-- 1. 釉藥計算工具下拉選單 --結束> -->
 
-                    <!-- 2. 計算教學下拉選單 -->
+                    <!-- <!-- 2. 計算教學下拉選單 --開始> -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn learn" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
                             <i class="fa-solid fa-book-open"></i> 計算教學 <i class="fa-solid fa-caret-down"></i>
@@ -522,13 +527,15 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <!-- 2. 計算教學下拉選單 --結束> -->
 
-                    <!-- 3. 陶釉講義按鈕 -->
+                    <!-- <!-- 3. 陶釉講義按鈕 --開始> -->
                     <a href="./lecture.html" target="content_frame" class="nav-btn lecture-btn protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-book-open-reader"></i> 陶釉講義
                     </a>
+                    <!-- <!-- 3. 陶釉講義按鈕 --結束> -->
 
-                    <!-- 4. 其他應用下拉選單 -->
+                    <!-- <!-- 4. 其他應用下拉選單 --開始> -->
                     <div class="dropdown" id="otherDropdown">
                         <a href="javascript:void(0)" class="nav-btn others" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
                             <i class="fa-solid fa-cubes"></i> 其他應用 <i class="fa-solid fa-caret-down"></i>
@@ -547,11 +554,13 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <!-- 4. 其他應用下拉選單 --結束> -->
 
-                    <!-- 5. 留言交流板按鈕 -->
+                    <!-- <!-- 5. 留言交流板按鈕 --開始> -->
                     <a href="guestbook.html" target="content_frame" class="nav-btn guestbook protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                         <i class="fa-solid fa-comments"></i> 留言交流板
                     </a>
+                    <!-- <!-- 5. 留言交流板按鈕 --結束> -->
                 </div>
 
                 <!-- 右側社群與外部按鈕組 -->
