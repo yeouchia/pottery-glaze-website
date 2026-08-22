@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="author" content="黃明文 Ming-Win Huang">
     <meta name="description" content="由黃明文老師開發的陶藝與釉藥調配工具，提供原料轉換、釉式計算與陶瓷教學資源。">   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>陶藝與釉藥調配 - 專業釉式計算、賽格式計算與教學工具</title>
     <meta name="description" content="專為陶藝愛好者設計的免費釉藥計算工具。提供原料轉釉式、釉式轉原料、賽格式計算、三角座標分析等功能。內含豐富的陶藝教學影片與原料資料庫，助您精準調配完美釉方。">
@@ -39,6 +39,7 @@
 
         * { box-sizing: border-box; }
         
+        /* <!-- 0. 跨瀏覽器文字大小防縮放與核心基礎設定 --開始> */
         html, body {
             height: 100%; 
             margin: 0;
@@ -48,7 +49,11 @@
             background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
+            -webkit-text-size-adjust: 100%; /* 防止 iOS Chrome / Safari 自動縮小文字 */
+            text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
+        /* <!-- 0. 跨瀏覽器文字大小防縮放與核心基礎設定 --結束> */
 
         /* --- 頂部導航列 --- */
         header {
