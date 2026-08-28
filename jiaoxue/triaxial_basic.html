@@ -321,54 +321,71 @@
 
         /* =========================================================
            ★ 手機版專屬響應式結界 (極致壓縮版，絕對不出現左右滾動條) ★
+           ★ 以下代碼絕對不會影響電腦版任何排版 ★
            ========================================================= */
         @media screen and (max-width: 768px) {
-            body { padding: 10px; }
-            .section-block { padding: 25px 15px; } /* 縮小兩側空白 */
-            .page-header h1 { font-size: 1.5em; flex-wrap: wrap; }
+            body { padding: 5px; } /* 極致縮小外側邊距，爭取內部最大空間 */
+            .section-block { padding: 20px 10px; }
+            .page-header { padding: 25px 15px; }
+            .page-header h1 { font-size: 1.4em; flex-wrap: wrap; }
             
-            /* 1. Canvas 畫布防爆框 */
+            /* 1. Canvas 畫布防爆框：徹底解決超過左右邊框 */
             .canvas-container {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+                overflow: hidden; /* 防止子層撐破 */
             }
             .canvas-wrapper {
-                min-width: 100% !important; 
+                min-width: 0 !important; /* 解除強制 100% 最小寬度，改用 max-width */
+                max-width: 100% !important;
                 width: 100%;
                 padding: 10px 5px !important;
+                box-sizing: border-box; /* 確保 padding 不增加總寬度 */
             }
             canvas {
-                width: 100% !important;
+                max-width: 100% !important;
                 height: auto !important;
+                width: 100% !important;
             }
 
-            /* 2. ABC卡片 & 優缺點卡片 強制上下疊放並壓縮內距 */
+            /* 2. ABC卡片 & 優缺點卡片：解除強制撐滿，避免破版 */
             .abc-cards-container, .pros-cons-container {
                 flex-direction: column !important;
                 gap: 10px !important;
+                width: 100%;
             }
             .abc-card, .pros-cons-container > div {
-                min-width: 100% !important;
+                min-width: 0 !important; 
                 width: 100% !important;
                 padding: 15px 10px !important; /* 減少內部空白 */
+                box-sizing: border-box;
+                font-size: 0.95em; /* 稍微縮小文字，讓排版更順暢 */
             }
 
-            /* 3. ★ 表格終極壓縮，適應手機全寬不滑動 ★ */
+            /* 3. ★ 表格終極壓縮，解決文字變長很怪的問題 ★ */
             .table-responsive {
                 overflow-x: hidden !important; /* 絕對禁止左右滑動 */
+                width: 100%;
+                box-sizing: border-box;
             }
             .compare-table {
-                min-width: 100% !important;
+                min-width: 0 !important;
+                width: 100% !important;
                 margin: 15px 0 !important;
-                font-size: 13px !important; /* 縮小表格字體 */
+                font-size: 12px !important; /* 極致縮小表格字體 */
+                table-layout: auto !important; /* 取消固定寬度！讓瀏覽器自動分配，解決文字擠成一直線的怪異感 */
             }
             .compare-table th, .compare-table td {
-                padding: 8px 4px !important; /* 大幅減少單元格內距 */
-                white-space: normal !important; /* 允許文字自動換行 */
-                word-break: break-word; /* 避免長英文單字撐破表格 */
+                padding: 6px 3px !important; /* 極限壓縮單元格空間 */
+                white-space: normal !important; 
+                word-break: normal !important; /* 恢復正常中文換行，避免破字 */
             }
             .compare-table th {
-                font-size: 14px !important; /* 表頭稍微大一點點 */
+                font-size: 12.5px !important;
+            }
+            .compare-table th:first-child { 
+                width: auto !important; /* 解除第一欄的 20% 限制，釋放空間給說明文字 */
             }
 
             /* 4. 時間軸改為單邊排列 */
