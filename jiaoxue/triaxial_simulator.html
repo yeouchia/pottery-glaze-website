@@ -181,7 +181,6 @@
             justify-content: space-between;
             gap: 6px; 
             width: 100%;
-            /* ★ 魔法修復：對齊頂部，不要讓行數較少的表格垂直拉伸放大 ★ */
             align-items: flex-start; 
         }
         
@@ -213,30 +212,61 @@
            ========================================================= */
         @media screen and (max-width: 900px) {
             .container {
-                flex-direction: column !important; /* 強制改為上下排列 */
-                padding: 10px !important;
+                flex-direction: column !important; 
+                padding: 8px !important; /* 壓縮外框內距 */
             }
             .left-panel {
                 flex: none !important;
-                width: 100% !important; /* 寬度佔滿手機螢幕 */
+                width: 100% !important; 
             }
             .right-panel {
                 flex: none !important;
                 width: 100% !important;
-                margin-top: 25px !important; /* 讓三角座標和配方表之間有空隙 */
+                margin-top: 15px !important; 
             }
             .table-scroll-area {
-                overflow-x: auto !important; /* 允許配方表在手機上左右滑動 */
+                overflow-x: auto !important; 
             }
             .multi-table-container {
-                min-width: 650px !important; /* 確保小表格不會被過度擠壓變形，維持原本漂亮比例 */
+                min-width: 650px !important; 
             }
             canvas {
                 max-width: 100% !important;
                 height: auto !important;
+                margin-top: 0px !important; /* 取消上方多餘留白 */
             }
+            
+            /* ★ 手機版專屬：極致垂直壓縮控制區 ★ */
             .step-selector {
-                flex-wrap: wrap !important; /* 手機版選項若太長自動換行 */
+                flex-wrap: wrap !important; 
+                padding: 3px 6px !important; /* 大幅壓縮內距 */
+                gap: 6px !important; /* 縮小選項間距 */
+                margin-bottom: 0px !important;
+                justify-content: center;
+            }
+            .step-selector strong, .step-selector label {
+                font-size: 11.5px !important; /* 縮小字體以塞入同一行 */
+            }
+            .controls-section {
+                gap: 2px !important; /* 縮小三個卷軸之間的垂直間距 */
+            }
+            .slider-group {
+                padding: 2px 4px !important; /* 壓縮卷軸列的上下空間 */
+                gap: 4px !important;
+            }
+            .material-select {
+                width: 80px !important; /* 稍微縮小下拉選單寬度 */
+                font-size: 11.5px !important;
+                padding: 1px 2px !important;
+            }
+            .value-display {
+                font-size: 12px !important;
+                width: 32px !important;
+            }
+            .lock-btn {
+                width: 58px !important; /* 縮小鎖定按鈕 */
+                font-size: 10px !important;
+                padding: 2px !important;
             }
         }
     </style>
