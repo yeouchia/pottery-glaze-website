@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶瓷釉藥三角座標模擬器 - 極致滿版</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: transparent; 
+            color: #333;
+            margin: 0;
+            padding: 0; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            background: #fff;
+            padding: 10px 15px; 
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            max-width: 1800px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap; 
+            gap: 20px; 
+            align-items: stretch;
+        }
+        
+        .left-panel {
+            flex: 0 0 42%; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative; 
+        }
+        
+        .plot-title {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .right-panel {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            gap: 5px; 
+        }
+        
+        .color-a { color: #e74c3c; } 
+        .color-b { color: #2ecc71; } 
+        .color-c { color: #3498db; } 
+        .bg-a { background-color: rgba(231, 76, 60, 0.1); }
+        .bg-b { background-color: rgba(46, 204, 113, 0.1); }
+        .bg-c { background-color: rgba(52, 152, 219, 0.1); }
+
+        canvas {
+            background: transparent;
+            max-width: 100%;
+            height: auto;
+            margin-top: 8px; 
+        }
+        
+        .controls-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px; 
+            margin-top: 0px; 
+        }
+        
+        .step-selector {
+            background: #eef2f5;
+            padding: 6px 10px; 
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 2px;
+        }
+        .step-selector strong, .step-selector label {
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 13px; 
+        }
+        
+        .material-select {
+            width: 90px; 
+            font-weight: bold;
+            font-size: 13px;
+            padding: 2px 4px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .material-select:focus { outline: none; border-color: #aaa; }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 8px; 
+            border-radius: 6px;
+        }
+        input[type="range"] {
+            flex: 1;
+            height: 4px; 
+        }
+        .value-display {
+            width: 40px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .lock-btn {
+            background: #ddd;
+            color: #333;
+            border: none;
+            padding: 4px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.3s;
+            width: 70px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .lock-btn.locked {
+            background: #e74c3c;
+            color: white;
+            font-weight: bold;
+            border: 1px solid #c0392b;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .table-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .copy-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .copy-btn:hover { background-color: #2980b9; }
+        
+        .table-scroll-area {
+            width: 100%;
+            max-height: 80vh; 
+            overflow-y: auto; 
+            padding-right: 0px;
+        }
+        .table-scroll-area::-webkit-scrollbar { width: 6px; }
+        .table-scroll-area::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .table-scroll-area::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        .table-scroll-area::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+        .multi-table-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px; 
+            width: 100%;
+            /* ★ 魔法修復：對齊頂部，不要讓行數較少的表格垂直拉伸放大 ★ */
+            align-items: flex-start; 
+        }
+        
+        .compact-table {
+            flex: 1;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 11px; 
+        }
+        .compact-table th, .compact-table td {
+            border: 1px solid #ddd;
+            padding: 2.5px 2px; 
+        }
+        .compact-table th {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .highlight-row {
+            background-color: #ffeaa7 !important;
+            font-weight: bold;
+            border: 1.5px solid #fdcb6e;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 左側：圖形與控制區 -->
+    <div class="left-panel">
+        <h3 class="plot-title">三角座標圖 (Ternary Plot)</h3>
+        
+        <canvas id="ternaryCanvas" width="500" height="350"></canvas> 
+        
+        <div style="margin-top: -10px; font-weight: bold; font-size: 1em; margin-bottom: 4px;">
+            當前配比：
+            <span class="color-a" id="lbl-a-val">100</span>% | 
+            <span class="color-b" id="lbl-b-val">0</span>% | 
+            <span class="color-c" id="lbl-c-val">0</span>%
+        </div>
+
+        <div class="controls-section">
+            <div class="step-selector">
+                <strong>移動單位：</strong>
+                <label><input type="radio" name="step" value="1"> 1% (自訂)</label>
+                <label><input type="radio" name="step" value="5-full"> 5% (完整配方)</label>
+                <label><input type="radio" name="step" value="5-half" checked> 5% (66個配方)</label>
+                <label><input type="radio" name="step" value="10"> 10% (54個配方)</label>
+            </div>
+
+            <div class="slider-group bg-a">
+                <select id="sel-a" class="color-a material-select" onchange="updateMaterialNames()">
+                    <option value="釜戶長石">釜戶長石</option>
+                    <option value="霞正長石">霞正長石</option>
+                    <option value="澳洲鉀長石">澳洲鉀長石</option>
+                    <option value="印度鉀長石">印度鉀長石</option>
+                    <option value="葉長石">葉長石</option>
+                    <option value="合成土灰">合成土灰</option>
+                    <option value="稻草灰">稻草灰</option>
+                    <option value="鋰輝石">鋰輝石</option>
+                </select>
+                <input type="range" id="slider-a" min="50" max="100" value="100" step="5">
+                <div class="value-display color-a" id="val-a">100%</div>
+                <button class="lock-btn" id="lock-a" onclick="toggleLock('a')">🔓 未鎖定</button>
+            </div>
+
+            <div class="slider-group bg-b">
+                <select id="sel-b" class="color-b material-select" onchange="updateMaterialNames()">
+                    <option value="石灰石">石灰石</option>
+                    <option value="滑石">滑石</option>
+                    <option value="氧化鎂">氧化鎂</option>
+                    <option value="碳酸鎂">碳酸鎂</option>
+                    <option value="氧化鋅">氧化鋅</option>
+                    <option value="鉛白">鉛白</option>
+                    <option value="硼砂">硼砂</option>
+                </select>
+                <input type="range" id="slider-b" min="0" max="50" value="0" step="5">
+                <div class="value-display color-b" id="val-b">0%</div>
+                <button class="lock-btn" id="lock-b" onclick="toggleLock('b')">🔓 未鎖定</button>
+            </div>
+
+            <div class="slider-group bg-c">
+                <select id="sel-c" class="color-c material-select" onchange="updateMaterialNames()">
+                    <option value="高嶺土">高嶺土</option>
+                    <option value="石英">石英</option>
+                </select>
+                <input type="range" id="slider-c" min="0" max="50" value="0" step="5">
+                <div class="value-display color-c" id="val-c">0%</div>
+                <button class="lock-btn" id="lock-c" onclick="toggleLock('c')">🔓 未鎖定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右側：配方表生成區 -->
+    <div class="right-panel">
+        <div class="table-header-container">
+            <h3 id="table-title" style="margin: 0; font-size: 1.1em;">配方表 (66 個配方)</h3>
+            <button class="copy-btn" onclick="copyTableToWord()">複製配方表 (Word橫格式)</button>
+        </div>
+        
+        <div style="font-size: 11.5px; color: #7f8c8d; margin-bottom: 0px;" id="table-hint">
+            💡 提示：系統已優化防呆邏輯。10%模式最低 A=10%，5%模式(66配方)最低 A=50%。
+        </div>
+        
+        <div class="table-scroll-area">
+            <div id="visual-tables-container" class="multi-table-container">
+                <!-- JS 注入表格 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let state = {
+        a: 100, b: 0, c: 0,
+        step: 5, mode: 'half', locked: null,
+        matA: '釜戶長石', matB: '石灰石', matC: '高嶺土'
+    };
+
+    const DOM = {
+        sliders: { a: document.getElementById('slider-a'), b: document.getElementById('slider-b'), c: document.getElementById('slider-c') },
+        values: { a: document.getElementById('val-a'), b: document.getElementById('val-b'), c: document.getElementById('val-c') },
+        lblVals: { a: document.getElementById('lbl-a-val'), b: document.getElementById('lbl-b-val'), c: document.getElementById('lbl-c-val') },
+        locks: { a: document.getElementById('lock-a'), b: document.getElementById('lock-b'), c: document.getElementById('lock-c') },
+        selects: { a: document.getElementById('sel-a'), b: document.getElementById('sel-b'), c: document.getElementById('sel-c') },
+        radios: document.querySelectorAll('input[name="step"]')
+    };
+
+    window.updateMaterialNames = function() {
+        state.matA = DOM.selects.a.value;
+        state.matB = DOM.selects.b.value;
+        state.matC = DOM.selects.c.value;
+        drawTernaryPlot();
+        generateTables(); 
+    };
+
+    DOM.radios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            let val = e.target.value;
+            
+            if (val === '5-half') {
+                state.step = 5; state.mode = 'half';
+                DOM.sliders.a.min = 50; DOM.sliders.b.max = 50; DOM.sliders.c.max = 50;
+                if (state.a < 50) state.a = 50; 
+            } else if (val === '5-full') {
+                state.step = 5; state.mode = 'full';
+                DOM.sliders.a.min = 0; DOM.sliders.b.max = 100; DOM.sliders.c.max = 100;
+            } else if (val === '10') {
+                state.step = 10; state.mode = '54';
+                DOM.sliders.a.min = 10; DOM.sliders.b.max = 90; DOM.sliders.c.max = 90;
+                if (state.a < 10) state.a = 10;
+            } else if (val === '1') {
+                state.step = 1; state.mode = '1';
+                DOM.sliders.a.min = 0; DOM.sliders.b.max = 100; DOM.sliders.c.max = 100;
+            }
+            
+            DOM.sliders.a.step = state.step; 
+            DOM.sliders.b.step = state.step; 
+            DOM.sliders.c.step = state.step;
+            
+            state.a = Math.round(state.a / state.step) * state.step;
+            state.b = Math.round(state.b / state.step) * state.step;
+            
+            if (state.mode === 'half') {
+                if (state.a < 50) state.a = 50;
+                if (state.b > 50) state.b = 50;
+            } else if (state.mode === '54') {
+                if (state.a < 10) state.a = 10;
+                if (state.b > 90) state.b = 90;
+            }
+            
+            if (state.a + state.b > 100) state.b = 100 - state.a;
+            state.c = 100 - state.a - state.b;
+            
+            updateDOM();
+            drawTernaryPlot();
+            generateTables();
+        });
+    });
+
+    window.toggleLock = function(targetKey) {
+        state.locked = (state.locked === targetKey) ? null : targetKey;
+        ['a', 'b', 'c'].forEach(key => {
+            const btn = DOM.locks[key]; const slider = DOM.sliders[key];
+            if (state.locked === key) {
+                btn.innerHTML = "🔒 鎖定"; btn.classList.add('locked'); slider.disabled = true;
+            } else {
+                btn.innerHTML = "🔓 未鎖定"; btn.classList.remove('locked');
+                btn.disabled = (state.locked !== null && state.locked !== key);
+                slider.disabled = false;
+            }
+        });
+    };
+
+    function handleSliderChange(sourceKey) {
+        let val = parseInt(DOM.sliders[sourceKey].value);
+        
+        if (state.mode === 'half') {
+            if (sourceKey === 'a' && val < 50) val = 50;
+            if (sourceKey === 'b' && val > 50) val = 50;
+            if (sourceKey === 'c' && val > 50) val = 50;
+        } else if (state.mode === '54') {
+            if (sourceKey === 'a' && val < 10) val = 10;
+            if (sourceKey === 'b' && val > 90) val = 90;
+            if (sourceKey === 'c' && val > 90) val = 90;
+        }
+
+        if (state.locked) {
+            const lockedKey = state.locked;
+            const thirdKey = ['a', 'b', 'c'].find(k => k !== sourceKey && k !== lockedKey);
+            let maxAllowed = 100 - state[lockedKey];
+            val = Math.round(val / state.step) * state.step;
+            if (val > maxAllowed) val = maxAllowed;
+            state[sourceKey] = val; state[thirdKey] = maxAllowed - val;
+        } else {
+            let keys = ['a', 'b', 'c'].filter(k => k !== sourceKey);
+            let k1 = keys[0], k2 = keys[1];
+            val = Math.round(val / state.step) * state.step;
+            if (val > 100) val = 100;
+            let remainder = 100 - val;
+            let oldSum = state[k1] + state[k2];
+            if (oldSum === 0) {
+                state[k1] = Math.round((remainder / 2) / state.step) * state.step; state[k2] = remainder - state[k1];
+            } else {
+                state[k1] = Math.round((remainder * (state[k1] / oldSum)) / state.step) * state.step; state[k2] = remainder - state[k1];
+            }
+            state[sourceKey] = val;
+        }
+        
+        if (state.mode === 'half' && state.a < 50) {
+            state.a = 50;
+            if (state.locked === 'b') {
+                state.c = 100 - state.a - state.b;
+            } else if (state.locked === 'c') {
+                state.b = 100 - state.a - state.c;
+            } else {
+                if (sourceKey === 'b') {
+                    if (state.b > 50) state.b = 50;
+                    state.c = 100 - state.a - state.b;
+                } else if (sourceKey === 'c') {
+                    if (state.c > 50) state.c = 50;
+                    state.b = 100 - state.a - state.c;
+                }
+            }
+        } else if (state.mode === '54' && state.a < 10) {
+            state.a = 10;
+            if (state.locked === 'b') {
+                state.c = 100 - state.a - state.b;
+            } else if (state.locked === 'c') {
+                state.b = 100 - state.a - state.c;
+            } else {
+                if (sourceKey === 'b') {
+                    if (state.b > 90) state.b = 90;
+                    state.c = 100 - state.a - state.b;
+                } else if (sourceKey === 'c') {
+                    if (state.c > 90) state.c = 90;
+                    state.b = 100 - state.a - state.c;
+                }
+            }
+        }
+
+        updateDOM(); 
+        drawTernaryPlot(); 
+        
+        if (state.step === 1) {
+            generateTables(); 
+        } else {
+            highlightTableRow();
+        }
+    }
+    
+    ['a', 'b', 'c'].forEach(key => { DOM.sliders[key].addEventListener('input', () => handleSliderChange(key)); });
+
+    function updateDOM() {
+        ['a', 'b', 'c'].forEach(key => {
+            DOM.sliders[key].value = state[key];
+            DOM.values[key].textContent = state[key] + '%';
+            DOM.lblVals[key].textContent = state[key];
+        });
+    }
+
+    function drawTernaryPlot() {
+        const canvas = document.getElementById('ternaryCanvas');
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width, height = canvas.height;
+        
+        const paddingX = 80; 
+        const sideLength = width - paddingX * 2;
+        const h = sideLength * Math.sqrt(3) / 2;
+        const offsetY = 25; 
+        
+        const ptA = { x: width / 2, y: offsetY }; 
+        const ptB = { x: paddingX, y: offsetY + h }; 
+        const ptC = { x: width - paddingX, y: offsetY + h }; 
+        
+        ctx.clearRect(0, 0, width, height);
+
+        let divisions = 10;
+        if (state.step === 5 && state.mode === 'full') divisions = 20;
+        if (state.mode === '54') divisions = 9; 
+        
+        ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
+        for (let i = 1; i < divisions; i++) {
+            let frac = i * (100 / divisions);
+            drawLine(ctx, getPt(ptA, ptB, ptC, 100-frac, frac, 0), getPt(ptA, ptB, ptC, 100-frac, 0, frac));
+            drawLine(ctx, getPt(ptA, ptB, ptC, frac, 100-frac, 0), getPt(ptA, ptB, ptC, 0, 100-frac, frac));
+            drawLine(ctx, getPt(ptA, ptB, ptC, frac, 0, 100-frac), getPt(ptA, ptB, ptC, 0, frac, 100-frac));
+        }
+
+        ctx.strokeStyle = '#2c3e50'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath(); ctx.stroke();
+
+        ctx.font = 'bold 13.5px Arial'; 
+        
+        let lblA = state.matA + ' (A)';
+        let lblB = state.matB + ' (B)';
+        let lblC = state.matC + ' (C)';
+        if (state.mode === 'half') {
+            lblA = state.matA + ' (A=100%)';
+            lblB = state.matB + ' (B=50%)';
+            lblC = state.matC + ' (C=50%)';
+        } else if (state.mode === '54') {
+            lblA = state.matA + ' (A=100%)';
+            lblB = state.matB + ' (B=90%)';
+            lblC = state.matC + ' (C=90%)';
+        }
+
+        ctx.fillStyle = '#e74c3c'; ctx.textAlign = 'center'; ctx.fillText(lblA, ptA.x, ptA.y - 10);
+        ctx.fillStyle = '#2ecc71'; ctx.textAlign = 'center'; ctx.fillText(lblB, ptB.x - 10, ptB.y + 20);
+        ctx.fillStyle = '#3498db'; ctx.textAlign = 'center'; ctx.fillText(lblC, ptC.x + 10, ptC.y + 20);
+
+        let plotA = state.a, plotB = state.b, plotC = state.c;
+        if (state.mode === 'half') {
+            plotA = (state.a - 50) * 2;
+            plotB = state.b * 2;
+            plotC = state.c * 2;
+        } else if (state.mode === '54') {
+            plotA = (state.a - 10) * (100 / 90);
+            plotB = state.b * (100 / 90);
+            plotC = state.c * (100 / 90);
+        }
+
+        const targetPt = getPt(ptA, ptB, ptC, plotA, plotB, plotC);
+        ctx.beginPath(); ctx.arc(targetPt.x, targetPt.y, 8, 0, Math.PI * 2); 
+        ctx.fillStyle = '#333'; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2.5; ctx.stroke();
+    }
+    
+    function drawLine(ctx, p1, p2) { ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
+    function getPt(pA, pB, pC, a, b, c) { return { x: (a*pA.x + b*pB.x + c*pC.x)/100, y: (a*pA.y + b*pB.y + c*pC.y)/100 }; }
+
+    let currentRecipes = [];
+    
+    function generateTables() {
+        const container = document.getElementById('visual-tables-container');
+        const title = document.getElementById('table-title');
+        const hint = document.getElementById('table-hint');
+        container.innerHTML = '';
+        currentRecipes = [];
+        let counter = 1;
+
+        if (state.step === 5 && state.mode === 'half') {
+            title.textContent = "配方表 (66 個配方)";
+            hint.innerHTML = "💡 提示：系統已優化防呆邏輯。此模式最低 A=50%。";
+            for (let a = 100; a >= 50; a -= 5) {
+                for (let b = (100 - a); b >= 0; b -= 5) {
+                    let c = 100 - a - b;
+                    currentRecipes.push({ id: counter, a: a, b: b, c: c });
+                    counter++;
+                }
+            }
+        } else if (state.step === 5 && state.mode === 'full') {
+            title.textContent = "配方表 (231 個完整配方)";
+            hint.innerHTML = "💡 提示：完整配方數量龐大，已啟用捲軸模式。";
+            for (let a = 100; a >= 0; a -= 5) {
+                for (let b = (100 - a); b >= 0; b -= 5) {
+                    let c = 100 - a - b;
+                    currentRecipes.push({ id: counter, a: a, b: b, c: c });
+                    counter++;
+                }
+            }
+        } else if (state.step === 10 && state.mode === '54') {
+            title.textContent = `配方表 (54 個配方)`;
+            hint.innerHTML = "💡 提示：系統已優化防呆邏輯。此模式最低 A=10%。";
+            for (let a = 100; a >= 10; a -= 10) {
+                for (let b = (100 - a); b >= 0; b -= 10) {
+                    let c = 100 - a - b;
+                    currentRecipes.push({ id: counter, a: a, b: b, c: c });
+                    counter++;
+                }
+            }
+            currentRecipes = currentRecipes.slice(0, 54);
+        } else if (state.step === 1) {
+            title.textContent = `當前配比看板 (自由探索)`;
+            hint.innerHTML = "💡 提示：1% 模式專為微調設計，右側僅顯示目前唯一配比。";
+            currentRecipes.push({ id: '當前', a: state.a, b: state.b, c: state.c });
+        } else {
+            return;
+        }
+
+        // 網頁版欄數邏輯：54配方用4欄，66/231配方用5欄
+        let numCols = 4;
+        if (state.step === 1) numCols = 1;
+        if (state.mode === 'half' || state.mode === 'full') numCols = 5;
+        
+        // 統一以 15 列為切分基準，保證底部不會放大
+        let rowsPerTable = 15;
+        if (state.mode === 'full') rowsPerTable = Math.ceil(currentRecipes.length / numCols);
+
+        for (let i = 0; i < numCols; i++) {
+            if (i * rowsPerTable >= currentRecipes.length) break;
+
+            let table = document.createElement('table');
+            table.className = 'compact-table';
+            
+            if (state.step === 1) {
+                table.style.fontSize = '15px';
+                table.style.maxWidth = '600px';
+                table.style.margin = '0 auto';
+            }
+            
+            let thead = document.createElement('thead');
+            thead.innerHTML = `
+                <tr>
+                    <th>編號</th>
+                    <th class="color-a">${state.matA}</th>
+                    <th class="color-b">${state.matB}</th>
+                    <th class="color-c">${state.matC}</th>
+                </tr>
+            `;
+            table.appendChild(thead);
+
+            let tbody = document.createElement('tbody');
+            let slice = currentRecipes.slice(i * rowsPerTable, (i + 1) * rowsPerTable);
+            slice.forEach(r => {
+                let tr = document.createElement('tr');
+                tr.id = `row-${r.a}-${r.b}-${r.c}`;
+                tr.innerHTML = `
+                    <td>${r.id}</td>
+                    <td class="color-a">${r.a}</td>
+                    <td class="color-b">${r.b}</td>
+                    <td class="color-c">${r.c}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            container.appendChild(table);
+        }
+        
+        highlightTableRow();
+    }
+
+    function highlightTableRow() {
+        document.querySelectorAll('.compact-table tr').forEach(tr => tr.classList.remove('highlight-row'));
+        
+        let targetId = `row-${state.a}-${state.b}-${state.c}`;
+        let targetRow = document.getElementById(targetId);
+        if (targetRow) {
+            targetRow.classList.add('highlight-row');
+            if(state.mode === 'full' && state.step === 5) {
+                targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    }
+
+    // ★ 完全不碰 Word 輸出的程式碼，保留您上次測試成功的完美狀態 ★
+    window.copyTableToWord = function() {
+        if (currentRecipes.length === 0) return;
+        
+        const tempDiv = document.createElement('div');
+        
+        const maxRowsPerCol = 15; 
+        
+        let numCols = 4;
+        if (state.step === 1) numCols = 1;
+        if (state.mode === 'half' || state.mode === 'full') numCols = 5;
+
+        const recipesPerPage = maxRowsPerCol * numCols;
+        const totalPages = Math.ceil(currentRecipes.length / recipesPerPage);
+        
+        for (let p = 0; p < totalPages; p++) {
+            const pageDiv = document.createElement('div');
+            
+            let pageTitle = document.createElement('h3');
+            pageTitle.style.textAlign = 'center';
+            pageTitle.style.fontFamily = 'sans-serif';
+            pageTitle.style.fontSize = '16px'; 
+            pageTitle.style.margin = '0 0 8px 0'; 
+            
+            if (p > 0) {
+                pageTitle.style.pageBreakBefore = 'always';
+                pageTitle.innerHTML = `陶瓷釉藥配方表 (${state.matA} / ${state.matB} / ${state.matC}) - 第 ${p + 1} 頁`;
+            } else {
+                pageTitle.innerHTML = `陶瓷釉藥配方表 (${state.matA} / ${state.matB} / ${state.matC})${totalPages > 1 ? ' - 第 1 頁' : ''}`;
+            }
+            pageDiv.appendChild(pageTitle);
+            
+            let masterTable = document.createElement('table');
+            masterTable.style.width = '100%';
+            masterTable.style.borderCollapse = 'collapse';
+            masterTable.style.border = 'none';
+            masterTable.style.tableLayout = 'fixed';
+            
+            let masterRow = document.createElement('tr');
+            masterRow.style.verticalAlign = 'top';
+            
+            let pageRecipes = currentRecipes.slice(p * recipesPerPage, (p + 1) * recipesPerPage);
+            let displayCols = (state.step === 1) ? 1 : Math.min(Math.ceil(pageRecipes.length / maxRowsPerCol), numCols);
+            
+            for (let c = 0; c < displayCols; c++) {
+                let startIndex = c * maxRowsPerCol;
+                let slice = pageRecipes.slice(startIndex, startIndex + maxRowsPerCol);
+                
+                let masterTd = document.createElement('td');
+                masterTd.style.border = 'none';
+                masterTd.style.padding = '0 6px'; 
+                masterTd.style.width = (100 / numCols) + '%';
+                
+                if (slice.length > 0) {
+                    let innerTable = document.createElement('table');
+                    innerTable.style.borderCollapse = 'collapse';
+                    innerTable.style.width = '100%'; 
+                    innerTable.style.textAlign = 'center';
+                    innerTable.style.fontFamily = 'sans-serif';
+                    innerTable.style.fontSize = '12px'; 
+                    
+                    let thead = document.createElement('thead');
+                    thead.innerHTML = `
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid black; padding: 4px 2px; white-space: nowrap;">編號</th>
+                            <th style="border: 1px solid black; padding: 4px 2px; white-space: nowrap;">${state.matA}</th>
+                            <th style="border: 1px solid black; padding: 4px 2px; white-space: nowrap;">${state.matB}</th>
+                            <th style="border: 1px solid black; padding: 4px 2px; white-space: nowrap;">${state.matC}</th>
+                        </tr>
+                    `;
+                    innerTable.appendChild(thead);
+                    
+                    let tbody = document.createElement('tbody');
+                    slice.forEach(r => {
+                        let tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td style="border: 1px solid black; padding: 4px 2px;">${r.id}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #c0392b;">${r.a}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #27ae60;">${r.b}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #2980b9;">${r.c}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                    innerTable.appendChild(tbody);
+                    masterTd.appendChild(innerTable);
+                }
+                masterRow.appendChild(masterTd);
+            }
+            
+            if (displayCols < numCols) {
+                for (let c = displayCols; c < numCols; c++) {
+                    let emptyTd = document.createElement('td');
+                    emptyTd.style.border = 'none';
+                    emptyTd.style.width = (100 / numCols) + '%';
+                    masterRow.appendChild(emptyTd);
+                }
+            }
+            
+            masterTable.appendChild(masterRow);
+            pageDiv.appendChild(masterTable);
+            tempDiv.appendChild(pageDiv);
+        }
+        
+        document.body.appendChild(tempDiv);
+        
+        const range = document.createRange();
+        range.selectNode(tempDiv);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        try {
+            document.execCommand('copy');
+            alert('✅ 完美 Word 配方表已複製！\n\n(💡 提示：超過 60 個配方時，系統會自動標記為第 2 頁，並在貼上 Word 時自動分頁！)');
+        } catch (err) {
+            alert('複製失敗，請檢查瀏覽器權限。');
+        }
+        
+        selection.removeAllRanges();
+        document.body.removeChild(tempDiv);
+    };
+
+    updateMaterialNames();
+    updateDOM();
+</script>
+
+</body>
+</html>
