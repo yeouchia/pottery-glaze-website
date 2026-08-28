@@ -349,18 +349,30 @@
                 width: 100% !important;
             }
 
-            /* 2. ABC卡片 & 優缺點卡片：解除強制撐滿，避免破版 */
+            /* 2. ABC卡片 & 優缺點卡片：進行極致垂直壓縮 */
             .abc-cards-container, .pros-cons-container {
                 flex-direction: column !important;
-                gap: 10px !important;
+                gap: 6px !important; /* 大幅縮小卡片之間的間隔 */
                 width: 100%;
             }
-            .abc-card, .pros-cons-container > div {
+            .abc-card {
                 min-width: 0 !important; 
                 width: 100% !important;
-                padding: 15px 10px !important; /* 減少內部空白 */
+                padding: 8px 10px !important; /* 極限壓縮上下內距 */
                 box-sizing: border-box;
-                font-size: 0.95em; /* 稍微縮小文字，讓排版更順暢 */
+            }
+            .abc-card strong {
+                font-size: 1.1em !important; /* 標題微調縮小 */
+            }
+            .abc-card i {
+                margin: 2px 0 !important; /* 強制覆蓋箭頭的上下留白 (原本是8px) */
+            }
+            .pros-cons-container > div {
+                min-width: 0 !important; 
+                width: 100% !important;
+                padding: 12px 10px !important; 
+                box-sizing: border-box;
+                font-size: 0.95em; 
             }
 
             /* 3. ★ 表格終極壓縮，解決文字變長很怪的問題 ★ */
