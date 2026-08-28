@@ -207,6 +207,38 @@
             font-weight: bold;
             border: 1.5px solid #fdcb6e;
         }
+
+        /* =========================================================
+           ★ 手機版專屬響應式結界 (這段範圍內設定絕對不影響電腦版) ★
+           ========================================================= */
+        @media screen and (max-width: 900px) {
+            .container {
+                flex-direction: column !important; /* 強制改為上下排列 */
+                padding: 10px !important;
+            }
+            .left-panel {
+                flex: none !important;
+                width: 100% !important; /* 寬度佔滿手機螢幕 */
+            }
+            .right-panel {
+                flex: none !important;
+                width: 100% !important;
+                margin-top: 25px !important; /* 讓三角座標和配方表之間有空隙 */
+            }
+            .table-scroll-area {
+                overflow-x: auto !important; /* 允許配方表在手機上左右滑動 */
+            }
+            .multi-table-container {
+                min-width: 650px !important; /* 確保小表格不會被過度擠壓變形，維持原本漂亮比例 */
+            }
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            .step-selector {
+                flex-wrap: wrap !important; /* 手機版選項若太長自動換行 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -583,12 +615,10 @@
             return;
         }
 
-        // 網頁版欄數邏輯：54配方用4欄，66/231配方用5欄
         let numCols = 4;
         if (state.step === 1) numCols = 1;
         if (state.mode === 'half' || state.mode === 'full') numCols = 5;
         
-        // 統一以 15 列為切分基準，保證底部不會放大
         let rowsPerTable = 15;
         if (state.mode === 'full') rowsPerTable = Math.ceil(currentRecipes.length / numCols);
 
@@ -648,7 +678,6 @@
         }
     }
 
-    // ★ 完全不碰 Word 輸出的程式碼，保留您上次測試成功的完美狀態 ★
     window.copyTableToWord = function() {
         if (currentRecipes.length === 0) return;
         
