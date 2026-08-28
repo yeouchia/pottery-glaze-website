@@ -152,7 +152,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-sizing: border-box; /* 確保 padding 不會撐破容器 */
+            box-sizing: border-box; 
         }
 
         .canvas-wrapper canvas {
@@ -263,13 +263,9 @@
             background: var(--accent-color);
         }
 
-        /* =========================================
-           表格響應式外框 (重要！防止手機表格變形)
-           ========================================= */
+        /* 比較表格外框 */
         .table-responsive {
             width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         /* 比較表格 */
@@ -279,6 +275,7 @@
             margin: 25px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             background: white;
+            table-layout: fixed; /* 讓欄位寬度固定，更好控制 */
         }
 
         .compare-table th, .compare-table td {
@@ -291,7 +288,7 @@
             background-color: #f8f9fa;
             color: var(--primary-bg);
             font-size: 1.1em;
-            white-space: nowrap; /* 電腦版標題不斷行 */
+            white-space: nowrap; 
         }
 
         .compare-table th:first-child { width: 20%; }
@@ -299,54 +296,89 @@
         ul.clean-list { padding-left: 25px; margin: 10px 0; text-align: left;}
         ul.clean-list li { margin-bottom: 8px; }
 
-        /* 用於優缺點區塊的 Flex 容器 */
         .pros-cons-container {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
+        
+        .abc-cards-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .abc-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            box-sizing: border-box;
+        }
 
         /* =========================================================
-           ★ 手機版專屬響應式結界 (這段範圍內設定絕對不影響電腦版) ★
+           ★ 手機版專屬響應式結界 (極致壓縮版，絕對不出現左右滾動條) ★
            ========================================================= */
         @media screen and (max-width: 768px) {
             body { padding: 10px; }
-            .section-block { padding: 25px 20px; }
-            .page-header h1 { font-size: 1.6em; }
+            .section-block { padding: 25px 15px; } /* 縮小兩側空白 */
+            .page-header h1 { font-size: 1.5em; flex-wrap: wrap; }
             
-            /* 1. Canvas 畫布防爆框設定 */
+            /* 1. Canvas 畫布防爆框 */
             .canvas-container {
                 flex-direction: column;
                 align-items: center;
             }
             .canvas-wrapper {
-                min-width: 100% !important; /* 強制縮放不超出螢幕 */
+                min-width: 100% !important; 
                 width: 100%;
-                padding: 10px !important;
+                padding: 10px 5px !important;
             }
             canvas {
                 width: 100% !important;
                 height: auto !important;
             }
 
-            /* 2. 優缺點卡片防擠壓：強制上下排列 */
-            .pros-cons-container {
+            /* 2. ABC卡片 & 優缺點卡片 強制上下疊放並壓縮內距 */
+            .abc-cards-container, .pros-cons-container {
                 flex-direction: column !important;
+                gap: 10px !important;
+            }
+            .abc-card, .pros-cons-container > div {
+                min-width: 100% !important;
+                width: 100% !important;
+                padding: 15px 10px !important; /* 減少內部空白 */
             }
 
-            /* 3. 表格防擠壓：確保有足夠寬度，超出可用手指左右滑動 */
+            /* 3. ★ 表格終極壓縮，適應手機全寬不滑動 ★ */
+            .table-responsive {
+                overflow-x: hidden !important; /* 絕對禁止左右滑動 */
+            }
             .compare-table {
-                min-width: 600px; /* 強制最小寬度，讓表格字體保持漂亮比例 */
+                min-width: 100% !important;
+                margin: 15px 0 !important;
+                font-size: 13px !important; /* 縮小表格字體 */
+            }
+            .compare-table th, .compare-table td {
+                padding: 8px 4px !important; /* 大幅減少單元格內距 */
+                white-space: normal !important; /* 允許文字自動換行 */
+                word-break: break-word; /* 避免長英文單字撐破表格 */
+            }
+            .compare-table th {
+                font-size: 14px !important; /* 表頭稍微大一點點 */
             }
 
             /* 4. 時間軸改為單邊排列 */
             .timeline::before { left: 30px; }
-            .timeline-item { width: 100%; padding-left: 70px !important; padding-right: 0 !important; }
+            .timeline-item { width: 100%; padding-left: 65px !important; padding-right: 0 !important; }
             .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; }
             .timeline-item:nth-child(odd) .timeline-marker,
-            .timeline-item:nth-child(even) .timeline-marker { left: 9px; right: auto; }
+            .timeline-item:nth-child(even) .timeline-marker { left: 9px; right: auto; width: 36px; height: 36px; line-height: 30px; font-size: 1em;}
             .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+            .timeline-item:nth-child(even) .timeline-content { text-align: left; padding: 12px 15px; font-size: 1em;}
             .timeline-item:nth-child(odd) .timeline-content::after { display: none; }
             .timeline-item:nth-child(even) .timeline-content::after { left: -10px; border-width: 10px 10px 10px 0; border-color: transparent white transparent transparent; }
         }
@@ -524,18 +556,18 @@
         <p>以本課程指定的「長石＋碳酸鈣＋石英」為例，這三種原料可以用來建立一個非常直觀的基礎實驗：</p>
         
         <!-- 角色卡片 -->
-        <div style="display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
-            <div style="flex:1; min-width: 250px; background:rgba(231, 76, 60, 0.05); padding:20px; text-align:center; border:1px solid rgba(231, 76, 60, 0.3); border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+        <div class="abc-cards-container">
+            <div class="abc-card" style="background:rgba(231, 76, 60, 0.05); border:1px solid rgba(231, 76, 60, 0.3);">
                 <strong style="color:var(--color-a); font-size:1.2em;">長石 (A)</strong><br>
                 <i class="fa-solid fa-arrow-down" style="color:rgba(231, 76, 60, 0.5); margin:8px 0;"></i><br>
                 <span style="color:#333; font-weight:bold;">提供多種釉藥成分</span>
             </div>
-            <div style="flex:1; min-width: 250px; background:rgba(46, 204, 113, 0.05); padding:20px; text-align:center; border:1px solid rgba(46, 204, 113, 0.3); border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+            <div class="abc-card" style="background:rgba(46, 204, 113, 0.05); border:1px solid rgba(46, 204, 113, 0.3);">
                 <strong style="color:var(--color-b); font-size:1.2em;">碳酸鈣 (B)</strong><br>
                 <i class="fa-solid fa-arrow-down" style="color:rgba(46, 204, 113, 0.5); margin:8px 0;"></i><br>
                 <span style="color:#333; font-weight:bold;">助熔作用</span>
             </div>
-            <div style="flex:1; min-width: 250px; background:rgba(52, 152, 219, 0.05); padding:20px; text-align:center; border:1px solid rgba(52, 152, 219, 0.3); border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+            <div class="abc-card" style="background:rgba(52, 152, 219, 0.05); border:1px solid rgba(52, 152, 219, 0.3);">
                 <strong style="color:var(--color-c); font-size:1.2em;">石英 (C)</strong><br>
                 <i class="fa-solid fa-arrow-down" style="color:rgba(52, 152, 219, 0.5); margin:8px 0;"></i><br>
                 <span style="color:#333; font-weight:bold;">玻璃質來源</span>
@@ -546,9 +578,8 @@
         <p>例如：<strong>長石</strong>並不是「只有助熔劑」。它本身含有 K₂O、Na₂O、Al₂O₃、SiO₂、CaO 等成分，所以長石是一種<strong>「複合型原料」</strong>。學生要清楚區分「原料」與「原料裡面的氧化物」這兩個概念。</p>
 
         <h3 class="sub-title">📌 三角座標法的優缺點</h3>
-        <!-- 使用 .pros-cons-container 包裝，讓手機版強制上下疊放 -->
         <div class="pros-cons-container">
-            <div style="flex:1; min-width: 280px; background:#f9f9f9; padding:20px; border-radius:8px; border-top:4px solid #2ecc71;">
+            <div style="flex:1; background:#f9f9f9; border-radius:8px; border-top:4px solid #2ecc71;">
                 <strong style="color:#27ae60; font-size:1.1em;"><i class="fa-solid fa-circle-check"></i> 優點</strong>
                 <ul class="clean-list">
                     <li><strong>簡單：</strong> 學生容易理解。</li>
@@ -558,7 +589,7 @@
                     <li><strong>找最佳區：</strong> 燒成後可直接比較整組試片。</li>
                 </ul>
             </div>
-            <div style="flex:1; min-width: 280px; background:#f9f9f9; padding:20px; border-radius:8px; border-top:4px solid #e74c3c;">
+            <div style="flex:1; background:#f9f9f9; border-radius:8px; border-top:4px solid #e74c3c;">
                 <strong style="color:#c0392b; font-size:1.1em;"><i class="fa-solid fa-circle-xmark"></i> 缺點</strong>
                 <ul class="clean-list">
                     <li><strong>數量龐大：</strong> 66點全做需大量原料與時間。</li>
@@ -580,8 +611,8 @@
                 <thead>
                     <tr>
                         <th>比較項目</th>
-                        <th style="background-color: rgba(52, 152, 219, 0.05); width: 40%;">🔺 三角座標法</th>
-                        <th style="background-color: rgba(231, 76, 60, 0.05); width: 40%;">🧪 塞格式 (Seger Formula)</th>
+                        <th style="background-color: rgba(52, 152, 219, 0.05);">🔺 三角座標法</th>
+                        <th style="background-color: rgba(231, 76, 60, 0.05);">🧪 塞格式 (Seger Formula)</th>
                     </tr>
                 </thead>
                 <tbody>
