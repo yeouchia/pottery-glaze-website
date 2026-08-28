@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶瓷釉藥的奧秘：三角座標基礎教學</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #14213d;      /* 主色：深海軍藍 */
+            --accent-color: #fca311;    /* 輔助色：琥珀金 */
+            --bg-color: #f4f7f6;        /* 背景色 */
+            --text-main: #333333;       /* 主要文字 */
+            --text-light: #555555;      /* 次要文字 */
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 頁首標題區 */
+        .page-header {
+            background-color: var(--primary-bg);
+            color: white;
+            padding: 45px 30px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .page-header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 800;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .page-header p {
+            margin: 15px auto 0;
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.85);
+            max-width: 800px;
+        }
+
+        /* 內容區段 */
+        .section-block {
+            padding: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-block:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-bg);
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 6px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        .sub-title {
+            color: #2c3e50;
+            font-size: 1.25em;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #eee;
+            padding-bottom: 8px;
+        }
+
+        /* 強調與提示框 */
+        .highlight-text {
+            color: #d35400;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: #fff8e7;
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            color: #8a6d3b;
+            font-size: 1.05em;
+        }
+
+        .formula-box {
+            background: #e8f4f8;
+            border: 1px solid #bce0fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        /* 流程圖樣式 (CSS 繪製) */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .flow-step {
+            background: var(--primary-bg);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: var(--accent-color);
+            font-size: 1.5em;
+        }
+
+        /* 實驗流程網格 (14步驟) */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .process-item {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .process-item:hover {
+            background: var(--primary-bg);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .process-item .step-num {
+            background: var(--accent-color);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+
+        /* 圖片預留區 */
+        .image-placeholder {
+            background-color: #f0f2f5;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #7f8c8d;
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .image-placeholder i {
+            font-size: 2.5em;
+        }
+
+        /* 比較表格 */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .compare-table th, .compare-table td {
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .compare-table th {
+            background-color: #f8f9fa;
+            color: var(--primary-bg);
+            font-size: 1.1em;
+        }
+
+        .compare-table th:first-child { width: 20%; }
+        .compare-table th:nth-child(2) { background-color: rgba(52, 152, 219, 0.05); width: 40%; }
+        .compare-table th:nth-child(3) { background-color: rgba(231, 76, 60, 0.05); width: 40%; }
+
+        .compare-table td:first-child { font-weight: bold; background-color: #fcfcfc; }
+        
+        ul.clean-list { padding-left: 25px; margin: 10px 0; }
+        ul.clean-list li { margin-bottom: 8px; }
+
+        @media (max-width: 768px) {
+            .section-block { padding: 25px 20px; }
+            .page-header h1 { font-size: 1.6em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fa-solid fa-shapes"></i> 陶瓷釉藥的奧秘：三角座標基礎教學</h1>
+        <p>不再憑感覺調配！透過科學化的「三角座標試驗法」，帶您建立清晰的釉藥實驗地圖，精準找出理想配方。</p>
+    </div>
+
+    <!-- 第一段：基本概念 -->
+    <div class="section-block">
+        <h2 class="section-title">一、 什麼是「三角座標試驗法」？</h2>
+        <p>釉藥是由多種原料混合而成。但是，如果我們只是憑經驗：<br>
+        <span class="highlight-text">「這個多加一點、那個少加一點。」</span><br>
+        就很難知道到底是哪一個比例造成釉面變化。</p>
+
+        <p>因此，陶瓷釉藥實驗發展出一種非常實用的方法：<strong>三角座標試驗法（Triaxial Blend）</strong></p>
+        <p>它的基本概念非常簡單：選擇三種原料，利用一個等邊三角形，把三種原料的不同比例排列出來，再逐一燒製比較。</p>
+
+        <div class="flowchart">
+            <div class="flow-step">三種原料</div>
+            <i class="fa-solid fa-arrow-down flow-arrow"></i>
+            <div class="flow-step">三角座標</div>
+            <i class="fa-solid fa-arrow-down flow-arrow"></i>
+            <div class="flow-step">不同比例</div>
+            <i class="fa-solid fa-arrow-down flow-arrow"></i>
+            <div class="flow-step">不同釉方</div>
+            <i class="fa-solid fa-arrow-down flow-arrow"></i>
+            <div class="flow-step">試片燒成</div>
+            <i class="fa-solid fa-arrow-down flow-arrow"></i>
+            <div class="flow-step">觀察釉面</div>
+            <i class="fa-solid fa-arrow-down flow-arrow"></i>
+            <div class="flow-step" style="background-color: var(--accent-color); color: var(--primary-bg);">找出理想配方</div>
+        </div>
+        <p style="text-align: center; color: var(--text-light);">利用三種原料的不同比例進行系統性試釉，並藉由燒成後的試片比較釉藥特性。</p>
+    </div>
+
+    <!-- 第二段：頂點與邊界 -->
+    <div class="section-block">
+        <h2 class="section-title">二、 為什麼叫「三角座標」？</h2>
+        <p>因為我們一次研究<strong>三種原料</strong>，所以使用<strong>一個三角形</strong>。三角形的三個頂點，就代表三種不同的原料。</p>
+        
+        <div class="info-box">
+            <strong>例如本課程指定：</strong><br>
+            A頂點：長石<br>
+            B頂點：碳酸鈣<br>
+            C頂點：石英
+        </div>
+
+        <h3 class="sub-title">📌 三個頂點代表「100%」</h3>
+        <p>這是學習三角座標最重要的第一個觀念。</p>
+        <ul class="clean-list">
+            <li><strong>A頂點：</strong> 代表 A＝100%（因此 B＝0%, C＝0%）</li>
+            <li><strong>B頂點：</strong> 代表 B＝100%（因此 A＝0%, C＝0%）</li>
+            <li><strong>C頂點：</strong> 代表 C＝100%（因此 A＝0%, B＝0%）</li>
+        </ul>
+        <p class="highlight-text">★ 結論：頂點＝某一種原料 100%。</p>
+
+        <h3 class="sub-title">📌 三角形的三條「邊」代表什麼？</h3>
+        <p>這個觀念非常重要。假設 A＝長石，那麼：<strong>距離 A 最遠的那一條邊，就代表 A＝0%</strong>。</p>
+        <p>因此：<br>
+        <i class="fa-solid fa-caret-up" style="color:var(--accent-color);"></i> <strong>越靠近 A 頂點 → A越多</strong><br>
+        <i class="fa-solid fa-caret-down" style="color:var(--accent-color);"></i> <strong>越遠離 A 頂點 → A越少</strong><br>
+        (B、C也是完全相同的判讀方式)</p>
+
+        <div class="image-placeholder">
+            <i class="fa-solid fa-image"></i>
+            <div>[請插入：帶有頂點100%與對邊0%標示的三角座標解說圖]</div>
+        </div>
+    </div>
+
+    <!-- 第三段：比例刻度與點 -->
+    <div class="section-block">
+        <h2 class="section-title">三、 平行線與交叉點的意義</h2>
+        
+        <h3 class="sub-title">📌 平行線就是「比例刻度」</h3>
+        <p>三角座標真正有用的地方，是我們可以在三角形裡面畫出很多條平行線。這些線就像「刻度尺」（例如 0%, 20%, 40%, 60%, 80%, 100%）。實際繪製時，是由三個方向建立互相平行的等比例線。</p>
+
+        <h3 class="sub-title">📌 為什麼一個「點」就是一個「釉方」？</h3>
+        <p>這是三角座標最核心的概念。例如我們在三角形中找到一個點，這個點同時可以讀出：</p>
+        <div class="formula-box">
+            A＝40% ｜ B＝40% ｜ C＝20%<br>
+            <strong style="color:var(--color-a);">A ＋ B ＋ C ＝ 100%</strong>
+        </div>
+        <p>如果我們要做 100g 的釉藥，就直接換算成實際重量：</p>
+        <table class="compare-table" style="margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th style="width:33%;">原料</th>
+                    <th style="width:33%;">比例</th>
+                    <th style="width:33%;">實際重量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>A 長石</td><td>40%</td><td>40g</td></tr>
+                <tr><td>B 碳酸鈣</td><td>40%</td><td>40g</td></tr>
+                <tr><td>C 石英</td><td>20%</td><td>20g</td></tr>
+                <tr style="background:#fef5e7; font-weight:bold;"><td>總和</td><td>100%</td><td>100g</td></tr>
+            </tbody>
+        </table>
+        <p class="highlight-text" style="text-align:center; font-size:1.2em; margin-top:20px;">★ 一個交叉點 ＝ 一組釉藥配方 ★</p>
+    </div>
+
+    <!-- 第四段：21點與66點 -->
+    <div class="section-block">
+        <h2 class="section-title">四、 21點與66點的實驗地圖</h2>
+        
+        <h3 class="sub-title">📌 為什麼要做這麼多配方？</h3>
+        <p>假設只做一種配方，燒完不好，我們只知道「這個配方不好」，但是不知道「那怎麼改？」。</p>
+        <p>如果我們一次做 21 組或 66 組不同的比例，就可以看到：<br>
+        <strong>原料比例改變 ➔ 釉面逐漸改變 ➔ 找到比較好的區域</strong></p>
+
+        <h3 class="sub-title">📌 21點與66點的關係</h3>
+        <p>可以把它想像成找尋寶藏的過程：</p>
+        <ul class="clean-list">
+            <li>🗺️ <strong>21點 ＝ 地圖：</strong> 先找出「哪個區域比較有可能成功？」 (初步篩選、大方向搜尋)</li>
+            <li>🔍 <strong>66點 ＝ 放大地圖：</strong> 再仔細尋找「這個區域裡面，到底哪一個比例最好？」 (細部搜尋)</li>
+        </ul>
+        <div class="info-box" style="text-align: center; font-size: 1.2em;">
+            <strong>口訣：</strong><span style="color:#e74c3c;">「21點找方向，66點找細節。」</span>
+        </div>
+
+        <div class="image-placeholder">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div>[請插入：21點與66點網格的對照圖]</div>
+        </div>
+    </div>
+
+    <!-- 第五段：原料角色與優缺點 -->
+    <div class="section-block">
+        <h2 class="section-title">五、 實驗原料的角色與限制</h2>
+        <p>以本課程指定的「長石＋碳酸鈣＋石英」為例，這三種原料可以用來建立一個非常直觀的基礎實驗：</p>
+        <div class="process-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="process-item" style="justify-content: center; flex-direction: column;">
+                <span style="font-size:1.2em; font-weight:bold;">長石</span>
+                <i class="fa-solid fa-arrow-down" style="color:#aaa;"></i>
+                <span>提供多種釉藥成分</span>
+            </div>
+            <div class="process-item" style="justify-content: center; flex-direction: column;">
+                <span style="font-size:1.2em; font-weight:bold;">碳酸鈣</span>
+                <i class="fa-solid fa-arrow-down" style="color:#aaa;"></i>
+                <span>助熔作用</span>
+            </div>
+            <div class="process-item" style="justify-content: center; flex-direction: column;">
+                <span style="font-size:1.2em; font-weight:bold;">石英</span>
+                <i class="fa-solid fa-arrow-down" style="color:#aaa;"></i>
+                <span>玻璃質來源</span>
+            </div>
+        </div>
+
+        <h3 class="sub-title"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> 注意：一種原料不一定只扮演一種角色</h3>
+        <p>例如：<strong>長石</strong>並不是「只有助熔劑」。它本身含有 K₂O、Na₂O、Al₂O₃、SiO₂、CaO 等成分，所以長石是一種<strong>「複合型原料」</strong>。學生要清楚區分「原料」與「原料裡面的氧化物」這兩個概念。</p>
+
+        <h3 class="sub-title">📌 三角座標法的優缺點</h3>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div style="flex:1; background:#f9f9f9; padding:20px; border-radius:8px; border-top:4px solid #2ecc71;">
+                <strong style="color:#27ae60; font-size:1.1em;"><i class="fa-solid fa-circle-check"></i> 優點</strong>
+                <ul class="clean-list">
+                    <li><strong>簡單：</strong> 學生容易理解。</li>
+                    <li><strong>直觀：</strong> 比例直接轉換成重量。</li>
+                    <li><strong>容易比較：</strong> 不同交叉點就是不同釉方。</li>
+                    <li><strong>系統化：</strong> 系統化實驗，不是憑感覺亂加。</li>
+                    <li><strong>找最佳區：</strong> 燒成後可直接比較整組試片。</li>
+                </ul>
+            </div>
+            <div style="flex:1; background:#f9f9f9; padding:20px; border-radius:8px; border-top:4px solid #e74c3c;">
+                <strong style="color:#c0392b; font-size:1.1em;"><i class="fa-solid fa-circle-xmark"></i> 缺點</strong>
+                <ul class="clean-list">
+                    <li><strong>數量龐大：</strong> 66點全做需大量原料與時間。</li>
+                    <li><strong>變數限制：</strong> 只能研究三種原料的變化。</li>
+                    <li><strong>非化學組成：</strong> 它是原料比例的實驗方法，無法直接代表完整的化學組成分析。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第六段：三角座標 vs 塞格式 -->
+    <div class="section-block">
+        <h2 class="section-title">六、 三角座標 vs. 塞格式 (Seger Formula)</h2>
+        <p>當理解三角座標後，可以開始認識另一種更進階的化學方法。兩者最大的差異在於：</p>
+        
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>比較項目</th>
+                    <th>🔺 三角座標法</th>
+                    <th>🧪 塞格式 (Seger Formula)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>思考方式</td><td>原料比例</td><td>化學氧化物比例</td></tr>
+                <tr><td>基礎單位</td><td>重量百分比</td><td>莫耳／當量計算</td></tr>
+                <tr><td>難度</td><td>⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr>
+                <tr><td>適合對象</td><td>初學、實驗</td><td>進階釉藥研究</td></tr>
+                <tr><td>優點</td><td>直觀、容易操作</td><td>化學分析較精確</td></tr>
+                <tr><td>缺點</td><td>受原料本身成分變化影響</td><td>計算較複雜</td></tr>
+            </tbody>
+        </table>
+        <p><strong>建議教學順序：</strong> 先學三角座標 ➔ 再理解原料與氧化物 ➔ 最後才進入塞格式。</p>
+    </div>
+
+    <!-- 第七段：完整實驗流程與觀察 -->
+    <div class="section-block">
+        <h2 class="section-title">七、 三角座標的完整實驗流程</h2>
+        <div class="process-grid">
+            <div class="process-item"><div class="step-num">1</div>選擇三種原料</div>
+            <div class="process-item"><div class="step-num">2</div>建立三角座標</div>
+            <div class="process-item"><div class="step-num">3</div>劃分21點/66點</div>
+            <div class="process-item"><div class="step-num">4</div>選擇交叉點</div>
+            <div class="process-item"><div class="step-num">5</div>讀取比例</div>
+            <div class="process-item"><div class="step-num">6</div>換算實際重量</div>
+            <div class="process-item"><div class="step-num">7</div>精準秤量</div>
+            <div class="process-item"><div class="step-num">8</div>混合、研磨</div>
+            <div class="process-item"><div class="step-num">9</div>製作/編號試片</div>
+            <div class="process-item"><div class="step-num">10</div>施釉</div>
+            <div class="process-item"><div class="step-num">11</div>燒成</div>
+            <div class="process-item"><div class="step-num">12</div>觀察釉面</div>
+            <div class="process-item"><div class="step-num">13</div>比較不同配方</div>
+            <div class="process-item" style="border-color:var(--accent-color);"><div class="step-num" style="background:#e74c3c;">14</div>找出理想區域</div>
+        </div>
+
+        <h3 class="sub-title">📌 燒成後要觀察什麼？</h3>
+        <p>三角座標不是「配完就結束」，真正重要的是<strong>燒完以後的比較</strong>。每一個試片都要觀察：</p>
+        <ul class="clean-list">
+            <li><strong>① 是否熔融？</strong> 釉有沒有真正融化？</li>
+            <li><strong>② 是否流釉？</strong> 釉是否流得太厲害？</li>
+            <li><strong>③ 光澤：</strong> 是亮面、半光還是霧面？</li>
+            <li><strong>④ 透明度：</strong> 是透明、半透明還是不透明？</li>
+            <li><strong>⑤ 色彩：</strong> 呈現什麼顏色？</li>
+            <li><strong>⑥ 表面缺陷：</strong> 有沒有針孔、氣泡、縮釉、裂釉或流釉？</li>
+        </ul>
+        <p>三角座標的真正價值在於讓學生建立：<strong>「實驗 → 記錄 → 比較 → 修正」</strong> 的科學思考，讓陶藝不再只是憑經驗調釉，而是有系統地研究釉藥。</p>
+    </div>
+
+    <!-- 總結與口訣 -->
+    <div class="section-block" style="background-color: var(--primary-bg); color: white; border-radius: 0 0 12px 12px;">
+        <h2 style="text-align: center; color: var(--accent-color);">🌟 給學生的最後總結</h2>
+        <p style="text-align: center; font-size: 1.1em;">三角座標法可以理解成：<br><strong>「用三角形建立一張釉藥實驗地圖。」</strong></p>
+        
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 5px solid var(--accent-color);">
+            <h3 style="margin-top: 0; color: #fca311;">🔺 三角座標四句話口訣：</h3>
+            <ol style="font-size: 1.15em; line-height: 2;">
+                <li>三個頂點，代表三種原料。</li>
+                <li>頂點100%，對邊0%。</li>
+                <li>一個交叉點，就是一組釉方。</li>
+                <li>三種比例加起來，永遠等於100%。</li>
+            </ol>
+            <p style="text-align: center; font-size: 1.3em; font-weight: bold; color: #fff; margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.3);">
+                「21點找方向，66點找細節。」
+            </p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
