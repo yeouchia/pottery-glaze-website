@@ -85,7 +85,7 @@
             font-size: 1rem;
         }
 
-        /* ★ 新增：APP 安裝專屬按鈕樣式 ★ */
+        /* ★ APP 安裝專屬按鈕樣式 ★ */
         .install-btn {
             margin-top: 15px;
             background: linear-gradient(135deg, var(--accent-color) 0%, #e6920b 100%);
@@ -131,6 +131,7 @@
             gap: 12px;
         }
 
+        /* ★ 圓形浮動 Icon 按鈕樣式 ★ */
         .share-circle-btn {
             width: 45px;
             height: 45px;
@@ -171,6 +172,13 @@
             position: relative;
             overflow: hidden;
             border-left: 6px solid var(--accent-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .feature-card.card-calc { border-left-color: #fca311; }
@@ -252,7 +260,7 @@
             margin-top: 10px;
         }
 
-        /* ★ 新增：精美的安裝教學 Modal 樣式 ★ */
+        /* ★ 精美的安裝教學 Modal 樣式 ★ */
         .install-modal-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -294,101 +302,44 @@
 
         /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --開始 */
         @media (max-width: 1250px) {
-            .welcome-wrapper {
-                padding: 4vw 4vw 35vw 4vw !important;
-            }
-
+            .welcome-wrapper { padding: 4vw 4vw 35vw 4vw !important; }
             .top-banner {
-                flex-direction: column !important;
-                text-align: center !important;
-                padding: 6vw !important;
-                gap: 5vw !important;
-                border-radius: 16px !important;
-                margin-bottom: 5vw !important;
+                flex-direction: column !important; text-align: center !important;
+                padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; margin-bottom: 5vw !important;
             }
-
-            .banner-left {
-                flex-direction: column !important;
-                gap: 3vw !important;
-            }
-
+            .banner-left { flex-direction: column !important; gap: 3vw !important; }
             .banner-icon { font-size: 14vw !important; }
             .banner-text h1 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
             .banner-text p { font-size: 4vw !important; line-height: 1.6 !important; }
 
-            /* ★ 手機版的安裝 APP 按鈕放大 ★ */
             .install-btn {
-                margin-top: 5vw !important;
-                padding: 3vw 6vw !important;
-                font-size: 4.5vw !important;
-                border-radius: 50px !important;
+                margin-top: 5vw !important; padding: 3vw 6vw !important;
+                font-size: 4.5vw !important; border-radius: 50px !important;
             }
 
             .share-title { font-size: 4.5vw !important; margin-bottom: 2vw !important; justify-content: center !important; }
             .share-buttons { gap: 4vw !important; }
             .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
-            .cards-grid {
-                grid-template-columns: 1fr !important;
-                gap: 5vw !important;
-                margin-bottom: 6vw !important;
-            }
-
+            .cards-grid { grid-template-columns: 1fr !important; gap: 5vw !important; margin-bottom: 6vw !important; }
             .feature-card {
-                padding: 6.5vw 6vw !important;
-                border-radius: 18px !important;
-                border-left-width: 10px !important;
+                padding: 6.5vw 6vw !important; border-radius: 18px !important; border-left-width: 10px !important;
                 box-shadow: 0 4px 18px rgba(0,0,0,0.08) !important;
             }
-
-            .card-header {
-                gap: 4.5vw !important;
-                margin-bottom: 4.5vw !important;
-            }
-
-            .card-icon {
-                font-size: 7.8vw !important;
-                width: 15vw !important;
-                height: 15vw !important;
-                border-radius: 14px !important;
-            }
-
-            .card-title {
-                font-size: 6.4vw !important;
-                font-weight: 800 !important;
-            }
-
-            .card-desc {
-                font-size: 4.8vw !important;
-                line-height: 1.8 !important;
-                margin-bottom: 4.5vw !important;
-            }
-
-            .card-list {
-                gap: 3.8vw !important;
-            }
-
-            .card-list li {
-                font-size: 5vw !important;
-                font-weight: 700 !important;
-                gap: 4vw !important;
-            }
-
-            .card-list li i {
-                font-size: 5.8vw !important;
-                width: 7vw !important;
-            }
-
-            .bottom-hint {
-                font-size: 4.2vw !important;
-                padding: 3.5vw 5vw !important;
-                border-radius: 50px !important;
-            }
+            .card-header { gap: 4.5vw !important; margin-bottom: 4.5vw !important; }
+            .card-icon { font-size: 7.8vw !important; width: 15vw !important; height: 15vw !important; border-radius: 14px !important; }
+            .card-title { font-size: 6.4vw !important; font-weight: 800 !important; }
+            .card-desc { font-size: 4.8vw !important; line-height: 1.8 !important; margin-bottom: 4.5vw !important; }
+            .card-list { gap: 3.8vw !important; }
+            .card-list li { font-size: 5vw !important; font-weight: 700 !important; gap: 4vw !important; }
+            .card-list li i { font-size: 5.8vw !important; width: 7vw !important; }
+            .bottom-hint { font-size: 4.2vw !important; padding: 3.5vw 5vw !important; border-radius: 50px !important; }
         }
         /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --結束 */
     </style>
 </head>
-<body>
+<!-- ★ 在 body 加上點擊解鎖音效 ★ -->
+<body onclick="unlockAudio()">
 
     <div class="welcome-wrapper">
         
@@ -400,8 +351,8 @@
                     <h1>陶藝與釉藥調配</h1>
                     <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
                     
-                    <!-- ★ 新增的：一鍵安裝 APP 按鈕 ★ -->
-                    <button class="install-btn" onclick="showInstallGuide()">
+                    <!-- 一鍵安裝 APP 按鈕 -->
+                    <button class="install-btn" onmouseenter="playHoverSound()" onclick="playClickSound(); showInstallGuide()">
                         <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
                     </button>
                 </div>
@@ -409,17 +360,18 @@
             <div class="banner-right">
                 <div class="share-title"><i class="fa-solid fa-share-nodes"></i> 分享給好友</div>
                 <div class="share-buttons">
-                    <button onclick="shareToFB()" class="share-circle-btn fb" title="分享到 Facebook"><i class="fa-brands fa-facebook-f"></i></button>
-                    <button onclick="shareToLine()" class="share-circle-btn line" title="分享到 LINE"><i class="fa-brands fa-line"></i></button>
-                    <button onclick="copyCurrentLink()" class="share-circle-btn copy" title="複製連結"><i class="fa-solid fa-link"></i></button>
+                    <!-- 圓形浮動分享按鈕 -->
+                    <button onclick="playClickSound(); shareToFB()" onmouseenter="playHoverSound()" class="share-circle-btn fb" title="分享到 Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button onclick="playClickSound(); shareToLine()" onmouseenter="playHoverSound()" class="share-circle-btn line" title="分享到 LINE"><i class="fa-brands fa-line"></i></button>
+                    <button onclick="playClickSound(); copyCurrentLink()" onmouseenter="playHoverSound()" class="share-circle-btn copy" title="複製連結"><i class="fa-solid fa-link"></i></button>
                 </div>
             </div>
         </div>
 
         <!-- 功能特色卡片網格 -->
         <div class="cards-grid">
-            <!-- 3. 精準釉藥計算卡片 --開始 -->
-            <div class="feature-card card-calc">
+            <!-- 3. 精準釉藥計算卡片 -->
+            <div class="feature-card card-calc" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <div class="card-icon"><i class="fa-solid fa-calculator"></i></div>
                     <div class="card-title">精準釉藥計算</div>
@@ -432,10 +384,9 @@
                     <li><i class="fa-solid fa-chalkboard-user"></i> 賽格式與三角座標教學</li>
                 </ul>
             </div>
-            <!-- 3. 精準釉藥計算卡片 --結束 -->
 
-            <!-- 4. 豐富影音課程卡片 --開始 -->
-            <div class="feature-card card-video">
+            <!-- 4. 豐富影音課程卡片 -->
+            <div class="feature-card card-video" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <div class="card-icon"><i class="fa-brands fa-youtube"></i></div>
                     <div class="card-title">豐富影音課程</div>
@@ -448,10 +399,9 @@
                     <li><i class="fa-solid fa-vial"></i> 釉藥調配實務</li>
                 </ul>
             </div>
-            <!-- 4. 豐富影音課程卡片 --結束 -->
 
-            <!-- 5. 陶釉教學講義卡片 --開始 -->
-            <div class="feature-card card-lecture">
+            <!-- 5. 陶釉教學講義卡片 -->
+            <div class="feature-card card-lecture" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <div class="card-icon"><i class="fa-solid fa-book-open-reader"></i></div>
                     <div class="card-title">陶釉教學講義</div>
@@ -464,10 +414,9 @@
                     <li><i class="fa-solid fa-fire-burner"></i> 四大窯爐操作與安全規範</li>
                 </ul>
             </div>
-            <!-- 5. 陶釉教學講義卡片 --結束 -->
 
-            <!-- 6. 陶藝生活與靈感卡片 --開始 -->
-            <div class="feature-card card-life">
+            <!-- 6. 陶藝生活與靈感卡片 -->
+            <div class="feature-card card-life" onmouseenter="playHoverSound()">
                 <div class="card-header">
                     <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
                     <div class="card-title">陶藝生活與靈感</div>
@@ -480,30 +429,60 @@
                     <li><i class="fa-solid fa-comments"></i> 留言板互動提問</li>
                 </ul>
             </div>
-            <!-- 6. 陶藝生活與靈感卡片 --結束 -->
         </div>
 
-        <div class="bottom-hint">
+        <div class="bottom-hint" onmouseenter="playHoverSound()">
             <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
         </div>
 
     </div>
 
-    <!-- ★ 新增：安裝教學專屬 Modal 彈出視窗 ★ -->
-    <div class="install-modal-overlay" id="installModal" onclick="closeInstallGuide()">
+    <!-- ★ 安裝教學專屬 Modal 彈出視窗 ★ -->
+    <div class="install-modal-overlay" id="installModal" onclick="playClickSound(); closeInstallGuide()">
         <div class="install-modal-content" onclick="event.stopPropagation()">
-            <div class="modal-close" onclick="closeInstallGuide()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal-close" onmouseenter="playHoverSound()" onclick="playClickSound(); closeInstallGuide()"><i class="fa-solid fa-xmark"></i></div>
             <h3 id="install-title"><i class="fa-solid fa-mobile-screen"></i> 取得專屬桌面 APP</h3>
             <p id="install-desc">系統載入中...</p>
             <div class="install-steps" id="install-steps">
                 <!-- 這裡的內容會由下方的 JS 根據手機系統自動生成 -->
             </div>
-            <button class="modal-ok-btn" onclick="closeInstallGuide()">我知道了，立刻設定！</button>
+            <!-- 彈出視窗確認按鈕 -->
+            <button class="modal-ok-btn" onmouseenter="playHoverSound()" onclick="playClickSound(); closeInstallGuide()">我知道了，立刻設定！</button>
         </div>
     </div>
 
-    <!-- 7. 直開 FB / LINE 應用程式發文之精準 JavaScript --開始 -->
+    <!-- ★ 本地端專屬音效載入區塊 ★ -->
+    <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
+    <audio id="clickSound" src="click.wav" preload="auto"></audio>
+
     <script>
+        // --- 本地專屬音效播放系統 (不依賴跨框架) ---
+        var hoverAudio = document.getElementById("hoverSound");
+        var clickAudio = document.getElementById("clickSound");
+
+        function unlockAudio() {
+            if(hoverAudio) { hoverAudio.play().then(() => { hoverAudio.pause(); hoverAudio.currentTime = 0; }).catch((e) => {}); }
+            if(clickAudio) { clickAudio.play().then(() => { clickAudio.pause(); clickAudio.currentTime = 0; }).catch((e) => {}); }
+            document.body.onclick = null;
+        }
+
+        function playHoverSound() {
+            if (hoverAudio) {
+                hoverAudio.currentTime = 0; hoverAudio.volume = 0.15;
+                var p = hoverAudio.play();
+                if (p !== undefined) { p.catch(() => {}); }
+            }
+        }
+
+        function playClickSound() {
+            if (clickAudio) {
+                clickAudio.currentTime = 0; clickAudio.volume = 0.15;
+                var p = clickAudio.play();
+                if (p !== undefined) { p.catch(() => {}); }
+            }
+        }
+
+        // --- 分享功能 ---
         function getSiteUrl() {
             return window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
         }
@@ -542,7 +521,7 @@
             });
         }
 
-        // ★ 新增：智慧辨識手機系統並顯示安裝教學 ★
+        // --- 智慧辨識手機系統並顯示安裝教學 ---
         function showInstallGuide() {
             const modal = document.getElementById('installModal');
             const desc = document.getElementById('install-desc');
@@ -584,6 +563,5 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
     </script>
-    <!-- 7. 直開 FB / LINE 應用程式發文之精準 JavaScript --結束 -->
 </body>
 </html>
