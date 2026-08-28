@@ -355,7 +355,7 @@
         <i class="fa-solid fa-caret-up" style="color:var(--accent-color);"></i> <strong>越靠近某個頂點 → 該原料越多</strong><br>
         <i class="fa-solid fa-caret-down" style="color:var(--accent-color);"></i> <strong>越遠離某個頂點 → 該原料越少</strong></p>
 
-        <!-- ★ 修改：A圖置中獨立，B圖與C圖並排 ★ -->
+        <!-- A圖置中獨立，B圖與C圖並排 -->
         <div class="canvas-container" style="margin-bottom: 10px;">
             <div class="canvas-wrapper" style="max-width: 450px; width: 100%;">
                 <canvas id="conceptCanvasA" width="380" height="300"></canvas>
@@ -650,7 +650,7 @@
         };
     }
 
-    // 1. A原料 (紅)
+    // 1. A原料 (紅) 保持不變
     function drawConceptA() {
         const canvas = document.getElementById('conceptCanvasA');
         const ctx = canvas.getContext('2d');
@@ -675,7 +675,6 @@
             ctx.fillText((100 - i*20), xr + 12, yy + 5);
         }
         
-        // 0% 對邊
         ctx.setLineDash([6, 4]); ctx.strokeStyle = "#e74c3c"; ctx.lineWidth = 3;
         ctx.beginPath(); ctx.moveTo(ptB.x-15, ptB.y); ctx.lineTo(ptC.x+15, ptC.y); ctx.stroke(); ctx.setLineDash([]);
         ctx.fillText("0", ptC.x + 18, ptC.y + 5);
@@ -690,7 +689,7 @@
         drawArrowWithText(ctx, 250, 75, 345, 225, "比例遞減", "#e74c3c");
     }
 
-    // 2. B原料 (綠)
+    // 2. B原料 (綠) 保持不變
     function drawConceptB() {
         const canvas = document.getElementById('conceptCanvasB');
         const ctx = canvas.getContext('2d');
@@ -719,7 +718,7 @@
         ctx.setLineDash([6, 4]); ctx.strokeStyle = "#2ecc71"; ctx.lineWidth = 3;
         let vecAC = {x: ptC.x - ptA.x, y: ptC.y - ptA.y};
         ctx.beginPath(); ctx.moveTo(ptA.x - vecAC.x*0.1, ptA.y - vecAC.y*0.1); ctx.lineTo(ptC.x + vecAC.x*0.1, ptC.y + vecAC.y*0.1); ctx.stroke(); ctx.setLineDash([]);
-        ctx.fillText("0", ptA.x - 12, ptA.y + 5); 
+        ctx.fillText("0", ptA.x - 15, ptA.y + 5); 
 
         ctx.beginPath(); ctx.arc(ptB.x, ptB.y, 7, 0, Math.PI*2); ctx.fill();
         ctx.textAlign = "center";
@@ -733,7 +732,7 @@
         drawArrowWithText(ctx, 40, 220, 140, 65, "比例遞減", "#2ecc71");
     }
 
-    // 3. C原料 (藍)
+    // 3. C原料 (藍) ★ 修復文字裁切與箭頭高度
     function drawConceptC() {
         const canvas = document.getElementById('conceptCanvasC');
         const ctx = canvas.getContext('2d');
@@ -768,16 +767,21 @@
         ctx.textAlign = "center";
         ctx.fillStyle = "#e74c3c"; ctx.fillText("A原料", ptA.x, ptA.y - 15);
         ctx.fillStyle = "#2ecc71"; ctx.textAlign = "right"; ctx.fillText("B原料", ptB.x - 10, ptB.y + 15);
-        ctx.fillStyle = "#3498db"; ctx.textAlign = "left"; ctx.fillText("C原料 (100%)", ptC.x + 10, ptC.y + 15);
+        
+        // ★ 分成兩行顯示，徹底解決被右邊界裁切的問題
+        ctx.fillStyle = "#3498db"; ctx.textAlign = "left"; 
+        ctx.fillText("C原料", ptC.x + 8, ptC.y + 10);
+        ctx.fillText("(100%)", ptC.x + 8, ptC.y + 28);
         
         ctx.save(); ctx.translate(100, 130); ctx.rotate(-58 * Math.PI/180);
         ctx.textAlign = "center";
         ctx.fillText("對邊 C原料 (0%)", 0, 0); ctx.restore();
 
-        drawArrowWithText(ctx, 310, 285, 70, 285, "比例遞減", "#3498db");
+        // ★ 箭頭向下推移到 y=290，完全避開 80 60 40 20 數字
+        drawArrowWithText(ctx, 310, 290, 70, 290, "比例遞減", "#3498db");
     }
 
-    // 4. 配方交會點解析圖
+    // 4. 配方交會點解析圖 
     function drawPointCanvas() {
         const canvas = document.getElementById('pointCanvas');
         const ctx = canvas.getContext('2d');
@@ -852,8 +856,8 @@
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(targetPt.x + 5, targetPt.y - 5);
-        ctx.lineTo(330, 80);
-        ctx.lineTo(480, 80);
+        ctx.lineTo(340, 70);
+        ctx.lineTo(485, 70);
         ctx.stroke();
         
         ctx.beginPath();
@@ -861,12 +865,12 @@
         ctx.fillStyle = "#333"; ctx.fill();
 
         ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-        ctx.fillRect(335, 60, 145, 22);
+        ctx.fillRect(345, 50, 140, 20);
 
         ctx.font = "bold 14px Arial";
         ctx.textAlign = "left";
-        let tx = 340;
-        let ty = 76;
+        let tx = 350;
+        let ty = 65;
         
         ctx.fillStyle = "#e74c3c"; ctx.fillText("A 40%", tx, ty);
         let wA = ctx.measureText("A 40% ").width;
