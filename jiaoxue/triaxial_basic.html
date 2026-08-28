@@ -127,89 +127,147 @@
             color: #2c3e50;
         }
 
-        /* 流程圖樣式 (CSS 繪製) */
-        .flowchart {
+        /* Canvas 繪圖區 */
+        .canvas-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             gap: 15px;
-            margin: 30px 0;
+            margin: 25px 0;
+            flex-wrap: wrap;
         }
-
-        .flow-step {
-            background: var(--primary-bg);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            position: relative;
-            min-width: 200px;
+        
+        .canvas-wrapper {
+            flex: 1;
+            min-width: 280px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             text-align: center;
         }
 
-        .flow-arrow {
-            color: var(--accent-color);
-            font-size: 1.5em;
+        .canvas-wrapper canvas {
+            max-width: 100%;
+            height: auto;
         }
 
-        /* 實驗流程網格 (14步驟) */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 25px 0;
+        /* =========================================
+           14步驟 絕美交錯垂直時間軸 (Timeline) 
+           ========================================= */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px 0;
         }
 
-        .process-item {
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* 中間的引導線 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-color), #e74c3c);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 25px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        /* 左側步驟 */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 45px;
+        }
+
+        /* 右側步驟 */
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 45px;
+        }
+
+        /* 圓形數字按鈕 */
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            background: var(--primary-bg);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 2;
             transition: all 0.3s ease;
         }
 
-        .process-item:hover {
-            background: var(--primary-bg);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        /* 第 14 步特別標示顏色 */
+        .timeline-item:last-child .timeline-marker {
+            background: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.6);
         }
 
-        .process-item .step-num {
-            background: var(--accent-color);
-            color: #fff;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9em;
-            flex-shrink: 0;
-        }
+        .timeline-item:nth-child(odd) .timeline-marker { right: -21px; }
+        .timeline-item:nth-child(even) .timeline-marker { left: -21px; }
 
-        /* 圖片預留區 */
-        .image-placeholder {
-            background-color: #f0f2f5;
-            border: 2px dashed #bdc3c7;
+        /* 文字內容框 */
+        .timeline-content {
+            background: white;
+            padding: 15px 25px;
             border-radius: 8px;
-            padding: 40px 20px;
-            text-align: center;
-            color: #7f8c8d;
-            margin: 25px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border: 1px solid #eaeaea;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--primary-bg);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
-        .image-placeholder i {
-            font-size: 2.5em;
+        .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
+        .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+
+        /* 小箭頭裝飾 */
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border-style: solid;
+        }
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        /* 懸浮特效 */
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            border-color: var(--accent-color);
+        }
+        .timeline-item:hover .timeline-marker {
+            transform: translateY(-50%) scale(1.1);
+            background: var(--accent-color);
         }
 
         /* 比較表格 */
@@ -238,12 +296,24 @@
 
         .compare-table td:first-child { font-weight: bold; background-color: #fcfcfc; }
         
-        ul.clean-list { padding-left: 25px; margin: 10px 0; }
+        ul.clean-list { padding-left: 25px; margin: 10px 0; text-align: left;}
         ul.clean-list li { margin-bottom: 8px; }
 
+        /* RWD 響應式設計 */
         @media (max-width: 768px) {
             .section-block { padding: 25px 20px; }
             .page-header h1 { font-size: 1.6em; }
+            
+            /* 手機版時間軸改為單邊 */
+            .timeline::before { left: 30px; }
+            .timeline-item { width: 100%; padding-left: 70px !important; padding-right: 0 !important; }
+            .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item:nth-child(odd) .timeline-marker,
+            .timeline-item:nth-child(even) .timeline-marker { left: 9px; right: auto; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+            .timeline-item:nth-child(odd) .timeline-content::after { display: none; }
+            .timeline-item:nth-child(even) .timeline-content::after { left: -10px; border-width: 10px 10px 10px 0; border-color: transparent white transparent transparent; }
         }
     </style>
 </head>
@@ -265,20 +335,8 @@
         <p>因此，陶瓷釉藥實驗發展出一種非常實用的方法：<strong>三角座標試驗法（Triaxial Blend）</strong></p>
         <p>它的基本概念非常簡單：選擇三種原料，利用一個等邊三角形，把三種原料的不同比例排列出來，再逐一燒製比較。</p>
 
-        <div class="flowchart">
-            <div class="flow-step">三種原料</div>
-            <i class="fa-solid fa-arrow-down flow-arrow"></i>
-            <div class="flow-step">三角座標</div>
-            <i class="fa-solid fa-arrow-down flow-arrow"></i>
-            <div class="flow-step">不同比例</div>
-            <i class="fa-solid fa-arrow-down flow-arrow"></i>
-            <div class="flow-step">不同釉方</div>
-            <i class="fa-solid fa-arrow-down flow-arrow"></i>
-            <div class="flow-step">試片燒成</div>
-            <i class="fa-solid fa-arrow-down flow-arrow"></i>
-            <div class="flow-step">觀察釉面</div>
-            <i class="fa-solid fa-arrow-down flow-arrow"></i>
-            <div class="flow-step" style="background-color: var(--accent-color); color: var(--primary-bg);">找出理想配方</div>
+        <div class="info-box" style="text-align: center; font-size: 1.1em; line-height: 2;">
+            三種原料 ➔ 三角座標 ➔ 不同比例 ➔ 不同釉方 ➔ 試片燒成 ➔ 觀察釉面 ➔ <strong style="color:var(--color-a);">找出理想配方</strong>
         </div>
         <p style="text-align: center; color: var(--text-light);">利用三種原料的不同比例進行系統性試釉，並藉由燒成後的試片比較釉藥特性。</p>
     </div>
@@ -307,13 +365,23 @@
         <h3 class="sub-title">📌 三角形的三條「邊」代表什麼？</h3>
         <p>這個觀念非常重要。假設 A＝長石，那麼：<strong>距離 A 最遠的那一條邊，就代表 A＝0%</strong>。</p>
         <p>因此：<br>
-        <i class="fa-solid fa-caret-up" style="color:var(--accent-color);"></i> <strong>越靠近 A 頂點 → A越多</strong><br>
-        <i class="fa-solid fa-caret-down" style="color:var(--accent-color);"></i> <strong>越遠離 A 頂點 → A越少</strong><br>
-        (B、C也是完全相同的判讀方式)</p>
+        <i class="fa-solid fa-caret-up" style="color:var(--accent-color);"></i> <strong>越靠近某個頂點 → 該原料越多</strong><br>
+        <i class="fa-solid fa-caret-down" style="color:var(--accent-color);"></i> <strong>越遠離某個頂點 → 該原料越少</strong></p>
 
-        <div class="image-placeholder">
-            <i class="fa-solid fa-image"></i>
-            <div>[請插入：帶有頂點100%與對邊0%標示的三角座標解說圖]</div>
+        <!-- 純 Canvas 繪製的 A、B、C 三張概念圖 -->
+        <div class="canvas-container">
+            <div class="canvas-wrapper">
+                <canvas id="conceptCanvasA" width="300" height="280"></canvas>
+                <div style="font-weight: bold; color: #555;">(圖1) A原料 (長石) 比例遞減</div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="conceptCanvasB" width="300" height="280"></canvas>
+                <div style="font-weight: bold; color: #555;">(圖2) B原料 (碳酸鈣) 比例遞減</div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="conceptCanvasC" width="300" height="280"></canvas>
+                <div style="font-weight: bold; color: #555;">(圖3) C原料 (石英) 比例遞減</div>
+            </div>
         </div>
     </div>
 
@@ -322,7 +390,7 @@
         <h2 class="section-title">三、 平行線與交叉點的意義</h2>
         
         <h3 class="sub-title">📌 平行線就是「比例刻度」</h3>
-        <p>三角座標真正有用的地方，是我們可以在三角形裡面畫出很多條平行線。這些線就像「刻度尺」（例如 0%, 20%, 40%, 60%, 80%, 100%）。實際繪製時，是由三個方向建立互相平行的等比例線。</p>
+        <p>三角座標真正有用的地方，是我們可以在三角形裡面畫出很多條平行線。這些線就像「刻度尺」（如上圖的 80, 60, 40, 20, 0）。實際繪製時，是由三個方向建立互相平行的等比例線。</p>
 
         <h3 class="sub-title">📌 為什麼一個「點」就是一個「釉方」？</h3>
         <p>這是三角座標最核心的概念。例如我們在三角形中找到一個點，這個點同時可以讀出：</p>
@@ -368,9 +436,16 @@
             <strong>口訣：</strong><span style="color:#e74c3c;">「21點找方向，66點找細節。」</span>
         </div>
 
-        <div class="image-placeholder">
-            <i class="fa-solid fa-map-location-dot"></i>
-            <div>[請插入：21點與66點網格的對照圖]</div>
+        <!-- 純 Canvas 繪製的 21點與66點 比較圖 -->
+        <div class="canvas-container">
+            <div class="canvas-wrapper" style="min-width: 320px;">
+                <canvas id="canvas21" width="320" height="280"></canvas>
+                <div style="font-weight: bold; color: #555; margin-top: 5px;">21點 (5等分) - 找方向</div>
+            </div>
+            <div class="canvas-wrapper" style="min-width: 320px;">
+                <canvas id="canvas66" width="320" height="280"></canvas>
+                <div style="font-weight: bold; color: #555; margin-top: 5px;">66點 (10等分) - 找細節</div>
+            </div>
         </div>
     </div>
 
@@ -378,21 +453,16 @@
     <div class="section-block">
         <h2 class="section-title">五、 實驗原料的角色與限制</h2>
         <p>以本課程指定的「長石＋碳酸鈣＋石英」為例，這三種原料可以用來建立一個非常直觀的基礎實驗：</p>
-        <div class="process-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="process-item" style="justify-content: center; flex-direction: column;">
-                <span style="font-size:1.2em; font-weight:bold;">長石</span>
-                <i class="fa-solid fa-arrow-down" style="color:#aaa;"></i>
-                <span>提供多種釉藥成分</span>
+        
+        <div style="display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
+            <div style="flex:1; background:#f8f9fa; padding:15px; text-align:center; border:1px solid #ddd; border-radius:8px;">
+                <strong>長石</strong><br><i class="fa-solid fa-arrow-down" style="color:#aaa; margin:5px 0;"></i><br>提供多種釉藥成分
             </div>
-            <div class="process-item" style="justify-content: center; flex-direction: column;">
-                <span style="font-size:1.2em; font-weight:bold;">碳酸鈣</span>
-                <i class="fa-solid fa-arrow-down" style="color:#aaa;"></i>
-                <span>助熔作用</span>
+            <div style="flex:1; background:#f8f9fa; padding:15px; text-align:center; border:1px solid #ddd; border-radius:8px;">
+                <strong>碳酸鈣</strong><br><i class="fa-solid fa-arrow-down" style="color:#aaa; margin:5px 0;"></i><br>助熔作用
             </div>
-            <div class="process-item" style="justify-content: center; flex-direction: column;">
-                <span style="font-size:1.2em; font-weight:bold;">石英</span>
-                <i class="fa-solid fa-arrow-down" style="color:#aaa;"></i>
-                <span>玻璃質來源</span>
+            <div style="flex:1; background:#f8f9fa; padding:15px; text-align:center; border:1px solid #ddd; border-radius:8px;">
+                <strong>石英</strong><br><i class="fa-solid fa-arrow-down" style="color:#aaa; margin:5px 0;"></i><br>玻璃質來源
             </div>
         </div>
 
@@ -450,21 +520,24 @@
     <!-- 第七段：完整實驗流程與觀察 -->
     <div class="section-block">
         <h2 class="section-title">七、 三角座標的完整實驗流程</h2>
-        <div class="process-grid">
-            <div class="process-item"><div class="step-num">1</div>選擇三種原料</div>
-            <div class="process-item"><div class="step-num">2</div>建立三角座標</div>
-            <div class="process-item"><div class="step-num">3</div>劃分21點/66點</div>
-            <div class="process-item"><div class="step-num">4</div>選擇交叉點</div>
-            <div class="process-item"><div class="step-num">5</div>讀取比例</div>
-            <div class="process-item"><div class="step-num">6</div>換算實際重量</div>
-            <div class="process-item"><div class="step-num">7</div>精準秤量</div>
-            <div class="process-item"><div class="step-num">8</div>混合、研磨</div>
-            <div class="process-item"><div class="step-num">9</div>製作/編號試片</div>
-            <div class="process-item"><div class="step-num">10</div>施釉</div>
-            <div class="process-item"><div class="step-num">11</div>燒成</div>
-            <div class="process-item"><div class="step-num">12</div>觀察釉面</div>
-            <div class="process-item"><div class="step-num">13</div>比較不同配方</div>
-            <div class="process-item" style="border-color:var(--accent-color);"><div class="step-num" style="background:#e74c3c;">14</div>找出理想區域</div>
+        <p>了解理論後，實務上的操作必須嚴謹。以下是完整的 14 步驟實驗流程：</p>
+        
+        <!-- ★ 絕美交錯垂直時間軸 ★ -->
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-marker">1</div><div class="timeline-content">選擇三種原料</div></div>
+            <div class="timeline-item"><div class="timeline-marker">2</div><div class="timeline-content">建立三角座標</div></div>
+            <div class="timeline-item"><div class="timeline-marker">3</div><div class="timeline-content">劃分21點／66點</div></div>
+            <div class="timeline-item"><div class="timeline-marker">4</div><div class="timeline-content">選擇交叉點</div></div>
+            <div class="timeline-item"><div class="timeline-marker">5</div><div class="timeline-content">讀取三種原料比例</div></div>
+            <div class="timeline-item"><div class="timeline-marker">6</div><div class="timeline-content">換算實際重量</div></div>
+            <div class="timeline-item"><div class="timeline-marker">7</div><div class="timeline-content">精準秤量</div></div>
+            <div class="timeline-item"><div class="timeline-marker">8</div><div class="timeline-content">混合、研磨</div></div>
+            <div class="timeline-item"><div class="timeline-marker">9</div><div class="timeline-content">製作／編號試片</div></div>
+            <div class="timeline-item"><div class="timeline-marker">10</div><div class="timeline-content">施釉</div></div>
+            <div class="timeline-item"><div class="timeline-marker">11</div><div class="timeline-content">燒成</div></div>
+            <div class="timeline-item"><div class="timeline-marker">12</div><div class="timeline-content">觀察釉面</div></div>
+            <div class="timeline-item"><div class="timeline-marker">13</div><div class="timeline-content">比較不同配方</div></div>
+            <div class="timeline-item"><div class="timeline-marker"><i class="fa-solid fa-flag-checkered"></i></div><div class="timeline-content">找出理想區域</div></div>
         </div>
 
         <h3 class="sub-title">📌 燒成後要觀察什麼？</h3>
@@ -500,6 +573,228 @@
     </div>
 
 </div>
+
+<!-- Canvas 繪圖腳本 (A/B/C 三原料概念圖 與 21/66網格圖) -->
+<script>
+    // 1. 繪製 A原料 (紅) 概念圖
+    function drawConceptA() {
+        const canvas = document.getElementById('conceptCanvasA');
+        const ctx = canvas.getContext('2d');
+        const ptA = {x: 150, y: 40}, ptB = {x: 40, y: 220}, ptC = {x: 260, y: 220};
+        
+        // 漸層：由上往下
+        let grad = ctx.createLinearGradient(0, ptA.y, 0, ptB.y);
+        grad.addColorStop(0, "rgba(231, 76, 60, 0.7)");
+        grad.addColorStop(1, "rgba(231, 76, 60, 0)");
+        
+        // 畫主三角形
+        ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath();
+        ctx.fillStyle = grad; ctx.fill();
+        ctx.strokeStyle = "#2c3e50"; ctx.lineWidth = 2; ctx.stroke();
+        
+        // 畫平行線與刻度 (80, 60, 40, 20)
+        ctx.strokeStyle = "rgba(0,0,0,0.15)"; ctx.lineWidth = 1;
+        ctx.font = "bold 15px Arial"; ctx.fillStyle = "#e74c3c"; ctx.textAlign = "left";
+        for(let i=1; i<5; i++) {
+            let frac = i/5;
+            let xl = ptA.x + (ptB.x - ptA.x)*frac;
+            let xr = ptA.x + (ptC.x - ptA.x)*frac;
+            let yy = ptA.y + (ptB.y - ptA.y)*frac;
+            ctx.beginPath(); ctx.moveTo(xl, yy); ctx.lineTo(xr, yy); ctx.stroke();
+            ctx.fillText((100 - i*20), xr + 8, yy + 5);
+        }
+        
+        // 畫底邊對邊虛線 (0%)
+        ctx.setLineDash([6, 4]); ctx.strokeStyle = "#e74c3c"; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(ptB.x-15, ptB.y); ctx.lineTo(ptC.x+15, ptC.y); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillText("0", ptC.x + 15, ptC.y + 5);
+
+        // 標示文字
+        ctx.beginPath(); ctx.arc(ptA.x, ptA.y, 7, 0, Math.PI*2); ctx.fill();
+        ctx.textAlign = "center";
+        ctx.fillText("A原料 (100%)", ptA.x, ptA.y - 15);
+        ctx.fillText("對邊 A原料 (0%)", 150, 245);
+        ctx.fillStyle = "#2ecc71"; ctx.fillText("B原料", ptB.x, ptB.y + 20);
+        ctx.fillStyle = "#3498db"; ctx.fillText("C原料", ptC.x, ptC.y + 20);
+        
+        // 右側向下箭頭
+        ctx.strokeStyle = "#e74c3c"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(200, 50); ctx.lineTo(290, 195); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(290, 195); ctx.lineTo(280, 185); ctx.lineTo(295, 180); ctx.closePath(); ctx.fillStyle = "#e74c3c"; ctx.fill();
+        ctx.save(); ctx.translate(255, 130); ctx.rotate(58 * Math.PI/180);
+        ctx.fillText("比例遞減", 0, 0); ctx.restore();
+    }
+
+    // 2. 繪製 B原料 (綠) 概念圖
+    function drawConceptB() {
+        const canvas = document.getElementById('conceptCanvasB');
+        const ctx = canvas.getContext('2d');
+        const ptA = {x: 150, y: 40}, ptB = {x: 40, y: 220}, ptC = {x: 260, y: 220};
+        
+        // 漸層：由左下往右上
+        let grad = ctx.createLinearGradient(ptB.x, ptB.y, (ptA.x+ptC.x)/2, (ptA.y+ptC.y)/2);
+        grad.addColorStop(0, "rgba(46, 204, 113, 0.7)");
+        grad.addColorStop(1, "rgba(46, 204, 113, 0)");
+        
+        ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath();
+        ctx.fillStyle = grad; ctx.fill();
+        ctx.strokeStyle = "#2c3e50"; ctx.lineWidth = 2; ctx.stroke();
+        
+        // 畫平行線與刻度
+        ctx.strokeStyle = "rgba(0,0,0,0.15)"; ctx.lineWidth = 1;
+        ctx.font = "bold 15px Arial"; ctx.fillStyle = "#2ecc71"; ctx.textAlign = "right";
+        for(let i=1; i<5; i++) {
+            let frac = i/5;
+            let xt = ptB.x + (ptA.x - ptB.x)*frac;
+            let yt = ptB.y + (ptA.y - ptB.y)*frac;
+            let xb = ptB.x + (ptC.x - ptB.x)*frac;
+            let yb = ptB.y + (ptC.y - ptB.y)*frac;
+            ctx.beginPath(); ctx.moveTo(xt, yt); ctx.lineTo(xb, yb); ctx.stroke();
+            ctx.fillText((100 - i*20), xt - 8, yt + 5);
+        }
+        
+        // 畫右邊對邊虛線 (0%)
+        ctx.setLineDash([6, 4]); ctx.strokeStyle = "#2ecc71"; ctx.lineWidth = 3;
+        let vecAC = {x: ptC.x - ptA.x, y: ptC.y - ptA.y};
+        ctx.beginPath(); ctx.moveTo(ptA.x - vecAC.x*0.1, ptA.y - vecAC.y*0.1); ctx.lineTo(ptC.x + vecAC.x*0.1, ptC.y + vecAC.y*0.1); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillText("0", ptA.x - 10, ptA.y + 5);
+
+        // 標示文字
+        ctx.beginPath(); ctx.arc(ptB.x, ptB.y, 7, 0, Math.PI*2); ctx.fill();
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#e74c3c"; ctx.fillText("A原料", ptA.x, ptA.y - 15);
+        ctx.fillStyle = "#2ecc71"; ctx.fillText("B原料 (100%)", ptB.x+10, ptB.y + 25);
+        ctx.fillStyle = "#3498db"; ctx.fillText("C原料", ptC.x, ptC.y + 20);
+        
+        ctx.save(); ctx.translate(230, 110); ctx.rotate(58 * Math.PI/180);
+        ctx.fillStyle = "#2ecc71"; ctx.fillText("對邊 B原料 (0%)", 0, 0); ctx.restore();
+
+        // 下方往右箭頭
+        ctx.strokeStyle = "#2ecc71"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(60, 255); ctx.lineTo(240, 255); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(240, 255); ctx.lineTo(230, 245); ctx.lineTo(230, 265); ctx.closePath(); ctx.fill();
+        ctx.fillText("比例遞減", 150, 275);
+    }
+
+    // 3. 繪製 C原料 (藍) 概念圖
+    function drawConceptC() {
+        const canvas = document.getElementById('conceptCanvasC');
+        const ctx = canvas.getContext('2d');
+        const ptA = {x: 150, y: 40}, ptB = {x: 40, y: 220}, ptC = {x: 260, y: 220};
+        
+        // 漸層：由右下往左上
+        let grad = ctx.createLinearGradient(ptC.x, ptC.y, (ptA.x+ptB.x)/2, (ptA.y+ptB.y)/2);
+        grad.addColorStop(0, "rgba(52, 152, 219, 0.7)");
+        grad.addColorStop(1, "rgba(52, 152, 219, 0)");
+        
+        ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath();
+        ctx.fillStyle = grad; ctx.fill();
+        ctx.strokeStyle = "#2c3e50"; ctx.lineWidth = 2; ctx.stroke();
+        
+        // 畫平行線與刻度
+        ctx.strokeStyle = "rgba(0,0,0,0.15)"; ctx.lineWidth = 1;
+        ctx.font = "bold 15px Arial"; ctx.fillStyle = "#3498db"; ctx.textAlign = "center";
+        for(let i=1; i<5; i++) {
+            let frac = i/5;
+            let xt = ptC.x + (ptA.x - ptC.x)*frac;
+            let yt = ptC.y + (ptA.y - ptC.y)*frac;
+            let xb = ptC.x + (ptB.x - ptC.x)*frac;
+            let yb = ptC.y + (ptB.y - ptC.y)*frac;
+            ctx.beginPath(); ctx.moveTo(xt, yt); ctx.lineTo(xb, yb); ctx.stroke();
+            ctx.fillText((100 - i*20), xb, yb + 20); // Labels on bottom
+        }
+        
+        // 畫左邊對邊虛線 (0%)
+        ctx.setLineDash([6, 4]); ctx.strokeStyle = "#3498db"; ctx.lineWidth = 3;
+        let vecAB = {x: ptB.x - ptA.x, y: ptB.y - ptA.y};
+        ctx.beginPath(); ctx.moveTo(ptA.x - vecAB.x*0.1, ptA.y - vecAB.y*0.1); ctx.lineTo(ptB.x + vecAB.x*0.1, ptB.y + vecAB.y*0.1); ctx.stroke(); ctx.setLineDash([]);
+        ctx.textAlign = "right"; ctx.fillText("0", ptA.x - 10, ptA.y + 5);
+
+        // 標示文字
+        ctx.beginPath(); ctx.arc(ptC.x, ptC.y, 7, 0, Math.PI*2); ctx.fill();
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#e74c3c"; ctx.fillText("A原料", ptA.x, ptA.y - 15);
+        ctx.fillStyle = "#2ecc71"; ctx.fillText("B原料", ptB.x, ptB.y + 20);
+        ctx.fillStyle = "#3498db"; ctx.fillText("C原料 (100%)", ptC.x-10, ptC.y + 25);
+        
+        ctx.save(); ctx.translate(70, 110); ctx.rotate(-58 * Math.PI/180);
+        ctx.fillText("對邊 C原料 (0%)", 0, 0); ctx.restore();
+
+        // 右側向上箭頭
+        ctx.strokeStyle = "#3498db"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(280, 205); ctx.lineTo(190, 55); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(190, 55); ctx.lineTo(185, 70); ctx.lineTo(200, 65); ctx.closePath(); ctx.fill();
+        ctx.save(); ctx.translate(245, 140); ctx.rotate(-58 * Math.PI/180);
+        ctx.fillText("比例遞減", 0, 0); ctx.restore();
+    }
+
+    // 4. 繪製 21點 與 66點 的網格圖
+    function drawGridCanvas(canvasId, divisions) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width, h = canvas.height;
+        
+        const ptA = {x: 160, y: 35};
+        const ptB = {x: 40, y: 240};
+        const ptC = {x: 280, y: 240};
+        
+        ctx.clearRect(0, 0, w, h);
+        ctx.strokeStyle = '#cccccc'; 
+        ctx.lineWidth = 1;
+
+        function getPt(a, b, c) {
+            return {
+                x: (a*ptA.x + b*ptB.x + c*ptC.x)/100,
+                y: (a*ptA.y + b*ptB.y + c*ptC.y)/100
+            };
+        }
+
+        // 畫網格線
+        for (let i = 1; i < divisions; i++) {
+            let frac = i * (100 / divisions);
+            let l1p1 = getPt(100-frac, frac, 0), l1p2 = getPt(100-frac, 0, frac);
+            let l2p1 = getPt(frac, 100-frac, 0), l2p2 = getPt(0, 100-frac, frac);
+            let l3p1 = getPt(frac, 0, 100-frac), l3p2 = getPt(0, frac, 100-frac);
+            
+            ctx.beginPath(); ctx.moveTo(l1p1.x, l1p1.y); ctx.lineTo(l1p2.x, l1p2.y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(l2p1.x, l2p1.y); ctx.lineTo(l2p2.x, l2p2.y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(l3p1.x, l3p1.y); ctx.lineTo(l3p2.x, l3p2.y); ctx.stroke();
+        }
+
+        // 畫外框
+        ctx.strokeStyle = '#2c3e50'; 
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath(); ctx.stroke();
+
+        // 畫交叉點
+        ctx.fillStyle = '#fca311';
+        let step = 100 / divisions;
+        for (let a = 100; a >= 0; a -= step) {
+            for (let b = (100 - a); b >= 0; b -= step) {
+                let c = 100 - a - b;
+                if (Math.abs(c) < 0.1) c = 0; // 修正浮點數誤差
+                let pt = getPt(a, b, c);
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, divisions===5 ? 5 : 3.5, 0, Math.PI*2);
+                ctx.fill();
+            }
+        }
+        
+        ctx.font = "bold 15px Arial";
+        ctx.fillStyle = "#e74c3c"; ctx.textAlign = "center"; ctx.fillText("A原料", ptA.x, ptA.y - 10);
+        ctx.fillStyle = "#2ecc71"; ctx.textAlign = "right"; ctx.fillText("B原料", ptB.x - 5, ptB.y + 15);
+        ctx.fillStyle = "#3498db"; ctx.textAlign = "left"; ctx.fillText("C原料", ptC.x + 5, ptC.y + 15);
+    }
+
+    // 啟動所有繪圖
+    window.onload = function() {
+        drawConceptA();
+        drawConceptB();
+        drawConceptC();
+        drawGridCanvas('canvas21', 5);
+        drawGridCanvas('canvas66', 10);
+    };
+</script>
 
 </body>
 </html>
