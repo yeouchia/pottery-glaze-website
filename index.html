@@ -191,16 +191,42 @@
 
         /* === 6. 下拉選單與子項目外觀設定 開始 === */
         .dropdown { position: relative; }
-        .dropdown-content { display: none; position: absolute; left: 0; top: 100%; padding-top: 8px; min-width: 220px; z-index: 999999; }
-        .share-dropdown-content { display: none; position: absolute; right: 0; top: 100%; padding-top: 8px; min-width: 180px; z-index: 999999; }
-        .share-dropdown-content.show { display: block; animation: fadeIn 0.2s ease; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        /* ★ 電腦版魔法：改用透明度、可見度與位移，創造極致絲滑的下拉浮現效果 */
+        .dropdown-content { 
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(15px); /* 初始位置稍微偏下 */
+            position: absolute; left: 0; top: 100%; padding-top: 8px; min-width: 220px; z-index: 999999; 
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); /* 頂級平滑曲線 */
+            pointer-events: none; /* 隱藏時不可點擊 */
+        }
+        
+        .share-dropdown-content { 
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(15px);
+            position: absolute; right: 0; top: 100%; padding-top: 8px; min-width: 180px; z-index: 999999; 
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
+        }
+        
+        .share-dropdown-content.show { 
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0); /* 滑動回歸原位 */
+            pointer-events: auto;
+        }
 
         .dropdown-inner { background-color: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
         
         @media (min-width: 1251px) {
-            .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.2s ease; }
+            .dropdown:hover .dropdown-content { 
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0); /* 滑動回歸原位 */
+                pointer-events: auto;
+            }
             .dropdown:hover .nav-btn i.fa-caret-down { transform: rotate(180deg); }
         }
 
@@ -272,25 +298,36 @@
             .nav-btn > div { display: flex; align-items: center; gap: 4vw !important; }
             .nav-btn i { font-size: 6.8vw !important; }
 
-            /* ★ 手機版子選單：手風琴絲滑展開 (Accordion) ★ */
+            /* ★ 手機版子選單：現代化 CSS Grid 絲滑手風琴展開 ★ */
             .dropdown { width: 100% !important; }
+            
             .dropdown-content { 
-                display: block !important; 
+                display: grid !important; 
+                grid-template-rows: 0fr; /* 魔法核心：收合狀態高度精準為 0 */
+                opacity: 0;
                 position: static !important; width: 100% !important; box-shadow: none !important;
-                max-height: 0; padding-top: 0 !important; padding-bottom: 0 !important; overflow: hidden; opacity: 0;
-                transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease, opacity 0.3s ease;
+                padding-top: 0 !important; padding-bottom: 0 !important;
+                transition: grid-template-rows 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+                pointer-events: none;
             }
+            
             .dropdown.mobile-open .dropdown-content { 
-                /* 留大一點空間給您新增的豐富選單 */
-                max-height: 800px; padding-top: 2.5vw !important; padding-bottom: 2.5vw !important; opacity: 1;
+                grid-template-rows: 1fr; /* 魔法核心：展開狀態自動完美貼合內容真實高度 */
+                opacity: 1;
+                pointer-events: auto;
             }
+            
             .dropdown.mobile-open .nav-btn i.fa-caret-down { transform: rotate(180deg); }
 
             .dropdown-inner {
+                min-height: 0; /* Grid 動畫必須條件 */
+                overflow: hidden; /* 隱藏超出範圍的內容，確保動畫邊緣銳利 */
                 background: transparent !important; box-shadow: none !important; border-radius: 10px !important;
-                overflow: visible !important; display: flex !important; flex-direction: column !important;
+                display: flex !important; flex-direction: column !important;
                 gap: 2.5vw !important; border: none !important;
+                padding-top: 2.5vw !important; padding-bottom: 2.5vw !important; /* 內距移至內部，防止動畫抖動 */
             }
+            
             .dropdown-item { border-radius: 12px !important; padding: 4.2vw 5.5vw !important; font-size: 5.2vw !important; font-weight: 800 !important; }
             .dropdown-item i { font-size: 6vw !important; }
 
