@@ -296,36 +296,44 @@
                 visibility: visible;
             }
 
-            /* ★ 修正 1：群組置中對齊，間距強力壓縮近 90% (改為 4px) ★ */
+            /* ★ 修正 1：群組間距極致壓縮 (3px)，讓按鈕彼此靠近 ★ */
             .tools-group { 
                 flex-direction: column !important; 
                 width: 100% !important; 
-                gap: 4px !important; 
+                gap: 3px !important; 
                 align-items: center !important; 
             }
 
-            /* ★ 修正 2：寬度縮減約 20% (設為 82%)，讓按鈕不會佔滿整個畫面 ★ */
+            /* ★ 修正 2：寬度再縮減約 20% (設為 76%)，兩側留白完美置中 ★ */
             .dropdown, .nav-btn.theme-purple { 
-                width: 82% !important; 
+                width: 76% !important; 
                 margin: 0 auto !important; 
             }
 
-            /* ★ 修正 3：五大主標題按鈕尺寸強力縮小 50%，消除膨脹感 ★ */
+            /* 五大主標題按鈕尺寸強力縮小，高度與字體變得細緻 */
             .nav-btn {
                 width: 100% !important; justify-content: space-between !important; 
-                padding: 8px 16px !important; /* 壓縮高度 */
-                font-size: 0.9rem !important; /* 縮小字體 */
+                padding: 8px 16px !important; 
+                font-size: 0.9rem !important; 
                 font-weight: 800 !important; 
                 border-radius: 8px !important; 
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+                transition: all 0.2s ease !important; /* 加快過渡速度 */
             }
             .nav-btn > div { display: flex; align-items: center; gap: 8px !important; }
             .nav-btn i { font-size: 1.05rem !important; }
 
-            /* ★ 修正 4：防重疊結界！強制取消手機版觸控時的放大與上浮特效 ★ */
+            /* 防重疊結界！強制取消手機版觸控時的放大特效 */
             .nav-btn:hover, .nav-btn:active {
                 transform: none !important;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+            }
+
+            /* ★ 修正 3：讓展開時的母標題與子選單「完全黏在一起」的融合魔法 ★ */
+            .dropdown.mobile-open .nav-btn {
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                box-shadow: none !important; /* 消除底部的陰影，達成無縫接合 */
             }
 
             /* 手機版子選單：現代化 CSS Grid 絲滑手風琴展開 */
@@ -341,41 +349,58 @@
                 pointer-events: none;
             }
             
-            /* ★ 修正 5：展開時底部自動產生 6px 安全距離，保證最後一個子標題不遮擋下一個大標題！ ★ */
+            /* ★ 修正 4：開啟時，底部產生 15px 間距，強力推開下一個大標題絕不重疊 ★ */
             .dropdown.mobile-open .dropdown-content { 
                 grid-template-rows: 1fr; 
                 opacity: 1;
                 visibility: visible !important; 
-                margin-bottom: 6px !important; /* 安全推擠距離 */
+                margin-bottom: 15px !important; 
                 pointer-events: auto;
+                /* 給整個展開的卡片加上整體陰影，質感滿分 */
+                filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
             }
             
             .dropdown.mobile-open .nav-btn i.fa-caret-down { transform: rotate(180deg); }
 
+            /* 修正 5：子選單容器內部去邊界，達成與母標題的完美一體成型 */
             .dropdown-inner {
                 min-height: 0; 
                 overflow: hidden; 
-                background: transparent !important; box-shadow: none !important; border-radius: 8px !important;
+                background: transparent !important; box-shadow: none !important; 
+                border-radius: 0 0 8px 8px !important; /* 只有下方有圓角 */
                 display: flex !important; flex-direction: column !important;
-                gap: 2px !important; border: none !important;
-                padding-top: 4px !important; padding-bottom: 4px !important; 
+                gap: 0 !important; /* 移除子項目間的縫隙，讓它們緊密相連 */
+                border: none !important;
+                padding-top: 0 !important; padding-bottom: 0 !important; 
             }
             
+            /* 子選單項目的平面化與分隔線設定 */
             .dropdown-item { 
-                border-radius: 8px !important; 
-                padding: 8px 16px !important; 
+                border-radius: 0 !important; /* 方形邊緣以利拼接 */
+                padding: 12px 16px !important; 
                 font-size: 0.85rem !important; 
                 font-weight: 800 !important; 
+                border-bottom: 1px solid rgba(0,0,0,0.05) !important; /* 微弱分隔線 */
+                border-left: 4px solid transparent !important; /* 保留色彩飾條空間 */
             }
+            .dropdown-item:last-child {
+                border-bottom: none !important; /* 最後一項不需要底線 */
+            }
+            
+            /* 將左側色彩飾條變細，更精緻 */
+            .dropdown-item.item-red { border-left-color: #c0392b !important; }
+            .dropdown-item.item-blue { border-left-color: #1565c0 !important; }
+            .dropdown-item.item-green { border-left-color: #2e7d32 !important; }
+            .dropdown-item.item-purple { border-left-color: #6a1b9a !important; }
+
             .dropdown-item i { font-size: 1rem !important; }
 
-            /* ★ 取消子選單手機版的點擊橫移動畫，防止畫面跳動 ★ */
+            /* 取消子選單手機版的點擊橫移動畫，防止畫面跳動 */
             .dropdown-item:hover, .dropdown-item:active {
                 padding-left: 16px !important; 
                 transform: none !important;
             }
 
-            /* ★ 修正 6：社群圖示區塊向上壓縮，確保一頁顯示完畢 ★ */
             .social-group {
                 border-left: none !important; border-top: 1px solid rgba(255,255,255,0.15) !important;
                 padding-left: 0 !important; margin-left: 0 !important; 
