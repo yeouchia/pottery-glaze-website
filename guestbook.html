@@ -430,11 +430,91 @@
         .loading, .status-msg { text-align: center; padding: 30px; color: #eee; /* 深色背景上改用淺色文字 */ }
         .loading i { color: var(--accent-color); }
 
+        /* =========================================================
+           ★ 手機版專屬響應式防爆框結界 (絕對不影響電腦版) ★
+           ========================================================= */
         @media (max-width: 768px) {
-            .total-badge { position: relative; right: auto; top: auto; transform: none; margin: 10px auto; width: fit-content; }
-            .toolbar { flex-direction: column; align-items: stretch; gap: 15px; }
-            .sort-buttons { justify-content: space-between; width: 100%; }
-            .sort-btn { flex: 1; justify-content: center; }
+            body { 
+                padding: 15px 10px; /* 縮小兩側留白 */
+                overflow-x: hidden; /* ★ 終極防護，禁止整個網頁左右滑動 ★ */
+            }
+            
+            /* ★ 核心修正：讓所有主要區塊的寬度計算往內縮，絕不撐破螢幕寬度 ★ */
+            .container, .form-area, .toolbar, .message-card, .search-box input, .page-size-select {
+                box-sizing: border-box !important;
+                width: 100% !important;
+            }
+            
+            .container { 
+                padding: 20px 15px !important; /* 縮小容器內距 */
+            }
+            
+            .form-area {
+                padding: 20px 15px !important;
+            }
+            
+            .toolbar { 
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 12px; 
+                padding: 15px !important; 
+            }
+            
+            .sort-buttons { 
+                justify-content: space-between; 
+                width: 100%; 
+                gap: 5px;
+            }
+            
+            .sort-btn { 
+                flex: 1; 
+                justify-content: center; 
+                padding: 6px 4px;
+                font-size: 0.85em;
+            }
+            
+            .total-badge { 
+                position: relative; 
+                right: auto; 
+                top: auto; 
+                transform: none; 
+                margin: 15px auto 0; 
+                width: fit-content; 
+            }
+            
+            .message-card { 
+                padding: 15px !important; /* 卡片內部空間縮小 */
+                gap: 12px !important; 
+            }
+            
+            .avatar-img { 
+                width: 45px; 
+                height: 45px; 
+            }
+            
+            .header { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 5px; 
+            }
+            
+            .text { 
+                word-wrap: break-word; 
+                word-break: break-word; /* 確保長串英文字或網址不會撐破卡片寬度 */
+            }
+            
+            .emoji-picker {
+                width: 100%;
+                max-width: 280px;
+                box-sizing: border-box;
+                right: 0;
+            }
+            
+            /* 手機版送出按鈕滿版寬度，更好點擊 */
+            button.submit-btn {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
