@@ -416,18 +416,22 @@
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .article-reader-overlay.show { transform: translateX(0); /* 滑入畫面 */ }
+        
         .reader-header {
-            height: 60px; background: var(--primary-color); color: white;
-            display: flex; align-items: center; padding: 0 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15); flex-shrink: 0; gap: 15px;
+            height: 44px; /* ★ 強力壓縮：從 60px 縮減到 44px (iOS 頂部欄標準高度) ★ */
+            background: var(--primary-color); color: white;
+            display: flex; align-items: center; padding: 0 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); flex-shrink: 0; gap: 10px;
         }
+        
         .reader-back-btn {
             background: rgba(255,255,255,0.1); border: none; color: white;
-            font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex;
-            align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; transition: all 0.2s ease;
+            font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex;
+            align-items: center; gap: 5px; padding: 5px 12px; border-radius: 15px; transition: all 0.2s ease;
         }
         .reader-back-btn:hover { background: rgba(255,255,255,0.25); transform: translateX(-3px); }
-        .reader-title { font-size: 1.1rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .reader-title { font-size: 0.95rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .reader-frame { flex-grow: 1; width: 100%; border: none; background: var(--bg-color); }
         /* === 5. App風格文章閱讀器 (滑動重疊層) 結束 === */
 
@@ -586,7 +590,6 @@
                     <h1>陶藝與釉藥調配</h1>
                     <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
                     
-                    <!-- 一鍵安裝 APP 按鈕 -->
                     <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
                         <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
                     </button>
@@ -617,19 +620,17 @@
                     <li><i class="fa-solid fa-chalkboard-user"></i> 賽格式與三角座標教學</li>
                 </ul>
             </div>
-
+            <!-- 其他三大功能卡片保持原樣呈現... -->
             <div class="feature-card card-video" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><div class="card-title">豐富影音課程</div></div>
                 <div class="card-desc">完整 YouTube 教學影片庫：</div>
                 <ul class="card-list"><li><i class="fa-solid fa-landmark"></i> 陶瓷歷史與文化介紹</li><li><i class="fa-solid fa-hands-holding"></i> 陶瓷拉坯製作過程</li><li><i class="fa-solid fa-paintbrush"></i> 釉色與裝飾技法</li><li><i class="fa-solid fa-vial"></i> 釉藥調配實務</li></ul>
             </div>
-
             <div class="feature-card card-lecture" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-solid fa-book-open-reader"></i></div><div class="card-title">陶釉教學講義</div></div>
                 <div class="card-desc">完整七大章節陶瓷專書文稿：</div>
                 <ul class="card-list"><li><i class="fa-solid fa-book-bookmark"></i> 陶瓷歷史與五大名窯</li><li><i class="fa-solid fa-cubes-stacked"></i> 14種常用釉藥原料解析</li><li><i class="fa-solid fa-shapes"></i> 三角座標與賽格爾式理論</li><li><i class="fa-solid fa-fire-burner"></i> 窯爐操作與安全規範</li></ul>
             </div>
-
             <div class="feature-card card-life" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-solid fa-heart"></i></div><div class="card-title">陶藝生活與靈感</div></div>
                 <div class="card-desc">關注 FB 與 IG 獲得創作養分：</div>
@@ -820,7 +821,6 @@
 
     <script>
         // --- ★ 頁面捲動位置雙重保險記憶功能 ★ ---
-        // 若使用者不小心點擊了主選單重整頁面，這裡會幫忙記住並還原滾動位置
         window.addEventListener('beforeunload', () => {
             sessionStorage.setItem('welcomeScrollPosition', document.documentElement.scrollTop || document.body.scrollTop);
         });
@@ -828,7 +828,6 @@
         window.addEventListener('load', () => {
             const savedScroll = sessionStorage.getItem('welcomeScrollPosition');
             if (savedScroll) {
-                // ★ 這裡加上 behavior: 'smooth' 並且延遲 0.15 秒，創造絲滑的下降感！
                 setTimeout(() => { 
                     window.scrollTo({
                         top: parseInt(savedScroll),
@@ -843,25 +842,22 @@
         function openArticle(url, title, isReady) {
             playClick();
             
-            // 處理尚未建置的文章
             if (!isReady) {
                 alert('🚧 內容建置中：這篇精彩的教學文章黃老師正在趕工撰寫中，敬請期待！\n\n（💡 提示：未來將檔案存入 book 資料夾後，請至 html 將 false 改為 true 即可直接連線）');
                 return;
             }
 
-            // 開啟閱讀層
             document.getElementById('readerTitle').innerText = title;
             document.getElementById('readerFrame').src = url;
             document.getElementById('articleReader').classList.add('show');
-            document.body.style.overflow = 'hidden'; // 鎖住背景滑動
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeArticle() {
             playClick();
             document.getElementById('articleReader').classList.remove('show');
-            document.body.style.overflow = ''; // 恢復背景滑動
+            document.body.style.overflow = ''; 
             
-            // 等待滑動動畫結束後清空 iframe，避免聽到殘留音效
             setTimeout(() => { document.getElementById('readerFrame').src = ''; }, 400);
         }
 
@@ -891,7 +887,7 @@
             }
         }
 
-        // --- 本地專屬音效播放系統 (不依賴跨框架) ---
+        // --- 本地專屬音效播放系統 ---
         var hoverAudio = document.getElementById("hoverSound");
         var clickAudio = document.getElementById("clickSound");
 
@@ -936,7 +932,7 @@
         }
 
         function copyCurrentLink() {
-            navigator.clipboard.writeText(getSiteUrl()).then(() => { alert('✨ 網站網址已複製！快去分享給陶藝好友吧！'); }).catch(() => { alert('複製失敗，請手動複製網址。'); });
+            navigator.clipboard.writeText(getSiteUrl()).then(() => { alert('✨ 網站網址已複製！快去分享給陶藝好友吧！'); }).catch(() => { alert('複製失敗，請手手複製網址。'); });
         }
 
         function showInstallGuide() {
