@@ -246,6 +246,101 @@
             text-align: center;
         }
 
+        /* ==========================================
+           ★ 新增：依主題開始探索 (Topic Exploration) ★
+           ========================================== */
+        .topic-section {
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .topic-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-header h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .topic-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: rgba(252, 163, 17, 0.3);
+        }
+
+        .topic-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-card h3 i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .topic-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .topic-action {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #d35400; /* 使用紅土色系點綴 */
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .topic-card:hover .topic-action {
+            gap: 10px; /* Hover 時箭頭向右微移 */
+        }
+
         .bottom-hint {
             background: #fff8e7;
             color: #b45309;
@@ -333,12 +428,21 @@
             .card-list { gap: 3.8vw !important; }
             .card-list li { font-size: 5vw !important; font-weight: 700 !important; gap: 4vw !important; }
             .card-list li i { font-size: 5.8vw !important; width: 7vw !important; }
+
+            /* 手機版：探索主題網格轉換為 1 欄直排 */
+            .topic-grid { grid-template-columns: 1fr !important; gap: 4vw !important; }
+            .topic-header h2 { font-size: 6vw !important; }
+            .topic-header p { font-size: 4vw !important; }
+            .topic-card { padding: 6vw !important; border-radius: 16px !important; }
+            .topic-card h3 { font-size: 5.2vw !important; margin-bottom: 3vw !important; }
+            .topic-card p { font-size: 4.2vw !important; margin-bottom: 4vw !important; }
+            .topic-action { font-size: 4.2vw !important; }
+
             .bottom-hint { font-size: 4.2vw !important; padding: 3.5vw 5vw !important; border-radius: 50px !important; }
         }
         /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --結束 */
     </style>
 </head>
-<!-- ★ 在 body 加上點擊解鎖音效 ★ -->
 <body onclick="unlockAudio()">
 
     <div class="welcome-wrapper">
@@ -360,7 +464,6 @@
             <div class="banner-right">
                 <div class="share-title"><i class="fa-solid fa-share-nodes"></i> 分享給好友</div>
                 <div class="share-buttons">
-                    <!-- 圓形浮動分享按鈕 -->
                     <button onclick="playClickSound(); shareToFB()" onmouseenter="playHoverSound()" class="share-circle-btn fb" title="分享到 Facebook"><i class="fa-brands fa-facebook-f"></i></button>
                     <button onclick="playClickSound(); shareToLine()" onmouseenter="playHoverSound()" class="share-circle-btn line" title="分享到 LINE"><i class="fa-brands fa-line"></i></button>
                     <button onclick="playClickSound(); copyCurrentLink()" onmouseenter="playHoverSound()" class="share-circle-btn copy" title="複製連結"><i class="fa-solid fa-link"></i></button>
@@ -431,8 +534,60 @@
             </div>
         </div>
 
+        <!-- ★ 全新板塊：依主題開始探索 ★ -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <h2>依主題開始探索</h2>
+                <p>從實際需求出發，快速啟動您的專業計算與陶釉學習旅程。</p>
+            </div>
+            
+            <div class="topic-grid">
+                <!-- 卡片 1 -->
+                <a href="./yuanliao/index.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <h3><i class="fa-solid fa-flask"></i> 原料轉釉式</h3>
+                    <p>透過配方重量百分比，快速換算出精確的賽格爾分子式，了解釉藥化學組成。</p>
+                    <div class="topic-action">開啟計算器 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 2 -->
+                <a href="./youzhi/index.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <h3><i class="fa-solid fa-calculator"></i> 釉式轉原料</h3>
+                    <p>利用賽格爾分子式目標，逆向推導並精準計算出實際調配所需的原料重量。</p>
+                    <div class="topic-action">開啟計算器 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 3 -->
+                <a href="./jiaoxue/triaxial_basic.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <h3><i class="fa-solid fa-chalkboard-user"></i> 三角座標基礎教學</h3>
+                    <p>學習如何建立三種原料的基礎座標圖，透過系統化尋找理想的釉藥配方與色彩漸變。</p>
+                    <div class="topic-action">閱讀講義 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 4 -->
+                <a href="./jiaoxue/triaxial_simulator.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <h3><i class="fa-solid fa-shapes"></i> 三角座標計算工具</h3>
+                    <p>專為實驗設計的線上模擬器，一鍵即可自動生成完整的 21 點或 66 點試片配方表。</p>
+                    <div class="topic-action">開啟模擬器 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 5 -->
+                <a href="./lecture.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                    <h3><i class="fa-solid fa-book-bookmark"></i> 教學講義~陶藝與釉藥</h3>
+                    <p>涵蓋七大章節的豐富教材，從歷史名窯到各類原料特性，深入了解陶瓷工藝核心。</p>
+                    <div class="topic-action">查閱講義 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 6 (預留) -->
+                <a href="#" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound(); alert('內容準備中，敬請期待！'); return false;">
+                    <h3><i class="fa-solid fa-feather"></i> 何謂釉藥、釉的本質？</h3>
+                    <p>深入淺出解析釉藥的玻璃質原理與三大核心元素結構，建立扎實的基礎知識。</p>
+                    <div class="topic-action">閱讀文章 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+            </div>
+        </div>
+
         <div class="bottom-hint" onmouseenter="playHoverSound()">
-            <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
+            <i class="fa-solid fa-arrow-up"></i> 歡迎您來到陶藝與釉藥調配，請開啟您感興趣的功能
         </div>
 
     </div>
