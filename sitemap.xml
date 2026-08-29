@@ -3,7 +3,7 @@
   <!-- 首頁 (最重要的頁面) -->
   <url>
     <loc>https://pottery-glaze.vercel.app/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,15 +11,15 @@
   <!-- 歡迎頁面 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/welcome.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- 新增：陶釉教學講義 -->
+  <!-- 陶釉教學講義 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/lecture.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -27,7 +27,7 @@
   <!-- 施工中頁面 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/welcome-2.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -35,64 +35,108 @@
   <!-- 原料轉釉式 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/yuanliao/index.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- 釉式轉原料 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/youzhi/index.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- 教學頁面：三角座標 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/jiaoxue/sanjiao.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.8</priority>
   </url>
 
   <!-- 教學頁面：賽格式 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/jiaoxue/sege.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.8</priority>
   </url>
 
   <!-- 教學頁面：原料廠商 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/info/suppliers.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.7</priority>
   </url>
 
-  <!-- 新增：留言交流板 -->
+  <!-- 留言交流板 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/guestbook.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.7</priority>
   </url>
 
-  <!-- 新增：電腦版影像編輯器 -->
+  <!-- 電腦版影像編輯器 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/photo_edit/photo_edit.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.6</priority>
   </url>
 
-  <!-- 新增：手機版影像編輯器 -->
+  <!-- 手機版影像編輯器 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/photo_edit/phone_photo_edit.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.6</priority>
   </url>
 
-  <!-- 新增：天堂小遊戲 -->
+  <!-- 天堂小遊戲 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/game/index.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.4</priority>
+  </url>
+
+  <!-- ========================================== -->
+  <!-- ======= 新增：探索陶藝知識文章區塊 ======= -->
+  <!-- ========================================== -->
+  
+  <!-- 陶土與瓷土怎麼選？ -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/book/buy_clay.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 為什麼作品乾了總會裂開？ -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/book/dry_crack.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 什麼是素燒與釉燒？ -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/book/bisque_glaze.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 釉藥三大元素 -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/book/glaze_elements.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 釉藥的奧秘~三角座標 -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/book/triaxial_mystery.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
