@@ -13,8 +13,13 @@
         :root {
             --primary-color: #14213d;
             --accent-color: #fca311;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
+            --bg-color: #f8fafc; /* 背景保持不變 */
+            
+            /* === 修改卡片區塊底色對比度 開始 === */
+            /* 將原本純白(#ffffff)加深為莫蘭迪淺灰藍，讓卡片比背景更深，凸顯立體層次 */
+            --card-bg: #eef2f6; 
+            /* === 修改卡片區塊底色對比度 結束 === */
+            
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
@@ -53,7 +58,9 @@
             width: 100%;
             border-radius: 16px;
             padding: 30px 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            /* === 增強陰影對比 開始 === */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* 稍微加深陰影配合變深的底色 */
+            /* === 增強陰影對比 結束 === */
             border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
@@ -165,7 +172,7 @@
             background: var(--card-bg);
             border-radius: 16px;
             padding: 25px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* 陰影微調配合深底色 */
             border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
@@ -193,6 +200,7 @@
             margin-bottom: 16px;
         }
 
+        /* === 修改小圖示底色以融合新卡片底色 開始 === */
         .card-icon {
             font-size: 1.5rem;
             width: 42px;
@@ -201,13 +209,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f1f5f9;
+            background: #ffffff; /* 讓圖示底色變白，與偏深的卡片底色產生凸顯層次 */
         }
-
-        .card-calc .card-icon { color: #fca311; background: #fff8e7; }
-        .card-video .card-icon { color: #ef4444; background: #fee2e2; }
-        .card-lecture .card-icon { color: #2ec4b6; background: #e0f2f1; }
-        .card-life .card-icon { color: #8b5cf6; background: #f3e8ff; }
+        /* === 修改小圖示底色以融合新卡片底色 結束 === */
 
         .card-title {
             font-size: 1.2rem;
@@ -247,7 +251,7 @@
         }
 
         /* ==========================================
-           ★ 新增：依主題開始探索 (Topic Exploration) ★
+           ★ 依主題開始探索 (Topic Exploration) ★
            ========================================== */
         .topic-section {
             width: 100%;
@@ -285,12 +289,12 @@
         }
 
         .topic-card {
-            background: var(--card-bg);
+            background: var(--card-bg); /* 套用新加深的卡片底色 */
             border-radius: 12px;
             padding: 24px;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06); /* 陰影微調配合深底色 */
             border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
@@ -300,8 +304,8 @@
 
         .topic-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            border-color: rgba(252, 163, 17, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: rgba(252, 163, 17, 0.4);
         }
 
         .topic-card h3 {
@@ -534,7 +538,9 @@
             </div>
         </div>
 
-        <!-- ★ 全新板塊：依主題開始探索 ★ -->
+        <!-- ======================================================== -->
+        <!-- === 新增：依主題開始探索 (Topic Exploration) 區塊 開始 === -->
+        <!-- ======================================================== -->
         <div class="topic-section">
             <div class="topic-header">
                 <h2>依主題開始探索</h2>
@@ -542,49 +548,70 @@
             </div>
             
             <div class="topic-grid">
-                <!-- 卡片 1 -->
+                <!-- 原有 6 個主題卡片... -->
                 <a href="./yuanliao/index.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
                     <h3><i class="fa-solid fa-flask"></i> 原料轉釉式</h3>
                     <p>透過配方重量百分比，快速換算出精確的賽格爾分子式，了解釉藥化學組成。</p>
                     <div class="topic-action">開啟計算器 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
 
-                <!-- 卡片 2 -->
                 <a href="./youzhi/index.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
                     <h3><i class="fa-solid fa-calculator"></i> 釉式轉原料</h3>
                     <p>利用賽格爾分子式目標，逆向推導並精準計算出實際調配所需的原料重量。</p>
                     <div class="topic-action">開啟計算器 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
 
-                <!-- 卡片 3 -->
                 <a href="./jiaoxue/triaxial_basic.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
                     <h3><i class="fa-solid fa-chalkboard-user"></i> 三角座標基礎教學</h3>
                     <p>學習如何建立三種原料的基礎座標圖，透過系統化尋找理想的釉藥配方與色彩漸變。</p>
                     <div class="topic-action">閱讀講義 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
 
-                <!-- 卡片 4 -->
                 <a href="./jiaoxue/triaxial_simulator.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
                     <h3><i class="fa-solid fa-shapes"></i> 三角座標計算工具</h3>
                     <p>專為實驗設計的線上模擬器，一鍵即可自動生成完整的 21 點或 66 點試片配方表。</p>
                     <div class="topic-action">開啟模擬器 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
 
-                <!-- 卡片 5 -->
                 <a href="./lecture.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound()">
                     <h3><i class="fa-solid fa-book-bookmark"></i> 教學講義~陶藝與釉藥</h3>
                     <p>涵蓋七大章節的豐富教材，從歷史名窯到各類原料特性，深入了解陶瓷工藝核心。</p>
                     <div class="topic-action">查閱講義 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
 
-                <!-- 卡片 6 (預留) -->
                 <a href="#" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound(); alert('內容準備中，敬請期待！'); return false;">
                     <h3><i class="fa-solid fa-feather"></i> 何謂釉藥、釉的本質？</h3>
                     <p>深入淺出解析釉藥的玻璃質原理與三大核心元素結構，建立扎實的基礎知識。</p>
                     <div class="topic-action">閱讀文章 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
+
+                <!-- === 新增 3 個話題探索卡片 開始 === -->
+                <!-- 卡片 7 -->
+                <a href="#" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound(); alert('內容準備中，敬請期待！'); return false;">
+                    <h3><i class="fa-solid fa-hands"></i> 教你手拉坯定中心快速學會</h3>
+                    <p>掌握拉坯機上的定中心訣竅，透過正確的姿勢與施力點，讓陶土乖乖聽話，為後續成型打好基礎。</p>
+                    <div class="topic-action">觀看教學 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 8 -->
+                <a href="#" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound(); alert('內容準備中，敬請期待！'); return false;">
+                    <h3><i class="fa-solid fa-seedling"></i> 學陶可以為你帶來什麼？</h3>
+                    <p>從泥土的觸感中找回內心的寧靜，釋放日常生活的壓力，並在手作過程中培養專注力與生活美學。</p>
+                    <div class="topic-action">閱讀文章 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <!-- 卡片 9 -->
+                <a href="guestbook.html" class="topic-card" onmouseenter="playHoverSound()" onclick="playClickSound();">
+                    <h3><i class="fa-solid fa-lightbulb"></i> 話題探索中~~!你想知道什麼呢？</h3>
+                    <p>還有什麼想了解的陶藝或釉藥知識嗎？歡迎前往留言板告訴我們您學習上遇到的瓶頸，我們將為您策劃專屬內容！</p>
+                    <div class="topic-action">前往許願 <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <!-- === 新增 3 個話題探索卡片 結束 === -->
             </div>
         </div>
+        <!-- ======================================================== -->
+        <!-- === 新增：依主題開始探索 (Topic Exploration) 區塊 結束 === -->
+        <!-- ======================================================== -->
 
         <div class="bottom-hint" onmouseenter="playHoverSound()">
             <i class="fa-solid fa-arrow-up"></i> 歡迎您來到陶藝與釉藥調配，請開啟您感興趣的功能
