@@ -10,33 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ======================================================== */
-        /* === ★ 專屬顏色控制面板：您可以在這裡手動修改顏色測試 ★ === */
-        /* ======================================================== */
         :root {
-            /* 1. 網頁最底層的「大背景顏色」 (與下拉選單相同的淡琥珀/卡其色) */
-            --bg-color: #fff8e7; 
-            
-            /* === 修改卡片區塊底色對比度 開始 === */
-            /* 2. 所有「文字區塊、卡片、頂部橫幅」的背景顏色 (改為純白，讓畫面更乾淨明亮) */
-            --card-bg: #ffffff;  
-            /* === 修改卡片區塊底色對比度 結束 === */
-            
-            /* 3. 網站的「品牌點綴色」 (琥珀金：控制各種 Icon 顏色、卡片左側邊框、按鈕漸層色) */
-            --accent-color: #fca311;
-            
-            /* 4. 網站的「主要深色」 (深海軍藍：控制大標題文字、安裝按鈕的文字顏色) */
             --primary-color: #14213d;
-            
-            /* 5. 一般「內文」的主要顏色 (深灰黑色：控制卡片內的清單文字等) */
+            --accent-color: #fca311;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
             --text-main: #1e293b;
-            
-            /* 6. 「次要說明文字」的顏色 (淺灰藍色：控制卡片內的描述小字、副標題) */
             --text-muted: #64748b;
         }
-        /* ======================================================== */
-        /* === 專屬顏色控制面板 結束 ================================ */
-        /* ======================================================== */
 
         * {
             box-sizing: border-box;
@@ -48,7 +29,7 @@
         html, body {
             height: 100%;
             font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color); /* 自動套用卡其背景色 */
+            background-color: var(--bg-color);
             color: var(--text-main);
             overflow-y: auto;
             -webkit-text-size-adjust: 100% !important;
@@ -68,11 +49,11 @@
 
         /* --- 頂部 Banner 區塊 --- */
         .top-banner {
-            background: var(--card-bg); /* 自動套用純白卡片底色 */
+            background: var(--card-bg);
             width: 100%;
             border-radius: 16px;
             padding: 30px 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* 白底配輕柔陰影 */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
@@ -88,7 +69,7 @@
 
         .banner-icon {
             font-size: 3.8rem;
-            color: var(--accent-color);
+            color: #fca311;
         }
 
         .banner-text h1 {
@@ -143,7 +124,7 @@
             gap: 8px;
         }
 
-        .share-title i { color: var(--accent-color); }
+        .share-title i { color: #fca311; }
 
         .share-buttons {
             display: flex;
@@ -181,7 +162,7 @@
         }
 
         .feature-card {
-            background: var(--card-bg); /* 自動套用純白卡片底色 */
+            background: var(--card-bg);
             border-radius: 16px;
             padding: 25px 20px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -200,7 +181,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
-        /* 四大功能卡片的左側邊框顏色 */
         .feature-card.card-calc { border-left-color: #fca311; }
         .feature-card.card-video { border-left-color: #ef4444; }
         .feature-card.card-lecture { border-left-color: #2ec4b6; }
@@ -221,7 +201,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f1f5f9; /* 讓圖示背後有一點點微灰色，在白卡片上能跳出來 */
+            background: #f1f5f9;
         }
 
         .card-calc .card-icon { color: #fca311; background: #fff8e7; }
@@ -256,7 +236,7 @@
             gap: 10px;
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--text-main);
+            color: #334155;
         }
 
         .card-list li i {
@@ -266,104 +246,8 @@
             text-align: center;
         }
 
-        /* ==========================================
-           ★ 依主題開始探索 (Topic Exploration) ★
-           ========================================== */
-        .topic-section {
-            width: 100%;
-            margin-top: 20px;
-            margin-bottom: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .topic-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .topic-header h2 {
-            font-size: 1.6rem;
-            color: var(--primary-color);
-            font-weight: 800;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .topic-header p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .topic-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            width: 100%;
-        }
-
-        .topic-card {
-            background: var(--card-bg); /* 自動套用純白卡片底色 */
-            border-radius: 12px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .topic-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            border-color: rgba(252, 163, 17, 0.4);
-        }
-
-        .topic-card h3 {
-            font-size: 1.15rem;
-            color: var(--primary-color);
-            font-weight: 800;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .topic-card h3 i {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        .topic-card p {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .topic-action {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #d35400; /* 紅土色系點綴箭頭文字 */
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: gap 0.2s;
-        }
-
-        .topic-card:hover .topic-action {
-            gap: 10px; 
-        }
-
         .bottom-hint {
-            /* 底部提示條，固定使用亮眼配色 */
-            background: #ffffff; 
+            background: #fff8e7;
             color: #b45309;
             padding: 12px 24px;
             border-radius: 30px;
@@ -437,33 +321,73 @@
             .share-buttons { gap: 4vw !important; }
             .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
-            .cards-grid { grid-template-columns: 1fr !important; gap: 5vw !important; margin-bottom: 6vw !important; }
-            .feature-card {
-                padding: 6.5vw 6vw !important; border-radius: 18px !important; border-left-width: 10px !important;
-                box-shadow: 0 4px 18px rgba(0,0,0,0.08) !important;
+            /* ★ 手機版四大功能卡片：2 欄並排極致壓縮版 ★ */
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important; /* 強制雙欄排列 */
+                gap: 12px !important; /* 改用固定像素，保持間距精緻 */
+                margin-bottom: 25px !important;
             }
-            .card-header { gap: 4.5vw !important; margin-bottom: 4.5vw !important; }
-            .card-icon { font-size: 7.8vw !important; width: 15vw !important; height: 15vw !important; border-radius: 14px !important; }
-            .card-title { font-size: 6.4vw !important; font-weight: 800 !important; }
-            .card-desc { font-size: 4.8vw !important; line-height: 1.8 !important; margin-bottom: 4.5vw !important; }
-            .card-list { gap: 3.8vw !important; }
-            .card-list li { font-size: 5vw !important; font-weight: 700 !important; gap: 4vw !important; }
-            .card-list li i { font-size: 5.8vw !important; width: 7vw !important; }
 
-            /* 手機版：探索主題網格轉換為 1 欄直排 */
-            .topic-grid { grid-template-columns: 1fr !important; gap: 4vw !important; }
-            .topic-header h2 { font-size: 6vw !important; }
-            .topic-header p { font-size: 4vw !important; }
-            .topic-card { padding: 6vw !important; border-radius: 16px !important; }
-            .topic-card h3 { font-size: 5.2vw !important; margin-bottom: 3vw !important; }
-            .topic-card p { font-size: 4.2vw !important; margin-bottom: 4vw !important; }
-            .topic-action { font-size: 4.2vw !important; }
+            .feature-card {
+                padding: 16px 12px !important; /* 壓縮留白 */
+                border-radius: 14px !important;
+                border-left-width: 5px !important; /* 左側飾條變細 */
+                box-shadow: 0 3px 12px rgba(0,0,0,0.06) !important;
+            }
+
+            .card-header {
+                gap: 8px !important;
+                margin-bottom: 12px !important;
+                /* 為了在雙欄中不擁擠，將圖示與標題改為「上下排列」，更有原生 APP 質感 */
+                flex-direction: column !important; 
+                align-items: flex-start !important;
+            }
+
+            .card-icon {
+                font-size: 1.2rem !important;
+                width: 34px !important;
+                height: 34px !important;
+                border-radius: 8px !important;
+            }
+
+            .card-title {
+                font-size: 0.95rem !important; /* 約 15px */
+                font-weight: 800 !important;
+                letter-spacing: -0.3px !important;
+            }
+
+            .card-desc {
+                font-size: 0.75rem !important; /* 約 12px */
+                line-height: 1.4 !important;
+                margin-bottom: 12px !important;
+                letter-spacing: -0.2px !important;
+            }
+
+            .card-list {
+                gap: 6px !important;
+            }
+
+            .card-list li {
+                font-size: 0.75rem !important; /* 約 12px */
+                font-weight: 700 !important;
+                gap: 6px !important;
+                align-items: flex-start !important; /* 文字換行時對齊上方 */
+                line-height: 1.3 !important;
+                letter-spacing: -0.2px !important;
+            }
+
+            .card-list li i {
+                font-size: 0.8rem !important;
+                width: 14px !important;
+                margin-top: 2px !important; /* 圖示微調對齊文字 */
+            }
 
             .bottom-hint { font-size: 4.2vw !important; padding: 3.5vw 5vw !important; border-radius: 50px !important; }
         }
         /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --結束 */
     </style>
 </head>
+<!-- ★ 在 body 加上點擊解鎖音效 ★ -->
 <body onclick="unlockParentAudio()">
 
     <div class="welcome-wrapper">
@@ -556,79 +480,8 @@
             </div>
         </div>
 
-        <!-- ======================================================== -->
-        <!-- === 新增：依主題開始探索 (Topic Exploration) 區塊 開始 === -->
-        <!-- ======================================================== -->
-        <div class="topic-section">
-            <div class="topic-header">
-                <h2>依主題開始探索</h2>
-                <p>從實際需求出發，快速啟動您的專業計算與陶釉學習旅程。</p>
-            </div>
-            
-            <div class="topic-grid">
-                <a href="./yuanliao/index.html" class="topic-card" onmouseenter="playHover()" onclick="playClick()">
-                    <h3><i class="fa-solid fa-flask"></i> 原料轉釉式</h3>
-                    <p>透過配方重量百分比，快速換算出精確的賽格爾分子式，了解釉藥化學組成。</p>
-                    <div class="topic-action">開啟計算器 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="./youzhi/index.html" class="topic-card" onmouseenter="playHover()" onclick="playClick()">
-                    <h3><i class="fa-solid fa-calculator"></i> 釉式轉原料</h3>
-                    <p>利用賽格爾分子式目標，逆向推導並精準計算出實際調配所需的原料重量。</p>
-                    <div class="topic-action">開啟計算器 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="./jiaoxue/triaxial_basic.html" class="topic-card" onmouseenter="playHover()" onclick="playClick()">
-                    <h3><i class="fa-solid fa-chalkboard-user"></i> 三角座標基礎教學</h3>
-                    <p>學習如何建立三種原料的基礎座標圖，透過系統化尋找理想的釉藥配方與色彩漸變。</p>
-                    <div class="topic-action">閱讀講義 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="./jiaoxue/triaxial_simulator.html" class="topic-card" onmouseenter="playHover()" onclick="playClick()">
-                    <h3><i class="fa-solid fa-shapes"></i> 三角座標計算工具</h3>
-                    <p>專為實驗設計的線上模擬器，一鍵即可自動生成完整的 21 點或 66 點試片配方表。</p>
-                    <div class="topic-action">開啟模擬器 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="./lecture.html" class="topic-card" onmouseenter="playHover()" onclick="playClick()">
-                    <h3><i class="fa-solid fa-book-bookmark"></i> 教學講義~陶藝與釉藥</h3>
-                    <p>涵蓋七大章節的豐富教材，從歷史名窯到各類原料特性，深入了解陶瓷工藝核心。</p>
-                    <div class="topic-action">查閱講義 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="#" class="topic-card" onmouseenter="playHover()" onclick="playClick(); alert('內容準備中，敬請期待！'); return false;">
-                    <h3><i class="fa-solid fa-feather"></i> 何謂釉藥、釉的本質？</h3>
-                    <p>深入淺出解析釉藥的玻璃質原理與三大核心元素結構，建立扎實的基礎知識。</p>
-                    <div class="topic-action">閱讀文章 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <!-- === 新增 3 個話題探索卡片 開始 === -->
-                <a href="#" class="topic-card" onmouseenter="playHover()" onclick="playClick(); alert('內容準備中，敬請期待！'); return false;">
-                    <h3><i class="fa-solid fa-hands"></i> 教你手拉坯定中心快速學會</h3>
-                    <p>掌握拉坯機上的定中心訣竅，透過正確的姿勢與施力點，讓陶土乖乖聽話，為後續成型打好基礎。</p>
-                    <div class="topic-action">觀看教學 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="#" class="topic-card" onmouseenter="playHover()" onclick="playClick(); alert('內容準備中，敬請期待！'); return false;">
-                    <h3><i class="fa-solid fa-seedling"></i> 學陶可以為你帶來什麼？</h3>
-                    <p>從泥土的觸感中找回內心的寧靜，釋放日常生活的壓力，並在手作過程中培養專注力與生活美學。</p>
-                    <div class="topic-action">閱讀文章 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-
-                <a href="guestbook.html" class="topic-card" onmouseenter="playHover()" onclick="playClick();">
-                    <h3><i class="fa-solid fa-lightbulb"></i> 話題探索中~~!你想知道什麼呢？</h3>
-                    <p>還有什麼想了解的陶藝或釉藥知識嗎？歡迎前往留言板告訴我們您學習上遇到的瓶頸，我們將為您策劃專屬內容！</p>
-                    <div class="topic-action">前往許願 <i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-                <!-- === 新增 3 個話題探索卡片 結束 === -->
-            </div>
-        </div>
-        <!-- ======================================================== -->
-        <!-- === 新增：依主題開始探索 (Topic Exploration) 區塊 結束 === -->
-        <!-- ======================================================== -->
-
         <div class="bottom-hint" onmouseenter="playHover()">
-            <i class="fa-solid fa-arrow-up"></i> 歡迎您來到陶藝與釉藥調配，請開啟您感興趣的功能
+            <i class="fa-solid fa-arrow-up"></i> 請使用上方導航列，開啟您感興趣的功能
         </div>
 
     </div>
@@ -676,6 +529,30 @@
                 var p = clickAudio.play();
                 if (p !== undefined) { p.catch(() => {}); }
             }
+        }
+
+        function playHover() {
+            try {
+                if (window.parent && typeof window.parent.playHoverSound === 'function') {
+                    window.parent.playHoverSound();
+                } else { playHoverSound(); }
+            } catch (e) { playHoverSound(); }
+        }
+
+        function playClick() {
+            try {
+                if (window.parent && typeof window.parent.playClickSound === 'function') {
+                    window.parent.playClickSound();
+                } else { playClickSound(); }
+            } catch (e) { playClickSound(); }
+        }
+
+        function unlockParentAudio() {
+            try {
+                if (window.parent && typeof window.parent.unlockAudio === 'function') {
+                    window.parent.unlockAudio();
+                } else { unlockAudio(); }
+            } catch (e) { unlockAudio(); }
         }
 
         // --- 分享功能 ---
@@ -759,6 +636,5 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
     </script>
-    <!-- 7. 直開 FB / LINE 與專屬音效橋樑 JavaScript --結束 -->
 </body>
 </html>
