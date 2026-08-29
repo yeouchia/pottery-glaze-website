@@ -256,18 +256,15 @@
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 5px; }
 
         @media (max-width: 1250px) {
-            /* ★ 修正 1：縮減頂部 Header 的邊距，防止按鈕被推到螢幕外 ★ */
             header { padding: 0 15px !important; }
             .header-bg-overlay { display: none !important; }
             
-            /* ★ 修正 2：確保漢堡選單按鈕絕對不會被擠壓消失 ★ */
             .mobile-menu-btn { 
                 display: block !important; 
                 flex-shrink: 0; 
                 margin-right: -5px; 
             }
             
-            /* ★ 修正 3：防止 Logo 區域文字過長擠爆畫面 ★ */
             .brand { 
                 margin-right: auto !important; 
                 max-width: calc(100% - 50px); 
@@ -285,7 +282,7 @@
                 left: 0 !important; right: 0 !important; bottom: 0 !important;
                 width: 100% !important; height: auto !important; max-height: calc(100vh - var(--header-height)) !important;
                 background-color: #14213d !important; flex-direction: column !important; justify-content: flex-start !important;
-                padding: 20px 20px 100px 20px !important; overflow-y: scroll !important; 
+                padding: 15px 20px 80px 20px !important; overflow-y: scroll !important; 
                 -webkit-overflow-scrolling: touch !important; touch-action: pan-y !important;
                 box-shadow: -5px 0 25px rgba(0,0,0,0.5) !important; z-index: 99999 !important;
                 
@@ -299,24 +296,39 @@
                 visibility: visible;
             }
 
-            /* ★ 修正 4：消除無效間距，將標題間距大幅縮小近 90% ★ */
-            .tools-group { flex-direction: column !important; width: 100% !important; gap: 6px !important; align-items: stretch !important; }
+            /* ★ 修正 1：群組置中對齊，間距強力壓縮近 90% (改為 4px) ★ */
+            .tools-group { 
+                flex-direction: column !important; 
+                width: 100% !important; 
+                gap: 4px !important; 
+                align-items: center !important; 
+            }
 
-            /* ★ 修正 5：五大主標題按鈕尺寸強力縮小，高度與字體變得細緻 ★ */
+            /* ★ 修正 2：寬度縮減約 20% (設為 82%)，讓按鈕不會佔滿整個畫面 ★ */
+            .dropdown, .nav-btn.theme-purple { 
+                width: 82% !important; 
+                margin: 0 auto !important; 
+            }
+
+            /* ★ 修正 3：五大主標題按鈕尺寸強力縮小 50%，消除膨脹感 ★ */
             .nav-btn {
                 width: 100% !important; justify-content: space-between !important; 
-                padding: 10px 16px !important; 
-                font-size: 0.95rem !important; 
+                padding: 8px 16px !important; /* 壓縮高度 */
+                font-size: 0.9rem !important; /* 縮小字體 */
                 font-weight: 800 !important; 
                 border-radius: 8px !important; 
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
             }
-            .nav-btn > div { display: flex; align-items: center; gap: 10px !important; }
-            .nav-btn i { font-size: 1.1rem !important; }
+            .nav-btn > div { display: flex; align-items: center; gap: 8px !important; }
+            .nav-btn i { font-size: 1.05rem !important; }
+
+            /* ★ 修正 4：防重疊結界！強制取消手機版觸控時的放大與上浮特效 ★ */
+            .nav-btn:hover, .nav-btn:active {
+                transform: none !important;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+            }
 
             /* 手機版子選單：現代化 CSS Grid 絲滑手風琴展開 */
-            .dropdown { width: 100% !important; }
-            
             .dropdown-content { 
                 display: grid !important; 
                 grid-template-rows: 0fr; 
@@ -324,15 +336,17 @@
                 visibility: hidden !important; 
                 position: static !important; width: 100% !important; box-shadow: none !important;
                 padding-top: 0 !important; padding-bottom: 0 !important;
-                transition: grid-template-rows 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, visibility 0.4s;
+                margin-bottom: 0 !important;
+                transition: grid-template-rows 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s;
                 pointer-events: none;
             }
             
-            /* ★ 修正 6：解除隱身魔法，讓子選單隨動畫完美浮現 ★ */
+            /* ★ 修正 5：展開時底部自動產生 6px 安全距離，保證最後一個子標題不遮擋下一個大標題！ ★ */
             .dropdown.mobile-open .dropdown-content { 
                 grid-template-rows: 1fr; 
                 opacity: 1;
                 visibility: visible !important; 
+                margin-bottom: 6px !important; /* 安全推擠距離 */
                 pointer-events: auto;
             }
             
@@ -347,16 +361,30 @@
                 padding-top: 4px !important; padding-bottom: 4px !important; 
             }
             
-            .dropdown-item { border-radius: 8px !important; padding: 10px 16px !important; font-size: 0.85rem !important; font-weight: 800 !important; }
+            .dropdown-item { 
+                border-radius: 8px !important; 
+                padding: 8px 16px !important; 
+                font-size: 0.85rem !important; 
+                font-weight: 800 !important; 
+            }
             .dropdown-item i { font-size: 1rem !important; }
 
+            /* ★ 取消子選單手機版的點擊橫移動畫，防止畫面跳動 ★ */
+            .dropdown-item:hover, .dropdown-item:active {
+                padding-left: 16px !important; 
+                transform: none !important;
+            }
+
+            /* ★ 修正 6：社群圖示區塊向上壓縮，確保一頁顯示完畢 ★ */
             .social-group {
                 border-left: none !important; border-top: 1px solid rgba(255,255,255,0.15) !important;
-                padding-left: 0 !important; margin-left: 0 !important; margin-top: 15px !important; padding-top: 15px !important;
-                padding-bottom: 40px !important; width: 100% !important; display: flex !important; flex-direction: row !important;
-                flex-wrap: wrap !important; justify-content: center !important; gap: 12px !important;
+                padding-left: 0 !important; margin-left: 0 !important; 
+                margin-top: 10px !important; padding-top: 15px !important;
+                padding-bottom: 20px !important; width: 100% !important; 
+                display: flex !important; flex-direction: row !important;
+                flex-wrap: wrap !important; justify-content: center !important; gap: 10px !important;
             }
-            .icon-btn { width: 38px !important; height: 38px !important; font-size: 1.2rem !important; }
+            .icon-btn { width: 34px !important; height: 34px !important; font-size: 1.1rem !important; }
             .icon-btn::after { display: none !important; }
 
             .share-dropdown-content {
