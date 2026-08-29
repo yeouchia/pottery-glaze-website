@@ -255,11 +255,11 @@
         }
         /* === 3. 功能導覽卡片區 (電腦版 4 欄) 結束 === */
 
-        /* === 4. 探索陶藝知識 15大區塊 (電腦版 3 欄) 開始 === */
+        /* === 4. 探索陶藝知識 15大區塊與搜尋列 開始 === */
         .knowledge-header {
             width: 100%;
             text-align: center;
-            margin: 50px 0 25px 0;
+            margin: 50px 0 35px 0;
             position: relative;
         }
         
@@ -274,6 +274,61 @@
         .knowledge-header p {
             color: var(--text-muted);
             font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        /* ★ 新增：即時搜尋列外觀樣式 ★ */
+        .knowledge-search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .knowledge-search-bar i {
+            position: absolute;
+            left: 20px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .knowledge-search-bar input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border-radius: 30px;
+            border: 2px solid rgba(0,0,0,0.05);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            background: white;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .knowledge-search-bar input::placeholder {
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .knowledge-search-bar input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 20px rgba(252, 163, 17, 0.15);
+        }
+
+        /* 搜尋無結果時的提示文字 */
+        .no-results-msg {
+            display: none;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: rgba(0,0,0,0.02);
+            border-radius: 16px;
         }
 
         .knowledge-grid {
@@ -353,7 +408,7 @@
             transform: translateX(6px);
             color: var(--accent-color);
         }
-        /* === 4. 探索陶藝知識 15大區塊 (電腦版 3 欄) 結束 === */
+        /* === 4. 探索陶藝知識 15大區塊與搜尋列 結束 === */
 
         /* === 5. 安裝教學 Modal 樣式 開始 === */
         .install-modal-overlay {
@@ -464,10 +519,13 @@
 
             .card-list li i { font-size: 0.75rem !important; width: 14px !important; margin-top: 0 !important; }
 
-            /* 手機版探索知識 15大區塊：單欄往下滑動 */
+            /* 手機版探索知識與搜尋列 */
             .knowledge-header { margin: 8vw 0 5vw 0 !important; }
             .knowledge-header h2 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
-            .knowledge-header p { font-size: 4vw !important; }
+            .knowledge-header p { font-size: 4vw !important; margin-bottom: 5vw !important; }
+            
+            .knowledge-search-bar input { padding: 4vw 5vw 4vw 12vw !important; font-size: 4vw !important; }
+            .knowledge-search-bar i { left: 4.5vw !important; font-size: 4.5vw !important; }
 
             .knowledge-grid {
                 grid-template-columns: 1fr !important; /* 手機變為單欄 */
@@ -583,18 +641,29 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- ★ 探索陶藝知識 15 大區塊 開始 ★ -->
+        <!-- ★ 探索陶藝知識 15 大區塊與搜尋列 開始 ★ -->
         <!-- ========================================== -->
         <div class="knowledge-header">
             <h2><i class="fa-solid fa-book-journal-whills" style="color: #fca311;"></i> 探索陶藝知識</h2>
             <p>循序漸進，從基礎理論到進階實作，用最清楚的解答陪伴您理解陶藝。</p>
+            
+            <!-- ★ 新增：即時過濾搜尋列 ★ -->
+            <div class="knowledge-search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="搜尋本站知識關鍵字 (例如：三角座標、釉藥)..." onkeyup="filterCards()">
+            </div>
         </div>
 
-        <div class="knowledge-grid">
+        <div class="knowledge-grid" id="knowledgeGrid">
             
+            <!-- 搜尋無結果提示區塊 -->
+            <div class="no-results-msg" id="noResultsMsg">
+                <i class="fa-solid fa-ghost"></i> 找不到相關內容，請嘗試更換關鍵字！
+            </div>
+
             <!-- 【第 1 列：新手痛點與吸睛實作】 -->
             <!-- 卡片 1 (未建置：提示後 return false) -->
-            <a href="./book/buy_clay.html" target="content_frame" class="knowledge-card" onmouseenter="playHover()" onclick="playClick(); ">
+            <a href="./book/buy_clay.html" target="content_frame" class="knowledge-card" onmouseenter="playHover()" onclick="playClick(); alert('🚧 內容建置中：這篇精彩的教學文章黃老師正在趕工撰寫中，敬請期待！\n\n（💡 提示：未來將檔案存入 book 資料夾後，請至 html 刪除此 alert 語法即可直接連線）'); return false;">
                 <span class="k-category">陶藝入門</span>
                 <h3 class="k-title">陶土與瓷土怎麼選？新手買泥全指南</h3>
                 <p class="k-desc">走進材料行，面對琳瑯滿目的土條感到不知所措？白瓷土、日本土、還是常見的熟料土到底有什麼差別？教您依據「手捏或拉坯成型方式」與「預期燒成溫度」，挑選出最適合您的第一包泥土。</p>
@@ -602,7 +671,7 @@
             </a>
 
             <!-- 卡片 2 (未建置：提示後 return false) -->
-            <a href="./book/dry_crack.html" target="content_frame" class="knowledge-card" onmouseenter="playHover()" onclick="playClick();">
+            <a href="./book/dry_crack.html" target="content_frame" class="knowledge-card" onmouseenter="playHover()" onclick="playClick(); alert('🚧 內容建置中：這篇精彩的教學文章黃老師正在趕工撰寫中，敬請期待！\n\n（💡 提示：未來將檔案存入 book 資料夾後，請至 html 刪除此 alert 語法即可直接連線）'); return false;">
                 <span class="k-category">疑難雜症</span>
                 <h3 class="k-title">為什麼作品乾了總會裂開？接合與乾燥的致命錯誤</h3>
                 <p class="k-desc">杯把掉下來、盤底出現裂痕，絕對是新手最常遇到的痛！為您破解泥土收縮的原理，掌握「厚度均勻」、「控制陰乾速度」與正確的「刻痕塗泥漿」技巧，大幅提升作品進窯前的存活率。</p>
@@ -719,7 +788,7 @@
             
         </div>
         <!-- ========================================== -->
-        <!-- ★ 探索陶藝知識 15 大區塊 結束 ★ -->
+        <!-- ★ 探索陶藝知識 15 大區塊與搜尋列 結束 ★ -->
         <!-- ========================================== -->
 
     </div>
@@ -749,6 +818,34 @@
     <audio id="clickSound" src="click.wav" preload="auto"></audio>
 
     <script>
+        // --- ★ 新增：即時過濾搜尋卡片功能 ★ ---
+        function filterCards() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const grid = document.getElementById('knowledgeGrid');
+            const cards = grid.querySelectorAll('.knowledge-card');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            let visibleCount = 0;
+
+            // 逐一檢查卡片內的文字是否包含輸入的關鍵字
+            cards.forEach(card => {
+                const text = card.textContent || card.innerText;
+                if (text.toLowerCase().indexOf(filter) > -1) {
+                    card.style.display = "flex"; // 符合就顯示
+                    visibleCount++;
+                } else {
+                    card.style.display = "none"; // 不符合就隱藏
+                }
+            });
+
+            // 如果全部都被隱藏了，顯示「找不到相關內容」的提示
+            if (visibleCount === 0) {
+                noResultsMsg.style.display = "block";
+            } else {
+                noResultsMsg.style.display = "none";
+            }
+        }
+
         // --- 本地專屬音效播放系統 (不依賴跨框架) ---
         var hoverAudio = document.getElementById("hoverSound");
         var clickAudio = document.getElementById("clickSound");
