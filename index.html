@@ -233,6 +233,9 @@
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item i { width: 20px; text-align: center; font-size: 1.1em; flex-shrink: 0; }
 
+        /* 階層縮排項目專用樣式 (電腦版) */
+        .dropdown-item.nested-item { padding-left: 2.5rem !important; }
+
         .dropdown-item.item-red { background-color: var(--gold-light); border-left-color: #c0392b; } .dropdown-item.item-red i { color: #c0392b; } .dropdown-item.item-red:hover { background-color: var(--gold-hover); padding-left: 22px; }
         .dropdown-item.item-blue { background-color: var(--gold-light); border-left-color: #1565c0; } .dropdown-item.item-blue i { color: #1565c0; } .dropdown-item.item-blue:hover { background-color: var(--gold-hover); padding-left: 22px; }
         .dropdown-item.item-green { background-color: var(--gold-light); border-left-color: #2e7d32; } .dropdown-item.item-green i { color: #2e7d32; } .dropdown-item.item-green:hover { background-color: var(--gold-hover); padding-left: 22px; }
@@ -335,39 +338,39 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
             }
 
-            /* ★ 終極母子連體魔法：展開時切平母標題下方圓角、消除底線與陰影 ★ */
+            /* 終極母子連體魔法：展開時切平母標題下方圓角、消除底線與陰影 */
             .dropdown.mobile-open .nav-btn {
-                border-radius: 8px 8px 0 0 !important; /* 強制下方圓角歸零 */
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
                 box-shadow: none !important; 
                 border-bottom: none !important;
             }
 
-            /* ★ 手機版子選單：徹底拔除電腦版的位移干擾 ★ */
+            /* 手機版子選單：徹底拔除電腦版的位移干擾 */
             .dropdown-content { 
                 display: grid !important; 
                 grid-template-rows: 0fr; 
                 opacity: 0;
                 visibility: hidden !important; 
-                
-                /* ★ 致命錯誤修復：設定為 static 並清空 top/transform 徹底消除斷層與亂移 ★ */
                 position: static !important; 
                 top: auto !important;
                 transform: none !important;
-                
                 width: 100% !important; box-shadow: none !important;
                 padding: 0 !important; 
                 margin: 0 !important; 
-                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s;
+                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s, margin-top 0.35s;
                 pointer-events: none;
             }
             
-            /* ★ 展開時，底部產生 12px 安全距離，強力推開下一個大標題絕不重疊 ★ */
+            /* 展開時，底部產生 12px 安全距離，並向上拉提 8px 完美消滅縫隙 */
             .dropdown.mobile-open .dropdown-content { 
                 grid-template-rows: 1fr; 
                 opacity: 1;
                 visibility: visible !important; 
                 margin-bottom: 12px !important; 
+                margin-top: -8px !important; /* 強行拉提，吃掉任何可能產生的空白縫隙 */
                 pointer-events: auto;
+                filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); 
             }
             
             .dropdown.mobile-open .nav-btn i.fa-caret-down { transform: rotate(180deg); }
@@ -377,30 +380,31 @@
                 min-height: 0; 
                 overflow: hidden; 
                 background: var(--gold-light) !important; 
-                box-shadow: 0 4px 6px rgba(0,0,0,0.15) !important; /* 將陰影加在內部容器，營造合體後的立體感 */
-                border-radius: 0 0 8px 8px !important; /* 只有下方有圓角，上方平齊母標題 */
+                box-shadow: none !important; 
+                border-radius: 0 0 8px 8px !important; 
                 display: flex !important; flex-direction: column !important;
-                gap: 0 !important; /* 移除子項目間的縫隙，讓它們緊密相連 */
+                gap: 0 !important; 
                 border: none !important;
-                padding: 0 !important; /* ★ 移除所有內距，讓第一項與母標題完全無縫貼合 ★ */
+                padding-top: 8px !important; /* 補償被提拉吃掉的 8px */
+                padding-bottom: 0 !important; 
                 margin: 0 !important;
             }
             
             /* 子選單項目的平面化與分隔線設定 */
             .dropdown-item { 
-                border-radius: 0 !important; /* 方形邊緣以利拼接 */
+                border-radius: 0 !important; 
                 padding: 12px 18px !important; 
                 font-size: 0.9rem !important; 
                 font-weight: 800 !important; 
-                border-bottom: 1px solid rgba(0,0,0,0.05) !important; /* 微弱分隔線 */
-                border-left: 4px solid transparent !important; /* 保留色彩飾條空間 */
-                background-color: transparent !important; /* 讓背景透明以吃 inner 的底色 */
+                border-bottom: 1px solid rgba(0,0,0,0.05) !important; 
+                border-left: 4px solid transparent !important; 
+                background-color: transparent !important; 
             }
             .dropdown-item:last-child {
-                border-bottom: none !important; /* 最後一項不需要底線 */
+                border-bottom: none !important; 
             }
             
-            /* 將左側色彩飾條保留，視覺更精緻 */
+            /* 將左側色彩飾條保留 */
             .dropdown-item.item-red { border-left-color: #c0392b !important; }
             .dropdown-item.item-blue { border-left-color: #1565c0 !important; }
             .dropdown-item.item-green { border-left-color: #2e7d32 !important; }
@@ -408,11 +412,17 @@
 
             .dropdown-item i { font-size: 1.05rem !important; }
 
+            /* 階層縮排項目專用樣式 (手機版) */
+            .dropdown-item.nested-item { padding-left: 3rem !important; }
+
             /* 取消子選單手機版的點擊橫移動畫，防止畫面跳動 */
             .dropdown-item:hover, .dropdown-item:active {
                 padding-left: 18px !important; 
-                background-color: var(--gold-hover) !important; /* 點擊時顏色變深 */
+                background-color: var(--gold-hover) !important; 
                 transform: none !important;
+            }
+            .dropdown-item.nested-item:hover, .dropdown-item.nested-item:active {
+                padding-left: 3rem !important; 
             }
 
             /* 社群圖示區塊向上壓縮，確保一頁顯示完畢 */
@@ -486,7 +496,7 @@
                                 <a href="./youzhi/index.html" target="content_frame" class="dropdown-item item-red protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-calculator"></i> 釉式轉原料
                                 </a>
-                                <a href="./welcome-2.html" target="content_frame" class="dropdown-item item-red protected-link" title="新功能開發中" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="./welcome-2.html" target="content_frame" class="dropdown-item item-red protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-right-left"></i> 雙向精準轉換
                                 </a>
                             </div>
@@ -494,10 +504,10 @@
                     </div>
                     <!-- === 1. 釉藥計算工具 (深紅系) 結束 === -->
 
-                    <!-- === 2. 計算教學 (深藍系) 開始 === -->
+                    <!-- === 2. 計算與理論教學 (深藍系) 開始 === -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-blue" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
-                            <div><i class="fa-solid fa-book-open"></i> 計算教學</div> <i class="fa-solid fa-caret-down"></i>
+                            <div><i class="fa-solid fa-book-open"></i> 釉藥計算教學</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
@@ -508,18 +518,18 @@
                                     <i class="fa-solid fa-shapes"></i> 三角座標計算工具
                                 </a>
                                 <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-table-cells"></i> 賽格式計算教學
+                                    <i class="fa-solid fa-table-cells"></i> 賽格式(釉式)計算教學
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('釉藥配方原理 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-vial-circle-check"></i> 釉藥配方原理
                                 </a>
                                 <a href="./tools/tools.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-mortar-pestle"></i> 釉藥調配工具
                                 </a>
-                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-store"></i> 原料廠商資訊
-                                </a>
                             </div>
                         </div>
                     </div>
-                    <!-- === 2. 計算教學 (深藍系) 結束 === -->
+                    <!-- === 2. 計算與理論教學 (深藍系) 結束 === -->
 
                     <!-- === 3. 陶釉講義 (深綠系) 開始 === -->
                     <div class="dropdown" id="lectureDropdown">
@@ -529,41 +539,66 @@
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
                                 <a href="./lecture.html" target="content_frame" class="dropdown-item item-green protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-book-bookmark"></i> 教學講義~陶藝與藥釉調配
+                                    <i class="fa-solid fa-book-bookmark"></i> 教學講義~陶藝與釉藥調配
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('何謂釉藥、釉的本質？ 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('何謂釉藥、釉的本質？ 內容準備中，敬請期待！');">
                                     <i class="fa-solid fa-feather"></i> 何謂釉藥、釉的本質？
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('釉藥的三大元素？ 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="./book/glaze_elements.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-feather"></i> 釉藥的三大元素？
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('釉藥的奧秘~三角座標 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="./book/triaxial_mystery.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-feather"></i> 釉藥的奧秘~三角座標
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('釉的種類？ 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('釉的種類？ 內容準備中，敬請期待！');">
                                     <i class="fa-solid fa-feather"></i> 釉的種類？
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('玻璃質如何結合在陶瓷？ 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('玻璃質如何結合在陶瓷？ 內容準備中，敬請期待！');">
                                     <i class="fa-solid fa-feather"></i> 玻璃質如何結合在陶瓷？
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('燒窯溫度曲線設計 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('燒窯溫度曲線設計 內容準備中，敬請期待！');">
                                     <i class="fa-solid fa-feather"></i> 燒窯溫度曲線設計
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('金屬氧化物的發色 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('金屬氧化物的發色 內容準備中，敬請期待！');">
                                     <i class="fa-solid fa-feather"></i> 金屬氧化物的發色
                                 </a>
-                                <a href="javascript:void(0)" onclick="alert('作品分享 內容準備中，敬請期待！'); return false;" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-feather"></i> 作品分享
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('上釉有哪些方式？ 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-feather"></i> 上釉有哪些方式？
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('釉藥的配方 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-feather"></i> 釉藥的配方
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('釉上彩與釉下彩 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-feather"></i> 釉上彩與釉下彩
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('燒成技術 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-fire"></i> 燒成技術
+                                </a>
+                                <!-- 階層縮排的子項目 -->
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('氧化燒 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 氧化燒
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('還原燒 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 還原燒
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('窯的種類 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 窯的種類
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('上開式電窯 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 上開式電窯
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('側開式電窯 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 側開式電窯
                                 </a>
                             </div>
                         </div>
                     </div>
                     <!-- === 3. 陶釉講義 (深綠系) 結束 === -->
 
-                    <!-- === 4. 其他應用 (紫色系) 開始 === -->
+                    <!-- === 4. 影像編輯工具 (紫色系) 開始 === -->
                     <div class="dropdown" id="otherDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-purple" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
-                            <div><i class="fa-solid fa-cubes"></i> 其他應用</div> <i class="fa-solid fa-caret-down"></i>
+                            <div><i class="fa-solid fa-image"></i> 影像編輯工具</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
@@ -573,22 +608,35 @@
                                 <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> 手機版影像編輯器
                                 </a>
-                                <a href="#" onclick="alert('新應用開發中，敬請期待！'); return false;" class="dropdown-item item-purple" onmouseenter="playHoverSound()">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i> 開發中功能
+                            </div>
+                        </div>
+                    </div>
+                    <!-- === 4. 影像編輯工具 (紫色系) 結束 === -->
+
+                    <!-- === 5. 其他 (紫紅漸層過渡下拉選單) 開始 === -->
+                    <div class="dropdown" id="extraMenuDropdown">
+                        <a href="javascript:void(0)" class="nav-btn theme-purple" onmouseenter="playHoverSound()" onclick="toggleDropdown('extraMenuDropdown')">
+                            <div><i class="fa-solid fa-layer-group"></i> 其他</div> <i class="fa-solid fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-inner">
+                                <a href="javascript:void(0)" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('作品分享 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-images"></i> 作品分享
                                 </a>
-                                <a href="#" onclick="alert('關於本站！'); return false;" class="dropdown-item item-purple" onmouseenter="playHoverSound()">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i> 關於本站
+                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-store"></i> 原料／廠商資訊
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('關於本站！');">
+                                    <i class="fa-solid fa-circle-info"></i> 關於本站
+                                </a>
+                                <a href="guestbook.html" target="content_frame" class="dropdown-item item-purple protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-comments"></i> 留言板
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <!-- === 4. 其他應用 (紫色系) 結束 === -->
+                    <!-- === 5. 其他 (紫紅漸層過渡下拉選單) 結束 === -->
 
-                    <!-- === 5. 留言交流板 (視覺過渡) 開始 === -->
-                    <a href="guestbook.html" target="content_frame" class="nav-btn theme-purple protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                        <div><i class="fa-solid fa-comments"></i> 留言交流板</div>
-                    </a>
-                    <!-- === 5. 留言交流板 (視覺過渡) 結束 === -->
                 </div>
 
                 <!-- === 右側社群與分享按鈕群組 開始 === -->
