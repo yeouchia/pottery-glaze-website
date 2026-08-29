@@ -196,10 +196,10 @@
         .dropdown-content { 
             visibility: hidden;
             opacity: 0;
-            transform: translateY(15px); /* 初始位置稍微偏下 */
+            transform: translateY(15px);
             position: absolute; left: 0; top: 100%; padding-top: 8px; min-width: 220px; z-index: 999999; 
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); /* 頂級平滑曲線 */
-            pointer-events: none; /* 隱藏時不可點擊 */
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
         }
         
         .share-dropdown-content { 
@@ -214,7 +214,7 @@
         .share-dropdown-content.show { 
             visibility: visible;
             opacity: 1;
-            transform: translateY(0); /* 滑動回歸原位 */
+            transform: translateY(0);
             pointer-events: auto;
         }
 
@@ -224,7 +224,7 @@
             .dropdown:hover .dropdown-content { 
                 visibility: visible;
                 opacity: 1;
-                transform: translateY(0); /* 滑動回歸原位 */
+                transform: translateY(0);
                 pointer-events: auto;
             }
             .dropdown:hover .nav-btn i.fa-caret-down { transform: rotate(180deg); }
@@ -260,9 +260,10 @@
             .header-bg-overlay { display: none !important; }
             .mobile-menu-btn { display: block !important; }
             
-            .brand-icon { font-size: 7.5vw !important; }
-            .brand-text h1 { font-size: 5.4vw !important; }
-            .brand-text .sub-en { font-size: 2.7vw !important; }
+            /* 修正：恢復 Logo 品牌名稱原始大小比例，不再隨螢幕過度放大 */
+            .brand-icon { font-size: 1.8rem !important; }
+            .brand-text h1 { font-size: 1.25rem !important; }
+            .brand-text .sub-en { font-size: 0.65rem !important; }
 
             /* ★ 側邊抽屜滑入魔法 (Side Drawer) ★ */
             .nav-menu {
@@ -271,7 +272,7 @@
                 left: 0 !important; right: 0 !important; bottom: 0 !important;
                 width: 100% !important; height: auto !important; max-height: calc(100vh - var(--header-height)) !important;
                 background-color: #14213d !important; flex-direction: column !important; justify-content: flex-start !important;
-                padding: 6vw 5vw 35vw 5vw !important; overflow-y: scroll !important;
+                padding: 20px 20px 100px 20px !important; overflow-y: scroll !important; /* 修正：恢復固定像素 */
                 -webkit-overflow-scrolling: touch !important; touch-action: pan-y !important;
                 box-shadow: -5px 0 25px rgba(0,0,0,0.5) !important; z-index: 99999 !important;
                 
@@ -287,16 +288,16 @@
                 visibility: visible;
             }
 
-            .tools-group { flex-direction: column !important; width: 100% !important; gap: 4vw !important; align-items: stretch !important; }
+            .tools-group { flex-direction: column !important; width: 100% !important; gap: 12px !important; align-items: stretch !important; }
 
-            /* 手機版主要功能按鈕超特大飽滿化 */
+            /* ★ 修正：手機版主要功能按鈕恢復原大小，確保一頁顯示所有按鈕 ★ */
             .nav-btn {
-                width: 100% !important; justify-content: space-between !important; padding: 4.8vw 6vw !important;
-                font-size: 5.8vw !important; font-weight: 800 !important; border-radius: 14px !important;
+                width: 100% !important; justify-content: space-between !important; padding: 14px 20px !important;
+                font-size: 1.1rem !important; font-weight: 800 !important; border-radius: 12px !important;
                 box-shadow: 0 3px 8px rgba(0,0,0,0.2) !important;
             }
-            .nav-btn > div { display: flex; align-items: center; gap: 4vw !important; }
-            .nav-btn i { font-size: 6.8vw !important; }
+            .nav-btn > div { display: flex; align-items: center; gap: 12px !important; }
+            .nav-btn i { font-size: 1.3rem !important; }
 
             /* ★ 手機版子選單：現代化 CSS Grid 絲滑手風琴展開 ★ */
             .dropdown { width: 100% !important; }
@@ -305,15 +306,17 @@
                 display: grid !important; 
                 grid-template-rows: 0fr; /* 魔法核心：收合狀態高度精準為 0 */
                 opacity: 0;
+                visibility: hidden !important; /* ★ 修正：隱藏內容，避免佔據畫布 */
                 position: static !important; width: 100% !important; box-shadow: none !important;
                 padding-top: 0 !important; padding-bottom: 0 !important;
-                transition: grid-template-rows 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+                transition: grid-template-rows 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, visibility 0.4s;
                 pointer-events: none;
             }
             
             .dropdown.mobile-open .dropdown-content { 
                 grid-template-rows: 1fr; /* 魔法核心：展開狀態自動完美貼合內容真實高度 */
                 opacity: 1;
+                visibility: visible !important; /* ★ 修正：解決點開一片空白的問題 */
                 pointer-events: auto;
             }
             
@@ -324,20 +327,20 @@
                 overflow: hidden; /* 隱藏超出範圍的內容，確保動畫邊緣銳利 */
                 background: transparent !important; box-shadow: none !important; border-radius: 10px !important;
                 display: flex !important; flex-direction: column !important;
-                gap: 2.5vw !important; border: none !important;
-                padding-top: 2.5vw !important; padding-bottom: 2.5vw !important; /* 內距移至內部，防止動畫抖動 */
+                gap: 8px !important; border: none !important;
+                padding-top: 10px !important; padding-bottom: 10px !important; /* 內距移至內部，防止動畫抖動 */
             }
             
-            .dropdown-item { border-radius: 12px !important; padding: 4.2vw 5.5vw !important; font-size: 5.2vw !important; font-weight: 800 !important; }
-            .dropdown-item i { font-size: 6vw !important; }
+            .dropdown-item { border-radius: 10px !important; padding: 12px 18px !important; font-size: 1rem !important; font-weight: 800 !important; }
+            .dropdown-item i { font-size: 1.2rem !important; }
 
             .social-group {
                 border-left: none !important; border-top: 1px solid rgba(255,255,255,0.15) !important;
-                padding-left: 0 !important; margin-left: 0 !important; margin-top: 7vw !important; padding-top: 6vw !important;
-                padding-bottom: 12vw !important; width: 100% !important; display: flex !important; flex-direction: row !important;
-                flex-wrap: wrap !important; justify-content: center !important; gap: 4.5vw !important;
+                padding-left: 0 !important; margin-left: 0 !important; margin-top: 20px !important; padding-top: 20px !important;
+                padding-bottom: 40px !important; width: 100% !important; display: flex !important; flex-direction: row !important;
+                flex-wrap: wrap !important; justify-content: center !important; gap: 15px !important;
             }
-            .icon-btn { width: 15vw !important; height: 15vw !important; font-size: 6.8vw !important; }
+            .icon-btn { width: 45px !important; height: 45px !important; font-size: 1.4rem !important; }
             .icon-btn::after { display: none !important; }
 
             .share-dropdown-content {
@@ -347,9 +350,9 @@
 
             /* ★ 手機版頁尾 Footer 極致壓縮，避免折行撐大高度 ★ */
             footer {
-                padding: 3px 5px !important; /* 縮減上下內距 */
-                font-size: clamp(9px, 2.5vw, 12px) !important; /* 動態縮小字體 */
-                white-space: nowrap !important; /* 強制不折行，避免高度翻倍 */
+                padding: 3px 5px !important; 
+                font-size: clamp(9px, 2.5vw, 12px) !important; 
+                white-space: nowrap !important; 
                 line-height: 1.2 !important;
             }
         }
@@ -442,7 +445,6 @@
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <!-- 您新增的精采選單選項 -->
                                 <a href="./lecture.html" target="content_frame" class="dropdown-item item-green protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-book-bookmark"></i> 教學講義~陶藝與藥釉調配
                                 </a>
