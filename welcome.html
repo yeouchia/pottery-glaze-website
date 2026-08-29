@@ -21,13 +21,17 @@
         :root {
             --primary-color: #14213d;
             --accent-color: #fca311;
-            --bg-color: #fff8e7; /* 網頁整體背景奶油黃 */
-            --card-bg: #ffffff;  /* 標題區塊與卡片純白 */
+            --bg-color: #fff8e7; /* 網頁整體背景改為奶油黃 */
+            --card-bg: #ffffff;  /* 標題區塊與卡片為純白色 */
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         html, body {
             height: 100%;
@@ -50,115 +54,358 @@
         }
         /* === 1. 根目錄與顏色變數定義 結束 === */
 
-        /* === 2. 頂部 Banner 標題區塊 開始 === */
+        /* === 2. 頂部 Banner 標題區塊 (純白底) 開始 === */
         .top-banner {
-            background: var(--card-bg); width: 100%; border-radius: 16px;
-            padding: 30px 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.05); display: flex;
-            justify-content: space-between; align-items: center; margin-bottom: 30px;
+            background: var(--card-bg);
+            width: 100%;
+            border-radius: 16px;
+            padding: 30px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
-        .banner-left { display: flex; align-items: center; gap: 20px; }
-        .banner-icon { font-size: 3.8rem; color: #fca311; }
-        .banner-text h1 { font-size: 1.8rem; color: var(--primary-color); font-weight: 800; margin-bottom: 8px; }
-        .banner-text p { color: var(--text-muted); line-height: 1.6; font-size: 1rem; }
 
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .banner-icon {
+            font-size: 3.8rem;
+            color: #fca311;
+        }
+
+        .banner-text h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .banner-text p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* APP 安裝專屬按鈕樣式 */
         .install-btn {
-            margin-top: 15px; background: linear-gradient(135deg, var(--accent-color) 0%, #e6920b 100%);
-            color: var(--primary-color); border: none; padding: 8px 22px; border-radius: 30px;
-            font-size: 0.95rem; font-weight: 800; cursor: pointer; display: inline-flex;
-            align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(252, 163, 17, 0.3); transition: all 0.3s ease;
+            margin-top: 15px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #e6920b 100%);
+            color: var(--primary-color);
+            border: none;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(252, 163, 17, 0.3);
+            transition: all 0.3s ease;
         }
         .install-btn:hover {
-            transform: translateY(-2px); box-shadow: 0 6px 15px rgba(252, 163, 17, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(252, 163, 17, 0.4);
             background: linear-gradient(135deg, #ffd166 0%, #fca311 100%);
         }
 
-        .banner-right { display: flex; flex-direction: column; align-items: center; gap: 15px; flex-shrink: 0; }
-        .share-title { font-weight: 700; color: var(--primary-color); display: flex; align-items: center; gap: 8px; }
-        .share-title i { color: #fca311; }
-        .share-buttons { display: flex; gap: 12px; }
+        .banner-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
 
+        .share-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .share-title i { color: #fca311; }
+
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* 圓形浮動 Icon 按鈕樣式 */
         .share-circle-btn {
-            width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; color: white; text-decoration: none; font-size: 1.2rem;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2); border: none; cursor: pointer; transition: transform 0.2s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
         .share-circle-btn:hover { transform: scale(1.1); }
         .share-circle-btn.fb { background-color: #1877f2; }
         .share-circle-btn.line { background-color: #00c300; }
         .share-circle-btn.copy { background-color: #64748b; }
-        /* === 2. 頂部 Banner 標題區塊 結束 === */
+        /* === 2. 頂部 Banner 標題區塊 (純白底) 結束 === */
 
         /* === 3. 功能導覽卡片區 (電腦版 4 欄) 開始 === */
         .cards-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 20px;
         }
+
         .feature-card {
-            background: var(--card-bg); border-radius: 16px; padding: 25px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.05);
-            display: flex; flex-direction: column; position: relative; overflow: hidden;
-            border-left: 6px solid var(--accent-color); transition: transform 0.2s, box-shadow 0.2s; cursor: default;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border-left: 6px solid var(--accent-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default;
         }
-        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
         .feature-card.card-calc { border-left-color: #fca311; }
         .feature-card.card-video { border-left-color: #ef4444; }
         .feature-card.card-lecture { border-left-color: #2ec4b6; }
         .feature-card.card-life { border-left-color: #8b5cf6; }
 
-        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .card-icon {
-            font-size: 1.5rem; width: 42px; height: 42px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center; background: #f1f5f9;
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
         }
+
+        .card-icon {
+            font-size: 1.5rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+        }
+
         .card-calc .card-icon { color: #fca311; background: #fff8e7; }
         .card-video .card-icon { color: #ef4444; background: #fee2e2; }
         .card-lecture .card-icon { color: #2ec4b6; background: #e0f2f1; }
         .card-life .card-icon { color: #8b5cf6; background: #f3e8ff; }
 
-        .card-title { font-size: 1.2rem; font-weight: 800; color: var(--primary-color); }
-        .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-        .card-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .card-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: #334155; }
-        .card-list li i { font-size: 1.05rem; color: #64748b; width: 18px; text-align: center; }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .card-list li i {
+            font-size: 1.05rem;
+            color: #64748b;
+            width: 18px;
+            text-align: center;
+        }
         /* === 3. 功能導覽卡片區 (電腦版 4 欄) 結束 === */
 
         /* === 4. 探索陶藝知識 15大區塊與搜尋列 開始 === */
-        .knowledge-header { width: 100%; text-align: center; margin: 50px 0 35px 0; position: relative; }
-        .knowledge-header h2 { font-size: 1.8rem; color: var(--primary-color); font-weight: 800; margin-bottom: 8px; letter-spacing: 1px; }
-        .knowledge-header p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; }
-
-        .knowledge-search-bar { max-width: 600px; margin: 0 auto; position: relative; display: flex; align-items: center; }
-        .knowledge-search-bar i { position: absolute; left: 20px; color: var(--text-muted); font-size: 1.2rem; }
-        .knowledge-search-bar input {
-            width: 100%; padding: 16px 20px 16px 50px; border-radius: 30px; border: 2px solid rgba(0,0,0,0.05);
-            font-size: 1rem; font-weight: 700; color: var(--text-main); background: white; outline: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: all 0.3s ease; font-family: inherit;
+        .knowledge-header {
+            width: 100%;
+            text-align: center;
+            margin: 50px 0 35px 0;
+            position: relative;
         }
-        .knowledge-search-bar input::placeholder { color: #94a3b8; font-weight: 600; }
-        .knowledge-search-bar input:focus { border-color: var(--accent-color); box-shadow: 0 4px 20px rgba(252, 163, 17, 0.15); }
+        
+        .knowledge-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .knowledge-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .knowledge-search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .knowledge-search-bar i {
+            position: absolute;
+            left: 20px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .knowledge-search-bar input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border-radius: 30px;
+            border: 2px solid rgba(0,0,0,0.05);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            background: white;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .knowledge-search-bar input::placeholder {
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .knowledge-search-bar input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 20px rgba(252, 163, 17, 0.15);
+        }
 
         .no-results-msg {
-            display: none; grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--text-muted);
-            font-size: 1.2rem; font-weight: 700; background: rgba(0,0,0,0.02); border-radius: 16px;
+            display: none;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: rgba(0,0,0,0.02);
+            border-radius: 16px;
         }
 
-        .knowledge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; margin-bottom: 40px; }
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
         .knowledge-card {
-            background: var(--card-bg); border-radius: 16px; padding: 30px 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer; text-decoration: none;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
         }
-        .knowledge-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+        
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
         .k-category {
-            font-size: 0.75rem; font-weight: 700; color: #b45309; background: #fff8e7; padding: 4px 12px;
-            border-radius: 20px; align-self: flex-start; margin-bottom: 15px; border: 1px solid rgba(252, 163, 17, 0.2);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #b45309;
+            background: #fff8e7;
+            padding: 4px 12px;
+            border-radius: 20px;
+            align-self: flex-start;
+            margin-bottom: 15px;
+            border: 1px solid rgba(252, 163, 17, 0.2);
         }
-        .k-title { font-size: 1.25rem; font-weight: 800; color: var(--primary-color); margin-bottom: 12px; line-height: 1.4; }
-        .k-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; flex-grow: 1; }
-        .k-link { font-size: 0.95rem; font-weight: 800; color: var(--text-main); display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; margin-top: auto; }
-        .k-link i { transition: transform 0.2s ease; color: var(--text-muted); }
-        .knowledge-card:hover .k-link { color: var(--accent-color); }
-        .knowledge-card:hover .k-link i { transform: translateX(6px); color: var(--accent-color); }
+
+        .k-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .k-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .k-link {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+            margin-top: auto;
+        }
+        
+        .k-link i {
+            transition: transform 0.2s ease;
+            color: var(--text-muted);
+        }
+
+        .knowledge-card:hover .k-link {
+            color: var(--accent-color);
+        }
+        .knowledge-card:hover .k-link i {
+            transform: translateX(6px);
+            color: var(--accent-color);
+        }
         /* === 4. 探索陶藝知識 15大區塊與搜尋列 結束 === */
 
         /* === 5. App風格文章閱讀器 (滑動重疊層) 開始 === */
@@ -186,24 +433,42 @@
 
         /* === 6. 安裝教學 Modal 樣式 開始 === */
         .install-modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(20, 33, 61, 0.7); backdrop-filter: blur(4px); z-index: 4000;
-            align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(20, 33, 61, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 4000;
+            align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
         }
         .install-modal-overlay.show { opacity: 1; }
         .install-modal-content {
-            background: white; padding: 30px; border-radius: 20px; max-width: 400px; width: 90%;
-            position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: white; padding: 30px; border-radius: 20px;
+            max-width: 400px; width: 90%; position: relative;
+            transform: translateY(20px); transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .install-modal-overlay.show .install-modal-content { transform: translateY(0); }
-        .modal-close { position: absolute; top: 18px; right: 20px; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: 0.2s; }
+        .modal-close {
+            position: absolute; top: 18px; right: 20px;
+            font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: 0.2s;
+        }
         .modal-close:hover { color: #ef4444; }
         .install-modal-content h3 { color: var(--primary-color); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 1.4rem; }
         .install-modal-content p { color: var(--text-muted); font-size: 1rem; margin-bottom: 20px; font-weight: 600; }
         .install-steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .step-item { background: #f8fafc; padding: 15px; border-radius: 12px; font-size: 1rem; color: #334155; font-weight: 700; display: flex; align-items: center; gap: 12px; border: 1px solid #e2e8f0; }
+        .step-item { 
+            background: #f8fafc; padding: 15px; border-radius: 12px; 
+            font-size: 1rem; color: #334155; font-weight: 700; 
+            display: flex; align-items: center; gap: 12px; 
+            border: 1px solid #e2e8f0;
+        }
         .step-item i { color: var(--accent-color); font-size: 1.3rem; width: 25px; text-align: center; }
-        .modal-ok-btn { width: 100%; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 1.1rem; transition: background 0.2s; }
+        .modal-ok-btn {
+            width: 100%; background: var(--primary-color); color: white; border: none; padding: 14px;
+            border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 1.1rem;
+            transition: background 0.2s;
+        }
         .modal-ok-btn:hover { background: #1e3057; }
         /* === 6. 安裝教學 Modal 樣式 結束 === */
 
@@ -212,37 +477,88 @@
         /* ========================================== */
         @media (max-width: 1250px) {
             .welcome-wrapper { padding: 4vw 4vw 35vw 4vw !important; }
-            .top-banner { flex-direction: column !important; text-align: center !important; padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; margin-bottom: 5vw !important; }
+            .top-banner {
+                flex-direction: column !important; text-align: center !important;
+                padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; margin-bottom: 5vw !important;
+            }
             .banner-left { flex-direction: column !important; gap: 3vw !important; }
             .banner-icon { font-size: 14vw !important; }
             .banner-text h1 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
             .banner-text p { font-size: 4vw !important; line-height: 1.6 !important; }
 
-            .install-btn { margin-top: 5vw !important; padding: 3vw 6vw !important; font-size: 4.5vw !important; border-radius: 50px !important; }
+            .install-btn {
+                margin-top: 5vw !important; padding: 3vw 6vw !important;
+                font-size: 4.5vw !important; border-radius: 50px !important;
+            }
+
             .share-title { font-size: 4.5vw !important; margin-bottom: 2vw !important; justify-content: center !important; }
             .share-buttons { gap: 4vw !important; }
             .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
             /* 手機版四大功能卡片壓縮版 */
-            .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; margin-bottom: 10vw !important; }
-            .feature-card { padding: 10px 8px !important; border-radius: 12px !important; border-left-width: 4px !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; }
-            .card-header { gap: 6px !important; margin-bottom: 6px !important; flex-direction: row !important; align-items: center !important; }
-            .card-icon { font-size: 1rem !important; width: 28px !important; height: 28px !important; border-radius: 6px !important; flex-shrink: 0; }
-            .card-title { font-size: 0.85rem !important; font-weight: 800 !important; letter-spacing: -0.5px !important; }
-            .card-desc { font-size: 0.7rem !important; line-height: 1.2 !important; margin-bottom: 6px !important; letter-spacing: -0.2px !important; }
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+                margin-bottom: 10vw !important;
+            }
+
+            .feature-card {
+                padding: 10px 8px !important;
+                border-radius: 12px !important;
+                border-left-width: 4px !important; 
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+            }
+
+            .card-header {
+                gap: 6px !important;
+                margin-bottom: 6px !important;
+                flex-direction: row !important;
+                align-items: center !important;
+            }
+
+            .card-icon {
+                font-size: 1rem !important; width: 28px !important; height: 28px !important;
+                border-radius: 6px !important; flex-shrink: 0;
+            }
+
+            .card-title {
+                font-size: 0.85rem !important; font-weight: 800 !important; letter-spacing: -0.5px !important;
+            }
+
+            .card-desc {
+                font-size: 0.7rem !important; line-height: 1.2 !important;
+                margin-bottom: 6px !important; letter-spacing: -0.2px !important;
+            }
+
             .card-list { gap: 4px !important; }
-            .card-list li { font-size: 0.7rem !important; font-weight: 700 !important; gap: 4px !important; line-height: 1.2 !important; letter-spacing: -0.5px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+
+            .card-list li {
+                font-size: 0.7rem !important; font-weight: 700 !important; gap: 4px !important;
+                line-height: 1.2 !important; letter-spacing: -0.5px !important;
+                white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+            }
+
             .card-list li i { font-size: 0.75rem !important; width: 14px !important; margin-top: 0 !important; }
 
             /* 手機版探索知識與搜尋列 */
             .knowledge-header { margin: 8vw 0 5vw 0 !important; }
             .knowledge-header h2 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
             .knowledge-header p { font-size: 4vw !important; margin-bottom: 5vw !important; }
+            
             .knowledge-search-bar input { padding: 4vw 5vw 4vw 12vw !important; font-size: 4vw !important; }
             .knowledge-search-bar i { left: 4.5vw !important; font-size: 4.5vw !important; }
 
-            .knowledge-grid { grid-template-columns: 1fr !important; gap: 4vw !important; margin-bottom: 8vw !important; }
-            .knowledge-card { padding: 6vw 5vw !important; border-radius: 16px !important; }
+            .knowledge-grid {
+                grid-template-columns: 1fr !important; /* 手機變為單欄 */
+                gap: 4vw !important;
+                margin-bottom: 8vw !important;
+            }
+
+            .knowledge-card {
+                padding: 6vw 5vw !important;
+                border-radius: 16px !important;
+            }
+
             .k-category { font-size: 3.2vw !important; margin-bottom: 3.5vw !important; padding: 1vw 3.5vw !important; }
             .k-title { font-size: 5.5vw !important; margin-bottom: 3vw !important; }
             .k-desc { font-size: 4.2vw !important; margin-bottom: 5vw !important; line-height: 1.6 !important; }
@@ -270,6 +586,7 @@
                     <h1>陶藝與釉藥調配</h1>
                     <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
                     
+                    <!-- 一鍵安裝 APP 按鈕 -->
                     <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
                         <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
                     </button>
@@ -300,17 +617,19 @@
                     <li><i class="fa-solid fa-chalkboard-user"></i> 賽格式與三角座標教學</li>
                 </ul>
             </div>
-            <!-- 其他三大功能卡片保持原樣呈現... -->
+
             <div class="feature-card card-video" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><div class="card-title">豐富影音課程</div></div>
                 <div class="card-desc">完整 YouTube 教學影片庫：</div>
                 <ul class="card-list"><li><i class="fa-solid fa-landmark"></i> 陶瓷歷史與文化介紹</li><li><i class="fa-solid fa-hands-holding"></i> 陶瓷拉坯製作過程</li><li><i class="fa-solid fa-paintbrush"></i> 釉色與裝飾技法</li><li><i class="fa-solid fa-vial"></i> 釉藥調配實務</li></ul>
             </div>
+
             <div class="feature-card card-lecture" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-solid fa-book-open-reader"></i></div><div class="card-title">陶釉教學講義</div></div>
                 <div class="card-desc">完整七大章節陶瓷專書文稿：</div>
                 <ul class="card-list"><li><i class="fa-solid fa-book-bookmark"></i> 陶瓷歷史與五大名窯</li><li><i class="fa-solid fa-cubes-stacked"></i> 14種常用釉藥原料解析</li><li><i class="fa-solid fa-shapes"></i> 三角座標與賽格爾式理論</li><li><i class="fa-solid fa-fire-burner"></i> 窯爐操作與安全規範</li></ul>
             </div>
+
             <div class="feature-card card-life" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-solid fa-heart"></i></div><div class="card-title">陶藝生活與靈感</div></div>
                 <div class="card-desc">關注 FB 與 IG 獲得創作養分：</div>
@@ -336,8 +655,6 @@
                 <i class="fa-solid fa-ghost"></i> 找不到相關內容，請嘗試更換關鍵字！
             </div>
 
-            <!-- ★ 注意：此處已改為 openArticle(URL, 標題, 是否已建置完成) ★ -->
-            
             <!-- 卡片 1 (已建置 true) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/buy_clay.html', '陶土與瓷土怎麼選？', true)">
                 <span class="k-category">陶藝入門</span>
@@ -507,10 +824,17 @@
         window.addEventListener('beforeunload', () => {
             sessionStorage.setItem('welcomeScrollPosition', document.documentElement.scrollTop || document.body.scrollTop);
         });
+        
         window.addEventListener('load', () => {
             const savedScroll = sessionStorage.getItem('welcomeScrollPosition');
             if (savedScroll) {
-                setTimeout(() => { window.scrollTo(0, parseInt(savedScroll)); }, 50);
+                // ★ 這裡加上 behavior: 'smooth' 並且延遲 0.15 秒，創造絲滑的下降感！
+                setTimeout(() => { 
+                    window.scrollTo({
+                        top: parseInt(savedScroll),
+                        behavior: 'smooth'
+                    }); 
+                }, 150);
                 sessionStorage.removeItem('welcomeScrollPosition');
             }
         });
