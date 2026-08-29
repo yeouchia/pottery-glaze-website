@@ -14,11 +14,13 @@
         /* === ★ 專屬顏色控制面板：您可以在這裡手動修改顏色測試 ★ === */
         /* ======================================================== */
         :root {
-            /* 1. 網頁最底層的「大背景顏色」 (改為與下拉選單相同的淡琥珀/卡其色) */
+            /* 1. 網頁最底層的「大背景顏色」 (與下拉選單相同的淡琥珀/卡其色) */
             --bg-color: #fff8e7; 
             
-            /* 2. 所有「文字區塊、卡片、頂部橫幅」的背景顏色 (改為原本淡淡的灰白色) */
-            --card-bg: #f8fafc;  
+            /* === 修改卡片區塊底色對比度 開始 === */
+            /* 2. 所有「文字區塊、卡片、頂部橫幅」的背景顏色 (改為純白，讓畫面更乾淨明亮) */
+            --card-bg: #ffffff;  
+            /* === 修改卡片區塊底色對比度 結束 === */
             
             /* 3. 網站的「品牌點綴色」 (琥珀金：控制各種 Icon 顏色、卡片左側邊框、按鈕漸層色) */
             --accent-color: #fca311;
@@ -46,8 +48,8 @@
         html, body {
             height: 100%;
             font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color); /* 這裡會自動套用上面的 --bg-color */
-            color: var(--text-main);           /* 這裡會自動套用上面的 --text-main */
+            background-color: var(--bg-color); /* 自動套用卡其背景色 */
+            color: var(--text-main);
             overflow-y: auto;
             -webkit-text-size-adjust: 100% !important;
             text-size-adjust: 100% !important;
@@ -66,11 +68,11 @@
 
         /* --- 頂部 Banner 區塊 --- */
         .top-banner {
-            background: var(--card-bg); /* 自動套用卡片底色變數 */
+            background: var(--card-bg); /* 自動套用純白卡片底色 */
             width: 100%;
             border-radius: 16px;
             padding: 30px 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* 白底配輕柔陰影 */
             border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
@@ -86,18 +88,18 @@
 
         .banner-icon {
             font-size: 3.8rem;
-            color: var(--accent-color); /* 自動套用琥珀金變數 */
+            color: var(--accent-color);
         }
 
         .banner-text h1 {
             font-size: 1.8rem;
-            color: var(--primary-color); /* 自動套用深海軍藍變數 */
+            color: var(--primary-color);
             font-weight: 800;
             margin-bottom: 8px;
         }
 
         .banner-text p {
-            color: var(--text-muted); /* 自動套用次要文字顏色變數 */
+            color: var(--text-muted);
             line-height: 1.6;
             font-size: 1rem;
         }
@@ -179,7 +181,7 @@
         }
 
         .feature-card {
-            background: var(--card-bg); /* 自動套用卡片底色變數 */
+            background: var(--card-bg); /* 自動套用純白卡片底色 */
             border-radius: 16px;
             padding: 25px 20px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -219,13 +221,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #ffffff; /* 圖示背後的白底框 */
+            background: #f1f5f9; /* 讓圖示背後有一點點微灰色，在白卡片上能跳出來 */
         }
 
-        .card-calc .card-icon { color: #fca311; }
-        .card-video .card-icon { color: #ef4444; }
-        .card-lecture .card-icon { color: #2ec4b6; }
-        .card-life .card-icon { color: #8b5cf6; }
+        .card-calc .card-icon { color: #fca311; background: #fff8e7; }
+        .card-video .card-icon { color: #ef4444; background: #fee2e2; }
+        .card-lecture .card-icon { color: #2ec4b6; background: #e0f2f1; }
+        .card-life .card-icon { color: #8b5cf6; background: #f3e8ff; }
 
         .card-title {
             font-size: 1.2rem;
@@ -303,7 +305,7 @@
         }
 
         .topic-card {
-            background: var(--card-bg); /* 自動套用卡片底色變數 */
+            background: var(--card-bg); /* 自動套用純白卡片底色 */
             border-radius: 12px;
             padding: 24px;
             text-decoration: none;
@@ -483,6 +485,7 @@
             <div class="banner-right">
                 <div class="share-title"><i class="fa-solid fa-share-nodes"></i> 分享給好友</div>
                 <div class="share-buttons">
+                    <!-- 圓形浮動分享按鈕 -->
                     <button onclick="playClick(); shareToFB()" onmouseenter="playHover()" class="share-circle-btn fb" title="分享到 Facebook"><i class="fa-brands fa-facebook-f"></i></button>
                     <button onclick="playClick(); shareToLine()" onmouseenter="playHover()" class="share-circle-btn line" title="分享到 LINE"><i class="fa-brands fa-line"></i></button>
                     <button onclick="playClick(); copyCurrentLink()" onmouseenter="playHover()" class="share-circle-btn copy" title="複製連結"><i class="fa-solid fa-link"></i></button>
@@ -599,6 +602,7 @@
                     <div class="topic-action">閱讀文章 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
 
+                <!-- === 新增 3 個話題探索卡片 開始 === -->
                 <a href="#" class="topic-card" onmouseenter="playHover()" onclick="playClick(); alert('內容準備中，敬請期待！'); return false;">
                     <h3><i class="fa-solid fa-hands"></i> 教你手拉坯定中心快速學會</h3>
                     <p>掌握拉坯機上的定中心訣竅，透過正確的姿勢與施力點，讓陶土乖乖聽話，為後續成型打好基礎。</p>
@@ -616,6 +620,7 @@
                     <p>還有什麼想了解的陶藝或釉藥知識嗎？歡迎前往留言板告訴我們您學習上遇到的瓶頸，我們將為您策劃專屬內容！</p>
                     <div class="topic-action">前往許願 <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
+                <!-- === 新增 3 個話題探索卡片 結束 === -->
             </div>
         </div>
         <!-- ======================================================== -->
@@ -642,31 +647,35 @@
         </div>
     </div>
 
-    <!-- 7. 直開 FB / LINE 與專屬音效橋樑 JavaScript --開始 -->
+    <!-- ★ 本地端專屬音效載入區塊 ★ -->
+    <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
+    <audio id="clickSound" src="click.wav" preload="auto"></audio>
+
     <script>
-        // ★ 專屬音效橋樑程式：安全呼叫外層 index.html 的喇叭 ★
-        function playHover() {
-            try {
-                if (window.parent && typeof window.parent.playHoverSound === 'function') {
-                    window.parent.playHoverSound();
-                }
-            } catch (e) {}
+        // --- 本地專屬音效播放系統 (不依賴跨框架) ---
+        var hoverAudio = document.getElementById("hoverSound");
+        var clickAudio = document.getElementById("clickSound");
+
+        function unlockAudio() {
+            if(hoverAudio) { hoverAudio.play().then(() => { hoverAudio.pause(); hoverAudio.currentTime = 0; }).catch((e) => {}); }
+            if(clickAudio) { clickAudio.play().then(() => { clickAudio.pause(); clickAudio.currentTime = 0; }).catch((e) => {}); }
+            document.body.onclick = null;
         }
 
-        function playClick() {
-            try {
-                if (window.parent && typeof window.parent.playClickSound === 'function') {
-                    window.parent.playClickSound();
-                }
-            } catch (e) {}
+        function playHoverSound() {
+            if (hoverAudio) {
+                hoverAudio.currentTime = 0; hoverAudio.volume = 0.15;
+                var p = hoverAudio.play();
+                if (p !== undefined) { p.catch(() => {}); }
+            }
         }
 
-        function unlockParentAudio() {
-            try {
-                if (window.parent && typeof window.parent.unlockAudio === 'function') {
-                    window.parent.unlockAudio();
-                }
-            } catch (e) {}
+        function playClickSound() {
+            if (clickAudio) {
+                clickAudio.currentTime = 0; clickAudio.volume = 0.15;
+                var p = clickAudio.play();
+                if (p !== undefined) { p.catch(() => {}); }
+            }
         }
 
         // --- 分享功能 ---
