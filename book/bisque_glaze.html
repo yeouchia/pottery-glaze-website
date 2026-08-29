@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>什麼是素燒與釉燒？</title>
+<meta name="description" content="為什麼陶器通常要燒兩次？從生坯排水、低溫素燒、施釉，到高溫釉燒，了解陶藝作品如何一步步從泥土變成穩定、實用又有釉面質感的陶器。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+  .page{
+    width:min(900px,calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{padding:42px 56px 64px}
+  .breadcrumb{
+    font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;font-size:11px;color:#625d4e;
+    background:var(--accent-light);border:1px solid #dcd7c7;
+    border-radius:999px;padding:3px 10px;margin-bottom:13px;
+  }
+  h1{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-weight:600;font-size:30px;line-height:1.45;
+    letter-spacing:.03em;margin:0 0 18px;color:#35332c;
+  }
+  .lead{
+    background:var(--quote);border:1px solid #dedacd;border-radius:8px;
+    padding:18px 20px;margin:20px 0 28px;color:#4d4a40;font-size:14px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+  .tag{
+    border:1px solid #d7d2c3;background:#f8f6ed;color:#706b5d;
+    border-radius:999px;padding:3px 10px;font-size:11px;
+  }
+  .notice,.summary{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:8px;padding:19px 21px;margin:22px 0;
+  }
+  .notice-title,.summary-title{
+    font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;
+  }
+  .notice p,.summary p{margin:5px 0}
+  h2{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-size:22px;line-height:1.55;margin:42px 0 17px;
+    padding-bottom:8px;border-bottom:1px solid #ddd8ca;color:#3e3b32;
+  }
+  h3{font-size:17px;margin:28px 0 9px;color:#464238}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.5em;margin:10px 0 18px}
+  li{margin:4px 0}
+  strong{font-weight:700}
+  .quote{
+    margin:18px 0;padding:13px 18px;border-left:4px solid #aaa38e;
+    background:#f5f3e9;color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+  .table-wrap{
+    overflow-x:auto;margin:18px 0 25px;border:1px solid var(--line);border-radius:8px;
+  }
+  table{width:100%;border-collapse:collapse;min-width:620px;background:#faf9f3}
+  th,td{
+    border-bottom:1px solid #dfdccf;padding:10px 12px;
+    text-align:left;vertical-align:top;
+  }
+  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px}
+  td{font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .quick-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 24px;
+  }
+  .quick{
+    background:var(--card2);border:1px solid var(--line);
+    border-radius:8px;padding:13px 15px;
+  }
+  .quick b{display:block;margin-bottom:3px;color:#4b473c}
+  .tip{
+    background:#eeece1;border:1px solid #d9d5c7;border-radius:8px;
+    padding:17px 20px;margin:22px 0;
+  }
+  .tip b{display:block;margin-bottom:5px}
+  .final-box{
+    margin-top:38px;background:#ebe8dc;border:1px solid #d5d0c1;
+    border-radius:9px;padding:23px 24px;
+  }
+  .final-box h3{margin-top:0}
+  .footer{
+    border-top:1px solid #ddd8ca;margin-top:44px;padding-top:18px;
+    color:#898476;font-size:12px;
+  }
+  .backtop{
+    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;text-decoration:none;
+    color:#5e594c;background:#f8f6ed;border:1px solid #d5d0c2;
+    border-radius:50%;box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+  @media(max-width:700px){
+    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px}
+    .article{padding:28px 22px 45px}
+    h1{font-size:25px} h2{font-size:20px} body{font-size:14px}
+    .quick-grid{grid-template-columns:1fr}
+    .lead,.notice,.summary,.tip,.final-box{padding:15px 16px}
+  }
+  @media print{
+    body{background:white}
+    .page{width:100%;margin:0;border:none;box-shadow:none}
+    .backtop{display:none}
+  }
+</style>
+</head>
+
+<body id="top">
+<main class="page">
+<article class="article">
+
+  <div class="breadcrumb">陶藝燒成｜素燒｜施釉｜釉燒</div>
+  <span class="eyebrow">陶藝燒成入門</span>
+
+  <h1>什麼是素燒與釉燒？<br>從泥坯到有釉陶器的兩次窯燒</h1>
+
+  <div class="tags">
+    <span class="tag">素燒</span>
+    <span class="tag">釉燒</span>
+    <span class="tag">生坯</span>
+    <span class="tag">施釉</span>
+    <span class="tag">釉層</span>
+    <span class="tag">燒成溫度</span>
+    <span class="tag">窯具安全</span>
+  </div>
+
+  <div class="lead">
+    <strong>一看就懂：</strong>
+    為什麼做好的陶器通常要進窯燒兩次？因為<strong>素燒與釉燒各自負責不同工作</strong>。
+    生坯先經過乾燥，再以較低溫度素燒，讓泥坯由柔軟的生土變成具有一定強度、但仍保有吸水性的素燒坯；
+    之後才能比較穩定地施釉，最後再以適合泥料與釉藥的溫度進行釉燒，讓釉層成熟並與坯體結合。
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">先記住這張「三階段地圖」</div>
+    <p><strong>生坯：</strong>還含水、可塑、不能直接快速升溫。</p>
+    <p><strong>素燒：</strong>先把泥坯「定型、變硬、保留吸水性」，方便後續處理。</p>
+    <p><strong>釉燒：</strong>讓釉藥在適合的高溫下成熟，形成玻璃質釉面，同時讓坯體進一步燒結。</p>
+    <p><strong>最重要觀念：</strong>兩次窯燒不是「同一件事做兩遍」，而是<strong>每一次都在完成不同階段的材料變化</strong>。</p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">新手先記 6 個關鍵</div>
+    <ol>
+      <li><strong>生坯一定要乾透</strong>：窯燒前仍有大量水分，升溫過快可能造成破損。</li>
+      <li><strong>素燒不是終點</strong>：素燒後的作品通常仍然多孔、會吸水。</li>
+      <li><strong>素燒坯要保留適度吸水性</strong>：這正是浸釉、淋釉、刷釉時容易控制的原因之一。</li>
+      <li><strong>釉藥厚薄要均勻</strong>：過厚容易流釉、釉裂或表面缺陷；過薄則可能發色不足或覆蓋不完整。</li>
+      <li><strong>釉燒溫度要配套</strong>：泥料與釉藥的成熟範圍必須互相配合，不能只看「越高越好」。</li>
+      <li><strong>釉燒前釉料不能碰窯棚</strong>：作品底部與支撐接觸區要保持乾淨，避免釉液在高溫熔融後黏住窯具。</li>
+    </ol>
+  </div>
+
+  <h2>一、為什麼陶器通常要燒兩次？</h2>
+
+  <p>
+    一件陶器從泥土變成完成品，不是「放進窯裡一次就全部完成」。
+    對多數常見的陶藝流程來說，第一次主要處理<strong>泥坯本身</strong>，
+    第二次則主要完成<strong>釉層與最終燒成</strong>。
+  </p>
+
+  <p>
+    這樣安排的好處，是讓製作者可以先得到一個比較穩定、容易拿取與施釉的素燒坯，
+    再進一步控制釉色、釉厚與最後的燒成結果。
+  </p>
+
+  <div class="quote">
+    <strong>簡單想像：</strong><br>
+    生坯 → 素燒＝先把「泥」變成穩定的陶坯 → 施釉 → 釉燒＝讓「釉」成熟並完成最終燒成。
+  </div>
+
+  <div class="quick-grid">
+    <div class="quick">
+      <b>第一次：素燒</b>
+      讓泥坯變硬、結構更穩定，同時保留孔隙與吸水能力，方便下一步施釉。
+    </div>
+    <div class="quick">
+      <b>第二次：釉燒</b>
+      在更適合的高溫下使釉藥成熟，並讓坯體進一步燒結，成為最終作品。
+    </div>
+    <div class="quick">
+      <b>為什麼不一次完成？</b>
+      生坯太脆、含水；直接在表面施釉也難以精準控制，製作與搬運的風險較高。
+    </div>
+    <div class="quick">
+      <b>也不是絕對只能兩次</b>
+      有些陶藝流程會採單次燒成或多次燒成，但新手最常接觸的是「素燒＋釉燒」。
+    </div>
+  </div>
+
+  <h2>二、第一階段：生坯進窯前，究竟發生什麼事？</h2>
+
+  <p>
+    生坯就是還沒有經過窯燒的泥坯。此時泥土仍含有大量水分，形體也仍具有一定可塑性。
+    因此<strong>乾燥完成</strong>是進窯前非常重要的一關。
+  </p>
+
+  <p>
+    作品放進窯後，前期升溫首先要安全地排除殘留水分；隨著溫度繼續上升，
+    黏土中的結構也會發生更深層的變化，最後形成較穩定的陶瓷坯體。
+  </p>
+
+  <div class="tip">
+    <b>實用觀念：</b>
+    「摸起來不濕」只是很粗略的判斷。厚底、封閉空間、複雜雕塑等作品，內部可能比表面更晚乾。
+    大型或厚實作品尤其需要給足乾燥時間。
+  </div>
+
+  <h2>三、什麼是「素燒」？</h2>
+
+  <p>
+    <strong>素燒（Bisque Firing）</strong>是指泥坯在尚未施釉的狀態下，先進行一次窯燒。
+    素燒後，作品已經不再是原本柔軟的泥土，而是變成具有一定機械強度、可以拿取與清潔的陶坯。
+  </p>
+
+  <p>
+    但素燒坯通常還不是最後成品：它依然具有相當的孔隙，因此會吸水。
+    這個特性反而非常適合施釉，因為釉漿接觸素燒坯後，水分能被坯體吸收，
+    使釉料固體逐漸留在表面。
+  </p>
+
+  <h3>素燒主要在做什麼？</h3>
+  <ul>
+    <li><strong>讓泥坯變硬：</strong>作品不再像生坯一樣容易變形或被輕易捏傷。</li>
+    <li><strong>提高搬運與施釉的穩定性：</strong>拿取、刷釉、浸釉、淋釉都比較容易進行。</li>
+    <li><strong>保留吸水性：</strong>有助於後續施釉時控制釉料附著。</li>
+    <li><strong>為釉燒做準備：</strong>下一次燒成時，重點便可以放在釉層成熟與最終坯體燒結。</li>
+  </ul>
+
+  <div class="quote">
+    <strong>一句話：</strong>
+    素燒不是把作品「燒到完成」，而是先把生坯變成一個<strong>穩定、堅硬、仍可吸釉的中間狀態</strong>。
+  </div>
+
+  <h2>四、素燒之後，為什麼要施釉？</h2>
+
+  <p>
+    釉是由多種無機原料組成的材料系統，經適當高溫後會熔融、流動並形成玻璃質層。
+    不同釉藥配方、施釉厚度與燒成條件，會產生霧面、亮面、透明、不透明等不同效果。
+  </p>
+
+  <p>
+    釉層除了提供視覺效果，也可以改變作品表面的觸感、清潔性與耐水性。
+    但要注意：<strong>「釉藥＝一定安全、一定防水」並不成立</strong>。
+    最終性能仍要看釉藥本身、燒成溫度、坯體成熟度與實際用途是否匹配。
+  </p>
+
+  <h2>五、素燒坯施釉時，最容易出錯的地方</h2>
+
+  <div class="quick-grid">
+    <div class="quick">
+      <b>① 先除塵</b>
+      素燒坯表面的灰塵會影響釉層附著。清潔後再施釉，比直接把釉塗上去更穩定。
+    </div>
+    <div class="quick">
+      <b>② 注意釉層厚度</b>
+      太厚、太薄都可能影響最後表面效果。不同釉藥需要的厚度也不完全相同。
+    </div>
+    <div class="quick">
+      <b>③ 底部留乾淨</b>
+      作品與窯具接觸的位置通常要擦除釉料，避免釉在高溫下熔融後與窯棚黏結。
+    </div>
+    <div class="quick">
+      <b>④ 不要把釉液當水用</b>
+      施釉量、濃度與乾燥狀況都會影響結果。大量反覆補釉，不一定會更漂亮。
+    </div>
+  </div>
+
+  <h3>施釉前的簡單順序</h3>
+  <ol>
+    <li>確認素燒坯完整，沒有明顯裂損。</li>
+    <li>輕柔清除表面灰塵。</li>
+    <li>確認釉藥已充分攪拌，並依釉藥說明控制狀態。</li>
+    <li>均勻施釉，避免某些位置堆積過厚。</li>
+    <li>檢查邊緣、凹槽與內外轉角，避免局部積釉。</li>
+    <li><strong>徹底清理底足或窯具接觸面。</strong></li>
+    <li>等釉層乾燥、確認作品乾淨，再安排釉燒。</li>
+  </ol>
+
+  <div class="tip">
+    <b>新手最重要的一個習慣：</b>
+    施完釉後，花幾十秒把「底部」再檢查一次。
+    很多窯具黏釉事故，不是釉藥不好，而是底部殘留了一圈不該存在的釉。
+  </div>
+
+  <h2>六、什麼是「釉燒」？</h2>
+
+  <p>
+    <strong>釉燒（Glaze Firing）</strong>是施釉後的第二次主要窯燒。
+    在適合的燒成溫度範圍內，釉料會逐步軟化、熔融並形成連續的玻璃質表面，
+    同時坯體也會進一步燒結。
+  </p>
+
+  <p>
+    釉燒不是單純「把溫度升得比素燒高」而已。
+    真正重要的是<strong>泥料、釉藥與窯燒制度三者要互相配合</strong>。
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>素燒</th>
+          <th>釉燒</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>燒之前</td>
+          <td>乾燥完成的生坯</td>
+          <td>已素燒、已施釉的坯體</td>
+        </tr>
+        <tr>
+          <td>主要目的</td>
+          <td>讓泥坯變硬、穩定化，並保留吸水性</td>
+          <td>讓釉藥成熟，同時完成更進一步的坯體燒結</td>
+        </tr>
+        <tr>
+          <td>表面狀態</td>
+          <td>通常多孔、無玻璃質釉面</td>
+          <td>形成最終釉面效果</td>
+        </tr>
+        <tr>
+          <td>重點控制</td>
+          <td>乾燥與安全升溫</td>
+          <td>釉藥厚度、釉藥成熟溫度、氣氛與燒成曲線</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>七、為什麼釉燒後，釉色和施釉前看起來差很多？</h2>
+
+  <p>
+    這是陶藝初學者非常容易困惑的地方：<strong>施釉時看到的顏色，不等於出窯後的顏色。</strong>
+  </p>
+
+  <p>
+    因為窯內高溫會讓釉料發生熔融與化學變化，釉層厚度、燒成溫度、保溫時間與窯內氣氛，
+    都可能影響最終效果。因此實務上通常會依靠釉藥廠的測試資料與自己的試片，
+    累積「這一款釉在這一種泥料、這一個燒成制度下會變成什麼樣子」的經驗。
+  </p>
+
+  <div class="quote">
+    <strong>不要只相信罐子上的顏色。</strong><br>
+    真正值得參考的是「在你的泥料與你的窯燒條件下，實際燒出的試片」。
+  </div>
+
+  <h2>八、釉燒最常見的問題，可以先從哪裡找原因？</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>出窯現象</th>
+          <th>可能原因</th>
+          <th>優先檢查</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>釉面局部太厚、流到底部</td>
+          <td>施釉過厚、凹槽積釉、不同位置厚度差太大</td>
+          <td>施釉量＋底部清潔</td>
+        </tr>
+        <tr>
+          <td>釉面縮成一塊一塊、露出坯體</td>
+          <td>釉層收縮、表面污染、施釉狀態或厚度不理想</td>
+          <td>坯體清潔＋釉層厚度</td>
+        </tr>
+        <tr>
+          <td>釉面出現小孔、針孔感</td>
+          <td>釉內氣體排出、釉層與燒成條件不匹配</td>
+          <td>釉藥＋燒成曲線</td>
+        </tr>
+        <tr>
+          <td>釉色與預期差異很大</td>
+          <td>溫度、氣氛、釉厚或泥料不同</td>
+          <td>試片＋實際燒成紀錄</td>
+        </tr>
+        <tr>
+          <td>作品底部黏住窯具</td>
+          <td>底足殘留釉料，或釉在高溫時流動接觸窯具</td>
+          <td>釉燒前底部檢查</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>九、素燒坯施釉後，搬運時反而更要小心</h2>
+
+  <p>
+    素燒坯雖然比生坯硬很多，但它仍然可能因碰撞、邊緣受力或局部細小裂痕而損壞。
+    尤其是杯把、薄邊、尖角、細長裝飾等突出部位，施釉後不代表就變得「耐摔」。
+  </p>
+
+  <p>
+    搬運時最好托住作品主要結構，不要只捏住細小裝飾或單薄邊緣。
+    施釉完成後也要避免讓作品彼此碰撞，否則可能造成崩釉、缺角或釉層脫落。
+  </p>
+
+  <h2>十、素燒一定要比釉燒低溫嗎？</h2>
+
+  <p>
+    「素燒通常比釉燒低」是很常見的入門概念，但不要把它理解成一條永遠固定的規則。
+    實際燒成溫度要看<strong>泥料種類、釉藥成熟範圍、作品用途與陶窯設定</strong>。
+  </p>
+
+  <p>
+    更重要的是：釉燒的溫度必須讓釉藥有機會成熟，同時又不能讓坯體超出適合的燒成範圍。
+    因此使用不同品牌、不同系列泥料或釉藥時，最好以產品資料與試燒結果為依據。
+  </p>
+
+  <div class="notice">
+    <div class="notice-title">⚠️ 一個很重要的觀念：不要只看「幾度」</div>
+    <p>
+      陶藝燒成不只是看最高溫度。實際結果也會受到<strong>升溫速度、保溫、窯內氣氛、作品大小、泥釉組合</strong>等因素影響。
+      同樣寫著一個最高溫度，不同燒成條件得到的成熟程度也可能不同。
+    </p>
+  </div>
+
+  <h2>十一、進行釉燒前的「新手檢查表」</h2>
+
+  <div class="notice">
+    <div class="notice-title">🔥 裝窯前，請逐項確認</div>
+    <ol>
+      <li>作品是否已完成素燒，且本體沒有明顯裂損？</li>
+      <li>釉藥是否適用於目前使用的泥料與燒成範圍？</li>
+      <li>釉層是否過厚，尤其是凹槽、轉角與底部附近？</li>
+      <li>杯底、底足、支撐接觸區是否已經<strong>完全清除釉料</strong>？</li>
+      <li>作品與作品之間是否保持足夠空間，避免高溫時彼此碰觸？</li>
+      <li>作品表面是否沒有明顯灰塵、纖維或其他異物？</li>
+      <li>窯具是否乾淨、平穩，作品放置是否安全？</li>
+      <li>這次使用的泥料、釉藥與燒成設定是否有做好紀錄？</li>
+    </ol>
+  </div>
+
+  <h2>十二、新手最容易犯的 8 個錯誤</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>錯誤</th>
+          <th>為什麼容易出問題？</th>
+          <th>改進方法</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>生坯還沒乾透就進窯</td>
+          <td>殘留水分在升溫初期可能造成破損</td>
+          <td>確實乾燥後再進窯</td>
+        </tr>
+        <tr>
+          <td>把素燒當成「完成品」</td>
+          <td>素燒坯仍有孔隙，性能與最終釉燒品不同</td>
+          <td>把素燒理解為中間階段</td>
+        </tr>
+        <tr>
+          <td>素燒坯不除塵就施釉</td>
+          <td>灰塵會影響釉層附著與表面狀態</td>
+          <td>施釉前先輕柔清潔</td>
+        </tr>
+        <tr>
+          <td>釉塗得越厚越好</td>
+          <td>過厚可能造成流釉、釉面缺陷或局部堆積</td>
+          <td>依釉藥資料控制施釉厚度</td>
+        </tr>
+        <tr>
+          <td>底足也一起上釉</td>
+          <td>釉熔融後可能黏住窯棚</td>
+          <td>釉燒前清乾淨接觸面</td>
+        </tr>
+        <tr>
+          <td>只看瓶身上的釉色猜結果</td>
+          <td>實際燒成受泥料、厚度與燒成條件影響</td>
+          <td>使用試片累積經驗</td>
+        </tr>
+        <tr>
+          <td>不同泥釉直接混搭</td>
+          <td>成熟範圍不匹配可能造成表面或坯體問題</td>
+          <td>先確認泥料與釉藥相容的燒成範圍</td>
+        </tr>
+        <tr>
+          <td>沒有記錄燒成條件</td>
+          <td>出問題後很難追查原因</td>
+          <td>記錄泥料、釉藥、厚度與窯燒設定</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="final-box">
+    <h3>十三、記住這一句就夠了</h3>
+    <p>
+      <strong>素燒是把生坯變成「穩定、堅硬、可吸釉的坯體」；釉燒則是把釉藥「燒成熟」，完成最後的表面與坯體燒成。</strong>
+    </p>
+    <p>
+      做陶時可以把整個流程記成：
+    </p>
+    <p>
+      <strong>生坯 → 完全乾燥 → 素燒 → 清潔 → 施釉 → 清理底足 → 釉燒 → 出窯檢查</strong>
+    </p>
+    <p>
+      真正熟悉陶藝之後，你會開始注意的不只是「幾度燒」，
+      而是<strong>泥料、釉料、厚度、乾燥、施釉與燒成條件之間的關係</strong>。
+      這些因素彼此配合，才是作品穩定與成功的關鍵。
+    </p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">延伸思考：為什麼懂燒成，就更懂陶土？</div>
+    <p>
+      因為陶藝不是單純把泥巴「烤硬」。從生坯到素燒，再到釉燒，
+      材料會持續失去水分、發生結構變化、燒結，釉料也會在高溫中重新形成表面。
+    </p>
+    <p>
+      所以看一件出窯作品時，可以反過來問：
+      <strong>這個坯體成熟了嗎？釉層厚度合適嗎？為什麼這個位置流釉？為什麼顏色與試片不同？</strong>
+      當你開始這樣觀察，窯燒就不再只是「交給窯來決定」，而會變成可以理解與控制的陶藝科學。
+    </p>
+  </div>
+
+  <div class="footer">
+    本頁為陶藝素燒與釉燒入門教學內容。實際燒成溫度、燒成曲線與施釉方式會受到泥料種類、
+    釉藥配方、窯型、燒成氣氛與作品厚度等因素影響。實際操作時，應以泥料與釉藥製造商提供的技術資料、
+    工作室的窯燒規範與試燒結果為主要依據。
+  </div>
+
+</article>
+</main>
+
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>認識釉藥三大元素｜鹼性、中性、酸性</title>
+<meta name="description" content="認識釉藥三大基本化學角色：鹼性 RO 助熔、中性 Al₂O₃ 控制黏稠與穩定、酸性 SiO₂ 形成玻璃質，從原料、功能到比例，建立陶瓷釉藥的基礎觀念。">
+<style>
+  :root{
+    --bg:#eee7d8;--paper:#fbfaf5;--card:#f1f0e4;--card2:#f6f4e9;
+    --line:#d8d4c5;--text:#39372f;--muted:#777367;--accent:#6c6654;
+    --accent-light:#e8e4d6;--quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.85;font-size:15px}
+  .page{width:min(900px,calc(100% - 32px));margin:34px auto 70px;background:var(--paper);border:1px solid #e1ddcf;border-radius:12px;box-shadow:0 7px 24px rgba(70,62,45,.08);overflow:hidden}
+  .article{padding:42px 56px 64px}
+  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em}
+  .eyebrow{display:inline-block;font-size:11px;color:#625d4e;background:var(--accent-light);border:1px solid #dcd7c7;border-radius:999px;padding:3px 10px;margin-bottom:13px}
+  h1{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-weight:600;font-size:30px;line-height:1.45;letter-spacing:.03em;margin:0 0 18px;color:#35332c}
+  .lead{background:var(--quote);border:1px solid #dedacd;border-radius:8px;padding:18px 20px;margin:20px 0 28px;color:#4d4a40;font-size:14px}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}.tag{border:1px solid #d7d2c3;background:#f8f6ed;color:#706b5d;border-radius:999px;padding:3px 10px;font-size:11px}
+  .notice,.summary{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:19px 21px;margin:22px 0}.notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e}.notice p,.summary p{margin:5px 0}
+  h2{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-size:22px;line-height:1.55;margin:42px 0 17px;padding-bottom:8px;border-bottom:1px solid #ddd8ca;color:#3e3b32}
+  h3{font-size:17px;margin:28px 0 9px;color:#464238}p{margin:10px 0}ul,ol{padding-left:1.5em;margin:10px 0 18px}li{margin:4px 0}strong{font-weight:700}
+  .quote{margin:18px 0;padding:13px 18px;border-left:4px solid #aaa38e;background:#f5f3e9;color:#4d4a40;font-family:"Noto Serif TC","PMingLiU",serif}
+  .table-wrap{overflow-x:auto;margin:18px 0 25px;border:1px solid var(--line);border-radius:8px}table{width:100%;border-collapse:collapse;min-width:650px;background:#faf9f3}th,td{border-bottom:1px solid #dfdccf;padding:10px 12px;text-align:left;vertical-align:top}th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px}td{font-size:13px}tr:last-child td{border-bottom:none}
+  .quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 24px}.quick{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:13px 15px}.quick b{display:block;margin-bottom:3px;color:#4b473c}
+  .formula-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 24px}.formula{background:#f7f5ed;border:1px solid var(--line);border-radius:8px;padding:16px 14px;text-align:center}.formula .symbol{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:700;margin-bottom:5px}.formula .name{font-size:14px;font-weight:700}.formula .role{font-size:12px;color:#6c6759;margin-top:4px}
+  .tip{background:#eeece1;border:1px solid #d9d5c7;border-radius:8px;padding:17px 20px;margin:22px 0}.tip b{display:block;margin-bottom:5px}
+  .final-box{margin-top:38px;background:#ebe8dc;border:1px solid #d5d0c1;border-radius:9px;padding:23px 24px}.final-box h3{margin-top:0}
+  .footer{border-top:1px solid #ddd8ca;margin-top:44px;padding-top:18px;color:#898476;font-size:12px}.backtop{position:fixed;right:20px;bottom:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#5e594c;background:#f8f6ed;border:1px solid #d5d0c2;border-radius:50%;box-shadow:0 3px 12px rgba(60,55,43,.08)}
+  @media(max-width:700px){.page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px}.article{padding:28px 22px 45px}h1{font-size:25px}h2{font-size:20px}body{font-size:14px}.quick-grid,.formula-grid{grid-template-columns:1fr}.lead,.notice,.summary,.tip,.final-box{padding:15px 16px}}
+  @media print{body{background:white}.page{width:100%;margin:0;border:none;box-shadow:none}.backtop{display:none}}
+</style>
+</head>
+<body id="top">
+<main class="page"><article class="article">
+  <div class="breadcrumb">陶藝釉藥｜釉方基礎｜化學成分入門</div>
+  <span class="eyebrow">釉藥化學基礎</span>
+  <h1>認識釉藥三大元素<br>鹼性、中性、酸性</h1>
+
+  <div class="tags">
+    <span class="tag">RO</span><span class="tag">Al₂O₃</span><span class="tag">SiO₂</span>
+    <span class="tag">助熔</span><span class="tag">黏稠與穩定</span><span class="tag">玻璃質</span><span class="tag">釉藥比例</span>
+  </div>
+
+  <div class="lead">
+    <strong>一看就懂：</strong>
+    釉藥不是單一材料，而是許多原料與化學成分在高溫下共同作用的結果。學習釉藥時，可以先抓住三個最重要的基本角色：<strong>鹼性 RO 幫助熔融、中性 Al₂O₃ 控制黏稠與穩定、酸性 SiO₂ 形成玻璃質</strong>。三者不是三種「原料名稱」，而是理解釉藥配方時非常重要的功能分類。
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">先記住這三句話</div>
+    <p><strong>RO：</strong>幫助釉藥在適當溫度下熔融。</p>
+    <p><strong>Al₂O₃：</strong>調整黏度與穩定性，避免釉在高溫下過度流動。</p>
+    <p><strong>SiO₂：</strong>是重要的玻璃質來源，參與形成釉面的玻璃質結構。</p>
+    <p><strong>最重要：</strong>三者不是各自獨立工作，而是要以適當比例互相配合。</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula"><div class="symbol">RO</div><div class="name">鹼性</div><div class="role">助熔｜幫助融化</div></div>
+    <div class="formula"><div class="symbol">Al₂O₃</div><div class="name">中性</div><div class="role">黏稠、穩定｜控制流動</div></div>
+    <div class="formula"><div class="symbol">SiO₂</div><div class="name">酸性</div><div class="role">玻璃質｜形成釉面結構</div></div>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">新手核心表</div>
+    <div class="table-wrap" style="margin:10px 0 0">
+      <table>
+        <thead><tr><th>分類</th><th>化學表示</th><th>主要功能</th><th>簡單記法</th></tr></thead>
+        <tbody>
+          <tr><td>鹼性</td><td>RO</td><td>助熔，影響釉藥的熔融與流動</td><td><strong>幫助融</strong></td></tr>
+          <tr><td>中性</td><td>Al₂O₃</td><td>提供黏度與穩定性，控制高溫流動</td><td><strong>控制流</strong></td></tr>
+          <tr><td>酸性</td><td>SiO₂</td><td>重要玻璃質來源，參與形成玻璃質結構</td><td><strong>形成玻璃</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>一、為什麼釉藥需要三種基本角色？</h2>
+  <p>釉藥經過高溫後，會發生熔融、流動與結構形成等變化，最後在陶瓷表面形成釉層。但如果只使用單一類型的材料，往往無法同時兼顧「能熔融、能穩定附著、能形成玻璃質」這些需求。</p>
+  <p>因此，可以先把釉藥想成一個需要分工合作的系統：</p>
+  <div class="quote"><strong>SiO₂</strong> 提供玻璃質 → <strong>RO</strong> 幫助降低熔融難度 → <strong>Al₂O₃</strong> 調整黏度與穩定性 → 三者共同形成適合燒成的釉層。</div>
+  <p>這就是初學釉藥最值得建立的基本框架：<strong>不是找一種「神奇原料」，而是理解不同成分如何互相配合。</strong></p>
+
+  <h2>二、第一大元素：鹼性 RO——助熔劑</h2>
+  <p>在釉藥的基本化學表示中，<strong>RO</strong>可以用來代表具有助熔作用的一類氧化物。最簡單的理解，就是<strong>幫助釉藥更容易在指定燒成範圍內熔融</strong>。</p>
+  <h3>助熔劑在做什麼？</h3>
+  <ul><li>幫助降低釉藥的熔融溫度。</li><li>影響釉藥在高溫中的熔融與流動行為。</li><li>讓原本不容易熔融的玻璃質來源，能在陶瓷燒成溫度範圍內參與形成釉層。</li></ul>
+  <p>課程教材舉出的助熔來源包括鉀、鈉、鉛、硼砂等；在實際配釉時，這些成分通常是由不同釉藥原料帶入。</p>
+  <div class="tip"><b>記憶法：</b>RO 可以先想成「把熔融這件事變得比較容易」的角色；但助熔不是越多越好，比例改變也會連帶影響釉的流動與最後效果。</div>
+
+  <h2>三、第二大元素：中性 Al₂O₃——黏稠與穩定</h2>
+  <p><strong>Al₂O₃（氧化鋁）</strong>在本課程中被歸在中性成分，主要用來理解釉藥的<strong>黏稠、附著與穩定作用</strong>。</p>
+  <p>想像一個很容易熔化的釉方：如果高溫時流動性太強，釉液就可能沿著作品往下跑，形成不希望出現的流釉。因此，配方需要適當的 Al₂O₃ 來調整高溫下的黏度。</p>
+  <div class="quick-grid">
+    <div class="quick"><b>Al₂O₃ 太少</b>釉可能過度流動，穩定性不足，容易出現流釉等問題。</div>
+    <div class="quick"><b>適量 Al₂O₃</b>讓釉藥在熔融的同時保有適當黏度，較能穩定停留在坯體表面。</div>
+    <div class="quick"><b>理解重點</b>它不是單純「讓釉變厚」而已，而是調整高溫熔融狀態中的流動與穩定。</div>
+    <div class="quick"><b>生活比喻</b>像把太稀的液體調成更容易控制的狀態，但仍要保留必要的流動性。</div>
+  </div>
+
+  <h2>四、第三大元素：酸性 SiO₂——玻璃質</h2>
+  <p><strong>SiO₂（二氧化矽）</strong>是釉藥中非常重要的玻璃質來源。最常見、也最容易讓學生理解的原料之一，就是<strong>石英</strong>。</p>
+  <p>在高溫燒成過程中，SiO₂會與其他成分共同形成釉面的玻璃質結構。因此，它是理解透明性、光澤與釉面結構時非常重要的一個角色。</p>
+  <div class="quote"><strong>記住：</strong>SiO₂ 本身不是「完成的釉」，而是釉藥玻璃質形成的重要成分；它需要與助熔、穩定等其他成分共同作用。</div>
+
+  <h2>五、三大元素不是三種原料：這一點最容易搞混</h2>
+  <p>初學者很容易把 RO、Al₂O₃、SiO₂ 想成三個可以直接拿來秤的「材料名稱」。其實更準確的理解是：<strong>它們主要是在描述釉藥中的化學成分與功能角色。</strong></p>
+  <p>真正拿來配釉的原料，可能是長石、石英、碳酸鈣、高嶺土、熔塊或其他礦物原料。每一種原料可能同時含有多種氧化物，因此一種原料並不一定只扮演一個角色。</p>
+  <h3>最典型的例子：長石</h3>
+  <p>課程教材中的澳洲鉀長石，成分包含 K₂O、Na₂O、SiO₂、Al₂O₃、CaO 等。因此長石不是「只有助熔劑」，它其實可以同時帶入多種釉藥所需要的成分。</p>
+  <div class="tip"><b>關鍵觀念：</b>看到一包原料時，要問的不是「它是哪一種元素」，而是「這個原料帶進釉方中的哪些氧化物？各自扮演什麼角色？」</div>
+
+  <h2>六、為什麼「比例」比單一原料更重要？</h2>
+  <p>釉藥的效果不是單純由某一種原料決定，而是由<strong>各成分的比例與相互作用</strong>共同形成。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>比例變化</th><th>可能影響</th><th>觀察方向</th></tr></thead>
+    <tbody>
+      <tr><td>RO 增加或減少</td><td>熔融與流動行為改變</td><td>觀察是否更容易熔融、是否過度流動</td></tr>
+      <tr><td>Al₂O₃ 改變</td><td>黏度與穩定性改變</td><td>觀察釉面是否更穩定、流動是否改變</td></tr>
+      <tr><td>SiO₂ 改變</td><td>玻璃質特性與熔融條件改變</td><td>觀察釉面結構、透明度、光澤等變化</td></tr>
+    </tbody>
+  </table></div>
+  <p>因此，釉藥不是「材料越多越好」，而是要找到<strong>適合特定泥料、燒成溫度與作品用途的比例區域</strong>。</p>
+
+  <h2>七、這就是為什麼下一步會學「三角座標」</h2>
+  <p>當我們已經知道三大基本角色之後，下一個問題自然會出現：</p>
+  <div class="quote"><strong>「那麼，究竟什麼比例最好？」</strong></div>
+  <p>三角座標試驗法就是用來回答這個問題。以長石、碳酸鈣、石英為例，把三種原料放進三角座標中，改變它們的重量比例，再逐一製作試片、施釉與燒成，比較不同配方的釉面變化。</p>
+  <p>例如一組 100g 配方，可以是：</p>
+  <div class="quick-grid">
+    <div class="quick"><b>長石 40g</b>提供多種釉藥成分。</div>
+    <div class="quick"><b>碳酸鈣 40g</b>作為助熔來源之一。</div>
+    <div class="quick"><b>石英 20g</b>作為玻璃質來源。</div>
+    <div class="quick"><b>總重量 100g</b>比例改變，就可能得到不同的燒成結果。</div>
+  </div>
+  <p>也就是說：<strong>第五週先認識「功能」，下一階段再用實驗找「比例」。</strong></p>
+
+  <h2>八、從「原料」進一步理解「氧化物」</h2>
+  <p>這個觀念是從初級配釉走向進階配釉的重要橋樑。</p>
+  <p>例如鉀長石不是單純的 K₂O，而是一種天然礦物原料，裡面同時含有多種氧化物。配釉時，我們真正關心的是：這些原料把哪些氧化物帶進配方，以及它們最後如何共同參與釉面的形成。</p>
+  <p>這樣的思考方式，會為後面的<strong>賽格爾式（Seger Formula）</strong>等化學計算打下基礎。</p>
+
+  <h2>九、三大元素的「蓋房子」比喻</h2>
+  <p>第一次接觸化學式時，可以把釉藥想像成一棟正在建造的房子：</p>
+  <div class="formula-grid">
+    <div class="formula"><div class="symbol">SiO₂</div><div class="name">玻璃質骨架</div><div class="role">參與形成主要玻璃質結構</div></div>
+    <div class="formula"><div class="symbol">RO</div><div class="name">助熔角色</div><div class="role">幫助材料在燒成溫度下熔融</div></div>
+    <div class="formula"><div class="symbol">Al₂O₃</div><div class="name">穩定角色</div><div class="role">調整黏度與高溫流動</div></div>
+  </div>
+  <p>房子不是只靠一種材料蓋起來；釉藥也一樣，需要不同成分互相配合，才能形成適合的表面。</p>
+
+  <h2>十、常見錯誤觀念一次釐清</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>常見誤解</th><th>比較正確的理解</th></tr></thead>
+    <tbody>
+      <tr><td>「RO、Al₂O₃、SiO₂ 就是三種原料。」</td><td>它們主要是釉藥中的化學成分／功能角色；真正配釉時使用的是各種原料。</td></tr>
+      <tr><td>「長石就是助熔劑。」</td><td>長石是複合型原料，可能同時帶入 K₂O、Na₂O、SiO₂、Al₂O₃、CaO 等成分。</td></tr>
+      <tr><td>「SiO₂ 越多，釉一定越好。」</td><td>比例改變會同時影響玻璃質特性與熔融條件，必須放在整體配方中判斷。</td></tr>
+      <tr><td>「Al₂O₃ 就是讓釉完全不流。」</td><td>重點是調整黏度與穩定性，而不是完全取消高溫流動。</td></tr>
+      <tr><td>「助熔劑越多越容易成功。」</td><td>過度改變比例可能造成流動等問題，仍需配合其他成分與燒成條件。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>十一、從配方到燒成：真正要觀察什麼？</h2>
+  <p>當不同配方完成試片並燒成後，不是只看「漂不漂亮」。更有價值的是把變化記錄下來。</p>
+  <div class="quick-grid">
+    <div class="quick"><b>① 熔融程度</b>釉有沒有充分熔融？表面是否仍顯得生硬？</div>
+    <div class="quick"><b>② 流動性</b>釉是否流動過多，或仍維持適當位置？</div>
+    <div class="quick"><b>③ 光澤</b>偏亮面、半光或霧面？</div>
+    <div class="quick"><b>④ 透明度</b>透明、半透明或不透明？</div>
+    <div class="quick"><b>⑤ 色彩與質感</b>不同配方的色彩、表面感受是否產生變化？</div>
+    <div class="quick"><b>⑥ 表面缺陷</b>有沒有針孔、氣泡、縮釉、裂釉或流釉等現象？</div>
+  </div>
+  <p>只有把「配方比例」和「燒成結果」放在一起比較，才能真正知道哪一個方向值得繼續實驗。</p>
+
+  <h2>十二、三大元素的完整關係圖</h2>
+  <div class="notice">
+    <div class="notice-title">釉藥基本思考流程</div>
+    <p><strong>原料</strong> → 帶入不同<strong>氧化物</strong> → 分別扮演<strong>助熔／穩定／玻璃質</strong>等角色 → 改變<strong>比例</strong> → 經過<strong>施釉與燒成</strong> → 觀察<strong>熔融、光澤、透明度、質感與缺陷</strong> → 修正下一組配方。</p>
+  </div>
+  <div class="quote"><strong>換句話說：</strong><br>學釉藥不是背「哪種原料一定會變成什麼顏色」，而是逐漸理解「原料帶入哪些成分，以及這些成分如何互相配合」。</div>
+
+  <div class="final-box">
+    <h3>十三、最後只要記住這一句</h3>
+    <p><strong>RO 幫助熔融、Al₂O₃ 控制流動、SiO₂ 形成玻璃質；三者比例不同，就會產生不同的釉面效果。</strong></p>
+    <p>再往前一步理解：<strong>三大元素不是三種固定原料，而是釉藥中重要的化學成分與功能角色。</strong>一種原料可以同時帶入多種氧化物，所以真正的配釉，就是在研究這些成分如何共同作用。</p>
+    <p>當你能從「看原料」進一步做到「看成分、看比例、看燒成結果」，就開始真正進入釉藥配方的世界。</p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">延伸思考：下一步學什麼？</div>
+    <p><strong>第五週：</strong>先認識 RO、Al₂O₃、SiO₂ 的功能。</p>
+    <p><strong>下一階段：</strong>利用三角座標改變三種原料比例，做系統性試釉。</p>
+    <p><strong>再往後：</strong>進一步理解原料中的氧化物，銜接賽格爾式（Seger Formula）等進階配釉方法。</p>
+  </div>
+
+  <div class="footer">本頁內容依據提供之「認識釉藥三大元素：鹼性、中性、酸性」教材整理，保留原教材對 RO、Al₂O₃、SiO₂ 三大基本角色、原料與氧化物關係，以及三角座標銜接概念的教學架構。實際釉藥效果仍會受到原料組成、配方比例、施釉厚度、泥料與燒成條件等因素影響。</div>
+</article></main>
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釉藥的奧秘～三角座標</title>
+<meta name="description" content="用三角座標試驗法系統性研究三種釉藥原料的比例，從21點到66點建立釉藥實驗地圖，了解如何配方、試片、燒成與比較。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.85;font-size:15px}
+  .page{width:min(900px,calc(100% - 32px));margin:34px auto 70px;background:var(--paper);border:1px solid #e1ddcf;border-radius:12px;box-shadow:0 7px 24px rgba(70,62,45,.08);overflow:hidden}
+  .article{padding:42px 56px 64px}
+  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em}
+  .eyebrow{display:inline-block;font-size:11px;color:#625d4e;background:var(--accent-light);border:1px solid #dcd7c7;border-radius:999px;padding:3px 10px;margin-bottom:13px}
+  h1{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-weight:600;font-size:30px;line-height:1.45;letter-spacing:.03em;margin:0 0 18px;color:#35332c}
+  .lead{background:var(--quote);border:1px solid #dedacd;border-radius:8px;padding:18px 20px;margin:20px 0 28px;color:#4d4a40;font-size:14px}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+  .tag{border:1px solid #d7d2c3;background:#f8f6ed;color:#706b5d;border-radius:999px;padding:3px 10px;font-size:11px}
+  .notice,.summary{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:19px 21px;margin:22px 0}
+  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e}
+  .notice p,.summary p{margin:5px 0}
+  h2{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-size:22px;line-height:1.55;margin:42px 0 17px;padding-bottom:8px;border-bottom:1px solid #ddd8ca;color:#3e3b32}
+  h3{font-size:17px;margin:28px 0 9px;color:#464238}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.5em;margin:10px 0 18px}
+  li{margin:4px 0}
+  strong{font-weight:700}
+  .quote{margin:18px 0;padding:13px 18px;border-left:4px solid #aaa38e;background:#f5f3e9;color:#4d4a40;font-family:"Noto Serif TC","PMingLiU",serif}
+  .table-wrap{overflow-x:auto;margin:18px 0 25px;border:1px solid var(--line);border-radius:8px}
+  table{width:100%;border-collapse:collapse;min-width:620px;background:#faf9f3}
+  th,td{border-bottom:1px solid #dfdccf;padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px}
+  td{font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 24px}
+  .quick{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:13px 15px}
+  .quick b{display:block;margin-bottom:3px;color:#4b473c}
+  .triangle{margin:18px auto 24px;max-width:430px;padding:14px;background:#f7f5ec;border:1px solid var(--line);border-radius:8px;text-align:center}
+  .triangle svg{width:100%;height:auto;display:block}
+  .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f2efe5;border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:14px 0;color:#514d42;overflow:auto}
+  .tip{background:#eeece1;border:1px solid #d9d5c7;border-radius:8px;padding:17px 20px;margin:22px 0}
+  .tip b{display:block;margin-bottom:5px}
+  .final-box{margin-top:38px;background:#ebe8dc;border:1px solid #d5d0c1;border-radius:9px;padding:23px 24px}
+  .final-box h3{margin-top:0}
+  .footer{border-top:1px solid #ddd8ca;margin-top:44px;padding-top:18px;color:#898476;font-size:12px}
+  .backtop{position:fixed;right:20px;bottom:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#5e594c;background:#f8f6ed;border:1px solid #d5d0c2;border-radius:50%;box-shadow:0 3px 12px rgba(60,55,43,.08)}
+  @media(max-width:700px){.page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px}.article{padding:28px 22px 45px}h1{font-size:25px}h2{font-size:20px}body{font-size:14px}.quick-grid{grid-template-columns:1fr}.lead,.notice,.summary,.tip,.final-box{padding:15px 16px}}
+  @media print{body{background:white}.page{width:100%;margin:0;border:none;box-shadow:none}.backtop{display:none}}
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝釉藥｜配方實驗｜三角座標入門</div>
+  <span class="eyebrow">釉藥科學實驗法</span>
+  <h1>釉藥的奧秘～三角座標</h1>
+
+  <div class="lead">
+    <strong>一看就懂：</strong>
+    不再靠「這個多一點、那個少一點」來猜釉藥。三角座標試驗法把三種原料放進一個等邊三角形，讓每一個位置都代表一組明確配方，再透過試片與燒成結果，比較釉面的熔融、色彩、光澤、透明度與表面狀況。
+  </div>
+
+  <div class="tags">
+    <span class="tag">三角座標</span><span class="tag">Triaxial Blend</span><span class="tag">21點</span><span class="tag">66點</span><span class="tag">原料比例</span><span class="tag">試片</span><span class="tag">釉藥開發</span>
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">重點整理</div>
+    <p>三角座標一次研究<strong>三種原料</strong>，利用等邊三角形表示它們的比例變化。</p>
+    <p><strong>三個頂點＝三種原料各 100%</strong>；三角形內的一個點，就是一組不同的釉方。</p>
+    <p><strong>21 點找方向，66 點找細節。</strong>最後一定要透過實際配釉、施釉與燒成，才能知道哪一個區域值得繼續研究。</p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">三角座標四句口訣</div>
+    <ol>
+      <li><strong>三個頂點，代表三種原料。</strong></li>
+      <li><strong>頂點 100%，對邊 0%。</strong></li>
+      <li><strong>一個交叉點，就是一組釉方。</strong></li>
+      <li><strong>三種比例加起來，永遠等於 100%。</strong></li>
+    </ol>
+  </div>
+
+  <h2>一、什麼是「三角座標試驗法」？</h2>
+  <p>釉藥是由多種原料混合而成。如果只是憑經驗一直增減，很難知道到底是哪一個比例造成釉面變化。</p>
+  <p>三角座標試驗法（Triaxial Blend）提供一個更有系統的方法：<strong>選三種原料，設計不同比例，再逐一燒製與比較。</strong></p>
+  <div class="quote"><strong>三種原料 → 三角座標 → 不同比例 → 不同釉方 → 試片燒成 → 觀察比較 → 找出理想區域</strong></div>
+
+  <h2>二、為什麼叫「三角座標」？</h2>
+  <p>因為一次研究三種原料，所以用一個<strong>等邊三角形</strong>表示全部比例變化。教材示範的三種原料為：</p>
+  <div class="quick-grid">
+    <div class="quick"><b>A：長石</b>提供多種釉藥成分，是複合型原料。</div>
+    <div class="quick"><b>B：碳酸鈣</b>可作為釉藥中的助熔來源之一。</div>
+    <div class="quick"><b>C：石英</b>是重要的玻璃質來源。</div>
+    <div class="quick"><b>注意</b>原料不是只扮演單一角色；長石本身就包含多種氧化物。</div>
+  </div>
+
+  <div class="triangle" aria-label="三角座標概念圖">
+    <svg viewBox="0 0 500 330" role="img">
+      <polygon points="250,28 50,285 450,285" fill="#f1f0e4" stroke="#aaa38e" stroke-width="3"/>
+      <line x1="150" y1="157" x2="350" y2="157" stroke="#d1cbbb" stroke-width="2"/>
+      <line x1="100" y1="221" x2="400" y2="221" stroke="#d1cbbb" stroke-width="2"/>
+      <line x1="200" y1="92" x2="300" y2="285" stroke="#d1cbbb" stroke-width="2" opacity="0.8"/>
+      <line x1="300" y1="92" x2="200" y2="285" stroke="#d1cbbb" stroke-width="2" opacity="0.8"/>
+      <circle cx="250" cy="178" r="6" fill="#6c6654"/>
+      <text x="250" y="20" text-anchor="middle" font-size="18" fill="#4d493e">A 長石 100%</text>
+      <text x="42" y="313" text-anchor="start" font-size="18" fill="#4d493e">B 碳酸鈣 100%</text>
+      <text x="458" y="313" text-anchor="end" font-size="18" fill="#4d493e">C 石英 100%</text>
+      <text x="250" y="168" text-anchor="middle" font-size="15" fill="#4d493e">一個點＝一組釉方</text>
+    </svg>
+  </div>
+
+  <h2>三、三個頂點代表「100%」</h2>
+  <p>這是判讀三角座標最重要的第一個觀念：</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>位置</th><th>比例</th><th>代表意義</th></tr></thead>
+    <tbody>
+      <tr><td>A 頂點</td><td>A＝100%，B＝0%，C＝0%</td><td>全部是 A 原料</td></tr>
+      <tr><td>B 頂點</td><td>A＝0%，B＝100%，C＝0%</td><td>全部是 B 原料</td></tr>
+      <tr><td>C 頂點</td><td>A＝0%，B＝0%，C＝100%</td><td>全部是 C 原料</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>記住：</strong>頂點代表某一種原料 100%，其他兩種原料則為 0%。</p>
+
+  <h2>四、三角形的三條邊代表什麼？</h2>
+  <p>假設 A 是長石，那麼<strong>距離 A 最遠的那一條邊，就代表 A＝0%</strong>。</p>
+  <div class="quote">越靠近 A 頂點 → A 越多；越遠離 A 頂點 → A 越少。B、C 也是完全相同的判讀方式。</div>
+  <p>因此，三角座標不是單純看「離哪裡近」，而是利用三個方向同時讀出三種原料的比例。</p>
+
+  <h2>五、平行線就是「比例刻度」</h2>
+  <p>在三角形裡畫出互相平行的等比例線，就像在三角形內放進三把「刻度尺」。常見的概念刻度包括：</p>
+  <div class="quick-grid">
+    <div class="quick"><b>0%</b>位於對應原料的對邊。</div>
+    <div class="quick"><b>20%</b>離頂點較遠，但已經包含該原料。</div>
+    <div class="quick"><b>40%～80%</b>依平行線位置逐級增加。</div>
+    <div class="quick"><b>100%</b>就是該原料的頂點。</div>
+  </div>
+  <p>教材以<strong>21 點三角座標</strong>作為較容易理解的入門例子；實際繪製就是由三個方向建立互相平行的等比例線。</p>
+
+  <h2>六、為什麼一個「點」就是一個「釉方」？</h2>
+  <p>三角座標最核心的概念，就是三個比例加起來一定等於 100%。例如某一點讀出：</p>
+  <div class="formula">A＝40%　＋　B＝40%　＋　C＝20%　＝　100%</div>
+  <p>如果要製作 100g 釉藥，就可以直接換算：</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>原料</th><th>比例</th><th>100g 配方的實際重量</th></tr></thead>
+    <tbody><tr><td>長石</td><td>40%</td><td>40g</td></tr><tr><td>碳酸鈣</td><td>40%</td><td>40g</td></tr><tr><td>石英</td><td>20%</td><td>20g</td></tr><tr><td><strong>總和</strong></td><td><strong>100%</strong></td><td><strong>100g</strong></td></tr></tbody>
+  </table></div>
+  <div class="quote"><strong>一句話：</strong>一個交叉點，就是一組釉藥配方。</div>
+
+  <h2>七、為什麼要做 21 個配方？</h2>
+  <p>只做一個配方，燒完不好時，只知道「這個配方不好」，卻不知道下一步該往哪裡改。</p>
+  <p>一次做 21 組不同比例，就能看到原料比例改變後，釉面如何逐漸變化，進而找出<strong>比較有希望的區域</strong>。</p>
+  <div class="notice"><div class="notice-title">把 21 點想成一張「釉藥地圖」</div><p>不是一次找到完美答案，而是先找出「哪一區值得繼續研究」。</p></div>
+
+  <h2>八、66 個交叉點：把好區域再放大</h2>
+  <p>當 21 點找到一個大概不錯的區域後，就可以使用<strong>66 點三角座標</strong>，讓比例切得更細。</p>
+  <div class="quick-grid">
+    <div class="quick"><b>21 點</b>大方向搜尋、初步篩選。</div>
+    <div class="quick"><b>66 點</b>細部搜尋、放大有希望的區域。</div>
+  </div>
+  <div class="quote"><strong>21 點找方向，66 點找細節。</strong></div>
+
+  <h2>九、三角座標不是「數學遊戲」</h2>
+  <p>真正的目的，是把「釉藥開發」變成可以重複、比較與修正的實驗。</p>
+  <p>例如在某一區發現長石增加後，釉面比較容易熔融；再繼續增加，則可能變得太流動。石英比例改變，也可能讓玻璃質成分與熔融條件發生變化。</p>
+  <p><strong>因此，每一個交叉點都是一次實驗。</strong></p>
+
+  <h2>十、三種原料，為什麼適合拿來做基礎實驗？</h2>
+  <p>教材以「長石＋碳酸鈣＋石英」建立直觀的基礎試驗。三者在釉藥中的功能方向不同，因此可以觀察比例變化帶來的差異。</p>
+  <div class="quick-grid">
+    <div class="quick"><b>長石</b>含有多種氧化物，是複合型原料。</div>
+    <div class="quick"><b>碳酸鈣</b>可作為助熔來源之一。</div>
+    <div class="quick"><b>石英</b>是重要的玻璃質來源。</div>
+    <div class="quick"><b>重要提醒</b>「原料」與「原料裡面的氧化物」是兩個不同層次的概念。</div>
+  </div>
+  <p>教材特別提醒，長石本身含有 K₂O、Na₂O、Al₂O₃、SiO₂、CaO 等成分，所以不能把一種原料簡單理解成只負責一種功能。</p>
+
+  <h2>十一、三角座標使用的是「原料比例」</h2>
+  <p>這也是它很適合初學者的原因。三角座標直接使用<strong>重量百分比</strong>思考，不必先做複雜的氧化物化學換算。</p>
+  <div class="formula">40% 長石 → 100g 配方就是 40g 長石<br>40% 碳酸鈣 → 100g 配方就是 40g 碳酸鈣<br>20% 石英 → 100g 配方就是 20g 石英</div>
+  <p>所以它的特色可以濃縮成：<strong>比例直觀、重量直接、容易比較。</strong></p>
+
+  <h2>十二、三角座標的完整實驗流程</h2>
+  <div class="notice"><div class="notice-title">從圖表到實物</div><ol>
+    <li>選擇三種原料</li><li>建立三角座標</li><li>劃分 21 點或 66 點</li><li>選擇交叉點</li><li>讀取三種原料比例</li><li>換算實際重量</li><li>精準秤量</li><li>混合、研磨</li><li>製作與編號試片</li><li>施釉</li><li>燒成</li><li>觀察釉面</li><li>比較不同配方</li><li>找出理想區域</li>
+  </ol></div>
+
+  <h2>十三、燒成後要觀察什麼？</h2>
+  <p>三角座標的價值不在「畫完圖」，而在於<strong>燒完之後能不能有系統地比較</strong>。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>觀察項目</th><th>可以問自己什麼？</th></tr></thead>
+    <tbody>
+      <tr><td>熔融</td><td>釉有沒有真正融化？</td></tr>
+      <tr><td>流動</td><td>是否流得太厲害？</td></tr>
+      <tr><td>光澤</td><td>亮面、半光還是霧面？</td></tr>
+      <tr><td>透明度</td><td>透明、半透明還是不透明？</td></tr>
+      <tr><td>色彩</td><td>呈現什麼顏色與變化？</td></tr>
+      <tr><td>表面缺陷</td><td>有沒有針孔、氣泡、縮釉、裂釉或流釉？</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>十四、三角座標的優點</h2>
+  <div class="quick-grid">
+    <div class="quick"><b>① 簡單</b>學生容易理解比例概念。</div>
+    <div class="quick"><b>② 直觀</b>比例可以直接換算成重量。</div>
+    <div class="quick"><b>③ 容易比較</b>不同交叉點就是不同釉方。</div>
+    <div class="quick"><b>④ 系統化</b>不必一直憑感覺亂加。</div>
+  </div>
+  <p>再加上<strong>容易找到「有希望的區域」</strong>，因此很適合作為釉藥實驗的入門方法。</p>
+
+  <h2>十五、三角座標也有它的限制</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>限制</th><th>意思</th></tr></thead>
+    <tbody>
+      <tr><td>配方很多</td><td>66 點若全部實驗，需要較多原料、試片與窯燒時間。</td></tr>
+      <tr><td>一次研究三種原料</td><td>若一次要研究四種、五種原料，就不能直接使用單純三角座標。</td></tr>
+      <tr><td>不是完整化學分析</td><td>它研究的是原料比例，不等於完整的氧化物化學組成分析。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>十六、三角座標 vs. 塞格式</h2>
+  <p>當學生熟悉三角座標後，就可以進一步認識塞格式（Seger Formula）。兩者不是誰取代誰，而是思考層次不同。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th>🔺 三角座標法</th><th>🧪 塞格式</th></tr></thead>
+    <tbody>
+      <tr><td>主要思考</td><td>原料比例</td><td>化學氧化物比例</td></tr>
+      <tr><td>基礎</td><td>重量百分比</td><td>莫耳／當量計算</td></tr>
+      <tr><td>適合</td><td>初學、實驗</td><td>進階釉藥研究</td></tr>
+      <tr><td>優點</td><td>直觀、容易操作</td><td>化學分析較精確</td></tr>
+      <tr><td>限制</td><td>受原料本身成分影響</td><td>計算較複雜</td></tr>
+    </tbody>
+  </table></div>
+  <div class="quote"><strong>建議學習順序：</strong>先學三角座標 → 再理解原料與氧化物 → 最後進入塞格式。</div>
+
+  <h2>十七、三角座標真正的價值</h2>
+  <p>三角座標最重要的，不是記住「21」和「66」兩個數字，而是建立一個非常實用的科學思考循環：</p>
+  <div class="notice"><div class="notice-title">實驗 → 記錄 → 比較 → 修正</div><p>看到某個試片比較亮，就回頭查看配方；發現長石比例改變後熔融程度不同，就比較附近試片，再決定下一輪往哪個方向細分。</p></div>
+  <p>這時候陶藝就不只是「憑經驗調釉」，而變成<strong>有系統地研究釉藥</strong>。</p>
+
+  <h2>十八、把三角座標想成一張「釉藥實驗地圖」</h2>
+  <div class="quick-grid">
+    <div class="quick"><b>整個三角形</b>就是三種原料比例的實驗範圍。</div>
+    <div class="quick"><b>不同位置</b>代表不同比例。</div>
+    <div class="quick"><b>不同比例</b>形成不同釉方。</div>
+    <div class="quick"><b>不同釉方</b>可能帶來不同燒成結果。</div>
+  </div>
+  <p>所以可以把整個方法想成：<strong>先畫地圖，再在地圖上做實驗。</strong></p>
+
+  <h2>十九、新手實作時的幾個小提醒</h2>
+  <div class="tip"><b>① 每個試片都要清楚編號。</b>否則燒完後很容易失去配方與結果的對應關係。</div>
+  <div class="tip"><b>② 秤量要精準。</b>三角座標比較的是比例變化，秤量誤差會直接影響比較結果。</div>
+  <div class="tip"><b>③ 施釉條件盡量一致。</b>如果每片的釉厚差異太大，最後就很難判斷究竟是「配方」還是「施釉厚度」造成差異。</div>
+  <div class="tip"><b>④ 燒成條件要保持一致。</b>只有控制好其他條件，才能更公平地比較不同配方。</div>
+
+  <div class="final-box">
+    <h3>二十、記住這一句就夠了</h3>
+    <p>三角座標法，就是把三種原料的比例變化，畫成一張<strong>可以讀、可以配、可以燒、可以比較</strong>的釉藥實驗地圖。</p>
+    <p><strong>三個頂點＝三種原料 100%</strong></p>
+    <p><strong>一個交叉點＝一組釉方</strong></p>
+    <p><strong>21 點找方向 → 66 點找細節 → 試片燒成 → 比較結果 → 找出理想區域</strong></p>
+    <p>真正的重點不是「算出一個答案」，而是學會用<strong>實驗、記錄、比較與修正</strong>的方法，逐步開發自己的釉藥。</p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">延伸思考：什麼時候該用三角座標？</div>
+    <p>當你想比較<strong>三種原料比例</strong>如何影響釉面，而且希望有系統地找出值得深入研究的區域時，三角座標就是非常實用的起點。</p>
+    <p>當研究進一步進入「原料背後的氧化物組成」與更複雜的化學關係，就可以再往塞格式等進階方法延伸。</p>
+  </div>
+
+  <div class="footer">
+    本頁內容依據提供的《陶瓷釉藥的奧秘－三角座標基礎教學》整理，重點包含三角座標、21 點與 66 點、原料比例、試片燒成、觀察項目與三角座標和塞格式的差異。實際釉藥配方仍應依原料來源、泥料、施釉厚度與窯燒條件進行實驗與記錄。
+  </div>
+</article>
+</main>
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>
