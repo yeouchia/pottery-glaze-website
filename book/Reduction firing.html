@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玻璃質如何結合在陶瓷？（燒成技術~還原燒）</title>
+<meta name="description" content="深入了解還原燒的原理與特色，探討瓦斯窯與電窯在氧氣控制下的釉色變化，揭開陶瓷與玻璃質完美結合的科學奧秘。">
+
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{padding:42px 56px 64px;}
+  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;}
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:3px 10px;
+    margin-bottom:13px;
+  }
+  h1{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.45;
+    letter-spacing:.03em;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:18px 20px;
+    margin:20px 0 28px;
+    color:#4d4a40;
+    font-size:14px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+  }
+  .notice,.summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px 21px;
+    margin:22px 0;
+  }
+  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;}
+  .notice p,.summary p{margin:5px 0}
+  h2{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-size:22px;
+    line-height:1.55;
+    margin:42px 0 17px;
+    padding-bottom:8px;
+    border-bottom:1px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{font-size:17px;margin:28px 0 9px;color:#464238;}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.5em;margin:10px 0 18px;}
+  li{margin:4px 0}
+  strong{font-weight:700}
+  .quote{
+    margin:18px 0;
+    padding:13px 18px;
+    border-left:4px solid #aaa38e;
+    background:#f5f3e9;
+    color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    margin:18px 0 25px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px;}
+  td{font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:16px 0 24px;
+  }
+  .quick{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 15px;
+  }
+  .quick b{display:block;margin-bottom:3px;color:#4b473c;}
+  .tip{
+    background:#eeece1;
+    border:1px solid #d9d5c7;
+    border-radius:8px;
+    padding:17px 20px;
+    margin:22px 0;
+  }
+  .tip b{
+    display:block;
+    margin-bottom:5px;
+  }
+  .final-box{
+    margin-top:38px;
+    background:#ebe8dc;
+    border:1px solid #d5d0c1;
+    border-radius:9px;
+    padding:23px 24px;
+  }
+  .final-box h3{margin-top:0;}
+  .footer{
+    border-top:1px solid #ddd8ca;
+    margin-top:44px;
+    padding-top:18px;
+    color:#898476;
+    font-size:12px;
+  }
+  .backtop{
+    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;color:#5e594c;background:#f8f6ed;
+    border:1px solid #d5d0c2;border-radius:50%;
+    box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+  @media(max-width:700px){
+    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px;}
+    .article{padding:28px 22px 45px}
+    h1{font-size:25px}
+    h2{font-size:20px}
+    body{font-size:14px}
+    .quick-grid{grid-template-columns:1fr}
+  }
+</style>
+
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識網站｜燒成技術</div>
+  <span class="eyebrow">燒窯技術</span>
+  <h1>玻璃質如何結合在陶瓷？（燒成技術~還原燒）</h1>
+  <div class="tags">
+    <span class="tag">釉藥</span>
+    <span class="tag">電窯</span>
+    <span class="tag">瓦斯窯</span>
+  </div>
+
+  <div class="lead">
+    <strong>摘要：</strong>
+    還原燒，是陶瓷燒成技術中非常重要的一種燒成方式。簡單來說，就是在燒成過程中，控制窯內氧氣量，使窯內形成氧氣不足的還原氣氛。這不僅影響金屬氧化物的發色，也關乎釉藥玻璃質與陶瓷坯體的結合變化。
+  </div>
+
+  <h2>一、什麼是還原燒？</h2>
+  <p>還原燒，是陶瓷燒成技術中非常重要的一種燒成方式。簡單來說，就是：在燒成過程中，控制窯內氧氣量，使窯內形成氧氣不足的還原氣氛。</p>
+  <p>當窯內氧氣不足時，燃燒中的氣體會尋找氧氣來源，進而影響陶土與釉藥中的部分金屬氧化物。因此，還原燒會改變：</p>
+  <ul>
+    <li>釉色</li>
+    <li>金屬氧化物的發色</li>
+    <li>坯體表面</li>
+    <li>釉面質感</li>
+    <li>窯變效果</li>
+  </ul>
+  <p>所以，同一個釉藥配方：氧化燒，可能呈現一種顏色。還原燒，則可能呈現完全不同的顏色。這就是還原燒最迷人的地方。</p>
+
+  <h2>二、還原燒的基本原理</h2>
+  <p>陶瓷與釉藥中常含有不同的金屬氧化物。例如：氧化鐵、氧化銅、氧化鈷、氧化錳。這些金屬氧化物在不同燒成氣氛中，可能產生不同的化學狀態與顏色。</p>
+  <p>在氧氣較充足的氧化燒中，金屬氧化物通常保持較高的氧化狀態。而在還原燒中：窯內氧氣供應減少，使部分金屬氧化物發生還原反應。因此，釉藥中的金屬氧化物可能產生不同的發色。</p>
+  <p>例如，含鐵釉在氧化與還原氣氛下，可能呈現不同的色彩變化；含銅釉也可能因燒成氣氛不同而出現明顯差異。</p>
+  <p>所以，還原燒的效果並不是只由釉藥配方決定。可以簡單理解為：</p>
+  <div class="quote">
+    <strong>還原燒效果 ＝ 釉藥配方 + 溫度 + 時間 + 還原程度 + 冷卻方式</strong>
+  </div>
+
+  <h2>三、為什麼還原燒的效果較有變化？</h2>
+  <p>氧化燒通常比較容易控制。但是還原燒除了控制溫度之外，還必須控制：氧氣量、燃料量、空氣供應、燒成時間、還原開始的時機、還原的強弱、冷卻方式。</p>
+  <p>因此：還原燒比氧化燒多了一個重要的變化因素，就是窯內氣氛。只要窯內氣氛發生改變，作品的顏色與釉面效果就可能不同。這也是為什麼：同一種釉藥，使用不同的還原程度，可能產生不同的結果。</p>
+
+  <h2>四、還原燒的三個基本概念</h2>
+  <p>還原燒並不是只有「還原」與「不還原」兩種狀態。實際燒成時，可以概念性地理解為：</p>
+  <ul>
+    <li><strong>1. 弱還原：</strong>窯內仍有一定的氧氣，但氧氣量開始減少。還原效果較溫和。</li>
+    <li><strong>2. 中度還原：</strong>窯內形成較明顯的還原氣氛。這是許多還原燒成中需要控制的重要狀態。</li>
+    <li><strong>3. 強還原：</strong>窯內氧氣量明顯不足。還原作用較強。但要注意：強還原並不一定代表效果最好。如果還原過度，可能造成釉色失去原本預期的效果。</li>
+  </ul>
+  <p>因此，真正重要的不是：還原越強越好。而是：找到適合釉藥與坯體的還原程度。</p>
+
+  <h2>五、還原燒與釉色的關係</h2>
+  <p>還原燒最大的特色，就是能改變金屬氧化物的發色。不同的著色氧化物，對還原氣氛的反應並不相同。因此，同一種釉藥在不同氣氛下可能出現不同效果。</p>
+  <ul>
+    <li><strong>含鐵釉：</strong>可能因氧化與還原條件不同，而呈現不同的黃褐色、青色、灰色、深色。</li>
+    <li><strong>含銅釉：</strong>可能因燒成氣氛不同，而產生不同的綠色、青綠色、紅色系。</li>
+  </ul>
+  <p>因此，陶瓷釉色並不能只依照：「加入多少色料」來判斷。真正影響釉色的因素還包括：釉藥配方、金屬氧化物種類、燒成溫度、還原氣氛、還原時間、冷卻方式。</p>
+
+  <h2>六、還原燒與電窯</h2>
+  <h3>一般電熱窯可以還原燒嗎？</h3>
+  <p>一般傳統電熱窯，主要是利用電熱線加熱。窯內沒有直接燃燒火焰，因此通常以氧化燒為主。</p>
+  <p>電窯最大的優點是：溫度控制穩定、可設定燒成程式、升溫速度容易控制、保溫時間容易設定、重複性較高。因此，一般電窯非常適合：氧化燒、釉藥測試、色釉測試、結晶釉燒成、建立穩定的燒成資料。</p>
+  <p>電窯利用電阻加熱元件產生熱量，並透過溫度控制系統監測與調整窯內溫度，因此可以依照設定控制溫度的升降。</p>
+  
+  <h3>二、特殊電熱窯的還原燒</h3>
+  <p>現代部分特殊設計的電窯，可以進行還原燒。這類窯爐通常必須具有：氣氛控制系統、特殊進氣或排氣設計、還原氣氛控制設備。</p>
+  <p>因此，不能把所有電窯都視為可以進行還原燒。可以簡單理解為：一般電熱窯主要進行氧化燒。具有特殊氣氛控制設計的電窯，才可以進行還原燒。</p>
+  <p>電窯進行還原燒的最大特色，是：溫度控制較精確。但其還原氣氛的形成與控制方式，必須依照窯爐設備本身的設計與操作規格進行。</p>
+
+  <h2>七、還原燒與瓦斯窯</h2>
+  <p>瓦斯窯是最常見的還原燒窯爐之一。瓦斯窯利用瓦斯燃燒產生高溫。與電窯最大的不同是：瓦斯窯具有火焰與燃燒氣體，因此可以直接控制窯內氣氛。</p>
+  <p>燒窯者可以透過調整：燃料供應、空氣供應、燃燒狀態、窯內壓力、排煙與通風，來改變窯內的氧氣量。因此，瓦斯窯可以進行：氧化燒、中性燒成、還原燒。</p>
+  <p>瓦斯窯可以透過調整瓦斯供應與通風系統來控制氧氣量，形成不同的燒成氣氛；其中降低氧氣量可以形成還原燒成。</p>
+
+  <h2>八、瓦斯窯還原燒的特色</h2>
+  <p>瓦斯窯還原燒最大的特色是：可以較直接地控制「火」與「空氣」之間的關係。</p>
+  <p>如果空氣供應較充足，燃燒會較接近氧化氣氛。如果燃料與空氣比例改變，使窯內氧氣供應減少，就可能形成還原氣氛。</p>
+  <p>因此，瓦斯窯的操作重點包括：火焰、溫度、空氣、瓦斯壓力、排氣、還原時間。這些因素必須同時觀察。所以：瓦斯窯還原燒，不只是控制溫度，更是控制窯內氣氛。</p>
+
+  <h2>九、還原燒與柴燒窯</h2>
+  <p>柴燒窯是最具有自然變化的燒成方式之一。柴燒窯利用木柴燃燒產生熱能。與電窯、瓦斯窯不同的是：柴燒窯中的燃料、火焰、灰燼與空氣會同時影響作品。</p>
+  <p>因此，柴燒窯的還原氣氛通常比電窯或瓦斯窯更加複雜。因為柴燒過程中，窯內可能出現：氧化氣氛、還原氣氛、強還原區、弱還原區。而且不同位置可能同時存在不同的燒成環境。</p>
+  <p>所以：柴燒窯的每一個位置，都可能有不同的效果。柴燒窯以木材提供熱能，火焰與灰燼在窯內流動，灰燼會落在作品表面並在高溫下形成自然灰釉與火痕，因此作品往往具有高度變化性與不可完全預測的特色。</p>
+
+  <h2>十、柴燒窯的還原燒特色</h2>
+  <p>柴燒與瓦斯窯最大的不同是：柴燒不只是控制氣氛，也同時受到火焰與灰燼的直接影響。</p>
+  <p>在柴燒過程中：</p>
+  <ul>
+    <li><strong>火焰：</strong>可能直接接觸作品。</li>
+    <li><strong>灰燼：</strong>可能落在作品表面。</li>
+    <li><strong>窯內氣氛：</strong>可能隨著燃燒狀態改變。</li>
+    <li><strong>裝窯位置：</strong>會影響作品接受火焰與灰燼的程度。</li>
+  </ul>
+  <p>因此，同一窯作品可能出現：深淺不同的顏色、火痕、落灰效果、自然灰釉、局部還原效果、不同的表面質感。這些都是柴燒的重要特色。</p>
+
+  <h2>十一、柴燒中的氧化與還原</h2>
+  <p>柴燒窯並不是整個燒成過程都保持完全相同的氣氛。在不同燒成階段中，可能出現：</p>
+  <ul>
+    <li>空氣較充足：形成較偏氧化的環境。</li>
+    <li>氧氣減少：形成較偏還原的環境。</li>
+  </ul>
+  <p>因此，柴燒的還原效果往往與：加柴節奏、燃燒狀態、窯內通風、裝窯位置、火焰流動有密切關係。所以柴燒的特色是：每一件作品都可能因所在位置不同，而產生不同的窯變。這也是柴燒作品很難完全複製的原因。</p>
+
+  <h2>十二、電熱窯、瓦斯窯與柴燒窯的比較</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>電熱窯</th>
+          <th>瓦斯窯</th>
+          <th>柴燒窯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>熱源</td><td>電能</td><td>瓦斯燃燒</td><td>木柴燃燒</td></tr>
+        <tr><td>一般氣氛</td><td>氧化</td><td>可氧化或還原</td><td>氣氛變化較複雜</td></tr>
+        <tr><td>還原能力</td><td>特殊設備才可</td><td>很適合</td><td>可以產生還原區</td></tr>
+        <tr><td>溫度控制</td><td>較精確</td><td>需要人工調整</td><td>變化較大</td></tr>
+        <tr><td>重複性</td><td>較高</td><td>中等</td><td>較低</td></tr>
+        <tr><td>火焰</td><td>無</td><td>有</td><td>有</td></tr>
+        <tr><td>灰燼影響</td><td>無</td><td>通常較少</td><td>明顯</td></tr>
+        <tr><td>作品變化</td><td>較穩定</td><td>變化豐富</td><td>變化最大</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>從三種窯爐可以看出：電窯重視穩定與精確。瓦斯窯重視溫度與氣氛的控制。柴燒窯則結合火焰、灰燼、溫度與氣氛的自然變化。這些差異也使同一種陶土與釉藥，在不同窯爐中可能呈現完全不同的作品效果。</p>
+
+  <h2>十三、還原燒的溫度控制</h2>
+  <p>還原燒並不是從開始到結束都保持相同的氣氛。設計還原燒時，除了溫度曲線之外，也需要思考：</p>
+  <ol>
+    <li><strong>1. 何時開始還原？</strong>不同坯體與釉藥，對還原開始的時間可能有不同需求。</li>
+    <li><strong>2. 還原持續多久？</strong>還原時間會影響部分釉藥的發色。</li>
+    <li><strong>3. 還原強度如何？</strong>不同釉藥適合的還原程度不同。</li>
+    <li><strong>4. 最高溫是多少？</strong>需要符合陶土與釉藥的成熟溫度。</li>
+    <li><strong>5. 如何冷卻？</strong>冷卻速度也可能影響最終釉面與顏色。</li>
+  </ol>
+  <p>因此，一條完整的還原燒曲線，可以概念性理解為：<br>
+  <strong>升溫 → 調整氣氛 → 控制還原 → 到達最高溫 → 保溫 → 控制冷卻</strong></p>
+
+  <h2>十四、還原燒與冷卻</h2>
+  <p>還原燒完成後，並不代表控制工作完全結束。冷卻同樣可能影響：釉色、光澤、結晶、表面質感。</p>
+  <p>因此，有些燒成會在不同冷卻階段，採取不同的氣氛控制方式。可以記住：燒成結果不是只在最高溫決定。從開始升溫到最後冷卻，每個階段都可能影響作品。</p>
+
+  <h2>十五、還原燒常見的問題</h2>
+  <ul>
+    <li><strong>問題一：釉色與預期不同</strong><br>可能與還原程度、還原時間、最高溫度、釉藥厚度、冷卻速度有關。</li>
+    <li><strong>問題二：同一窯作品顏色不同</strong><br>可能原因包括窯內溫度不同、氣氛分布不同、裝窯位置不同、火焰流動不同。這種情況在瓦斯窯與柴燒窯中可能更加明顯。</li>
+    <li><strong>問題三：還原效果不穩定</strong><br>可能原因包括窯內氣氛變化過大、還原開始時間不同、燒成條件沒有完整紀錄。因此，每次燒窯都應該進行紀錄。</li>
+  </ul>
+
+  <h2>十六、建立自己的還原燒紀錄</h2>
+  <p>每次還原燒完成後，可以記錄：</p>
+  <ul>
+    <li><strong>基本資料：</strong>窯爐種類、燒成日期、陶土種類、釉藥名稱。</li>
+    <li><strong>溫度資料：</strong>升溫速度、最高溫度、保溫時間、冷卻方式。</li>
+    <li><strong>氣氛資料：</strong>還原開始時間、還原持續時間、還原程度、燒成氣氛變化。</li>
+    <li><strong>作品結果：</strong>釉色、光澤、表面質感、流動程度、窯變效果。</li>
+  </ul>
+  <p>長期累積這些資料，就可以逐漸建立：自己的還原燒成資料庫。</p>
+
+  <h2>十七、三種窯爐的核心特色</h2>
+  <ul>
+    <li><strong>電熱窯</strong><br>核心：溫度控制。適合追求：穩定、精確、重複性。一般電窯以氧化燒為主，特殊設計的氣氛控制電窯才可進行還原燒。</li>
+    <li><strong>瓦斯窯</strong><br>核心：火與氣氛控制。適合追求：氧化與還原變化、釉色變化、還原釉效果。瓦斯窯是學習還原燒的重要窯爐之一。</li>
+    <li><strong>柴燒窯</strong><br>核心：火、灰與自然窯變。適合追求：火痕、落灰、自然灰釉、豐富窯變、每件作品不同的自然效果。柴燒的魅力就在於：即使使用相同的陶土與釉藥，每件作品仍然可能呈現不同結果。</li>
+  </ul>
+
+  <h2>十八、還原燒的核心觀念</h2>
+  <p>學習還原燒時，可以記住：還原燒不是單純「少給氧氣」。真正的還原燒，需要同時理解：</p>
+  <ol>
+    <li><strong>1. 溫度：</strong>決定坯體與釉藥是否成熟。</li>
+    <li><strong>2. 時間：</strong>影響燒成與還原反應。</li>
+    <li><strong>3. 氣氛：</strong>決定還原效果與部分釉色變化。</li>
+    <li><strong>4. 窯爐：</strong>不同窯爐有不同的控制方式。</li>
+    <li><strong>5. 冷卻：</strong>可能影響最後的釉面與顏色。</li>
+  </ol>
+  <div class="quote">
+    <strong>因此可以簡單記住：</strong><br>
+    還原燒效果 = 配方 + 溫度 + 時間 + 氣氛 + 窯爐 + 冷卻
+  </div>
+
+  <h2>十九、結論</h2>
+  <p>還原燒是陶瓷燒成技術中非常重要的一種方法。它最大的特色是：透過控制窯內氣氛，改變陶土與釉藥中的部分氧化物反應，產生不同的釉色與表面效果。</p>
+  <p>不同窯爐有不同特色：</p>
+  <ul>
+    <li><strong>電熱窯：</strong>重視溫度穩定與精確控制。一般電窯主要以氧化燒為主，特殊氣氛控制型電窯才可進行還原燒。</li>
+    <li><strong>瓦斯窯：</strong>重視火焰與窯內氣氛的控制。是進行還原燒的重要窯爐。</li>
+    <li><strong>柴燒窯：</strong>重視火焰、灰燼、氣氛與自然窯變。每件作品都可能因火焰與位置不同，形成獨特的效果。</li>
+  </ul>
+  <p>因此，還原燒最重要的不是：把窯燒到最高溫。而是學習如何理解：火、氧氣、溫度、時間與材料之間的關係。當我們開始了解這些因素，就會發現：還原燒不只是燒成技術，更是一種控制火與氣氛的陶瓷藝術。</p>
+
+  <div class="notice">
+    <div class="notice-title">常見問題 (FAQ)</div>
+    <p><strong>Q：如果我用瓦斯窯燒還原，釉藥裡的玻璃質結合會不會受到影響？</strong></p>
+    <p>A：還原氣氛主要影響的是金屬氧化物的價態與發色，對組成玻璃質的基礎原料（如二氧化矽、長石等）的熔融行為影響較小。但某些助熔劑（例如氧化鐵被還原後）可能會表現出更強的助熔效果，這有時會讓釉面看起來更具流動感或更為溫潤，因此還是會間接影響玻璃質的最終狀態。</p>
+    <p><strong>Q：還原燒時窯內會產生黑煙嗎？</strong></p>
+    <p>A：是的，為了製造還原氣氛（缺氧狀態），燃燒往往不完全，因此窯煙中會帶有較多的一氧化碳與未燃燒的碳微粒（黑煙）。因此在進行還原燒時，窯房必須有極佳的通風設備，以確保操作人員的安全。</p>
+  </div>
+
+  <div class="final-box">
+    <h3>相關文章</h3>
+    <ul>
+      <li><a href="Kiln temperature curve design.html">燒窯溫度曲線設計</a></li>
+      <li><a href="Oxidation.html">燒成技術~氧化燒</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    本站主要內容涵蓋陶藝與陶瓷知識、釉藥基礎與配方、燒成技術等，致力於為台灣陶藝愛好者提供專業且易讀的內容參考。
+  </div>
+
+</article>
+</main>
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>燒成技術~氧化燒</title>
+<meta name="description" content="了解陶瓷氧化燒的基本原理與特色，探討電窯與瓦斯窯在氧化燒中的應用，以及釉藥在不同燒成氣氛與溫度下的色彩變化，建立正確的燒窯紀錄與觀念。">
+
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{padding:42px 56px 64px;}
+  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;}
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:3px 10px;
+    margin-bottom:13px;
+  }
+  h1{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.45;
+    letter-spacing:.03em;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:18px 20px;
+    margin:20px 0 28px;
+    color:#4d4a40;
+    font-size:14px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+  }
+  .notice,.summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px 21px;
+    margin:22px 0;
+  }
+  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;}
+  .notice p,.summary p{margin:5px 0}
+  h2{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-size:22px;
+    line-height:1.55;
+    margin:42px 0 17px;
+    padding-bottom:8px;
+    border-bottom:1px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{font-size:17px;margin:28px 0 9px;color:#464238;}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.5em;margin:10px 0 18px;}
+  li{margin:4px 0}
+  strong{font-weight:700}
+  .quote{
+    margin:18px 0;
+    padding:13px 18px;
+    border-left:4px solid #aaa38e;
+    background:#f5f3e9;
+    color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    margin:18px 0 25px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px;}
+  td{font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:16px 0 24px;
+  }
+  .quick{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 15px;
+  }
+  .quick b{display:block;margin-bottom:3px;color:#4b473c;}
+  .tip{
+    background:#eeece1;
+    border:1px solid #d9d5c7;
+    border-radius:8px;
+    padding:17px 20px;
+    margin:22px 0;
+  }
+  .tip b{
+    display:block;
+    margin-bottom:5px;
+  }
+  .final-box{
+    margin-top:38px;
+    background:#ebe8dc;
+    border:1px solid #d5d0c1;
+    border-radius:9px;
+    padding:23px 24px;
+  }
+  .final-box h3{margin-top:0;}
+  .footer{
+    border-top:1px solid #ddd8ca;
+    margin-top:44px;
+    padding-top:18px;
+    color:#898476;
+    font-size:12px;
+  }
+  .backtop{
+    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;color:#5e594c;background:#f8f6ed;
+    border:1px solid #d5d0c2;border-radius:50%;
+    box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+  @media(max-width:700px){
+    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px;}
+    .article{padding:28px 22px 45px}
+    h1{font-size:25px}
+    h2{font-size:20px}
+    body{font-size:14px}
+    .quick-grid{grid-template-columns:1fr}
+  }
+</style>
+
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識網站｜燒成技術</div>
+  <span class="eyebrow">燒窯基礎</span>
+  <h1>燒成技術~氧化燒</h1>
+  <div class="tags">
+    <span class="tag">釉藥</span>
+    <span class="tag">電窯</span>
+    <span class="tag">瓦斯窯</span>
+  </div>
+
+  <div class="lead">
+    <strong>摘要：</strong>
+    氧化燒，是陶瓷燒成技術中最常見的燒成方式之一。簡單來說，就是在燒成過程中，讓窯內保持較充足的氧氣，使坯體與釉藥在氧氣較充足的環境中完成燒成。
+  </div>
+
+  <h2>一、什麼是氧化燒？</h2>
+  <p>氧化燒，是陶瓷燒成技術中最常見的燒成方式之一。簡單來說，就是：在燒成過程中，讓窯內保持較充足的氧氣，使坯體與釉藥在氧氣較充足的環境中完成燒成。</p>
+  <p>氧化燒的重點不只是提高窯內溫度，而是同時控制：</p>
+  <ul>
+    <li>溫度</li>
+    <li>升溫速度</li>
+    <li>最高溫</li>
+    <li>保溫時間</li>
+    <li>冷卻速度</li>
+    <li>窯內氣氛</li>
+  </ul>
+  <p>這些因素共同影響陶瓷作品最後的：釉色、光澤、表面質感、坯體成熟度、作品整體效果。</p>
+
+  <h2>二、氧化燒的基本原理</h2>
+  <p>陶瓷燒成時，窯內的氣氛會影響坯體與釉藥中的金屬氧化物。在氧化燒環境中，窯內氧氣供應較充足，因此：氧化物較容易維持氧化狀態。</p>
+  <p>例如，釉藥中的不同金屬氧化物，會因為燒成氣氛的不同而產生不同的發色效果。因此，同一個釉藥配方：</p>
+  <ul>
+    <li>在氧化燒中，可能呈現一種顏色。</li>
+    <li>在還原燒中，可能呈現另一種顏色。</li>
+  </ul>
+  <p>所以，陶瓷燒成時不能只看：「用了什麼釉藥？」還必須考慮：「使用什麼燒成氣氛？」</p>
+
+  <h2>三、氧化燒與一般燒成有什麼關係？</h2>
+  <p>氧化燒是一種「燒成氣氛」。而燒成氣氛只是整個燒成技術中的一部分。</p>
+  <p>完整的燒成過程還包括：作品乾燥、裝窯、升溫、溫度控制、最高溫燒成、保溫、冷卻、開窯。</p>
+  <p>因此可以簡單理解：氧化燒決定燒成環境，而溫度曲線決定燒成過程。兩者必須互相配合。</p>
+
+  <h2>四、哪些窯爐適合氧化燒？</h2>
+  <h3>（一）電窯氧化燒</h3>
+  <p>電窯是進行氧化燒最方便的窯爐之一。電窯主要利用電能轉換成熱能，透過加熱元件提高窯內溫度。</p>
+  <p>由於電窯通常沒有直接燃燒燃料，因此燒成過程中的窯內氣氛較容易維持在氧氣相對充足的狀態。</p>
+  <p>電窯通常具有：溫度控制系統、溫度感應器、自動升溫功能、保溫功能、冷卻程式設定。</p>
+  <p>因此，電窯特別適合：一般陶藝創作、釉藥測試、色釉測試、教學使用、需要穩定重複燒成的作品。</p>
+  <p>電窯使用電子溫度控制系統，可以透過調整加熱元件的功率來控制溫度，使燒成過程具有較穩定與一致的特性。</p>
+
+  <h3>（二）瓦斯窯氧化燒</h3>
+  <p>瓦斯窯也可以進行氧化燒。瓦斯窯的溫度與氣氛，需要透過：瓦斯供應、空氣量、火焰狀態、窯孔控制、排煙系統進行調整。</p>
+  <p>如果燃燒較完全，並且有足夠的空氣進入窯內，就可以形成氧化燒的環境。</p>
+  <p>相較於電窯，瓦斯窯對氣氛的控制需要更多實際經驗。因此，燒窯者必須同時觀察：窯內溫度、火焰狀態、瓦斯壓力、燒成時間、窯內氣氛。</p>
+  <p>瓦斯窯可以透過調整燃料供應與通風系統來控制窯內氧氣量，而窯孔的開閉也是控制氧化與還原氣氛的重要因素。</p>
+
+  <h2>五、氧化燒的主要特色</h2>
+  <p>氧化燒最大的特色是：燒成效果通常較容易控制與重複。</p>
+  <p>尤其是在電窯中，只要：陶土相同、釉藥相同、溫度曲線相同、裝窯方式相近，通常可以獲得較穩定的燒成結果。</p>
+  <p>因此，氧化燒非常適合進行：</p>
+  <ul>
+    <li><strong>1. 釉藥實驗：</strong>可以測試不同配方的釉藥效果。</li>
+    <li><strong>2. 色釉測試：</strong>觀察不同著色氧化物的發色。</li>
+    <li><strong>3. 釉藥配方調整：</strong>比較不同原料比例對釉面的影響。</li>
+    <li><strong>4. 作品量產：</strong>較容易建立固定的燒成程序。</li>
+  </ul>
+
+  <h2>六、氧化燒與釉色的關係</h2>
+  <p>釉色並不是只由釉藥配方決定。燒成氣氛同樣會影響最終顏色。</p>
+  <div class="quote">
+    <strong>可以簡單表示為：</strong><br>
+    釉色效果 ＝ 釉藥配方 ＋ 燒成溫度 ＋ 燒成氣氛 ＋ 冷卻方式
+  </div>
+  <p>因此，即使使用相同的釉藥：</p>
+  <ul>
+    <li>燒成溫度不同，顏色可能不同。</li>
+    <li>燒成時間不同，釉面可能不同。</li>
+    <li>氧化與還原不同，顏色也可能不同。</li>
+    <li>冷卻速度不同，釉面質感可能不同。</li>
+  </ul>
+  <p>釉藥的組成與配方會影響最後的色彩，而燒成溫度同樣會影響釉色表現。</p>
+
+  <h2>七、氧化燒中的溫度控制</h2>
+  <p>進行氧化燒時，最重要的工作之一，就是控制溫度。燒窯不是直接快速加熱到最高溫。一般需要依照作品狀況安排：</p>
+  <h3>第一階段：低溫緩慢升溫</h3>
+  <p>主要目的：排除殘留水分，降低作品因溫差造成問題的機會。尤其是：厚胎作品、大型作品、雕塑作品，更需要注意低溫階段。</p>
+  <h3>第二階段：穩定升溫</h3>
+  <p>當作品進入中溫區時，可以採取較穩定的升溫方式。主要目的是讓：窯內溫度逐漸均勻，坯體完成燒成過程中的結構變化，作品內外減少過大的溫度差異。</p>
+  <h3>第三階段：高溫燒成</h3>
+  <p>進入高溫後，坯體逐漸燒結，釉藥開始熔融。此時需要注意：升溫速度、最高溫度、窯內溫度差異、釉藥成熟程度。</p>
+
+  <h2>八、氧化燒的最高溫度</h2>
+  <p>氧化燒並沒有固定的最高溫度。因為不同作品使用的：陶土、釉藥、窯爐都不相同。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>燒成類型</th>
+          <th>溫度特性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>低溫燒成</td><td>使用較低的成熟溫度</td></tr>
+        <tr><td>中溫燒成</td><td>常用於部分陶藝釉藥</td></tr>
+        <tr><td>高溫燒成</td><td>坯體與釉藥需要較高溫成熟</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>真正的燒成溫度，應以：陶土與釉藥的實際成熟範圍為主要依據。不能因為「氧化燒」就使用固定的最高溫。</p>
+
+  <h2>九、氧化燒需要保溫嗎？</h2>
+  <p>有些氧化燒會加入保溫。所謂保溫，就是：到達指定溫度後，暫停升溫並維持一段時間。</p>
+  <p>保溫可能具有以下作用：</p>
+  <ul>
+    <li><strong>1. 讓窯內溫度更均勻：</strong>窯內不同位置可能存在溫度差異。適當保溫，可以讓不同位置的作品有更多時間達到接近的燒成狀態。</li>
+    <li><strong>2. 幫助釉藥成熟：</strong>部分釉藥可能需要適當時間，才能形成較完整的釉面。</li>
+    <li><strong>3. 改善燒成一致性：</strong>特別是裝窯較滿時，保溫可能有助於改善不同位置的燒成效果。</li>
+  </ul>
+  <p>但是：保溫不是越久越好。保溫過久可能造成：釉面過度流動、流釉、顏色改變、作品變形。所以，保溫時間應依照實際燒成結果進行調整。</p>
+
+  <h2>十、氧化燒的冷卻</h2>
+  <p>燒成完成後，冷卻同樣非常重要。停止加熱並不代表作品已經完全沒有風險。陶瓷在冷卻過程中，坯體與釉藥仍然會因溫度下降而產生變化。因此，通常不建議在窯溫仍然很高時急著開窯。</p>
+  <p>一般氧化燒可以採用：</p>
+  <ul>
+    <li><strong>自然冷卻：</strong>停止加熱後，讓窯爐逐漸自行降溫。這是最常見的方式。</li>
+    <li><strong>控制冷卻：</strong>部分特殊釉藥可能需要調整冷卻速度。例如：特殊結晶效果、部分無光釉、特殊色彩釉。某些結晶效果會受到特定溫度與冷卻過程影響，氧化鈦的添加量、溫度控制與冷卻方式都可能改變最終的結晶表現。</li>
+  </ul>
+
+  <h2>十一、氧化燒與還原燒的基本比較</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>氧化燒</th>
+          <th>還原燒</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>窯內氧氣</td><td>較充足</td><td>有意降低氧氣量</td></tr>
+        <tr><td>常見窯爐</td><td>電窯、瓦斯窯</td><td>主要常見於可控制氣氛的燃料窯</td></tr>
+        <tr><td>控制方式</td><td>相對穩定</td><td>需要控制燃燒與氣氛</td></tr>
+        <tr><td>燒成效果</td><td>較容易重複</td><td>窯內效果變化較多</td></tr>
+        <tr><td>釉色表現</td><td>依氧化狀態發色</td><td>部分氧化物會產生不同發色</td></tr>
+        <tr><td>適合用途</td><td>教學、測試、一般創作</td><td>特殊釉色與氣氛效果</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>兩者最大的差異，可以簡單理解為：氧化燒主要是在氧氣較充足的環境中燒成。還原燒則是透過降低氧氣量，改變部分材料的燒成反應與發色效果。</p>
+
+  <h2>十二、氧化燒常見的問題</h2>
+  <ul>
+    <li><strong>問題一：釉藥沒有完全熔融</strong><br>可能原因：溫度不足、釉藥需要更高成熟溫度、燒成時間不足。</li>
+    <li><strong>問題二：釉面過度流動</strong><br>可能原因：溫度過高、保溫時間過長、釉藥本身流動性較高。</li>
+    <li><strong>問題三：窯內作品顏色不一致</strong><br>可能原因：窯內溫度不均勻、裝窯位置不同、作品厚度不同、釉藥施釉厚度不同。</li>
+    <li><strong>問題四：同一種釉藥每次效果不同</strong><br>可能原因：燒成曲線不同、最高溫不同、保溫時間不同、裝窯方式不同、釉層厚度不同。因此，必須建立燒窯紀錄。</li>
+  </ul>
+
+  <h2>十三、氧化燒的紀錄方法</h2>
+  <p>每次燒窯時，可以記錄：</p>
+  <ul>
+    <li><strong>基本資料：</strong>燒成日期、窯爐種類、窯爐容量、陶土種類、釉藥名稱。</li>
+    <li><strong>溫度資料：</strong>升溫速度、各階段溫度、最高溫、保溫時間、冷卻方式。</li>
+    <li><strong>燒成結果：</strong>釉色、光澤、流動程度、表面質感、是否有缺陷。</li>
+  </ul>
+  <p>透過每次的燒窯紀錄與比較，可以逐漸調整燒成溫度、升降溫速度與燒成曲線，使燒成品質更加穩定。</p>
+
+  <h2>十四、氧化燒的基本操作觀念</h2>
+  <p>在進行氧化燒之前，可以依照以下方式思考：</p>
+  <ol>
+    <li><strong>第一步：確認陶土。</strong>了解陶土適合的燒成溫度。</li>
+    <li><strong>第二步：確認釉藥。</strong>了解釉藥的成熟溫度、流動性、發色方式、是否需要保溫、是否需要特殊冷卻。</li>
+    <li><strong>第三步：設計燒成曲線。</strong>安排：低溫緩慢升溫、中溫穩定升溫、高溫燒成、保溫、冷卻。</li>
+    <li><strong>第四步：確認氧化氣氛。</strong>如果使用電窯，通常較容易維持穩定的氧化環境。如果使用瓦斯窯，則需要注意：空氣供應、燃燒狀態、通風、窯孔控制。</li>
+    <li><strong>第五步：完成紀錄。</strong>記錄：溫度 + 時間 + 釉藥 + 燒成結果。這些資料就是未來調整燒成的重要依據。</li>
+  </ol>
+
+  <h2>十五、氧化燒的核心觀念</h2>
+  <p>學習氧化燒時，可以記住以下公式：</p>
+  <div class="quote">
+    <strong>氧化燒成果 = 釉藥配方 + 坯體 + 溫度 + 時間 + 氣氛 + 冷卻</strong>
+  </div>
+  <p>其中任何一個條件改變，都可能影響最終結果。因此，不要只問「這個釉燒幾度？」還應該進一步思考：使用什麼陶土？使用什麼窯爐？採用什麼燒成氣氛？最高溫是多少？是否需要保溫？如何冷卻？只有將這些條件一起考慮，才能真正了解氧化燒的效果。</p>
+
+  <h2>十六、結論</h2>
+  <p>氧化燒是陶瓷燒成中非常重要且實用的技術。它的核心概念是：在氧氣較充足的環境中，透過溫度與時間控制完成陶瓷燒成。</p>
+  <p>氧化燒通常具有：燒成條件較容易控制、結果較容易重複、適合釉藥測試、適合教學、適合一般陶藝創作。</p>
+  <p>但真正決定作品效果的，並不是只有「氧化」或「還原」。而是：陶土 + 釉藥 + 溫度 + 時間 + 氣氛 + 冷卻。</p>
+  <p>當我們能夠理解這些因素之間的關係，就能更有系統地設計自己的燒成方式。最後，透過不斷的：測試、燒成、紀錄、比較與調整，就能逐漸建立屬於自己窯爐、陶土與釉藥的氧化燒成資料。這就是「燒成技術～氧化燒」最重要的核心。</p>
+
+  <div class="notice">
+    <div class="notice-title">常見問題 (FAQ)</div>
+    <p><strong>Q：用瓦斯窯進行氧化燒，和用電窯進行氧化燒，燒出來的效果會完全一樣嗎？</strong></p>
+    <p>A：不一定。雖然兩者都盡力維持氧化氣氛，但電窯的加熱是靠輻射熱，氣氛極度穩定且無燃燒廢氣；瓦斯窯即使是氧化燒，仍有燃燒產生的氣流、水氣與微量氣體流動。這可能導致某些對氣氛極敏感的釉藥（如含某些微量元素的色釉）在兩種窯中呈現細微的色澤或質感差異。</p>
+    <p><strong>Q：如果我的電窯沒有排氣孔，還算是氧化燒嗎？</strong></p>
+    <p>A：一般電窯在加熱時本身就是偏向氧化環境。但如果作品中含有大量有機物，或是釉藥在熔融時釋放出氣體，若沒有適當排氣，窯內可能會短暫形成微弱的局部還原氣氛。因此，適度的通風（如在低溫段打開氣孔或使用抽風設備）有助於維持更純粹的氧化環境。</p>
+  </div>
+
+  <div class="final-box">
+    <h3>相關文章</h3>
+    <ul>
+      <li><a href="Kiln temperature curve design.html">燒窯溫度曲線設計</a></li>
+      <li><a href="Reduction firing.html">燒成技術~還原燒</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    本站主要內容涵蓋陶藝與陶瓷知識、釉藥基礎與配方、燒成技術等，致力於為台灣陶藝愛好者提供專業且易讀的內容參考。
+  </div>
+
+</article>
+</main>
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>
