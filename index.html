@@ -296,7 +296,7 @@
                 visibility: visible;
             }
 
-            /* ★ 修正 1：群組間距極致壓縮 (5px)，讓整體更緊湊 ★ */
+            /* 群組間距壓縮，讓整體更緊湊 */
             .tools-group { 
                 flex-direction: column !important; 
                 width: 100% !important; 
@@ -304,12 +304,13 @@
                 align-items: center !important; 
             }
 
-            /* ★ 修正 2：寬度縮減 (設為 85%)，左右留白完美置中 ★ */
+            /* ★ 確保包含選單的容器絕對垂直排列、無間隙 ★ */
             .dropdown, .nav-btn.theme-purple { 
                 width: 85% !important; 
                 margin: 0 auto !important; 
-                display: flex !important;           /* 確保內部垂直排列，消滅任何換行產生的空白 */
-                flex-direction: column !important;  
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0 !important; /* 強制母子間距為 0 */
             }
 
             /* 五大主標題按鈕尺寸強力縮小，高度與字體變得細緻 */
@@ -321,8 +322,9 @@
                 border-radius: 8px !important; 
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
                 transition: all 0.2s ease !important;
-                z-index: 2; /* 確保主標題疊在最上層 */
-                position: relative;
+                position: relative !important;
+                z-index: 10 !important; /* ★ 確保母標題疊在最上層 ★ */
+                margin: 0 !important;
             }
             .nav-btn > div { display: flex; align-items: center; gap: 10px !important; }
             .nav-btn i { font-size: 1.1rem !important; }
@@ -333,9 +335,10 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
             }
 
-            /* ★ 母子連體魔法：展開時母標題下方變平(明確指定四角)、取消陰影，與子選單無縫接合 ★ */
+            /* ★ 終極母子連體魔法：展開時切平母標題下方圓角、消除底線與陰影 ★ */
             .dropdown.mobile-open .nav-btn {
-                border-radius: 8px 8px 0 0 !important; /* 強制下方圓角歸零 */
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
                 box-shadow: none !important; 
                 border-bottom: none !important;
             }
@@ -346,37 +349,42 @@
                 grid-template-rows: 0fr; 
                 opacity: 0;
                 visibility: hidden !important; 
-                position: static !important; width: 100% !important; box-shadow: none !important;
-                padding: 0 !important; 
-                margin: 0 !important; /* 確保與母標題無縫 */
-                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s;
+                position: relative !important; 
+                z-index: 1 !important; /* ★ 確保子選單在母標題下層 ★ */
+                width: 100% !important; box-shadow: none !important;
+                padding-top: 0 !important; padding-bottom: 0 !important;
+                margin-top: 0 !important; 
+                margin-bottom: 0 !important;
+                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s, margin-top 0.35s;
                 pointer-events: none;
             }
             
-            /* ★ 分離推擠魔法：展開時，底部產生 12px 安全距離，強力推開下一個大標題絕不重疊 ★ */
+            /* ★ 終極縫隙消除：強制向上提拉 8px，塞進母標題底下；並向下推擠 12px 防遮蔽大標題 ★ */
             .dropdown.mobile-open .dropdown-content { 
                 grid-template-rows: 1fr; 
                 opacity: 1;
                 visibility: visible !important; 
                 margin-bottom: 12px !important; 
-                margin-top: -1px !important; /* 向上微拉 1px，完美消除與母標題之間的微小縫隙 */
+                margin-top: -8px !important; /* 強行拉提，吃掉任何可能產生的空白縫隙 */
                 pointer-events: auto;
                 filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); /* 合體後的卡片整體陰影 */
             }
             
             .dropdown.mobile-open .nav-btn i.fa-caret-down { transform: rotate(180deg); }
 
-            /* ★ 子選單內部去邊界，達成與母標題的完美一體成型 ★ */
+            /* 子選單內部去邊界，達成與母標題的完美一體成型 */
             .dropdown-inner {
                 min-height: 0; 
                 overflow: hidden; 
-                background: var(--gold-light) !important; /* 使用與獨立項目相同的底色 */
+                background: var(--gold-light) !important; 
                 box-shadow: none !important; 
-                border-radius: 0 0 8px 8px !important; /* 只有下方有圓角，上方平齊母標題 */
+                border-radius: 0 0 8px 8px !important; /* 只有下方有圓角 */
                 display: flex !important; flex-direction: column !important;
                 gap: 0 !important; /* 移除子項目間的縫隙，讓它們緊密相連 */
                 border: none !important;
-                padding: 0 !important; /* ★ 移除所有內距，讓第一項與母標題完全貼合 ★ */
+                padding-top: 8px !important; /* ★ 補償被提拉吃掉的 8px，確保字體不被遮擋 ★ */
+                padding-bottom: 0 !important; 
+                margin: 0 !important;
             }
             
             /* 子選單項目的平面化與分隔線設定 */
