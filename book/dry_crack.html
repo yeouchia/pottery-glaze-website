@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>為什麼作品乾了總會裂開？接合與乾燥的致命錯誤</title>
+<meta name="description" content="陶藝作品為什麼乾燥時會裂？從泥土收縮、厚薄不均、接合、乾燥速度與盤底 S 型裂紋，了解如何提高作品進窯前的成功率。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+  .page{
+    width:min(900px,calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{padding:42px 56px 64px}
+  .breadcrumb{
+    font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;font-size:11px;color:#625d4e;
+    background:var(--accent-light);border:1px solid #dcd7c7;
+    border-radius:999px;padding:3px 10px;margin-bottom:13px;
+  }
+  h1{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-weight:600;font-size:30px;line-height:1.45;
+    letter-spacing:.03em;margin:0 0 18px;color:#35332c;
+  }
+  .lead{
+    background:var(--quote);border:1px solid #dedacd;border-radius:8px;
+    padding:18px 20px;margin:20px 0 28px;color:#4d4a40;font-size:14px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+  .tag{
+    border:1px solid #d7d2c3;background:#f8f6ed;color:#706b5d;
+    border-radius:999px;padding:3px 10px;font-size:11px;
+  }
+  .notice,.summary{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:8px;padding:19px 21px;margin:22px 0;
+  }
+  .notice-title,.summary-title{
+    font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;
+  }
+  .notice p,.summary p{margin:5px 0}
+  h2{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-size:22px;line-height:1.55;margin:42px 0 17px;
+    padding-bottom:8px;border-bottom:1px solid #ddd8ca;color:#3e3b32;
+  }
+  h3{font-size:17px;margin:28px 0 9px;color:#464238}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.5em;margin:10px 0 18px}
+  li{margin:4px 0}
+  strong{font-weight:700}
+  .quote{
+    margin:18px 0;padding:13px 18px;border-left:4px solid #aaa38e;
+    background:#f5f3e9;color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+  .table-wrap{
+    overflow-x:auto;margin:18px 0 25px;border:1px solid var(--line);border-radius:8px;
+  }
+  table{width:100%;border-collapse:collapse;min-width:620px;background:#faf9f3}
+  th,td{
+    border-bottom:1px solid #dfdccf;padding:10px 12px;
+    text-align:left;vertical-align:top;
+  }
+  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px}
+  td{font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .quick-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 24px;
+  }
+  .quick{
+    background:var(--card2);border:1px solid var(--line);
+    border-radius:8px;padding:13px 15px;
+  }
+  .quick b{display:block;margin-bottom:3px;color:#4b473c}
+  .tip{
+    background:#eeece1;border:1px solid #d9d5c7;border-radius:8px;
+    padding:17px 20px;margin:22px 0;
+  }
+  .tip b{display:block;margin-bottom:5px}
+  .final-box{
+    margin-top:38px;background:#ebe8dc;border:1px solid #d5d0c1;
+    border-radius:9px;padding:23px 24px;
+  }
+  .final-box h3{margin-top:0}
+  .footer{
+    border-top:1px solid #ddd8ca;margin-top:44px;padding-top:18px;
+    color:#898476;font-size:12px;
+  }
+  .backtop{
+    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;text-decoration:none;
+    color:#5e594c;background:#f8f6ed;border:1px solid #d5d0c2;
+    border-radius:50%;box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+  @media(max-width:700px){
+    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px}
+    .article{padding:28px 22px 45px}
+    h1{font-size:25px} h2{font-size:20px} body{font-size:14px}
+    .quick-grid{grid-template-columns:1fr}
+    .lead,.notice,.summary,.tip,.final-box{padding:15px 16px}
+  }
+  @media print{
+    body{background:white}
+    .page{width:100%;margin:0;border:none;box-shadow:none}
+    .backtop{display:none}
+  }
+</style>
+</head>
+
+<body id="top">
+<main class="page">
+<article class="article">
+
+  <div class="breadcrumb">陶藝成型｜坯體乾燥｜新手入門</div>
+  <span class="eyebrow">裂痕預防指南</span>
+
+  <h1>為什麼作品乾了總會裂開？<br>接合與乾燥的致命錯誤</h1>
+
+  <div class="tags">
+    <span class="tag">乾燥收縮</span>
+    <span class="tag">裂痕</span>
+    <span class="tag">接合</span>
+    <span class="tag">刻痕</span>
+    <span class="tag">泥漿</span>
+    <span class="tag">厚度控制</span>
+    <span class="tag">陰乾</span>
+  </div>
+
+  <div class="lead">
+    <strong>一看就懂：</strong>
+    杯把掉下來、盤底出現裂痕、作品放著放著自己裂開，
+    絕對是陶藝新手最常遇到的問題之一。
+    真正的關鍵通常不是「土不好」，而是<strong>泥土乾燥時會收縮，而不同部位收縮速度不一致</strong>。
+    只要掌握厚度、接合與乾燥速度，就能大幅提高作品進窯前的存活率。
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">重點整理</div>
+    <p>
+      陶土含有水分。作品乾燥時，水分逐漸離開，泥土顆粒彼此靠近，
+      坯體因此產生<strong>乾燥收縮</strong>。
+    </p>
+    <p>
+      裂痕最常發生在「厚薄差異大」、「兩個部件接合不良」、
+      「乾燥速度不一致」以及「內外水分差異太大」的地方。
+    </p>
+    <p>
+      <strong>記住：陶土不是怕乾，而是怕乾得不均勻。</strong>
+    </p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">新手防裂 5 原則</div>
+    <ol>
+      <li><strong>厚度盡量均勻</strong>：避免同一件作品有極厚與極薄的區域。</li>
+      <li><strong>接合一定要做對</strong>：刻痕＋泥漿只是基本，接合處還要壓實、融合。</li>
+      <li><strong>控制乾燥速度</strong>：不要突然吹風、曬太陽或直接放在熱源旁。</li>
+      <li><strong>厚件慢慢乾</strong>：越厚、越複雜的作品，越需要延長乾燥時間。</li>
+      <li><strong>進窯前確認全乾</strong>：作品內部若仍有水分，高溫前期容易造成嚴重問題。</li>
+    </ol>
+  </div>
+
+  <h2>一、作品為什麼會裂？先了解「乾燥收縮」</h2>
+
+  <p>
+    剛做好的一件陶土作品，其實含有相當多的水分。
+    這些水分除了讓泥土保持柔軟，也存在於泥土顆粒之間。
+  </p>
+
+  <p>
+    當作品開始乾燥，水分逐漸蒸發，泥土顆粒會彼此靠近，
+    坯體尺寸因此縮小，這就是<strong>乾燥收縮</strong>。
+  </p>
+
+  <div class="quote">
+    <strong>簡單想像：</strong><br>
+    濕泥 → 水分離開 → 顆粒靠近 → 體積變小 → 產生收縮。
+  </div>
+
+  <p>
+    如果整件作品每個部位都能以相近速度收縮，通常問題不大。
+    真正麻煩的是：<strong>某一區已經縮了，另一區卻還被拉住。</strong>
+  </p>
+
+  <p>
+    當收縮產生的拉應力超過泥土當時能承受的強度，就可能形成裂縫。
+  </p>
+
+  <h2>二、第一個致命錯誤：作品厚薄差太大</h2>
+
+  <p>
+    這是非常常見的裂痕來源。
+  </p>
+
+  <p>
+    例如一個杯子，杯壁只有 5 mm 左右，但杯底卻做得非常厚。
+    杯壁與杯底在乾燥時的速度與收縮行為不同，
+    交界處就容易累積應力。
+  </p>
+
+  <div class="quick-grid">
+    <div class="quick">
+      <b>❌ 厚底</b>
+      水分較難排出，內部乾燥慢，容易與周圍形成乾燥差異。
+    </div>
+    <div class="quick">
+      <b>❌ 厚薄突然變化</b>
+      厚薄交界處的收縮差異容易集中應力。
+    </div>
+    <div class="quick">
+      <b>✓ 厚度較均勻</b>
+      各部位乾燥與收縮比較容易同步。
+    </div>
+    <div class="quick">
+      <b>✓ 過厚處適度修薄</b>
+      減少不必要的泥量，也能降低乾燥問題。
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>實用觀念：</strong>
+    做器皿時，杯壁、盤壁與底部不一定要完全相同厚度，
+    但要避免突然從薄壁變成非常厚的泥塊。
+    尤其是「底部中央」與「壁底交界」要特別注意。
+  </div>
+
+  <h2>三、第二個致命錯誤：杯把、耳朵、裝飾接不好</h2>
+
+  <p>
+    很多新手會遇到：
+  </p>
+
+  <ul>
+    <li>杯把乾了之後掉下來</li>
+    <li>動物耳朵裂開</li>
+    <li>小裝飾品從作品表面脫落</li>
+    <li>泥板接縫乾後出現一道裂痕</li>
+  </ul>
+
+  <p>
+    原因通常不是「黏得不夠多」，而是<strong>接合面沒有真正形成可靠的泥土連結</strong>。
+  </p>
+
+  <h3>正確的接合：刻痕＋泥漿＋壓實融合</h3>
+
+  <ol>
+    <li>讓兩個接合面保持適當濕潤，但不要水汪汪。</li>
+    <li>用刻刀、叉子或齒狀工具，把兩個表面<strong>刻出交叉紋路</strong>。</li>
+    <li>塗上適當濃度的泥漿（slip）。</li>
+    <li>將兩個部件貼合。</li>
+    <li>從接合處周圍<strong>壓實、揉合</strong>，讓兩邊的泥真正連成一體。</li>
+    <li>最後再用工具或手指整理接縫。</li>
+  </ol>
+
+  <div class="quote">
+    <strong>重要：</strong>
+    「刻痕＋泥漿」不是魔法膠水。真正重要的是讓兩個泥土表面產生充分接觸，
+    並且讓接合區具有足夠的泥料連續性。
+  </div>
+
+  <h2>四、泥漿不是越稀越好</h2>
+
+  <p>
+    很多人第一次接合時會把泥漿調得像水一樣稀，
+    然後大量塗在接合面上。
+  </p>
+
+  <p>這樣反而可能造成問題：</p>
+
+  <ul>
+    <li>接合面含水量突然增加</li>
+    <li>乾燥時接合區收縮差異變大</li>
+    <li>過多水分使接合處變得鬆軟</li>
+  </ul>
+
+  <p>
+    好的接合泥漿應該能均勻覆蓋接合面，
+    但不是讓兩個部件漂浮在一層厚厚的水泥漿上。
+  </p>
+
+  <div class="tip">
+    <strong>小技巧：</strong>
+    接合面可以「刻痕 → 少量泥漿 → 貼合 → 壓實」。
+    如果作品是受力部件，例如杯把，接合後最好再用泥條或泥漿補強接縫。
+  </div>
+
+  <h2>五、第三個致命錯誤：作品乾得太快</h2>
+
+  <p>
+    陶土乾燥最怕的不是「乾」，而是<strong>乾燥速度太快、而且各部位乾燥速度不同</strong>。
+  </p>
+
+  <p>以下情況都可能讓乾燥速度突然變快：</p>
+
+  <ul>
+    <li>直接放在太陽下曝曬</li>
+    <li>電風扇長時間直吹</li>
+    <li>冷氣出風口正對作品</li>
+    <li>放在除濕機附近</li>
+    <li>放在暖氣、熱風或其他熱源旁</li>
+    <li>厚薄差異很大的作品沒有遮蓋控制</li>
+  </ul>
+
+  <p>
+    表面可能已經乾硬，但作品內部仍然含有較多水分。
+    這種「外乾內濕」的狀態，很容易讓不同區域產生收縮差異。
+  </p>
+
+  <h2>六、正確的乾燥方法：慢慢乾、均勻乾</h2>
+
+  <p>
+    新手最實用的方法，其實很簡單：
+  </p>
+
+  <div class="quick-grid">
+    <div class="quick">
+      <b>① 避免直吹</b>
+      不要讓電風扇、冷氣或熱風直接吹作品。
+    </div>
+    <div class="quick">
+      <b>② 控制遮蓋</b>
+      用塑膠袋、塑膠布或適當方式減慢水分蒸發。
+    </div>
+    <div class="quick">
+      <b>③ 厚件更慢乾</b>
+      大型、厚實、封閉的作品需要更多時間。
+    </div>
+    <div class="quick">
+      <b>④ 適度翻動</b>
+      適合的作品可在乾燥過程中調整接觸面，減少局部乾燥差異。
+    </div>
+  </div>
+
+  <p>
+    「陰乾」不是完全不通風，而是避免讓作品快速失水。
+    目標是讓水分從作品內部向外逐漸移動，讓整件作品比較同步地乾燥。
+  </p>
+
+  <h2>七、為什麼盤底特別容易裂？</h2>
+
+  <p>
+    陶藝中很常見的一種裂痕，就是盤子或碗底出現裂紋。
+    有時裂痕會從底部中央附近向外延伸，
+    也可能呈現俗稱的<strong>「S 型裂」</strong>。
+  </p>
+
+  <p>
+    盤底容易出問題，通常與以下因素有關：
+  </p>
+
+  <ul>
+    <li>底部太厚</li>
+    <li>底部與器壁厚度差異過大</li>
+    <li>修坯時底部厚薄不均</li>
+    <li>乾燥時底部與器壁的乾燥速度不同</li>
+    <li>作品與乾燥平台接觸狀況不理想</li>
+  </ul>
+
+  <div class="quote">
+    <strong>修坯時多注意一件事：</strong><br>
+    盤底不是「越厚越安全」。過厚的底部反而可能增加乾燥與收縮問題。
+    在結構允許的情況下，讓底部厚度合理且均勻，通常更容易控制。
+  </div>
+
+  <h2>八、泥板作品為什麼容易翹曲、裂開？</h2>
+
+  <p>
+    泥板看起來平整，但其實非常容易受到乾燥收縮影響。
+  </p>
+
+  <p>
+    如果泥板的一面比另一面乾得快，就可能產生彎曲；
+    如果作品受到固定、黏貼或其他結構限制，則可能進一步產生裂縫。
+  </p>
+
+  <h3>泥板乾燥的簡單原則</h3>
+
+  <ul>
+    <li>厚度盡量均勻</li>
+    <li>不要只讓單面快速乾燥</li>
+    <li>大型泥板避免突然曝曬</li>
+    <li>必要時使用吸水板材或適當乾燥材料協助控制</li>
+    <li>翻面時要小心，避免尚未具備足夠強度就硬翻</li>
+  </ul>
+
+  <h2>九、不同裂痕，可以怎麼找原因？</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>裂痕位置／狀況</th>
+          <th>可能原因</th>
+          <th>優先檢查</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>杯把接合處裂開</td>
+          <td>接合面太乾、刻痕不足、沒有壓實融合、乾燥速度不同</td>
+          <td>接合方式＋乾燥速度</td>
+        </tr>
+        <tr>
+          <td>盤底中央或附近裂開</td>
+          <td>底部厚薄不均、乾燥差異、修坯不均</td>
+          <td>底部厚度＋乾燥</td>
+        </tr>
+        <tr>
+          <td>泥板邊緣裂開</td>
+          <td>邊緣失水太快、厚薄不均</td>
+          <td>遮蓋與乾燥速度</td>
+        </tr>
+        <tr>
+          <td>裝飾物脫落</td>
+          <td>接合面沒有充分融合、部件收縮差異</td>
+          <td>接合面與部件厚度</td>
+        </tr>
+        <tr>
+          <td>作品大面積龜裂</td>
+          <td>泥料狀態、乾燥過快、結構或厚度問題</td>
+          <td>泥料＋乾燥環境＋作品結構</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>十、裂了之後可以救嗎？</h2>
+
+  <p>
+    可以嘗試修補，但要看裂痕出現的時間與程度。
+  </p>
+
+  <h3>還在半乾狀態：最好處理</h3>
+
+  <p>
+    如果作品仍具有一定濕度，可以將裂縫重新打開，
+    清理鬆散泥料，再用適當泥漿與同類泥料重新接合、壓實。
+  </p>
+
+  <h3>已經接近乾燥：需要更小心</h3>
+
+  <p>
+    可以使用較細的修補泥料處理小裂縫，但修補區仍可能在後續乾燥時再次收縮。
+    因此修補後不能立刻快速吹乾。
+  </p>
+
+  <h3>已經完全乾燥：不要隨便大量加水</h3>
+
+  <p>
+    完全乾燥的作品吸水很快，如果直接把大量水或很濕的泥漿灌入裂縫，
+    可能造成修補區與周圍的收縮差異，反而讓裂縫變得更嚴重。
+  </p>
+
+  <div class="tip">
+    <strong>重要觀念：</strong>
+    修補不是把裂縫「填滿」就結束。
+    真正要解決的是裂縫背後的原因——厚度、接合、泥料狀態與乾燥速度。
+  </div>
+
+  <h2>十一、進窯前的「防裂檢查表」</h2>
+
+  <div class="notice">
+    <div class="notice-title">🔥 放進窯之前，請逐項檢查</div>
+    <ol>
+      <li>作品是否已經<strong>完全乾燥</strong>？</li>
+      <li>底部是否有明顯厚薄不均？</li>
+      <li>杯把、耳朵、裝飾物等接合處是否牢固？</li>
+      <li>是否存在肉眼可見的裂縫？</li>
+      <li>大型或厚件作品是否給予足夠乾燥時間？</li>
+      <li>最近是否曾經快速曝曬或強風吹乾？</li>
+      <li>作品內部是否仍有明顯潮濕感？</li>
+    </ol>
+  </div>
+
+  <p>
+    如果對作品是否全乾沒有把握，<strong>寧可多等一天，也不要急著進窯</strong>。
+    尤其是厚件、大型雕塑與封閉空間較多的作品，更需要耐心。
+  </p>
+
+  <h2>十二、新手最容易犯的 7 個錯誤</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>錯誤</th>
+          <th>為什麼容易出問題？</th>
+          <th>改進方法</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>作品做得忽厚忽薄</td>
+          <td>不同區域收縮不同</td>
+          <td>盡量讓厚度變化平順</td>
+        </tr>
+        <tr>
+          <td>杯把直接貼上去</td>
+          <td>接觸面不足</td>
+          <td>刻痕＋泥漿＋壓實融合</td>
+        </tr>
+        <tr>
+          <td>泥漿調得像水</td>
+          <td>增加接合區含水量</td>
+          <td>使用適當濃度並控制用量</td>
+        </tr>
+        <tr>
+          <td>拿電風扇猛吹</td>
+          <td>表面快速失水</td>
+          <td>改為緩慢、均勻乾燥</td>
+        </tr>
+        <tr>
+          <td>直接曬太陽</td>
+          <td>乾燥速度突然增加</td>
+          <td>放在穩定、避免直射的位置</td>
+        </tr>
+        <tr>
+          <td>厚底不修薄</td>
+          <td>內外乾燥差異大</td>
+          <td>合理修坯，避免局部過厚</td>
+        </tr>
+        <tr>
+          <td>作品還沒乾就進窯</td>
+          <td>殘留水分在升溫初期可能造成危險</td>
+          <td>確認作品完全乾燥再裝窯</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="final-box">
+    <h3>十三、記住這一句就夠了</h3>
+    <p>
+      陶土作品裂開，很多時候不是「運氣不好」，而是<strong>收縮沒有被控制好</strong>。
+    </p>
+    <p>
+      新手只要記住三個關鍵：
+    </p>
+    <p>
+      <strong>厚度均勻 → 接合確實 → 緩慢乾燥</strong>
+    </p>
+    <p>
+      做杯把要注意接合，做盤子要注意底部，做大型雕塑要注意厚度與內部乾燥，
+      做泥板則要注意兩面的乾燥速度。
+    </p>
+    <p>
+      當你開始觀察「裂痕出現在哪裡、作品哪裡比較厚、哪裡乾得比較快」，
+      你就不只是修裂痕，而是在真正理解陶土。
+    </p>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">延伸思考：作品進窯前，真正要控制的是什麼？</div>
+    <p>
+      <strong>水分 → 厚度 → 收縮 → 應力 → 裂痕</strong>
+    </p>
+    <p>
+      乾燥只是陶藝製作的一個階段。當作品進入窯內後，
+      還會經歷排除殘餘水分、結合水脫除、有機物燃燒與坯體燒結等變化。
+      因此「乾燥做好」是安全燒成的重要第一步。
+    </p>
+  </div>
+
+  <div class="footer">
+    本頁為陶藝成型與乾燥入門教學內容。實際乾燥時間會受到泥料種類、作品厚度、
+    作品尺寸、環境溫度、相對濕度與通風條件影響，應依實際作品狀況調整。
+    進窯前務必確認作品已完全乾燥。
+  </div>
+
+</article>
+</main>
+
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>
