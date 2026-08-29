@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金屬氧化物的發色：陶瓷釉藥的色彩科學</title>
+<meta name="description" content="陶瓷釉藥的顏色是怎麼來的？深入了解金屬氧化物（如氧化銅、氧化鐵、氧化鈷）在釉藥中如何發色，掌握陶瓷色彩的奧秘。">
+
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{padding:42px 56px 64px;}
+  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;}
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:3px 10px;
+    margin-bottom:13px;
+  }
+  h1{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.45;
+    letter-spacing:.03em;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:18px 20px;
+    margin:20px 0 28px;
+    color:#4d4a40;
+    font-size:14px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+  }
+  .notice,.summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px 21px;
+    margin:22px 0;
+  }
+  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;}
+  .notice p,.summary p{margin:5px 0}
+  h2{
+    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+    font-size:22px;
+    line-height:1.55;
+    margin:42px 0 17px;
+    padding-bottom:8px;
+    border-bottom:1px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{font-size:17px;margin:28px 0 9px;color:#464238;}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.5em;margin:10px 0 18px;}
+  li{margin:4px 0}
+  strong{font-weight:700}
+  .quote{
+    margin:18px 0;
+    padding:13px 18px;
+    border-left:4px solid #aaa38e;
+    background:#f5f3e9;
+    color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    margin:18px 0 25px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px;}
+  td{font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:16px 0 24px;
+  }
+  .quick{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 15px;
+  }
+  .quick b{display:block;margin-bottom:3px;color:#4b473c;}
+  .final-box{
+    margin-top:38px;
+    background:#ebe8dc;
+    border:1px solid #d5d0c1;
+    border-radius:9px;
+    padding:23px 24px;
+  }
+  .final-box h3{margin-top:0;}
+  .footer{
+    border-top:1px solid #ddd8ca;
+    margin-top:44px;
+    padding-top:18px;
+    color:#898476;
+    font-size:12px;
+  }
+  .backtop{
+    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;color:#5e594c;background:#f8f6ed;
+    border:1px solid #d5d0c2;border-radius:50%;
+    box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+  @media(max-width:700px){
+    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px;}
+    .article{padding:28px 22px 45px}
+    h1{font-size:25px}
+    h2{font-size:20px}
+    body{font-size:14px}
+    .quick-grid{grid-template-columns:1fr}
+  }
+</style>
+
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識網站｜陶瓷材料</div>
+  <span class="eyebrow">發色科學</span>
+  <h1>金屬氧化物的發色：陶瓷釉藥的色彩科學</h1>
+  <div class="tags">
+    <span class="tag">釉藥</span>
+    <span class="tag">呈色劑</span>
+    <span class="tag">氧化銅</span>
+    <span class="tag">氧化鐵</span>
+    <span class="tag">氧化鈷</span>
+  </div>
+  <div class="lead">
+    <strong>摘要：</strong>
+    基礎的釉藥燒熔後多半是透明或乳白色的，而賦予陶瓷豐富多彩面貌的關鍵，就在於釉方中添加了微量的「金屬氧化物」。本篇帶您了解這些呈色劑如何在窯火中幻化出千變萬化的釉色。
+  </div>
+
+  <h2>一、 呈色劑在釉藥中的角色</h2>
+  <p>在釉藥的三大骨材（玻璃質、助熔劑、黏稠劑）之外，為了讓釉藥呈現出各種美麗的色澤，必須額外加入少量的「呈色劑」[cite: 3]。呈色劑的成分多為過渡金屬的氧化物，例如銅、鐵、鈦、錫、錳、鈷、鉻、鎳等[cite: 3]。這些元素在高溫下融入玻璃質網絡中，吸收特定波長的光線，進而讓我們看到多樣的色彩。</p>
+
+  <h2>二、 常見金屬氧化物與其發色效果</h2>
+  <p>不同的金屬氧化物在釉藥中扮演著截然不同的角色，以下列舉幾種常見的呈色劑及其典型發色特徵[cite: 3]：</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>金屬氧化物</th>
+          <th>用量比例</th>
+          <th>常見發色系</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>氧化銅 (Copper Oxide)</strong></td>
+          <td>2-5% (氧化燒) <br> 0.5-3% (還原燒)</td>
+          <td>在氧化氣氛中通常發出<strong>青綠色</strong>；但在還原氣氛中，則能產生迷人的<strong>紅色</strong>（如著名的銅紅釉）[cite: 3]。</td>
+        </tr>
+        <tr>
+          <td><strong>氧化鐵 (Iron Oxide)</strong></td>
+          <td>2-5% (氧化燒) <br> 10-15% (還原燒)</td>
+          <td>陶瓷中最古老且常見的呈色劑。在氧化燒時多呈現<strong>土黃、褐色</strong>；在還原燒且用量較大時，則會形成深邃的<strong>青黑色</strong>（如天目釉）[cite: 3]。</td>
+        </tr>
+        <tr>
+          <td><strong>氧化鈷 (Cobalt Oxide)</strong></td>
+          <td>0.5-5%</td>
+          <td>極強的著色劑，只需微量即可產生非常穩定且鮮艷的<strong>藍色</strong>（青花瓷的標誌性色彩）[cite: 3]。</td>
+        </tr>
+        <tr>
+          <td><strong>氧化錳 (Manganese Oxide)</strong></td>
+          <td>2-5%</td>
+          <td>通常用於產生<strong>紫色</strong>或紫褐色調[cite: 3]。</td>
+        </tr>
+        <tr>
+          <td><strong>氧化鉻 (Chromium Oxide)</strong></td>
+          <td>2-4%</td>
+          <td>穩定的綠色來源，能產生濃郁的<strong>綠色</strong>調[cite: 3]。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>三、 燒成氣氛對發色的絕對影響</h2>
+  <p>從上述金屬氧化物的特性中可以發現，同一個金屬元素在不同的窯爐環境中，會產生截然不同的顏色[cite: 3]。這是因為窯爐內的「氧化還原氣氛」改變了金屬的價態：</p>
+  <ul>
+    <li><strong>氧化燒 (Oxidation Firing)：</strong>窯爐內氧氣充足，金屬氧化物充分與氧結合。例如銅在氧化環境下會呈現穩定的青綠色[cite: 3]。</li>
+    <li><strong>還原燒 (Reduction Firing)：</strong>刻意減少窯爐內的氧氣供應，使燃燒不完全，火焰會從釉藥中的金屬氧化物奪取氧原子。這一化學變化會使銅還原，轉變為美麗的紅色[cite: 3]。</li>
+  </ul>
+
+  <div class="notice">
+    <div class="notice-title">常見問題 (FAQ)</div>
+    <p><strong>Q：如果我把兩種不同的氧化物混在一起會怎樣？</strong></p>
+    <p>A：這正是釉藥調配的有趣之處！金屬氧化物可以互相混合產生複合色彩，例如加入氧化鈷（藍）與氧化鉻（綠）可以調出藍綠色調。許多獨特的藝術釉色都是經過精密比例混合而成的。</p>
+    <p><strong>Q：為什麼有時候加了氧化銅，燒出來卻不是綠色？</strong></p>
+    <p>A：除了燒成氣氛外，基礎釉方的化學組成（如含鉛、含鋇或含鹼性金屬）也會極大程度影響金屬氧化物的發色表現。這也是為什麼同一種呈色劑在不同的基礎釉中，效果會截然不同的原因。</p>
+  </div>
+
+  <div class="final-box">
+    <h3>相關文章</h3>
+    <ul>
+      <li><a href="Glazing type.html">上釉有那些方式？常見的陶瓷釉藥施釉技巧</a></li>
+      <li><a href="Overglaze and underglaze.html">釉上彩與釉下彩：陶瓷釉藥的彩繪裝飾藝術</a></li>
+    </ul>
+  </div>
+  <div class="footer">
+    本站深入淺出介紹陶瓷與釉藥的化學原理，帶您揭開陶藝科學的神秘面紗。
+  </div>
+</article>
+</main>
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+</body>
+</html>

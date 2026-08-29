@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釉的種類有哪些？常見陶瓷釉藥分類與特色</title>
+<meta name="description" content="釉藥種類繁多，從透明釉、無光釉到結晶釉，本篇帶您了解不同陶瓷釉藥的質感與發色特徵，幫助您選擇適合的陶藝表現方式。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+      "Noto Sans TC",
+      "PingFang TC",
+      "Microsoft JhengHei",
+      sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:3px 10px;
+    margin-bottom:13px;
+  }
+
+  h1{
+    font-family:
+      "Noto Serif TC",
+      "Source Han Serif TC",
+      "PMingLiU",
+      serif;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.45;
+    letter-spacing:.03em;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:18px 20px;
+    margin:20px 0 28px;
+    color:#4d4a40;
+    font-size:14px;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:28px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+  }
+
+  .notice,
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px 21px;
+    margin:22px 0;
+  }
+
+  .notice-title,
+  .summary-title{
+    font-weight:700;
+    font-size:15px;
+    margin:0 0 9px;
+    color:#4c493e;
+  }
+
+  .notice p,
+  .summary p{margin:5px 0}
+
+  h2{
+    font-family:
+      "Noto Serif TC",
+      "Source Han Serif TC",
+      "PMingLiU",
+      serif;
+    font-size:22px;
+    line-height:1.55;
+    margin:42px 0 17px;
+    padding-bottom:8px;
+    border-bottom:1px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:17px;
+    margin:28px 0 9px;
+    color:#464238;
+  }
+
+  p{margin:10px 0}
+
+  ul,ol{
+    padding-left:1.5em;
+    margin:10px 0 18px;
+  }
+
+  li{margin:4px 0}
+
+  strong{font-weight:700}
+
+  .quote{
+    margin:18px 0;
+    padding:13px 18px;
+    border-left:4px solid #aaa38e;
+    background:#f5f3e9;
+    color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:18px 0 25px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:13px;
+  }
+
+  td{font-size:13px}
+
+  tr:last-child td{border-bottom:none}
+
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:16px 0 24px;
+  }
+
+  .quick{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 15px;
+  }
+
+  .quick b{
+    display:block;
+    margin-bottom:3px;
+    color:#4b473c;
+  }
+
+  .tip{
+    background:#eeece1;
+    border:1px solid #d9d5c7;
+    border-radius:8px;
+    padding:17px 20px;
+    margin:22px 0;
+  }
+
+  .tip b{
+    display:block;
+    margin-bottom:5px;
+  }
+
+  .final-box{
+    margin-top:38px;
+    background:#ebe8dc;
+    border:1px solid #d5d0c1;
+    border-radius:9px;
+    padding:23px 24px;
+  }
+
+  .final-box h3{
+    margin-top:0;
+  }
+
+  .footer{
+    border-top:1px solid #ddd8ca;
+    margin-top:44px;
+    padding-top:18px;
+    color:#898476;
+    font-size:12px;
+  }
+
+  .backtop{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#5e594c;
+    background:#f8f6ed;
+    border:1px solid #d5d0c2;
+    border-radius:50%;
+    box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+
+  @media(max-width:700px){
+    .page{
+      width:calc(100% - 18px);
+      margin:12px auto 40px;
+      border-radius:9px;
+    }
+
+    .article{padding:28px 22px 45px}
+
+    h1{font-size:25px}
+
+    h2{font-size:20px}
+
+    body{font-size:14px}
+
+    .quick-grid{grid-template-columns:1fr}
+
+    .lead,.notice,.summary,.tip,.final-box{
+      padding:15px 16px;
+    }
+  }
+</style>
+</head>
+
+<body id="top">
+
+<main class="page">
+<article class="article">
+
+  <div class="breadcrumb">陶藝與釉藥知識網站｜釉藥基礎與種類</div>
+  <span class="eyebrow">釉藥分類</span>
+
+  <h1>釉的種類有哪些？常見分類與特色解析</h1>
+
+  <div class="tags">
+    <span class="tag">釉藥</span>
+    <span class="tag">透明釉</span>
+    <span class="tag">無光釉</span>
+    <span class="tag">結晶釉</span>
+  </div>
+
+  <div class="lead">
+    <strong>摘要：</strong>
+    釉藥在陶瓷工藝中宛如「魔術師」，只要改變原料的比例與燒成條件，就能從光亮透明轉變為柔和霧面，甚至長出猶如寶石般的結晶。
+  </div>
+
+  <h2>一、 依據表面質感與透明度分類</h2>
+  <p>
+    釉藥的物理質感深受原料成分的影響，在視覺與觸覺上可區分為以下幾種主要類型：
+  </p>
+  <ul>
+    <li><strong>透明釉：</strong>完全透明，能讓光線穿透，常被用來罩在細緻的瓷土表面或釉下彩繪上，不僅能展示底層結構與色彩，還能帶來極佳的清潔便利性[cite: 2]。</li>
+    <li><strong>無光釉（不透明釉）：</strong>光線無法直接穿透，表面呈現柔和的霧面或絲絹質感。這類釉藥通常會透過添加適量的碳酸鎂、碳酸鋇、滑石或氧化鋅來達成失透或無光的效果[cite: 1, 2]。</li>
+    <li><strong>結晶釉：</strong>這是一種特殊的釉藝，通常在釉料中添加氧化鈦或大量的氧化鋅，並在窯燒的高溫冷卻過程中，促使釉藥表面形成獨特且閃亮發光的結晶紋理[cite: 2]。</li>
+  </ul>
+
+  <h2>二、 依據古典名窯與風格分類</h2>
+  <p>
+    許多著名的釉藥種類，源自於中國歷史上各大名窯的傳統與創新，每種都蘊含獨特的美學特徵[cite: 2]：
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>釉藥類型</th>
+          <th>主要特徵與成色</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>青瓷 / 汝瓷</td>
+          <td>以天青色為主，釉色淡雅，並常帶有蟹爪紋等自然開片特徵[cite: 2]。</td>
+        </tr>
+        <tr>
+          <td>天目釉</td>
+          <td>古老的深色釉藝，以深藍色、黑色或褐色為底，常帶有微妙的斑紋變化[cite: 2]。</td>
+        </tr>
+        <tr>
+          <td>茶葉末釉</td>
+          <td>常透過滑石與氧化鐵結合產生，呈現獨特的黃綠色結晶斑點效果[cite: 2]。</td>
+        </tr>
+        <tr>
+          <td>鈞瓷</td>
+          <td>以玫瑰紫、天藍、月白等多樣的自然窯變釉色聞名[cite: 2]。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>三、 依據施釉與彩繪技術分類</h2>
+  <p>
+    將釉藥應用於彩繪時，根據其施加在陶瓷表面的順序不同，可分為兩大類[cite: 2]：
+  </p>
+  <ul>
+    <li><strong>釉上彩 (Overglaze)：</strong>在已經燒製完成的陶瓷釉面上繪製彩色釉料，通常需要進行低溫的二次燒製以固定顏色，能呈現極其精細的圖案與鮮豔色彩（如粉彩、五彩）[cite: 2]。</li>
+    <li><strong>釉下彩 (Underglaze)：</strong>在素燒或未完全燒製的坯體上塗抹彩色釉料繪製，然後在上方罩上透明釉進行高溫燒製（如經典的青花瓷、釉裡紅）。這種方式能創造柔和且耐磨的色彩，因為顏料被保護在釉層之下[cite: 2]。</li>
+  </ul>
+
+  <div class="notice">
+    <div class="notice-title">常見問題 (FAQ)</div>
+    <p><strong>Q：為什麼我的釉藥燒出來沒有光澤？</strong></p>
+    <p>A：這可能是因為您使用了配方中含有高比例碳酸鎂或碳酸鋇的「無光釉」，或者是在燒窯時溫度不足（未完全熔融燒熟），導致釉面無法形成平滑光亮的玻璃質[cite: 2, 3]。</p>
+    <p><strong>Q：同一款釉藥在不同作品上會呈現不同顏色嗎？</strong></p>
+    <p>A：會的。釉藥的最終效果深受底層坯土成分（例如含鐵量多寡）、施釉厚度，以及窯爐內氣氛（氧化燒或還原燒）的影響[cite: 3]。</p>
+  </div>
+
+  <div class="final-box">
+    <h3>相關文章</h3>
+    <ul>
+      <li><a href="What is glaze.html">何謂釉藥、釉的本質？陶藝新手的基礎指南</a></li>
+      <li><a href="Glass-bonded ceramics.html">玻璃質如何結合在陶瓷？揭開釉藥高溫熔融的科學原理</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    本站致力於為台灣讀者提供嚴謹的陶藝與釉藥知識，無論是探索無光釉的沉靜，還是結晶釉的絢麗，希望幫助您找到屬於自己的釉色。
+  </div>
+
+</article>
+</main>
+
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+
+</body>
+</html>

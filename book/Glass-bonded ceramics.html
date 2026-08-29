@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玻璃質如何結合在陶瓷？釉藥高溫熔融的科學原理</title>
+<meta name="description" content="釉藥中的玻璃質是如何緊密附著在陶瓷坯體上的？帶您了解助熔劑、黏稠劑與二氧化矽在窯爐高溫下的物理與化學變化。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+      "Noto Sans TC",
+      "PingFang TC",
+      "Microsoft JhengHei",
+      sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:3px 10px;
+    margin-bottom:13px;
+  }
+
+  h1{
+    font-family:
+      "Noto Serif TC",
+      "Source Han Serif TC",
+      "PMingLiU",
+      serif;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.45;
+    letter-spacing:.03em;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:18px 20px;
+    margin:20px 0 28px;
+    color:#4d4a40;
+    font-size:14px;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:28px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+  }
+
+  .notice,
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px 21px;
+    margin:22px 0;
+  }
+
+  .notice-title,
+  .summary-title{
+    font-weight:700;
+    font-size:15px;
+    margin:0 0 9px;
+    color:#4c493e;
+  }
+
+  .notice p,
+  .summary p{margin:5px 0}
+
+  h2{
+    font-family:
+      "Noto Serif TC",
+      "Source Han Serif TC",
+      "PMingLiU",
+      serif;
+    font-size:22px;
+    line-height:1.55;
+    margin:42px 0 17px;
+    padding-bottom:8px;
+    border-bottom:1px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:17px;
+    margin:28px 0 9px;
+    color:#464238;
+  }
+
+  p{margin:10px 0}
+
+  ul,ol{
+    padding-left:1.5em;
+    margin:10px 0 18px;
+  }
+
+  li{margin:4px 0}
+
+  strong{font-weight:700}
+
+  .quote{
+    margin:18px 0;
+    padding:13px 18px;
+    border-left:4px solid #aaa38e;
+    background:#f5f3e9;
+    color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:18px 0 25px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:13px;
+  }
+
+  td{font-size:13px}
+
+  tr:last-child td{border-bottom:none}
+
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:16px 0 24px;
+  }
+
+  .quick{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 15px;
+  }
+
+  .quick b{
+    display:block;
+    margin-bottom:3px;
+    color:#4b473c;
+  }
+
+  .tip{
+    background:#eeece1;
+    border:1px solid #d9d5c7;
+    border-radius:8px;
+    padding:17px 20px;
+    margin:22px 0;
+  }
+
+  .tip b{
+    display:block;
+    margin-bottom:5px;
+  }
+
+  .final-box{
+    margin-top:38px;
+    background:#ebe8dc;
+    border:1px solid #d5d0c1;
+    border-radius:9px;
+    padding:23px 24px;
+  }
+
+  .final-box h3{
+    margin-top:0;
+  }
+
+  .footer{
+    border-top:1px solid #ddd8ca;
+    margin-top:44px;
+    padding-top:18px;
+    color:#898476;
+    font-size:12px;
+  }
+
+  .backtop{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#5e594c;
+    background:#f8f6ed;
+    border:1px solid #d5d0c2;
+    border-radius:50%;
+    box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+
+  @media(max-width:700px){
+    .page{
+      width:calc(100% - 18px);
+      margin:12px auto 40px;
+      border-radius:9px;
+    }
+
+    .article{padding:28px 22px 45px}
+
+    h1{font-size:25px}
+
+    h2{font-size:20px}
+
+    body{font-size:14px}
+
+    .quick-grid{grid-template-columns:1fr}
+
+    .lead,.notice,.summary,.tip,.final-box{
+      padding:15px 16px;
+    }
+  }
+</style>
+</head>
+
+<body id="top">
+
+<main class="page">
+<article class="article">
+
+  <div class="breadcrumb">陶藝與釉藥知識網站｜燒成技術與科學</div>
+  <span class="eyebrow">科學解析</span>
+
+  <h1>玻璃質如何結合在陶瓷？揭開釉藥燒熔的奧秘</h1>
+
+  <div class="tags">
+    <span class="tag">釉藥</span>
+    <span class="tag">二氧化矽</span>
+    <span class="tag">燒成技術</span>
+    <span class="tag">助熔劑</span>
+  </div>
+
+  <div class="lead">
+    <strong>摘要：</strong>
+    陶瓷表面的釉藥本質上是一層玻璃。這層玻璃質是如何在攝氏千度的高溫下，完美且緊密地包覆住陶瓷坯體而不脫落的呢？這一切都仰賴釉藥配方中原料的完美協作。
+  </div>
+
+  <h2>一、 高溫下的推手：助熔劑降低熔點</h2>
+  <p>
+    釉藥中的主要玻璃質來源是酸性的「二氧化矽」（SiO2，即石英），其純物質的熔點高達 1685°C[cite: 3]。
+  </p>
+  <p>
+    一般的陶瓷坯土無法承受如此極端的高溫，否則坯體會提早軟化變形[cite: 3]。因此，陶藝家必須在釉藥中加入「助熔劑」（例如碳酸鈣、氧化鋇、長石等）[cite: 1, 2, 3]。這類物質能有效降低二氧化矽的熔點，使釉藥在正常的窯燒溫度（約 1100°C 至 1250°C 左右）就能順利熔化成液態的玻璃質[cite: 2, 3]。
+  </p>
+
+  <h2>二、 對抗地心引力：黏稠劑的穩定包覆</h2>
+  <p>
+    如果釉藥中只有玻璃質和助熔劑，當窯內溫度達到熔點時，釉漿的流動性會變得過高，容易順著立體的陶瓷坯體向下流動，造成「流釉」現象，最後積聚在作品底腳甚至沾黏窯板[cite: 1, 3]。
+  </p>
+  <p>
+    為了解決這個問題，釉藥配方中需要加入「黏稠劑」（或稱安定劑），最典型的代表是中性的「三氧化二鋁」（Al2O3），常從高嶺土中取得[cite: 1, 2, 3]。鋁成分能顯著提升高溫熔漿的黏稠度，讓液態的玻璃質像膠水般穩定地附著在陶瓷表面，完美包覆住坯體[cite: 3]。
+  </p>
+
+  <h2>三、 冷卻後的完美契合：熱膨脹係數的匹配</h2>
+  <p>
+    當窯爐停止加熱並開始冷卻時，液態的釉漿會逐漸固化，形成一層光亮、緻密且防水的保護層[cite: 3]。
+  </p>
+  <div class="quote">
+    此時，決定釉藥能否緊密結合而不脫落的關鍵在於「熱膨脹係數」的匹配。
+  </div>
+  <p>
+    陶瓷坯體與表面釉層在降溫時都會收縮。如果兩者的收縮比例差異過大，釉面就會因為張力而產生皸裂（開片）或剝落[cite: 2, 3]。透過精確控制助熔劑與原料的比例（例如添加白雲石、碳酸鋇等來降低膨脹係數），能確保釉層與陶瓷坯體在冷卻收縮時步調一致，達到永久且牢固的物理與化學結合[cite: 2]。
+  </p>
+
+  <div class="notice">
+    <div class="notice-title">常見問題 (FAQ)</div>
+    <p><strong>Q：為什麼燒出來的釉藥會流到窯板上？</strong></p>
+    <p>A：這通常是因為釉方中的助熔劑比例過高，或是缺乏足夠的黏稠劑（如氧化鋁），導致熔點降低過多，釉漿在高溫時流動性太強而無法抓住坯體[cite: 1, 3]。</p>
+    <p><strong>Q：釉藥與陶瓷坯土的成分一樣嗎？</strong></p>
+    <p>A：非常相似！坯土本身也含有玻璃質的二氧化矽、黏稠劑的三氧化二鋁以及各種金屬氧化物，只是比例與釉藥不同。這也是為什麼釉藥能與坯體在化學上緊密結合的原因[cite: 3]。</p>
+  </div>
+
+  <div class="final-box">
+    <h3>相關文章</h3>
+    <ul>
+      <li><a href="What is glaze.html">何謂釉藥、釉的本質？陶藝新手的基礎指南</a></li>
+      <li><a href="Types of glazes.html">釉的種類有哪些？常見陶瓷釉藥分類與特色解析</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    本站提供專業的陶藝技術與釉藥理論，助您更安全、穩定地掌控窯燒變化。所有科學知識均基於陶瓷材料學原理。
+  </div>
+
+</article>
+</main>
+
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+
+</body>
+</html>

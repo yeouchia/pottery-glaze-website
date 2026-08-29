@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>何謂釉藥、釉的本質？陶藝與釉藥基礎知識</title>
+<meta name="description" content="釉藥是什麼？本篇帶您詳細了解釉藥的本質與起源，並剖析釉藥在陶瓷作品中扮演的六大核心功能。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card2:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+      "Noto Sans TC",
+      "PingFang TC",
+      "Microsoft JhengHei",
+      sans-serif;
+    line-height:1.85;
+    font-size:15px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:3px 10px;
+    margin-bottom:13px;
+  }
+
+  h1{
+    font-family:
+      "Noto Serif TC",
+      "Source Han Serif TC",
+      "PMingLiU",
+      serif;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.45;
+    letter-spacing:.03em;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:18px 20px;
+    margin:20px 0 28px;
+    color:#4d4a40;
+    font-size:14px;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:28px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+  }
+
+  .notice,
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px 21px;
+    margin:22px 0;
+  }
+
+  .notice-title,
+  .summary-title{
+    font-weight:700;
+    font-size:15px;
+    margin:0 0 9px;
+    color:#4c493e;
+  }
+
+  .notice p,
+  .summary p{margin:5px 0}
+
+  h2{
+    font-family:
+      "Noto Serif TC",
+      "Source Han Serif TC",
+      "PMingLiU",
+      serif;
+    font-size:22px;
+    line-height:1.55;
+    margin:42px 0 17px;
+    padding-bottom:8px;
+    border-bottom:1px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:17px;
+    margin:28px 0 9px;
+    color:#464238;
+  }
+
+  p{margin:10px 0}
+
+  ul,ol{
+    padding-left:1.5em;
+    margin:10px 0 18px;
+  }
+
+  li{margin:4px 0}
+
+  strong{font-weight:700}
+
+  .quote{
+    margin:18px 0;
+    padding:13px 18px;
+    border-left:4px solid #aaa38e;
+    background:#f5f3e9;
+    color:#4d4a40;
+    font-family:"Noto Serif TC","PMingLiU",serif;
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:18px 0 25px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:13px;
+  }
+
+  td{font-size:13px}
+
+  tr:last-child td{border-bottom:none}
+
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:16px 0 24px;
+  }
+
+  .quick{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 15px;
+  }
+
+  .quick b{
+    display:block;
+    margin-bottom:3px;
+    color:#4b473c;
+  }
+
+  .tip{
+    background:#eeece1;
+    border:1px solid #d9d5c7;
+    border-radius:8px;
+    padding:17px 20px;
+    margin:22px 0;
+  }
+
+  .tip b{
+    display:block;
+    margin-bottom:5px;
+  }
+
+  .final-box{
+    margin-top:38px;
+    background:#ebe8dc;
+    border:1px solid #d5d0c1;
+    border-radius:9px;
+    padding:23px 24px;
+  }
+
+  .final-box h3{
+    margin-top:0;
+  }
+
+  .footer{
+    border-top:1px solid #ddd8ca;
+    margin-top:44px;
+    padding-top:18px;
+    color:#898476;
+    font-size:12px;
+  }
+
+  .backtop{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#5e594c;
+    background:#f8f6ed;
+    border:1px solid #d5d0c2;
+    border-radius:50%;
+    box-shadow:0 3px 12px rgba(60,55,43,.08);
+  }
+
+  @media(max-width:700px){
+    .page{
+      width:calc(100% - 18px);
+      margin:12px auto 40px;
+      border-radius:9px;
+    }
+
+    .article{padding:28px 22px 45px}
+
+    h1{font-size:25px}
+
+    h2{font-size:20px}
+
+    body{font-size:14px}
+
+    .quick-grid{grid-template-columns:1fr}
+
+    .lead,.notice,.summary,.tip,.final-box{
+      padding:15px 16px;
+    }
+  }
+</style>
+</head>
+
+<body id="top">
+
+<main class="page">
+<article class="article">
+
+  <div class="breadcrumb">陶藝與釉藥知識網站｜基礎釉藥知識</div>
+  <span class="eyebrow">釉藥基礎</span>
+
+  <h1>何謂釉藥、釉的本質？</h1>
+
+  <div class="tags">
+    <span class="tag">釉藥</span>
+    <span class="tag">基礎知識</span>
+    <span class="tag">陶瓷材料</span>
+  </div>
+
+  <div class="lead">
+    <strong>摘要：</strong>
+    釉藥不僅能為陶瓷穿上美麗的外衣，更是保護作品、賦予實用價值的關鍵。了解釉藥的本質與三大組成元素，是每位陶藝創作者邁向專業的第一步。
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">重點整理</div>
+    <p>
+      釉藥在本質上是一種矽酸鹽物質，需經過高溫燒熔才能與陶瓷完美結合[cite: 3]。
+      它由玻璃質、助熔劑與黏稠劑組成，負責為陶器帶來防水、抗刮與繽紛的色彩表現[cite: 1, 3]。
+    </p>
+  </div>
+
+  <h2>一、 釉藥的定義與起源</h2>
+  <p>
+    釉藥，通常簡稱為「釉」，是一種在陶瓷製作過程中使用的特殊材料，塗佈在陶瓷坯體表面後，透過窯爐高溫燒結，會熔化並形成一層玻璃狀或光滑的緻密保護膜[cite: 2, 3]。
+  </p>
+  <div class="quote">
+    在中國古代，人們發現這種塗層能賦予瓷器光澤與不透水性，當時的表面看起來就像塗抹了油一樣，因此最早的名稱是「油」。後來，人們將代表光彩的「采」和「由」組合在一起，創造了現在的「釉」字[cite: 2]。
+  </div>
+
+  <h2>二、 釉藥的三大核心組成元素</h2>
+  <p>
+    要形成穩定的釉藥配方，通常必須包含以下三種被稱為「釉藥三骨材」的核心成分[cite: 1, 3]：
+  </p>
+  <ul>
+    <li><strong>玻璃質：</strong>這是釉藥的主要骨架，最常見的代表原料是二氧化矽（SiO2，如石英）。它的主要功能是形成光亮、緻密且防水的保護層[cite: 1, 3]。</li>
+    <li><strong>助熔劑：</strong>由於純二氧化矽的熔點極高（達 1685°C），一般的陶瓷坯體無法承受，因此必須加入助熔劑（如碳酸鈣、氧化鉀等鹼性氧化物）來降低釉料的熔點，節省燃料並避免坯體變形[cite: 1, 3]。</li>
+    <li><strong>黏稠劑（安定劑）：</strong>加入助熔劑後雖然能降低熔點，但釉漿在高溫下容易流失。加入黏稠劑（如三氧化二鋁 Al2O3，常由高嶺土提供）可以增加釉漿的黏性與稠度，確保釉藥穩定附著在坯體表面，防止流釉[cite: 1, 3]。</li>
+  </ul>
+
+  <h2>三、 釉藥對陶瓷作品的六大功能</h2>
+  <p>
+    施加上釉藥並非僅為了美觀，它在實用性與物理性質上發揮了不可或缺的功用[cite: 3]：
+  </p>
+  <div class="quick-grid">
+    <div class="quick">
+      <b>1. 不透水性</b>
+      能充分阻絕液體滲漏，確保容器不吸水，是釉藥最基本且重要的特性[cite: 3]。
+    </div>
+    <div class="quick">
+      <b>2. 提高硬度</b>
+      形成玻璃質地的硬保護層，提升機械強度，使陶瓷表面更加耐磨、抗損耗[cite: 3]。
+    </div>
+    <div class="quick">
+      <b>3. 彰顯色澤與效果</b>
+      透過添加少量的呈色劑（如氧化銅、氧化鐵），能產生多樣的色彩，以及如開片、結晶等美麗質地[cite: 3]。
+    </div>
+    <div class="quick">
+      <b>4. 狀態穩定抗酸鹼</b>
+      高溫燒熔後形成的化學狀態極為穩定，即使接觸強酸與強鹼液體，也能安定不起反應[cite: 3]。
+    </div>
+    <div class="quick">
+      <b>5. 光滑平整</b>
+      讓表層平滑，食物殘渣或污垢不易附著，方便清洗並常保衛生，對食用與衛浴器皿極為重要[cite: 3]。
+    </div>
+    <div class="quick">
+      <b>6. 彌補表面缺陷</b>
+      高溫熔融時呈黏稠液狀，可有效填補坯土表面的細微裂痕、手跡或坑疤[cite: 3]。
+    </div>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">常見問題 (FAQ)</div>
+    <p><strong>Q：不上釉藥的陶器可以裝水嗎？</strong></p>
+    <p>A：未上釉藥的陶器本身多半具備毛細孔，容易滲漏水分，且表面未經玻璃化保護，硬度較低也容易因摩擦而損傷[cite: 3]。</p>
+    <p><strong>Q：釉藥的顏色是怎麼來的？</strong></p>
+    <p>A：基礎的玻璃質與助熔劑多呈透明或乳白，豐富的顏色主要來自額外添加的金屬氧化物「呈色劑」，例如加入氧化鈷會呈現藍色，氧化鐵則可呈現土黃或青黑色[cite: 3]。</p>
+  </div>
+
+  <div class="final-box">
+    <h3>相關文章</h3>
+    <ul>
+      <li><a href="Types of glazes.html">釉的種類有哪些？常見陶瓷釉藥分類與特色解析</a></li>
+      <li><a href="Glass-bonded ceramics.html">玻璃質如何結合在陶瓷？揭開釉藥高溫熔融的科學原理</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    本站主要內容涵蓋陶藝與陶瓷知識、釉藥基礎與配方、燒成技術等，致力於為台灣陶藝愛好者提供專業且易讀的內容參考。
+  </div>
+
+</article>
+</main>
+
+<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
+
+</body>
+</html>
