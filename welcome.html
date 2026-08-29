@@ -21,8 +21,8 @@
         :root {
             --primary-color: #14213d;
             --accent-color: #fca311;
-            --bg-color: #fff8e7; /* ★ 修改：背景顏色改為溫潤的 #fff8e7 */
-            --card-bg: #ffffff;
+            --bg-color: #fff8e7; /* ★ 修改：網頁整體背景改為奶油黃 */
+            --card-bg: #ffffff;  /* ★ 維持：標題區塊與卡片為純白色 */
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
@@ -54,7 +54,7 @@
         }
         /* === 1. 根目錄與顏色變數定義 結束 === */
 
-        /* === 2. 頂部 Banner 區塊 開始 === */
+        /* === 2. 頂部 Banner 標題區塊 (純白底) 開始 === */
         .top-banner {
             background: var(--card-bg);
             width: 100%;
@@ -158,9 +158,9 @@
         .share-circle-btn.fb { background-color: #1877f2; }
         .share-circle-btn.line { background-color: #00c300; }
         .share-circle-btn.copy { background-color: #64748b; }
-        /* === 2. 頂部 Banner 區塊 結束 === */
+        /* === 2. 頂部 Banner 標題區塊 (純白底) 結束 === */
 
-        /* === 3. 功能導覽卡片區 (電腦版) 開始 === */
+        /* === 3. 功能導覽卡片區 (電腦版 4 欄) 開始 === */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -268,7 +268,7 @@
             margin-top: 10px;
             border: 1px solid rgba(252, 163, 17, 0.2);
         }
-        /* === 3. 功能導覽卡片區 (電腦版) 結束 === */
+        /* === 3. 功能導覽卡片區 (電腦版 4 欄) 結束 === */
 
         /* === 4. 安裝教學 Modal 樣式 開始 === */
         .install-modal-overlay {
@@ -311,7 +311,9 @@
         .modal-ok-btn:hover { background: #1e3057; }
         /* === 4. 安裝教學 Modal 樣式 結束 === */
 
+        /* ========================================== */
         /* === 5. 手機版專屬 RWD 響應式區塊 開始 === */
+        /* ========================================== */
         @media (max-width: 1250px) {
             .welcome-wrapper { padding: 4vw 4vw 35vw 4vw !important; }
             .top-banner {
@@ -332,64 +334,67 @@
             .share-buttons { gap: 4vw !important; }
             .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
-            /* ★ 手機版四大功能卡片：2 欄並排極致壓縮版 ★ */
+            /* ★ 手機版四大功能卡片：高度強力縮減 50% ★ */
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr) !important; /* 強制雙欄排列 */
-                gap: 12px !important; /* 固定像素間距 */
+                gap: 10px !important; /* 縮減卡片間距 */
                 margin-bottom: 25px !important;
             }
 
             .feature-card {
-                padding: 16px 12px !important; /* 壓縮留白 */
-                border-radius: 14px !important;
-                border-left-width: 5px !important; 
-                box-shadow: 0 3px 12px rgba(0,0,0,0.06) !important;
+                padding: 10px 8px !important; /* 極限壓縮內部留白 */
+                border-radius: 12px !important;
+                border-left-width: 4px !important; /* 飾條變細 */
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
             }
 
             .card-header {
-                gap: 8px !important;
-                margin-bottom: 12px !important;
-                flex-direction: column !important; /* 圖示與標題上下排列 */
-                align-items: flex-start !important;
+                gap: 6px !important;
+                margin-bottom: 6px !important;
+                flex-direction: row !important; /* ★ 恢復左右排列，瞬間省下大量高度！ */
+                align-items: center !important;
             }
 
             .card-icon {
-                font-size: 1.2rem !important;
-                width: 34px !important;
-                height: 34px !important;
-                border-radius: 8px !important;
+                font-size: 1rem !important;
+                width: 28px !important;
+                height: 28px !important;
+                border-radius: 6px !important;
+                flex-shrink: 0;
             }
 
             .card-title {
-                font-size: 0.95rem !important;
+                font-size: 0.85rem !important; /* 字體縮小約 13.5px */
                 font-weight: 800 !important;
-                letter-spacing: -0.3px !important;
+                letter-spacing: -0.5px !important;
             }
 
             .card-desc {
-                font-size: 0.75rem !important;
-                line-height: 1.4 !important;
-                margin-bottom: 12px !important;
+                font-size: 0.7rem !important; /* 說明文字縮到約 11px */
+                line-height: 1.2 !important;
+                margin-bottom: 6px !important;
                 letter-spacing: -0.2px !important;
             }
 
             .card-list {
-                gap: 6px !important;
+                gap: 4px !important; /* 清單間距極小化 */
             }
 
             .card-list li {
-                font-size: 0.75rem !important;
+                font-size: 0.7rem !important; /* 約 11px */
                 font-weight: 700 !important;
-                gap: 6px !important;
-                align-items: flex-start !important;
-                line-height: 1.3 !important;
-                letter-spacing: -0.2px !important;
+                gap: 4px !important;
+                line-height: 1.2 !important;
+                letter-spacing: -0.5px !important;
+                white-space: nowrap !important; /* ★ 絕對不換行，避免撐高卡片 */
+                overflow: hidden !important;
+                text-overflow: ellipsis !important; /* 太長會自動變為 ... */
             }
 
             .card-list li i {
-                font-size: 0.8rem !important;
+                font-size: 0.75rem !important;
                 width: 14px !important;
-                margin-top: 2px !important;
+                margin-top: 0 !important;
             }
 
             .bottom-hint { font-size: 4.2vw !important; padding: 3.5vw 5vw !important; border-radius: 50px !important; }
