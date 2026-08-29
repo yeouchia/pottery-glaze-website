@@ -2,18 +2,26 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <!-- 0. 跨瀏覽器 Viewport 與文字防縮放設定 --開始 -->
+    <!-- ========================================== -->
+    <!-- ======= 0. 跨瀏覽器 Viewport 與文字防縮放設定 開始 ======= -->
+    <!-- ========================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- 0. 跨瀏覽器 Viewport 與文字防縮放設定 --結束 -->
+    <!-- ========================================== -->
+    <!-- ======= 0. 跨瀏覽器 Viewport 與文字防縮放設定 結束 ======= -->
+    <!-- ========================================== -->
     
     <title>歡迎使用陶藝與釉藥調配工具</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- ========================================== -->
+    <!-- ======= CSS 樣式設定區塊 開始 ======= -->
+    <!-- ========================================== -->
     <style>
+        /* === 1. 根目錄與顏色變數定義 開始 === */
         :root {
             --primary-color: #14213d;
             --accent-color: #fca311;
-            --bg-color: #f8fafc;
+            --bg-color: #fff8e7; /* ★ 修改：背景顏色改為溫潤的 #fff8e7 */
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
@@ -25,7 +33,6 @@
             padding: 0;
         }
 
-        /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --開始 */
         html, body {
             height: 100%;
             font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
@@ -36,8 +43,7 @@
             text-size-adjust: 100% !important;
             -webkit-tap-highlight-color: transparent;
         }
-        /* 1. 跨瀏覽器文字大小防縮放與核心基礎設定 --結束 */
-
+        
         .welcome-wrapper {
             max-width: 1300px;
             margin: 0 auto;
@@ -46,8 +52,9 @@
             flex-direction: column;
             align-items: center;
         }
+        /* === 1. 根目錄與顏色變數定義 結束 === */
 
-        /* --- 頂部 Banner 區塊 --- */
+        /* === 2. 頂部 Banner 區塊 開始 === */
         .top-banner {
             background: var(--card-bg);
             width: 100%;
@@ -151,8 +158,9 @@
         .share-circle-btn.fb { background-color: #1877f2; }
         .share-circle-btn.line { background-color: #00c300; }
         .share-circle-btn.copy { background-color: #64748b; }
+        /* === 2. 頂部 Banner 區塊 結束 === */
 
-        /* 功能導覽卡片區（電腦版 4 欄排列） */
+        /* === 3. 功能導覽卡片區 (電腦版) 開始 === */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -247,7 +255,7 @@
         }
 
         .bottom-hint {
-            background: #fff8e7;
+            background: #ffffff;
             color: #b45309;
             padding: 12px 24px;
             border-radius: 30px;
@@ -258,9 +266,11 @@
             gap: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-top: 10px;
+            border: 1px solid rgba(252, 163, 17, 0.2);
         }
+        /* === 3. 功能導覽卡片區 (電腦版) 結束 === */
 
-        /* ★ 精美的安裝教學 Modal 樣式 ★ */
+        /* === 4. 安裝教學 Modal 樣式 開始 === */
         .install-modal-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -299,8 +309,9 @@
             transition: background 0.2s;
         }
         .modal-ok-btn:hover { background: #1e3057; }
+        /* === 4. 安裝教學 Modal 樣式 結束 === */
 
-        /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --開始 */
+        /* === 5. 手機版專屬 RWD 響應式區塊 開始 === */
         @media (max-width: 1250px) {
             .welcome-wrapper { padding: 4vw 4vw 35vw 4vw !important; }
             .top-banner {
@@ -324,22 +335,21 @@
             /* ★ 手機版四大功能卡片：2 欄並排極致壓縮版 ★ */
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr) !important; /* 強制雙欄排列 */
-                gap: 12px !important; /* 改用固定像素，保持間距精緻 */
+                gap: 12px !important; /* 固定像素間距 */
                 margin-bottom: 25px !important;
             }
 
             .feature-card {
                 padding: 16px 12px !important; /* 壓縮留白 */
                 border-radius: 14px !important;
-                border-left-width: 5px !important; /* 左側飾條變細 */
+                border-left-width: 5px !important; 
                 box-shadow: 0 3px 12px rgba(0,0,0,0.06) !important;
             }
 
             .card-header {
                 gap: 8px !important;
                 margin-bottom: 12px !important;
-                /* 為了在雙欄中不擁擠，將圖示與標題改為「上下排列」，更有原生 APP 質感 */
-                flex-direction: column !important; 
+                flex-direction: column !important; /* 圖示與標題上下排列 */
                 align-items: flex-start !important;
             }
 
@@ -351,13 +361,13 @@
             }
 
             .card-title {
-                font-size: 0.95rem !important; /* 約 15px */
+                font-size: 0.95rem !important;
                 font-weight: 800 !important;
                 letter-spacing: -0.3px !important;
             }
 
             .card-desc {
-                font-size: 0.75rem !important; /* 約 12px */
+                font-size: 0.75rem !important;
                 line-height: 1.4 !important;
                 margin-bottom: 12px !important;
                 letter-spacing: -0.2px !important;
@@ -368,10 +378,10 @@
             }
 
             .card-list li {
-                font-size: 0.75rem !important; /* 約 12px */
+                font-size: 0.75rem !important;
                 font-weight: 700 !important;
                 gap: 6px !important;
-                align-items: flex-start !important; /* 文字換行時對齊上方 */
+                align-items: flex-start !important;
                 line-height: 1.3 !important;
                 letter-spacing: -0.2px !important;
             }
@@ -379,17 +389,23 @@
             .card-list li i {
                 font-size: 0.8rem !important;
                 width: 14px !important;
-                margin-top: 2px !important; /* 圖示微調對齊文字 */
+                margin-top: 2px !important;
             }
 
             .bottom-hint { font-size: 4.2vw !important; padding: 3.5vw 5vw !important; border-radius: 50px !important; }
         }
-        /* 2. 手機版專屬等比飽滿放大樣式 (1250px 判定) --結束 */
+        /* === 5. 手機版專屬 RWD 響應式區塊 結束 === */
     </style>
+    <!-- ========================================== -->
+    <!-- ======= CSS 樣式設定區塊 結束 ======= -->
+    <!-- ========================================== -->
 </head>
 <!-- ★ 在 body 加上點擊解鎖音效 ★ -->
 <body onclick="unlockParentAudio()">
 
+    <!-- ========================================== -->
+    <!-- ======= 6. HTML 頁面主要結構 開始 ======= -->
+    <!-- ========================================== -->
     <div class="welcome-wrapper">
         
         <!-- 頂部 Banner 區塊 -->
@@ -499,7 +515,13 @@
             <button class="modal-ok-btn" onmouseenter="playHover()" onclick="playClick(); closeInstallGuide()">我知道了，立刻設定！</button>
         </div>
     </div>
+    <!-- ========================================== -->
+    <!-- ======= 6. HTML 頁面主要結構 結束 ======= -->
+    <!-- ========================================== -->
 
+    <!-- ========================================== -->
+    <!-- ======= 7. JavaScript 互動與音效橋樑 開始 ======= -->
+    <!-- ========================================== -->
     <!-- ★ 本地端專屬音效載入區塊 ★ -->
     <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
     <audio id="clickSound" src="click.wav" preload="auto"></audio>
@@ -636,5 +658,8 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
     </script>
+    <!-- ========================================== -->
+    <!-- ======= 7. JavaScript 互動與音效橋樑 結束 ======= -->
+    <!-- ========================================== -->
 </body>
 </html>
