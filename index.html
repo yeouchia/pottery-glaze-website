@@ -304,10 +304,12 @@
                 align-items: center !important; 
             }
 
-            /* ★ 修正 2：寬度縮減 (設為 85%)，左右留白完美置中，符合您剛好的大小 ★ */
+            /* ★ 修正 2：寬度縮減 (設為 85%)，左右留白完美置中 ★ */
             .dropdown, .nav-btn.theme-purple { 
                 width: 85% !important; 
                 margin: 0 auto !important; 
+                display: flex !important;           /* 確保內部垂直排列，消滅任何換行產生的空白 */
+                flex-direction: column !important;  
             }
 
             /* 五大主標題按鈕尺寸強力縮小，高度與字體變得細緻 */
@@ -319,21 +321,23 @@
                 border-radius: 8px !important; 
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
                 transition: all 0.2s ease !important;
+                z-index: 2; /* 確保主標題疊在最上層 */
+                position: relative;
             }
             .nav-btn > div { display: flex; align-items: center; gap: 10px !important; }
             .nav-btn i { font-size: 1.1rem !important; }
 
-            /* ★ 防重疊結界！強制取消手機版觸控時的放大特效，避免遮蔽 ★ */
+            /* 防重疊結界！強制取消手機版觸控時的放大特效，避免遮蔽 */
             .nav-btn:hover, .nav-btn:active {
                 transform: none !important;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
             }
 
-            /* ★ 母子連體魔法：展開時母標題下方變平、取消陰影，與子選單無縫接合 ★ */
+            /* ★ 母子連體魔法：展開時母標題下方變平(明確指定四角)、取消陰影，與子選單無縫接合 ★ */
             .dropdown.mobile-open .nav-btn {
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
+                border-radius: 8px 8px 0 0 !important; /* 強制下方圓角歸零 */
                 box-shadow: none !important; 
+                border-bottom: none !important;
             }
 
             /* 手機版子選單：現代化 CSS Grid 絲滑手風琴展開 */
@@ -343,9 +347,8 @@
                 opacity: 0;
                 visibility: hidden !important; 
                 position: static !important; width: 100% !important; box-shadow: none !important;
-                padding-top: 0 !important; padding-bottom: 0 !important;
-                margin-top: 0 !important; /* 確保與母標題無縫 */
-                margin-bottom: 0 !important;
+                padding: 0 !important; 
+                margin: 0 !important; /* 確保與母標題無縫 */
                 transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s;
                 pointer-events: none;
             }
@@ -356,6 +359,7 @@
                 opacity: 1;
                 visibility: visible !important; 
                 margin-bottom: 12px !important; 
+                margin-top: -1px !important; /* 向上微拉 1px，完美消除與母標題之間的微小縫隙 */
                 pointer-events: auto;
                 filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); /* 合體後的卡片整體陰影 */
             }
@@ -372,7 +376,7 @@
                 display: flex !important; flex-direction: column !important;
                 gap: 0 !important; /* 移除子項目間的縫隙，讓它們緊密相連 */
                 border: none !important;
-                padding-top: 0 !important; padding-bottom: 0 !important; 
+                padding: 0 !important; /* ★ 移除所有內距，讓第一項與母標題完全貼合 ★ */
             }
             
             /* 子選單項目的平面化與分隔線設定 */
