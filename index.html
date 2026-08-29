@@ -307,8 +307,8 @@
                 align-items: center !important; 
             }
 
-            /* 確保包含選單的容器絕對垂直排列、無間隙 */
-            .dropdown, .nav-btn.theme-purple { 
+            /* ★ 確保包含選單的容器絕對垂直排列、無間隙，且所有 5 個大標題按鈕保持 85% 等寬 ★ */
+            .dropdown { 
                 width: 85% !important; 
                 margin: 0 auto !important; 
                 display: flex !important;
@@ -507,7 +507,7 @@
                     <!-- === 2. 計算與理論教學 (深藍系) 開始 === -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-blue" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
-                            <div><i class="fa-solid fa-book-open"></i> 釉藥計算教學</div> <i class="fa-solid fa-caret-down"></i>
+                            <div><i class="fa-solid fa-book-open"></i> 計算與理論教學</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
@@ -603,10 +603,10 @@
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
                                 <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> 電腦版影像編輯器
+                                    <i class="fa-solid fa-desktop"></i> 電腦版影像編輯器
                                 </a>
                                 <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> 手機版影像編輯器
+                                    <i class="fa-solid fa-mobile-screen"></i> 手機版影像編輯器
                                 </a>
                             </div>
                         </div>
