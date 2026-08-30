@@ -21,8 +21,8 @@
         :root {
             --primary-color: #14213d;
             --accent-color: #fca311;
-            --bg-color: #fff8e7; /* 網頁整體背景改為奶油黃 */
-            --card-bg: #ffffff;  /* 標題區塊與卡片為純白色 */
+            --bg-color: #fff8e7; 
+            --card-bg: #ffffff;  
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
@@ -68,26 +68,33 @@
             margin-bottom: 30px;
         }
 
-        /* === 更新：頂部 Banner 標題區塊 (配合作品圖) === */
         .banner-left {
             display: flex;
             align-items: center;
-            gap: 30px; /* 拉開作品圖與文字的距離 */
+            gap: 25px; 
         }
 
-        /* 新增：作品圖片的專屬樣式 */
+        /* ★ 新增：破框立體特效的專屬樣式 ★ */
         .banner-avatar {
-            width: 170px;
+            width: 180px; /* 這裡就是控制大小的魔法數字！ */
             height: auto;
+            max-height: 220px;
             object-fit: contain;
-            filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.15)); /* 讓去背圖浮現立體陰影 */
+            /* ★ 陰影加強版：讓 3D 立體感更明顯 ★ */
+            filter: drop-shadow(10px 15px 18px rgba(0,0,0,0.45)); 
             transition: transform 0.3s ease;
+            
+            /* 負邊距讓圖片向外突破，絕對不撐高白色背景框 */
+            margin-top: -45px;
+            margin-bottom: -35px;
+            margin-left: -10px;
+            position: relative;
+            z-index: 10;
         }
         .banner-avatar:hover {
-            transform: scale(1.05) rotate(-2deg); /* 滑鼠游標移過去時會有可愛的微動效果 */
+            transform: scale(1.08) rotate(-2deg); 
         }
 
-        /* 將原本的 icon 和文字群組包裝對齊 */
         .banner-title-group {
             display: flex;
             align-items: center;
@@ -112,7 +119,6 @@
             font-size: 1rem;
         }
 
-        /* APP 安裝專屬按鈕樣式 */
         .install-btn {
             margin-top: 15px;
             background: linear-gradient(135deg, var(--accent-color) 0%, #e6920b 100%);
@@ -158,7 +164,6 @@
             gap: 12px;
         }
 
-        /* 圓形浮動 Icon 按鈕樣式 */
         .share-circle-btn {
             width: 45px;
             height: 45px;
@@ -432,10 +437,10 @@
         .article-reader-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 3000; display: flex; flex-direction: column;
-            transform: translateX(100%); /* 預設隱藏在右側 */
+            transform: translateX(100%); 
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .article-reader-overlay.show { transform: translateX(0); /* 滑入畫面 */ }
+        .article-reader-overlay.show { transform: translateX(0); }
         
         .reader-header {
             height: 44px;
@@ -503,7 +508,9 @@
             .welcome-wrapper { padding: 4vw 4vw 35vw 4vw !important; }
             .top-banner {
                 flex-direction: column !important; text-align: center !important;
-                padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; margin-bottom: 5vw !important;
+                padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; 
+                margin-bottom: 5vw !important;
+                margin-top: 8vw !important; 
             }
             .banner-left { flex-direction: column !important; gap: 5vw !important; }
             
@@ -515,8 +522,10 @@
             }
 
             .banner-avatar { 
-                width: 45vw !important; 
+                width: 48vw !important; 
+                margin-top: -14vw !important; 
                 margin-bottom: 2vw !important; 
+                margin-left: 0 !important;
             }
 
             .banner-icon { font-size: 14vw !important; }
@@ -532,7 +541,6 @@
             .share-buttons { gap: 4vw !important; }
             .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
 
-            /* 手機版四大功能卡片壓縮版 */
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 10px !important;
@@ -577,7 +585,6 @@
 
             .card-list li i { font-size: 0.75rem !important; width: 14px !important; margin-top: 0 !important; }
 
-            /* 手機版探索知識與搜尋列 */
             .knowledge-header { margin: 8vw 0 5vw 0 !important; }
             .knowledge-header h2 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
             .knowledge-header p { font-size: 4vw !important; margin-bottom: 5vw !important; }
@@ -586,7 +593,7 @@
             .knowledge-search-bar i { left: 4.5vw !important; font-size: 4.5vw !important; }
 
             .knowledge-grid {
-                grid-template-columns: 1fr !important; /* 手機變為單欄 */
+                grid-template-columns: 1fr !important; 
                 gap: 4vw !important;
                 margin-bottom: 8vw !important;
             }
@@ -601,24 +608,17 @@
             .k-desc { font-size: 4.2vw !important; margin-bottom: 5vw !important; line-height: 1.6 !important; }
             .k-link { font-size: 4.2vw !important; }
         }
-        /* === 7. 手機版專屬 RWD 響響式區塊 結束 === */
+        /* === 7. 手機版專屬 RWD 響應式區塊 結束 === */
     </style>
-    <!-- ========================================== -->
-    <!-- ======= CSS 樣式設定區塊 結束 ======= -->
-    <!-- ========================================== -->
 </head>
-<!-- ★ 在 body 加上點擊解鎖音效 ★ -->
 <body onclick="unlockParentAudio()">
 
-    <!-- ========================================== -->
-    <!-- ======= 8. HTML 頁面主要結構 開始 ======= -->
-    <!-- ========================================== -->
     <div class="welcome-wrapper">
         
         <!-- 頂部 Banner 區塊 -->
         <div class="top-banner">
             <div class="banner-left">
-                <!-- 新增的去背作品圖 -->
+                <!-- 新增的去背作品圖 (採用破框立體特效) -->
                 <img src="./welcome/1.png" alt="陶藝原創作品" class="banner-avatar" onmouseenter="playHover()">
                 
                 <div class="banner-title-group">
@@ -626,7 +626,6 @@
                     <div class="banner-text">
                         <h1>陶藝與釉藥調配</h1>
                         <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
-                        <!-- 一鍵安裝 APP 按鈕 -->
                         <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
                             <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
                         </button>
@@ -643,7 +642,6 @@
             </div>
         </div>
 
-        <!-- 功能特色卡片網格 (4大核心功能維持一般連結跳轉) -->
         <div class="cards-grid">
             <div class="feature-card card-calc" onmouseenter="playHover()">
                 <div class="card-header">
@@ -658,7 +656,6 @@
                     <li><i class="fa-solid fa-chalkboard-user"></i> 賽格式與三角座標教學</li>
                 </ul>
             </div>
-            <!-- 其他三大功能卡片保持原樣呈現... -->
             <div class="feature-card card-video" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><div class="card-title">豐富影音課程</div></div>
                 <div class="card-desc">完整 YouTube 教學影片庫：</div>
@@ -676,9 +673,6 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ★ 探索陶藝知識 15 大區塊與搜尋列 開始 ★ -->
-        <!-- ========================================== -->
         <div class="knowledge-header">
             <h2><i class="fa-solid fa-book-journal-whills" style="color: #fca311;"></i> 探索陶藝知識</h2>
             <p>循序漸進，從基礎理論到進階實作，用最清楚的解答陪伴您理解陶藝。</p>
@@ -694,7 +688,6 @@
                 <i class="fa-solid fa-ghost"></i> 找不到相關內容，請嘗試更換關鍵字！
             </div>
 
-            <!-- 卡片 1 (已建置 true) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/buy_clay.html', '陶土與瓷土怎麼選？', true)">
                 <span class="k-category">陶藝入門</span>
                 <h3 class="k-title">陶土與瓷土怎麼選？新手買泥全指南</h3>
@@ -702,7 +695,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 2 (已建置 true) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/dry_crack.html', '為什麼作品乾了總會裂開？', true)">
                 <span class="k-category">疑難雜症</span>
                 <h3 class="k-title">為什麼作品乾了總會裂開？接合與乾燥的致命錯誤</h3>
@@ -710,7 +702,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 3 (未建置 false) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/centering.html', '快速手拉坯定中心', false)">
                 <span class="k-category">成型技法</span>
                 <h3 class="k-title">教你快速手拉坯定中心?</h3>
@@ -718,7 +709,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 4 (未建置 false) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/recycle_clay.html', '乾掉的土千萬別丟！', false)">
                 <span class="k-category">實用技巧</span>
                 <h3 class="k-title">乾掉的土千萬別丟！教你如何「練土」讓廢土重生</h3>
@@ -726,7 +716,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 5 (已建置 true) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/bisque_glaze.html', '什麼是素燒與釉燒？', true)">
                 <span class="k-category">燒窯知識</span>
                 <h3 class="k-title">什麼是素燒與釉燒？</h3>
@@ -734,7 +723,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 6 (未建置 false) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/glaze_nature.html', '何謂釉藥釉的本質?', false)">
                 <span class="k-category">釉藥基礎</span>
                 <h3 class="k-title">何謂釉藥釉的本質?</h3>
@@ -742,7 +730,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 7 (已建置 true) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/glaze_elements.html', '釉藥三大元素', true)">
                 <span class="k-category">釉藥基礎</span>
                 <h3 class="k-title">認識釉藥三大元素</h3>
@@ -750,7 +737,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 8 (未建置 false) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/glaze_crazing.html', '釉面開片是美感還是瑕疵？', false)">
                 <span class="k-category">釉藥與裝飾</span>
                 <h3 class="k-title">釉面開片是美感還是瑕疵？</h3>
@@ -758,7 +744,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 9 (未建置 false) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/kiln_atmosphere.html', '窯爐氣氛控制', false)">
                 <span class="k-category">燒窯知識</span>
                 <h3 class="k-title">氧化與還原的魔術、窯爐氣氛控制</h3>
@@ -766,7 +751,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 10 (已建置 true) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/triaxial_mystery.html', '釉藥的奧秘~三角座標', true)">
                 <span class="k-category">配方實驗</span>
                 <h3 class="k-title">釉藥的奧秘~三角座標</h3>
@@ -774,7 +758,6 @@
                 <div class="k-link">閱讀完整知識 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 11 (已建置 true 工具) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./jiaoxue/triaxial_basic.html', '三角座標基礎教學', true)">
                 <span class="k-category">新手教學</span>
                 <h3 class="k-title">三角座標基礎教學</h3>
@@ -782,7 +765,6 @@
                 <div class="k-link">前往使用工具 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 12 (已建置 true 工具) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./yuanliao/index.html', '原料轉釉式', true)">
                 <span class="k-category">進階計算</span>
                 <h3 class="k-title">原料轉釉式</h3>
@@ -790,7 +772,6 @@
                 <div class="k-link">開啟計算工具 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 13 (已建置 true 工具) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./youzhi/index.html', '釉藥轉原料', true)">
                 <span class="k-category">進階計算</span>
                 <h3 class="k-title">釉藥轉原料</h3>
@@ -798,7 +779,6 @@
                 <div class="k-link">開啟計算工具 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 14 (未建置 false) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('./book/gallery.html', '作品分享', false)">
                 <span class="k-category">靈感啟發</span>
                 <h3 class="k-title">作品分享</h3>
@@ -806,7 +786,6 @@
                 <div class="k-link">欣賞更多作品 <i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
-            <!-- 卡片 15 (已建置 true 留言板) -->
             <a href="javascript:void(0)" class="knowledge-card" onmouseenter="playHover()" onclick="openArticle('guestbook.html', '新話題~你想知道什麼?', true)">
                 <span class="k-category">互動交流</span>
                 <h3 class="k-title">新話題~你想知道什麼?</h3>
@@ -815,15 +794,8 @@
             </a>
             
         </div>
-        <!-- ========================================== -->
-        <!-- ★ 探索陶藝知識 15 大區塊 結束 ★ -->
-        <!-- ========================================== -->
-
     </div>
 
-    <!-- ========================================== -->
-    <!-- ★ 內建文章閱讀器 (App風格滑動重疊層) 開始 ★ -->
-    <!-- ========================================== -->
     <div class="article-reader-overlay" id="articleReader">
         <div class="reader-header">
             <button class="reader-back-btn" onclick="closeArticle()" onmouseenter="playHover()">
@@ -833,11 +805,7 @@
         </div>
         <iframe id="readerFrame" class="reader-frame" src=""></iframe>
     </div>
-    <!-- ========================================== -->
-    <!-- ★ 內建文章閱讀器 (App風格滑動重疊層) 結束 ★ -->
-    <!-- ========================================== -->
 
-    <!-- ★ 安裝教學專屬 Modal 彈出視窗 ★ -->
     <div class="install-modal-overlay" id="installModal" onclick="playClick(); closeInstallGuide()">
         <div class="install-modal-content" onclick="event.stopPropagation()">
             <div class="modal-close" onmouseenter="playHover()" onclick="playClick(); closeInstallGuide()"><i class="fa-solid fa-xmark"></i></div>
@@ -847,18 +815,11 @@
             <button class="modal-ok-btn" onmouseenter="playHover()" onclick="playClick(); closeInstallGuide()">我知道了，立刻設定！</button>
         </div>
     </div>
-    <!-- ========================================== -->
-    <!-- ======= 7. HTML 頁面主要結構 結束 ======= -->
-    <!-- ========================================== -->
 
-    <!-- ========================================== -->
-    <!-- ======= 8. JavaScript 互動與音效橋樑 開始 ======= -->
-    <!-- ========================================== -->
     <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
     <audio id="clickSound" src="click.wav" preload="auto"></audio>
 
     <script>
-        // --- ★ 頁面捲動位置雙重保險記憶功能 ★ ---
         window.addEventListener('beforeunload', () => {
             sessionStorage.setItem('welcomeScrollPosition', document.documentElement.scrollTop || document.body.scrollTop);
         });
@@ -876,7 +837,6 @@
             }
         });
 
-        // --- ★ 內建文章閱讀器功能 (App Slide-in Effect) ★ ---
         function openArticle(url, title, isReady) {
             playClick();
             
@@ -899,7 +859,6 @@
             setTimeout(() => { document.getElementById('readerFrame').src = ''; }, 400);
         }
 
-        // --- ★ 即時過濾搜尋卡片功能 ★ ---
         function filterCards() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
@@ -925,7 +884,6 @@
             }
         }
 
-        // --- 本地專屬音效播放系統 ---
         var hoverAudio = document.getElementById("hoverSound");
         var clickAudio = document.getElementById("clickSound");
 
@@ -955,7 +913,6 @@
             try { if (window.parent && typeof window.parent.unlockAudio === 'function') { window.parent.unlockAudio(); } else { unlockAudio(); } } catch (e) { unlockAudio(); }
         }
 
-        // --- 分享與安裝教學 ---
         function getSiteUrl() { return window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html'); }
 
         function shareToFB() {
@@ -994,8 +951,5 @@
             const modal = document.getElementById('installModal'); modal.classList.remove('show'); setTimeout(() => modal.style.display = 'none', 300);
         }
     </script>
-    <!-- ========================================== -->
-    <!-- ======= 8. JavaScript 互動與音效橋樑 結束 ======= -->
-    <!-- ========================================== -->
 </body>
 </html>
