@@ -217,7 +217,7 @@
             pointer-events: auto;
         }
 
-        /* === 在這裡修改 dropdown-inner，加入 max-height 和 overflow-y === */
+        /* === 下拉選單內部區塊 (電腦版開啟捲軸) === */
         .dropdown-inner { 
             background-color: #ffffff; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
@@ -401,8 +401,9 @@
 
             /* 子選單內部去邊界，達成與母標題的完美一體成型 */
             .dropdown-inner {
+                max-height: none !important;     /* === 解除手機版的高度限制 === */
+                overflow-y: hidden !important;   /* === 關閉手機版的內部捲軸 === */
                 min-height: 0; 
-                overflow: hidden; 
                 background: var(--gold-light) !important; 
                 box-shadow: none !important; 
                 border-radius: 0 0 8px 8px !important; 
