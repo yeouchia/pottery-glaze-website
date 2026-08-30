@@ -217,7 +217,31 @@
             pointer-events: auto;
         }
 
-        .dropdown-inner { background-color: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+        /* === 在這裡修改 dropdown-inner，加入 max-height 和 overflow-y === */
+        .dropdown-inner { 
+            background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+            border-radius: 8px; 
+            border: 1px solid rgba(0,0,0,0.08); 
+            max-height: calc(100vh - var(--header-height) - 20px); 
+            overflow-y: auto; 
+        }
+
+        /* === 美化下拉選單的自訂捲軸 === */
+        .dropdown-inner::-webkit-scrollbar {
+            width: 6px; 
+        }
+        .dropdown-inner::-webkit-scrollbar-track {
+            background: transparent; 
+            border-radius: 8px;
+        }
+        .dropdown-inner::-webkit-scrollbar-thumb {
+            background: #dcd7c7; 
+            border-radius: 8px;
+        }
+        .dropdown-inner::-webkit-scrollbar-thumb:hover {
+            background: #b5afa0; 
+        }
         
         @media (min-width: 1251px) {
             .dropdown:hover .dropdown-content { 
@@ -507,7 +531,7 @@
                     <!-- === 2. 計算與理論教學 (深藍系) 開始 === -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-blue" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
-                            <div><i class="fa-solid fa-book-open"></i> 計算與理論教學</div> <i class="fa-solid fa-caret-down"></i>
+                            <div><i class="fa-solid fa-book-open"></i> 計算釉藥配方</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
@@ -571,16 +595,18 @@
                                 <a href="./book/Overglaze and underglaze.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-feather"></i> 釉上彩與釉下彩
                                 </a>
-                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('燒成技術 內容準備中，敬請期待！');">
-                                    <i class="fa-solid fa-fire"></i> 燒成技術
+
                                 </a>
-                                <!-- 階層縮排的子項目 -->
-                                <a href="./book/Oxidation.html" target="content_frame" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 氧化燒
+                                <a href="./book/Oxidation.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-feather"></i> 燒成技術~氧化燒
                                 </a>
-                                <a href="./book/Reduction firing.html" target="content_frame" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 還原燒
+
                                 </a>
+                                <a href="./book/Reduction firing.html" target="content_frame" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
+                                    <i class="fa-solid fa-feather"></i> 燒成技術~還原燒
+                                </a>
+
+
                                 <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('窯的種類 內容準備中，敬請期待！');">
                                     <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 窯的種類
                                 </a>
@@ -625,13 +651,25 @@
                                 </a>
                                 <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-store"></i> 原料／廠商資訊
-                                </a>
-                                <a href="javascript:void(0)" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('關於本站！');">
-                                    <i class="fa-solid fa-circle-info"></i> 關於本站
-                                </a>
+                                
+</a>
                                 <a href="guestbook.html" target="content_frame" class="dropdown-item item-purple protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
                                     <i class="fa-solid fa-comments"></i> 留言板
                                 </a>
+
+
+
+
+                                <a href="javascript:void(0)" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('關於本站！');">
+                                    <i class="fa-solid fa-circle-info"></i> 關於本站
+                              
+
+  </a>
+
+
+
+
+
                             </div>
                         </div>
                     </div>
