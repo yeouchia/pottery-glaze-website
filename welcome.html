@@ -509,7 +509,7 @@
             .top-banner {
                 flex-direction: column !important; 
                 align-items: stretch !important; 
-                padding: 6vw 5vw 8vw 5vw !important; 
+                padding: 8vw 5vw 8vw 5vw !important; 
                 border-radius: 16px !important; 
                 margin-bottom: 8vw !important;
                 margin-top: 4vw !important;
@@ -523,7 +523,7 @@
                 position: static !important;
             }
 
-            /* ★ 順序與對齊大洗牌：Icon與標題平行、按鈕靠左 ★ */
+            /* ★ 手機專屬魔法：順序與對齊大洗牌 ★ */
             .banner-title-group {
                 display: grid !important;
                 grid-template-columns: auto 1fr !important; /* 圖示與標題並排 */
@@ -532,7 +532,7 @@
                 column-gap: 2vw !important;
                 width: 100% !important;
                 position: relative;
-                z-index: 12 !important; /* 確保不被 LULU 擋住點擊 */
+                z-index: 12 !important; 
             }
             
             .banner-text {
@@ -542,14 +542,14 @@
             .banner-icon {
                 grid-column: 1 !important;
                 grid-row: 1 !important;
-                font-size: 7vw !important; /* 縮小一點跟標題平行更協調 */
+                font-size: 8vw !important; /* 圖示大小與標題協調 */
                 margin: 0 !important;
             }
 
             .banner-text h1 {
                 grid-column: 2 !important; 
                 grid-row: 1 !important;
-                text-align: left !important; /* 靠左對齊 */
+                text-align: left !important; /* 標題靠左對齊 */
                 font-size: 6vw !important;
                 margin: 0 !important;
             }
@@ -557,13 +557,13 @@
             .banner-text p {
                 grid-column: 1 / -1 !important; 
                 grid-row: 2 !important;
-                text-align: left !important; /* 靠左對齊 */
-                font-size: 3.2vw !important; /* ★ 縮小字體確保只顯示2行 ★ */
+                text-align: left !important; /* 簡介靠左對齊 */
+                font-size: 3.5vw !important; /* 微縮字體確保只顯示2行 */
                 letter-spacing: -0.2px !important;
                 line-height: 1.5 !important;
                 margin: 1vw 0 0 0 !important;
                 font-weight: 700 !important; 
-                white-space: nowrap !important; /* ★ 強制不換行，依靠原有的 <br> 斷成2行 ★ */
+                white-space: nowrap !important; /* ★ 強制不換行，依靠 <br> 完美斷成2行 ★ */
             }
             
             .install-btn {
@@ -571,9 +571,12 @@
                 grid-row: 3 !important;
                 justify-self: start !important; /* ★ 按鈕強制靠左 ★ */
                 margin: 2vw 0 0 0 !important;
-                padding: 2.5vw 5vw !important;
-                font-size: 4vw !important;
+                padding: 2.2vw 4.5vw !important;
+                font-size: 3.6vw !important;
                 border-radius: 50px !important;
+                width: fit-content !important; /* 確保按鈕不會過寬 */
+                position: relative !important;
+                z-index: 15 !important; /* 確保按鈕層級高於 LULU */
             }
 
             /* ★ 分享區塊靠左 ★ */
@@ -595,10 +598,11 @@
                 position: absolute !important;
                 bottom: -5vw !important;  
                 right: -3vw !important;   
-                width: 42vw !important;   
-                max-width: 160px !important;
+                width: 38vw !important;   /* 稍微縮小 LULU 讓出空間 */
+                max-width: 150px !important;
                 margin: 0 !important;     
                 z-index: 10 !important;
+                pointer-events: none !important; /* ★ 魔法：防止 LULU 的鹿角擋住按鈕點擊 ★ */
             }
 
             /* 手機版四大功能卡片壓縮版 */
@@ -686,9 +690,10 @@
                     <i class="fa-solid fa-layer-group banner-icon"></i>
                     <div class="banner-text">
                         <h1>陶藝與釉藥調配</h1>
-                        <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
+                        <!-- ★ 精簡文字以確保雙行顯示 ★ -->
+                        <p>融合科學計算與藝術創作的陶藝中心。<br>分享陶瓷歷史、創作靈感與生活美學。</p>
                         <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
-                            <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
+                            <i class="fa-solid fa-mobile-screen-button"></i> 加入手機桌面 (APP)
                         </button>
                     </div>
                 </div>
