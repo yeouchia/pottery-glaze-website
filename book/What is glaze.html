@@ -178,24 +178,51 @@
       font-weight:700;
     }
 
-    .related a{
-      display:block;
-      color:#5e594c;
-      text-decoration:none;
-      padding:8px 0;
-      border-bottom:1px solid #ddd8ca;
-    }
+    /* 修改原有的連結外觀設定******** 開始**/
+/* 將連結設計成獨立的按鈕卡片 */
+.related a {
+  display: block;
+  position: relative;
+  
+  /* 1. 版面設計：利用背景色與陰影創造按鈕的立體感 */
+  background-color: var(--paper); /* 使用網頁背景的亮白色，與 .related 的灰底產生對比 */
+  border: 1px solid #dcd7c7;      /* 加上獨立邊框 */
+  border-radius: 8px;             /* 圓角讓它看起來像按鈕 */
+  padding: 14px 40px 14px 16px;   /* 增加內距，右側留空給箭頭 */
+  margin-top: 10px;               /* 讓每個連結之間有空隙，不再是連在一起的清單 */
+  box-shadow: 0 2px 5px rgba(70,62,45,.05); /* 微微的陰影增加浮凸感 */
+  
+  /* 2. 文字顏色：使用與內文不同的顏色，建立「可點擊」的視覺暗示 */
+  color: #2c5e7b;                 /* 帶有一點灰藍色調，既不突兀又能明顯區分 */
+  font-weight: 700;               /* 文字加粗 */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
 
-    .related a:last-child{border-bottom:none}
+/* 確保最後一個項目依然有完整的邊框與樣式 */
+.related a:last-child {
+  border-bottom: 1px solid #dcd7c7; 
+}
 
-    .footer{
-      border-top:1px solid #ddd8ca;
-      margin-top:44px;
-      padding-top:18px;
-      color:#898476;
-      font-size:12px;
-    }
+/* 3. 靜態視覺引導：固定顯示的向右箭頭 */
+.related a::after {
+  content: "〉";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);    /* 確保箭頭絕對垂直置中 */
+  color: var(--muted);            /* 箭頭使用原本設定的柔和灰色 */
+  font-size: 16px;
+  font-weight: normal;
+}
 
+/* (選擇性) 保留電腦版的滑鼠懸停效果，讓體驗更好 */
+.related a:hover {
+  background-color: #ffffff;
+  border-color: #b5afa0;
+  box-shadow: 0 4px 8px rgba(70,62,45,.1);
+}
+ /* 修改原有的連結外觀設定******** 結束**/
     .backtop{
       position:fixed;
       right:20px;
@@ -569,6 +596,13 @@ Al₂O₃ 可作為理解釉藥黏稠與穩定作用的重要功能角色，幫�
 <a href="Types of glazes.html">釉的種類</a>
 <a href="triaxial_mystery.html">釉藥的奧秘～三角座標</a>
 </div>
+
+
+
+
+
+
+
 
 <div class="footer">
 陶藝與釉藥知識網站｜釉藥基礎理論
