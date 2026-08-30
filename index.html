@@ -382,17 +382,17 @@
                 width: 100% !important; box-shadow: none !important;
                 padding: 0 !important; 
                 margin: 0 !important; 
-                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s, margin-top 0.35s;
+                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s;
                 pointer-events: none;
             }
             
-            /* 展開時，底部產生 12px 安全距離，並向上拉提 8px 完美消滅縫隙 */
+            /* 展開時，底部產生 12px 安全距離，修正負邊距避免覆蓋按鈕 */
             .dropdown.mobile-open .dropdown-content { 
                 grid-template-rows: 1fr; 
                 opacity: 1;
                 visibility: visible !important; 
                 margin-bottom: 12px !important; 
-                margin-top: -8px !important; /* 強行拉提，吃掉任何可能產生的空白縫隙 */
+                margin-top: 0 !important; /* <--- 修正：取消負邊距，讓它自然接在按鈕下方 */
                 pointer-events: auto;
                 filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); 
             }
@@ -410,7 +410,7 @@
                 display: flex !important; flex-direction: column !important;
                 gap: 0 !important; 
                 border: none !important;
-                padding-top: 8px !important; /* 補償被提拉吃掉的 8px */
+                padding-top: 0 !important; /* <--- 修正：取消上方補償的內距 */
                 padding-bottom: 0 !important; 
                 margin: 0 !important;
             }
@@ -607,13 +607,16 @@
                                     <i class="fa-solid fa-feather"></i> 燒成技術~還原燒
                                 </a>
 
-                                <a href="javascript:void(0)" class="dropdown-item item-green" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('窯爐的種類 內容準備中，敬請期待！');">
-                                    <i class="fa-solid fa-feather"></i> 窯爐的種類
+
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('窯的種類 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 窯的種類
                                 </a>
-
-
-
-
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('上開式電窯 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 上開式電窯
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item item-green nested-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('側開式電窯 內容準備中，敬請期待！');">
+                                    <i class="fa-solid fa-angle-right" style="font-size: 0.85em; width: 12px;"></i> 側開式電窯
+                                </a>
                             </div>
                         </div>
                     </div>
