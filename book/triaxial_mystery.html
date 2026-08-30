@@ -55,6 +55,52 @@
   .tip b{display:block;margin-bottom:5px}
   .final-box{margin-top:38px;background:#ebe8dc;border:1px solid #d5d0c1;border-radius:9px;padding:23px 24px}
   .final-box h3{margin-top:0}
+/* 1. 專門針對 final-box 內部的「無序清單(ul)」進行樣式清除 */
+  .final-box ul {
+    list-style: none; /* 移除預設的黑點 */
+    padding-left: 0;  /* 移除左側縮排 */
+    margin: 15px 0 0 0;
+  }
+
+  /* 2. 將清單內的「超連結(a)」設計成獨立的按鈕卡片 */
+  .final-box ul li a {
+    display: block;
+    position: relative;
+    background-color: var(--paper); /* 使用亮白色背景，與外框底色做出對比 */
+    border: 1px solid #dcd7c7;      /* 加上獨立邊框 */
+    border-radius: 8px;             /* 圓角按鈕感 */
+    padding: 14px 40px 14px 16px;   /* 增加內距，右側留空給箭頭 */
+    margin-bottom: 12px;            /* 讓按鈕之間產生間距 */
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); /* 微立體陰影 */
+    color: #2c5e7b;                 /* 使用帶有灰藍調的連結色彩 */
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  /* 3. 在手機版與電腦版都固定顯示向右箭頭，提供明確的行動暗示 */
+  .final-box ul li a::after {
+    content: "〉";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  /* 4. 保留電腦版的滑鼠懸停效果 */
+  .final-box ul li a:hover {
+    background-color: #ffffff;
+    border-color: #b5afa0;
+    box-shadow: 0 4px 8px rgba(70,62,45,.1);
+  }
+
+
+
+
+
   .footer{border-top:1px solid #ddd8ca;margin-top:44px;padding-top:18px;color:#898476;font-size:12px}
   .backtop{position:fixed;right:20px;bottom:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#5e594c;background:#f8f6ed;border:1px solid #d5d0c2;border-radius:50%;box-shadow:0 3px 12px rgba(60,55,43,.08)}
   @media(max-width:700px){.page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px}.article{padding:28px 22px 45px}h1{font-size:25px}h2{font-size:20px}body{font-size:14px}.quick-grid{grid-template-columns:1fr}.lead,.notice,.summary,.tip,.final-box{padding:15px 16px}}

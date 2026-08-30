@@ -3,32 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>金屬氧化物的發色：陶瓷釉藥的色彩科學</title>
-<meta name="description" content="陶瓷釉藥的顏色是怎麼來的？深入了解金屬氧化物（如氧化銅、氧化鐵、氧化鈷）在釉藥中如何發色，掌握陶瓷色彩的奧秘。">
-
+<title>金屬氧化物的發色：各種不同的金屬氧化物呈色</title>
+<meta name="description" content="探討釉藥中常見的金屬氧化物與碳酸鹽發色原理，解析紅鐵、黑鐵、黃鐵、銅釉、鈷釉、錳釉等在不同燒成氣氛下的奇妙色彩變化，並附上完整發色對照表格。">
 <style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     ========================================= */
+
   :root{
     --bg:#eee7d8;
     --paper:#fbfaf5;
     --card:#f1f0e4;
-    --card2:#f6f4e9;
-    --line:#d8d4c5;
+    --line:#dcd7c7;
     --text:#39372f;
     --muted:#777367;
     --accent:#6c6654;
     --accent-light:#e8e4d6;
     --quote:#eeeadd;
   }
+
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+
   body{
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
     line-height:1.85;
-    font-size:15px;
+    font-size:16px;
   }
+
   .page{
     width:min(900px, calc(100% - 32px));
     margin:34px auto 70px;
@@ -38,233 +54,375 @@
     box-shadow:0 7px 24px rgba(70,62,45,.08);
     overflow:hidden;
   }
-  .article{padding:42px 56px 64px;}
-  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;}
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
   .eyebrow{
     display:inline-block;
-    font-size:11px;
+    font-size:12px;
     color:#625d4e;
     background:var(--accent-light);
     border:1px solid #dcd7c7;
     border-radius:999px;
-    padding:3px 10px;
+    padding:4px 12px;
     margin-bottom:13px;
+    font-weight: bold;
   }
+
   h1{
-    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
-    font-weight:600;
-    font-size:30px;
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
     line-height:1.45;
-    letter-spacing:.03em;
     margin:0 0 18px;
     color:#35332c;
   }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
   .lead{
     background:var(--quote);
     border:1px solid #dedacd;
     border-radius:8px;
-    padding:18px 20px;
-    margin:20px 0 28px;
+    padding:20px 24px;
+    margin:24px 0 32px;
     color:#4d4a40;
-    font-size:14px;
+    font-size:16px;
+    line-height: 1.8;
   }
-  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
   .tag{
     border:1px solid #d7d2c3;
     background:#f8f6ed;
     color:#706b5d;
     border-radius:999px;
-    padding:3px 10px;
-    font-size:11px;
+    padding:4px 12px;
+    font-size:13px;
   }
-  .notice,.summary{
+
+  .faq-box {
     background:var(--card);
     border:1px solid var(--line);
     border-radius:8px;
-    padding:19px 21px;
-    margin:22px 0;
+    padding:24px 28px;
+    margin:32px 0;
   }
-  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;}
-  .notice p,.summary p{margin:5px 0}
-  h2{
-    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
-    font-size:22px;
-    line-height:1.55;
-    margin:42px 0 17px;
-    padding-bottom:8px;
-    border-bottom:1px solid #ddd8ca;
-    color:#3e3b32;
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
   }
-  h3{font-size:17px;margin:28px 0 9px;color:#464238;}
-  p{margin:10px 0}
-  ul,ol{padding-left:1.5em;margin:10px 0 18px;}
-  li{margin:4px 0}
-  strong{font-weight:700}
-  .quote{
-    margin:18px 0;
-    padding:13px 18px;
-    border-left:4px solid #aaa38e;
-    background:#f5f3e9;
-    color:#4d4a40;
-    font-family:"Noto Serif TC","PMingLiU",serif;
-  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
   .table-wrap{
     overflow-x:auto;
-    margin:18px 0 25px;
+    margin:24px 0 32px;
     border:1px solid var(--line);
     border-radius:8px;
   }
+
   table{
     width:100%;
     border-collapse:collapse;
     min-width:620px;
     background:#faf9f3;
   }
+
   th,td{
     border-bottom:1px solid #dfdccf;
-    padding:10px 12px;
+    padding:14px 16px;
     text-align:left;
     vertical-align:top;
   }
-  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px;}
-  td{font-size:13px}
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
   tr:last-child td{border-bottom:none}
-  .quick-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin:16px 0 24px;
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
   }
-  .quick{
-    background:var(--card2);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:13px 15px;
-  }
-  .quick b{display:block;margin-bottom:3px;color:#4b473c;}
-  .final-box{
-    margin-top:38px;
-    background:#ebe8dc;
-    border:1px solid #d5d0c1;
-    border-radius:9px;
-    padding:23px 24px;
-  }
-  .final-box h3{margin-top:0;}
-  .footer{
-    border-top:1px solid #ddd8ca;
-    margin-top:44px;
-    padding-top:18px;
-    color:#898476;
-    font-size:12px;
-  }
-  .backtop{
-    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
-    display:flex;align-items:center;justify-content:center;
-    text-decoration:none;color:#5e594c;background:#f8f6ed;
-    border:1px solid #d5d0c2;border-radius:50%;
-    box-shadow:0 3px 12px rgba(60,55,43,.08);
-  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
   @media(max-width:700px){
-    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px;}
-    .article{padding:28px 22px 45px}
-    h1{font-size:25px}
-    h2{font-size:20px}
-    body{font-size:14px}
-    .quick-grid{grid-template-columns:1fr}
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
   }
 </style>
-
 </head>
 <body id="top">
 <main class="page">
 <article class="article">
-  <div class="breadcrumb">陶藝與釉藥知識網站｜陶瓷材料</div>
-  <span class="eyebrow">發色科學</span>
-  <h1>金屬氧化物的發色：陶瓷釉藥的色彩科學</h1>
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥基礎｜釉的呈色</div>
+  <span class="eyebrow">釉藥基礎理論</span>
+  <h1>金屬氧化物的發色：各種不同的金屬氧化物呈色</h1>
+  <div class="lead"><strong>一看就懂：</strong>釉藥的色彩並非來自一般顏料，而是依賴發色金屬原料在高溫下與玻璃質熔融所產生的化學反應。無論是氧化物還是碳酸鹽，在不同的窯爐氣氛與溫度區間下，都會魔幻般地展現出截然不同的釉色。</div>
   <div class="tags">
-    <span class="tag">釉藥</span>
-    <span class="tag">呈色劑</span>
-    <span class="tag">氧化銅</span>
-    <span class="tag">氧化鐵</span>
-    <span class="tag">氧化鈷</span>
+    <span class="tag">釉藥</span><span class="tag">紅鐵/黑鐵/黃鐵</span><span class="tag">碳酸銅</span><span class="tag">碳酸鈷</span><span class="tag">碳酸錳</span><span class="tag">氧化燒</span><span class="tag">還原燒</span>
   </div>
-  <div class="lead">
-    <strong>摘要：</strong>
-    基礎的釉藥燒熔後多半是透明或乳白色的，而賦予陶瓷豐富多彩面貌的關鍵，就在於釉方中添加了微量的「金屬氧化物」。本篇帶您了解這些呈色劑如何在窯火中幻化出千變萬化的釉色。
-  </div>
-
-  <h2>一、 呈色劑在釉藥中的角色</h2>
-  <p>在釉藥的三大骨材（玻璃質、助熔劑、黏稠劑）之外，為了讓釉藥呈現出各種美麗的色澤，必須額外加入少量的「呈色劑」[cite: 3]。呈色劑的成分多為過渡金屬的氧化物，例如銅、鐵、鈦、錫、錳、鈷、鉻、鎳等[cite: 3]。這些元素在高溫下融入玻璃質網絡中，吸收特定波長的光線，進而讓我們看到多樣的色彩。</p>
-
-  <h2>二、 常見金屬氧化物與其發色效果</h2>
-  <p>不同的金屬氧化物在釉藥中扮演著截然不同的角色，以下列舉幾種常見的呈色劑及其典型發色特徵[cite: 3]：</p>
   
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>金屬氧化物</th>
-          <th>用量比例</th>
-          <th>常見發色系</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>氧化銅 (Copper Oxide)</strong></td>
-          <td>2-5% (氧化燒) <br> 0.5-3% (還原燒)</td>
-          <td>在氧化氣氛中通常發出<strong>青綠色</strong>；但在還原氣氛中，則能產生迷人的<strong>紅色</strong>（如著名的銅紅釉）[cite: 3]。</td>
-        </tr>
-        <tr>
-          <td><strong>氧化鐵 (Iron Oxide)</strong></td>
-          <td>2-5% (氧化燒) <br> 10-15% (還原燒)</td>
-          <td>陶瓷中最古老且常見的呈色劑。在氧化燒時多呈現<strong>土黃、褐色</strong>；在還原燒且用量較大時，則會形成深邃的<strong>青黑色</strong>（如天目釉）[cite: 3]。</td>
-        </tr>
-        <tr>
-          <td><strong>氧化鈷 (Cobalt Oxide)</strong></td>
-          <td>0.5-5%</td>
-          <td>極強的著色劑，只需微量即可產生非常穩定且鮮艷的<strong>藍色</strong>（青花瓷的標誌性色彩）[cite: 3]。</td>
-        </tr>
-        <tr>
-          <td><strong>氧化錳 (Manganese Oxide)</strong></td>
-          <td>2-5%</td>
-          <td>通常用於產生<strong>紫色</strong>或紫褐色調[cite: 3]。</td>
-        </tr>
-        <tr>
-          <td><strong>氧化鉻 (Chromium Oxide)</strong></td>
-          <td>2-4%</td>
-          <td>穩定的綠色來源，能產生濃郁的<strong>綠色</strong>調[cite: 3]。</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<h2>一、金屬原料的選擇：為什麼有「碳酸銅」，卻沒有「碳酸鐵」？</h2>
+<p>在陶藝的世界裡，釉藥的色彩來源於金屬元素。但如果您仔細檢視釉藥原料行的清單，會發現一個有趣的現象：銅、鈷、錳通常有「氧化物」與「碳酸鹽」兩種形式可供選擇（如氧化銅與碳酸銅），但鐵卻幾乎只有「氧化鐵」，而沒有人在賣「碳酸鐵」。</p>
+<p>這牽涉到釉藥化學中非常實務的物理與化學特性：</p>
+<ul>
+  <li><strong>碳酸鹽的優勢（如碳酸銅 CuCO₃、碳酸鈷 CoCO₃）：</strong> 碳酸鹽粉末的顆粒通常比氧化物更為細緻，在調配釉漿時更容易分散均勻。在窯燒過程中，碳酸根會分解化為二氧化碳氣體排出，雖然會產生些許氣泡，但金屬離子能極其均勻地融入釉網中。對於發色力極強的鈷或銅來說，使用碳酸鹽能有效避免釉面出現不均勻的「色斑」或「黑點」。需注意的是，碳酸鹽的發色濃度較弱（約為氧化物的一半至三分之二），因此配方比例需適度增加。</li>
+  <li><strong>鐵原料的特性：</strong> 自然界中雖然存在菱鐵礦（碳酸鐵），但它極度不穩定，容易氧化。相對地，鐵的氧化物（紅鐵、黑鐵、黃鐵）在自然界中存量龐大、發色強烈且價格低廉，加上它們在釉漿中的分散性已經足夠優秀，因此在實務配釉上，我們完全不需要且不會使用「碳酸鐵」作為發色劑。</li>
+</ul>
 
-  <h2>三、 燒成氣氛對發色的絕對影響</h2>
-  <p>從上述金屬氧化物的特性中可以發現，同一個金屬元素在不同的窯爐環境中，會產生截然不同的顏色[cite: 3]。這是因為窯爐內的「氧化還原氣氛」改變了金屬的價態：</p>
-  <ul>
-    <li><strong>氧化燒 (Oxidation Firing)：</strong>窯爐內氧氣充足，金屬氧化物充分與氧結合。例如銅在氧化環境下會呈現穩定的青綠色[cite: 3]。</li>
-    <li><strong>還原燒 (Reduction Firing)：</strong>刻意減少窯爐內的氧氣供應，使燃燒不完全，火焰會從釉藥中的金屬氧化物奪取氧原子。這一化學變化會使銅還原，轉變為美麗的紅色[cite: 3]。</li>
-  </ul>
+<h2>二、主要發色原料與其釉色對應深度解析</h2>
 
-  <div class="notice">
-    <div class="notice-title">常見問題 (FAQ)</div>
-    <p><strong>Q：如果我把兩種不同的氧化物混在一起會怎樣？</strong></p>
-    <p>A：這正是釉藥調配的有趣之處！金屬氧化物可以互相混合產生複合色彩，例如加入氧化鈷（藍）與氧化鉻（綠）可以調出藍綠色調。許多獨特的藝術釉色都是經過精密比例混合而成的。</p>
-    <p><strong>Q：為什麼有時候加了氧化銅，燒出來卻不是綠色？</strong></p>
-    <p>A：除了燒成氣氛外，基礎釉方的化學組成（如含鉛、含鋇或含鹼性金屬）也會極大程度影響金屬氧化物的發色表現。這也是為什麼同一種呈色劑在不同的基礎釉中，效果會截然不同的原因。</p>
-  </div>
+<h3>1. 鐵發色：不只是「鐵」，紅鐵、黑鐵與黃鐵的細微差異</h3>
+<p>鐵是釉藥中最古老、最穩定且變化最多的發色劑。在陶藝材料行，您會看到三種截然不同的鐵原料，它們的化學結構略有不同，對釉面的影響也各具特色：</p>
+<ul>
+  <li><strong>紅鐵（氧化鐵 / 三氧化二鐵 Fe₂O₃）：</strong> 最普及的主流原料，呈現紅色粉末。在充足氧氣的氧化燒中，少量的紅鐵會呈現溫暖的琥珀色、蜜黃色；濃度增至 5%~8% 時，呈現紅褐色（如柿紅釉、鐵紅釉）。若在還原氣氛（缺氧狀態）下燒至 1260℃ 左右，紅鐵會被還原成氧化亞鐵，蛻變為宛如白瓷土上那一抹溫潤迷人的青瓷綠或粉青色。</li>
+  <li><strong>黑鐵（四氧化三鐵 Fe₃O₄ 或 一氧化鐵 FeO）：</strong> 呈現黑色粉末。黑鐵的含氧量較低，溶解度與發色強度往往比紅鐵更為濃烈。常被用於調配深邃的黑釉、天目釉，或在還原燒中提供更深沉的底色。</li>
+  <li><strong>黃鐵（水合氧化鐵 / 褐鐵礦 Fe₂O₃·H₂O）：</strong> 帶有結晶水的氧化鐵，呈現黃色粉末。它的顆粒極細，在釉漿中的懸浮與分散性極佳，常用於需要均勻暖色調、避免沉澱的底釉中，燒成後的色彩往往比紅鐵更為柔和、均勻。</li>
+</ul>
 
-  <div class="final-box">
+<h3>2. 銅發色（氧化銅 CuO / 碳酸銅 CuCO₃）：敏感多變的精靈</h3>
+<p>銅是一位「性格極度敏感且多變」的金屬。為了追求釉色的均勻無斑點，許多藝術家在彩繪或配釉時更偏愛使用淺綠色的「碳酸銅」粉末。</p>
+<ul>
+  <li><strong>銅綠與孔雀藍：</strong>在一般氧化燒中，2%~5% 的銅會呈現穩定的綠色。但如果將銅加入高鹼性（富含鈉、鉀）的基礎釉中，並設定在 1050℃ 左右進行電窯氧化燒，就會呈現出極其鮮豔飽和、充滿異國風情的「孔雀藍」。</li>
+  <li><strong>銅紅釉（辰砂、祭紅、牛血紅）：</strong>在還原燒的高溫下，銅失去氧原子轉變為奈米級的純銅微粒，爆發出濃烈如血的紅色。這是陶藝中最難穩定控制的釉色之一。</li>
+</ul>
+
+<h3>3. 鈷發色（氧化鈷 CoO / 碳酸鈷 CoCO₃）：強烈深邃的王者之藍</h3>
+<p>鈷是發色力最強烈的著色劑。為了避免極少量的鈷在白瓷土作品上留下難看的藍黑斑點，實務上常使用分散性更好的「碳酸鈷」（淡紫色粉末）。</p>
+<ul>
+  <li><strong>青花藍 / 鈷藍釉：</strong>不論氧化或還原窯，鈷幾乎都會頑強地呈現純粹的藍色。</li>
+  <li><strong>紫藍變化：</strong>當鈷遇到富含「鎂」或「鋅」的基礎釉時，藍色色相會發生偏移，產生迷人的紫藍色或純紫色釉色。</li>
+</ul>
+
+<h3>4. 錳發色（二氧化錳 MnO₂ / 碳酸錳 MnCO₃）：沉穩與金屬光澤的締造者</h3>
+<ul>
+  <li><strong>紫褐色 / 棕色：</strong>加入 2%~5% 的錳會呈現沉穩的紫褐色，常被用來調配復古或大地色系。使用碳酸錳同樣能獲得更均勻的底色。</li>
+  <li><strong>金屬釉：</strong>當錳的添加量極高（超過 10%~20%），並配合特定的降溫曲線，表面會析出大量結晶，形成具有強烈反光與金屬光澤的「金屬釉」，極適合模擬青銅器或鑄鐵雕塑。</li>
+</ul>
+
+<h3>5. 其他不可或缺的輔助氧化物與乳濁劑</h3>
+<ul>
+  <li><strong>二氧化鈦 / 金紅石 (TiO₂)：</strong> 主要作為結晶促進劑與乳濁劑。在透明釉中加入鈦，能使其變成溫潤的米黃色或奶白色，並增加消光（霧面）質感。它更是「結晶釉」配方中最核心的催化元素。</li>
+  <li><strong>氧化鉻 (Cr₂O₃)：</strong> 單獨使用呈現不透明的深綠色（鉻綠）。若與含錫的釉藥在高溫下相遇，會奇蹟般地產生鮮豔的粉紅色（鉻錫紅）。</li>
+  <li><strong>氧化錫 (SnO₂) 與 矽酸鋯 (Zr)：</strong> 兩者皆為優良的「乳濁劑」，能使透明釉變成不透明的白釉。錫白釉質感古樸溫潤，而鋯白釉則是現代工業最穩定、成本較低的選擇。</li>
+  <li><strong>氧化鎳 (NiO)：</strong> 發色力弱（灰綠或紫褐），通常作為「調色劑」，用來壓暗其他金屬的鮮豔度，使整體釉色更顯沉穩。</li>
+</ul>
+
+<h2>三、金屬氧化物發色總覽對照表</h2>
+<p>為了方便配釉計算，以下表格整理了陶藝實務上最完整的發色原料與其對應的色彩變化。請注意，若將配方中的「氧化物」替換為「碳酸鹽」，添加比例需依分子量差異適度提高。</p>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>主要著色原料 / 複合色料</th>
+        <th>常見添加比例</th>
+        <th>氧化燒呈色 (約 1200℃-1230℃)</th>
+        <th>還原燒呈色 (約 1230℃-1260℃)</th>
+        <th>特殊變化與實務備註</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>鐵：紅鐵 / 黑鐵 / 黃鐵 (Fe)</td>
+        <td>1% - 12%</td>
+        <td>米黃、琥珀、鐵紅、褐黑</td>
+        <td>粉青、青瓷綠、深黑</td>
+        <td>三種鐵原料皆不使用碳酸鹽。濃度高於 8% 極易形成結晶（油滴、兔毫盞）或黑釉。</td>
+      </tr>
+      <tr>
+        <td>銅：氧化銅 / 碳酸銅 (Cu)</td>
+        <td>1% - 5%</td>
+        <td>清澈綠色、孔雀藍(1050℃高鹼釉)</td>
+        <td>銅紅、牛血紅、鈞紅</td>
+        <td>高溫極易揮發。碳酸銅分散均勻，但會產生氣體；氧化銅色彩更為濃烈。</td>
+      </tr>
+      <tr>
+        <td>鈷：氧化鈷 / 碳酸鈷 (Co)</td>
+        <td>0.1% - 2%</td>
+        <td>深藍色、靛藍色</td>
+        <td>深藍色、青花藍</td>
+        <td>極少添加即有強烈藍色。若基礎釉含大量鎂(Mg)或鋅(Zn)，可轉化為紫藍或紫色。</td>
+      </tr>
+      <tr>
+        <td>錳：二氧化錳 / 碳酸錳 (Mn)</td>
+        <td>2% - 15%</td>
+        <td>紫褐、棕色、金屬黑</td>
+        <td>紫褐、黑色</td>
+        <td>高比例添加可製作出仿古青銅器的金屬釉效果。加鎳會偏向復古灰棕色。</td>
+      </tr>
+      <tr>
+        <td>鉻：氧化鉻 (Cr)</td>
+        <td>0.5% - 2%</td>
+        <td>草綠色、不透明深綠</td>
+        <td>深綠色</td>
+        <td>單獨使用顏色較為乾澀。與錫(Sn)共存時，可燒出著名的高溫粉紅色（鉻錫紅）。</td>
+      </tr>
+      <tr>
+        <td>鎳：氧化鎳 (Ni)</td>
+        <td>0.5% - 3%</td>
+        <td>灰綠、黃褐、紫灰</td>
+        <td>灰黑、褐色</td>
+        <td>極少單獨作為主色，常作為降低色彩飽和度、增加層次感的調色輔助劑。</td>
+      </tr>
+      <tr>
+        <td>鈦：二氧化鈦 / 金紅石 (Ti)</td>
+        <td>5% - 15%</td>
+        <td>白、米黃、橙、金色</td>
+        <td>米黃、灰棕、金色</td>
+        <td>強效乳濁劑，能消光。更是結晶釉最重要的「催化劑」，幫助表面析出晶花。</td>
+      </tr>
+      <tr>
+        <td>錫：氧化錫 (Sn)</td>
+        <td>3% - 8%</td>
+        <td>乳白色、不透明</td>
+        <td>乳白色</td>
+        <td>傳統工藝中最強的乳濁劑，能使透明釉變成溫潤的不透明白釉。</td>
+      </tr>
+      <tr>
+        <td>鋯：矽酸鋯 / 氧化鋯 (Zr)</td>
+        <td>4% - 12%</td>
+        <td>乳白色、不透明</td>
+        <td>乳白色</td>
+        <td>現代陶瓷最常用的穩定乳濁劑。常與釩或鐠結合製造高溫色粉。</td>
+      </tr>
+      <tr>
+        <td>釩：五氧化二釩 (V)</td>
+        <td>5% - 10%</td>
+        <td>明黃色、芥末黃</td>
+        <td>偏暗黃或灰黃</td>
+        <td>毒性較強，實務上極少單用，通常購買與鋯結合燒製好的「釩鋯黃」色料。</td>
+      </tr>
+      <tr>
+        <td>鐠：氧化鐠 (Pr)</td>
+        <td>1% - 5%</td>
+        <td>鮮黃色、檸檬黃</td>
+        <td>鮮黃色</td>
+        <td>稀土元素，通常與鋯石結合成「鋯鐠黃」，是陶瓷中最鮮豔且耐高溫的黃色來源。</td>
+      </tr>
+      <tr>
+        <td>複合：銅 (Cu) + 鈷 (Co)</td>
+        <td>微量依比例</td>
+        <td>藍綠色、土耳其藍</td>
+        <td>偏暗的藍綠色</td>
+        <td>兩者混合能調配出海洋般層次豐富的藍綠色調。</td>
+      </tr>
+      <tr>
+        <td>複合：鐵 (Fe) + 鈷 (Co)</td>
+        <td>微量依比例</td>
+        <td>灰藍色、暗藍色</td>
+        <td>深灰藍色</td>
+        <td>鐵能有效降低鈷的鮮豔銳利度，呈現出日式沉穩內斂的灰藍質感。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="faq-box">
+  <div class="faq-title">釉藥原料與呈色常見問答 FAQ</div>
+  <p><strong>Q：為什麼我照著書上的銅紅釉配方燒，出來的作品卻是綠色的？</strong><br>
+  A：銅紅釉極度依賴「還原氣氛」（在窯爐高溫階段刻意減少氧氣供應）。如果窯爐內的還原強度不夠，或是進氧量太多變成了氧化燒，銅就會回歸其本性呈現綠色。這正是金屬氧化物迷人且具挑戰性的地方。</p>
+  <p><strong>Q：想要自己調配白色的風鈴，應該買哪一種乳濁劑？</strong><br>
+  A：如果您追求傳統溫潤、像羊脂白玉般的質感，可以選擇添加 5% 左右的氧化錫；如果您需要極致的死白覆蓋力且考量成本，添加 8%~10% 的矽酸鋯是工業上最穩定的做法。</p>
+  <p><strong>Q：我的釉面上總是出現不均勻的藍色或綠色色斑，該怎麼辦？</strong><br>
+  A：這通常是因為氧化鈷或氧化銅的粉末不夠細緻或攪拌不均。您可以嘗試將配方中的「氧化物」替換為同元素的「碳酸鹽」（如碳酸鈷、碳酸銅），並過 150 目以上的細篩，分散性會大幅改善。</p>
+  <p><strong>Q：金屬氧化物對人體安全嗎？可以用來做食器嗎？</strong><br>
+  A：一般而言，只要經過 1200℃ 以上充分高溫熔融，且基礎釉的二氧化矽與氧化鋁比例正確，金屬離子會被穩定地包覆在玻璃質網絡中，作為食器是安全的。但若是低溫燒製、金屬含量極高（如金屬釉）、或是表面粗糙未完全玻璃化的作品，則建議作為裝飾藝術品，避免長期接觸酸性食物。</p>
+</div>
+
+  <div class="related">
     <h3>相關文章</h3>
-    <ul>
-      <li><a href="Glazing type.html">上釉有那些方式？常見的陶瓷釉藥施釉技巧</a></li>
-      <li><a href="Overglaze and underglaze.html">釉上彩與釉下彩：陶瓷釉藥的彩繪裝飾藝術</a></li>
-    </ul>
-  </div>
-  <div class="footer">
-    本站深入淺出介紹陶瓷與釉藥的化學原理，帶您揭開陶藝科學的神秘面紗。
+    <a href="Glazing type.html">了解更多：上釉有那些方式？各類上釉技法解析</a>
+    <a href="Overglaze and underglaze.html">進階知識：何謂釉上彩與釉下彩？彩繪差異比較</a>
   </div>
 </article>
 </main>
-<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
 </body>
 </html>

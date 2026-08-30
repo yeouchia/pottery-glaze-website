@@ -161,6 +161,52 @@
     padding:23px 24px;
   }
   .final-box h3{margin-top:0;}
+
+
+/* 1. 移除 final-box 內預設的清單圓點與左側縮排 */
+  .final-box ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0 0 0;
+  }
+
+  /* 2. 將清單內的連結設計成獨立的按鈕卡片 */
+  .final-box li a {
+    display: block;
+    position: relative;
+    background-color: var(--paper); /* 使用亮白色背景 */
+    border: 1px solid #dcd7c7;      /* 加上獨立邊框 */
+    border-radius: 8px;             /* 圓角按鈕感 */
+    padding: 14px 40px 14px 16px;   /* 增加內距，右側留空給箭頭 */
+    margin-bottom: 10px;            /* 讓按鈕之間產生間距 */
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); /* 微立體陰影 */
+    color: #2c5e7b;                 /* 明顯的連結色彩 */
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  /* 3. 固定顯示的向右箭頭 */
+  .final-box li a::after {
+    content: "〉";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  /* 4. 保留電腦版的滑鼠懸停效果 */
+  .final-box li a:hover {
+    background-color: #ffffff;
+    border-color: #b5afa0;
+    box-shadow: 0 4px 8px rgba(70,62,45,.1);
+  }
+
+
+
   .footer{
     border-top:1px solid #ddd8ca;
     margin-top:44px;

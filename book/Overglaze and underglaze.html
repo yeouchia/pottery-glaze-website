@@ -3,32 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>釉上彩與釉下彩：陶瓷釉藥的彩繪裝飾藝術</title>
-<meta name="description" content="什麼是釉上彩與釉下彩？本篇為您解析這兩種常見的陶瓷釉藥彩繪方式，包含青花瓷、五彩與粉彩的應用與特色。">
-
+<title>何謂釉上彩與釉下彩？</title>
+<meta name="description" content="說明釉上彩與釉下彩的差別、彩繪流程與顏料特性，並介紹青花、鬥彩與粉彩等重要陶瓷裝飾技術。">
 <style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     ========================================= */
+
   :root{
     --bg:#eee7d8;
     --paper:#fbfaf5;
     --card:#f1f0e4;
-    --card2:#f6f4e9;
-    --line:#d8d4c5;
+    --line:#dcd7c7;
     --text:#39372f;
     --muted:#777367;
     --accent:#6c6654;
     --accent-light:#e8e4d6;
     --quote:#eeeadd;
   }
+
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+
   body{
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
     line-height:1.85;
-    font-size:15px;
+    font-size:16px;
   }
+
   .page{
     width:min(900px, calc(100% - 32px));
     margin:34px auto 70px;
@@ -38,204 +54,309 @@
     box-shadow:0 7px 24px rgba(70,62,45,.08);
     overflow:hidden;
   }
-  .article{padding:42px 56px 64px;}
-  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;}
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
   .eyebrow{
     display:inline-block;
-    font-size:11px;
+    font-size:12px;
     color:#625d4e;
     background:var(--accent-light);
     border:1px solid #dcd7c7;
     border-radius:999px;
-    padding:3px 10px;
+    padding:4px 12px;
     margin-bottom:13px;
+    font-weight: bold;
   }
+
   h1{
-    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
-    font-weight:600;
-    font-size:30px;
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
     line-height:1.45;
-    letter-spacing:.03em;
     margin:0 0 18px;
     color:#35332c;
   }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
   .lead{
     background:var(--quote);
     border:1px solid #dedacd;
     border-radius:8px;
-    padding:18px 20px;
-    margin:20px 0 28px;
+    padding:20px 24px;
+    margin:24px 0 32px;
     color:#4d4a40;
-    font-size:14px;
+    font-size:16px;
+    line-height: 1.8;
   }
-  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
   .tag{
     border:1px solid #d7d2c3;
     background:#f8f6ed;
     color:#706b5d;
     border-radius:999px;
-    padding:3px 10px;
-    font-size:11px;
+    padding:4px 12px;
+    font-size:13px;
   }
-  .notice,.summary{
+
+  .faq-box {
     background:var(--card);
     border:1px solid var(--line);
     border-radius:8px;
-    padding:19px 21px;
-    margin:22px 0;
+    padding:24px 28px;
+    margin:32px 0;
   }
-  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;}
-  .notice p,.summary p{margin:5px 0}
-  h2{
-    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
-    font-size:22px;
-    line-height:1.55;
-    margin:42px 0 17px;
-    padding-bottom:8px;
-    border-bottom:1px solid #ddd8ca;
-    color:#3e3b32;
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
   }
-  h3{font-size:17px;margin:28px 0 9px;color:#464238;}
-  p{margin:10px 0}
-  ul,ol{padding-left:1.5em;margin:10px 0 18px;}
-  li{margin:4px 0}
-  strong{font-weight:700}
-  .quote{
-    margin:18px 0;
-    padding:13px 18px;
-    border-left:4px solid #aaa38e;
-    background:#f5f3e9;
-    color:#4d4a40;
-    font-family:"Noto Serif TC","PMingLiU",serif;
-  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
   .table-wrap{
     overflow-x:auto;
-    margin:18px 0 25px;
+    margin:24px 0 32px;
     border:1px solid var(--line);
     border-radius:8px;
   }
+
   table{
     width:100%;
     border-collapse:collapse;
     min-width:620px;
     background:#faf9f3;
   }
+
   th,td{
     border-bottom:1px solid #dfdccf;
-    padding:10px 12px;
+    padding:14px 16px;
     text-align:left;
     vertical-align:top;
   }
-  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px;}
-  td{font-size:13px}
-  tr:last-child td{border-bottom:none}
-  .quick-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin:16px 0 24px;
-  }
-  .quick{
-    background:var(--card2);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:13px 15px;
-  }
-  .quick b{display:block;margin-bottom:3px;color:#4b473c;}
-  .final-box{
-    margin-top:38px;
-    background:#ebe8dc;
-    border:1px solid #d5d0c1;
-    border-radius:9px;
-    padding:23px 24px;
-  }
-  .final-box h3{margin-top:0;}
-  .footer{
-    border-top:1px solid #ddd8ca;
-    margin-top:44px;
-    padding-top:18px;
-    color:#898476;
-    font-size:12px;
-  }
-  .backtop{
-    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
-    display:flex;align-items:center;justify-content:center;
-    text-decoration:none;color:#5e594c;background:#f8f6ed;
-    border:1px solid #d5d0c2;border-radius:50%;
-    box-shadow:0 3px 12px rgba(60,55,43,.08);
-  }
-  @media(max-width:700px){
-    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px;}
-    .article{padding:28px 22px 45px}
-    h1{font-size:25px}
-    h2{font-size:20px}
-    body{font-size:14px}
-    .quick-grid{grid-template-columns:1fr}
-  }
-</style>
 
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+  </style>
 </head>
 <body id="top">
 <main class="page">
 <article class="article">
-  <div class="breadcrumb">陶藝與釉藥知識網站｜釉藥基礎與種類</div>
-  <span class="eyebrow">彩繪裝飾</span>
-  <h1>釉上彩與釉下彩：陶瓷釉藥的彩繪裝飾藝術</h1>
+  <div class="breadcrumb">陶藝與釉藥知識｜陶瓷裝飾｜彩繪工藝</div>
+  <span class="eyebrow">陶瓷彩繪工藝</span>
+  <h1>何謂釉上彩與釉下彩？</h1>
+  <div class="lead"><strong>一看就懂：</strong>陶瓷彩繪的分類，取決於顏料與透明釉層的上下相對位置。釉下彩是「先畫再上釉」，如經典的青花瓷；而釉上彩是「在燒好的光滑釉面上作畫」，如細膩多姿的粉彩。兩者的燒製溫度與視覺質感大不相同。</div>
   <div class="tags">
-    <span class="tag">釉藥</span>
-    <span class="tag">釉上彩</span>
-    <span class="tag">釉下彩</span>
-    <span class="tag">青花瓷</span>
-    <span class="tag">粉彩</span>
-  </div>
-  <div class="lead">
-    <strong>摘要：</strong>
-    釉藥不僅能提供保護，更是陶瓷彩繪的畫筆。在悠久的陶瓷發展史中，依照施加色彩與透明釉的先後順序，發展出了「釉上彩」與「釉下彩」兩大經典的裝飾技術。
+    <span class="tag">釉藥</span><span class="tag">青花</span><span class="tag">鬥彩</span><span class="tag">粉彩</span><span class="tag">釉上彩</span><span class="tag">釉下彩</span><span class="tag">陶瓷彩繪</span>
   </div>
   
-  <h2>一、 什麼是釉上彩 (Overglaze Enamels)？</h2>
-  <p>釉上彩是一種在「已經燒製完成」的陶瓷或瓷器表面上添加顏色的技術[cite: 2]。創作者在光滑的釉面上進行繪製，隨後需進行低溫的二次燒製，讓彩料固定在器物表面[cite: 2]。這種技術可以呈現極為精細的細節與鮮豔的色彩層次[cite: 2]。</p>
   
-  <h3>常見的釉上彩種類：</h3>
-  <ul>
-    <li><strong>五彩釉 (Wucai Porcelain)：</strong>在明代和清代廣泛使用，以多彩的釉彩（如綠、黃、紅、紫等）在瓷器上繪製動植物、人物和景觀，色彩生動鮮豔[cite: 2]。</li>
-    <li><strong>粉彩 (Famille Rose)：</strong>在清代非常流行，主要以粉紅色和其他淺色調為主，營造出柔和的色彩與浪漫的主題，多用於繪製花卉與人物[cite: 2]。</li>
-    <li><strong>琺瑯彩 (Cloisonné Enamel)：</strong>雖然廣泛用於金屬器物，但也應用於瓷器。其特點是以金屬線圍出區域再填入琺瑯粉，呈現精細且光彩奪目的紋飾[cite: 2]。</li>
-  </ul>
+<h2>一、釉上彩與釉下彩的核心差異：關鍵在於「位置」與「溫度」</h2>
+<p>在陶瓷裝飾藝術中，「彩繪」是賦予器物生命力與故事性的重要技法。我們常聽到的青花、粉彩、鬥彩，其實都圍繞著兩個最基礎的工藝概念：<strong>釉下彩（Underglaze）</strong>與<strong>釉上彩（Overglaze）</strong>。</p>
+<p>最直觀、最簡單的理解方式，就是判斷「彩色繪畫的顏料層，究竟是位在透明玻璃質釉層的上方，還是下方？」</p>
+<ul>
+  <li><strong>釉下彩：</strong>先在泥坯或素燒坯上畫圖案，然後在表面罩上一層透明釉，最後進窯進行高溫（通常 1200℃~1260℃ 以上）燒成。彩繪被封在玻璃質底下。</li>
+  <li><strong>釉上彩：</strong>先將白瓷（已經上好透明釉且高溫燒成完畢的陶瓷）燒製完成，然後在光滑的釉面上用低溫色料進行彩繪，最後以較低的溫度（約 700℃~850℃）進行第二次烤燒（烤花），讓顏料附著在表面。</li>
+</ul>
 
-  <h2>二、 什麼是釉下彩 (Underglaze Enamels)？</h2>
-  <p>釉下彩是在瓷器「未完全燒製前」（通常是素燒後的坯體上），將顏色添加到器物表面的技術[cite: 2]。繪製完成後，表面會再罩上一層透明釉，並進行高溫燒製。由於色彩被透明釉保護在底層，因此具有柔和的質感，且圖案不易磨損或褪色[cite: 2]。</p>
+<h2>二、釉下彩：深藏不露的溫潤與永恆</h2>
+<p>釉下彩因為彩繪層被覆蓋在高溫熔融的透明釉之下，燒成後表面非常平滑，完全摸不到顏料的起伏。這種工藝的特色是圖案受到堅固的玻璃質保護，永不褪色、無毒安全，非常適合作為日常食器。</p>
+<h3>青花瓷：最具代表性的釉下彩工藝</h3>
+<p>提到釉下彩，絕對不能不提歷史悠久的「青花瓷」。青花的藍色主要來自於<strong>氧化鈷（Cobalt Oxide）</strong>。傳統工藝的製作流程如下：</p>
+<ol>
+  <li>在成型的乾燥泥坯或低溫素燒坯上，匠人以含有鈷料的青花料進行描線與暈染。</li>
+  <li>在畫好的圖案外，均勻地施上一層透明釉（可用浸釉或吹釉）。</li>
+  <li>放入窯爐中，進行 1250℃ 以上的高溫還原燒。</li>
+</ol>
+<p>在高溫下，鈷具有極強且穩定的發色能力，穿透透明釉散發出明淨無瑕的湛藍色。除了青花，使用銅發色的「釉裡紅」也是著名的釉下彩技法，但因為銅在高溫下極易揮發變色，燒製難度遠高於青花。</p>
+<h3>釉下彩的挑戰</h3>
+<p>釉下彩顏料必須承受 1200℃ 以上的高溫考驗。許多顏色（如鮮豔的紅、黃）在高溫下會被燒飛或變色，因此早期釉下彩的顏色選擇非常受限，主要依賴鈷（藍）、鐵（褐/黑）、銅（紅/綠）等少數耐高溫金屬氧化物。現代雖然有耐高溫色料（Stains），但在高溫燒成後，色彩仍需要精準的預判。</p>
 
-  <h3>常見的釉下彩種類：</h3>
-  <ul>
-    <li><strong>青花 (Blue and White Porcelain)：</strong>雖然歷史上在釉上彩中也有討論，但青花最經典的應用是作為釉下彩。以藍色的氧化銅（註：傳統多以氧化鈷發色，但參考文獻中提及以藍色氧化銅作為紋飾）在白瓷底部繪製，展現細緻的藍色圖案與簡約美感[cite: 2]。</li>
-    <li><strong>釉裡紅 (Underglaze Copper-Red)：</strong>這是一種極具挑戰性的技術，以銅紅色的釉彩在釉下進行繪製，具有神秘且獨特的視覺效果，在明代達到了技術的高峰[cite: 2]。</li>
-    <li><strong>釉下三彩與五彩：</strong>釉下三彩流行於唐代，使用藍、綠、黃三色在白瓷底上創作圖案；釉下五彩則是類似的多彩繪製技術，使釉下裝飾更為豐富[cite: 2]。</li>
-  </ul>
+<h2>三、釉上彩：繽紛絢麗的釉面畫布</h2>
+<p>釉上彩是在已經完成本燒（已經有光滑釉面）的陶瓷表面進行彩繪。因為不需要承受高溫本燒的嚴酷考驗，只需在 800℃ 左右的低溫使彩料中的玻璃基質軟化附著，因此幾乎所有鮮豔的顏色都能保留下來，展現出極為細膩、豐富的色階。</p>
+<h3>釉上彩的顏料特性</h3>
+<p>釉上彩的顏料不同於釉下彩的純金屬氧化物。釉上彩料通常包含已經調配好的陶瓷色料，混合了大量的<strong>低溫熔劑（如鉛、硼質玻璃粉）</strong>。當在釉面上作畫後進行低溫烤花時，這些熔劑會微微熔化，將顏料「黏附」並部分沉入底層釉面，達到固化的效果。</p>
+<h3>粉彩（Famille Rose）：柔和細膩的極致表現</h3>
+<p>粉彩是清代發展出的一種極為著名的釉上彩裝飾技術。它的革命性突破在於引入了「玻璃白」（一種含有砷的乳濁白色打底料）。匠人先用玻璃白打底，再將彩色顏料洗染其上，創造出不透明、帶有粉潤漸層感、甚至有微微立體厚度的柔和色彩，極度適合表現花鳥畫的細膩明暗。</p>
 
-  <h2>三、 鬥彩 (Doucai Porcelain)：釉下與釉上的完美結合</h2>
-  <p>陶瓷工匠為了融合兩者的優點，發展出了「鬥彩」技術。它結合了釉下彩與釉上彩的特點，通常先在坯體上以釉下青花勾勒出圖案輪廓並燒製，接著再於釉面上填入五彩顏色進行二次低溫燒製。這種技術具有鮮明的對比效果與極高的藝術價值[cite: 2]。</p>
+<h2>四、鬥彩：釉上與釉下的華麗交響曲</h2>
+<p>如果既想要青花的沉穩輪廓，又想要釉上彩的繽紛多姿，該怎麼辦？古人發明了「鬥彩」。這是一種將釉下彩與釉上彩完美結合的複合裝飾技術。</p>
+<p>鬥彩的經典製作過程極為繁複：</p>
+<ol>
+  <li><strong>第一步（釉下）：</strong>先在坯體上用青花（鈷料）細緻地勾勒出圖案的「外框線條」。</li>
+  <li><strong>第二步（高溫）：</strong>施透明釉，進窯進行 1250℃ 的高溫本燒，燒出帶有藍色輪廓的青花瓷。</li>
+  <li><strong>第三步（釉上）：</strong>出窯後，匠人依據青花的輪廓線，在線條內精準地填入各種顏色的釉上彩顏料。</li>
+  <li><strong>第四步（低溫）：</strong>再次進窯，以 800℃ 左右的低溫進行烤花。</li>
+</ol>
+<p>最終的成品，釉下的青花線條與釉上的多彩顏料「爭奇鬥豔」，因此被稱為鬥彩。著名的明代成化鬥彩雞缸杯，便是此工藝的巔峰之作。</p>
 
-  <div class="notice">
-    <div class="notice-title">常見問題 (FAQ)</div>
-    <p><strong>Q：釉上彩與釉下彩哪一種比較耐磨？</strong></p>
-    <p>A：釉下彩比較耐磨。因為釉下彩的顏料被覆蓋在一層經高溫燒結的透明玻璃釉層之下，圖案不會直接與外界接觸；而釉上彩是附著於表面，若長期經過物理摩擦或酸性物質侵蝕，圖案較容易受損。</p>
-    <p><strong>Q：食用器皿適合使用哪一種？</strong></p>
-    <p>A：食用器皿通常建議使用「釉下彩」，因為顏料被透明釉封裝，不會直接接觸食物。若使用釉上彩，需特別確認其顏料成分是否無毒且符合食器安全標準。</p>
-  </div>
+<h2>五、釉上彩與釉下彩的綜合比較表</h2>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>比較項目</th>
+        <th>釉下彩 (Underglaze)</th>
+        <th>釉上彩 (Overglaze)</th>
+        <th>鬥彩 (Doucai)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>彩繪位置</td>
+        <td>在素坯上，位於透明釉層之下</td>
+        <td>在已燒成的光滑釉面之上</td>
+        <td>釉下青花勾線 ＋ 釉上彩填色</td>
+      </tr>
+      <tr>
+        <td>燒成次數與溫度</td>
+        <td>通常一次高溫燒成 (1200℃-1280℃)</td>
+        <td>先高溫燒釉，再低溫烤花 (700℃-850℃)</td>
+        <td>高溫本燒 ＋ 低溫烤花 (共兩次)</td>
+      </tr>
+      <tr>
+        <td>代表性工藝</td>
+        <td>青花、釉裡紅、現代高溫化妝土</td>
+        <td>粉彩、五彩、琺瑯彩、現代轉印花紙</td>
+        <td>成化鬥彩、青花加彩</td>
+      </tr>
+      <tr>
+        <td>顏料特性與色彩</td>
+        <td>須極度耐高溫，傳統色彩受限，色調沉穩</td>
+        <td>含低溫玻璃質，色彩鮮豔豐富、立體感強</td>
+        <td>結合兩者優勢</td>
+      </tr>
+      <tr>
+        <td>表面觸感與耐用度</td>
+        <td>完全平滑，受釉層保護，抗磨損、抗酸鹼安全</td>
+        <td>觸摸時可感覺微凸，長期使用可能磨損</td>
+        <td>輪廓平滑，填色區微凸</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  <div class="final-box">
+<div class="faq-box">
+  <div class="faq-title">彩繪陶瓷常見問答 FAQ</div>
+  <p><strong>Q：我買的青花餐盤，藍色圖案是釉上彩還是釉下彩？</strong><br>
+  A：傳統的青花瓷是標準的「釉下彩」，圖案在透明釉底下，摸起來完全平滑，這也是為什麼它非常適合做餐具。但市面上有些廉價的仿青花餐具，可能是用藍色釉上貼花紙（釉上彩）製作的，觸摸圖案邊緣會有輕微的凸起感。</p>
+  <p><strong>Q：釉上彩的作品可以用來裝熱湯或酸性食物嗎？</strong><br>
+  A：如果是裝飾性的粉彩或老件五彩瓷器，其低溫顏料中可能含有鉛等重金屬以幫助熔融，且顏料暴露在表面，長期接觸高溫酸性食物（如檸檬汁、醋）可能導致重金屬微量釋出。建議這類精美器皿作為茶具或裝飾，日常熱湯餐具以釉下彩或純高溫釉較為安全。</p>
+  <p><strong>Q：為什麼釉下彩的顏色在畫的時候跟燒出來完全不一樣？</strong><br>
+  A：釉下彩使用的多是金屬氧化物原料，例如氧化鈷在未燒前是黑色或灰紫色的粉末，必須經過 1200℃ 以上的高溫與矽酸鹽產生反應後，才會顯現出鮮豔的藍色。因此陶藝家在彩繪時，是憑著經驗與試片來「預判」最終的色彩。</p>
+  <p><strong>Q：現代陶藝材料行賣的「化妝土(Engobe)」算哪一種？</strong><br>
+  A：化妝土通常含有較高比例的黏土成分，塗敷在半乾或素燒坯上，隨後再罩透明釉高溫燒成，因此在工藝分類上，化妝土裝飾屬於「釉下彩」的範疇。</p>
+</div>
+
+  
+  <div class="related">
     <h3>相關文章</h3>
-    <ul>
-      <li><a href="Glazing type.html">上釉有那些方式？常見的陶瓷釉藥施釉技巧</a></li>
-      <li><a href="The color of oxides.html">金屬氧化物的發色：陶瓷釉藥的色彩科學</a></li>
-    </ul>
-  </div>
-  <div class="footer">
-    本站致力於解析陶瓷歷史上的各種裝飾技法與釉藥應用，帶您進入陶藝的彩繪世界。
+    
+<a href="The color of oxides.html">色彩來源：金屬氧化物的發色原理與呈色</a>
+<a href="Glazing type.html">基礎技法：上釉有那些方式？各類上釉技法解析</a>
+
   </div>
 </article>
 </main>
-<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
 </body>
 </html>

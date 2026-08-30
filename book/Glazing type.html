@@ -3,32 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>上釉有那些方式？常見的陶瓷釉藥施釉技巧</title>
-<meta name="description" content="了解常見的陶瓷釉藥施釉方式，包含浸漬法、刷塗法與噴灑法，掌握不同上釉技巧的優缺點，讓您的陶藝作品更添魅力。">
-
+<title>上釉有那些方式？</title>
+<meta name="description" content="完整介紹陶瓷釉藥的噴釉、刷釉、淋釉、浸釉、印刷釉與彩繪方式，了解各種上釉技術適合的作品與優缺點。">
 <style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     ========================================= */
+
   :root{
     --bg:#eee7d8;
     --paper:#fbfaf5;
     --card:#f1f0e4;
-    --card2:#f6f4e9;
-    --line:#d8d4c5;
+    --line:#dcd7c7;
     --text:#39372f;
     --muted:#777367;
     --accent:#6c6654;
     --accent-light:#e8e4d6;
     --quote:#eeeadd;
   }
+
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+
   body{
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
     line-height:1.85;
-    font-size:15px;
+    font-size:16px;
   }
+
   .page{
     width:min(900px, calc(100% - 32px));
     margin:34px auto 70px;
@@ -38,211 +54,313 @@
     box-shadow:0 7px 24px rgba(70,62,45,.08);
     overflow:hidden;
   }
-  .article{padding:42px 56px 64px;}
-  .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em;}
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
   .eyebrow{
     display:inline-block;
-    font-size:11px;
+    font-size:12px;
     color:#625d4e;
     background:var(--accent-light);
     border:1px solid #dcd7c7;
     border-radius:999px;
-    padding:3px 10px;
+    padding:4px 12px;
     margin-bottom:13px;
+    font-weight: bold;
   }
+
   h1{
-    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
-    font-weight:600;
-    font-size:30px;
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
     line-height:1.45;
-    letter-spacing:.03em;
     margin:0 0 18px;
     color:#35332c;
   }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
   .lead{
     background:var(--quote);
     border:1px solid #dedacd;
     border-radius:8px;
-    padding:18px 20px;
-    margin:20px 0 28px;
+    padding:20px 24px;
+    margin:24px 0 32px;
     color:#4d4a40;
-    font-size:14px;
+    font-size:16px;
+    line-height: 1.8;
   }
-  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
   .tag{
     border:1px solid #d7d2c3;
     background:#f8f6ed;
     color:#706b5d;
     border-radius:999px;
-    padding:3px 10px;
-    font-size:11px;
+    padding:4px 12px;
+    font-size:13px;
   }
-  .notice,.summary{
+
+  .faq-box {
     background:var(--card);
     border:1px solid var(--line);
     border-radius:8px;
-    padding:19px 21px;
-    margin:22px 0;
+    padding:24px 28px;
+    margin:32px 0;
   }
-  .notice-title,.summary-title{font-weight:700;font-size:15px;margin:0 0 9px;color:#4c493e;}
-  .notice p,.summary p{margin:5px 0}
-  h2{
-    font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
-    font-size:22px;
-    line-height:1.55;
-    margin:42px 0 17px;
-    padding-bottom:8px;
-    border-bottom:1px solid #ddd8ca;
-    color:#3e3b32;
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
   }
-  h3{font-size:17px;margin:28px 0 9px;color:#464238;}
-  p{margin:10px 0}
-  ul,ol{padding-left:1.5em;margin:10px 0 18px;}
-  li{margin:4px 0}
-  strong{font-weight:700}
-  .quote{
-    margin:18px 0;
-    padding:13px 18px;
-    border-left:4px solid #aaa38e;
-    background:#f5f3e9;
-    color:#4d4a40;
-    font-family:"Noto Serif TC","PMingLiU",serif;
-  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
   .table-wrap{
     overflow-x:auto;
-    margin:18px 0 25px;
+    margin:24px 0 32px;
     border:1px solid var(--line);
     border-radius:8px;
   }
+
   table{
     width:100%;
     border-collapse:collapse;
     min-width:620px;
     background:#faf9f3;
   }
+
   th,td{
     border-bottom:1px solid #dfdccf;
-    padding:10px 12px;
+    padding:14px 16px;
     text-align:left;
     vertical-align:top;
   }
-  th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:13px;}
-  td{font-size:13px}
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
   tr:last-child td{border-bottom:none}
-  .quick-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin:16px 0 24px;
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
   }
-  .quick{
-    background:var(--card2);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:13px 15px;
-  }
-  .quick b{display:block;margin-bottom:3px;color:#4b473c;}
-  .final-box{
-    margin-top:38px;
-    background:#ebe8dc;
-    border:1px solid #d5d0c1;
-    border-radius:9px;
-    padding:23px 24px;
-  }
-  .final-box h3{margin-top:0;}
-  .footer{
-    border-top:1px solid #ddd8ca;
-    margin-top:44px;
-    padding-top:18px;
-    color:#898476;
-    font-size:12px;
-  }
-  .backtop{
-    position:fixed;right:20px;bottom:20px;width:40px;height:40px;
-    display:flex;align-items:center;justify-content:center;
-    text-decoration:none;color:#5e594c;background:#f8f6ed;
-    border:1px solid #d5d0c2;border-radius:50%;
-    box-shadow:0 3px 12px rgba(60,55,43,.08);
-  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
   @media(max-width:700px){
-    .page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px;}
-    .article{padding:28px 22px 45px}
-    h1{font-size:25px}
-    h2{font-size:20px}
-    body{font-size:14px}
-    .quick-grid{grid-template-columns:1fr}
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
   }
 </style>
-
 </head>
 <body id="top">
 <main class="page">
 <article class="article">
-  <div class="breadcrumb">陶藝與釉藥知識網站｜燒成技術與科學</div>
-  <span class="eyebrow">施釉技巧</span>
-  <h1>上釉有那些方式？常見的陶瓷釉藥施釉技巧</h1>
+  <div class="breadcrumb">陶藝與釉藥知識｜燒成技術｜上釉方法</div>
+  <span class="eyebrow">實務技術解析</span>
+  <h1>上釉有那些方式？</h1>
+  <div class="lead"><strong>一看就懂：</strong>把配好的釉藥均勻附著到陶瓷表面，是燒成前最關鍵的步驟。因應作品尺寸、造型複雜度與量產需求，發展出了噴釉、刷釉、淋釉、浸釉與印刷釉等多種技法，各有其不可取代的優勢。</div>
   <div class="tags">
-    <span class="tag">釉藥</span>
-    <span class="tag">施釉</span>
-    <span class="tag">浸漬法</span>
-    <span class="tag">刷塗法</span>
-    <span class="tag">噴灑法</span>
+    <span class="tag">釉藥</span><span class="tag">噴釉</span><span class="tag">刷釉</span><span class="tag">淋釉</span><span class="tag">浸釉</span><span class="tag">印刷釉</span><span class="tag">施釉技法</span>
   </div>
-  <div class="lead">
-    <strong>摘要：</strong>
-    上釉是陶瓷製作中賦予作品色彩與質感的關鍵步驟。不同的器物形狀與設計需求，需要搭配不同的施釉方式。本篇帶您了解三種常見的釉藥施加技法。
-  </div>
-  <div class="summary">
-    <div class="summary-title">重點整理</div>
-    <p>
-      常見的施釉方法包含浸漬法、刷塗法與噴灑法[cite: 2]。選擇適當的方法取決於陶瓷器物的形狀、設計需求和藝術風格，這將直接影響釉藥最終在作品上的均勻度與表現[cite: 2]。
-    </p>
-  </div>
+  
+<h2>一、上釉不是只有一種方法，如何選擇是關鍵</h2>
+<p>上釉的目的，是把調配好的液態釉漿（釉藥），以適當且均勻的厚度覆蓋在陶瓷坯體表面，再透過高溫燒成，形成保護與裝飾兼具的玻璃質釉面。不同的陶瓷作品，因為器形的複雜度、釉藥的物理性質、作品的數量，以及藝術家追求的裝飾效果不同，需要採用截然不同的施釉技術。</p>
+<p>例如：在鶯歌等陶瓷重鎮的實務生產中，大型花瓶可能重視覆蓋效率；而針對精緻的原創角色周邊（如客製化造型的陶瓷風鈴），則需要重視細部的色彩塗刷。因此，選擇上釉方法時不能只問「哪一種最好」，而是要問「哪一種最適合現在這件作品」。</p>
 
-  <h2>一、 浸漬法 (Dipping)</h2>
-  <p>浸漬法是將陶瓷坯體直接浸入調配好的釉藥中，使其表面均勻覆蓋上一層釉料。通常在浸漬過程中會讓器物靜置片刻，以確保釉藥被充分吸收[cite: 2]。</p>
-  <ul>
-    <li><strong>適合情況：</strong>適用於需要整體均勻覆蓋的陶瓷器物，例如盤子、碗和杯子等日常實用器皿[cite: 2]。</li>
-    <li><strong>優點：</strong>能夠快速且確保釉藥的均勻覆蓋，適用於各種簡單形狀的陶瓷器物[cite: 2]。</li>
-    <li><strong>缺點：</strong>需要準備較大體積的釉藥才能將整件作品浸入，且對於造型過於複雜的立體形狀，容易在縫隙處造成釉藥堆積不均，可能不適用[cite: 2]。</li>
-  </ul>
+<h2>二、噴釉：適合大面積與多層次色彩疊加</h2>
+<p>噴釉是利用空氣壓縮機連接噴槍或專業噴塗設備，將液態釉漿霧化成細微的顆粒，均勻地噴灑並附著在器物表面。它特別適合大型立體作品、複雜曲面、或是需要逐層建立漸層釉色的創作。</p>
+<h3>噴釉的主要優點</h3>
+<ul>
+  <li><strong>大面積均勻度高：</strong>對於難以放入桶中浸泡的大型雕塑或花盆，噴釉能確保整體厚度一致。</li>
+  <li><strong>漸層與疊色：</strong>藝術家可以輕鬆地噴出由深到淺的漸層，或在不同部位噴上不同的金屬氧化物釉藥，製造柔和的交界。</li>
+  <li><strong>厚度控制精準：</strong>可以透過多次薄噴，逐層調整釉層的總厚度，減少流釉的風險。</li>
+</ul>
+<h3>噴釉的注意事項與限制</h3>
+<p>釉漿的濃度、噴槍與作品的距離、空壓機壓力，以及噴塗的次數，都會直接影響釉層的厚度與品質。若單次噴得太厚且水分未乾，極易造成釉漿流掛；太薄則燒成後可能乾澀、露底或無法展現應有的釉色。此外，噴釉會產生大量可吸入的細微粉塵與霧滴，工作時<strong>必須使用水洗式抽風設備並佩戴專業防護口罩</strong>。</p>
 
-  <h2>二、 刷塗法 (Brushing)</h2>
-  <p>刷塗法是透過各式刷具，將釉藥直接塗抹在陶瓷器物的表面上，這種方式可以實現非常精確的局部施釉與彩繪[cite: 2]。</p>
-  <ul>
-    <li><strong>適合情況：</strong>適用於需要細節處理、特定圖案設計，或局部疊加不同顏色的陶瓷器物[cite: 2]。</li>
-    <li><strong>優點：</strong>提供了極大的藝術靈活性，創作者可以自由地實現精細的設計和獨特的圖案變化[cite: 2]。</li>
-    <li><strong>缺點：</strong>刷塗過程需要較多的技巧和時間，為了達到所需的厚度與均勻度，通常需要多層施加，且容易留下刷痕（雖然有時這也是一種藝術表現）[cite: 2]。</li>
-  </ul>
+<h2>三、刷釉：最適合局部細節與藝術創作</h2>
+<p>刷釉是使用毛筆、平刷、排筆或其他特殊刷具，將釉藥直接塗刷在坯體（通常是素燒坯）表面。它的最大優勢在於極高的局部控制性，因此非常適合個人陶藝創作、細節修飾、邊緣處理，以及結合多種色彩的彩繪作品。</p>
+<h3>刷釉的典型應用場景</h3>
+<ul>
+  <li><strong>小型或造型特殊的作品：</strong>例如立體的人物公仔、帶有犄角和耳朵的複雜造型風鈴，刷釉能確保角落與凹槽都能上到釉。</li>
+  <li><strong>局部裝飾與上色：</strong>如果一件作品需要五種不同的顏色，刷釉能像畫畫一樣將色彩精準地填入指定區域。</li>
+  <li><strong>刻意保留筆觸：</strong>有些陶藝家會刻意使用硬毛刷，利用刷痕來增加作品表面的肌理與手作溫度。</li>
+</ul>
+<p><strong>實務技巧：</strong>刷釉通常需要「十字交叉」分多次薄薄地塗刷，讓每一層釉層稍微乾燥後再疊加下一層。若單次塗得太厚，燒成前釉層很容易因乾燥收縮而龜裂、剝落。</p>
 
-  <h2>三、 噴灑法 (Spraying)</h2>
-  <p>噴灑法是利用噴槍設備與空氣壓力，將液態釉料均勻地噴灑在陶瓷作品上。操作時通常會搭配噴釉台與轉盤來進行[cite: 2]。</p>
-  <ul>
-    <li><strong>適合情況：</strong>適用於需要大面積覆蓋的大型陶瓷器物，例如大型花瓶、水缸或立體雕塑[cite: 2]。</li>
-    <li><strong>優點：</strong>能夠節省時間，並且非常容易實現均勻平緩的釉藥覆蓋效果，甚至是漸層的過渡色彩[cite: 2]。</li>
-    <li><strong>缺點：</strong>對於小型器物來說可能不太適用且浪費釉藥，操作時需要專業的噴槍技巧與通風良好的噴釉台設備，以避免粉塵與釉料飛散[cite: 2]。</li>
-  </ul>
+<h2>四、淋釉：快速覆蓋，器物內部的最佳解方</h2>
+<p>淋釉（又稱澆釉）是將調好的釉漿用勺子從器物上方均勻倒下，或將釉漿倒入器物內部搖晃一圈後，再將多餘的釉漿迅速倒出。這是一種非常古老且有效率的方法。</p>
+<h3>淋釉的特色與優勢</h3>
+<ul>
+  <li><strong>內部施釉的唯一首選：</strong>對於口小肚大的瓶子、深碗或杯子，無法用刷子或噴槍伸入內部，將釉漿倒入再倒出的「內淋釉」是最快速均勻的方式。</li>
+  <li><strong>製造流動與重疊感：</strong>在器物外部進行淋釉，可以利用地心引力製造出自然流下的釉滴邊緣，許多藝術家會利用兩種不同顏色的釉藥進行重疊淋釉，燒成後產生豐富的窯變效果。</li>
+</ul>
+<p>淋釉極度考驗釉漿的「流變性」與「濃度比重」。太稀容易流失導致釉層太薄；太稠則容易堆積在器物底部造成龜裂。</p>
 
-  <div class="notice">
-    <div class="notice-title">常見問題 (FAQ)</div>
-    <p><strong>Q：初學者最適合哪一種上釉方式？</strong></p>
-    <p>A：對於剛接觸陶藝的新手，若製作的是一般的碗盤或杯子，通常建議使用「浸漬法」或「刷塗法」。浸漬法容易達到均勻的效果，而刷塗法則不需購置大型設備，只需準備適當的刷具即可開始練習。</p>
-    <p><strong>Q：上釉時釉藥的濃度重要嗎？</strong></p>
-    <p>A：非常重要。無論使用哪一種方式，釉藥過稀會導致發色不足；過濃則容易造成燒製時流釉或片狀剝落。施釉前務必將釉藥充分攪拌均勻，確保良好的懸浮狀態。</p>
-  </div>
+<h2>五、浸釉：大量量產與均勻度的王者</h2>
+<p>浸釉（Dipping）是用手或特製的夾具夾住器物，將其直接完全浸入一大桶攪拌均勻的釉漿中，停留幾秒鐘後迅速取出，並甩掉多餘的釉滴。對於器形規則、數量龐大的產品（如馬克杯、碗盤），浸釉是最具效率的施釉方式。</p>
+<p>浸釉的原理是利用「素燒坯的吸水性」。當乾燥的素坯進入釉漿中，會迅速吸收水分，使釉料中的固體粉末瞬間沉積附著在坯體表面。因此，<strong>浸泡的時間長短</strong>與<strong>坯體本身的氣孔率（吸水力）</strong>會直接決定釉層的厚度。</p>
 
-  <div class="final-box">
+<h2>六、印刷釉：工業化裝飾與重複圖案的核心技術</h2>
+<p>印刷釉（或廣義的陶瓷印刷技術）是將圖案透過網版印刷、移印、轉印花紙或數位噴墨等方式，將帶有釉料或色料的圖案轉移到陶瓷表面。這類技術特別適合需要大量重複、精準圖案的商業產品。</p>
+<h3>常見的陶瓷印刷應用</h3>
+<ul>
+  <li><strong>建築瓷磚：</strong>市面上常見的仿石紋、木紋、幾何圖形瓷磚，幾乎都是透過大型陶瓷網版印刷或高溫數位噴墨技術完成的。</li>
+  <li><strong>商業餐具：</strong>大量生產的骨瓷餐盤、帶有品牌 Logo 的馬克杯，多採用「轉印花紙」技術，將印好的圖案貼在已燒好的釉面上，再進行一次低溫烤花。</li>
+  <li><strong>特殊材質疊加：</strong>透過移印技術，可以在不規則的曲面上快速印上單色圖案，大幅提高生產效率。</li>
+</ul>
+
+<h2>七、各種上釉與裝飾方式比較總表</h2>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>上釉方法</th>
+        <th>最適用的情況與器物</th>
+        <th>主要優點</th>
+        <th>常見限制與挑戰</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>浸釉 (Dipping)</td>
+        <td>數量較多、器形規則的碗盤杯子</td>
+        <td>速度極快、釉層厚度均勻一致</td>
+        <td>大型、極重或特殊死角的造型較難操作；需要調配大量釉漿。</td>
+      </tr>
+      <tr>
+        <td>噴釉 (Spraying)</td>
+        <td>大面積雕塑、漸層設計、曲面作品</td>
+        <td>厚度可逐層控制，色彩過渡自然</td>
+        <td>需要空壓機、噴槍設備與良好的抽風防護；耗損率較高。</td>
+      </tr>
+      <tr>
+        <td>刷釉 (Brushing)</td>
+        <td>藝術創作、局部細節上色、複雜造型</td>
+        <td>控制性極高，不需大量設備</td>
+        <td>速度較慢，容易留下刷痕或厚薄不均。</td>
+      </tr>
+      <tr>
+        <td>淋釉 (Pouring)</td>
+        <td>深口瓶、杯碗內部、追求自然流淌感</td>
+        <td>內部施釉最快、具有自然流動美感</td>
+        <td>需要精準控制釉漿流速與比重，手勢不熟練易造成不平整。</td>
+      </tr>
+      <tr>
+        <td>印刷釉 (Printing)</td>
+        <td>瓷磚、商業餐具、量產圖案</td>
+        <td>圖案重複性極高、細節精準清晰</td>
+        <td>設備與製版初期成本較高，不適合單一客製化少量創作。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="faq-box">
+  <div class="faq-title">上釉技術常見問答 FAQ</div>
+  <p><strong>Q：大面積的陶藝作品一定要用噴釉嗎？</strong><br>
+  A：不一定。雖然噴釉很容易控制均勻度，但大型作品也可以使用大面積的淋釉方法。只是淋釉需要準備非常大量的釉漿，而噴釉可以用較少的釉漿完成覆蓋，因此噴釉在大型雕塑上更為普遍。</p>
+  <p><strong>Q：為什麼我用刷釉的方式，燒出來卻有很明顯的刷痕？</strong><br>
+  A：刷痕通常是因為：(1) 釉漿調得太稠；(2) 刷具的毛太硬；(3) 單次塗刷太厚。建議將釉漿稍微調稀，使用軟毛平刷，並採用「薄塗多層、十字交叉」的方式上釉，可以大幅減少燒成後的刷痕。</p>
+  <p><strong>Q：同一個釉藥，可以用浸釉也可以用刷釉嗎？</strong><br>
+  A：理論上成分相同，但「物理性質」需要調整。專為浸釉設計的釉漿通常水分較多、沉澱較快；而市售的「刷釉專用釉（Brush-on Glaze）」通常會添加少量的「黏稠劑（如 CMC 纖維素）」與懸浮劑，以延長乾燥時間，讓刷塗過程更滑順且不易龜裂。兩者的濃度與流變性是不同的。</p>
+  <p><strong>Q：如果作品有內部死角，該怎麼上釉？</strong><br>
+  A：最佳方式是結合多種技術。例如：先將釉漿倒入內部搖晃一圈倒出（內部淋釉），擦拭外表溢出的部分後，再對外部進行噴釉或浸釉。這也是工作室最標準的操作流程。</p>
+</div>
+
+  <div class="related">
     <h3>相關文章</h3>
-    <ul>
-      <li><a href="Overglaze and underglaze.html">釉上彩與釉下彩：陶瓷釉藥的彩繪裝飾藝術</a></li>
-      <li><a href="The color of oxides.html">金屬氧化物的發色：陶瓷釉藥的色彩科學</a></li>
-    </ul>
-  </div>
-  <div class="footer">
-    本站提供專業的陶藝技術與釉藥理論，致力於推廣陶瓷藝術的各種施釉與創作技法。
+    <a href="The color of oxides.html">深入材質：金屬氧化物的發色原理與呈色</a>
+    <a href="Overglaze and underglaze.html">進階裝飾：何謂釉上彩與釉下彩？彩繪差異比較</a>
   </div>
 </article>
 </main>
-<a class="backtop" href="#top" aria-label="回到頂端">↑</a>
 </body>
 </html>

@@ -216,14 +216,51 @@
       font-weight:700;
     }
 
-    .related a{
-      display:block;
-      color:#5e594c;
-      text-decoration:none;
-      padding:8px 0;
-      border-bottom:1px solid #ddd8ca;
-    }
+    /*********************** 修改原有的連結外觀設定******** 開始**/
+/* 將連結設計成獨立的按鈕卡片 */
+.related a {
+  display: block;
+  position: relative;
+  
+  /* 1. 版面設計：利用背景色與陰影創造按鈕的立體感 */
+  background-color: var(--paper); /* 使用網頁背景的亮白色，與 .related 的灰底產生對比 */
+  border: 1px solid #dcd7c7;      /* 加上獨立邊框 */
+  border-radius: 8px;             /* 圓角讓它看起來像按鈕 */
+  padding: 14px 40px 14px 16px;   /* 增加內距，右側留空給箭頭 */
+  margin-top: 10px;               /* 讓每個連結之間有空隙，不再是連在一起的清單 */
+  box-shadow: 0 2px 5px rgba(70,62,45,.05); /* 微微的陰影增加浮凸感 */
+  
+  /* 2. 文字顏色：使用與內文不同的顏色，建立「可點擊」的視覺暗示 */
+  color: #2c5e7b;                 /* 帶有一點灰藍色調，既不突兀又能明顯區分 */
+  font-weight: 700;               /* 文字加粗 */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
 
+/* 確保最後一個項目依然有完整的邊框與樣式 */
+.related a:last-child {
+  border-bottom: 1px solid #dcd7c7; 
+}
+
+/* 3. 靜態視覺引導：固定顯示的向右箭頭 */
+.related a::after {
+  content: "〉";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);    /* 確保箭頭絕對垂直置中 */
+  color: var(--muted);            /* 箭頭使用原本設定的柔和灰色 */
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* (選擇性) 保留電腦版的滑鼠懸停效果，讓體驗更好 */
+.related a:hover {
+  background-color: #ffffff;
+  border-color: #b5afa0;
+  box-shadow: 0 4px 8px rgba(70,62,45,.1);
+}
+/****************************** 修改原有的連結外觀設定******** 結束**/
     .related a:last-child{border-bottom:none}
 
     .footer{
