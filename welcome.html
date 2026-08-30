@@ -68,7 +68,27 @@
             margin-bottom: 30px;
         }
 
+        /* === 更新：頂部 Banner 標題區塊 (配合作品圖) === */
         .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 30px; /* 拉開作品圖與文字的距離 */
+        }
+
+        /* 新增：作品圖片的專屬樣式 */
+        .banner-avatar {
+            width: 170px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.15)); /* 讓去背圖浮現立體陰影 */
+            transition: transform 0.3s ease;
+        }
+        .banner-avatar:hover {
+            transform: scale(1.05) rotate(-2deg); /* 滑鼠游標移過去時會有可愛的微動效果 */
+        }
+
+        /* 將原本的 icon 和文字群組包裝對齊 */
+        .banner-title-group {
             display: flex;
             align-items: center;
             gap: 20px;
@@ -418,7 +438,7 @@
         .article-reader-overlay.show { transform: translateX(0); /* 滑入畫面 */ }
         
         .reader-header {
-            height: 44px; /* ★ 強力壓縮：從 60px 縮減到 44px (iOS 頂部欄標準高度) ★ */
+            height: 44px;
             background: var(--primary-color); color: white;
             display: flex; align-items: center; padding: 0 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15); flex-shrink: 0; gap: 10px;
@@ -485,7 +505,20 @@
                 flex-direction: column !important; text-align: center !important;
                 padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; margin-bottom: 5vw !important;
             }
-            .banner-left { flex-direction: column !important; gap: 3vw !important; }
+            .banner-left { flex-direction: column !important; gap: 5vw !important; }
+            
+            .banner-title-group {
+                display: flex;
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 3vw !important;
+            }
+
+            .banner-avatar { 
+                width: 45vw !important; 
+                margin-bottom: 2vw !important; 
+            }
+
             .banner-icon { font-size: 14vw !important; }
             .banner-text h1 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
             .banner-text p { font-size: 4vw !important; line-height: 1.6 !important; }
@@ -568,7 +601,7 @@
             .k-desc { font-size: 4.2vw !important; margin-bottom: 5vw !important; line-height: 1.6 !important; }
             .k-link { font-size: 4.2vw !important; }
         }
-        /* === 7. 手機版專屬 RWD 響應式區塊 結束 === */
+        /* === 7. 手機版專屬 RWD 響響式區塊 結束 === */
     </style>
     <!-- ========================================== -->
     <!-- ======= CSS 樣式設定區塊 結束 ======= -->
@@ -585,14 +618,19 @@
         <!-- 頂部 Banner 區塊 -->
         <div class="top-banner">
             <div class="banner-left">
-                <i class="fa-solid fa-layer-group banner-icon"></i>
-                <div class="banner-text">
-                    <h1>陶藝與釉藥調配</h1>
-                    <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
-                    
-                    <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
-                        <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
-                    </button>
+                <!-- 新增的去背作品圖 -->
+                <img src="./welcome/1.png" alt="陶藝原創作品" class="banner-avatar" onmouseenter="playHover()">
+                
+                <div class="banner-title-group">
+                    <i class="fa-solid fa-layer-group banner-icon"></i>
+                    <div class="banner-text">
+                        <h1>陶藝與釉藥調配</h1>
+                        <p>這是一個融合科學計算與藝術創作的陶藝學習中心。<br>分享陶藝的歷史文化、創作靈感與生活美學。</p>
+                        <!-- 一鍵安裝 APP 按鈕 -->
+                        <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
+                            <i class="fa-solid fa-mobile-screen-button"></i> 將本站加入手機桌面 (APP)
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="banner-right">
@@ -932,7 +970,7 @@
         }
 
         function copyCurrentLink() {
-            navigator.clipboard.writeText(getSiteUrl()).then(() => { alert('✨ 網站網址已複製！快去分享給陶藝好友吧！'); }).catch(() => { alert('複製失敗，請手手複製網址。'); });
+            navigator.clipboard.writeText(getSiteUrl()).then(() => { alert('✨ 網站網址已複製！快去分享給陶藝好友吧！'); }).catch(() => { alert('複製失敗，請手動複製網址。'); });
         }
 
         function showInstallGuide() {
