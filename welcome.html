@@ -74,13 +74,12 @@
             gap: 25px; 
         }
 
-        /* ★ 新增：破框立體特效的專屬樣式 ★ */
+        /* ★ 電腦版：破框立體特效的專屬樣式 ★ */
         .banner-avatar {
-            width: 180px; /* 這裡就是控制大小的魔法數字！ */
+            width: 180px; 
             height: auto;
             max-height: 220px;
             object-fit: contain;
-            /* ★ 陰影加強版：讓 3D 立體感更明顯 ★ */
             filter: drop-shadow(10px 15px 18px rgba(0,0,0,0.45)); 
             transition: transform 0.3s ease;
             
@@ -506,41 +505,91 @@
         /* ========================================== */
         @media (max-width: 1250px) {
             .welcome-wrapper { padding: 4vw 4vw 35vw 4vw !important; }
-            .top-banner {
-                flex-direction: column !important; text-align: center !important;
-                padding: 6vw !important; gap: 5vw !important; border-radius: 16px !important; 
-                margin-bottom: 5vw !important;
-                margin-top: 8vw !important; 
-            }
-            .banner-left { flex-direction: column !important; gap: 5vw !important; }
             
-            .banner-title-group {
-                display: flex;
-                flex-direction: column !important;
-                text-align: center !important;
-                gap: 3vw !important;
+            .top-banner {
+                flex-direction: column !important; 
+                padding: 6vw 5vw 8vw 5vw !important; /* 調整內距 */
+                border-radius: 16px !important; 
+                margin-bottom: 8vw !important;
+                margin-top: 4vw !important;
+                position: relative !important; /* 為 LULU 絕對定位做準備 */
             }
-
+            
+            .banner-left { 
+                flex-direction: column !important; 
+                width: 100%;
+                gap: 0 !important; 
+            }
+            
+            /* ★ LULU 手機專屬：移至右下角破框 ★ */
             .banner-avatar { 
-                width: 48vw !important; 
-                margin-top: -14vw !important; 
-                margin-bottom: 2vw !important; 
-                margin-left: 0 !important;
+                position: absolute !important;
+                bottom: -4vw !important;  /* 突破下邊界 */
+                right: -2vw !important;   /* 突破右邊界 */
+                width: 38vw !important;   /* 縮小尺寸 */
+                margin: 0 !important;     /* 重置電腦版的負邊距 */
+                z-index: 10;
             }
 
-            .banner-icon { font-size: 14vw !important; }
-            .banner-text h1 { font-size: 6.5vw !important; margin-bottom: 2vw !important; }
-            .banner-text p { font-size: 4vw !important; line-height: 1.6 !important; }
-
+            /* ★ 使用 Grid 重新排列：H1 -> (圖示+按鈕) -> 文字 ★ */
+            .banner-title-group {
+                display: grid !important;
+                grid-template-columns: 1fr auto auto 1fr !important; /* 讓圖示和按鈕置中並排 */
+                row-gap: 3vw !important;
+                column-gap: 3vw !important;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .banner-text {
+                display: contents !important; /* 神奇魔法：解除包裝，讓內部元素直接參與 grid 排版 */
+            }
+            
+            .banner-text h1 {
+                grid-column: 1 / -1; /* 標題置頂跨滿全寬 */
+                text-align: center;
+                font-size: 6.5vw !important;
+                margin: 0 0 2vw 0 !important;
+            }
+            
+            .banner-icon {
+                grid-column: 2; /* 放在中間偏左 */
+                font-size: 11vw !important;
+                margin: 0 !important;
+            }
+            
             .install-btn {
-                margin-top: 5vw !important; padding: 3vw 6vw !important;
-                font-size: 4.5vw !important; border-radius: 50px !important;
+                grid-column: 3; /* 放在中間偏右 */
+                margin: 0 !important;
+                padding: 2.5vw 5vw !important;
+                font-size: 4vw !important;
+                border-radius: 50px !important;
+            }
+            
+            .banner-text p {
+                grid-column: 1 / -1; /* 文字跨滿全寬置中 */
+                text-align: center;
+                font-size: 3.8vw !important;
+                line-height: 1.6 !important;
+                margin-top: 2vw !important;
+                font-weight: 700; 
             }
 
-            .share-title { font-size: 4.5vw !important; margin-bottom: 2vw !important; justify-content: center !important; }
-            .share-buttons { gap: 4vw !important; }
-            .share-circle-btn { width: 12vw !important; height: 12vw !important; font-size: 6vw !important; }
+            /* ★ 分享區塊靠左 ★ */
+            .banner-right {
+                width: 100%;
+                align-items: flex-start !important; /* 靠左對齊 */
+                padding-left: 2vw !important;
+                margin-top: 6vw !important;
+                gap: 3vw !important;
+                position: relative;
+                z-index: 11; 
+            }
+            .share-title { font-size: 4.5vw !important; }
+            .share-buttons { gap: 3vw !important; }
+            .share-circle-btn { width: 11vw !important; height: 11vw !important; font-size: 5.5vw !important; }
 
+            /* 手機版四大功能卡片壓縮版 */
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 10px !important;
@@ -618,7 +667,7 @@
         <!-- 頂部 Banner 區塊 -->
         <div class="top-banner">
             <div class="banner-left">
-                <!-- 新增的去背作品圖 (採用破框立體特效) -->
+                <!-- 原創作品圖 -->
                 <img src="./welcome/1.png" alt="陶藝原創作品" class="banner-avatar" onmouseenter="playHover()">
                 
                 <div class="banner-title-group">
