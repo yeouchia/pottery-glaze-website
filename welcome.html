@@ -508,12 +508,12 @@
             
             .top-banner {
                 flex-direction: column !important; 
-                align-items: stretch !important; /* 滿版延伸，方便內部排版 */
-                padding: 8vw 5vw 8vw 5vw !important; 
+                align-items: stretch !important; 
+                padding: 6vw 5vw 8vw 5vw !important; 
                 border-radius: 16px !important; 
                 margin-bottom: 8vw !important;
                 margin-top: 4vw !important;
-                position: relative !important; /* 為 LULU 絕對定位做準備 */
+                position: relative !important; 
             }
             
             .banner-left { 
@@ -523,79 +523,81 @@
                 position: static !important;
             }
 
-            /* ★ 手機專屬魔法 1：順序大洗牌 (H1 -> 圖示+按鈕 -> 簡介) ★ */
+            /* ★ 順序與對齊大洗牌：Icon與標題平行、按鈕靠左 ★ */
             .banner-title-group {
                 display: grid !important;
-                grid-template-columns: auto auto !important; /* 兩欄並排給圖示與按鈕 */
-                justify-content: center !important;
+                grid-template-columns: auto 1fr !important; /* 圖示與標題並排 */
                 align-items: center !important;
-                row-gap: 4vw !important;
-                column-gap: 3vw !important;
+                row-gap: 3vw !important;
+                column-gap: 2vw !important;
                 width: 100% !important;
+                position: relative;
+                z-index: 12 !important; /* 確保不被 LULU 擋住點擊 */
             }
             
             .banner-text {
-                display: contents !important; /* 解除外包裝，讓內部元素直接參與排版 */
-            }
-            
-            .banner-text h1 {
-                grid-column: 1 / -1 !important; /* 標題跨滿全寬 */
-                order: 1 !important;            /* 視覺排第一 */
-                text-align: center !important;
-                font-size: 6.5vw !important;
-                margin: 0 !important;
+                display: contents !important; 
             }
             
             .banner-icon {
-                grid-column: 1 !important;      /* 放左邊 */
-                order: 2 !important;            /* 視覺排第二 */
-                font-size: 11vw !important;
+                grid-column: 1 !important;
+                grid-row: 1 !important;
+                font-size: 7vw !important; /* 縮小一點跟標題平行更協調 */
                 margin: 0 !important;
-                justify-self: end !important;   /* 靠右對齊隔壁的按鈕 */
             }
-            
-            .install-btn {
-                grid-column: 2 !important;      /* 放右邊 */
-                order: 3 !important;            /* 視覺排第三 */
+
+            .banner-text h1 {
+                grid-column: 2 !important; 
+                grid-row: 1 !important;
+                text-align: left !important; /* 靠左對齊 */
+                font-size: 6vw !important;
                 margin: 0 !important;
-                padding: 2.5vw 5vw !important;
-                font-size: 4vw !important;
-                border-radius: 50px !important;
-                justify-self: start !important; /* 靠左對齊隔壁的圖示 */
             }
             
             .banner-text p {
-                grid-column: 1 / -1 !important; /* 跨滿全寬 */
-                order: 4 !important;            /* 視覺排第四 */
-                text-align: center !important;
-                font-size: 3.8vw !important;
-                line-height: 1.6 !important;
-                margin: 2vw 0 0 0 !important;
+                grid-column: 1 / -1 !important; 
+                grid-row: 2 !important;
+                text-align: left !important; /* 靠左對齊 */
+                font-size: 3.2vw !important; /* ★ 縮小字體確保只顯示2行 ★ */
+                letter-spacing: -0.2px !important;
+                line-height: 1.5 !important;
+                margin: 1vw 0 0 0 !important;
                 font-weight: 700 !important; 
+                white-space: nowrap !important; /* ★ 強制不換行，依靠原有的 <br> 斷成2行 ★ */
+            }
+            
+            .install-btn {
+                grid-column: 1 / -1 !important; 
+                grid-row: 3 !important;
+                justify-self: start !important; /* ★ 按鈕強制靠左 ★ */
+                margin: 2vw 0 0 0 !important;
+                padding: 2.5vw 5vw !important;
+                font-size: 4vw !important;
+                border-radius: 50px !important;
             }
 
-            /* ★ 手機專屬魔法 2：分享區塊靠左 ★ */
+            /* ★ 分享區塊靠左 ★ */
             .banner-right {
                 width: 100% !important;
-                align-items: flex-start !important; /* 強制靠左對齊 */
-                padding-left: 2vw !important;
-                margin-top: 8vw !important;
+                align-items: flex-start !important; 
+                padding-left: 0 !important;
+                margin-top: 6vw !important;
                 gap: 3vw !important;
                 position: relative !important;
                 z-index: 11 !important; 
             }
-            .share-title { font-size: 4.5vw !important; margin: 0 !important; justify-content: flex-start !important;}
+            .share-title { font-size: 4.2vw !important; margin: 0 !important; justify-content: flex-start !important;}
             .share-buttons { gap: 3vw !important; }
             .share-circle-btn { width: 11vw !important; height: 11vw !important; font-size: 5.5vw !important; }
 
-            /* ★ 手機專屬魔法 3：LULU 完美降落右下角並破框 ★ */
+            /* ★ LULU 完美降落右下角並破框 ★ */
             .banner-avatar { 
                 position: absolute !important;
-                bottom: -6vw !important;  /* 往下突破白底框 */
-                right: -3vw !important;   /* 往右突破白底框 */
-                width: 45vw !important;   /* 適當大小 */
-                max-width: 180px !important;
-                margin: 0 !important;     /* 消除電腦版的負邊距設定 */
+                bottom: -5vw !important;  
+                right: -3vw !important;   
+                width: 42vw !important;   
+                max-width: 160px !important;
+                margin: 0 !important;     
                 z-index: 10 !important;
             }
 
