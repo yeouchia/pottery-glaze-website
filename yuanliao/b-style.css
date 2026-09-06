@@ -1,0 +1,385 @@
+/* =================================================== */
+/* 陶瓷釉藥賽格式計算器 V10.7 樣式表 */
+/* 作用：確保佈局、顏色、字體穩定，並修復所有對齊問題 */
+/* =================================================== */
+
+/* --- 基礎設置與通用樣式 --- */
+body {
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f3f6; /* 背景顏色 */
+    color: #333;
+    font-size: 14px; /* 基礎字體大小 */
+    overflow-x: hidden; /* 防止整個網頁出現不必要的左右滑動條 */
+}
+
+header {
+    background-color: #34495e; /* 藍色標題背景 */
+    color: white;
+    padding: 15px; 
+    text-align: center;
+}
+header h1 {
+    font-size: 1.8em; 
+    margin: 0;
+}
+main {
+    max-width: 1400px; /* 限制內容最大寬度 */
+    margin: 20px auto; /* 居中 */
+    padding: 0 15px;
+}
+h2 {
+    color: #2c3e50; /* 區塊標題顏色 */
+    font-size: 1.4em; 
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+h3 {
+    color: #34495e; /* 組別標題顏色 */
+    font-size: 1.1em; 
+    margin: 5px 0 10px 0;
+}
+.box-shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-sizing: border-box; /* 確保 padding 不會撐破寬度 */
+}
+
+/* --- 核心佈局 (Flexbox 實現左右橫向排版 - 穩定版) --- */
+.main-content {
+    display: flex;
+    gap: 20px; /* 左右區塊間距 */
+    align-items: flex-start;
+    flex-wrap: nowrap; /* 確保不換行，強制左右並排 */
+}
+/* 左側輸入區塊 (原料表格) */
+.input-section {
+    flex: 0 0 40%; /* 固定寬度 40% */
+    max-height: 85vh; 
+    overflow-y: auto; 
+}
+/* 右側輸出區塊 (釉式結果) */
+.output-wrapper {
+    flex: 1; /* 佔據所有剩餘空間 */
+    min-width: 0; /* 防止 Flex 子元素被內容撐破 */
+}
+
+/* --- 輸入區塊樣式 --- */
+#recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 【防溢出關鍵】強迫表格嚴格遵守 100% 寬度，不被內容撐開 */
+}
+
+/* 原料選擇選單和重量輸入框的統一字體和樣式 */
+#recipe-table input[type="number"], 
+#recipe-table .raw-name {          
+    width: 95%; 
+    padding: 6px;
+    font-size: 1.5em; 
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 38px; 
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    margin: 0; 
+}
+
+/* 總計百分比樣式 */
+.total-display {
+    font-size: 2.0em; 
+    margin-left: 20px;
+    font-weight: bold;
+    line-height: 38px; 
+    vertical-align: top;
+    display: inline-block;
+}
+
+/* 移除按鈕和計算按鈕的樣式 */
+.remove-row-btn {
+    padding: 6px 10px;
+    font-size: 0.9em;
+    background-color: #e74c3c; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; 
+}
+#calculate-btn {
+    padding: 12px 25px; 
+    font-size: 1.1em;
+    background-color: #3498db; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%; 
+}
+#calculate-btn:hover {
+    background-color: #2980b9;
+}
+
+/* --- 輸出區塊樣式 --- */
+
+/* 三組顏色定義 */
+.ro-group {
+    background-color: #d4edda; /* RO 組 - 綠色背景 */
+    border-color: #28a745; 
+}
+.r2o3-group {
+    background-color: #f8d7da; /* R2O3 組 - 紅色背景 */
+    border-color: #dc3545; 
+}
+.ro2-group {
+    background-color: #d1ecf1; /* RO2 組 - 藍色背景 */
+    border-color: #17a2b8; 
+}
+
+.seger-formula-output {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px; 
+    margin-top: 15px;
+    text-align: center;
+}
+.seger-group {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc; 
+    min-width: 0; /* 防止內容撐破容器 */
+}
+
+/* 分子數值的總和顯示樣式 */
+.mole-value, .mole-line {
+    font-size: 2.0em; 
+    font-weight: bold;
+    margin: 5px 0;
+    color: #2c3e50; 
+}
+
+/* 各別氧化物分子數的列表細節容器 */
+.details {
+    font-size: 1.5em; 
+    max-height: 200px; 
+    overflow-y: auto; 
+    text-align: left;
+    padding-top: 8px;
+    border-top: 1px dashed #ccc;
+}
+
+/* 關鍵區塊：控制氧化物名稱和數值的排列 */
+.details p {
+    margin: 5px 0; 
+    display: flex;
+    justify-content: space-between; 
+    font-weight: 500; 
+    width: 100%; 
+}
+
+/* KNaO 總和的特殊樣式 (粗體深綠色) */
+.details .knao-total {
+    font-weight: bold; 
+    color: #006400; 
+    border-top: 1px dashed #aaa; 
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+/* 關鍵分析指標區塊的樣式 */
+.analysis-summary {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px; 
+    display: flex; 
+    justify-content: space-between;
+}
+.analysis-box {
+    width: 48%;
+}
+.ratio-value {
+    font-size: 1.6em; 
+    color: #c0392b; 
+    font-weight: bold;
+}
+
+/* =================================================== */
+/* 底部按鈕區塊排版 (一鍵複製 Word + YouTube) */
+/* =================================================== */
+.bottom-action-buttons {
+    display: flex;
+    justify-content: flex-end; /* 將按鈕對齊右側 */
+    align-items: center;
+    gap: 15px; /* 按鈕之間的間距 */
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#copy-word-btn {
+    background-color: #28a745; /* 採用綠色強調複製成功 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+}
+
+#copy-word-btn:hover {
+    background-color: #218838;
+}
+
+/* 修正 YouTube 按鈕，強制指定文字顏色為白色 */
+#add-youtube {
+    background-color: #ff0000;
+    color: white !important; /* 強制文字為白色 */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin: 0; 
+}
+
+/* 確保 YouTube 連結不會有預設底線，並讓超連結繼承按鈕的白色 */
+.bottom-action-buttons a {
+    text-decoration: none;
+    color: white !important;
+}
+
+
+/* =================================================== */
+/* RWD 響應式設計：平板尺寸 (1000px 以下) */
+/* =================================================== */
+@media (max-width: 1000px) {
+    .main-content {
+        flex-direction: column; /* 小螢幕時改為垂直堆疊 */
+        align-items: stretch; /* 確保上下區塊寬度完全一致拉伸 */
+    }
+    .input-section, .output-wrapper {
+        flex: auto; 
+        width: 100%; /* 強制填滿容器寬度 */
+        max-width: 100%; /* 防止任何子元素撐破 */
+        box-sizing: border-box; /* 確保內邊距不影響外寬 */
+    }
+    .input-section {
+        max-height: none; 
+        overflow-y: visible;
+    }
+}
+
+/* =================================================== */
+/* RWD 響應式設計：手機尺寸極致緊湊佈局 (600px 以下) */
+/* =================================================== */
+@media (max-width: 600px) {
+    /* 1. 標題區塊縮小 */
+    header {
+        padding: 10px 5px;
+    }
+    header h1 {
+        font-size: 1.2em;
+    }
+    #author-info {
+        font-size: 0.85em;
+    }
+
+    /* 2. 整體版面與卡片內邊距縮小 */
+    main {
+        padding: 0 5px;
+        margin: 10px auto;
+    }
+    .box-shadow {
+        padding: 12px; 
+    }
+    h2 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    /* 3. 原料輸入區塊縮小字體，加上 min-width 防止變形 */
+    #recipe-table input[type="number"], 
+    #recipe-table .raw-name {          
+        font-size: 1.0em; 
+        padding: 4px;
+        height: 32px; 
+        min-width: 0; /* 【防止溢出關鍵】確保選單乖乖待在格子裡 */
+    }
+    .total-display {
+        font-size: 1.2em; 
+        line-height: 32px;
+        margin-left: 10px;
+    }
+    .remove-row-btn {
+        font-size: 0.85em;
+        padding: 4px 6px;
+    }
+
+    /* 4. 賽格式結果區塊縮小 */
+    .seger-formula-output {
+        gap: 4px; 
+    }
+    .seger-group {
+        padding: 4px; 
+    }
+    h3 {
+        font-size: 0.85em; 
+        margin: 2px 0 5px 0;
+    }
+    .mole-value, .mole-line {
+        font-size: 1.2em; 
+    }
+    .details {
+        font-size: 0.9em; 
+    }
+    .details p {
+        margin: 2px 0;
+    }
+
+    /* 5. 【修正重點】分析指標區塊排版 (縮小且改回並排) */
+    .analysis-summary {
+        padding: 8px;
+        flex-direction: row; /* 恢復左右並排以節省高度 */
+        justify-content: space-around;
+        gap: 5px;
+    }
+    .analysis-box {
+        width: 48%; /* 讓兩個區塊各佔一半 */
+        text-align: center;
+    }
+    /* 縮小標題的字體與間距 */
+    .analysis-box p {
+        font-size: 0.85em; 
+        margin: 0 0 3px 0;
+    }
+    /* 縮小數值的字體 */
+    .ratio-value {
+        font-size: 1.1em;
+    }
+
+    /* 6. 底部按鈕改為垂直全寬 */
+    .bottom-action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    #copy-word-btn, #add-youtube {
+        width: 100%;
+        font-size: 1.1em;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+}
