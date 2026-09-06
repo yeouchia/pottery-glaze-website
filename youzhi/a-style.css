@@ -1,5 +1,5 @@
 /* ===================================================
-   陶瓷釉藥賽格式計算器 V5.1 CSS 樣式 - 完美三欄式佈局
+   陶瓷釉藥賽格式計算器 V5.1 CSS 樣式 - 完美三欄式佈局與手機防溢出
    =================================================== */
 
 body {
@@ -9,6 +9,8 @@ body {
     background-color: #f4f4f9; /* 淺灰色背景 */
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden; /* 強制防止整個網頁左右滑動 (關鍵修正) */
+    width: 100%;
 }
 
 header {
@@ -101,13 +103,12 @@ main {
     padding-bottom: 5px;
 }
 
-
 /* ===================================================
    UMF 輸入區：颜色調換修正 (RO:綠, R2O3:紅, RO2:藍)
    =================================================== */
 .umf-inputs-container {
     display: flex;
-    flex-direction: column; /* 因為改為三欄，左欄空間縮小，改為垂直排列 */
+    flex-direction: column; 
     gap: 15px;
 }
 
@@ -158,7 +159,6 @@ main {
 .umf-inputs .readonly-row input[type="number"] { background-color: #e9ecef; color: #6c757d; border-style: dashed; }
 #ro-umf-total { font-weight: bold; color: #333; margin-left: 10px; }
 
-
 /* ===================================================
    中欄配方表格與提示樣式
    =================================================== */
@@ -179,7 +179,6 @@ main {
 
 /* 提示文字 */
 .raw-material-warning-text { display: block; font-size: 11px; font-weight: bold; color: #dc3545; margin-top: 4px; line-height: 1.2; }
-
 
 /* ===================================================
    按鈕與總結區 (排成一列修正)
@@ -223,17 +222,16 @@ main {
 }
 .success-pulse { animation: success-pulse-flash 2s ease-in-out forwards; border-width: 2px !important; }
 
-
 /* ===================================================
-   右欄：釉式圖表 (Al2O3 vs SiO2) - 精確網格與刻度
+   右欄：釉式圖表 (Al2O3 vs SiO2)
    =================================================== */
 #glaze-chart {
     position: relative;
-    width: 320px; /* 為了適應右欄固定寬度，稍微縮小一點避免溢出 */
+    width: 320px; 
     height: 320px; 
     border-left: 2px solid #333; 
     border-bottom: 2px solid #333; 
-    margin-left: 25px; /* 留空間給 Y 軸標籤 */
+    margin-left: 25px; 
     background-color: #f9f9f9;
 }
 
@@ -271,15 +269,98 @@ main {
 .glaze-point:hover .point-value { opacity: 1; }
 
 /* ===================================================
-   RWD 響應式設計 (準備階段，後續可針對手機微調)
+   RWD 響應式設計 (防手機左右溢出)
    =================================================== */
-@media (max-width: 1200px) { 
+@media (max-width: 1200px) {
     main { flex-wrap: wrap; }
-    /* 當螢幕不夠寬時，強制讓圖表掉到下方置中 */
     #glaze-chart-section { flex: 1 1 100%; max-width: 100%; margin-top: 20px; }
 }
 
-@media (max-width: 800px) { 
-    main { flex-direction: column; }
-    .umf-inputs-section, .recipe-section { flex: auto; min-width: 100%; }
+@media (max-width: 1000px) {
+    main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .umf-inputs-section, .recipe-section, #glaze-chart-section {
+        flex: auto;
+        width: 100%;
+        min-width: 0; /* 關鍵：解除 400px 限制 */
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .umf-inputs-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 0 5px;
+        margin-top: 10px;
+    }
+    .umf-inputs-section, .recipe-section, #glaze-chart-section {
+        padding: 10px;
+    }
+    header h1 { font-size: 1.2em; }
+    .umf-inputs-section h2, .recipe-section h2, #glaze-chart-section h2 { font-size: 1.2em; }
+
+    /* 1. UMF 輸入區防溢出 */
+    .umf-inputs label {
+        white-space: normal; /* 允許文字換行，防止撐破 */
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    .umf-inputs input[type="number"] {
+        width: 65px;
+        font-size: 12px;
+    }
+
+    /* 2. 配方表格防溢出 */
+    #recipe-table {
+        table-layout: fixed; /* 強制表格遵守 100% 寬度 */
+        word-break: break-word;
+    }
+    #recipe-table th, #recipe-table td {
+        padding: 4px;
+        font-size: 12px;
+    }
+    #recipe-tbody select {
+        font-size: 11px;
+        padding: 2px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* 底部按鈕區排版：垂直全寬 */
+    .action-buttons-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .action-buttons-group button {
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+    }
+
+    /* 總結區改單欄 */
+    #recipe-summary-footer {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    /* 3. 相圖縮放與防溢出 */
+    #glaze-chart-wrapper {
+        overflow-x: auto;
+        max-width: 100%;
+        justify-content: flex-start; /* 確保滾動條從最左邊開始 */
+        padding-bottom: 25px;
+    }
+    #glaze-chart {
+        transform: scale(0.9);
+        transform-origin: left top;
+        margin-left: 15px; /* 縮小左邊距 */
+    }
 }
