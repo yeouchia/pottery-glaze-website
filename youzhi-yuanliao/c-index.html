@@ -123,7 +123,7 @@
                     <!-- R2O3 (粉紅) & RO2 (淺藍) -->
                     <div class="right-groups">
                         <div class="umf-group r2o3-group">
-                            <h3 class="r2o3-title">R₂O₃ 中性組</h3>
+                            <h3 class="r2o3-title">R₂O₃ 穩定劑</h3>
                             <div class="umf-grid">
                                 <div class="umf-row"><label>Al₂O₃</label> <input type="number" id="target-Al2O3" step="0.001" value="0.35"> <span class="res-val" id="curr-Al2O3">0.000</span></div>
                                 <div class="umf-row"><label>B₂O₃</label> <input type="number" id="target-B2O3" step="0.001"> <span class="res-val" id="curr-B2O3">0.000</span></div>
@@ -133,7 +133,7 @@
                         </div>
 
                         <div class="umf-group ro2-group">
-                            <h3 class="ro2-title">RO₂ 酸性組</h3>
+                            <h3 class="ro2-title">RO₂ 形成劑</h3>
                             <div class="umf-grid">
                                 <div class="umf-row"><label>SiO₂</label> <input type="number" id="target-SiO2" step="0.001" value="3.5"> <span class="res-val" id="curr-SiO2">0.000</span></div>
                                 <div class="umf-row"><label>TiO₂</label> <input type="number" id="target-TiO2" step="0.001"> <span class="res-val" id="curr-TiO2">0.000</span></div>
@@ -164,10 +164,9 @@
         </div>
     </main>
 
-    <!-- 【新增】音效播放器 (隱藏) -->
-    <!-- 請確認您的音效檔檔名與 src 內的名稱一致 -->
-    <audio id="audio-forward" src="sound-forward.mp3" preload="auto" style="display:none;"></audio>
-    <audio id="audio-wizard" src="sound-wizard.mp3" preload="auto" style="display:none;"></audio>
+    <!-- 【重點修正：將副檔名改為大寫 .MP3 以符合 GitHub 伺服器要求】 -->
+    <audio id="audio-forward" src="sound-forward.MP3" preload="auto" style="display:none;"></audio>
+    <audio id="audio-wizard" src="sound-wizard.MP3" preload="auto" style="display:none;"></audio>
 
     <script src="c-script.js"></script>
 </body>
