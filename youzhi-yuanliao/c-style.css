@@ -1,0 +1,213 @@
+:root {
+    --primary-color: #2c3e50;
+    --bg-color: #f0f3f6;
+    --panel-bg: #ffffff;
+    --warn-text: #e67e22;
+    --error-color: #c0392b;
+    --success-color: #28a745;
+    
+    /* UMF 區塊背景色 */
+    --ro-bg: #e8f5e9;    /* 淺綠 */
+    --r2o3-bg: #fce4ec;  /* 粉紅 */
+    --ro2-bg: #e3f2fd;   /* 淺藍 */
+    
+    /* UMF 標題與文字顏色 */
+    --ro-color: #006400;  /* 深綠 */
+    --r2o3-color: #c2185b; /* 深紅 */
+    --ro2-color: #1565c0; /* 深藍 */
+}
+
+body {
+    font-family: 'Microsoft JhengHei', sans-serif;
+    background-color: var(--bg-color);
+    margin: 0; padding: 0; color: #333; height: 100vh; display: flex; flex-direction: column;
+    overflow-x: hidden; /* 防止左右滑動 */
+}
+
+header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 5px 20px;
+    display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); flex-shrink: 0;
+}
+header h1 { margin: 0; font-size: 1.1rem; }
+.subtitle { margin: 0; font-size: 0.8rem; opacity: 0.8; }
+#author-info { font-size: 0.8rem; opacity: 0.7; }
+
+main {
+    flex: 1; padding: 10px; overflow-y: auto; overflow-x: hidden; 
+}
+
+.main-wrapper {
+    display: flex; width: 100%; height: 100%; gap: 10px; flex-wrap: nowrap; align-items: stretch;
+}
+
+/* 通用面板 */
+.panel {
+    background: var(--panel-bg); border-radius: 8px; padding: 10px; display: flex; flex-direction: column;
+    box-sizing: border-box; min-width: 0;
+}
+.box-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.panel-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; flex-shrink: 0;
+}
+.panel-header h2 { margin: 0; font-size: 1rem; color: var(--primary-color); white-space: nowrap; }
+
+/* 複製按鈕樣式 */
+.btn-copy {
+    border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; color: white;
+    font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;
+}
+.btn-copy.blue { background-color: #3498db; border: 1px solid #2980b9; }
+.btn-copy.blue:hover { background-color: #2980b9; }
+.btn-copy.green { background-color: #2ecc71; border: 1px solid #27ae60; }
+.btn-copy.green:hover { background-color: #27ae60; }
+
+/* ===================================================
+   1. 左側：原料配方區 (維持原本比例)
+   =================================================== */
+.recipe-panel { flex: 2; min-width: 280px; } 
+.table-container { flex: 1; overflow-y: auto; }
+.recipe-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed; }
+.recipe-table th { background: #f8f9fa; padding: 6px; text-align: left; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #ddd; }
+.recipe-table td { padding: 4px; border-bottom: 1px solid #eee; }
+.mat-select { width: 100%; padding: 4px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; box-sizing: border-box;}
+.mat-weight { width: 100%; padding: 4px; text-align: right; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; color: #2980b9; font-size: 0.95rem; box-sizing: border-box;}
+
+.del-btn { background-color: #e74c3c; color: white; border: none; width: 24px; height: 24px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto;}
+.del-btn:hover { background-color: #c0392b; }
+.add-btn { width: 100%; padding: 8px; margin-top: 5px; cursor: pointer; font-size: 0.9rem; background-color: #2ecc71; color: white; border: 1px solid #27ae60; border-radius: 4px; font-weight: bold;}
+.add-btn:hover { background-color: #27ae60; }
+
+.recipe-footer { margin-top: 5px; padding-top: 5px; border-top: 1px solid #eee; font-size: 0.9rem; }
+.total-row { font-weight: bold; display: flex; justify-content: space-between; }
+.warning-text { color: red; font-size: 0.85rem; text-align: right; font-weight: bold; }
+.loi-row { color: #7f8c8d; font-size: 0.85rem; margin-top: 2px; }
+
+/* 引導提示區 */
+.wizard-box { margin-top: 5px; padding: 8px; background-color: #fff3cd; color: #856404; border-radius: 4px; font-size: 0.9rem; font-weight: bold; display: flex; flex-direction: column; gap: 4px; border: 1px solid #ffeeba; line-height: 1.4; }
+
+/* ===================================================
+   2. 中間：直式控制按鈕欄 (維持原本比例)
+   =================================================== */
+.control-column {
+    flex: 0 0 70px; 
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: #fcfcfc; border-radius: 8px; border: 1px solid #eee;
+    padding: 10px 5px; gap: 15px; box-sizing: border-box;
+}
+.btn-group-vertical { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.divider-h { width: 80%; height: 1px; background: #ddd; margin: 5px 0; }
+.btn-vertical { width: 100%; padding: 15px 5px; border: none; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.2s; }
+.btn-vertical:active { transform: scale(0.95); }
+.btn-vertical i { font-size: 1.2rem; }
+.vertical-text { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; }
+.vertical-text-small { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
+
+.btn-vertical.reverse { background: linear-gradient(to bottom, #f39c12, #d35400); color: white; }
+.btn-vertical.reverse:hover:not(:disabled) { opacity: 0.9; }
+.btn-vertical.reverse:disabled { background: #bdc3c7; color: #7f8c8d; cursor: not-allowed; box-shadow: none; opacity: 0.7; }
+.btn-vertical.forward { background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; }
+.btn-vertical.forward:hover:not(:disabled) { opacity: 0.9; }
+.btn-vertical.forward:disabled { background: #ecf0f1; color: #bdc3c7; cursor: not-allowed; box-shadow: none; }
+.btn-reset { width: 100%; padding: 10px 5px; border: none; border-radius: 6px; cursor: pointer; background-color: #e74c3c; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+.btn-reset:hover { background-color: #c0392b; }
+
+.success-flash { color: #e74c3c; font-weight: bold; font-size: 0.8rem; margin-top: 5px; animation: blink 1s infinite; writing-mode: vertical-lr; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ===================================================
+   3. 中右：釉式目標區 (【重要修復】恢復並排，加寬輸入框)
+   =================================================== */
+.umf-panel { flex: 4; min-width: 480px; } /* 加大最小寬度確保不擠壓 */
+.umf-container { 
+    flex: 1; overflow-y: auto; display: flex; gap: 10px; 
+    flex-direction: row; /* 【恢復電腦版並排：左RO, 右R2O3+RO2】 */
+}
+
+.umf-group { border-radius: 6px; padding: 5px; display: flex; flex-direction: column; }
+.umf-group.ro-group { flex: 1; background-color: var(--ro-bg); border: 1px solid #c8e6c9; }
+.right-groups { flex: 1; display: flex; flex-direction: column; gap: 10px; } /* 恢復上下疊加 */
+.umf-group.r2o3-group { flex: 1; background-color: var(--r2o3-bg); border: 1px solid #f8bbd0; }
+.umf-group.ro2-group { flex: 1; background-color: var(--ro2-bg); border: 1px solid #bbdefb; }
+
+.ro-title, .r2o3-title, .ro2-title { margin: 0 0 5px 0; font-size: 0.9rem; text-align: center; padding-bottom: 3px; font-weight: bold; }
+.ro-title { color: var(--ro-color); border-bottom: 2px solid var(--ro-color); }
+.r2o3-title { color: var(--r2o3-color); border-bottom: 2px solid var(--r2o3-color); }
+.ro2-title { color: var(--ro2-color); border-bottom: 2px solid var(--ro2-color); }
+
+.umf-grid { display: flex; flex-direction: column; gap: 3px; }
+.umf-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 0; }
+.umf-row.full-width { background: rgba(255,255,255,0.6); padding: 4px; border-radius: 4px; margin-bottom: 5px; }
+.umf-row label { font-size: 0.85rem; font-weight: bold; color: #444; white-space: nowrap; margin-right: 5px;}
+.umf-row label.sub { font-weight: normal; font-size: 0.8rem; padding-left: 10px; color: #666; }
+
+/* 【重要修復】加寬數值輸入框，確保 0.1180 能完整顯示 */
+.umf-row input { width: 75px; text-align: right; border: 1px solid #ccc; border-radius: 3px; padding: 2px; font-size: 0.9rem; box-sizing: border-box;} 
+.res-val { font-weight: bold; color: #2980b9; width: 65px; text-align: right; font-size: 0.9rem; }
+.res-val-only { color: #666; width: 65px; text-align: right; font-size: 0.85rem; }
+
+.ro-footer { margin-top: auto; padding-top: 8px; font-size: 0.85rem; font-weight: bold; }
+.ro-target-display { color: #27ae60; text-align: center; margin-bottom: 2px; } 
+.ro-actual-display { color: #c0392b; text-align: center; } 
+
+/* ===================================================
+   4. 最右側：圖表區 (維持原本比例)
+   =================================================== */
+.chart-panel { flex: 2; min-width: 300px; display: flex; flex-direction: column; }
+.chart-square-wrapper { 
+    width: 100%; aspect-ratio: 1 / 1; position: relative; 
+    background: white; border: 1px solid #eee; border-radius: 4px;
+    margin-bottom: auto; 
+}
+canvas { width: 100% !important; height: 100% !important; }
+.legend-box { display: flex; justify-content: center; gap: 10px; font-size: 0.8rem; padding: 5px; background: #fafafa; margin-top: 5px; border-radius: 4px; }
+.chart-info { font-weight: bold; color: #2c3e50; font-size: 0.9rem;}
+
+/* Toast */
+.toast { 
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+    background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; 
+    z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-weight: bold;
+}
+.toast.show { opacity: 1; }
+.hidden { display: none !important; }
+
+/* ===================================================
+   RWD 響應式：手機與平板 (防左右溢出)
+   只有在螢幕小於 1000px 時才會切換成堆疊排版
+   =================================================== */
+@media (max-width: 1000px) {
+    .main-wrapper { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
+    
+    .recipe-panel, .umf-panel, .chart-panel { flex: auto; min-width: 100%; width: 100%; margin-bottom: 10px;}
+
+    .control-column { 
+        flex-direction: row; height: auto; width: 100%; padding: 10px;
+        justify-content: space-between; gap: 10px;
+    }
+    .btn-group-vertical { flex-direction: row; flex: 2; gap: 10px; }
+    .divider-h { display: none; } 
+    
+    .vertical-text, .vertical-text-small {
+        writing-mode: horizontal-tb; text-orientation: mixed; letter-spacing: 0;
+    }
+    .btn-vertical { flex-direction: row; width: 100%; padding: 12px; }
+    .btn-reset { width: auto; padding: 12px; flex: 1; display: flex; justify-content: center; }
+    .success-flash { writing-mode: horizontal-tb; margin-top: 0; margin-left: 10px; align-self: center;}
+
+    /* 在平板/手機上，讓 UMF 區塊直列排列以節省空間 */
+    .umf-container { flex-direction: column; }
+    .right-groups { flex-direction: row; } 
+}
+
+@media (max-width: 600px) {
+    header h1 { font-size: 1rem; }
+    .subtitle { display: none; } 
+    .panel-header { flex-direction: column; align-items: flex-start; gap: 5px;}
+    .btn-copy { width: 100%; text-align: center; padding: 8px;}
+    
+    /* 極小手機螢幕，全部直列 */
+    .right-groups { flex-direction: column; } 
+    
+    .umf-row input { width: 60px; }
+    .res-val, .res-val-only { width: 55px; }
+}
