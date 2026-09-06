@@ -1,350 +1,367 @@
-:root {
-    --primary-color: #2c3e50;
-    --bg-color: #f0f3f6;
-    --panel-bg: #ffffff;
-    --warn-text: #e67e22;
-    --error-color: #c0392b;
-    --success-color: #28a745;
-    
-    /* UMF 區塊背景色 */
-    --ro-bg: #e8f5e9;    
-    --r2o3-bg: #fce4ec;  
-    --ro2-bg: #e3f2fd;   
-    
-    /* UMF 標題與文字顏色 */
-    --ro-color: #006400;  
-    --r2o3-color: #c2185b; 
-    --ro2-color: #1565c0; 
-}
+/* ===================================================
+   陶瓷釉藥賽格式計算器 V5.1 CSS 樣式 - 完美三欄式佈局與手機防溢出
+   =================================================== */
 
 body {
-    font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif;
-    background-color: var(--bg-color);
-    margin: 0; 
-    padding: 0; 
-    color: #333; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column;
-    overflow-x: hidden; 
+    font-family: '微軟正黑體', 'Microsoft JhengHei', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9; /* 淺灰色背景 */
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden; /* 強制防止整個網頁左右滑動 (關鍵修正) */
+    width: 100%;
 }
 
 header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
-    color: white; 
-    padding: 5px 20px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
-    flex-shrink: 0;
+    background-color: #34495e; 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 6px 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; 
 }
-header h1 { margin: 0; font-size: 1.1rem; }
-.subtitle { margin: 0; font-size: 0.8rem; opacity: 0.8; }
-#author-info { font-size: 0.8rem; opacity: 0.7; }
+
+header h1 {
+    margin: 0;
+    font-size: 14px; 
+    font-weight: bold;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+#author-info {
+    position: absolute; 
+    left: 15px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    font-size: 11px; 
+    opacity: 0.8;
+}
 
 main {
-    flex: 1; 
-    padding: 10px; 
-    overflow-y: auto; 
-    overflow-x: hidden; 
-}
-
-.main-wrapper {
+    max-width: 1600px; /* 將外框拉寬以容納三欄並排 */
+    margin: 20px auto;
+    padding: 0 10px;
+    
     display: flex; 
-    width: 100%; 
-    min-height: 100%; 
-    gap: 10px; 
-    flex-wrap: nowrap; 
-    align-items: stretch;
+    flex-wrap: nowrap; /* 強制不換行，維持三欄 */
+    align-items: flex-start; /* 讓三個區塊頂部對齊 */
+    gap: 20px; 
 }
-
-.panel {
-    background: var(--panel-bg); 
-    border-radius: 8px; 
-    padding: 10px; 
-    display: flex; 
-    flex-direction: column;
-    box-sizing: border-box; 
-    min-width: 0; 
-}
-.box-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-
-.panel-header {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 8px; 
-    border-bottom: 1px solid #eee; 
-    padding-bottom: 5px; 
-    flex-shrink: 0;
-}
-.panel-header h2 { margin: 0; font-size: 1rem; color: var(--primary-color); white-space: nowrap; }
-
-.action-buttons-wrap {
-    display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
-}
-
-.btn-copy {
-    border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; color: white;
-    font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;
-}
-.btn-copy.blue { background-color: #3498db; border: 1px solid #2980b9; }
-.btn-copy.blue:hover { background-color: #2980b9; }
-.btn-copy.green { background-color: #2ecc71; border: 1px solid #27ae60; }
-.btn-copy.green:hover { background-color: #27ae60; }
-.btn-copy.orange { background-color: #e67e22; border: 1px solid #d35400; }
-.btn-copy.orange:hover { background-color: #d35400; }
-
-.recipe-panel { flex: 2; min-width: 280px; } 
-.table-container { flex: 1; overflow-y: auto; }
-.recipe-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed; }
-.recipe-table th { background: #f8f9fa; padding: 6px; text-align: left; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #ddd; }
-.recipe-table td { padding: 4px; border-bottom: 1px solid #eee; }
-.mat-select { width: 100%; padding: 4px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; box-sizing: border-box;}
-.mat-weight { width: 100%; padding: 4px; text-align: right; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; color: #2980b9; font-size: 0.95rem; box-sizing: border-box;}
-
-.del-btn { background-color: #e74c3c; color: white; border: none; width: 24px; height: 24px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto;}
-.del-btn:hover { background-color: #c0392b; }
-.add-btn { width: 100%; padding: 8px; margin-top: 5px; cursor: pointer; font-size: 0.9rem; background-color: #2ecc71; color: white; border: 1px solid #27ae60; border-radius: 4px; font-weight: bold;}
-.add-btn:hover { background-color: #27ae60; }
-
-.recipe-footer { margin-top: 5px; padding-top: 5px; border-top: 1px solid #eee; font-size: 0.9rem; }
-.total-row { font-weight: bold; display: flex; justify-content: space-between; }
-.warning-text { color: red; font-size: 0.85rem; text-align: right; font-weight: bold; }
-.loi-row { color: #7f8c8d; font-size: 0.85rem; margin-top: 2px; }
-.wizard-box { margin-top: 5px; padding: 8px; background-color: #fff3cd; color: #856404; border-radius: 4px; font-size: 0.9rem; font-weight: bold; display: flex; flex-direction: column; gap: 4px; border: 1px solid #ffeeba; line-height: 1.4; }
-
-@keyframes wizardSuccessFlash {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-.wizard-success-anim {
-    display: inline-block;
-    animation: wizardSuccessFlash 0.5s ease-in-out 2; 
-    transform-origin: left center;
-}
-
-.control-column {
-    flex: 0 0 70px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    background: #fcfcfc; 
-    border-radius: 8px; 
-    border: 1px solid #eee;
-    padding: 10px 5px; 
-    gap: 15px; 
-    box-sizing: border-box;
-    overflow-y: auto; 
-}
-
-.btn-group-vertical { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
-.divider-h { width: 80%; height: 1px; background: #ddd; margin: 5px 0; flex-shrink: 0; }
-
-.btn-vertical { 
-    width: 100%; 
-    min-height: 120px; 
-    padding: 15px 5px; 
-    border: none; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-    transition: all 0.2s; 
-    flex-shrink: 0;
-}
-.btn-vertical:active { transform: scale(0.95); }
-.btn-vertical i { font-size: 1.2rem; }
-.vertical-text { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; }
-.vertical-text-small { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
-
-@keyframes btnPulse {
-    0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.8); }
-    70% { box-shadow: 0 0 0 12px rgba(243, 156, 18, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
-}
-.btn-pulse {
-    animation: btnPulse 1.5s infinite !important;
-    border: 2px solid white;
-}
-
-.btn-vertical.reverse { background: linear-gradient(to bottom, #f39c12, #d35400); color: white; }
-.btn-vertical.reverse:hover:not(:disabled) { opacity: 0.9; }
-.btn-vertical.reverse:disabled { background: #bdc3c7; color: #7f8c8d; cursor: not-allowed; box-shadow: none; opacity: 0.7; border: none;}
-.btn-vertical.forward { background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; }
-.btn-vertical.forward:hover:not(:disabled) { opacity: 0.9; }
-.btn-vertical.forward:disabled { background: #ecf0f1; color: #bdc3c7; cursor: not-allowed; box-shadow: none; }
-
-.btn-reset { 
-    width: 100%; 
-    min-height: 100px;
-    padding: 10px 5px; 
-    border: none; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    background-color: #e74c3c; 
-    color: white; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    flex-shrink: 0;
-}
-.btn-reset:hover { background-color: #c0392b; }
-
-.success-flash { 
-    color: #e74c3c; 
-    font-weight: 900; 
-    font-size: 2.0rem; 
-    margin-top: 15px; 
-    animation: blink 1s infinite; 
-    writing-mode: vertical-lr; 
-    flex-shrink: 0;
-    letter-spacing: 3px; 
-}
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-.umf-panel { flex: 4; min-width: 480px; } 
-.umf-container { flex: 1; overflow-y: auto; display: flex; gap: 10px; flex-direction: row; }
-
-.umf-group { border-radius: 6px; padding: 5px; display: flex; flex-direction: column; }
-.umf-group.ro-group { flex: 1; background-color: var(--ro-bg); border: 1px solid #c8e6c9; }
-.right-groups { flex: 1; display: flex; flex-direction: column; gap: 10px; } 
-.umf-group.r2o3-group { flex: 1; background-color: var(--r2o3-bg); border: 1px solid #f8bbd0; }
-.umf-group.ro2-group { flex: 1; background-color: var(--ro2-bg); border: 1px solid #bbdefb; }
-
-.ro-title, .r2o3-title, .ro2-title { margin: 0 0 5px 0; font-size: 0.9rem; text-align: center; padding-bottom: 3px; font-weight: bold; }
-.ro-title { color: var(--ro-color); border-bottom: 2px solid var(--ro-color); }
-.r2o3-title { color: var(--r2o3-color); border-bottom: 2px solid var(--r2o3-color); }
-.ro2-title { color: var(--ro2-color); border-bottom: 2px solid var(--ro2-color); }
-
-.umf-grid { display: flex; flex-direction: column; gap: 3px; }
-.umf-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; }
-.umf-row.full-width { background: rgba(255,255,255,0.6); padding: 4px; border-radius: 4px; margin-bottom: 5px; }
-
-.umf-row label { flex: 1; font-size: 0.85rem; font-weight: bold; color: #444; white-space: nowrap; margin-right: 5px;}
-.umf-row label.sub { font-weight: normal; font-size: 0.8rem; padding-left: 10px; color: #666; }
-
-.umf-row input { flex: 0 0 75px; width: 75px; text-align: right; border: 1px solid #ccc; border-radius: 3px; padding: 2px; box-sizing: border-box; font-size: 0.9rem; color: #c0392b; font-weight: bold; margin-right: 10px;} 
-.res-val { flex: 0 0 65px; width: 65px; text-align: right; font-size: 0.9rem; font-weight: bold; color: #333333;}
-.res-val-only { flex: 0 0 65px; color: #555; width: 65px; text-align: right; font-size: 0.85rem; font-weight: bold;}
-
-.ro-footer { margin-top: 30px; padding-top: 10px; } 
-.ro-target-display { color: #c0392b; text-align: center; margin-bottom: 5px; font-size: 1.05rem; font-weight: 900; letter-spacing: 0.5px; transition: color 0.3s; } 
-.ro-actual-display { color: #333333; text-align: center; font-size: 1.05rem; font-weight: 900; letter-spacing: 0.5px; } 
-
-@keyframes warningBlink { 0%, 100% { opacity: 1; color: #c0392b; } 50% { opacity: 0.5; color: #e74c3c; } }
-.warning-blink { animation: warningBlink 1s infinite; font-weight: 900; }
-
-@keyframes textSuccessFlash { 
-    0% { transform: scale(1); color: #c0392b; } 
-    25% { transform: scale(1.05); color: #27ae60; } 
-    50% { transform: scale(1); color: #27ae60; } 
-    75% { transform: scale(1.05); color: #27ae60; } 
-    100% { transform: scale(1); color: #27ae60; } 
-}
-.text-success-pulse { animation: textSuccessFlash 0.6s ease-in-out; color: #27ae60 !important; }
-
-.chart-panel { flex: 2; min-width: 300px; display: flex; flex-direction: column; }
-
-.chart-square-wrapper { 
-    width: 100%; 
-    aspect-ratio: 1 / 1; 
-    position: relative; 
-    background: white; 
-    border: 1px solid #eee; 
-    border-radius: 4px; 
-    margin-bottom: auto; 
-}
-
-.legend-box { display: flex; justify-content: center; gap: 10px; font-size: 0.8rem; padding: 5px; background: #fafafa; margin-top: 5px; border-radius: 4px; }
-.chart-info { font-weight: bold; color: #2c3e50; font-size: 0.9rem;}
-
-.toast { 
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
-    background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; 
-    z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-weight: bold;
-}
-.toast.show { opacity: 1; }
-.hidden { display: none !important; }
 
 /* ===================================================
-   RWD 響應式：手機與平板完美排版 (修復按鈕消失 Bug)
+   左、中、右 三個主要區塊的共通設定
    =================================================== */
+.umf-inputs-section, .recipe-section, #glaze-chart-section {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+/* 左欄：釉式目標 */
+.umf-inputs-section {
+    flex: 0 0 32%; /* 佔據約三分之一的寬度 */
+    min-width: 400px; 
+}
+
+/* 中欄：配方求解 */
+.recipe-section {
+    flex: 1; /* 佔滿剩餘空間，作為主視覺 */
+    min-width: 400px; 
+}
+
+/* 右欄：圖表區塊 */
+#glaze-chart-section {
+    flex: 0 0 400px; /* 給定圖表區固定的安全寬度 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 讓圖表在其父容器中水平置中 */
+#glaze-chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-top: 10px;
+    padding-bottom: 20px; /* 給下方 X 軸標籤留空間 */
+}
+
+/* 區塊標題 H2 樣式統一 */
+.umf-inputs-section h2, .recipe-section h2, #glaze-chart-section h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #34495e; 
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* ===================================================
+   UMF 輸入區：颜色調換修正 (RO:綠, R2O3:紅, RO2:藍)
+   =================================================== */
+.umf-inputs-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+}
+
+.ro-group {
+    padding: 8px;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #e6ffe6;
+}
+.ro-group legend { color: #1e7e34; font-weight: bold; }
+
+.umf-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.r2o3-group {
+    border: 1px solid #dc3545;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #ffe6e6;
+}
+.r2o3-group legend { color: #8b0000; font-weight: bold; }
+
+.ro2-group {
+    border: 1px solid #007bff;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #e6f7ff;
+}
+.ro2-group legend { color: #004085; font-weight: bold; }
+
+.umf-inputs .input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px; 
+    font-size: 13px;
+}
+.umf-inputs label { flex: 1; white-space: nowrap; margin-right: 10px; }
+.umf-inputs input[type="number"] {
+    width: 80px; padding: 3px; border: 1px solid #ccc; border-radius: 3px; text-align: right; font-size: 13px;
+}
+.umf-inputs .readonly-row input[type="number"] { background-color: #e9ecef; color: #6c757d; border-style: dashed; }
+#ro-umf-total { font-weight: bold; color: #333; margin-left: 10px; }
+
+/* ===================================================
+   中欄配方表格與提示樣式
+   =================================================== */
+.warning-box {
+    padding: 8px; margin-bottom: 10px; border-radius: 5px; font-weight: bold; font-size: 13px; border: 1px solid transparent; transition: all 0.2s ease-in-out; 
+}
+.warning-box.notice-box { background-color: #e6ffe6; color: #0056b3; border-color: #b3d9ff; box-shadow: none; }
+.warning-box.error-box { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; box-shadow: none; }
+
+#recipe-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+#recipe-table th, #recipe-table td { border: 1px solid #ddd; padding: 6px; text-align: left; }
+#recipe-table th { background-color: #34495e; color: white; font-weight: normal; font-size: 13px; }
+#recipe-tbody td { vertical-align: middle; }
+#recipe-table tfoot { display: none; }
+
+.calculated-weight-cell { text-align: right; font-weight: bold; color: #28a745; }
+#recipe-tbody select { width: 100%; padding: 4px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box; font-size: 12px; }
+
+/* 提示文字 */
+.raw-material-warning-text { display: block; font-size: 11px; font-weight: bold; color: #dc3545; margin-top: 4px; line-height: 1.2; }
+
+/* ===================================================
+   按鈕與總結區 (排成一列修正)
+   =================================================== */
+.action-buttons-group {
+    display: flex;
+    flex-wrap: wrap; /* 如果空間不夠自動換行 */
+    gap: 8px; /* 按鈕間距 */
+    margin-top: 15px;
+}
+
+.action-buttons-group button { 
+    padding: 7px 12px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: background-color 0.2s; 
+    font-size: 13px; 
+    margin: 0; /* 移除獨立按鈕原本的 margin，交由 gap 控制 */
+}
+
+#add-raw-btn { background-color: #28a745; color: white; }
+#calculate-btn { background-color: #ffc107; color: #333; }
+.remove-row-btn { background-color: #dc3545; color: white; padding: 4px 8px; font-weight: normal; margin: 0; font-size: 12px; }
+#copy-umf-btn, #copy-batch-btn { background-color: #3498db; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+#copy-umf-btn:hover, #copy-batch-btn:hover { background-color: #2980b9; }
+
+#recipe-summary-footer {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-top: 25px; padding: 10px 0; border-top: 1px solid #ddd;
+}
+#recipe-summary-footer .summary-row { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 13px; padding: 2px 0; }
+#recipe-summary-footer .summary-label { color: #333; white-space: nowrap; }
+#recipe-summary-footer .summary-value { text-align: right; font-weight: bold; color: #007bff; }
+
+/* 成功提示閃爍動畫 */
+@keyframes success-pulse-flash {
+    0%, 50% { background-color: #28a745; color: white; border-color: #28a745; transform: scale(1.02); box-shadow: 0 0 10px rgba(40, 167, 69, 0.6); }
+    25%, 75% { background-color: #e6ffe6; color: #0056b3; border-color: #b3d9ff; transform: scale(1); box-shadow: none; }
+    100% { background-color: #e6ffe6; color: #0056b3; border-color: #b3d9ff; transform: scale(1); box-shadow: none; }
+}
+.success-pulse { animation: success-pulse-flash 2s ease-in-out forwards; border-width: 2px !important; }
+
+/* ===================================================
+   右欄：釉式圖表 (Al2O3 vs SiO2)
+   =================================================== */
+#glaze-chart {
+    position: relative;
+    width: 320px; 
+    height: 320px; 
+    border-left: 2px solid #333; 
+    border-bottom: 2px solid #333; 
+    margin-left: 25px; 
+    background-color: #f9f9f9;
+}
+
+/* 經典區域劃分 */
+.chart-area { position: absolute; opacity: 0.7; font-size: 11px; color: #333; padding: 5px; border-radius: 4px; text-align: center; box-sizing: border-box; bottom: 0; left: 0; }
+.matte-area { background-color: rgba(255, 199, 199, 0.7); width: 137px; height: 183px; top: 0; left: 0; line-height: 1.2; }
+.bright-area { background-color: rgba(199, 255, 199, 0.7); width: 228px; height: 183px; bottom: 0; left: 91px; line-height: 1.2; }
+.opacified-area { background-color: rgba(199, 199, 255, 0.7); width: 91px; height: 91px; top: 137px; right: 0; line-height: 1.2; }
+
+/* 座標軸標籤 */
+.axis-label { position: absolute; font-size: 11px; font-weight: bold; white-space: nowrap; }
+.x-label { bottom: -35px; left: 50%; transform: translateX(-50%); font-size: 12px; color: blue; }
+.y-label { top: 50%; left: -85px; transform: rotate(-90deg) translateY(50%); font-size: 12px; color: red; }
+
+/* 網格線和刻度樣式 */
+#chart-grid { position: absolute; width: 100%; height: 100%; }
+.y-tick, .x-tick { position: absolute; border-color: #ccc; border-style: dashed; pointer-events: none; z-index: 5; }
+.tick-label { position: absolute; font-size: 10px; color: #555; white-space: nowrap; }
+
+.y-tick { left: 0; width: 100%; height: 1px; border-top-width: 1px; }
+.y-tick .tick-label { right: 100%; padding-right: 5px; transform: translateY(-50%); }
+.y-02 { bottom: 20%; } .y-04 { bottom: 40%; } .y-06 { bottom: 60%; } .y-08 { bottom: 80%; }
+.y-10 { top: 0; border-top: 1px solid #333; } .y-10 .tick-label { transform: translateY(-100%); bottom: auto; top: 0; }
+
+.x-tick { bottom: 0; height: 100%; width: 1px; border-left-width: 1px; }
+.x-tick .tick-label { top: 100%; transform: translateX(-50%); padding-top: 5px; }
+.x-20 { left: 20%; } .x-40 { left: 40%; } .x-60 { left: 60%; } .x-80 { left: 80%; }
+.x-100 { right: 0; border-left: 1px solid #333; } .x-100 .tick-label { transform: translateX(50%); left: auto; right: 0; }
+
+.origin-label { position: absolute; bottom: -20px; left: -15px; font-size: 10px; color: #333; }
+
+/* 計算點樣式 */
+.glaze-point { position: absolute; width: 12px; height: 12px; background-color: #007bff; border-radius: 50%; z-index: 10; cursor: pointer; transform: translate(-50%, -50%); box-shadow: 0 0 5px rgba(0, 123, 255, 0.8); transition: all 0.5s ease; display: none; }
+.glaze-point .point-value { position: absolute; bottom: 15px; left: 15px; background-color: rgba(0, 0, 0, 0.7); color: white; padding: 3px 5px; border-radius: 3px; font-size: 11px; pointer-events: none; opacity: 0; transition: opacity 0.2s; white-space: nowrap; }
+.glaze-point:hover .point-value { opacity: 1; }
+
+/* ===================================================
+   RWD 響應式設計 (防手機左右溢出)
+   =================================================== */
+@media (max-width: 1200px) {
+    main { flex-wrap: wrap; }
+    #glaze-chart-section { flex: 1 1 100%; max-width: 100%; margin-top: 20px; }
+}
+
 @media (max-width: 1000px) {
-    .main-wrapper { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
-    .recipe-panel, .umf-panel, .chart-panel { flex: auto; min-width: 100%; width: 100%; margin-bottom: 10px;}
-    
-    /* 1. 將控制欄改回「垂直堆疊 (column)」，不讓按鈕互相擠壓 */
-    .control-column { 
-        flex-direction: column; 
-        height: auto; 
-        width: 100%; 
-        padding: 10px; 
-        gap: 10px; 
-        overflow: visible; 
-        box-sizing: border-box;
+    main {
+        flex-direction: column;
+        align-items: stretch;
     }
-    
-    /* 2. 讓「轉換原料」與「轉換釉式」兩個功能鍵並排顯示 */
-    .btn-group-vertical { 
-        flex-direction: row; 
-        width: 100%; 
-        gap: 10px; 
-    }
-    .divider-h { display: none; } 
-    
-    .vertical-text, .vertical-text-small { 
-        writing-mode: horizontal-tb; 
-        text-orientation: mixed; 
-        letter-spacing: 0; 
-    }
-    
-    .btn-vertical { 
-        flex-direction: row; 
-        flex: 1; /* 兩個功能鍵完美平分螢幕寬度 */
-        width: 0; 
-        min-height: 50px; 
-        padding: 12px 5px; 
-    }
-    
-    /* 3. 讓「清空重新開始」獨立顯示於下一行，佔滿 100% 寬度 */
-    .btn-reset { 
-        width: 100%; 
-        flex: none; /* 取消平分機制，強制佔滿整行 */
-        min-height: 50px; 
-        padding: 12px; 
-        display: flex; 
-        justify-content: center; 
-    }
-    
-    .success-flash { 
-        writing-mode: horizontal-tb; 
-        margin-top: 5px; 
-        align-self: center;
+    .umf-inputs-section, .recipe-section, #glaze-chart-section {
+        flex: auto;
         width: 100%;
-        text-align: center;
+        min-width: 0; 
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
     }
-    
-    .umf-container { flex-direction: column; }
-    .right-groups { flex-direction: row; } 
+    .umf-inputs-container {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 600px) {
-    header h1 { font-size: 1rem; }
-    .subtitle { display: none; } 
-    .panel-header { flex-direction: column; align-items: flex-start; gap: 5px;}
-    .action-buttons-wrap { justify-content: center; width: 100%; } 
-    .btn-copy { width: 100%; text-align: center; padding: 8px;}
-    .right-groups { flex-direction: column; } 
-    .umf-row input { flex: 0 0 60px; width: 60px; margin-right: 5px; }
-    .res-val, .res-val-only { flex: 0 0 55px; width: 55px; }
-    .ro-target-display, .ro-actual-display { font-size: 0.95rem; }
+    main {
+        padding: 0 5px;
+        margin-top: 10px;
+    }
+    .umf-inputs-section, .recipe-section, #glaze-chart-section {
+        padding: 10px;
+    }
+    header h1 { font-size: 1.2em; }
+    .umf-inputs-section h2, .recipe-section h2, #glaze-chart-section h2 { font-size: 1.2em; }
+
+    /* 1. UMF 輸入區防溢出 */
+    .umf-inputs label {
+        white-space: normal; 
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    .umf-inputs input[type="number"] {
+        width: 65px;
+        font-size: 12px;
+    }
+
+    /* 2. 配方表格防溢出 */
+    #recipe-table {
+        table-layout: fixed; 
+        word-break: break-word;
+    }
+    #recipe-table th, #recipe-table td {
+        padding: 4px;
+        font-size: 12px;
+    }
+    #recipe-tbody select {
+        font-size: 11px;
+        padding: 2px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* 底部按鈕區排版：垂直全寬 */
+    .action-buttons-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .action-buttons-group button {
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+    }
+
+    /* 總結區改單欄 */
+    #recipe-summary-footer {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    /* 3. 相圖縮放與防溢出 (重點修正區塊) */
+    #glaze-chart-wrapper {
+        overflow-x: auto;
+        max-width: 100%;
+        justify-content: flex-start; /* 確保滾動條從最左邊開始 */
+        padding-bottom: 25px;
+        padding-left: 15px; /* ⬅️【新增】增加左側內距，為 Al2O3 字體建立保護區 */
+    }
+    #glaze-chart {
+        transform: scale(0.9);
+        transform-origin: left top;
+        margin-left: 35px; /* ⬅️【修改】把圖表本體往右推，徹底釋放左邊的空間給旋轉後的文字 */
+    }
 }
