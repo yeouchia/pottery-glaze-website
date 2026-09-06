@@ -1,7 +1,9 @@
 // ===================================================
 // 全能陶瓷釉藥計算器 V31.0 (雙點定位版)
-// 1. [BugFix] 修正 autoCalculateWeightForRow，加入主屬性判定，防止微量元素造成重量破表。
-// 2. [WordCopy] 導入隱形表格 HTML 複製技術，實作一鍵複製完美 Word 報表。
+// 1. [Audio] 新增音效觸發指令 (在 forward 點擊與 wizard 完成時)。
+// 2. [ShapeMap] 新增圖形對應：目標值前加 ◆(紅)，實際值前加 ●(黑)。
+// 3. [BugFix] 修正 autoCalculateWeightForRow，加入主屬性判定。
+// 4. [WordCopy] 導入隱形表格 HTML 複製技術。
 // ===================================================
 
 const OXIDE_MOL_WEIGHT = {
@@ -181,9 +183,19 @@ function setupEventListeners() {
     document.getElementById('add-row-btn').addEventListener('click', () => addRecipeRow());
     document.getElementById('reverse-calc-btn').addEventListener('click', startWizardMode);
     document.getElementById('reset-all-btn').addEventListener('click', resetAll);
+    
+    // 【修改點1】在原料轉換釉式的按鈕加入播放音效指令
     document.getElementById('forward-calc-btn').addEventListener('click', () => {
         calculateUMF();
         document.getElementById('forward-success-msg').classList.remove('hidden');
+        
+        // 播放「轉換成功」音效
+        const audioFwd = document.getElementById('audio-forward');
+        if (audioFwd) {
+            audioFwd.currentTime = 0;
+            audioFwd.play().catch(e => console.log('音效播放被瀏覽器阻擋 (需使用者先互動過網頁):', e));
+        }
+        
         setTimeout(() => document.getElementById('forward-success-msg').classList.add('hidden'), 3000);
     });
 
@@ -209,19 +221,39 @@ function updateTargetROSum() {
     const display = document.getElementById('ro-target-display');
     const reverseBtn = document.getElementById('reverse-calc-btn');
     const diff = 1.0 - sum;
-    let msg = `釉式轉換原料RO合計(目標): ${sum.toFixed(3)}`;
+    
+    let symbol = `<span style="font-size: 1.8em; vertical-align: middle; line-height: 0.5; margin-right: 3px;">◆</span>`;
     
     if (Math.abs(diff) > 0.001) {
-        msg += ` (缺 ${diff.toFixed(3)})`;
-        display.style.color = "#d35400"; 
+        display.classList.remove('text-success-pulse');
+        reverseBtn.classList.remove('btn-pulse'); 
+        
+        let msg = `${symbol} 釉式轉換原料RO合計(目標): ${sum.toFixed(3)}`;
+        
+        if (diff > 0.001) {
+            msg += ` <span class="warning-blink">(缺 ${diff.toFixed(3)})</span>`;
+        } else if (diff < -0.001) {
+            msg += ` <span class="warning-blink">(超 ${Math.abs(diff).toFixed(3)})</span>`;
+        }
+        
+        display.innerHTML = msg; 
+        display.style.color = "#c0392b"; 
+        
         reverseBtn.disabled = true;
         reverseBtn.title = "RO 總和必須為 1.0 才能進行計算";
     } else {
+        let msg = `${symbol} 釉式轉換原料RO合計(目標): 1.000 (已達標)`;
+        display.innerHTML = msg; 
         display.style.color = "#27ae60"; 
+        
+        display.classList.remove('text-success-pulse');
+        void display.offsetWidth; 
+        display.classList.add('text-success-pulse');
+        
         reverseBtn.disabled = false;
-        reverseBtn.title = "清空並開始引導配方";
+        reverseBtn.title = "點擊開始引導配方";
+        reverseBtn.classList.add('btn-pulse'); 
     }
-    display.textContent = msg;
     
     updateKNaOAllocation();
 }
@@ -267,7 +299,7 @@ function updateTargetChart() {
 }
 
 // ===================================================
-// 引導模式 (Bug 1 修正：加入主屬性優先判定)
+// 引導模式
 // ===================================================
 function startWizardMode() {
     document.getElementById('recipe-body').innerHTML = '';
@@ -302,7 +334,18 @@ function analyzeNeedsAndHint() {
     if (missingList.length > 0) {
         hintEl.innerHTML = `缺少 <b>${missingList.length}</b> 個目標 (${missingList.slice(0, 4).join(', ')}${missingList.length>4?'...':''})。<br>請新增對應原料。`;
     } else {
-        hintEl.innerHTML = `<span style="color:green; font-weight:bold;">【完成計算】 釉式轉換原料目標已滿足！</span>`;
+        hintEl.innerHTML = `<span class="wizard-success-anim" style="color:#27ae60; font-weight:bold;">【完成計算】 釉式轉換原料目標已滿足！</span>`;
+        
+        // 【修改點2】當目標滿足時，播放「完成計算」音效
+        // 為了避免重複播放，我們判斷 isWizardMode 還是 true 的狀態下才播放 (代表這是第一次達標)
+        if (isWizardMode) {
+            const audioWiz = document.getElementById('audio-wizard');
+            if (audioWiz) {
+                audioWiz.currentTime = 0;
+                audioWiz.play().catch(e => console.log('音效播放被瀏覽器阻擋:', e));
+            }
+        }
+        
         isWizardMode = false;
         normalizeRecipeTo100();
     }
@@ -454,7 +497,10 @@ function calculateUMF() {
     const k2o = totalMoles['K2O'] / divisor;
     const na2o = totalMoles['Na2O'] / divisor;
     document.getElementById('curr-knao').textContent = (k2o + na2o).toFixed(3);
-    document.getElementById('ro-check-display').textContent = `原料換算釉式RO合計(實際): ${roSum > 0 ? "1.000" : "0.000"}`;
+    
+    const actDisplay = document.getElementById('ro-check-display');
+    actDisplay.innerHTML = `<span style="font-size: 1.2em; vertical-align: middle; line-height: 0.5; margin-right: 3px;">●</span> 原料換算釉式RO合計(實際): ${roSum > 0 ? "1.000" : "0.000"}`;
+    actDisplay.style.color = "#333333"; 
 
     const sio2 = totalMoles['SiO2'] / divisor;
     const al2o3 = totalMoles['Al2O3'] / divisor;
@@ -526,15 +572,15 @@ function initChart() {
         data: {
             datasets: [
                 {
-                    label: '實際配方',
+                    label: '實際配方(黑)',
                     data: [{x: 0, y: 0}],
-                    backgroundColor: 'red',
+                    backgroundColor: '#333333', 
                     pointRadius: 8
                 },
                 {
-                    label: '目標值',
+                    label: '目標值(紅)',
                     data: [{x: 0, y: 0}],
-                    backgroundColor: 'green',
+                    backgroundColor: '#c0392b', 
                     pointStyle: 'rectRot',
                     pointRadius: 8
                 }
@@ -571,7 +617,7 @@ function updateChart(si, al) {
 
 
 // ===================================================
-// Word 完美隱形表格複製技術 (Bug 3 修正)
+// Word 完美隱形表格複製技術
 // ===================================================
 
 function copyRecipeToClipboard() {

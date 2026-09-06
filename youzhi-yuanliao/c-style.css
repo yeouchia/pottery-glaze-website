@@ -7,21 +7,21 @@
     --success-color: #28a745;
     
     /* UMF 區塊背景色 */
-    --ro-bg: #e8f5e9;    /* 淺綠 */
-    --r2o3-bg: #fce4ec;  /* 粉紅 */
-    --ro2-bg: #e3f2fd;   /* 淺藍 */
+    --ro-bg: #e8f5e9;    
+    --r2o3-bg: #fce4ec;  
+    --ro2-bg: #e3f2fd;   
     
     /* UMF 標題與文字顏色 */
-    --ro-color: #006400;  /* 深綠 */
-    --r2o3-color: #c2185b; /* 深紅 */
-    --ro2-color: #1565c0; /* 深藍 */
+    --ro-color: #006400;  
+    --r2o3-color: #c2185b; 
+    --ro2-color: #1565c0; 
 }
 
 body {
-    font-family: 'Microsoft JhengHei', sans-serif;
+    font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif;
     background-color: var(--bg-color);
     margin: 0; padding: 0; color: #333; height: 100vh; display: flex; flex-direction: column;
-    overflow-x: hidden; /* 防止左右滑動 */
+    overflow-x: hidden; 
 }
 
 header {
@@ -43,7 +43,7 @@ main {
 /* 通用面板 */
 .panel {
     background: var(--panel-bg); border-radius: 8px; padding: 10px; display: flex; flex-direction: column;
-    box-sizing: border-box; min-width: 0;
+    box-sizing: border-box; min-width: 0; 
 }
 .box-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .panel-header {
@@ -61,9 +61,7 @@ main {
 .btn-copy.green { background-color: #2ecc71; border: 1px solid #27ae60; }
 .btn-copy.green:hover { background-color: #27ae60; }
 
-/* ===================================================
-   1. 左側：原料配方區 (維持原本比例)
-   =================================================== */
+/* 1. 左側：原料配方區 */
 .recipe-panel { flex: 2; min-width: 280px; } 
 .table-container { flex: 1; overflow-y: auto; }
 .recipe-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed; }
@@ -81,13 +79,21 @@ main {
 .total-row { font-weight: bold; display: flex; justify-content: space-between; }
 .warning-text { color: red; font-size: 0.85rem; text-align: right; font-weight: bold; }
 .loi-row { color: #7f8c8d; font-size: 0.85rem; margin-top: 2px; }
-
-/* 引導提示區 */
 .wizard-box { margin-top: 5px; padding: 8px; background-color: #fff3cd; color: #856404; border-radius: 4px; font-size: 0.9rem; font-weight: bold; display: flex; flex-direction: column; gap: 4px; border: 1px solid #ffeeba; line-height: 1.4; }
 
-/* ===================================================
-   2. 中間：直式控制按鈕欄 (維持原本比例)
-   =================================================== */
+/* 動畫：精靈模式完成提示縮放 */
+@keyframes wizardSuccessFlash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+.wizard-success-anim {
+    display: inline-block;
+    animation: wizardSuccessFlash 0.5s ease-in-out 2; 
+    transform-origin: left center;
+}
+
+/* 2. 中間：直式控制按鈕欄 */
 .control-column {
     flex: 0 0 70px; 
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -102,30 +108,35 @@ main {
 .vertical-text { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; }
 .vertical-text-small { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
 
+/* 動畫：按鈕光暈脈衝 */
+@keyframes btnPulse {
+    0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.8); }
+    70% { box-shadow: 0 0 0 12px rgba(243, 156, 18, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+}
+.btn-pulse {
+    animation: btnPulse 1.5s infinite !important;
+    border: 2px solid white;
+}
+
 .btn-vertical.reverse { background: linear-gradient(to bottom, #f39c12, #d35400); color: white; }
 .btn-vertical.reverse:hover:not(:disabled) { opacity: 0.9; }
-.btn-vertical.reverse:disabled { background: #bdc3c7; color: #7f8c8d; cursor: not-allowed; box-shadow: none; opacity: 0.7; }
+.btn-vertical.reverse:disabled { background: #bdc3c7; color: #7f8c8d; cursor: not-allowed; box-shadow: none; opacity: 0.7; border: none;}
 .btn-vertical.forward { background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; }
 .btn-vertical.forward:hover:not(:disabled) { opacity: 0.9; }
 .btn-vertical.forward:disabled { background: #ecf0f1; color: #bdc3c7; cursor: not-allowed; box-shadow: none; }
 .btn-reset { width: 100%; padding: 10px 5px; border: none; border-radius: 6px; cursor: pointer; background-color: #e74c3c; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
 .btn-reset:hover { background-color: #c0392b; }
-
 .success-flash { color: #e74c3c; font-weight: bold; font-size: 0.8rem; margin-top: 5px; animation: blink 1s infinite; writing-mode: vertical-lr; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-/* ===================================================
-   3. 中右：釉式目標區 (【重要修復】恢復並排，加寬輸入框)
-   =================================================== */
-.umf-panel { flex: 4; min-width: 480px; } /* 加大最小寬度確保不擠壓 */
-.umf-container { 
-    flex: 1; overflow-y: auto; display: flex; gap: 10px; 
-    flex-direction: row; /* 【恢復電腦版並排：左RO, 右R2O3+RO2】 */
-}
+/* 3. 中右：釉式目標區 */
+.umf-panel { flex: 4; min-width: 480px; } 
+.umf-container { flex: 1; overflow-y: auto; display: flex; gap: 10px; flex-direction: row; }
 
 .umf-group { border-radius: 6px; padding: 5px; display: flex; flex-direction: column; }
 .umf-group.ro-group { flex: 1; background-color: var(--ro-bg); border: 1px solid #c8e6c9; }
-.right-groups { flex: 1; display: flex; flex-direction: column; gap: 10px; } /* 恢復上下疊加 */
+.right-groups { flex: 1; display: flex; flex-direction: column; gap: 10px; } 
 .umf-group.r2o3-group { flex: 1; background-color: var(--r2o3-bg); border: 1px solid #f8bbd0; }
 .umf-group.ro2-group { flex: 1; background-color: var(--ro2-bg); border: 1px solid #bbdefb; }
 
@@ -134,67 +145,55 @@ main {
 .r2o3-title { color: var(--r2o3-color); border-bottom: 2px solid var(--r2o3-color); }
 .ro2-title { color: var(--ro2-color); border-bottom: 2px solid var(--ro2-color); }
 
+/* ===================================================
+   【完美對齊修復區】利用 Flex 嚴格鎖定寬度
+   =================================================== */
 .umf-grid { display: flex; flex-direction: column; gap: 3px; }
-.umf-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 0; }
+
+.umf-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; }
 .umf-row.full-width { background: rgba(255,255,255,0.6); padding: 4px; border-radius: 4px; margin-bottom: 5px; }
-.umf-row label { font-size: 0.85rem; font-weight: bold; color: #444; white-space: nowrap; margin-right: 5px;}
+
+.umf-row label { flex: 1; font-size: 0.85rem; font-weight: bold; color: #444; white-space: nowrap; margin-right: 5px;}
 .umf-row label.sub { font-weight: normal; font-size: 0.8rem; padding-left: 10px; color: #666; }
 
-/* 【重要修復】加寬數值輸入框，確保 0.1180 能完整顯示 */
-.umf-row input { width: 75px; text-align: right; border: 1px solid #ccc; border-radius: 3px; padding: 2px; font-size: 0.9rem; box-sizing: border-box;} 
-.res-val { font-weight: bold; color: #2980b9; width: 65px; text-align: right; font-size: 0.9rem; }
-.res-val-only { color: #666; width: 65px; text-align: right; font-size: 0.85rem; }
+.umf-row input { flex: 0 0 75px; width: 75px; text-align: right; border: 1px solid #ccc; border-radius: 3px; padding: 2px; box-sizing: border-box; font-size: 0.9rem; color: #c0392b; font-weight: bold; margin-right: 10px;} 
+.res-val { flex: 0 0 65px; width: 65px; text-align: right; font-size: 0.9rem; font-weight: bold; color: #333333;}
+.res-val-only { flex: 0 0 65px; color: #555; width: 65px; text-align: right; font-size: 0.85rem; font-weight: bold;}
 
-.ro-footer { margin-top: auto; padding-top: 8px; font-size: 0.85rem; font-weight: bold; }
-.ro-target-display { color: #27ae60; text-align: center; margin-bottom: 2px; } 
-.ro-actual-display { color: #c0392b; text-align: center; } 
+/* 底部總計文字與動畫 */
+.ro-footer { margin-top: 30px; padding-top: 10px; } 
+.ro-target-display { color: #c0392b; text-align: center; margin-bottom: 5px; font-size: 1.05rem; font-weight: 900; letter-spacing: 0.5px; transition: color 0.3s; } 
+.ro-actual-display { color: #333333; text-align: center; font-size: 1.05rem; font-weight: 900; letter-spacing: 0.5px; } 
 
-/* ===================================================
-   4. 最右側：圖表區 (維持原本比例)
-   =================================================== */
+@keyframes warningBlink { 0%, 100% { opacity: 1; color: #c0392b; } 50% { opacity: 0.5; color: #e74c3c; } }
+.warning-blink { animation: warningBlink 1s infinite; font-weight: 900; }
+
+@keyframes textSuccessFlash { 0% { transform: scale(1); color: #c0392b; } 25% { transform: scale(1.05); color: #27ae60; } 50% { transform: scale(1); color: #27ae60; } 75% { transform: scale(1.05); color: #27ae60; } 100% { transform: scale(1); color: #27ae60; } }
+.text-success-pulse { animation: textSuccessFlash 0.6s ease-in-out; color: #27ae60 !important; }
+
+/* 4. 最右側：圖表區 */
 .chart-panel { flex: 2; min-width: 300px; display: flex; flex-direction: column; }
-.chart-square-wrapper { 
-    width: 100%; aspect-ratio: 1 / 1; position: relative; 
-    background: white; border: 1px solid #eee; border-radius: 4px;
-    margin-bottom: auto; 
-}
+.chart-square-wrapper { width: 100%; aspect-ratio: 1 / 1; position: relative; background: white; border: 1px solid #eee; border-radius: 4px; margin-bottom: auto; }
 canvas { width: 100% !important; height: 100% !important; }
 .legend-box { display: flex; justify-content: center; gap: 10px; font-size: 0.8rem; padding: 5px; background: #fafafa; margin-top: 5px; border-radius: 4px; }
 .chart-info { font-weight: bold; color: #2c3e50; font-size: 0.9rem;}
 
 /* Toast */
-.toast { 
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
-    background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; 
-    z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-weight: bold;
-}
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-weight: bold;}
 .toast.show { opacity: 1; }
 .hidden { display: none !important; }
 
-/* ===================================================
-   RWD 響應式：手機與平板 (防左右溢出)
-   只有在螢幕小於 1000px 時才會切換成堆疊排版
-   =================================================== */
+/* RWD 響應式：手機與平板 */
 @media (max-width: 1000px) {
     .main-wrapper { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
-    
     .recipe-panel, .umf-panel, .chart-panel { flex: auto; min-width: 100%; width: 100%; margin-bottom: 10px;}
-
-    .control-column { 
-        flex-direction: row; height: auto; width: 100%; padding: 10px;
-        justify-content: space-between; gap: 10px;
-    }
+    .control-column { flex-direction: row; height: auto; width: 100%; padding: 10px; justify-content: space-between; gap: 10px; }
     .btn-group-vertical { flex-direction: row; flex: 2; gap: 10px; }
     .divider-h { display: none; } 
-    
-    .vertical-text, .vertical-text-small {
-        writing-mode: horizontal-tb; text-orientation: mixed; letter-spacing: 0;
-    }
+    .vertical-text, .vertical-text-small { writing-mode: horizontal-tb; text-orientation: mixed; letter-spacing: 0; }
     .btn-vertical { flex-direction: row; width: 100%; padding: 12px; }
     .btn-reset { width: auto; padding: 12px; flex: 1; display: flex; justify-content: center; }
     .success-flash { writing-mode: horizontal-tb; margin-top: 0; margin-left: 10px; align-self: center;}
-
-    /* 在平板/手機上，讓 UMF 區塊直列排列以節省空間 */
     .umf-container { flex-direction: column; }
     .right-groups { flex-direction: row; } 
 }
@@ -204,10 +203,8 @@ canvas { width: 100% !important; height: 100% !important; }
     .subtitle { display: none; } 
     .panel-header { flex-direction: column; align-items: flex-start; gap: 5px;}
     .btn-copy { width: 100%; text-align: center; padding: 8px;}
-    
-    /* 極小手機螢幕，全部直列 */
     .right-groups { flex-direction: column; } 
-    
-    .umf-row input { width: 60px; }
-    .res-val, .res-val-only { width: 55px; }
+    .umf-row input { flex: 0 0 60px; width: 60px; margin-right: 5px; }
+    .res-val, .res-val-only { flex: 0 0 55px; width: 55px; }
+    .ro-target-display, .ro-actual-display { font-size: 0.95rem; }
 }
