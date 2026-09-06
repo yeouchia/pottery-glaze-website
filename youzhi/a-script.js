@@ -1,3 +1,46 @@
+
+// ==========================================
+// 🛡️ 智慧財產權防護：網域鎖定引擎 (Domain Lock)
+// ==========================================
+(function() {
+    // 允許運行的官方白名單
+    // 'localhost' 和 '127.0.0.1' 保留給您自己在開發測試時使用
+    const allowedDomains = [
+        'yeouchia.github.io', 
+        'localhost', 
+        '127.0.0.1',
+        'usercontent.goog' // 允許在此 AI 預覽視窗測試
+    ];
+
+    const currentUrl = window.location.href;
+    const protocol = window.location.protocol;
+
+    // 檢查 1：是否被另存成檔案在電腦上離線打開？(file://)
+    const isLocalFile = (protocol === 'file:');
+    
+    // 檢查 2：是否在未授權的網域運行？
+    const isUnauthorizedDomain = !isLocalFile && !allowedDomains.some(domain => currentUrl.includes(domain));
+
+    if (isLocalFile || isUnauthorizedDomain) {
+        // 如果觸發防護機制，立刻清空畫面並鎖死 (替換為符合釉藥系統的白底風格)
+        document.body.innerHTML = `
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background-color:#f0f3f6;color:#333;font-family:'微軟正黑體',sans-serif;text-align:center;padding:20px;">
+                <h1 style="color:#c0392b;margin-bottom:10px;">⚠️ 未授權的執行環境</h1>
+                <p style="color:#555;margin-bottom:30px;line-height:1.5;font-weight:bold;font-size:1.1rem;">
+                    您目前正在非官方授權的環境中使用《陶瓷釉藥計算系統》。<br>
+                    為保障軟體完整性與您的資訊安全，請前往官方網站使用。
+                </p>
+                <a href="https://yeouchia.github.io/pottery-glaze-website/" style="padding:12px 24px;background-color:#3498db;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:0.2s;box-shadow:0 2px 5px rgba(0,0,0,0.2);">返回官方網站</a>
+            </div>
+        `;
+        
+        // 拋出致命錯誤，強制放棄執行後續的所有 JavaScript 運算與圖表生成
+        throw new Error("執行環境未授權，已終止系統。"); 
+    }
+})();
+// ==========================================
+// (下方保留原本的 const OXIDE_MOL_WEIGHT = ... 等等程式碼)
+
 // ===================================================
 // 陶瓷釉藥賽格式計算器 V5.1 - 圖表邏輯與定位修正
 // 【V5.1 進階修正】加入骨灰 (P2O5) 與白雲石 (MgO) 獨立優先計算邏輯，消除反推誤差。
