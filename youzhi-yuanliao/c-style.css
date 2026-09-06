@@ -275,39 +275,65 @@ main {
 .toast.show { opacity: 1; }
 .hidden { display: none !important; }
 
+/* ===================================================
+   RWD 響應式：手機與平板完美排版 (修復按鈕擠壓與消失)
+   =================================================== */
 @media (max-width: 1000px) {
     .main-wrapper { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
     .recipe-panel, .umf-panel, .chart-panel { flex: auto; min-width: 100%; width: 100%; margin-bottom: 10px;}
     
-    /* 【修正區】允許手機版按鈕自動換行，且不會被截斷 */
+    /* 1. 【修復】強制垂直疊加：功能區在上、清空區在下 */
     .control-column { 
-        flex-direction: row; 
+        flex-direction: column !important; 
         height: auto; 
         width: 100%; 
         padding: 10px; 
-        justify-content: space-between; 
         gap: 10px; 
-        overflow-y: visible; 
-        overflow-x: visible; 
-        flex-wrap: wrap; 
+        box-sizing: border-box;
     }
     
-    .btn-group-vertical { flex-direction: row; flex: 1; min-width: 60%; gap: 10px; }
+    /* 2. 功能群組水平並排 */
+    .btn-group-vertical { 
+        flex-direction: row !important; 
+        width: 100%; 
+        gap: 10px; 
+    }
     .divider-h { display: none; } 
-    .vertical-text, .vertical-text-small { writing-mode: horizontal-tb; text-orientation: mixed; letter-spacing: 0; }
-    .btn-vertical { flex-direction: row; width: 100%; min-height: 50px; padding: 12px; }
     
-    /* 【修正區】設定重置按鈕的最小寬高比例，確保與左側按鈕協調 */
+    .vertical-text, .vertical-text-small { 
+        writing-mode: horizontal-tb; 
+        text-orientation: mixed; 
+        letter-spacing: 0; 
+    }
+    
+    /* 3. 【修復】徹底解除寬度鎖定，讓兩個按鈕等比例均分空間 */
+    .btn-vertical { 
+        flex-direction: row; 
+        flex: 1 1 50%; 
+        width: auto !important; 
+        min-height: 50px; 
+        padding: 12px 5px; 
+        flex-shrink: 1 !important;
+    }
+    
+    /* 4. 清空重新開始按鈕獨立佔滿整行 */
     .btn-reset { 
-        flex: 1; 
-        min-width: 30%; 
+        width: 100% !important; 
+        flex: none !important; 
         min-height: 50px; 
         padding: 12px; 
         display: flex; 
         justify-content: center; 
     }
     
-    .success-flash { writing-mode: horizontal-tb; margin-top: 0; margin-left: 10px; align-self: center;}
+    .success-flash { 
+        writing-mode: horizontal-tb; 
+        margin-top: 5px; 
+        align-self: center;
+        width: 100%;
+        text-align: center;
+    }
+    
     .umf-container { flex-direction: column; }
     .right-groups { flex-direction: row; } 
 }
