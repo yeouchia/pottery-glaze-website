@@ -1,7 +1,7 @@
 // ===================================================
 // 全能陶瓷釉藥計算器 V31.0 (雙點定位版)
-// 1. [Audio] 新增目標 RO 達標 (1.0) 時播放專屬音效 (防重複觸發鎖)。
-// 2. [Audio] 原料轉換釉式「轉換成功」時播放音效。
+// 1. [Audio] 點擊「釉式轉換原料」按鈕時，播放「進行釉式轉換程序」音效。
+// 2. [Audio] 目標 RO 達標 (1.0) 與 原料轉換釉式完成，播放對應音效。
 // 3. [Visual] 極致放大 ◆ (1.8em) 並微調 ● (1.2em)。
 // ===================================================
 
@@ -76,8 +76,6 @@ const RO2_GLASS_FORMERS = ['SiO2', 'TiO2', 'SnO2', 'ZrO2'];
 
 let stullChart = null;
 let isWizardMode = false;
-
-// 【新增狀態鎖】防止網頁重整時，預設剛好等於 1.0 而自動播放音效
 let wasRoTargetMet = true; 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -183,7 +181,10 @@ function resetAll() {
 
 function setupEventListeners() {
     document.getElementById('add-row-btn').addEventListener('click', () => addRecipeRow());
+    
+    // 綁定「釉式轉換原料」按鈕事件
     document.getElementById('reverse-calc-btn').addEventListener('click', startWizardMode);
+    
     document.getElementById('reset-all-btn').addEventListener('click', resetAll);
     
     document.getElementById('forward-calc-btn').addEventListener('click', () => {
@@ -225,7 +226,6 @@ function updateTargetROSum() {
     let symbol = `<span style="font-size: 1.8em; vertical-align: middle; line-height: 0.5; margin-right: 3px;">◆</span>`;
     
     if (Math.abs(diff) > 0.001) {
-        // 未達標狀態：解除鎖定，允許下次達標時播放音效
         wasRoTargetMet = false;
         
         display.classList.remove('text-success-pulse');
@@ -245,7 +245,6 @@ function updateTargetROSum() {
         reverseBtn.disabled = true;
         reverseBtn.title = "RO 總和必須為 1.0 才能進行計算";
     } else {
-        // 已達標狀態
         let msg = `${symbol} 釉式轉換原料RO合計(目標): 1.000 (已達標)`;
         display.innerHTML = msg; 
         display.style.color = "#27ae60"; 
@@ -258,14 +257,13 @@ function updateTargetROSum() {
         reverseBtn.title = "點擊開始引導配方";
         reverseBtn.classList.add('btn-pulse'); 
         
-        // 【新增：觸發達標音效】只有當狀態從 false 變成 true 時才播放
         if (!wasRoTargetMet) {
             const audioTarget = document.getElementById('audio-target-ok');
             if (audioTarget) {
                 audioTarget.currentTime = 0;
-                audioTarget.play().catch(e => console.log('音效播放被阻擋(可能需使用者先點擊網頁):', e));
+                audioTarget.play().catch(e => console.log('音效播放被阻擋:', e));
             }
-            wasRoTargetMet = true; // 上鎖，避免輸入其他欄位時重複播放
+            wasRoTargetMet = true; 
         }
     }
     
@@ -321,6 +319,14 @@ function startWizardMode() {
     document.getElementById('wizard-guide').classList.remove('hidden');
     analyzeNeedsAndHint();
     showToast("已清空！請依提示選擇原料");
+    
+    // 【重點新增】點擊「釉式轉換原料」時播放引導音效
+    const audioStart = document.getElementById('audio-wizard-start');
+    if (audioStart) {
+        audioStart.currentTime = 0;
+        audioStart.play().catch(e => console.log('音效播放被阻擋:', e));
+    }
+    
     updateKNaOAllocation(); 
 }
 
@@ -354,7 +360,7 @@ function analyzeNeedsAndHint() {
             const audioWiz = document.getElementById('audio-wizard');
             if (audioWiz) {
                 audioWiz.currentTime = 0;
-                audioWiz.play().catch(e => console.log('音效播放被瀏覽器阻擋:', e));
+                audioWiz.play().catch(e => console.log('音效播放被阻擋:', e));
             }
         }
         
