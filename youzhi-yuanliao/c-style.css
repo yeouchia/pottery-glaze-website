@@ -145,11 +145,7 @@ main {
 .r2o3-title { color: var(--r2o3-color); border-bottom: 2px solid var(--r2o3-color); }
 .ro2-title { color: var(--ro2-color); border-bottom: 2px solid var(--ro2-color); }
 
-/* ===================================================
-   【完美對齊修復區】利用 Flex 嚴格鎖定寬度
-   =================================================== */
 .umf-grid { display: flex; flex-direction: column; gap: 3px; }
-
 .umf-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; }
 .umf-row.full-width { background: rgba(255,255,255,0.6); padding: 4px; border-radius: 4px; margin-bottom: 5px; }
 

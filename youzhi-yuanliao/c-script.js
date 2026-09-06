@@ -1,9 +1,8 @@
 // ===================================================
 // 全能陶瓷釉藥計算器 V31.0 (雙點定位版)
-// 1. [Audio] 新增音效觸發指令 (在 forward 點擊與 wizard 完成時)。
-// 2. [ShapeMap] 新增圖形對應：目標值前加 ◆(紅)，實際值前加 ●(黑)。
-// 3. [BugFix] 修正 autoCalculateWeightForRow，加入主屬性判定。
-// 4. [WordCopy] 導入隱形表格 HTML 複製技術。
+// 1. [Audio] 新增目標 RO 達標 (1.0) 時播放專屬音效 (防重複觸發鎖)。
+// 2. [Audio] 原料轉換釉式「轉換成功」時播放音效。
+// 3. [Visual] 極致放大 ◆ (1.8em) 並微調 ● (1.2em)。
 // ===================================================
 
 const OXIDE_MOL_WEIGHT = {
@@ -77,6 +76,9 @@ const RO2_GLASS_FORMERS = ['SiO2', 'TiO2', 'SnO2', 'ZrO2'];
 
 let stullChart = null;
 let isWizardMode = false;
+
+// 【新增狀態鎖】防止網頁重整時，預設剛好等於 1.0 而自動播放音效
+let wasRoTargetMet = true; 
 
 document.addEventListener('DOMContentLoaded', () => {
     initChart();
@@ -184,16 +186,14 @@ function setupEventListeners() {
     document.getElementById('reverse-calc-btn').addEventListener('click', startWizardMode);
     document.getElementById('reset-all-btn').addEventListener('click', resetAll);
     
-    // 【修改點1】在原料轉換釉式的按鈕加入播放音效指令
     document.getElementById('forward-calc-btn').addEventListener('click', () => {
         calculateUMF();
         document.getElementById('forward-success-msg').classList.remove('hidden');
         
-        // 播放「轉換成功」音效
         const audioFwd = document.getElementById('audio-forward');
         if (audioFwd) {
             audioFwd.currentTime = 0;
-            audioFwd.play().catch(e => console.log('音效播放被瀏覽器阻擋 (需使用者先互動過網頁):', e));
+            audioFwd.play().catch(e => console.log('音效播放被瀏覽器阻擋:', e));
         }
         
         setTimeout(() => document.getElementById('forward-success-msg').classList.add('hidden'), 3000);
@@ -225,6 +225,9 @@ function updateTargetROSum() {
     let symbol = `<span style="font-size: 1.8em; vertical-align: middle; line-height: 0.5; margin-right: 3px;">◆</span>`;
     
     if (Math.abs(diff) > 0.001) {
+        // 未達標狀態：解除鎖定，允許下次達標時播放音效
+        wasRoTargetMet = false;
+        
         display.classList.remove('text-success-pulse');
         reverseBtn.classList.remove('btn-pulse'); 
         
@@ -242,6 +245,7 @@ function updateTargetROSum() {
         reverseBtn.disabled = true;
         reverseBtn.title = "RO 總和必須為 1.0 才能進行計算";
     } else {
+        // 已達標狀態
         let msg = `${symbol} 釉式轉換原料RO合計(目標): 1.000 (已達標)`;
         display.innerHTML = msg; 
         display.style.color = "#27ae60"; 
@@ -253,6 +257,16 @@ function updateTargetROSum() {
         reverseBtn.disabled = false;
         reverseBtn.title = "點擊開始引導配方";
         reverseBtn.classList.add('btn-pulse'); 
+        
+        // 【新增：觸發達標音效】只有當狀態從 false 變成 true 時才播放
+        if (!wasRoTargetMet) {
+            const audioTarget = document.getElementById('audio-target-ok');
+            if (audioTarget) {
+                audioTarget.currentTime = 0;
+                audioTarget.play().catch(e => console.log('音效播放被阻擋(可能需使用者先點擊網頁):', e));
+            }
+            wasRoTargetMet = true; // 上鎖，避免輸入其他欄位時重複播放
+        }
     }
     
     updateKNaOAllocation();
@@ -336,8 +350,6 @@ function analyzeNeedsAndHint() {
     } else {
         hintEl.innerHTML = `<span class="wizard-success-anim" style="color:#27ae60; font-weight:bold;">【完成計算】 釉式轉換原料目標已滿足！</span>`;
         
-        // 【修改點2】當目標滿足時，播放「完成計算」音效
-        // 為了避免重複播放，我們判斷 isWizardMode 還是 true 的狀態下才播放 (代表這是第一次達標)
         if (isWizardMode) {
             const audioWiz = document.getElementById('audio-wizard');
             if (audioWiz) {
