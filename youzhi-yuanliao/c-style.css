@@ -17,9 +17,6 @@
     --ro2-color: #1565c0; 
 }
 
-/* ===================================================
-   基礎框架 (電腦版維持儀表板風格)
-   =================================================== */
 body {
     font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif;
     background-color: var(--bg-color);
@@ -278,12 +275,10 @@ main {
 .toast.show { opacity: 1; }
 .hidden { display: none !important; }
 
-
 /* ===================================================
    🚀 終極 RWD 手機響應式：全面解放滾動限制，變為全頁面流暢滑動！
    =================================================== */
 @media (max-width: 1000px) {
-    /* 1. 解除 body 與 main 的 100vh 鎖定，允許網頁自然向下延伸 */
     body { height: auto !important; min-height: 100vh; overflow-y: auto !important; }
     main { overflow: visible !important; height: auto !important; }
     
@@ -293,22 +288,35 @@ main {
         overflow: visible !important; 
     }
     
-    /* 2. 解除所有內部面板 (Panel) 的滾動條與高度限制，由內容撐開 */
     .recipe-panel, .umf-panel, .chart-panel { 
-        flex: none !important; /* 不再使用 flex 比例佔位 */
+        flex: none !important; 
         width: 100% !important; 
         height: auto !important; 
         margin-bottom: 15px; 
         overflow: visible !important; 
+        min-width: 0 !important; /* 解除最小寬度綁定 */
     }
     
-    .table-container, .umf-container { 
-        overflow: visible !important; /* 讓表格與設定區完全展開，不再有內部小視窗 */
+    /* 【關鍵修正區】：強制 UMF 三個區塊 (RO, R2O3, RO2) 上下疊加，嚴禁左右並排 */
+    .umf-container { 
+        flex-direction: column !important; /* 強制垂直排列 */
+        width: 100% !important;
+        height: auto !important; 
+        overflow: visible !important;
+        gap: 10px !important;
+    }
+    .right-groups { 
+        flex-direction: column !important; /* 確保粉色和藍色也是上下疊加 */
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .table-container { 
+        overflow: visible !important; 
         height: auto !important; 
         flex: none !important;
     }
 
-    /* 3. 中間控制按鈕區：解除裁切限制 */
     .control-column { 
         flex-direction: column !important; 
         height: auto !important; 
@@ -316,11 +324,10 @@ main {
         padding: 15px 10px; 
         gap: 12px; 
         box-sizing: border-box;
-        overflow: visible !important; /* 絕對不裁切按鈕 */
+        overflow: visible !important; 
         flex: none !important;
     }
     
-    /* 雙按鈕上層：50% / 50% 完美平分 */
     .btn-group-vertical { 
         flex-direction: row !important; 
         width: 100%; 
@@ -341,7 +348,6 @@ main {
         flex-shrink: 1 !important;
     }
     
-    /* 重置按鈕下層：獨立佔滿整行 */
     .btn-reset { 
         width: 100% !important; 
         flex: none !important; 
@@ -358,8 +364,6 @@ main {
         width: 100%;
         text-align: center;
     }
-    
-    .right-groups { flex-direction: column !important; } /* 在手機上連右側粉藍區塊也改為上下堆疊，更易讀 */
 }
 
 @media (max-width: 600px) {
@@ -368,6 +372,8 @@ main {
     .panel-header { flex-direction: column; align-items: flex-start; gap: 5px;}
     .action-buttons-wrap { justify-content: center; width: 100%; } 
     .btn-copy { width: 100%; text-align: center; padding: 8px;}
+    
+    /* 將輸入框微調，確保在超小手機上也不會溢出 */
     .umf-row input { flex: 0 0 60px; width: 60px; margin-right: 5px; }
     .res-val, .res-val-only { flex: 0 0 55px; width: 55px; }
     .ro-target-display, .ro-actual-display { font-size: 0.95rem; }
