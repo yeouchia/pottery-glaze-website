@@ -4,8 +4,7 @@
 // 【V5.1 一鍵複製優化】導入 Word 原生表格隱藏節點技術，保持極致緊湊。
 // 【V5.1 排序優化】複製時置頂 KNaO、放寬配方表格、移除不要的比值。
 // 【V5.1 視覺優化】複製到 Word 時，僅針對名稱 (KNaO, Al2O3, SiO2) 使用彩色粗體，數值保持黑色細體。
-// 【V5.1 空白修正】強制加入 4 格空白 (&nbsp;)，將氧化物名稱與數值完美拉開。
-// 【V5.1 標題修正】縮短 Word 釉式表格標題並加入 white-space: nowrap 強制一行顯示。
+// 【V5.1 終極對齊】放棄空白鍵，全面採用「隱形內部表格」搭配 Padding，實現 100% 筆直對齊且無亂碼。
 // ===================================================
 
 // --- A. 數據庫：氧化物分子量 ---
@@ -637,7 +636,7 @@ function updateGlazeChart(umfOutput) {
 }
 
 // =========================================================
-// 【V5.1 新增】一鍵複製 Word 格式技術 (完美對齊與隱形表格)
+// 【V5.1 新增】一鍵複製 Word 格式技術 (隱形表格對齊法)
 // =========================================================
 
 function copyUMFToClipboard() {
@@ -645,53 +644,59 @@ function copyUMFToClipboard() {
     const r2o3Oxides = ['Al2O3', 'Fe2O3', 'Cr2O3', 'B2O3', 'P2O5'];
     const ro2Oxides = ['SiO2', 'TiO2', 'SnO2', 'ZrO2'];
     
-    const space = '&nbsp;&nbsp;&nbsp;&nbsp;'; // 使用隱藏寬白拉開距離
-    
-    let roText = '';
+    // 【對齊核心】使用 padding-right 撐開完美間距，絕不使用空白鍵(&nbsp;)
+    const tdLeftStyle = 'border: none; padding: 0 15px 0 0; vertical-align: middle; white-space: nowrap;';
+    const tdRightStyle = 'border: none; padding: 0; vertical-align: middle; text-align: left;';
+    const pStyle = 'margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;';
+
+    let roText = '<table style="border-collapse: collapse; border: none; width: auto;">';
     const knaoSum = parseFloat(document.getElementById('umf-KNaO-sum').value) || 0;
     const k2oVal = parseFloat(document.getElementById('umf-K2O').value) || 0;
     const na2oVal = parseFloat(document.getElementById('umf-Na2O').value) || 0;
     
     if (knaoSum > 0) {
-        roText += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;"><span style="color: #006400; font-weight: bold;">KNaO</span>${space}${knaoSum.toFixed(3)}</p>`;
+        roText += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}"><span style="color: #006400; font-weight: bold;">KNaO</span></p></td><td style="${tdRightStyle}"><p style="${pStyle}">${knaoSum.toFixed(3)}</p></td></tr>`;
     }
     if (k2oVal > 0 || knaoSum > 0) {
-        roText += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;">K2O${space}${k2oVal.toFixed(4)}</p>`;
+        roText += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}">K2O</p></td><td style="${tdRightStyle}"><p style="${pStyle}">${k2oVal.toFixed(4)}</p></td></tr>`;
     }
     if (na2oVal > 0 || knaoSum > 0) {
-        roText += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;">Na2O${space}${na2oVal.toFixed(4)}</p>`;
+        roText += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}">Na2O</p></td><td style="${tdRightStyle}"><p style="${pStyle}">${na2oVal.toFixed(4)}</p></td></tr>`;
     }
 
     otherRoOxides.forEach(ox => {
         const val = parseFloat(document.getElementById('umf-' + ox).value) || 0;
         if (val > 0) {
-            roText += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;">${ox}${space}${val.toFixed(4)}</p>`;
+            roText += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}">${ox}</p></td><td style="${tdRightStyle}"><p style="${pStyle}">${val.toFixed(4)}</p></td></tr>`;
         }
     });
+    roText += '</table>';
 
-    let r2o3Text = '';
+    let r2o3Text = '<table style="border-collapse: collapse; border: none; width: auto;">';
     r2o3Oxides.forEach(ox => {
         const val = parseFloat(document.getElementById('umf-' + ox).value) || 0;
         if (val > 0) {
             if (ox === 'Al2O3') {
-                r2o3Text += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;"><span style="color: red; font-weight: bold;">${ox}</span>${space}${val.toFixed(4)}</p>`;
+                r2o3Text += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}"><span style="color: red; font-weight: bold;">${ox}</span></p></td><td style="${tdRightStyle}"><p style="${pStyle}">${val.toFixed(4)}</p></td></tr>`;
             } else {
-                r2o3Text += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;">${ox}${space}${val.toFixed(4)}</p>`;
+                r2o3Text += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}">${ox}</p></td><td style="${tdRightStyle}"><p style="${pStyle}">${val.toFixed(4)}</p></td></tr>`;
             }
         }
     });
+    r2o3Text += '</table>';
 
-    let ro2Text = '';
+    let ro2Text = '<table style="border-collapse: collapse; border: none; width: auto;">';
     ro2Oxides.forEach(ox => {
         const val = parseFloat(document.getElementById('umf-' + ox).value) || 0;
         if (val > 0) {
             if (ox === 'SiO2') {
-                ro2Text += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;"><span style="color: blue; font-weight: bold;">${ox}</span>${space}${val.toFixed(4)}</p>`;
+                ro2Text += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}"><span style="color: blue; font-weight: bold;">${ox}</span></p></td><td style="${tdRightStyle}"><p style="${pStyle}">${val.toFixed(4)}</p></td></tr>`;
             } else {
-                ro2Text += `<p style="margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;">${ox}${space}${val.toFixed(4)}</p>`;
+                ro2Text += `<tr><td style="${tdLeftStyle}"><p style="${pStyle}">${ox}</p></td><td style="${tdRightStyle}"><p style="${pStyle}">${val.toFixed(4)}</p></td></tr>`;
             }
         }
     });
+    ro2Text += '</table>';
 
     const wordHtmlPayload = `
     <div style="font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif; background-color: white; color: black; font-size: 10.5pt;">
