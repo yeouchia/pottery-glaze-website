@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全能陶瓷釉藥計算器 V31.0 (雙點定位版)</title>
+    <link rel="stylesheet" href="c-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="toast-msg" class="toast hidden">訊息提示</div>
+
+    <header>
+        <div class="header-content">
+            <h1>全能陶瓷釉藥計算器 V31.0 (雙點定位版)</h1>
+            <p class="subtitle">目標/實際雙點顯示 | 實時圖表定位 | 專業配方設計</p>
+        </div>
+        <div id="author-info">© 2025 陶瓷釉藥輔助工具 by 黃明文</div>
+    </header>
+
+    <main>
+        <div class="main-wrapper">
+            
+            <!-- 1. 左側：原料配方區 -->
+            <section class="panel recipe-panel box-shadow">
+                <div class="panel-header">
+                    <h2>1. 原料配方 (總和須為 100)</h2>
+                    <button id="copy-recipe-btn" class="btn-copy blue" onclick="copyRecipeToClipboard()">📋 複製配方 (Word格式)</button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="recipe-table">
+                        <thead>
+                            <tr>
+                                <th>原料名稱</th>
+                                <th style="width: 85px;">重量 %</th>
+                                <th style="width: 35px;">刪</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recipe-body">
+                            <!-- JS 動態生成 -->
+                        </tbody>
+                    </table>
+                    <button id="add-row-btn" class="add-btn">+ 新增原料</button>
+                    
+                    <div class="recipe-footer">
+                        <div class="total-row">
+                            總和: <span id="total-weight">0.0</span>% 
+                        </div>
+                        <div id="weight-warning" class="warning-text">(缺 100.0)</div>
+                        <div class="loi-row">L.O.I: <span id="total-loi">0.0</span>%</div>
+                        <!-- 引導提示區 -->
+                        <div id="wizard-guide" class="wizard-box hidden">
+                            <div class="wizard-icon"><i class="fas fa-magic"></i></div>
+                            <div id="wizard-msg">準備就緒...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 中間：直式控制按鈕欄 -->
+            <div class="control-column">
+                
+                <!-- 上半部：功能鍵 (直式) -->
+                <div class="btn-group-vertical">
+                    <button id="reverse-calc-btn" class="btn-vertical reverse" disabled title="RO總和必須為 1.0 才能啟用">
+                        <i class="fas fa-arrow-left"></i>
+                        <span class="vertical-text">釉式轉換原料</span>
+                    </button>
+
+                    <div class="divider-h"></div>
+
+                    <button id="forward-calc-btn" class="btn-vertical forward" disabled title="原料總和100時啟用">
+                        <span class="vertical-text">原料轉換釉式</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- 下半部：重置鍵 (紅色) -->
+                <button id="reset-all-btn" class="btn-reset" title="清空所有數據">
+                    <span class="vertical-text-small">清空重新開始</span>
+                </button>
+
+                <div id="forward-success-msg" class="success-flash hidden">轉換成功</div>
+            </div>
+
+            <!-- 3. 中右：釉式目標區 -->
+            <section class="panel umf-panel box-shadow">
+                <div class="panel-header">
+                    <h2>2. 釉式目標 (UMF)</h2>
+                    <button id="copy-umf-btn" class="btn-copy green" onclick="copyUmfToClipboard()">📋 複製釉式 (Word格式)</button>
+                </div>
+                
+                <div class="umf-container">
+                    <!-- RO Group (綠色) -->
+                    <div class="umf-group ro-group">
+                        <h3 class="ro-title">RO 助熔劑 (鹼性)</h3>
+                        <div class="umf-grid">
+                            <div class="umf-row full-width">
+                                <label>KNaO (鉀鈉總和)</label> 
+                                <input type="number" id="target-knao" step="0.001" value="0.5"> 
+                                <span class="res-val" id="curr-knao">0.000</span>
+                            </div>
+                            <div class="umf-row small-row"><label class="sub">K₂O (分配量)</label> <span class="res-val-only" id="curr-K2O-target">0.000</span></div>
+                            <div class="umf-row small-row"><label class="sub">Na₂O (分配量)</label> <span class="res-val-only" id="curr-Na2O-target">0.000</span></div>
+                            
+                            <div class="umf-row"><label>CaO</label> <input type="number" id="target-CaO" step="0.001" value="0.4"> <span class="res-val" id="curr-CaO">0.000</span></div>
+                            <div class="umf-row"><label>MgO</label> <input type="number" id="target-MgO" step="0.001" value="0.1"> <span class="res-val" id="curr-MgO">0.000</span></div>
+                            <div class="umf-row"><label>ZnO</label> <input type="number" id="target-ZnO" step="0.001"> <span class="res-val" id="curr-ZnO">0.000</span></div>
+                            <div class="umf-row"><label>BaO</label> <input type="number" id="target-BaO" step="0.001"> <span class="res-val" id="curr-BaO">0.000</span></div>
+                            <div class="umf-row"><label>SrO</label> <input type="number" id="target-SrO" step="0.001"> <span class="res-val" id="curr-SrO">0.000</span></div>
+                            <div class="umf-row"><label>Li₂O</label> <input type="number" id="target-Li2O" step="0.001"> <span class="res-val" id="curr-Li2O">0.000</span></div>
+                            <div class="umf-row"><label>PbO</label> <input type="number" id="target-PbO" step="0.001"> <span class="res-val" id="curr-PbO">0.000</span></div>
+                        </div>
+                        <div class="ro-footer">
+                            <div class="ro-target-display" id="ro-target-display"><span style="font-size: 1.8em; vertical-align: middle; line-height: 0.5; margin-right: 3px;">◆</span> 釉式轉換原料RO合計(目標): 0.000</div>
+                            <div class="ro-actual-display" id="ro-check-display"><span style="font-size: 1.2em; vertical-align: middle; line-height: 0.5; margin-right: 3px;">●</span> 原料換算釉式RO合計(實際): 0.000</div>
+                        </div>
+                    </div>
+
+                    <!-- R2O3 (粉紅) & RO2 (淺藍) -->
+                    <div class="right-groups">
+                        <div class="umf-group r2o3-group">
+                            <h3 class="r2o3-title">R₂O₃ 穩定劑</h3>
+                            <div class="umf-grid">
+                                <div class="umf-row"><label>Al₂O₃</label> <input type="number" id="target-Al2O3" step="0.001" value="0.35"> <span class="res-val" id="curr-Al2O3">0.000</span></div>
+                                <div class="umf-row"><label>B₂O₃</label> <input type="number" id="target-B2O3" step="0.001"> <span class="res-val" id="curr-B2O3">0.000</span></div>
+                                <div class="umf-row"><label>Fe₂O₃</label> <input type="number" id="target-Fe2O3" step="0.001"> <span class="res-val" id="curr-Fe2O3">0.000</span></div>
+                                <div class="umf-row"><label>P₂O₅</label> <input type="number" id="target-P2O5" step="0.001"> <span class="res-val" id="curr-P2O5">0.000</span></div>
+                            </div>
+                        </div>
+
+                        <div class="umf-group ro2-group">
+                            <h3 class="ro2-title">RO₂ 形成劑</h3>
+                            <div class="umf-grid">
+                                <div class="umf-row"><label>SiO₂</label> <input type="number" id="target-SiO2" step="0.001" value="3.5"> <span class="res-val" id="curr-SiO2">0.000</span></div>
+                                <div class="umf-row"><label>TiO₂</label> <input type="number" id="target-TiO2" step="0.001"> <span class="res-val" id="curr-TiO2">0.000</span></div>
+                                <div class="umf-row"><label>ZrO₂</label> <input type="number" id="target-ZrO2" step="0.001"> <span class="res-val" id="curr-ZrO2">0.000</span></div>
+                                <div class="umf-row"><label>SnO₂</label> <input type="number" id="target-SnO2" step="0.001"> <span class="res-val" id="curr-SnO2">0.000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 最右側：圖表區 -->
+            <section class="panel chart-panel box-shadow"> 
+                <div class="panel-header">
+                    <h2>3. Al₂O₃ · SiO₂ 線性圖</h2>
+                    <div class="chart-info">Si:Al = <span id="val-ratio">0.0</span></div>
+                </div>
+                <div class="chart-square-wrapper"> 
+                    <canvas id="stullChart"></canvas>
+                </div>
+                <div class="legend-box">
+                    <span style="color:#8b0000;">■ 無光區</span>
+                    <span style="color:#00008b;">■ 光澤區</span>
+                    <span style="color:#b8860b;">■ 乳濁區</span>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- 音效播放器 -->
+    <audio id="audio-forward" src="sound-forward.MP3" preload="auto" style="display:none;"></audio>
+    <audio id="audio-wizard" src="sound-wizard.MP3" preload="auto" style="display:none;"></audio>
+    <audio id="audio-target-ok" src="sound-target-ok.MP3" preload="auto" style="display:none;"></audio>
+    <!-- 【重點修正：將這裡的 src 改為您實際存放在資料夾的檔名】 -->
+    <audio id="audio-wizard-start" src="audio-wizard-start.MP3" preload="auto" style="display:none;"></audio>
+
+    <script src="c-script.js"></script>
+</body>
+</html>
