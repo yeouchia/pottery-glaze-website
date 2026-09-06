@@ -90,7 +90,13 @@
             <section class="panel umf-panel box-shadow">
                 <div class="panel-header">
                     <h2>2. 釉式目標 (UMF)</h2>
-                    <button id="copy-umf-btn" class="btn-copy green" onclick="copyUmfToClipboard()">📋 複製釉式 (Word格式)</button>
+                    <!-- 匯出與匯入功能區塊 -->
+                    <div class="action-buttons-wrap">
+                        <input type="file" id="import-file-input" style="display: none;" accept=".glaze,.json" onchange="importRecipe(event)">
+                        <button class="btn-copy orange" onclick="triggerImport()">📂 讀取配方</button>
+                        <button class="btn-copy green" onclick="exportRecipe()">💾 儲存配方</button>
+                        <button id="copy-umf-btn" class="btn-copy blue" onclick="copyUmfToClipboard()">📋 複製釉式 (Word格式)</button>
+                    </div>
                 </div>
                 
                 <div class="umf-container">
@@ -164,12 +170,16 @@
         </div>
     </main>
 
-    <!-- 音效播放器 (副檔名為大寫 MP3 以配合 GitHub 伺服器) -->
+    <!-- 音效播放器區塊 -->
     <audio id="audio-forward" src="sound-forward.MP3" preload="auto" style="display:none;"></audio>
     <audio id="audio-wizard" src="sound-wizard.MP3" preload="auto" style="display:none;"></audio>
     <audio id="audio-target-ok" src="sound-target-ok.MP3" preload="auto" style="display:none;"></audio>
-    <!-- 【新增】點擊釉式轉換原料時的引導音效 -->
-    <audio id="audio-wizard-start" src="進行釉式轉換程序.MP3" preload="auto" style="display:none;"></audio>
+    <audio id="audio-wizard-start" src="audio-wizard-start.MP3" preload="auto" style="display:none;"></audio>
+    <audio id="audio-export" src="sound-export.MP3" preload="auto" style="display:none;"></audio>
+    <audio id="audio-import" src="sound-import.MP3" preload="auto" style="display:none;"></audio>
+    
+    <!-- 【新增】清空重新開始音效 -->
+    <audio id="audio-reset" src="sound-reset.MP3" preload="auto" style="display:none;"></audio>
 
     <script src="c-script.js"></script>
 </body>

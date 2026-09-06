@@ -1,8 +1,8 @@
 // ===================================================
 // 全能陶瓷釉藥計算器 V31.0 (雙點定位版)
-// 1. [Audio] 點擊「釉式轉換原料」按鈕時，播放「進行釉式轉換程序」音效。
-// 2. [Audio] 目標 RO 達標 (1.0) 與 原料轉換釉式完成，播放對應音效。
-// 3. [Visual] 極致放大 ◆ (1.8em) 並微調 ● (1.2em)。
+// 1. [Audio] 新增「清空重新開始」的語音回饋音效。
+// 2. [Feature] 實體檔案儲存與讀取 (Export/Import)。
+// 3. [Visual] 實時追蹤引擎：黑點與紅點完美對應與即時導航。
 // ===================================================
 
 const OXIDE_MOL_WEIGHT = {
@@ -79,7 +79,12 @@ let isWizardMode = false;
 let wasRoTargetMet = true; 
 
 document.addEventListener('DOMContentLoaded', () => {
-    initChart();
+    try {
+        initChart();
+    } catch (e) {
+        console.warn("圖表模組初始化失敗，但配方系統維持運作:", e);
+    }
+    
     setupEventListeners();
     addRecipeRow();
     addRecipeRow();
@@ -87,8 +92,122 @@ document.addEventListener('DOMContentLoaded', () => {
     addRecipeRow();
     checkTotalWeight(); 
     updateTargetROSum(); 
-    updateTargetChart(); 
+    
+    try {
+        updateTargetChart(); 
+    } catch (e) {}
 });
+
+function triggerImport() {
+    const audioImport = document.getElementById('audio-import');
+    if (audioImport) {
+        audioImport.currentTime = 0;
+        audioImport.play().catch(e => console.log('音效播放被阻擋:', e));
+    }
+    document.getElementById('import-file-input').click();
+}
+
+function exportRecipe() {
+    const audioExport = document.getElementById('audio-export');
+    if (audioExport) {
+        audioExport.currentTime = 0;
+        audioExport.play().catch(e => console.log('音效播放被阻擋:', e));
+    }
+
+    let recipeName = prompt("請為這個配方命名 (將作為您的存檔檔名)：", "我的新配方");
+    if (recipeName === null) return; 
+    if (recipeName.trim() === "") recipeName = "未命名配方";
+
+    const targets = {};
+    const targetIds = ['knao', 'CaO', 'MgO', 'ZnO', 'BaO', 'SrO', 'Li2O', 'PbO', 'Al2O3', 'B2O3', 'Fe2O3', 'P2O5', 'SiO2', 'TiO2', 'ZrO2', 'SnO2'];
+    targetIds.forEach(id => {
+        const el = document.getElementById(`target-${id}`);
+        if (el) targets[id] = el.value;
+    });
+
+    const rows = document.querySelectorAll('#recipe-body tr');
+    const recipeData = [];
+    rows.forEach(r => {
+        const matName = r.querySelector('.mat-select').value;
+        const weight = r.querySelector('.mat-weight').value;
+        if (matName) {
+            recipeData.push({ name: matName, weight: weight });
+        }
+    });
+
+    const exportObj = {
+        version: "V31.0",
+        recipeName: recipeName,
+        targets: targets,
+        recipe: recipeData
+    };
+
+    const dataStr = JSON.stringify(exportObj, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${recipeName}.glaze`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast("💾 配方已成功匯出至您的電腦！");
+}
+
+function importRecipe(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        let data = null;
+        
+        try {
+            data = JSON.parse(e.target.result);
+            if (!data || !data.targets || !data.recipe) {
+                alert("檔案格式不符，請確認這是否為系統匯出的 .glaze 檔！");
+                return;
+            }
+        } catch (err) {
+            alert("檔案解析失敗，檔案可能已損毀！");
+            return;
+        }
+
+        try {
+            for (const [key, value] of Object.entries(data.targets)) {
+                const el = document.getElementById(`target-${key}`);
+                if (el) el.value = value;
+            }
+
+            document.getElementById('recipe-body').innerHTML = ''; 
+            if (data.recipe.length === 0) {
+                addRecipeRow();
+                addRecipeRow();
+            } else {
+                data.recipe.forEach(item => {
+                    addRecipeRow(item.name, parseFloat(item.weight) || 0);
+                });
+            }
+
+            updateTargetROSum();
+            checkTotalWeight();
+            calculateUMF();
+            
+            try { updateTargetChart(); } catch(err) {}
+
+            showToast(`📂 成功讀取配方：${data.recipeName || file.name}`);
+        } catch (err) {
+            console.error("UI 更新過程中發生小錯誤，但資料已盡力還原:", err);
+        }
+
+        try {
+            document.getElementById('import-file-input').value = "";
+        } catch (err) {}
+    };
+    reader.readAsText(file);
+}
 
 function generateMaterialOptions(selectedValue = '') {
     let html = '<option value="">選擇原料...</option>';
@@ -171,20 +290,24 @@ function resetAll() {
         updateTargetROSum();
         checkTotalWeight();
         calculateUMF();
-        updateTargetChart(); 
+        try { updateTargetChart(); } catch(e) {}
         
         isWizardMode = false;
         document.getElementById('wizard-guide').classList.add('hidden');
         showToast("已全部清空重置");
+
+        // 【新增】播放清空重新開始音效
+        const audioReset = document.getElementById('audio-reset');
+        if (audioReset) {
+            audioReset.currentTime = 0;
+            audioReset.play().catch(e => console.log('音效播放被阻擋:', e));
+        }
     }
 }
 
 function setupEventListeners() {
     document.getElementById('add-row-btn').addEventListener('click', () => addRecipeRow());
-    
-    // 綁定「釉式轉換原料」按鈕事件
     document.getElementById('reverse-calc-btn').addEventListener('click', startWizardMode);
-    
     document.getElementById('reset-all-btn').addEventListener('click', resetAll);
     
     document.getElementById('forward-calc-btn').addEventListener('click', () => {
@@ -194,7 +317,7 @@ function setupEventListeners() {
         const audioFwd = document.getElementById('audio-forward');
         if (audioFwd) {
             audioFwd.currentTime = 0;
-            audioFwd.play().catch(e => console.log('音效播放被瀏覽器阻擋:', e));
+            audioFwd.play().catch(e => console.log('音效播放被阻擋:', e));
         }
         
         setTimeout(() => document.getElementById('forward-success-msg').classList.add('hidden'), 3000);
@@ -204,7 +327,7 @@ function setupEventListeners() {
     allInputs.forEach(input => {
         input.addEventListener('input', () => {
             updateTargetROSum();
-            updateTargetChart(); 
+            try { updateTargetChart(); } catch(e) {}
         });
     });
 }
@@ -300,19 +423,23 @@ function updateKNaOAllocation(specificMatName = null) {
     }
 }
 
+function updateChart(si, al) {
+    if (stullChart) { 
+        stullChart.data.datasets[0].data = [{x: si, y: al}]; 
+        stullChart.update('none'); 
+    }
+}
+
 function updateTargetChart() {
     const al = parseFloat(document.getElementById('target-Al2O3').value) || 0;
     const si = parseFloat(document.getElementById('target-SiO2').value) || 0;
     
     if (stullChart) {
         stullChart.data.datasets[1].data = [{x: si, y: al}];
-        stullChart.update();
+        stullChart.update('none');
     }
 }
 
-// ===================================================
-// 引導模式
-// ===================================================
 function startWizardMode() {
     document.getElementById('recipe-body').innerHTML = '';
     isWizardMode = true;
@@ -320,7 +447,6 @@ function startWizardMode() {
     analyzeNeedsAndHint();
     showToast("已清空！請依提示選擇原料");
     
-    // 【重點新增】點擊「釉式轉換原料」時播放引導音效
     const audioStart = document.getElementById('audio-wizard-start');
     if (audioStart) {
         audioStart.currentTime = 0;
@@ -354,7 +480,7 @@ function analyzeNeedsAndHint() {
     if (missingList.length > 0) {
         hintEl.innerHTML = `缺少 <b>${missingList.length}</b> 個目標 (${missingList.slice(0, 4).join(', ')}${missingList.length>4?'...':''})。<br>請新增對應原料。`;
     } else {
-        hintEl.innerHTML = `<span class="wizard-success-anim" style="color:#27ae60; font-weight:bold;">【完成計算】 釉式轉換原料目標已滿足！</span>`;
+        hintEl.innerHTML = `<span class="wizard-success-anim" style="color:#006400; font-size:1.25rem; font-weight:900;">【完成計算】 釉式轉換原料目標已滿足！</span>`;
         
         if (isWizardMode) {
             const audioWiz = document.getElementById('audio-wizard');
@@ -478,9 +604,6 @@ function getTargets() {
     return t;
 }
 
-// ===================================================
-// 正推計算
-// ===================================================
 function calculateUMF() {
     const rows = document.querySelectorAll('#recipe-body tr');
     let totalWeight = 0;
@@ -522,7 +645,10 @@ function calculateUMF() {
 
     const sio2 = totalMoles['SiO2'] / divisor;
     const al2o3 = totalMoles['Al2O3'] / divisor;
-    updateChart(sio2, al2o3);
+    
+    try {
+        updateChart(sio2, al2o3);
+    } catch(e) {}
     document.getElementById('val-ratio').textContent = al2o3 > 0 ? (sio2/al2o3).toFixed(2) : "∞";
 }
 
@@ -560,18 +686,27 @@ function checkTotalWeight() {
         warnEl.style.color = "red";
         forwardBtn.disabled = true;
     }
+
+    try {
+        calculateUMF();
+    } catch(e) {}
 }
 
-// Chart
 function initChart() {
     const ctx = document.getElementById('stullChart').getContext('2d');
+    
     const bgPlugin = {
         id: 'customCanvasBackgroundColor',
         beforeDraw: (chart) => {
-            const ctx = chart.ctx;
-            const xAxis = chart.scales.x;
-            const yAxis = chart.scales.y;
+            const {ctx, scales} = chart;
+            if (!scales || !scales.x || !scales.y) return; 
+
+            const xAxis = scales.x;
+            const yAxis = scales.y;
+            
             const drawRect = (xStart, yStart, xEnd, yEnd, color) => {
+                if(typeof xAxis.getPixelForValue !== 'function') return;
+                
                 const left = xAxis.getPixelForValue(xStart);
                 const right = xAxis.getPixelForValue(xEnd);
                 const top = yAxis.getPixelForValue(yEnd); 
@@ -579,9 +714,14 @@ function initChart() {
                 ctx.fillStyle = color;
                 ctx.fillRect(left, top, right - left, bottom - top);
             };
-            drawRect(0.0, 0.6, 4.0, 1.0, 'rgba(255, 182, 193, 0.3)'); 
-            drawRect(4.0, 0.2, 8.0, 0.6, 'rgba(173, 216, 230, 0.3)');
-            drawRect(4.0, 0.6, 8.0, 1.0, 'rgba(255, 255, 224, 0.5)'); 
+            
+            try {
+                drawRect(0.0, 0.6, 4.0, 1.0, 'rgba(255, 182, 193, 0.3)'); 
+                drawRect(4.0, 0.2, 8.0, 0.6, 'rgba(173, 216, 230, 0.3)');
+                drawRect(4.0, 0.6, 8.0, 1.0, 'rgba(255, 255, 224, 0.5)'); 
+            } catch(e) { 
+                console.warn("背景色塊繪製失敗", e); 
+            }
         }
     };
     
@@ -605,7 +745,8 @@ function initChart() {
             ]
         },
         options: {
-            responsive: true, maintainAspectRatio: false,
+            responsive: true, 
+            maintainAspectRatio: false,
             scales: {
                 x: { 
                     title: { display: true, text: 'SiO₂', color: '#00008b', font: { weight: 'bold', size: 14 } }, 
@@ -625,18 +766,6 @@ function initChart() {
         plugins: [bgPlugin]
     });
 }
-
-function updateChart(si, al) {
-    if (stullChart) { 
-        stullChart.data.datasets[0].data = [{x: si, y: al}]; 
-        stullChart.update(); 
-    }
-}
-
-
-// ===================================================
-// Word 完美隱形表格複製技術
-// ===================================================
 
 function copyRecipeToClipboard() {
     let recipeRowsHTML = '';
@@ -700,7 +829,6 @@ function copyUmfToClipboard() {
     const tdRightStyle = 'border: none; padding: 0; vertical-align: middle; text-align: left;';
     const pStyle = 'margin: 0; padding: 0; line-height: 1.2; font-size: 10pt;';
 
-    // RO 組
     let roText = '<table style="border-collapse: collapse; border: none; width: auto;">';
     const knaoTarget = parseFloat(document.getElementById('target-knao').value) || 0;
     const knaoCurr = parseFloat(document.getElementById('curr-knao').textContent) || 0;
@@ -717,7 +845,6 @@ function copyUmfToClipboard() {
     });
     roText += '</table>';
 
-    // R2O3 組
     let r2o3Text = '<table style="border-collapse: collapse; border: none; width: auto;">';
     ['Al2O3', 'B2O3', 'Fe2O3', 'P2O5'].forEach(ox => {
         const target = parseFloat(document.getElementById(`target-${ox}`).value) || 0;
@@ -728,7 +855,6 @@ function copyUmfToClipboard() {
     });
     r2o3Text += '</table>';
 
-    // RO2 組
     let ro2Text = '<table style="border-collapse: collapse; border: none; width: auto;">';
     ['SiO2', 'TiO2', 'ZrO2', 'SnO2'].forEach(ox => {
         const target = parseFloat(document.getElementById(`target-${ox}`).value) || 0;

@@ -20,38 +20,71 @@
 body {
     font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif;
     background-color: var(--bg-color);
-    margin: 0; padding: 0; color: #333; height: 100vh; display: flex; flex-direction: column;
+    margin: 0; 
+    padding: 0; 
+    color: #333; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column;
     overflow-x: hidden; 
 }
 
 header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 5px 20px;
-    display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); flex-shrink: 0;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+    color: white; 
+    padding: 5px 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    flex-shrink: 0;
 }
 header h1 { margin: 0; font-size: 1.1rem; }
 .subtitle { margin: 0; font-size: 0.8rem; opacity: 0.8; }
 #author-info { font-size: 0.8rem; opacity: 0.7; }
 
 main {
-    flex: 1; padding: 10px; overflow-y: auto; overflow-x: hidden; 
+    flex: 1; 
+    padding: 10px; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
 }
 
 .main-wrapper {
-    display: flex; width: 100%; height: 100%; gap: 10px; flex-wrap: nowrap; align-items: stretch;
+    display: flex; 
+    width: 100%; 
+    min-height: 100%; 
+    gap: 10px; 
+    flex-wrap: nowrap; 
+    align-items: stretch;
 }
 
-/* 通用面板 */
 .panel {
-    background: var(--panel-bg); border-radius: 8px; padding: 10px; display: flex; flex-direction: column;
-    box-sizing: border-box; min-width: 0; 
+    background: var(--panel-bg); 
+    border-radius: 8px; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column;
+    box-sizing: border-box; 
+    min-width: 0; 
 }
 .box-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
 .panel-header {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; flex-shrink: 0;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 8px; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 5px; 
+    flex-shrink: 0;
 }
 .panel-header h2 { margin: 0; font-size: 1rem; color: var(--primary-color); white-space: nowrap; }
 
-/* 複製按鈕樣式 */
+.action-buttons-wrap {
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+}
+
 .btn-copy {
     border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; color: white;
     font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;
@@ -60,8 +93,9 @@ main {
 .btn-copy.blue:hover { background-color: #2980b9; }
 .btn-copy.green { background-color: #2ecc71; border: 1px solid #27ae60; }
 .btn-copy.green:hover { background-color: #27ae60; }
+.btn-copy.orange { background-color: #e67e22; border: 1px solid #d35400; }
+.btn-copy.orange:hover { background-color: #d35400; }
 
-/* 1. 左側：原料配方區 */
 .recipe-panel { flex: 2; min-width: 280px; } 
 .table-container { flex: 1; overflow-y: auto; }
 .recipe-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed; }
@@ -81,10 +115,9 @@ main {
 .loi-row { color: #7f8c8d; font-size: 0.85rem; margin-top: 2px; }
 .wizard-box { margin-top: 5px; padding: 8px; background-color: #fff3cd; color: #856404; border-radius: 4px; font-size: 0.9rem; font-weight: bold; display: flex; flex-direction: column; gap: 4px; border: 1px solid #ffeeba; line-height: 1.4; }
 
-/* 動畫：精靈模式完成提示縮放 */
 @keyframes wizardSuccessFlash {
     0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 .wizard-success-anim {
@@ -93,22 +126,45 @@ main {
     transform-origin: left center;
 }
 
-/* 2. 中間：直式控制按鈕欄 */
 .control-column {
     flex: 0 0 70px; 
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: #fcfcfc; border-radius: 8px; border: 1px solid #eee;
-    padding: 10px 5px; gap: 15px; box-sizing: border-box;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    background: #fcfcfc; 
+    border-radius: 8px; 
+    border: 1px solid #eee;
+    padding: 10px 5px; 
+    gap: 15px; 
+    box-sizing: border-box;
+    overflow-y: auto; 
 }
+
 .btn-group-vertical { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
-.divider-h { width: 80%; height: 1px; background: #ddd; margin: 5px 0; }
-.btn-vertical { width: 100%; padding: 15px 5px; border: none; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.2s; }
+.divider-h { width: 80%; height: 1px; background: #ddd; margin: 5px 0; flex-shrink: 0; }
+
+.btn-vertical { 
+    width: 100%; 
+    min-height: 120px; 
+    padding: 15px 5px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: all 0.2s; 
+    flex-shrink: 0;
+}
 .btn-vertical:active { transform: scale(0.95); }
 .btn-vertical i { font-size: 1.2rem; }
 .vertical-text { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; }
 .vertical-text-small { writing-mode: vertical-lr; text-orientation: upright; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
 
-/* 動畫：按鈕光暈脈衝 */
 @keyframes btnPulse {
     0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.8); }
     70% { box-shadow: 0 0 0 12px rgba(243, 156, 18, 0); }
@@ -125,12 +181,36 @@ main {
 .btn-vertical.forward { background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; }
 .btn-vertical.forward:hover:not(:disabled) { opacity: 0.9; }
 .btn-vertical.forward:disabled { background: #ecf0f1; color: #bdc3c7; cursor: not-allowed; box-shadow: none; }
-.btn-reset { width: 100%; padding: 10px 5px; border: none; border-radius: 6px; cursor: pointer; background-color: #e74c3c; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+
+.btn-reset { 
+    width: 100%; 
+    min-height: 100px;
+    padding: 10px 5px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    background-color: #e74c3c; 
+    color: white; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-shrink: 0;
+}
 .btn-reset:hover { background-color: #c0392b; }
-.success-flash { color: #e74c3c; font-weight: bold; font-size: 0.8rem; margin-top: 5px; animation: blink 1s infinite; writing-mode: vertical-lr; }
+
+.success-flash { 
+    color: #e74c3c; 
+    font-weight: 900; 
+    font-size: 2.0rem; 
+    margin-top: 15px; 
+    animation: blink 1s infinite; 
+    writing-mode: vertical-lr; 
+    flex-shrink: 0;
+    letter-spacing: 3px; 
+}
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-/* 3. 中右：釉式目標區 */
 .umf-panel { flex: 4; min-width: 480px; } 
 .umf-container { flex: 1; overflow-y: auto; display: flex; gap: 10px; flex-direction: row; }
 
@@ -163,31 +243,48 @@ main {
 @keyframes warningBlink { 0%, 100% { opacity: 1; color: #c0392b; } 50% { opacity: 0.5; color: #e74c3c; } }
 .warning-blink { animation: warningBlink 1s infinite; font-weight: 900; }
 
-@keyframes textSuccessFlash { 0% { transform: scale(1); color: #c0392b; } 25% { transform: scale(1.05); color: #27ae60; } 50% { transform: scale(1); color: #27ae60; } 75% { transform: scale(1.05); color: #27ae60; } 100% { transform: scale(1); color: #27ae60; } }
+@keyframes textSuccessFlash { 
+    0% { transform: scale(1); color: #c0392b; } 
+    25% { transform: scale(1.05); color: #27ae60; } 
+    50% { transform: scale(1); color: #27ae60; } 
+    75% { transform: scale(1.05); color: #27ae60; } 
+    100% { transform: scale(1); color: #27ae60; } 
+}
 .text-success-pulse { animation: textSuccessFlash 0.6s ease-in-out; color: #27ae60 !important; }
 
-/* 4. 最右側：圖表區 */
 .chart-panel { flex: 2; min-width: 300px; display: flex; flex-direction: column; }
-.chart-square-wrapper { width: 100%; aspect-ratio: 1 / 1; position: relative; background: white; border: 1px solid #eee; border-radius: 4px; margin-bottom: auto; }
-canvas { width: 100% !important; height: 100% !important; }
+
+/* 【修正點】：解除對 Canvas 的強制控制，交還給 Chart.js 引擎自動排版 */
+.chart-square-wrapper { 
+    width: 100%; 
+    aspect-ratio: 1 / 1; /* 現代瀏覽器專用的完美 1:1 正方形 */
+    position: relative; 
+    background: white; 
+    border: 1px solid #eee; 
+    border-radius: 4px; 
+    margin-bottom: auto; 
+}
+
 .legend-box { display: flex; justify-content: center; gap: 10px; font-size: 0.8rem; padding: 5px; background: #fafafa; margin-top: 5px; border-radius: 4px; }
 .chart-info { font-weight: bold; color: #2c3e50; font-size: 0.9rem;}
 
-/* Toast */
-.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-weight: bold;}
+.toast { 
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+    background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; 
+    z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-weight: bold;
+}
 .toast.show { opacity: 1; }
 .hidden { display: none !important; }
 
-/* RWD 響應式：手機與平板 */
 @media (max-width: 1000px) {
     .main-wrapper { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
     .recipe-panel, .umf-panel, .chart-panel { flex: auto; min-width: 100%; width: 100%; margin-bottom: 10px;}
-    .control-column { flex-direction: row; height: auto; width: 100%; padding: 10px; justify-content: space-between; gap: 10px; }
+    .control-column { flex-direction: row; height: auto; width: 100%; padding: 10px; justify-content: space-between; gap: 10px; overflow-y: hidden; overflow-x: auto; }
     .btn-group-vertical { flex-direction: row; flex: 2; gap: 10px; }
     .divider-h { display: none; } 
     .vertical-text, .vertical-text-small { writing-mode: horizontal-tb; text-orientation: mixed; letter-spacing: 0; }
-    .btn-vertical { flex-direction: row; width: 100%; padding: 12px; }
-    .btn-reset { width: auto; padding: 12px; flex: 1; display: flex; justify-content: center; }
+    .btn-vertical { flex-direction: row; width: 100%; min-height: 50px; padding: 12px; }
+    .btn-reset { width: auto; min-height: 50px; padding: 12px; flex: 1; display: flex; justify-content: center; }
     .success-flash { writing-mode: horizontal-tb; margin-top: 0; margin-left: 10px; align-self: center;}
     .umf-container { flex-direction: column; }
     .right-groups { flex-direction: row; } 
@@ -197,6 +294,7 @@ canvas { width: 100% !important; height: 100% !important; }
     header h1 { font-size: 1rem; }
     .subtitle { display: none; } 
     .panel-header { flex-direction: column; align-items: flex-start; gap: 5px;}
+    .action-buttons-wrap { justify-content: center; width: 100%; } 
     .btn-copy { width: 100%; text-align: center; padding: 8px;}
     .right-groups { flex-direction: column; } 
     .umf-row input { flex: 0 0 60px; width: 60px; margin-right: 5px; }
