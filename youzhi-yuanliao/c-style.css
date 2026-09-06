@@ -254,10 +254,9 @@ main {
 
 .chart-panel { flex: 2; min-width: 300px; display: flex; flex-direction: column; }
 
-/* 【修正點】：解除對 Canvas 的強制控制，交還給 Chart.js 引擎自動排版 */
 .chart-square-wrapper { 
     width: 100%; 
-    aspect-ratio: 1 / 1; /* 現代瀏覽器專用的完美 1:1 正方形 */
+    aspect-ratio: 1 / 1; 
     position: relative; 
     background: white; 
     border: 1px solid #eee; 
@@ -279,12 +278,35 @@ main {
 @media (max-width: 1000px) {
     .main-wrapper { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
     .recipe-panel, .umf-panel, .chart-panel { flex: auto; min-width: 100%; width: 100%; margin-bottom: 10px;}
-    .control-column { flex-direction: row; height: auto; width: 100%; padding: 10px; justify-content: space-between; gap: 10px; overflow-y: hidden; overflow-x: auto; }
-    .btn-group-vertical { flex-direction: row; flex: 2; gap: 10px; }
+    
+    /* 【修正區】允許手機版按鈕自動換行，且不會被截斷 */
+    .control-column { 
+        flex-direction: row; 
+        height: auto; 
+        width: 100%; 
+        padding: 10px; 
+        justify-content: space-between; 
+        gap: 10px; 
+        overflow-y: visible; 
+        overflow-x: visible; 
+        flex-wrap: wrap; 
+    }
+    
+    .btn-group-vertical { flex-direction: row; flex: 1; min-width: 60%; gap: 10px; }
     .divider-h { display: none; } 
     .vertical-text, .vertical-text-small { writing-mode: horizontal-tb; text-orientation: mixed; letter-spacing: 0; }
     .btn-vertical { flex-direction: row; width: 100%; min-height: 50px; padding: 12px; }
-    .btn-reset { width: auto; min-height: 50px; padding: 12px; flex: 1; display: flex; justify-content: center; }
+    
+    /* 【修正區】設定重置按鈕的最小寬高比例，確保與左側按鈕協調 */
+    .btn-reset { 
+        flex: 1; 
+        min-width: 30%; 
+        min-height: 50px; 
+        padding: 12px; 
+        display: flex; 
+        justify-content: center; 
+    }
+    
     .success-flash { writing-mode: horizontal-tb; margin-top: 0; margin-left: 10px; align-self: center;}
     .umf-container { flex-direction: column; }
     .right-groups { flex-direction: row; } 
