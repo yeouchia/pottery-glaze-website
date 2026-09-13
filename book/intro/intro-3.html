@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- 基礎網頁設定與 SEO Meta 標籤 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陶藝是什麼？從古代生活用品到現代陶瓷藝術的演進</title>
+<meta name="description" content="什麼是陶藝？從仰韶文化、龍山文化到現代陶瓷工藝，帶您了解陶土特性、黏性、成型方式與低溫燒結過程，探索生活器皿的工藝之美。">
+<style>
+  /* ====== 變數與全局設定 ====== */
+  :root {
+    --bg: #eee7d8;
+    --paper: #fbfaf5;
+    --card: #f1f0e4;
+    --line: #d8d4c5;
+    --text: #39372f;
+    --muted: #777367;
+    --accent-light: #e8e4d6;
+    --quote: #eeeadd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.85; font-size: 15px;
+  }
+  
+  /* ====== 頁面與文章主體版面配置 ====== */
+  .page {
+    width: min(900px, calc(100% - 32px));
+    margin: 34px auto 70px; background: var(--paper);
+    border: 1px solid #e1ddcf; border-radius: 12px;
+    box-shadow: 0 7px 24px rgba(70,62,45,.08); overflow: hidden;
+  }
+  .article { padding: 42px 56px 64px; }
+  
+  /* ====== 文章標頭與分類標記 ====== */
+  .breadcrumb { font-size: 12px; color: var(--muted); margin-bottom: 18px; letter-spacing: .04em; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; color: #625d4e;
+    background: var(--accent-light); border: 1px solid #dcd7c7;
+    border-radius: 999px; padding: 5px 15px; margin-bottom: 20px; font-weight: bold;
+  }
+  h1 { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 30px; margin: 0 0 18px; color: #35332c; }
+  
+  /* ====== 開場文 (Lead Text) ====== */
+  .lead {
+    background: var(--quote); border: 1px solid #dedacd;
+    border-radius: 8px; padding: 18px 20px; margin: 20px 0 28px; color: #4d4a40; font-size: 15px;
+  }
+  
+  /* ====== 關鍵詞半圓滑外框標記 ====== */
+  .keyword-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+  .keyword-pill {
+    border: 1px solid #dcd7c7; background: #ffffff; color: #5e594c;
+    border-radius: 20px; padding: 6px 16px; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  
+  /* ====== 內文排版 (標題、表格、列表) ====== */
+  h2 { font-family: "Noto Serif TC", serif; font-size: 22px; margin: 42px 0 17px; padding-bottom: 8px; border-bottom: 1px solid #ddd8ca; color: #3e3b32; }
+  h3 { font-size: 17px; margin: 28px 0 9px; color: #464238; }
+  p { margin: 10px 0; }
+  ul, ol { padding-left: 1.5em; margin: 10px 0 18px; }
+  li { margin: 4px 0; }
+  
+  .table-wrap { overflow-x: auto; margin: 18px 0 25px; border: 1px solid var(--line); border-radius: 8px; }
+  table { width: 100%; border-collapse: collapse; background: #faf9f3; }
+  th, td { border-bottom: 1px solid #dfdccf; padding: 10px 12px; text-align: left; }
+  th { background: #ece9dc; font-weight: 700; color: #4d493e; font-size: 14px; }
+  
+  /* ====== FAQ 區塊設定 ====== */
+  .faq-box { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin: 30px 0; }
+  .faq-item { margin-bottom: 15px; border-bottom: 1px dashed #d8d4c5; padding-bottom: 15px; }
+  .faq-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+  .faq-q { font-weight: bold; color: #2c5e7b; margin-bottom: 5px; }
+  .faq-a { color: #4d4a40; font-size: 14px; margin: 0; }
+  
+  /* ====== 相關文章區塊 (指定 CSS) ====== */
+  .related-section { margin-top: 50px; border-top: 2px solid var(--line); padding-top: 20px; }
+  .related-section h3 { margin-bottom: 15px; }
+  .related { list-style: none; padding: 0; margin: 0; }
+  
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related a {
+    display: block; position: relative;
+    /* 1. 版面設計：利用背景色與陰影創造按鈕的立體感 */
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;    
+    border-radius: 8px;           
+    padding: 14px 40px 14px 16px; 
+    margin-top: 10px;             
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    /* 2. 文字顏色：使用與內文不同的顏色，建立「可點擊」的視覺暗示 */
+    color: #2c5e7b;               
+    font-weight: 700;             
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  /* 3. 靜態視覺引導：固定顯示的向右箭頭 */
+  .related a::after {
+    content: "〉"; position: absolute; right: 16px; top: 50%;
+    transform: translateY(-50%); 
+    color: var(--muted);         
+    font-size: 16px; font-weight: normal;
+  }
+  .related a:hover {
+    background-color: #ffffff; border-color: #b5afa0;
+    box-shadow: 0 4px 8px rgba(70,62,45,.1);
+  }
+</style>
+</head>
+<body>
+<main class="page">
+<article class="article">
+
+  <!-- 分類與主歸類別 -->
+  <div class="breadcrumb">陶藝與釉藥知識｜陶藝基礎｜陶的本質</div>
+   <span class="eyebrow">陶藝入門</span><span class="eyebrow">認識陶藝</span>
+
+  <h1>陶藝是什麼？</h1>
+
+  <!-- 開場文區塊 -->
+  <div class="lead">
+    <strong>一看就懂：</strong>陶藝不僅僅是玩泥巴，它是人類文明中最古老的工藝之一。透過將天然的泥土賦予形體，再經過火的淬鍊，這些原本柔軟的物質轉化為堅固的生活器皿。這是一門結合了自然元素與人類智慧的陶瓷藝術。
+  </div>
+
+  <!-- 關鍵詞半圓滑外框標記 -->
+  <div class="keyword-pills">
+    <span class="keyword-pill">陶瓷藝術</span>
+    <span class="keyword-pill">陶瓷工藝</span>
+    <span class="keyword-pill">陶土</span>
+    <span class="keyword-pill">泥土</span>
+    <span class="keyword-pill">低溫燒結</span>
+    <span class="keyword-pill">黏性</span>
+  </div>
+
+  <h2>一、陶藝的起源與歷史文化</h2>
+  <p>陶器的發明，是人類文明史上的一個重要里程碑。早期先民發現，富含<strong>黏性</strong>的<strong>泥土</strong>在經過適當的<strong>成型</strong>後，一旦投入火堆中經過<strong>低溫</strong>烘烤，就會發生質變，成為可以蓄水、儲存食物的<strong>古代生活用品</strong>。</p>
+  <ul>
+    <li><strong>仰韶文化與龍山文化：</strong>在中國新石器時代，仰韶文化的彩陶與龍山文化的<strong>黑陶</strong>展現了極高的<strong>陶瓷工藝</strong>水準，尤其是黑陶那「薄如蛋殼」的精緻度，至今令人驚嘆。</li>
+    <li><strong>繩紋陶：</strong>在日本，繩紋時代的先民利用繩子在濕潤的陶胎上壓印出紋路，創造了極具生命力的繩紋陶，這是早期<strong>生活器皿</strong>藝術化的極佳範例。</li>
+  </ul>
+
+  <h2>二、陶土的特性與燒成</h2>
+  <p>要成就一件好的陶藝作品，材料的選擇至關重要。一般<strong>陶土</strong>的特性在於其較佳的可塑性，適合多種<strong>成型</strong>方式。一般陶土可能含有較多鐵、鈦等礦物雜質，因此燒成後常見紅、黃、褐、灰等自然土色。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>材料特性</th>
+          <th>說明與影響</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>含鐵</strong>量</td>
+          <td>陶土中豐富的氧化鐵，是決定燒成後呈現紅褐、土黃等溫暖色調的關鍵。</td>
+        </tr>
+        <tr>
+          <td><strong>燒成溫度</strong></td>
+          <td>相較於瓷器，陶器的燒成溫度較低（約800℃~1200℃左右），屬於<strong>低溫</strong>至中溫的<strong>燒結</strong>過程。</td>
+        </tr>
+        <tr>
+          <td>可塑性與<strong>黏性</strong></td>
+          <td>陶土含有適當比例的黏土礦物，使其具有良好的支撐力與黏性，非常適合手捏或拉坯。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>三、從實用到藝術的昇華</h2>
+  <p>隨著時代演進，陶瓷不再僅限於滿足生存需求的<strong>古代生活用品</strong>。現代的<strong>陶瓷藝術</strong>已經發展為一種充滿表現力的當代藝術形式。藝術家們利用陶土天然的肌理與燒成時的不可預測性，創作出具備深刻思想與美學價值的作品，讓<strong>陶瓷工藝</strong>在現代社會綻放新的光芒。</p>
+
+  <!-- FAQ 區塊 -->
+  <div class="faq-box">
+    <h3>常見問答 (FAQ)</h3>
+    <div class="faq-item">
+      <div class="faq-q">Q1：製作陶藝一定要用高溫燒嗎？</div>
+      <div class="faq-a">不一定。傳統陶器多半屬於低溫燒結，溫度約在 800℃ 至 1100℃ 之間即可讓陶土硬化並適合日常使用。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q2：為什麼陶土燒出來大多是紅褐色？</div>
+      <div class="faq-a">因為天然泥土中常含有氧化鐵等礦物質，在氧化氣氛下燒成時，這些含鐵物質會讓胎體呈現紅、褐色澤。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q3：黑陶是如何製作出來的？</div>
+      <div class="faq-a">黑陶主要透過特殊的「滲碳」燒製工藝，在燒成末期控制窯內缺氧，使碳素滲入陶體孔隙中，從而呈現烏黑發亮的質感。</div>
+    </div>
+  </div>
+
+  <!-- 相關文章區塊 -->
+<!-- === 動態相關文章區塊 開始 === -->
+<div id="dynamic-related-articles"></div>
+<script src="../../assets/js/knowledge-data.js"></script>
+<script src="../../assets/js/related.js"></script>
+<!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>

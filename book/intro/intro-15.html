@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自己可以調配陶土嗎？從黏性、骨架到燒成特性</title>
+<meta name="description" content="自己可以調配陶土嗎？認識一次黏土、二次黏土、砂土、石英質與骨架材料，以及可塑性、收縮、透氣、燒結溫度與生活陶測試。">
+<style>
+
+:root{
+  --bg:#eee7d8; --paper:#fbfaf5; --card:#f1f0e4; --line:#d8d4c5;
+  --text:#39372f; --muted:#777367; --accent:#6c6654;
+  --accent-light:#e8e4d6; --quote:#eeeadd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.85;font-size:16px;
+}
+.page{
+  width:min(900px,calc(100% - 32px));margin:34px auto 70px;
+  background:var(--paper);border:1px solid #e1ddcf;border-radius:12px;
+  box-shadow:0 7px 24px rgba(70,62,45,.08);overflow:hidden;
+}
+.article{padding:42px 56px 64px}
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:18px;letter-spacing:.04em}
+.eyebrow{
+  display:inline-block;font-size:12px;color:#625d4e;background:var(--accent-light);
+  border:1px solid #dcd7c7;border-radius:999px;padding:4px 12px;
+  margin-bottom:13px;font-weight:bold
+}
+h1{
+  font-family:"Noto Serif TC","Source Han Serif TC",serif;font-weight:700;
+  font-size:32px;line-height:1.45;margin:0 0 18px;color:#35332c
+}
+h2{
+  font-family:"Noto Serif TC","Source Han Serif TC",serif;font-size:24px;
+  line-height:1.55;margin:48px 0 18px;padding-bottom:10px;
+  border-bottom:2px solid #ddd8ca;color:#3e3b32
+}
+h3{font-size:19px;margin:32px 0 12px;color:#464238;border-left:4px solid var(--accent);padding-left:10px}
+.lead{
+  background:var(--quote);border:1px solid #dedacd;border-radius:8px;
+  padding:20px 24px;margin:24px 0 32px;color:#4d4a40;font-size:16px;line-height:1.8
+}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.tag{border:1px solid #d7d2c3;background:#f8f6ed;color:#706b5d;border-radius:999px;padding:4px 12px;font-size:13px}
+.notice,.summary,.faq-box{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:20px 24px;margin:24px 0 32px
+}
+.faq-title{font-weight:700;font-size:20px;margin:0 0 16px;color:#4c493e;border-bottom:1px solid #d7d2c3;padding-bottom:10px}
+p{margin:14px 0}
+ul,ol{padding-left:1.8em;margin:14px 0 24px}
+li{margin:6px 0}
+strong{font-weight:700;color:#2a2822}
+.table-wrap{overflow-x:auto;margin:24px 0 32px;border:1px solid var(--line);border-radius:8px}
+table{width:100%;border-collapse:collapse;min-width:620px;background:#faf9f3}
+th,td{border-bottom:1px solid #dfdccf;padding:14px 16px;text-align:left;vertical-align:top}
+th{background:#ece9dc;font-weight:700;color:#4d493e;font-size:15px}
+td{font-size:15px} tr:last-child td{border-bottom:none}
+.related h3{margin-top:40px;border-bottom:none;border-left:none;padding-left:0;font-size:22px}
+.related a{
+  display:block;position:relative;background:var(--paper);border:1px solid #dcd7c7;
+  border-radius:8px;padding:14px 40px 14px 16px;margin-top:10px;
+  box-shadow:0 2px 5px rgba(70,62,45,.05);color:#2c5e7b;font-weight:700;
+  text-decoration:none;transition:all .2s ease
+}
+.related a::after{content:"〉";position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.related a:hover{background:#fff;border-color:#b5afa0;box-shadow:0 4px 8px rgba(70,62,45,.1)}
+@media(max-width:700px){
+ .page{width:calc(100% - 18px);margin:16px auto 40px;border-radius:9px}
+ .article{padding:28px 24px 45px} h1{font-size:26px} h2{font-size:22px} body{font-size:15px}
+}
+
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+<div class="breadcrumb">陶藝與釉藥知識｜陶藝材料｜陶土配方</div>
+<span class="eyebrow">陶土配方與材料學</span>
+<h1>自己可以調配陶土嗎？從黏性、骨架到燒成特性</h1>
+<div class="lead"><strong>一看就懂：</strong>自己調配陶土是可行的，但真正困難的是讓黏性、骨架、可塑性、收縮與燒結範圍取得平衡。配土應從小量測試開始，而不是直接套用固定比例。</div>
+<div class="tags"><span class="tag">陶藝</span><span class="tag">黏土</span><span class="tag">陶土</span><span class="tag">一次黏土</span><span class="tag">二次黏土</span><span class="tag">砂土</span><span class="tag">黏性</span><span class="tag">石英質</span><span class="tag">骨架</span><span class="tag">可塑性</span><span class="tag">縮收比</span><span class="tag">透氣</span><span class="tag">瓷化</span><span class="tag">燒結溫度</span><span class="tag">軟化點</span><span class="tag">生活陶</span><span class="tag">陶藝材料</span></div>
+
+<h2>一、自己可以調配陶土嗎？可以，但不是把幾種粉末混在一起就完成</h2>
+<p>「自己可以調配陶土嗎？」答案是<strong>可以</strong>。陶藝工作室、陶瓷工廠與材料研究中，都可能依照成形方式、燒成溫度、顏色、收縮與表面效果調整陶土配方。</p>
+<p>不過，陶土是一個複合材料系統。配方中的不同原料會共同影響<strong>黏性、可塑性、骨架、乾燥收縮、燒成收縮、透氣性、燒結程度與最終顏色</strong>。因此，自己配土比較接近「材料設計」，而不是單純的 DIY 混合。</p>
+
+<h2>二、先認識陶土的基本結構：黏性與骨架</h2>
+<h3>1. 黏土礦物：提供可塑性</h3>
+<p>陶土中的黏土礦物具有細小顆粒與吸水特性，是泥料能夠被捏、拉、壓、拉坯與塑形的重要來源。黏土比例提高，通常有助於提高可塑性，但也可能帶來較大的乾燥收縮與變形風險。</p>
+
+<h3>2. 砂土或較粗顆粒：形成骨架</h3>
+<p>配方中的砂、石英質材料、熟料或其他較粗顆粒，可以理解成泥料中的「骨架」。它們能改變泥料的觸感、乾燥行為與尺寸穩定性；但顆粒太多，也可能讓可塑性下降。</p>
+
+<h3>3. 黏性與骨架需要取得平衡</h3>
+<p>好的陶土不是「越黏越好」。如果只有非常細、非常黏的材料，成形時雖然柔軟，乾燥時卻可能出現較明顯的收縮與裂紋。相反地，如果粗顆粒比例過高，材料可能不容易成形。因此，配土的核心之一，就是找到<strong>可塑性與尺寸穩定性之間的平衡</strong>。</p>
+
+<h2>三、一次黏土與二次黏土是什麼？</h2>
+<p>陶藝材料中常會遇到「一次黏土」與「二次黏土」這類地質分類概念。一次黏土通常指原地母岩風化後，沒有經長距離搬運、仍較接近原生位置的黏土；二次黏土則是經水流、風或其他地質作用搬運後沉積的黏土。</p>
+<p>二次黏土在搬運過程中，細顆粒可能被重新分選，也可能與其他礦物混合，因此自然形成的二次黏土常具有與原生黏土不同的顆粒組成與可塑性。實際陶藝配土時，仍需依原料的礦物組成與粒度分析判斷，不能只靠「一次」或「二次」這個名稱推測最後性能。</p>
+
+<h2>四、石英質、砂土與骨架材料有什麼作用？</h2>
+<p><strong>石英（SiO₂）</strong>是陶瓷配方中常見的矽質原料。對泥料而言，石英顆粒可作為非塑性成分，參與泥料的顆粒骨架；但石英在不同溫度下會有晶相轉變，且顆粒尺寸、比例與升降溫條件都可能影響材料的乾燥與燒成行為。</p>
+<p>在陶藝實務上，也可能加入熟料、砂或其他顆粒材料來改變泥料質地與乾燥性能。所謂「加砂就一定不裂」並不成立；顆粒大小、形狀、比例以及原本泥料的組成都會影響結果。研究資料也指出，粗顆粒材料對降低乾燥收縮的效果並不是單純線性增加，仍需要依配方測試。</p>
+<h2>五、陶土配方最重要的幾個性能指標</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>性能</th><th>代表意義</th><th>配土時要注意什麼</th></tr></thead>
+<tbody>
+<tr><td>可塑性</td><td>濕土能否被拉、捏、壓而不容易斷裂</td><td>黏土礦物與含水量都會影響</td></tr>
+<tr><td>乾燥收縮</td><td>從濕態到乾燥後尺寸的變化</td><td>細黏土比例高時通常要特別注意</td></tr>
+<tr><td>燒成收縮</td><td>乾坯經燒成後進一步縮小的程度</td><td>與燒結、配方及最高溫度有關</td></tr>
+<tr><td>吸水率</td><td>燒後坯體吸收水分的程度</td><td>可協助判斷燒結成熟程度</td></tr>
+<tr><td>燒結範圍</td><td>材料開始緻密化到過度軟化之間的工作區間</td><td>不同配方不能直接套用同一溫度</td></tr>
+<tr><td>透氣性</td><td>與坯體孔隙及緻密程度相關</td><td>需配合用途與燒成條件判斷</td></tr>
+</tbody></table></div>
+
+<h2>六、縮收比與配土：為什麼尺寸會一直變小？</h2>
+<p>陶土從濕泥到乾坯，再到窯燒後的成品，尺寸可能逐步縮小。這就是陶藝常說的<strong>收縮</strong>。如果作品需要精準尺寸，例如蓋子、榫接件或多件組合，就不能只在最後才量尺寸，而要從一開始就考慮泥料的乾燥與燒成收縮。</p>
+<p>不同土料的縮收比不同，因此自己配土時不能只計算「粉料百分比」，還需要實際製作試片，測量濕尺寸、乾燥尺寸與燒成尺寸。這比只用理論公式推估可靠得多。</p>
+
+<h2>七、燒結溫度與軟化點，不是同一件事</h2>
+<p><strong>燒結</strong>是陶瓷材料在加熱過程中逐漸緻密化的重要過程。隨著溫度上升，顆粒間可能發生擴散與液相形成，使坯體孔隙減少、強度提高。</p>
+<p>但如果溫度繼續升高，材料也可能逐漸軟化、變形，甚至出現過燒。也就是說，「燒得越高越好」並不是陶藝材料的通則。配土時真正要找的是<strong>適合這個配方與用途的燒成範圍</strong>。</p>
+<p>另外，「最高燒成溫度」是材料供應商的重要參考資訊，但它不代表每件作品都必須燒到該溫度。實際燒成仍應配合窯爐、升溫曲線、保溫、坯體厚度與釉藥條件。</p>
+
+<h2>八、生活陶的配土，更需要謹慎測試</h2>
+<p>如果目標是杯、碗、盤等<strong>生活陶</strong>，配土不能只追求好拉、好捏或漂亮顏色。還要考慮燒後成熟程度、吸水率、變形、釉藥相容性與實際使用條件。</p>
+<p>尤其是自行調配的新土，在沒有經過測試前，不宜直接把它當成已經驗證過的食器用坯體材料。最穩妥的方法是先製作試片與小型測試杯，再依乾燥、燒成與釉燒結果調整配方。</p>
+
+<h2>九、自己配土的基本測試流程</h2>
+<ol>
+<li><strong>設定目的：</strong>先決定是拉坯、手捏、雕塑、陶板還是生活陶。</li>
+<li><strong>設定燒成範圍：</strong>先確認窯爐能力與預計燒成溫度。</li>
+<li><strong>選擇基礎土：</strong>先從已知性能的陶土開始，不要一次加入太多變因。</li>
+<li><strong>小比例調整：</strong>每次只改變一個主要變因，例如增加粗顆粒或調整黏土比例。</li>
+<li><strong>製作試片：</strong>至少記錄濕尺寸與重量。</li>
+<li><strong>乾燥後測量：</strong>記錄乾燥尺寸，計算乾燥收縮。</li>
+<li><strong>燒成後再測量：</strong>觀察顏色、變形、裂紋與尺寸。</li>
+<li><strong>必要時測吸水率：</strong>比較不同配方的燒結程度。</li>
+<li><strong>留下配方紀錄：</strong>把原料名稱、比例、批次與燒成條件完整記下來。</li>
+</ol>
+
+<div class="summary"><strong>配土的核心觀念：</strong>不要追求「一個神奇比例」。真正可靠的陶土配方，是在明確用途下，透過小量試驗逐步找到適合的黏性、骨架、可塑性、收縮與燒結範圍。</div>
+
+<div class="faq-box">
+<div class="faq-title">自己調配陶土常見問答 FAQ</div>
+<p><strong>Q：一般陶藝家可以自己調配陶土嗎？</strong><br>A：可以，但最好從小量試驗開始，並完整記錄比例、乾燥與燒成結果。</p>
+<p><strong>Q：砂土加越多，陶土就越不容易裂嗎？</strong><br>A：不能這樣直接判斷。顆粒大小、形狀、添加量與原本配方都會影響結果，過量也可能降低可塑性。</p>
+<p><strong>Q：石英質材料可以直接當成陶土的主要成分嗎？</strong><br>A：石英屬於非塑性材料，通常需要與具有可塑性的黏土礦物等原料共同形成適合成形的泥料；實際比例必須依用途與測試結果決定。</p>
+<p><strong>Q：自己配的陶土可以直接拿來做生活陶嗎？</strong><br>A：不建議未經測試就直接使用。應先測試乾燥、燒成、吸水性、變形與釉藥相容性，再判斷是否適合特定用途。</p>
+</div>
+
+
+
+<!-- === 動態相關文章區塊 開始 === -->
+<div id="dynamic-related-articles"></div>
+<script src="../../assets/js/knowledge-data.js"></script>
+<script src="../../assets/js/related.js"></script>
+<!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>

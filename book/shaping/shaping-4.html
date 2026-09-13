@@ -1,0 +1,138 @@
+<!-- 檔案 4：檔名 shaping-4.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手捏成型常見問題與解決方案</title>
+<meta name="description" content="解析手捏陶藝成型時最常見的問題，如表面龜裂、疊痕明顯、軟硬度控制不佳等。提供專業陶藝技巧與材料科學原理，助您提高作品成功率。">
+<style>
+  :root{
+    --bg:#eee7d8; --paper:#fbfaf5; --card:#f1f0e4; --sub-card:#f6f4e9; 
+    --line:#d8d4c5; --text:#39372f; --muted:#777367; --accent:#6c6654; 
+    --accent-light:#e8e4d6; --quote:#eeeadd;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:"Noto Sans TC","PingFang TC",sans-serif; line-height:1.85; font-size:16px;}
+  .page{width:min(900px, calc(100% - 32px)); margin:34px auto 70px; background:var(--paper); border:1px solid var(--line); border-radius:12px; box-shadow:0 7px 24px rgba(70,62,45,.08); overflow:hidden;}
+  .article{padding:42px 56px 64px;}
+  .breadcrumb{font-size:13px; color:var(--muted); margin-bottom:18px; letter-spacing:.04em;}
+  .eyebrow{display:inline-block; font-size:12px; color:#625d4e; background:var(--accent-light); border:1px solid var(--line); border-radius:999px; padding:4px 12px; margin-bottom:13px; font-weight:bold;}
+  h1{font-family:"Noto Serif TC",serif; font-weight:700; font-size:32px; line-height:1.45; margin:0 0 18px; color:#35332c;}
+  h2{font-family:"Noto Serif TC",serif; font-size:24px; line-height:1.55; margin:48px 0 18px; padding-bottom:10px; border-bottom:2px solid #ddd8ca; color:#3e3b32;}
+  h3{font-size:19px; margin:32px 0 12px; color:#464238; border-left:4px solid var(--accent); padding-left:10px;}
+  .lead{background:var(--quote); border:1px solid var(--line); border-radius:8px; padding:20px 24px; margin:24px 0 32px; color:#4d4a40; font-size:16px; line-height:1.8;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px;}
+  .tag{border:1px solid var(--line); background:var(--sub-card); color:#706b5d; border-radius:999px; padding:4px 12px; font-size:13px;}
+  .faq-box{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:24px 28px; margin:32px 0;}
+  .faq-title{font-weight:700; font-size:20px; margin:0 0 16px; color:#4c493e; border-bottom:1px solid var(--line); padding-bottom:10px;}
+  p{margin:14px 0} ul,ol{padding-left:1.8em; margin:14px 0 24px;} li{margin:6px 0} strong{font-weight:700; color:#2a2822;}
+  .related h3{margin-top:40px; border:none; padding-left:0; font-size:22px;}
+  .related a{display:block; position:relative; background-color:var(--paper); border:1px solid var(--line); border-radius:8px; padding:14px 40px 14px 16px; margin-top:10px; color:#2c5e7b; font-weight:700; text-decoration:none; transition:all 0.2s ease;}
+  .related a::after{content:"〉"; position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:16px;}
+  .related a:hover{background-color:#ffffff; border-color:#b5afa0; box-shadow:0 4px 8px rgba(70,62,45,.1);}
+  @media(max-width:700px){.page{width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px;} .article{padding:28px 24px 45px} h1{font-size:26px} h2{font-size:22px}}
+</style>
+</head>
+<body>
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜陶土與瓷土｜疑難排解</div>
+  <span class="eyebrow">實作問題解析</span>
+  <h1>手捏成型常見問題：龜裂與變形怎麼辦？</h1>
+  <div class="lead"><strong>一看就懂：</strong>在陶藝創作的過程中，手捏成型雖然直覺簡單，但稍有不慎，作品就容易在乾燥或燒結階段出現瑕疵。初學者最常面臨的挑戰，莫過於表面龜裂、難以消除的疊痕，以及因為水分與手溫控制不當所導致的坍塌。這些問題的根源，往往與陶土材料特性、非塑性材料的比例，以及操作時的軟硬度息息相關。透過這篇詳盡的問題解析，我們將帶您從陶瓷材料學的角度，深入了解這些成型障礙的成因，並提供實用的修復與預防技巧，讓您的手捏陶藝之路更加順遂。</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">黏土</span><span class="tag">表面龜裂</span><span class="tag">疊痕</span><span class="tag">軟硬度</span><span class="tag">水份控制</span><span class="tag">手溫</span><span class="tag">非塑性材料</span>
+  </div>
+
+  <h2>一、令人頭痛的表面龜裂：成因與預防</h2>
+  <p>表面龜裂是手捏陶最常遇到的噩夢。有時候剛捏好看起來很完美，一覺醒來卻發現杯緣裂開了。這通常與黏土內部的應力釋放以及乾燥速度有關。</p>
+  <h3>1. 水分蒸發過快的危機</h3>
+  <p>當作品暴露在乾燥的空氣中或冷氣房內，表層水分快速散失而收縮，但內部仍然濕潤，這種內外收縮不均的拉扯就會造成表面龜裂。</p>
+  <h3>2. 避免過度擴張與拉扯</h3>
+  <p>在壓泥或拉伸器壁時，若一次施力過猛，超出了陶土的延展極限，表面就會出現細小的撕裂紋。操作時應循序漸進，溫和施力。</p>
+  <h3>3. 非塑性材料的穩定作用</h3>
+  <p>選用含有適量「熟料」或石英粉等非塑性材料的陶土，能有效降低整體的收縮率，骨架支撐力變強，自然不易產生嚴重的龜裂。</p>
+
+  <h2>二、疊痕明顯與接縫斷裂：結構隱患</h2>
+  <p>在使用泥條盤築或連接把手時，若交接處處理不佳，不僅會留下不美觀的疊痕，在經過高溫窯燒時，更極易從接縫處無情地斷裂。</p>
+  <h3>1. 刮縫與泥漿的絕對必要</h3>
+  <p>不要偷懶只用水抹！必須確實刮出深邃的交叉網紋，並塗上如糨糊般濃稠的泥漿，這能讓兩塊泥土的粒子重新咬合交融。</p>
+  <h3>2. 水分一致性的重要</h3>
+  <p>接合的兩塊黏土，其軟硬度與水份必須盡可能一致。若將極濕的泥條黏在已半乾的器壁上，兩者收縮率不同，乾燥後必裂無疑。</p>
+  <h3>3. 徹底推平消滅疊痕</h3>
+  <p>利用修坯刀或指腹，以斜向交錯的方式將接縫處的泥料上下互相推動抹平，直到肉眼完全看不出原本的界線為止。</p>
+
+  <h2>三、軟硬度失控與作品坍塌</h2>
+  <p>手捏陶時，常常捏著捏著，作品就變得像爛泥一樣軟趴趴，甚至整個塌陷。這通常是因為未能掌握黏土在不同階段應有的軟硬度。</p>
+  <h3>1. 判斷最佳的操作時機</h3>
+  <p>剛開包裝的土最適合做底部；當要向上疊高時，底部的土必須風乾至「皮革硬度（Leather hard）」，才具備足夠的支撐力承受上方重量。</p>
+  <h3>2. 手溫傳遞導致的水分流失</h3>
+  <p>人的手掌帶有溫度，長時間把玩同一塊泥土，水分會被手溫烤乾，導致陶土失去黏性與可塑性。操作應盡量俐落，減少無謂的搓揉。</p>
+  <h3>3. 局部保濕的急救策略</h3>
+  <p>若需要分多天完成作品，未完成的部分必須用微濕的海綿或毛巾輕輕包覆，再套上塑膠袋密封，以維持適當的工作水份。</p>
+
+  <h2>四、厚薄不均導致的燒成炸裂</h2>
+  <p>手捏器皿很難像拉坯那樣擁有絕對均勻的器壁。但如果厚薄差異過於懸殊，就會埋下窯燒時炸裂的定時炸彈。</p>
+  <h3>1. 觸覺檢測厚度的技巧</h3>
+  <p>閉上眼睛，用拇指與食指沿著器壁由下往上滑動。若感覺到某處特別厚，應利用推泥技法將多餘的泥料往薄的地方勻平。</p>
+  <h3>2. 底部過厚的隱藏風險</h3>
+  <p>初學者常將茶碗邊緣捏得很薄，卻忽略了底部厚重如石。高溫燒製時，厚實底部的水分若來不及排出，蒸汽膨脹就會導致作品炸裂。</p>
+  <h3>3. 掏空與修坯的補救</h3>
+  <p>如果成型後發現某處太厚，可在陶土達到皮革硬度時，使用環形修坯刀進行局部削薄，讓整體的厚度趨於一致。</p>
+
+  <h2>五、表面粗糙與不平整的處理</h2>
+  <p>許多人希望手捏作品也能有平滑的外觀，但往往越抹越粗糙，甚至出現難看的泥漿紋理。這牽涉到表面修飾的方法與時機。</p>
+  <h3>1. 切忌用水狂洗表面</h3>
+  <p>發現不平整時，直接沾大量水去抹是最錯誤的做法！這會洗去表面的細泥，暴露出粗糙的熟料顆粒，讓表面變得像砂紙一樣。</p>
+  <h3>2. 利用工具輔助刮平</h3>
+  <p>在黏土半乾時，使用具有彈性的金屬刮片或橡皮刮刀，順著器形的弧度輕輕刮除多餘的不平整，效果遠比用手抹來得好。</p>
+  <h3>3. 拋光技法（Burnishing）</h3>
+  <p>當作品接近完全乾燥時，使用光滑的鵝卵石或湯匙背面，在器表反覆摩擦施壓，可以將泥料粒子壓實，產生不用上釉也迷人的自然光澤。</p>
+
+  <h2>六、氣泡包覆與處理對策</h2>
+  <p>黏土內部若包覆了空氣，在高溫窯燒時，氣體遇熱劇烈膨脹，會將器壁撐破或炸出一個坑洞，造成無法挽回的損害。</p>
+  <h3>1. 揉土不確實的後遺症</h3>
+  <p>如果前置的菊花揉土法沒有做好，泥團內部佈滿孔隙，在捏塑時空氣就被永久封印在器壁中。</p>
+  <h3>2. 摺疊泥板的錯誤示範</h3>
+  <p>在調整造型時，千萬不要將邊緣的泥土隨意往內摺疊壓扁，這極易將空氣直接包裹進去。多餘的土應該切除或向外推平。</p>
+  <h3>3. 針刺排氣法</h3>
+  <p>如果在製作過程中發現器壁有異常的鼓起或彈性，很有可能是氣泡。請立即用極細的陶藝針將氣泡刺破，擠出空氣後再重新推平表面。</p>
+
+  <h2>七、非塑性材料帶來的挑戰</h2>
+  <p>為了增加支撐力或創造特殊肌理，我們常使用含有大量熟料、砂粒或紙漿的複合陶土，但這些非塑性材料也會帶來新的問題。</p>
+  <h3>1. 延展性大幅降低</h3>
+  <p>含有粗顆粒的陶土可塑性較差，在進行大幅度拉伸或彎曲時更容易斷裂，操作時需配合拍打而非用力拉扯。</p>
+  <h3>2. 修坯時的阻力</h3>
+  <p>當土坯變硬進行修削時，刀具很容易勾到粗大的熟料顆粒，導致表面被拉出一條條深溝。修坯刀必須保持鋒利，且修削力道要輕。</p>
+  <h3>3. 燒成後的粗獷觸感</h3>
+  <p>這類陶土燒成後表面較為粗糙，若作為食器，需注意內部必須施以足夠厚度的釉藥，以免卡垢或刮傷嘴唇。</p>
+
+  <h2>八、建立失敗清單與經驗總結</h2>
+  <p>面對上述種種問題，與其感到氣餒，不如將每一次的失敗視為珍貴的材料學實驗，系統性地記錄並改進。</p>
+  <h3>1. 觀察龜裂的走向</h3>
+  <p>裂痕是會說話的。垂直的裂痕通常是乾燥太快；而接縫處的裂痕則是刮縫與泥漿沒做好。對症下藥才能有效解決問題。</p>
+  <h3>2. 建立專屬的製作筆記</h3>
+  <p>記錄使用的土種、當天的天氣濕度、以及乾燥的天數。長時間積累下來，您會找出最適合自己環境的工作節奏。</p>
+  <h3>3. 擁抱不完美的美學</h3>
+  <p>有時候，輕微的龜裂或疊痕反而能成為作品獨特的記憶點。若不影響結構安全，試著換個角度欣賞這些手作的隨機痕跡。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">疑難排解常見問答 FAQ</div>
+    <p><strong>Q：作品邊緣已經有小裂痕了，還能救嗎？</strong><br>
+    A：如果是因為太乾產生的淺層裂痕，不要加水，改用一小塊微濕的軟泥，配合指腹將其強壓推抹進裂縫中填補。若裂痕太深則建議切除重做。</p>
+    <p><strong>Q：為什麼我的土明明很濕，捏的時候還是會裂？</strong><br>
+    A：水分多不代表「可塑性」好。有可能是您使用的泥料缺乏黏性（例如瓷土比例過高），或是泥團沒有經過充分揉捏，內部粒子尚未均勻結合。</p>
+    <p><strong>Q：如何安全的讓手捏作品乾燥？</strong><br>
+    A：最安全的方式是「陰乾」。將作品放置在無陽光直射、無強風吹拂的通風處。若器形複雜，初期可用報紙或塑膠袋輕輕覆蓋，減緩水分散失速度。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+</article>
+</main>
+</body>
+</html>

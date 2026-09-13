@@ -1,0 +1,138 @@
+<!-- 檔案 3：檔名 shaping-3.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手捏陶藝基本技法：從泥條到壓泥的實作指南</title>
+<meta name="description" content="詳解手捏陶藝的基本技法，包含泥條、拍片、推泥與壓泥的應用。掌握這些核心陶藝成型技法，讓您輕鬆將陶土轉化為理想的陶瓷作品。">
+<style>
+  :root{
+    --bg:#eee7d8; --paper:#fbfaf5; --card:#f1f0e4; --sub-card:#f6f4e9; 
+    --line:#d8d4c5; --text:#39372f; --muted:#777367; --accent:#6c6654; 
+    --accent-light:#e8e4d6; --quote:#eeeadd;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:"Noto Sans TC","PingFang TC",sans-serif; line-height:1.85; font-size:16px;}
+  .page{width:min(900px, calc(100% - 32px)); margin:34px auto 70px; background:var(--paper); border:1px solid var(--line); border-radius:12px; box-shadow:0 7px 24px rgba(70,62,45,.08); overflow:hidden;}
+  .article{padding:42px 56px 64px;}
+  .breadcrumb{font-size:13px; color:var(--muted); margin-bottom:18px; letter-spacing:.04em;}
+  .eyebrow{display:inline-block; font-size:12px; color:#625d4e; background:var(--accent-light); border:1px solid var(--line); border-radius:999px; padding:4px 12px; margin-bottom:13px; font-weight:bold;}
+  h1{font-family:"Noto Serif TC",serif; font-weight:700; font-size:32px; line-height:1.45; margin:0 0 18px; color:#35332c;}
+  h2{font-family:"Noto Serif TC",serif; font-size:24px; line-height:1.55; margin:48px 0 18px; padding-bottom:10px; border-bottom:2px solid #ddd8ca; color:#3e3b32;}
+  h3{font-size:19px; margin:32px 0 12px; color:#464238; border-left:4px solid var(--accent); padding-left:10px;}
+  .lead{background:var(--quote); border:1px solid var(--line); border-radius:8px; padding:20px 24px; margin:24px 0 32px; color:#4d4a40; font-size:16px; line-height:1.8;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px;}
+  .tag{border:1px solid var(--line); background:var(--sub-card); color:#706b5d; border-radius:999px; padding:4px 12px; font-size:13px;}
+  .faq-box{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:24px 28px; margin:32px 0;}
+  .faq-title{font-weight:700; font-size:20px; margin:0 0 16px; color:#4c493e; border-bottom:1px solid var(--line); padding-bottom:10px;}
+  p{margin:14px 0} ul,ol{padding-left:1.8em; margin:14px 0 24px;} li{margin:6px 0} strong{font-weight:700; color:#2a2822;}
+  .related h3{margin-top:40px; border:none; padding-left:0; font-size:22px;}
+  .related a{display:block; position:relative; background-color:var(--paper); border:1px solid var(--line); border-radius:8px; padding:14px 40px 14px 16px; margin-top:10px; color:#2c5e7b; font-weight:700; text-decoration:none; transition:all 0.2s ease;}
+  .related a::after{content:"〉"; position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:16px;}
+  .related a:hover{background-color:#ffffff; border-color:#b5afa0; box-shadow:0 4px 8px rgba(70,62,45,.1);}
+  @media(max-width:700px){.page{width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px;} .article{padding:28px 24px 45px} h1{font-size:26px} h2{font-size:22px}}
+</style>
+</head>
+<body>
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜陶土與瓷土｜成型技法</div>
+  <span class="eyebrow">專業技法教學</span>
+  <h1>手捏陶藝基本技法</h1>
+  <div class="lead"><strong>一看就懂：</strong>看似隨性的手捏陶藝，其實蘊含著扎實的基本功。要將柔軟的陶土塑造成穩固且美觀的器皿，必須熟練掌握「泥條」、「拍片」、「推泥」與「壓泥」等核心技法。這些技法就像是陶藝創作的基礎詞彙，只要將它們靈活組合運用，無論是日常使用的茶杯、具備藝術感的立體雕塑，還是複雜的陶瓷材料組合，都能在雙手的引導下完美成型。本篇文章將深入拆解這些手捏陶藝基本技法的操作細節，助您穩紮穩打建立陶藝實力。</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">黏土</span><span class="tag">陶土</span><span class="tag">手捏陶</span><span class="tag">泥條</span><span class="tag">拍片</span><span class="tag">推泥</span><span class="tag">壓泥</span>
+  </div>
+
+  <h2>一、揉土與整地：所有技法的前置作業</h2>
+  <p>在進行任何手捏成型之前，將陶土處理至最佳狀態是不可或缺的步驟。未經充分揉勻的黏土內部含有氣泡或軟硬不均，這會直接導致後續推泥與壓泥時產生阻礙，甚至在燒窯時引發破裂。</p>
+  <h3>1. 菊花揉土法排除氣泡</h3>
+  <p>利用手掌根部將土團向內捲動推壓，反覆操作使內部空氣排出。這個步驟能讓泥料的質地變得緊實且水分均勻。</p>
+  <h3>2. 確認黏土的軟硬度</h3>
+  <p>適合手捏的陶土，捏起來應該像耳垂般柔軟且有彈性，彎折時不易產生深刻的裂紋。太硬需補水，太軟則需靜置風乾。</p>
+  <h3>3. 準備整潔的工作表面</h3>
+  <p>選擇一塊乾淨、吸水性適中的木板或鋪上帆布，能防止泥土黏死在桌面上，讓後續的拍片與泥條滾動更加順暢。</p>
+
+  <h2>二、壓泥技法：打造器皿的核心空間</h2>
+  <p>壓泥（Pinching）是手捏陶最經典的起手式。透過拇指與指腹的配合，將實心的泥球逐漸發展成一個中空的半球體，這是製作茶碗或小盆栽最基本的方式。</p>
+  <h3>1. 尋找中心點下壓</h3>
+  <p>將泥球握在非慣用手中，慣用手的拇指找準中心點，垂直且平穩地向下壓入，記得保留底部足夠的厚度作為器底。</p>
+  <h3>2. 均勻受力的旋轉捏壓</h3>
+  <p>拇指在內、食指與中指在外，一邊旋轉泥團，一邊由下往上輕柔地捏壓器壁，使黏土向外延展並向上長高。</p>
+  <h3>3. 避免過度施力變形</h3>
+  <p>壓泥的力道必須均勻一致，切忌在同一處反覆過度捏壓，這會導致器壁局部過薄，乾燥時容易發生坍塌或變形。</p>
+
+  <h2>三、推泥技法：平滑表面與延伸結構</h2>
+  <p>當基本造型完成後，表面常會留下明顯的指印。推泥技法不僅用於平整表面，更是將黏土向上拉伸、或是將兩塊土團無縫接合的關鍵動作。</p>
+  <h3>1. 抹平與肌理修飾</h3>
+  <p>使用指腹或木製的修坯刀，順著器壁的弧度輕推，將多餘的泥料推勻。這個動作能讓作品的外觀變得圓潤且扎實。</p>
+  <h3>2. 向上延伸器壁高度</h3>
+  <p>在手捏過程中，利用指腹由下往上、有節奏地推動泥土，可以有效增加作品的高度，同時讓器壁逐漸變薄變挺。</p>
+  <h3>3. 無縫接合的關鍵</h3>
+  <p>當添加新的泥塊或把手時，必須用推泥的方式，將新舊土團的邊緣互相交錯推平，確保兩者緊密結合不留縫隙。</p>
+
+  <h2>四、泥條技法：建構大型作品的骨幹</h2>
+  <p>當手捏的高度達到極限，泥條技法（Coiling）便成為繼續向上生長的重要手段。將陶土搓成長條，像蓋房子一樣一圈圈堆疊，能創造出尺寸驚人的立體造型。</p>
+  <h3>1. 搓揉均勻的泥條</h3>
+  <p>雙手平放在泥團上，從中央向兩側均勻滾動施力，確保搓出的泥條粗細一致。若泥條太乾，滾動時容易斷裂。</p>
+  <h3>2. 刮縫與泥漿的黏著</h3>
+  <p>在堆疊新的一圈泥條前，必須在下層邊緣刮出交叉紋路，並塗上濃稠的泥漿，這能讓上下兩層泥條緊緊咬合。</p>
+  <h3>3. 內外推平強化結構</h3>
+  <p>泥條疊加後，必須利用推泥技法將內外壁的接縫處推平。通常內部推平以確保結構穩固，外部則可選擇保留泥條的原始紋理。</p>
+
+  <h2>五、拍片技法：快速建立大面積平面</h2>
+  <p>拍片技法是指利用木拍或手掌，將泥塊拍打成厚度均勻的扁平泥板。這在製作盤子、方盒或是立體雕塑的基底時非常實用。</p>
+  <h3>1. 拍打的力道與方向</h3>
+  <p>由中心向四周放射狀地輕拍，一邊拍打一邊翻面，這樣能確保泥板受力均勻，避免單面過度延展而產生翹曲。</p>
+  <h3>2. 排除內部的潛在氣泡</h3>
+  <p>強力的拍打過程能進一步擠出黏土內部殘留的細小氣泡，使陶土的結構變得更加緻密，提升燒成後的強度。</p>
+  <h3>3. 結合模具的延伸應用</h3>
+  <p>拍打好的泥片，可以直接披覆在石膏模具或素燒碗的外部，快速成型為一個大面積的淺盤或碗缽，省時又精準。</p>
+
+  <h2>六、四種技法的綜合運用與變化</h2>
+  <p>優秀的陶藝作品往往不是單一技法能完成的。將壓泥、推泥、泥條與拍片靈活組合，才能打破造型的限制，創造出層次豐富的藝術品。</p>
+  <h3>1. 拍片為底，泥條為牆</h3>
+  <p>製作大型花盆時，常先用拍片技法製作平整厚實的底部，接著再以泥條盤築技法，一圈圈將盆壁向上疊高。</p>
+  <h3>2. 壓泥開碗，推泥拉高</h3>
+  <p>先以壓泥法捏出茶碗的底部半球體，再利用推泥的力道將上半部器壁往上拉伸收口，形成優美的器物曲線。</p>
+  <h3>3. 局部裝飾與細節添加</h3>
+  <p>主體成型後，可搓揉細小的泥條作為把手或藤蔓裝飾，並利用推泥技法將其牢牢固定在器表，增添作品的生動感。</p>
+
+  <h2>七、控制水分與溫度的進階訣竅</h2>
+  <p>在運用這些基本技法時，創作者必須具備敏銳的觀察力，隨時注意黏土水分的流失。環境的濕度與手掌的溫度，都會無形中改變陶土的狀態。</p>
+  <h3>1. 手溫對陶土的影響</h3>
+  <p>掌心溫度較高的人，捏土時水分蒸發較快，陶土容易變硬。適時用微濕的海綿沾潤雙手，能保持操作的滑順度。</p>
+  <h3>2. 分階段乾燥的策略</h3>
+  <p>製作高大作品時，底部的土必須稍微變硬（皮革硬度）才能支撐上層的重量。此時需暫停操作，用塑膠布局部覆蓋控制乾燥速度。</p>
+  <h3>3. 龜裂的緊急修補</h3>
+  <p>若在推泥或壓泥時邊緣出現細微裂痕，千萬不要直接用水狂抹，應使用指腹沾取微量泥漿，輕輕推平填補裂縫。</p>
+
+  <h2>八、建立手感的日常練習法</h2>
+  <p>熟練掌握手捏陶藝技法沒有捷徑，唯有透過反覆的練習，讓雙手記住黏土的回饋力道，才能在創作時游刃有餘。</p>
+  <h3>1. 盲捏練習法</h3>
+  <p>閉上眼睛，僅憑觸覺去進行壓泥與推泥，感受器壁厚薄的變化。這能大幅提升指尖對泥土張力的敏感度。</p>
+  <h3>2. 標準化尺寸挑戰</h3>
+  <p>嘗試連續捏出三個大小、形狀與厚度完全相同的小茶杯。這能訓練力道的穩定性與對比例的精準掌控。</p>
+  <h3>3. 突破材料極限</h3>
+  <p>挑戰將泥片拍到最薄，或將泥條搓到最細而不斷裂。透過了解材料的極限，未來在創作時更能避開失敗的風險。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">手捏技法常見問答 FAQ</div>
+    <p><strong>Q：推泥的時候，土總是會黏在手上怎麼辦？</strong><br>
+    A：可能是土太濕，或是手上有殘留乾燥的泥屑。請將雙手洗淨擦乾，或者將陶土稍微靜置風乾後再繼續操作。</p>
+    <p><strong>Q：泥條疊加上去後，作品越來越往外擴展，無法收口？</strong><br>
+    A：疊加泥條時，若放在下層泥條的外側，器形就會外擴；若要收口，必須將新泥條疊在下層泥條的「內側偏上方」，並配合推泥向內施力。</p>
+    <p><strong>Q：拍片時邊緣總是會裂開，是正常的嗎？</strong><br>
+    A：邊緣受力延展時容易產生細小裂痕是正常的。在拍打過程中，可以不時用手掌將邊緣向內輕拍收攏，就能減少邊緣龜裂的情形。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+</article>
+</main>
+</body>
+</html>

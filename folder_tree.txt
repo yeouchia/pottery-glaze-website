@@ -1,0 +1,168 @@
+Folder PATH listing
+Volume serial number is 2210-B0A3
+C:.
+¢x   BingSiteAuth.xml
+¢x   buy_clay.html
+¢x   c-index.html
+¢x   c-script.js
+¢x   c-style.css
+¢x   click.wav
+¢x   folder_tree.txt
+¢x   glass-logo.ico
+¢x   good-1.mp3
+¢x   good.wav
+¢x   googlefabc6f1b4da9450b.html
+¢x   guestbook.html
+¢x   header_bg.jpg
+¢x   hover.wav
+¢x   index.html
+¢x   knowledge-home.html
+¢x   knowledge.html
+¢x   lecture.html
+¢x   make-tree.bat
+¢x   Pottery_Website.rar-1
+¢x   sitemap.xml
+¢x   style.css
+¢x   welcome.html
+¢x   
+¢u¢w¢w¢wassets
+¢x   ¢|¢w¢w¢wjs
+¢x           knowledge-data.js
+¢x           related.js
+¢x           
+¢u¢w¢w¢wbook
+¢x   ¢x   make-tree.bat
+¢x   ¢x   
+¢x   ¢u¢w¢w¢wexperiments
+¢x   ¢x       experiments-1.html
+¢x   ¢x       
+¢x   ¢u¢w¢w¢wfiring
+¢x   ¢x       firing-1.html
+¢x   ¢x       firing-2.html
+¢x   ¢x       firing-3.html
+¢x   ¢x       firing-4.html
+¢x   ¢x       
+¢x   ¢u¢w¢w¢wglaze_basics
+¢x   ¢x       glaze_basics-1.html
+¢x   ¢x       glaze_basics-2.html
+¢x   ¢x       glaze_basics-3.html
+¢x   ¢x       glaze_basics-4.html
+¢x   ¢x       glaze_basics-5.html
+¢x   ¢x       glaze_basics-6.html
+¢x   ¢x       glaze_basics-7.html
+¢x   ¢x       
+¢x   ¢u¢w¢w¢wintro
+¢x   ¢x       intro-1.html
+¢x   ¢x       intro-1.rar
+¢x   ¢x       intro-10.html
+¢x   ¢x       intro-11.html
+¢x   ¢x       intro-12.html
+¢x   ¢x       intro-13.html
+¢x   ¢x       intro-14.html
+¢x   ¢x       intro-15.html
+¢x   ¢x       intro-16.html
+¢x   ¢x       intro-17.html
+¢x   ¢x       intro-18.html
+¢x   ¢x       intro-19.html
+¢x   ¢x       intro-2.html
+¢x   ¢x       intro-20.html
+¢x   ¢x       intro-21.html
+¢x   ¢x       intro-22.html
+¢x   ¢x       intro-23.html
+¢x   ¢x       intro-24.html
+¢x   ¢x       intro-25.html
+¢x   ¢x       intro-26.html
+¢x   ¢x       intro-27.html
+¢x   ¢x       intro-28.html
+¢x   ¢x       intro-29.html
+¢x   ¢x       intro-3.html
+¢x   ¢x       intro-30.html
+¢x   ¢x       intro-31.html
+¢x   ¢x       intro-32.html
+¢x   ¢x       intro-33.html
+¢x   ¢x       intro-34.html
+¢x   ¢x       intro-35.html
+¢x   ¢x       intro-36.html
+¢x   ¢x       intro-37.html
+¢x   ¢x       intro-38.html
+¢x   ¢x       intro-39.html
+¢x   ¢x       intro-4.html
+¢x   ¢x       intro-40.html
+¢x   ¢x       intro-5.html
+¢x   ¢x       intro-6.html
+¢x   ¢x       intro-7.html
+¢x   ¢x       intro-8.html
+¢x   ¢x       intro-9.html
+¢x   ¢x       
+¢x   ¢u¢w¢w¢wlecture
+¢x   ¢x       ch1_history.html
+¢x   ¢x       ch2_glaze_basics.html
+¢x   ¢x       ch3_glaze_mixing.html
+¢x   ¢x       ch4_glaze_application.html
+¢x   ¢x       ch5_pottery_making.html
+¢x   ¢x       ch6_safety_env.html
+¢x   ¢x       ch7_aesthetics.html
+¢x   ¢x       
+¢x   ¢u¢w¢w¢wshaping
+¢x   ¢x       shaping-1.html
+¢x   ¢x       shaping-10.html
+¢x   ¢x       shaping-2.html
+¢x   ¢x       shaping-3.html
+¢x   ¢x       shaping-4.html
+¢x   ¢x       shaping-5.html
+¢x   ¢x       shaping-6.html
+¢x   ¢x       shaping-7.html
+¢x   ¢x       shaping-8.html
+¢x   ¢x       shaping-9.html
+¢x   ¢x       
+¢x   ¢|¢w¢w¢wskills
+¢x           skills-1.html
+¢x           
+¢u¢w¢w¢wgame
+¢x       assets.js
+¢x       data.js
+¢x       game.js
+¢x       index.html
+¢x       lineage.mp3
+¢x       ui.js
+¢x       
+¢u¢w¢w¢wjiaoxue
+¢x       triaxial_basic.html
+¢x       triaxial_simulator.html
+¢x       
+¢u¢w¢w¢wphoto_edit
+¢x       phone_photo_edit.html
+¢x       photo_edit.html
+¢x       photo_edit­Ó¤Hª©.html
+¢x       
+¢u¢w¢w¢wwelcome
+¢x       1.png
+¢x       
+¢u¢w¢w¢wyouzhi
+¢x       a-index.html
+¢x       a-script.js
+¢x       a-style.css
+¢x       index.html
+¢x       script.js
+¢x       style.css
+¢x       
+¢u¢w¢w¢wyouzhi-yuanliao
+¢x       audio-wizard-start.MP3
+¢x       c-index.html
+¢x       c-script.js
+¢x       c-style.css
+¢x       sound-export.MP3
+¢x       sound-forward.MP3
+¢x       sound-import.MP3
+¢x       sound-reset.MP3
+¢x       sound-target-ok.MP3
+¢x       sound-wizard.MP3
+¢x       
+¢|¢w¢w¢wyuanliao
+        b-index.html
+        b-script.js
+        b-style.css
+        index.html
+        script.js
+        style.css
+        

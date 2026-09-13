@@ -433,6 +433,7 @@
         /* === 4. 探索陶藝知識 15大區塊與搜尋列 結束 === */
 
         /* === 5. App風格文章閱讀器 (滑動重疊層) 開始 === */
+        /* 保留原本的 Overlay 框架以防工具載入需要，教學文章將直接跳轉至知識庫 */
         .article-reader-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 3000; display: flex; flex-direction: column;
@@ -862,12 +863,13 @@
         </div>
     </div>
 
+    <!-- 這裡保留原本的 Overlay 介面給「工具類」與「留言板」使用 -->
     <div class="article-reader-overlay" id="articleReader">
         <div class="reader-header">
             <button class="reader-back-btn" onclick="closeArticle()" onmouseenter="playHover()">
                 <i class="fa-solid fa-chevron-left"></i> 返回
             </button>
-            <div class="reader-title" id="readerTitle">陶藝知識閱讀</div>
+            <div class="reader-title" id="readerTitle">陶藝工具與交流</div>
         </div>
         <iframe id="readerFrame" class="reader-frame" src=""></iframe>
     </div>
@@ -903,6 +905,9 @@
             }
         });
 
+        // ==========================================
+        // === 智慧路由：判斷前往知識庫還是開啟工具 Overlay ===
+        // ==========================================
         function openArticle(url, title, isReady) {
             playClick();
             
@@ -911,18 +916,26 @@
                 return;
             }
 
-            document.getElementById('readerTitle').innerText = title;
-            document.getElementById('readerFrame').src = url;
-            document.getElementById('articleReader').classList.add('show');
-            document.body.style.overflow = 'hidden'; 
+            // 【智慧路由】：判斷點擊的是「工具/獨立頁面」還是「知識文章」
+            const isToolOrApp = url.includes('yuanliao') || 
+                                url.includes('youzhi') || 
+                                url.includes('guestbook') || 
+                                url.includes('jiaoxue');
+
+            if (isToolOrApp) {
+                // 如果是計算機工具或留言板，直接在當前 iframe 跳轉頁面
+                window.location.href = url;
+            } else {
+                // 如果是教學文章，自動萃取檔名作為 ID (例如 './book/buy_clay.html' 萃取出 'buy_clay')
+                const articleId = url.split('/').pop().replace('.html', '');
+                
+                // 帶上參數，完美跳轉到我們新做的知識庫大廳！
+                window.location.href = 'knowledge.html?article=' + articleId;
+            }
         }
 
         function closeArticle() {
-            playClick();
-            document.getElementById('articleReader').classList.remove('show');
-            document.body.style.overflow = ''; 
-            
-            setTimeout(() => { document.getElementById('readerFrame').src = ''; }, 400);
+            // 已廢棄：改由直接跳轉或透過首頁頂部導航列返回
         }
 
         function filterCards() {
