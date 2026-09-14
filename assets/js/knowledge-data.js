@@ -68,7 +68,17 @@ const knowledgeTree = [
 { id: "shaping-12", title: "陶板如何製作？", tag: "成型技法", url: "./book/shaping/shaping-12.html" },
 { id: "shaping-13", title: "土板厚度如何控制？", tag: "成型技法", url: "./book/shaping/shaping-13.html" },
 { id: "shaping-14", title: "土板為什麼會翹曲？", tag: "成型技法", url: "./book/shaping/shaping-14.html" },
-{ id: "shaping-15", title: "土板作品如何組合？", tag: "成型技法", url: "./book/shaping/shaping-15.html" }
+{ id: "shaping-15", title: "土板作品如何組合？", tag: "成型技法", url: "./book/shaping/shaping-15.html" },
+
+
+{ id: "shaping-16", title: "模具成型是什麼？需要什麼設備？", tag: "成型技法", url: "./book/shaping/shaping-16.html" },
+{ id: "shaping-17", title: "陶藝石膏模具的製作", tag: "成型技法", url: "./book/shaping/shaping-17.html" },
+{ id: "shaping-18", title: "單面模、多片模", tag: "成型技法", url: "./book/shaping/shaping-18.html" },
+{ id: "shaping-19", title: "壓模成型、注將成型", tag: "成型技法", url: "./book/shaping/shaping-19.html" },
+{ id: "shaping-20", title: "模具成型的優缺點", tag: "成型技法", url: "./book/shaping/shaping-20.html" }
+
+
+
 
         ]
     },
