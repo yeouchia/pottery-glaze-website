@@ -62,7 +62,13 @@ const knowledgeTree = [
 { id: "shaping-7", title: "陶藝盤築技巧", tag: "手捏成型", url: "./book/shaping/shaping-7.html" },
 { id: "shaping-8", title: "如何讓盤築作品不倒？", tag: "手捏成型", url: "./book/shaping/shaping-8.html" },
 { id: "shaping-9", title: "盤築成型常見問題", tag: "手捏成型", url: "./book/shaping/shaping-9.html" },
-{ id: "shaping-10", title: "大型作品如何盤築？", tag: "手捏成型", url: "./book/shaping/shaping-10.html" }
+{ id: "shaping-10", title: "大型作品如何盤築？", tag: "手捏成型", url: "./book/shaping/shaping-10.html" },
+
+{ id: "shaping-11", title: "土板成型是什麼？", tag: "成型技法", url: "./book/shaping/shaping-11.html" },
+{ id: "shaping-12", title: "陶板如何製作？", tag: "成型技法", url: "./book/shaping/shaping-12.html" },
+{ id: "shaping-13", title: "土板厚度如何控制？", tag: "成型技法", url: "./book/shaping/shaping-13.html" },
+{ id: "shaping-14", title: "土板為什麼會翹曲？", tag: "成型技法", url: "./book/shaping/shaping-14.html" },
+{ id: "shaping-15", title: "土板作品如何組合？", tag: "成型技法", url: "./book/shaping/shaping-15.html" }
 
         ]
     },
