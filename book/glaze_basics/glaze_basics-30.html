@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從配方到化學的終極解碼：釉藥配方 → 氧化物 → Seger 釉式 (UMF)</title>
+<meta name="description" content="完整解析陶藝釉藥的終極科學：從傳統的重量配方，轉換為氧化物分析，最終導出 Seger 釉式 (UMF)。學習如何透過統一分子式精準預測、調整並開發專屬陶瓷釉藥。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     ========================================= */
+
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+  </style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉藥計算工具</div>
+  <span class="eyebrow">終極配方理論</span>
+  <h1>從配方到化學的終極解碼：釉藥配方 → 氧化物 → Seger／UMF 釉式</h1>
+  
+  <div class="lead">
+    <strong>一看就懂：</strong>在陶藝學習的初期，我們習慣依賴「重量配方」（例如：長石 40克、石英 30克），就像看食譜做菜一樣。然而，當原料產地改變、配方出現嚴重瑕疵，或是想將別人的高溫配方改為低溫時，單看重量是找不到答案的。要真正掌控窯火，我們必須跨越三個層次：首先，將實體「原料」轉化為高溫下的「氧化物」；接著，運用分子量將其標準化；最後，匯集成陶藝科學的最高指導原則——「Seger 釉式（UMF，統一分子式）」。這套由德國化學家赫爾曼·塞格創立的系統，是全世界陶藝家共通的化學語言。本文將帶您一步步拆解這套系統，讓您從此不再盲目試燒，具備獨立分析、修正與開發專業陶瓷釉藥的強大能力。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span>
+    <span class="tag">釉藥組成</span>
+    <span class="tag">Seger Formula</span>
+    <span class="tag">UMF</span>
+    <span class="tag">釉式計算</span>
+    <span class="tag">氧化物</span>
+    <span class="tag">化學當量</span>
+    <span class="tag">配方分析</span>
+    <span class="tag">陶瓷材料</span>
+  </div>
+
+  <h2>一、為什麼傳統的「重量配方表」還不夠？</h2>
+  <p>許多陶藝愛好者手中都握有一本寫滿秘方的筆記本，上面記載著各種原料的克數與百分比。然而，這種基於「重量」的紀錄方式，在跨越不同時間與空間時，往往會面臨嚴峻的挑戰。</p>
+
+  <h3>1. 重量配方的致命侷限性</h3>
+  <p>重量配方最大的問題在於它只顯示了「加了什麼礦物」，卻無法揭露「這些礦物在高溫下提供了什麼化學成分」。例如，加入 20 克的碳酸鈣和加入 20 克的矽灰石，雖然重量相同且兩者都含有鈣，但後者還額外帶入了大量的二氧化矽，這會導致兩桶釉藥燒出來的結果天差地遠。單看重量，我們無法預測它們的熔點與熱膨脹變化。</p>
+
+  <h3>2. 原料產地與批次的變數</h3>
+  <p>地球上的天然礦物從來不是純粹的化學物質。台灣材料行的「印度鉀長石」，與美國陶藝書上的「Custer Feldspar」，雖然都叫鉀長石，但它們內部的鉀、鈉、矽、鋁比例截然不同。如果你直接照抄國外配方的「重量」，燒出來的結果通常會失敗。唯有將材料還原成化學成分，才能找到精準的在地替代方案。</p>
+
+  <h3>3. 建立「統一比較基準」的迫切需求</h3>
+  <p>當一位陶藝家想要將一款 1280℃ 的高溫天目釉，改良成適合 1200℃ 電窯燒成的中溫釉時，他需要知道該增加多少助熔劑、減少多少石英。如果沒有一個科學的比較基準，這個過程將淪為無止盡的盲目猜測。我們需要一套系統，能將所有雜亂的重量數據，轉換為可供量化分析的化學圖譜。</p>
+
+  <h2>二、轉換的第一步：從實體原料拆解為化學氧化物</h2>
+  <p>要進入釉式的世界，第一步是拋開手上的粉末，學會用化學家的眼睛，看出這些粉末在高溫窯爐中釋放出的真實靈魂——氧化物。</p>
+
+  <h3>1. 原料分解與燒灼減量 (LOI)</h3>
+  <p>當原料被加熱到 1000℃ 以上時，許多我們秤重的物質會化為氣體消失。例如，碳酸鋇（BaCO₃）在高溫下會釋放二氧化碳（CO₂），只留下氧化鋇（BaO）參與玻璃反應。這消失的重量稱為「燒灼減量（LOI）」。因此，我們計算配方時，必須先剔除這些會揮發的成分，只留下真正構築釉面的高溫氧化物。</p>
+
+  <h3>2. 辨識三大類氧化物角色</h3>
+  <p>在窯爐中留下來的氧化物，根據它們的化學行為，被嚴格分為三大陣營：第一是「鹼性氧化物（如 K₂O、CaO）」，它們負責破壞結構、降低熔點；第二是「中性氧化物（如 Al₂O₃）」，負責增加黏度與穩定性；第三是「酸性氧化物（如 SiO₂）」，負責建立玻璃的堅固骨架。釐清這三者的對立與合作關係，是釉藥設計的基礎。</p>
+
+  <h3>3. 莫耳數 (Mole) 概念的導入</h3>
+  <p>化學反應是原子與分子之間的結合，而不是重量的直接堆疊。10 克的氧化鉛和 10 克的氧化鋰，它們所包含的分子數量差距極大。因此，我們必須將原料的「重量」除以其「分子量」，轉換為「莫耳數（Mole）」。莫耳數能真實反映出該氧化物在釉藥網絡中佔據的活躍程度與影響力。</p>
+
+  <h2>三、認識 Seger 釉式 (UMF) 的歷史與核心架構</h2>
+  <p>將重量轉換為莫耳數後，數字依然龐雜難讀。為了讓全世界的陶藝家能一眼看穿配方的本質，一種被稱為「統一分子式（Unity Molecular Formula, UMF）」的系統應運而生。</p>
+
+  <h3>1. 赫爾曼·塞格 (Hermann Seger) 的偉大貢獻</h3>
+  <p>十九世紀末，德國陶瓷化學家赫爾曼·塞格為了標準化陶瓷工業，發明了這套系統（同時他也發明了測溫用的塞格測溫錐）。他將釉藥中複雜的氧化物依照化學性質分為 RO、R₂O₃、RO₂ 三組，並建立了一個極為巧妙的數學正規化規則，這項發明至今仍是全球陶瓷工程的基石。</p>
+
+  <h3>2. 釉式的三大直欄分類 (RO/R₂O, R₂O₃, RO₂)</h3>
+  <p>在標準的 Seger 釉式表中，你會看到三個直欄。左欄是 RO 或 R₂O，專門放置所有的助熔劑（如鉀、鈉、鈣、鎂）；中欄是 R₂O₃，主要放置氧化鋁（Al₂O₃）與部分特殊元素（如硼）；右欄是 RO₂，專門放置二氧化矽（SiO₂）及鈦、鋯等乳濁劑。這種排列方式，讓釉藥的「動能（助熔）」與「骨架（矽鋁）」一目了然。</p>
+
+  <h3>3. 助熔劑總和為 1 的數學正規化</h3>
+  <p>這是 UMF 系統中最關鍵的魔法：**將左欄（助熔劑）的所有莫耳數相加，然後將整個配方的所有數字同除以這個總和，使得左欄的總和永遠等於 1.0**。透過這個「歸一化」的動作，無論原本配方是 100 克還是 1000 噸，都被壓縮到同一個比較基準上。我們只需觀察中欄與右欄的數字，就能立刻判斷這款釉藥的熔融溫度與表面光澤。</p>
+
+  <h2>四、剖析 RO/R₂O 組：啟動熔融的引擎</h2>
+  <p>位於釉式左欄的助熔群，就像是汽車的引擎，決定了釉藥在什麼溫度啟動、爆發多強的流動性，以及最終釉面的膨脹與收縮。</p>
+
+  <h3>1. 鹼金屬 (鉀 K₂O、鈉 Na₂O) 的強效與副作用</h3>
+  <p>這類氧化物通常來自長石或霞石正長岩。在 UMF 中，如果鹼金屬的比例佔據了助熔群（總和 1.0）的 0.3 以上，這款釉藥通常會有極佳的低溫流動性與鮮豔的金屬發色。但代價是，它的熱膨脹係數會飆高，極易在燒成後產生嚴重的網狀開片。</p>
+
+  <h3>2. 鹼土金屬 (鈣 CaO、鎂 MgO、鋇 BaO) 的輔助與穩定</h3>
+  <p>為了牽制鹼金屬的副作用，我們必須在左欄加入鹼土金屬。氧化鈣是最堅實的基底，通常佔據 UMF 左欄 0.5 到 0.7 的比例，它能在中高溫提供優異的透明度與硬度。而氧化鎂則能大幅增加表面張力，當它在左欄的比例超過 0.25 時，釉面往往會轉向溫潤的平光或無光質感。</p>
+
+  <h3>3. 助熔群內部比例的平衡藝術</h3>
+  <p>一個設計優良的釉式，其左欄絕對不會只有單一氧化物。如同烹飪需要油、鹽、糖的平衡，最佳的助熔效果通常來自「共熔現象」。在 UMF 中維持鹼金屬（約 0.2~0.3）與鹼土金屬（約 0.7~0.8）的黃金比例，是確保釉面既能平滑熔融，又不會嚴重開片的關鍵策略。</p>
+
+  <h2>五、剖析 R₂O₃ 組：穩定與成色的中樞</h2>
+  <p>中欄的數值，主宰了釉藥在高溫液態時的「黏稠度（Viscosity）」。沒有這個欄位，所有的釉藥都會像水一樣流到窯爐的棚板上。</p>
+
+  <h3>1. 氧化鋁 (Al₂O₃) 的絕對統治地位</h3>
+  <p>在傳統釉式中，氧化鋁是 R₂O₃ 欄位的絕對主角。它在 UMF 中的數值，直接決定了釉面是光亮還是消光。對於 1230℃ 的中溫釉而言，當 Al₂O₃ 的值落在 0.25 到 0.4 之間時，通常會產生漂亮的透明亮面；若數值飆升至 0.5 以上，多餘的氧化鋁無法溶解，便會形成粗糙或乾澀的消光表面。</p>
+
+  <h3>2. 氧化硼 (B₂O₃) 在現代釉式中的特殊處理</h3>
+  <p>氧化硼（B₂O₃）在化學式上屬於 R₂O₃，但它的行為卻是強悍的低溫助熔劑。早期學者將它放在中欄，這常導致計算混亂。現代的網頁釉式計算軟體，通常會將 B₂O₃ 獨立標示，或者在計算左欄總和時給予它特殊的權重考量。對於低溫無鉛釉，掌握硼在 UMF 中的莫耳數（通常在 0.3~0.8 之間），是決定釉藥是否熟透的唯一指標。</p>
+
+  <h3>3. 金屬發色劑在釉式中的標示位置</h3>
+  <p>值得注意的是，我們常加入的鐵、銅、鈷等金屬氧化物，在嚴謹的 UMF 計算中，通常被視為「外加物」，不參與左欄總和等於 1 的正規化計算。這是因為它們添加的量相對極微，且主要功能是染色而非改變基礎玻璃的骨架（儘管高比例的鐵確實有助熔作用）。將色料與基礎釉式分開檢視，能幫助我們更清晰地進行色彩實驗。</p>
+
+  <h2>六、剖析 RO₂ 組：建構玻璃的酸性骨架</h2>
+  <p>右欄是建構整個陶瓷玻璃網絡的基石。這個欄位的數值大小，決定了釉面抵抗刀叉刮痕與抵抗酸鹼侵蝕的終極強度。</p>
+
+  <h3>1. 二氧化矽 (SiO₂) 的網狀結構與數值意義</h3>
+  <p>SiO₂ 是釉式中最龐大的數字。在 Cone 6（1222℃）的環境下，UMF 右欄的二氧化矽數值通常落在 2.5 到 3.5 之間。當數值過低時，玻璃結構不完整，釉面會出現流淌且容易被檸檬汁等酸性物質腐蝕；當數值過高時（例如超過 4.5），助熔劑無法將其完全熔化，表面會變得粗糙且呈現未熟的渾濁感。</p>
+
+  <h3>2. 矽鋁比 (Si:Al) 與釉面質感的對應關係</h3>
+  <p>將右欄的 SiO₂ 數值除以中欄的 Al₂O₃ 數值，就得到了釉藥科學中最著名的「矽鋁比」。透過數十年的實驗累積（如著名的 Stull 座標圖），我們確知：矽鋁比在 8 到 12 之間是光澤釉；低於 5 則是無光釉。在 UMF 的輔助下，只要微調配方使矽鋁比移動到目標區間，就能隨心所欲地控制光澤度。</p>
+
+  <h3>3. 鈦、鋯等乳濁劑的酸性歸屬</h3>
+  <p>當我們希望釉面呈現不透明的白色（乳濁釉）時，會加入二氧化鈦（TiO₂）或矽酸鋯（ZrSiO₄）。這些金屬氧化物在釉式中同樣被歸類在 RO₂ 組。它們在高溫下不易完全溶解，或者在冷卻時會率先結晶析出，透過折射光線來達到遮蓋底色的效果。在檢視 UMF 時，必須將它們與 SiO₂ 的骨架功能區分開來評估。</p>
+
+  <h2>七、從理論到實踐：如何運用 UMF 調整釉藥</h2>
+  <p>學習 Seger 釉式的終極目的，是為了解決工作檯上的實際問題。UMF 是陶藝家手中最強大的診斷工具與導航儀。</p>
+
+  <h3>1. 解決開片與熱膨脹問題的科學處方</h3>
+  <p>當你最喜歡的透明釉在杯子上產生開片時，不再需要盲目亂加材料。打開 UMF 試算表，檢查左欄的鈉與鉀是否過高（通常超過 0.3）。解決方案是：引入低膨脹的元素。你可以在維持左欄總和為 1 的前提下，增加氧化鎂或氧化鈣的比例；或者同步提高右欄的 SiO₂ 數值，藉由增加低膨脹的玻璃骨架來根除開片現象。</p>
+
+  <h3>2. 調整燒成溫度的精準降溫法</h3>
+  <p>如果你在書上看到一款極美的 1300℃ 高溫青瓷，想在自己的 1200℃ 電窯中重現。直接燒一定會生燒無光。透過 UMF，你可以在維持原配方矽鋁比與鈣鉀比例（保持青瓷質感與發色）的情況下，適度引入 0.1 到 0.2 莫耳的氧化硼（B₂O₃），或者微調左欄增加氧化鋅（ZnO）的助熔力。UMF 能確保你在降溫的過程中，不會迷失原有的釉藥性格。</p>
+
+  <h3>3. 替換停產原料的無縫接軌計算</h3>
+  <p>陶藝界經常面臨某種特定長石或熔塊突然停產的困境。有了 UMF，這完全不成問題。只要知道新原料的化學成分分析，將其輸入軟體中，透過微調其他基礎原料（如加一點石英、扣一點高嶺土），就能配湊出與原配方 UMF 數值一模一樣的新配方，達到 100% 的無縫接軌替換，這正是化學計算的威力所在。</p>
+
+  <h2>八、現代科技的輔助：釉藥計算軟體與網頁工具</h2>
+  <p>百年前的陶藝家必須依靠厚重的參考書與計算尺來推導 UMF；而在當代，結合程式設計的網頁應用程式，已將這門科學推向了極致的普及與便利。</p>
+
+  <h3>1. 告別手算的繁瑣過程</h3>
+  <p>現代陶藝教學與研發，已經全面導入數位化的「釉藥化學計算工具（如 Glazy 或各類自建 Web App）」。創作者只需在直覺的操作介面上，輸入材料行買來的原料與重量百分比，後端程式就會自動查詢龐大的材料分子量資料庫，瞬間轉換並輸出精確的 Seger UMF 表格，甚至自動算出熱膨脹係數預測值。</p>
+
+  <h3>2. 善用視覺化圖表與三角座標分析</h3>
+  <p>進階的計算網頁不僅能顯示數字，還能將 UMF 數值直接投射到視覺化的「Stull Chart（矽鋁座標圖）」上。一個紅點落在哪個區域，釉面是亮、是霧、是流淌還是乾澀，一目了然。配合網頁工具生成的「三角座標配方表（Triaxial Blend）」，能幫助職業學校的學生或個人創作者，在最短時間內規劃出嚴謹的漸層試片實驗。</p>
+
+  <h3>3. 建立個人專屬的數位釉藥資料庫</h3>
+  <p>對於長期投入陶藝教學或創作的人而言，建立並維護一套屬於自己的線上釉藥資料庫是無價的資產。透過軟體記錄每一次試片的配方、UMF 數據以及燒成後的照片，這些數據將成為日後改良缺陷、開發新釉色時最可靠的基石。將傳統窯火技藝與現代資訊科學結合，正是當代陶瓷工藝最迷人的演進方向。</p>
+
+  
+  <div class="faq-box">
+    <div class="faq-title">Seger 釉式 (UMF) 常見問答 FAQ</div>
+    <p><strong>Q：學會看 UMF，我就能配出任何我想要的釉藥而且一次成功嗎？</strong><br>
+    A：UMF 是一個強大的「預測與分析」工具，能幫你避開 80% 註定失敗的配方比例。但陶瓷燒成還包含物理層面（如釉漿厚度、顆粒粗細）與窯爐環境（如氧化還原氣氛、升降溫曲線）。UMF 能給你正確的方向，但最終的微調依然需要透過試片與窯火來印證。</p>
+    
+    <p><strong>Q：為什麼不同的釉藥計算軟體，算出來的熱膨脹係數 (COE) 會不一樣？</strong><br>
+    A：因為計算熱膨脹係數的模型有很多種（例如 English & Turner、Winkelmann & Schott 等），不同的科學家在不同年代給予各個氧化物的「膨脹係數常數」略有不同。重要的是「統一使用一種模型」來進行配方之間的相對比較，看數值是變大還是變小，這比追求絕對的物理數值更有實務意義。</p>
+    
+    <p><strong>Q：我只是一個初學者，現在學 UMF 會不會太難？</strong><br>
+    A：完全不會！現在有非常多免費且介面友善的網頁版釉藥計算工具。您可以先從輸入您常用的配方開始，觀察數字的變化，不必強求自己手動計算莫耳數。當您遇到「開片」或「流釉」想尋求解答時，UMF 將會成為您最好的老師。</p>
+    
+    <p><strong>Q：Seger 釉式的 RO 欄位總和一定要等於 1 嗎？</strong><br>
+    A：傳統的 Seger UMF 是如此定義的，這為了方便比較矽和鋁的相對比例。但在現代某些特殊計算系統中（例如百分比莫耳數 Mole%），可能會採用不同的基準。不過，對於絕大多數中高溫日用陶藝配方而言，將 RO/R₂O 歸一化（總和為 1）依然是最經典且最好用的分析視角。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>

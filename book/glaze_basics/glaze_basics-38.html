@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釉藥科學：熔塊（Frit）在釉藥配方計算中的角色與應用</title>
+<meta name="description" content="深入探討熔塊（Frit）在賽格爾釉式（Seger Formula）與配方計算中的核心角色。學習如何透過網頁計算工具與三角座標測試，精準替換釉藥材料，提升陶瓷燒成的穩定性。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     ========================================= */
+
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥計算工具｜釉藥配方與釉式</div>
+  <span class="eyebrow">科學配釉與數據運算</span>
+  <h1>釉藥科學：熔塊（Frit）在釉藥配方計算中的角色與應用</h1>
+  
+  <div class="lead">
+    <strong>一看就懂：</strong>從傳統的「憑感覺抓比例」，跨越到現代陶瓷工程的「精準科學計算」，是每一位陶藝創作者與學習者進階的必經之路。在釉藥實驗課程與開發過程中，我們不再只是盲目混合粉末，而是透過化學莫耳數來透視玻璃質的微觀結構。而在這場化學運算中，「熔塊（Frit）」扮演著一個極為特殊的角色。它不同於化學式單一的天然礦物，熔塊是一種已經預先燒結、充滿多種元素的「複合分子群」。要如何在賽格爾釉式（Seger Formula）中正確引入熔塊？如何利用網頁版計算工具與三角座標測試法，精準推算出熔塊與生釉原料之間的完美平衡？本篇文章將為您拆解複雜的數學迷宮，帶您掌握利用熔塊進行釉藥配方替換與計算的核心邏輯，讓您的配釉技術不再依賴運氣，而是建立在扎實的科學數據之上。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">釉藥計算工具</span>
+    <span class="tag">賽格爾釉式</span>
+    <span class="tag">熔塊 Frit</span>
+    <span class="tag">陶藝教學</span>
+    <span class="tag">三角座標</span>
+    <span class="tag">化學莫耳數</span>
+    <span class="tag">釉藥組成</span>
+    <span class="tag">網頁計算機</span>
+  </div>
+
+  <h2>一、從直覺配釉到科學計算：賽格爾（Seger）釉式的基礎</h2>
+  <p>在探討熔塊的計算之前，我們必須先建立釉藥化學的共通語言。古代陶工依賴世代相傳的重量比例（例如：草木灰三成、瓷土七成），但這種方式一旦更換了產地的材料，釉色往往面目全非。為了解決這個問題，德國化學家赫爾曼·賽格爾（Hermann Seger）發明了革命性的「釉式」。</p>
+  
+  <h3>1. 什麼是賽格爾釉式（Seger Formula）？</h3>
+  <p>賽格爾釉式不看原料的「重量」，而是看它們在高溫下發揮作用的「分子數量（莫耳數）」。他將釉藥中的氧化物分為三大類：RO/R2O（鹼金屬與鹼土金屬，作為助熔劑）、R2O3（兩性氧化物，主要是氧化鋁，作為穩定劑），以及 RO2（酸性氧化物，主要是二氧化矽，作為玻璃形成物）。在標準釉式中，為了方便比較，我們會將助熔劑（RO/R2O）的總莫耳數強制設定為 1.0。</p>
+
+  <h3>2. 莫耳數與重量百分比的轉換</h3>
+  <p>我們在電子秤上量到的是公克（重量），但化學反應看的是分子數（莫耳）。要將重量轉換為釉式，必須將每種原料的重量除以它的「分子量」。這就像是把不同幣值的各國貨幣，全部換算成美金來進行統一比較。透過這個轉換，陶藝家可以穿透材料表象，直接看到配方中真正參與反應的化學元素比例。</p>
+
+  <h3>3. 統一標準帶來的配方重現性</h3>
+  <p>一旦我們掌握了理想釉色的「賽格爾釉式」，無論身處何地，只要利用當地的礦物或熔塊，重新透過數學計算拼湊出相同的化學莫耳比例，就能在窯爐中重現一模一樣的釉面質感。這是陶藝科學化與現代釉藥實驗室教學中最核心的基礎，也是我們能精準運用熔塊的前提。</p>
+
+  <h2>二、熔塊在化學組成式中的特殊地位</h2>
+  <p>在進行釉藥計算時，天然生釉原料通常具有相對簡單且固定的化學式（例如石英就是 SiO2，碳酸鈣就是 CaCO3）。但當我們將熔塊引入計算表時，情況就變得複雜許多。</p>
+
+  <h3>1. 熔塊不是單一礦物，而是複合分子</h3>
+  <p>熔塊是工廠將多種原料高溫熔融後製成的玻璃粉末。這意味著，單一一種熔塊的化學式裡，可能同時包含了氧化鈉、氧化鈣、氧化硼、氧化鋁與二氧化矽等多達五六種元素。在計算軟體中，加入 100 克的熔塊，等同於同時向配方中注入了這五六種不同比例的化學分子。</p>
+
+  <h3>2. 廠商提供的化學分析表（MSDS）</h3>
+  <p>要精準計算熔塊，陶藝家絕對不能用猜的。必須依賴製造商（如 Ferro、Degussa 等）提供的產品化學分析表。這些數據通常會以「理論分子式」或是「重量百分比」的形式呈現。在建立個人的計算工具資料庫時，必須將這些精確到小數點後三位的數據逐一建檔，計算出來的結果才會具有參考價值。</p>
+
+  <h3>3. 處理化學式中的小數點與變數</h3>
+  <p>由於熔塊是人造配方，其化學式往往充滿了不規則的小數點（例如某款熔塊可能含有 0.34 莫耳的 Na2O 和 0.66 莫耳的 CaO）。在手寫計算的年代，這是一場漫長且容易出錯的數學夢魘。這也凸顯了為什麼現代陶瓷工程系所與專業創作者，極度仰賴數位化工具來處理這些繁雜的矩陣運算。</p>
+
+  <h2>三、如何在配方計算中引入或替換熔塊</h2>
+  <p>在釉藥實驗中，我們最常遇到的挑戰是：手邊有一個好用的配方，但其中某個原料停產了，或者我們想把一個會產生毒氣的生釉配方，替換成安全的熔塊配方。這時就需要運用「化學平衡」的計算技巧。</p>
+
+  <h3>1. 為什麼需要替換熔塊？</h3>
+  <p>替換材料的動機很多。可能是為了解決水溶性原料（如純鹼）帶來的流釉問題，可能是為了降低燒成溫度（引入含硼熔塊），也可能是因為原本配方熱膨脹係數太高導致冰裂，需要替換成低膨脹率的熔塊。不管是哪種原因，目標都是「改變物理性質，但盡可能維持原來的視覺質感」。</p>
+
+  <h3>2. 數學平衡：補足缺失與扣除多餘</h3>
+  <p>替換的邏輯是「補差價」。假設您想用一款硼熔塊（含有鈣、鈉、矽、鋁）來取代配方中原本的碳酸鈣。當您加入這款熔塊以滿足鈣的需求時，這款熔塊同時也會「偷渡」額外的鈉、矽和鋁進入配方。因此，您必須在配方中扣除原本的長石（減少鈉和鋁）與石英（減少矽），才能讓最終的總化學式恢復到最初的平衡狀態。</p>
+
+  <h3>3. 保持釉式總莫耳數的一致性</h3>
+  <p>在所有增減替換的過程中，最關鍵的原則是：無論怎麼替換原料，最終釉式中 RO/R2O（助熔劑）的總和必須永遠保持為 1.0。只要這個基準線沒有跑掉，矽鋁比（SiO2 / Al2O3）維持一致，燒出來的釉藥熔點與質感就會與原配方高度相似。這就是釉式計算的魔力。</p>
+
+  <h2>四、現代數位工具與網頁版釉藥計算機的應用</h2>
+  <p>對於教育工作者與釉藥開發者而言，將上述繁複的數學邏輯轉化為自動化的數位程式，是提升效率與精準度的巨大飛躍。</p>
+
+  <h3>1. 告別手算：數位工具的崛起</h3>
+  <p>過去，陶藝學生必須拿著計算機與紙筆，花費數小時才能解開一個含有多種熔塊的配方。如今，透過撰寫 JavaScript 等程式語言，我們可以將化學分子量、賽格爾公式的轉換邏輯寫入網頁應用程式（Web App）中。只要輸入每種材料的公克數，螢幕上瞬間就能呈現完美的化學莫耳分佈圖。</p>
+
+  <h3>2. 建立專屬的陶瓷材料資料庫</h3>
+  <p>一個強大的釉藥計算機，背後必須有一個精準的資料庫。許多專注於陶藝教學的開發者，會將台灣在地常使用的礦石（如長石、石英、碳酸鋇）與市售各種編號的熔塊化學數據，統整並部署於 GitHub Pages 或 Vercel 等平台上。這不僅方便創作者隨時調用，也能隨著材料批次的變化進行雲端更新。</p>
+
+  <h3>3. 跨平台網頁工具在教學與實驗室的優勢</h3>
+  <p>在實際的陶藝釉藥實驗課程中，學生可以直接在手機或平板上打開網頁版計算工具。當教師引導學生探討「如果把配方中的 Frit 3124 增加 10%，會對二氧化矽的比例造成什麼影響？」時，學生能立即在介面上拉動滑桿，看到數據的即時變化。這種互動式、視覺化的學習方式，讓冰冷的化學式變得直觀且易於掌握。</p>
+
+  <h2>五、結合三角座標系統（Triangular Bi-axial Blends）的實務測試</h2>
+  <p>雖然釉式計算能提供科學的方向，但窯爐內的氣氛與升溫曲線是無法完全被數學量化的。因此，將計算結果與「三角座標配方測試」結合，是驗證熔塊配方的終極手段。</p>
+
+  <h3>1. 理論計算與實際燒成的落差</h3>
+  <p>有時候，就算兩組配方的賽格爾釉式完全一模一樣，燒出來的光澤度或氣泡量仍會有細微差異。這是因為熔塊是預先燒過的玻璃，其熱反應速度遠快於生釉礦物。為了捕捉這種動態的物理變化，我們必須進行實體的試片燒製。</p>
+
+  <h3>2. 什麼是三角座標測試法？</h3>
+  <p>三角座標（Triangular Blend）是一種針對三種變數進行系統性混合的實驗方法。在一個等邊三角形的圖紙上，三個頂點分別代表三種極端的配方。透過特定的幾何比例，我們可以在三角形內部調配出 15 個或 21 個漸進變化的混合配方。這能在一次燒成中，展示出成分變化的完整光譜。</p>
+
+  <h3>3. 將熔塊作為變數的矩陣實驗</h3>
+  <p>在設計釉藥課程或開發新釉色時，我們可以將 A 頂點設定為純生釉配方，B 頂點設定為高熔塊配方，C 頂點則是高氧化鋁的消光配方。透過三角座標的矩陣混合，我們可以直觀地觀察到：隨著熔塊比例的逐漸增加，釉面是如何從乾澀轉為平滑，冰裂紋是如何消失，或是金屬發色是如何產生戲劇性的轉變。這種將計算與實作結合的嚴謹訓練，能為陶藝家奠定深厚的材質掌控力。</p>
+
+  <h2>六、計算中的水溶性與燒失量（LOI）陷阱</h2>
+  <p>在操作釉藥計算軟體時，有一個經常被初學者忽略的變數，那就是材料在高溫下的「質量流失」。這個概念對於精準衡量熔塊的價值至關重要。</p>
+
+  <h3>1. 生釉原料的高燒失量（LOI）</h3>
+  <p>許多生釉原料在常溫下含有結晶水或碳酸根。例如，當您秤了 100 克的碳酸鈣（CaCO3）進入窯爐，在 900°C 時它會釋放二氧化碳（CO2），燒成後實際上只剩下 56 克的氧化鈣（CaO）參與釉面的形成。這消失的 44 克氣體，在化學上稱為「燒失量（Loss on Ignition, LOI）」。</p>
+
+  <h3>2. 熔塊的零燒失量優勢</h3>
+  <p>相較之下，熔塊在工廠製造階段就已經歷過超高溫的煆燒。這意味著熔塊的燒失量幾乎是零（LOI = 0%）。您在電子秤上量了 100 克的熔塊，燒成後留在陶瓷表面的就是扎扎實實的 100 克玻璃質。在計算軟體中，這個差異會極大地影響釉藥在素坯上實際生成的「厚度與黏度」。</p>
+
+  <h3>3. 重量與體積在施釉時的落差調整</h3>
+  <p>如果我們把一個高 LOI 的生釉配方，計算替換成低 LOI 的熔塊配方，即使兩者的化學莫耳數相同，調配出來的釉漿「比重（Specific Gravity）」與「懸浮體積」會有極大差異。含有大量生釉的釉漿通常比較蓬鬆、吸水性強；而高熔塊釉漿則密度極高。因此，計算完配方後，實務上還必須針對水分比例與懸浮劑（如 CMC）進行物理性的調整。</p>
+
+  <h2>七、針對不同溫段（低溫至中高溫）的計算策略</h2>
+  <p>在釉藥計算機中，我們不只是追求數據的平衡，更要根據目標的「燒成溫度」，設定適當的化學限制範圍（Limit Formulas）。</p>
+
+  <h3>1. 低溫釉的計算重點：控制膨脹係數</h3>
+  <p>針對 1050°C 以下的低溫配方，計算的核心往往是圍繞著「強效助熔劑（如鈉、鉀、硼）」展開。由於需要大量使用這類熔塊，導致整體的熱膨脹係數極容易飆高。因此，在計算介面上，開發者必須密切盯著預測的 COE 數值，試圖在不過度提高熔點的前提下，微調加入一些低膨脹的元素，以防止低溫陶瓷最常見的嚴重冰裂。</p>
+
+  <h3>2. 中溫電窯：氧化硼與矽鋁比的最佳化</h3>
+  <p>在 1200°C 左右的中溫電窯（Cone 6）中，氧化硼（B2O3）的用量是計算的關鍵。過多的硼會導致釉面產生雲霧狀的藍白光（Boron Blue 瑕疵），過少則釉藥無法平整。在這個溫段，計算策略是利用中等熔點的熔塊，將氧化硼的莫耳數精準控制在 0.15 到 0.25 之間，並優化矽與鋁的比例，確保釉面堅固且清澈。</p>
+
+  <h3>3. 高溫還原燒：微量熔塊的催化計算</h3>
+  <p>對於 1240°C 以上的高溫還原燒，計算邏輯則完全不同。這裡的主角是長石與高嶺土，矽鋁比例往往極高。若要在高溫配方中引入熔塊，通常只會佔總重量的 2% 到 5%。在軟體中，這微量的熔塊（如高鈣熔塊）被視為一種「助熔催化劑」，用於微調高溫液態玻璃的表面張力，幫助釉面在還原氣氛中更均勻地包裹鐵氧化物，促成完美的窯變。</p>
+
+  <h2>八、實戰演練：將一個含鉛生釉配方改寫為無鉛熔塊配方</h2>
+  <p>讓我們將所有的理論付諸實踐。假設您接手了一個古老且色彩絕美的低溫透明釉配方，但它使用了劇毒的生鉛（黃丹）。我們該如何透過計算，將其改寫為現代安全的熔塊配方？</p>
+
+  <h3>1. 解析原始危險配方的化學結構</h3>
+  <p>第一步，將原配方中所有的重量（黃丹、長石、石英等）輸入釉藥計算軟體。我們得到了它的賽格爾釉式：假設其助熔劑（RO）中，有高達 0.6 莫耳是氧化鉛（PbO）。這就是我們要消滅的目標，同時必須記下原始配方中的二氧化矽與氧化鋁的莫耳總數，這是維持釉面質感的關鍵指標。</p>
+
+  <h3>2. 尋找合適的無毒替代熔塊</h3>
+  <p>為了取代氧化鉛強大的助熔與高折射率效果，我們在資料庫中尋找替代品。通常會選擇含有大量氧化硼與高比例鹼土金屬（如鍶或鋇的無毒玻璃態）的複合熔塊（例如 Ferro 3134 搭配某些鍶熔塊）。我們將這些新熔塊輸入計算機，利用軟體的自動平衡功能，調整熔塊的重量，直到配方中的 PbO 歸零，而整體的熔點預測值與原配方相符。</p>
+
+  <h3>3. 最終微調與試片驗證</h3>
+  <p>計算軟體告訴我們，替換後的無鉛配方需要 65% 的 3134 熔塊、20% 的高嶺土與 15% 的石英。然而，計算只完成了化學的一半。接下來，必須將這個新配方拿到釉藥實驗室，經過球磨機研磨，並進行三角座標的微調測試，以確保它在實際的窯爐溫度曲線中，能完美展現出不亞於鉛釉的明亮與平滑。這就是釉藥科學計算的完整閉環。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">關於配方計算與熔塊應用的常見問答 FAQ</div>
+    <p><strong>Q：如果我不想學複雜的化學公式，還能自己調配熔塊釉藥嗎？</strong><br>
+    A：可以的。許多陶藝創作者採用「體積法」或直覺的「重量百分比」進行測試（例如 70% 熔塊 + 30% 高嶺土）。這種方法適合快速實驗，但如果遇到材料停產或想要精準解決釉面瑕疵時，缺乏釉式計算的輔助，就會陷入漫長且盲目的試錯過程中。</p>
+    <p><strong>Q：網頁版釉藥計算機算出來的熔融溫度準確嗎？</strong><br>
+    A：計算軟體預測的熔點（例如 Stull Chart 上的位置）具有極高的參考價值，但它無法完全取代實際燒成。因為窯爐的升溫速度、持溫時間、窯內氣氛以及素坯的厚度，都會影響實際的熔融狀態。計算機提供的是一張精確的航海圖，而真正的航行仍需依賴窯溫錐與試片。</p>
+    <p><strong>Q：為什麼在計算軟體中加入熔塊後，氧化鋁（Al2O3）的比例會下降？</strong><br>
+    A：這取決於您選用的熔塊種類。許多低溫高流動性的熔塊（如 Ferro 3134）幾乎不含氧化鋁。當您在配方中大量使用這類熔塊來取代長石（富含鋁）時，整體的氧化鋁佔比自然會下降。這時您必須在配方中額外添加高嶺土或氧化鋁粉來補足，以免釉面過度流動。</p>
+    <p><strong>Q：我可以用兩個不同的熔塊混在一起，來取代一個我買不到的特定熔塊嗎？</strong><br>
+    A：在化學莫耳數的層面上，完全可以！這正是釉式計算最強大的功能。只要透過計算軟體，調整這兩種熔塊的比例，加上適當的石英或高嶺土，讓最終的總化學組成式與那個買不到的熔塊一致，燒出來的物理性質就會極度相近。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>
