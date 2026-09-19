@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手捏陶藝風鈴製作全紀錄 - 陶藝與釉藥調配</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #14213d;
+            --accent-color: #fca311;
+            --text-main: #333333;
+            --bg-color: #f4f6f8;
+            --teach-theme: #0f766e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.8;
+            padding: 20px;
+        }
+
+        .article-container {
+            max-width: 900px;
+            margin: 20px auto 60px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border-top: 6px solid var(--teach-theme);
+        }
+
+        /* 文章標題與路徑區 */
+        .article-header {
+            padding: 30px 40px 20px 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .breadcrumb {
+            font-size: 0.85rem; color: #64748b; font-weight: 700; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .breadcrumb span { color: var(--teach-theme); }
+        .article-header h1 {
+            font-size: 1.8rem; color: var(--primary-bg); font-weight: 800; line-height: 1.4;
+        }
+
+        /* 主視覺成品展示 */
+        .hero-img-box {
+            width: 100%;
+            background-color: #1e293b;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-img-box img {
+            max-width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .img-caption {
+            font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 10px; font-weight: 600;
+        }
+
+        /* 文章內文主體 */
+        .article-body { padding: 40px; }
+
+        .section-heading {
+            font-size: 1.3rem; font-weight: 800; color: var(--primary-bg);
+            margin: 30px 0 15px 0; padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-heading i { color: var(--teach-theme); }
+
+        p { margin-bottom: 16px; font-size: 1.05rem; color: #475569; }
+
+        /* 工具與材料清單方塊 */
+        .materials-box {
+            background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px;
+            padding: 20px 25px; margin: 20px 0 30px 0;
+        }
+        .materials-box h3 { color: #166534; font-size: 1.1rem; margin-bottom: 10px; font-weight: 800; }
+        .materials-box ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+        .materials-box li { font-size: 0.95rem; color: #15803d; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .materials-box li i { color: #22c55e; }
+
+        /* 步驟圖文區塊 */
+        .step-card {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 25px; margin-bottom: 25px;
+        }
+        .step-title {
+            font-size: 1.15rem; font-weight: 800; color: var(--primary-bg); margin-bottom: 12px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .step-badge {
+            background: var(--teach-theme); color: white; width: 28px; height: 28px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+        }
+
+        .step-grid-imgs {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px; margin: 15px 0;
+        }
+        .step-grid-imgs img {
+            width: 100%; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1;
+        }
+
+        .teacher-tip {
+            background: #fff8e7; border-left: 4px solid var(--accent-color);
+            padding: 12px 18px; border-radius: 0 8px 8px 0; font-size: 0.95rem; color: #92400e; font-weight: 700; margin-top: 15px;
+        }
+        .teacher-tip i { color: var(--accent-color); margin-right: 6px; }
+
+        /* 底部返回按鈕 */
+        .footer-nav { text-align: center; padding: 30px; background: #f8fafc; border-top: 1px solid #e2e8f0; }
+        .back-btn {
+            background: var(--primary-bg); color: white; padding: 12px 28px; border-radius: 30px;
+            text-decoration: none; font-weight: 800; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.2s;
+        }
+        .back-btn:hover { background: #1f365c; transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .article-body { padding: 20px; }
+            .article-header { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="article-container">
+        
+        <!-- 文章頂部標題區 -->
+        <div class="article-header">
+            <div class="breadcrumb">
+                <i class="fa-solid fa-graduation-cap"></i> 教學天地 <span>/</span> 校園實作專欄 01
+            </div>
+            <h1>手捏陶藝風鈴製作全紀錄：從拍打泥片到清脆燒成</h1>
+        </div>
+
+        <!-- 主視覺成品展示 -->
+        <div class="hero-img-box">
+            <!-- 載入您上傳的成品照片 cover.jpg -->
+            <img src="./cover.jpg" alt="LULU造型陶藝風鈴成品" onerror="this.src='../../sample-windchime.jpg'">
+            <div class="img-caption"><i class="fa-solid fa-sparkles"></i> 完成後的 LULU 造型風鈴成品（高溫釉燒，色彩鮮豔且具備清脆共鳴）</div>
+        </div>
+
+        <!-- 內文主體 -->
+        <div class="article-body">
+            
+            <p>陶藝手捏創作最迷人之處，在於賦予冰冷泥土生動的表情與靈魂。本次課程帶領學生運用簡單的「泥片成型法」與「中空挖空技巧」，親手打造兼具造型與實用發聲功能的特色風鈴。從泥料選擇、結構支撐到最後的釉色搭配，以下為完整的實作步驟全紀錄。</p>
+
+            <!-- 工具材料清單 -->
+            <div class="materials-box">
+                <h3><i class="fa-solid fa-toolbox"></i> 本次實作工具與材料清單</h3>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 陶土（建議具備一定收縮率與抗裂性的熟料土）</li>
+                    <li><i class="fa-solid fa-check"></i> 陶藝修坯刀、針具、海綿</li>
+                    <li><i class="fa-solid fa-check"></i> 陶瓷專用化妝土與中高溫色釉</li>
+                    <li><i class="fa-solid fa-check"></i> 吊掛用麻繩或耐高溫金屬吊線</li>
+                    <li><i class="fa-solid fa-check"></i> 拍板與桿泥棍</li>
+                </ul>
+            </div>
+
+            <!-- 步驟一 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <div class="step-badge">1</div> 泥片拍打與厚度控制
+                </div>
+                <p>風鈴的主體需要足夠的結構強度來支撐吊掛重量，同時又不能太厚重。首先將陶土充分揉勻後，使用桿泥棍與拍板，拍打出厚度約 0.8 至 1 公分的均勻泥片。</p>
+                <div class="step-grid-imgs">
+                    <!-- 預留未來放置步驟照片的空間 -->
+                    <img src="./step1-1.jpg" alt="步驟1-1" onerror="this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80'">
+                    <img src="./step1-2.jpg" alt="步驟1-2" onerror="this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80'">
+                </div>
+                <div class="teacher-tip">
+                    <i class="fa-solid fa-lightbulb"></i> 黃老師教學叮嚀：泥片厚度務必前後一致，若局部太薄燒成後容易因受力不均而變形或破裂。
+                </div>
+            </div>
+
+            <!-- 步驟二 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <div class="step-badge">2</div> 主體造型塑形與頂部吊孔
+                </div>
+                <p>將泥片包覆或圍塑成中空的圓錐狀或鐘罩狀（如本作品的 LULU 造型主體），並在頂部預留貫穿內外的懸掛孔洞，用於穿透固定風舌的麻繩。</p>
+                <div class="step-grid-imgs">
+                    <img src="./step2-1.jpg" alt="步驟2-1" onerror="this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80'">
+                    <img src="./step2-2.jpg" alt="步驟2-2" onerror="this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80'">
+                </div>
+                <div class="teacher-tip">
+                    <i class="fa-solid fa-lightbulb"></i> 黃老師教學叮嚀：頂部吊孔在泥土半乾時要再次確認孔徑大小，因為陶土經過素燒與釉燒後會收縮，孔太小會導致後續麻繩穿不過去！
+                </div>
+            </div>
+
+            <!-- 步驟三 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <div class="step-badge">3</div> 立體五官與裝飾配件接合
+                </div>
+                <p>利用剩餘的泥料捏塑出耳機、立體眼睛、嘴唇與花朵裝飾。接合時務必確實執行「表面刻痕、塗抹陶漿（泥漿）、壓實撫平」的三步驟，防止乾燥後脫落。</p>
+                <div class="step-grid-imgs">
+                    <img src="./step3-1.jpg" alt="步驟3-1" onerror="this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80'">
+                    <img src="./step3-2.jpg" alt="步驟3-2" onerror="this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80'">
+                </div>
+            </div>
+
+            <!-- 步驟四 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <div class="step-badge">4</div> 施釉藝術與燒成發色
+                </div>
+                <p>經過充分陰乾與低溫素燒後，使用明亮的綠釉作為主體基底，搭配紅色耳機與鮮豔唇彩形成強烈對比。高溫還原或氧化燒成後，釉面呈現溫潤光澤，敲擊時能發出清脆悅耳的共鳴聲。</p>
+            </div>
+
+        </div>
+
+        <!-- 底部返回導覽 -->
+        <div class="footer-nav">
+            <a href="../../teaching-home.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 返回教學天地大廳</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

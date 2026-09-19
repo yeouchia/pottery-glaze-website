@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手捏陶與雕塑造型教學專區</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #14213d;
+            --text-main: #333333;
+            --bg-color: #f8fafc;
+            --theme-color: #0f766e; /* 專屬主題色：手捏陶青綠色 */
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 20px;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.4;
+        }
+
+        .container { max-width: 1150px; margin: 0 auto; }
+
+        .category-header {
+            background: white; border-radius: 12px; padding: 20px 25px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--theme-color);
+        }
+        .category-header h1 { margin: 0 0 5px 0; font-size: 1.5rem; color: var(--primary-bg); font-weight: 800; }
+        .category-header p { margin: 0; color: #64748b; font-size: 0.95rem; }
+
+        .back-btn {
+            background: #f1f5f9; color: var(--primary-bg); padding: 10px 18px; border-radius: 30px;
+            text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.2s; border: 1px solid #e2e8f0;
+        }
+        .back-btn:hover { background: var(--primary-bg); color: white; }
+
+        /* 🌟 關鍵修正：固定嚴格的三欄式網格，並確保即使只有 1~2 篇，卡片大小也跟 3 篇完全一模一樣！ */
+        .article-grid {
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* 強制固定 3 欄 */
+            gap: 25px; 
+            margin-bottom: 40px;
+        }
+
+        /* 響應式：當螢幕較小時自動轉為 1 欄或 2 欄，避免擠壓 */
+        @media (max-width: 900px) {
+            .article-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .article-grid { grid-template-columns: 1fr; }
+        }
+
+        .article-card {
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;
+            text-decoration: none; color: inherit; display: flex; flex-direction: column;
+            border-top: 5px solid var(--theme-color);
+        }
+        .article-card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+
+        /* 正方形 1:1 圖片外框 */
+        .article-img-box {
+            width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #0f172a; position: relative;
+        }
+        .article-img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        .article-card:hover .article-img {
+            transform: scale(1.05); 
+        }
+
+        /* 右上角青綠色精緻標籤 */
+        .corner-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(15, 118, 110, 0.9); /* 半透明手捏陶青綠色 */
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border-radius: 6px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+        
+        .article-body { padding: 14px 16px 16px 16px; display: flex; flex-direction: column; flex-grow: 1; }
+        .article-body h3 { margin: 0 0 6px 0; font-size: 1.05rem; color: var(--primary-bg); font-weight: 800; }
+        .article-body p { margin: 0 0 10px 0; font-size: 0.85rem; color: #64748b; flex-grow: 1; line-height: 1.4; }
+        
+        .article-footer {
+            font-size: 0.85rem; font-weight: 700; color: var(--theme-color);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .empty-notice {
+            grid-column: 1 / -1; text-align: center; padding: 50px; background: white;
+            border-radius: 12px; color: #94a3b8; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="category-header">
+            <div>
+                <h1><i class="fa-solid fa-hands-holding" style="color: var(--theme-color);"></i> 手捏陶與雕塑造型教學專區</h1>
+                <p>收錄泥片拍打、LULU造型風鈴與各類生活器皿的手作步驟，賦予冰冷泥土生動表情。</p>
+            </div>
+            <a href="../teaching-home.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 返回教學分類大廳</a>
+        </div>
+
+        <div id="articleGrid" class="article-grid"></div>
+    </div>
+
+    <script>
+        /* ========================================================================== */
+        /* 💡【黃老師專用：手捏陶文章自動生成清單】                                   */
+        /* 您只要在這裡複製貼上新增 02、03，網頁就會自動幫您生出對應的卡片！           */
+        /* ========================================================================== */
+        const articles = [
+            
+            /* ========================================================== */
+            /* [ ⚠️ 文章 01 範圍開始 ]                                     */
+            /* ========================================================== */
+            {
+                title: "01. 手捏成型陶偶風鈴製作",
+                desc: "帶領學生透過手捏技巧，創作陶偶造型風鈴藝術作品。",
+                img: "./01/cover.jpg",         /* 👈 文章 01 的封面圖片路徑 */
+                link: "./01/teacher01.html",   /* 👈 文章 01 的詳細網頁連結 */
+                badgeText: "手捏陶技巧"        /* 👈 右上角標籤文字 */
+            }
+            /* ========================================================== */
+            /* [ ⚠️ 文章 01 範圍結束 ]                                     */
+            /* ========================================================== */
+
+            /* 
+               💡【如果要新增文章 02，請取消下方註解並確保大括號之間有逗號 (,)】：
+            ,
+            {
+                title: "02. 第二篇手捏陶文章標題",
+                desc: "第二篇的內容介紹說明...",
+                img: "./02/b-wait.jpg",
+                link: "./02/teacher01.html",
+                badgeText: "手捏陶技巧"
+            }
+            */
+
+,
+            {
+                title: "02. 手捏陶偶",
+                desc: "帶領學生透過手捏技巧，創作陶偶造型藝術作品。",
+                img: "./02/b-wait.jpg",
+                link: "./02/teacher02.html",
+                badgeText: "手捏陶技巧"
+            }
+
+
+,
+            {
+                title: "03. 手捏陶趣小屋",
+                desc: "帶領學生透過手捏技巧，創作陶趣小屋藝術作品。",
+                img: "./03/b-wait.jpg",
+                link: "./03/teacher03.html",
+                badgeText: "手捏陶技巧"
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        ];
+
+        // 自動渲染卡片邏輯
+        const gridContainer = document.getElementById('articleGrid');
+
+        if (!articles || articles.length === 0) {
+            gridContainer.innerHTML = `
+                <div class="empty-notice">
+                    <i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                    目前手捏陶專區尚無教學文章。
+                </div>
+            `;
+        } else {
+            let htmlContent = "";
+            articles.forEach(article => {
+                htmlContent += `
+                    <a href="${article.link}" class="article-card">
+                        <div class="article-img-box">
+                            <span class="corner-badge">${article.badgeText || '教學專區'}</span>
+                            <img src="${article.img}" alt="${article.title}" class="article-img">
+                        </div>
+                        <div class="article-body">
+                           <h3>${article.title}</h3>
+                           <p>${article.desc}</p>
+                           <div class="article-footer">閱讀詳細教學 <i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </a>
+                `;
+            });
+            gridContainer.innerHTML = htmlContent;
+        }
+    </script>
+
+</body>
+</html>

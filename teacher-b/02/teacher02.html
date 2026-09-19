@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程內容建構中~!! - 陶藝與釉藥調配</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #14213d;
+            --accent-color: #fca311;
+            --text-main: #333333;
+            --bg-color: #f4f6f8;
+            --teach-theme: #0f766e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.8;
+            padding: 20px;
+        }
+
+        .article-container {
+            max-width: 900px; margin: 20px auto 60px auto; background: white;
+            border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden;
+            border-top: 6px solid #0f766e;
+        }
+
+        .article-header { padding: 30px 40px 20px 40px; border-bottom: 1px solid #e2e8f0; }
+        .breadcrumb { font-size: 0.85rem; color: #64748b; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb span { color: var(--teach-theme); }
+        .article-header h1 { font-size: 1.8rem; color: var(--primary-bg); font-weight: 800; line-height: 1.4; }
+
+        .hero-img-box {
+            width: 100%;
+            background: linear-gradient(to bottom, #fffbeb 0%, #ffffff 100%);
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .hero-img-box img {
+            max-width: 100%; max-height: 500px; width: auto; height: auto;
+            object-fit: contain; border-radius: 12px; box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+        }
+        .img-caption {
+            font-size: 0.95rem; color: var(--teach-theme); margin-top: 15px; font-weight: 700;
+        }
+
+        .article-body { padding: 40px; }
+        p { margin-bottom: 16px; font-size: 1.05rem; color: #475569; }
+
+        /* 工具材料清單背景與文字色彩完全連動主題 */
+        .materials-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px 25px; margin: 20px 0 30px 0; }
+        .materials-box h3 { color: #166534; font-size: 1.1rem; margin-bottom: 10px; font-weight: 800; }
+        .materials-box ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+        .materials-box li { font-size: 0.95rem; color: #15803d; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+        .step-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 25px; }
+        .step-title { font-size: 1.15rem; font-weight: 800; color: var(--primary-bg); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .step-badge { color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+
+        .step-grid-imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 15px 0; }
+        .img-wrap { background: transparent; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: none; }
+        .img-wrap img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block; }
+
+        .teacher-tip {
+            background: #fff8e7; border-left: 4px solid var(--accent-color);
+            padding: 12px 18px; border-radius: 0 8px 8px 0; font-size: 0.95rem;
+            color: #92400e; font-weight: 700; margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(252, 163, 17, 0.1);
+        }
+        .teacher-tip i { color: var(--accent-color); margin-right: 6px; }
+
+        .footer-nav { text-align: center; padding: 30px; background: #f8fafc; border-top: 1px solid #e2e8f0; }
+        .back-btn { background: var(--primary-bg); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.2s; }
+        .back-btn:hover { background: #1f365c; transform: translateY(-2px); }
+
+        @media (max-width: 768px) { .article-body { padding: 20px; } .article-header { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <div class="article-header">
+            <div class="breadcrumb"><i class="fa-solid fa-graduation-cap"></i> Teaching Zone <span>/</span> 手捏陶與雕塑造型教學專區 02</div>
+            <h1>課程內容建構中~!!</h1>
+        </div>
+
+        <div class="hero-img-box">
+            <img src="./b-wait.jpg" alt="作品成品" onerror="this.src='../../sample-windchime.jpg'">
+            <div class="img-caption"><i class="fa-solid fa-sparkles"></i> 課程內容建構中~!!</div>
+        </div>
+
+        <div class="article-body">
+            <p>本單元的詳細教學步驟在精心製作中，精彩內容即將呈現，敬請期待！</p>
+
+            <div class="materials-box">
+                <h3><i class="fa-solid fa-toolbox" style="color:#0f766e;"></i> 本次實作工具與材料清單</h3>
+                <ul>
+                    <li><i class="fa-solid fa-check" style="color:#15803d;"></i> 陶土（熟料土）</li>
+<li><i class="fa-solid fa-check" style="color:#15803d;"></i> 陶藝修坯刀與針具</li>
+<li><i class="fa-solid fa-check" style="color:#15803d;"></i> 陶瓷專用化妝土與色釉</li>
+<li><i class="fa-solid fa-check" style="color:#15803d;"></i> 塑形海綿與拍板</li>
+
+                </ul>
+                
+            </div>
+
+            
+        </div>
+
+        <div class="footer-nav">
+            <a href="../../teaching-home.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 返回教學天地大廳</a>
+        </div>
+    </div>
+</body>
+</html>

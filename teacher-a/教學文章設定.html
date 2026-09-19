@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教學天地 SOP 網頁自動生成器 (主題色彩全連動版)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #14213d;
+            --accent: #fca311;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+            background-color: var(--bg); color: var(--text); padding: 30px 20px; line-height: 1.6;
+        }
+
+        .container { max-width: 1050px; margin: 0 auto; }
+
+        .header {
+            background: var(--card); padding: 30px; border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 25px;
+            border-left: 6px solid var(--accent);
+        }
+        .header h1 { font-size: 1.8rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+        .header p { color: var(--muted); font-size: 0.95rem; }
+
+        .form-section {
+            background: var(--card); padding: 30px; border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 25px;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 700; color: var(--primary); margin-bottom: 8px; font-size: 0.95rem; }
+        .form-control {
+            width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #cbd5e1;
+            font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s;
+        }
+        .form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(252,163,17,0.15); }
+        textarea.form-control { resize: vertical; height: 85px; }
+
+        .hero-config-box {
+            background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 20px; margin-bottom: 25px;
+        }
+        .material-config-box {
+            background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px; margin-bottom: 25px;
+        }
+
+        .steps-container { border-top: 2px dashed #cbd5e1; padding-top: 20px; margin-top: 20px; }
+        .step-box {
+            background: #f1f5f9; padding: 20px; border-radius: 10px; margin-bottom: 20px;
+            border: 1px solid #e2e8f0; position: relative;
+        }
+        .step-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .step-title-num { font-weight: 800; color: var(--primary); font-size: 1.1rem; }
+        
+        .step-grid-inputs { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 15px; }
+        .step-sub-row { display: grid; grid-template-columns: 2fr 1fr 120px; gap: 12px; align-items: center; }
+
+        .tip-control-area {
+            background: #e2e8f0; padding: 10px 15px; border-radius: 8px; margin-top: 10px;
+            display: flex; gap: 15px; align-items: center; flex-wrap: wrap;
+        }
+
+        .img-ratio-config {
+            background: #cbd5e1; padding: 12px 15px; border-radius: 8px; margin-top: 10px;
+        }
+        .img-item-row {
+            display: grid; grid-template-columns: 80px 1fr 1fr 140px; gap: 10px; align-items: center;
+            background: white; padding: 10px 12px; border-radius: 6px; margin-top: 8px; border: 1px solid #94a3b8;
+        }
+        .preview-thumb {
+            width: 50px; height: 50px; border-radius: 4px; object-fit: cover; background: #e2e8f0; border: 1px solid #cbd5e1; display: block;
+        }
+
+        .del-step-btn {
+            background: #ef4444; color: white; border: none; padding: 6px 12px;
+            border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.85rem;
+            display: inline-flex; align-items: center; gap: 5px; transition: background 0.2s;
+        }
+        .del-step-btn:hover { background: #dc2626; }
+
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 12px 24px;
+            border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1rem;
+            display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; text-decoration: none;
+        }
+        .btn:hover { background: #1f365c; }
+        .btn-accent { background: var(--accent); color: var(--primary); }
+        .btn-accent:hover { background: #e6920b; }
+        .btn-green { background: #10b981; color: white; }
+        .btn-green:hover { background: #059669; }
+        .btn-file {
+            background: #0284c7; color: white; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; text-align: center; font-weight: 700; display: inline-block;
+        }
+        .btn-file:hover { background: #0369a1; }
+
+        .btn-group-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+
+        .output-section {
+            background: var(--card); padding: 30px; border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: none;
+        }
+        .output-box {
+            width: 100%; height: 220px; background: #0f172a; color: #38bdf8;
+            font-family: monospace; padding: 15px; border-radius: 8px; font-size: 0.85rem;
+            resize: vertical; border: none; outline: none; margin-top: 10px;
+        }
+        .success-banner {
+            background: #dcfce7; color: #166534; padding: 15px; border-radius: 8px;
+            font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .step-sub-row { grid-template-columns: 1fr; }
+            .img-item-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent);"></i> 教學網頁自動生成器 (色彩全連動版)</h1>
+            <p>主題選單附帶直覺顏色參考，且產出網頁的工具材料清單底色會隨著主題全面連動變化！</p>
+        </div>
+
+        <div class="form-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>自訂輸出的 HTML 檔名</label>
+                    <input type="text" id="fileNameInput" class="form-control" value="teacher02">
+                </div>
+                <div class="form-group">
+                    <label>佈景主題配色風格</label>
+                    <select id="themeStyle" class="form-control" style="font-weight: 700; color: var(--primary);">
+                        <option value="teal">🟢 雅緻青綠 (自然工坊風)</option>
+                        <option value="gold">🟡 琥珀金 (網站招牌風格)</option>
+                        <option value="navy">🔵 沉穩海軍藍 (專業學院風)</option>
+                        <option value="brown">🟤 溫潤大地棕 (手作陶藝風)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>分類標籤名稱</label>
+                    <input type="text" id="categoryTag" class="form-control" value="泥條實作專欄">
+                </div>
+                <div class="form-group">
+                    <label>專欄編號</label>
+                    <input type="text" id="teachNum" class="form-control" value="02">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>教學文章大標題</label>
+                <input type="text" id="teachTitle" class="form-control" value="手捏陶藝器皿與拉坯技巧綜合演練">
+            </div>
+
+            <!-- 主視覺成品照片與名稱設定區塊 -->
+            <div class="hero-config-box">
+                <label style="font-weight: 800; color: #92400e; font-size: 1.05rem; margin-bottom: 10px; display: block;">
+                    <i class="fa-solid fa-image"></i> 主視覺成品大圖與作品名稱設定
+                </label>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: center;">
+                    <div>
+                        <label style="font-size: 0.85rem; font-weight: 700; color: #78350f; margin-bottom: 4px;">封面圖片檔名 (預設 cover.jpg)</label>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="text" id="heroImgName" class="form-control" value="cover.jpg" style="background: white;">
+                            <label class="btn-file" style="margin:0; white-space:nowrap;">
+                                <i class="fa-solid fa-folder-open"></i> 選圖
+                                <input type="file" accept="image/*" style="display:none;" onchange="previewLocalImage(this, 'heroThumb', 'heroImgName')">
+                            </label>
+                            <img id="heroThumb" class="preview-thumb" src="" alt="預覽" style="display:none;">
+                        </div>
+                    </div>
+                    <div>
+                        <label style="font-size: 0.85rem; font-weight: 700; color: #78350f; margin-bottom: 4px;">主照片下方顯示的作品名稱／圖說文字</label>
+                        <input type="text" id="heroCaption" class="form-control" value="LULU 造型風鈴成品展示（高溫釉燒，色彩鮮豔）" style="background: white;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>文章前言簡介說明</label>
+                <textarea id="teachDesc" class="form-control">陶藝手捏創作最迷人之處，在於賦予冰冷泥土生動的表情與靈魂。本次課程帶領學生運用基礎手捏與成型技巧，打造兼具美感與實用性的陶藝作品。</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>材料清單 (項目用逗號隔開)</label>
+                <input type="text" id="teachMaterials" class="form-control" value="陶土（熟料土）, 陶藝修坯刀與針具, 陶瓷專用化妝土與色釉, 塑形海綿與拍板">
+            </div>
+
+            <!-- 材料圖片開關區塊 -->
+            <div class="material-config-box">
+                <label style="display: flex; align-items: center; gap: 10px; font-weight: 800; color: #166534; cursor: pointer; font-size: 1.05rem; margin-bottom: 10px;">
+                    <input type="checkbox" id="useMaterialImg" style="width: 20px; height: 20px; accent-color: #166534;" onchange="toggleMaterialImgInput()">
+                    <i class="fa-solid fa-image"></i> 是否新增材料圖片參考
+                </label>
+                <div id="materialImgPathBox" style="display: none; display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                    <input type="text" id="materialImgName" class="form-control" value="material.jpg" style="max-width: 250px; background: white;" placeholder="圖片檔名">
+                    <label class="btn-file" style="margin:0;">
+                        <i class="fa-solid fa-folder-open"></i> 選擇本機材料圖
+                        <input type="file" accept="image/*" style="display:none;" onchange="previewLocalImage(this, 'materialThumb', 'materialImgName')">
+                    </label>
+                    <img id="materialThumb" class="preview-thumb" src="" alt="預覽" style="display:none;">
+                </div>
+            </div>
+
+            <div class="steps-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <label style="font-weight: 800; color: var(--primary); font-size: 1.1rem;"><i class="fa-solid fa-list-check"></i> 實作步驟、叮嚀與圖片配置 (最多支援6張)</label>
+                    <button class="btn btn-accent" onclick="addStepBox()" style="padding: 6px 14px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-plus"></i> 新增一個步驟
+                    </button>
+                </div>
+                
+                <div id="stepsList"></div>
+            </div>
+
+            <div class="btn-group-row">
+                <button class="btn btn-green" onclick="generateAndDownloadFile()" style="font-size: 1.1rem; padding: 14px 30px;">
+                    <i class="fa-solid fa-file-arrow-down"></i> 一鍵下載生成網頁檔案 (.html)
+                </button>
+                <button class="btn" onclick="generateCodeOnly()">
+                    <i class="fa-solid fa-code"></i> 僅預覽程式碼
+                </button>
+            </div>
+        </div>
+
+        <div class="output-section" id="outputSection">
+            <div class="success-banner">
+                <i class="fa-solid fa-circle-check"></i> 網頁檔案已成功下載！
+            </div>
+            <textarea id="codeOutput" class="output-box" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        let defaultImgCounter = 1;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            addStepBox("泥片拍打與厚度控制", "將陶土充分揉勻後，使用桿泥棍與拍板，拍打出厚度均勻的泥片。", true, "泥片厚度務必前後一致，若局部太薄燒成後容易變形。", 1, [{name: 'cover-1.jpg', ratio: 'landscape'}]); 
+        });
+
+        function toggleMaterialImgInput() {
+            const checkbox = document.getElementById('useMaterialImg');
+            const pathBox = document.getElementById('materialImgPathBox');
+            pathBox.style.display = checkbox.checked ? 'flex' : 'none';
+        }
+
+        function previewLocalImage(input, thumbId, textInputId) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                document.getElementById(textInputId).value = file.name;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const thumb = document.getElementById(thumbId);
+                    thumb.src = e.target.result;
+                    thumb.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function previewStepLocalImage(input, thumbClass, textClass) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const row = input.closest('.img-item-row');
+                row.querySelector('.' + textClass).value = file.name;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const thumb = row.querySelector('.' + thumbClass);
+                    thumb.src = e.target.result;
+                    thumb.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addStepBox(title = "", desc = "", useTip = true, tip = "", imgCount = 1, imgConfigs = null) {
+            const list = document.getElementById('stepsList');
+            
+            const box = document.createElement('div');
+            box.className = 'step-box';
+            box.innerHTML = `
+                <div class="step-box-header">
+                    <div class="step-title-num">步驟項目</div>
+                    <button class="del-step-btn" onclick="removeStepBox(this)"><i class="fa-solid fa-trash-can"></i> 刪除此步驟</button>
+                </div>
+                <div class="step-grid-inputs">
+                    <input type="text" class="form-control step-title-input" placeholder="步驟標題" value="${title}">
+                    <textarea class="form-control step-desc-input" placeholder="步驟詳細文字說明">${desc}</textarea>
+                    
+                    <div class="step-sub-row">
+                        <div>
+                            <label style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 4px;">圖片張數 (最多6張)</label>
+                            <select class="form-control step-imgcount-select" onchange="updateImageRows(this)">
+                                <option value="1" ${imgCount==1?'selected':''}>1 張</option>
+                                <option value="2" ${imgCount==2?'selected':''}>2 張</option>
+                                <option value="3" ${imgCount==3?'selected':''}>3 張</option>
+                                <option value="4" ${imgCount==4?'selected':''}>4 張</option>
+                                <option value="5" ${imgCount==5?'selected':''}>5 張</option>
+                                <option value="6" ${imgCount==6?'selected':''}>6 張</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-control-area">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: 800; color: #1e293b; cursor: pointer;">
+                        <input type="checkbox" class="step-usetip-checkbox" ${useTip ? 'checked' : ''} onchange="toggleTipInput(this)" style="width: 18px; height: 18px; accent-color: var(--accent);">
+                        <i class="fa-solid fa-lightbulb" style="color: var(--accent);"></i> 啟用黃老師教學叮嚀
+                    </label>
+                    <input type="text" class="form-control step-tip-input" placeholder="請輸入叮嚀內容..." value="${tip}" style="flex-grow: 1; ${useTip ? '' : 'display:none;'}">
+                </div>
+
+                <div class="img-ratio-config">
+                    <div style="font-size: 0.85rem; font-weight: 800; color: #334155; margin-bottom: 5px;">
+                        <i class="fa-solid fa-image"></i> 設定每張照片的本地選取、檔名與比例：
+                    </div>
+                    <div class="image-rows-wrapper"></div>
+                </div>
+            `;
+            list.appendChild(box);
+            
+            const selectEl = box.querySelector('.step-imgcount-select');
+            updateImageRows(selectEl, imgConfigs);
+            reindexSteps();
+        }
+
+        function updateImageRows(selectEl, existingConfigs = null) {
+            const box = selectEl.closest('.step-box');
+            const count = parseInt(selectEl.value);
+            const wrapper = box.querySelector('.image-rows-wrapper');
+            wrapper.innerHTML = '';
+
+            for (let k = 1; k <= count; k++) {
+                let defaultName = `cover-${defaultImgCounter}.jpg`;
+                let defaultRatio = 'landscape';
+
+                if (existingConfigs && existingConfigs[k-1]) {
+                    defaultName = existingConfigs[k-1].name || defaultName;
+                    defaultRatio = existingConfigs[k-1].ratio || defaultRatio;
+                } else {
+                    defaultImgCounter++;
+                }
+
+                const row = document.createElement('div');
+                row.className = 'img-item-row';
+                row.innerHTML = `
+                    <img class="preview-thumb step-thumb" src="" alt="預覽" style="display:none;">
+                    <label class="btn-file" style="margin:0;">
+                        <i class="fa-solid fa-folder-open"></i> 選圖
+                        <input type="file" accept="image/*" style="display:none;" onchange="previewStepLocalImage(this, 'step-thumb', 'photo-filename-input')">
+                    </label>
+                    <input type="text" class="form-control photo-filename-input" value="${defaultName}" placeholder="檔名" style="padding: 6px 10px; font-size: 0.9rem;">
+                    <select class="form-control photo-ratio-select" style="padding: 6px 10px; font-size: 0.9rem;">
+                        <option value="landscape" ${defaultRatio==='landscape'?'selected':''}>橫式 (16:9)</option>
+                        <option value="portrait" ${defaultRatio==='portrait'?'selected':''}>直式 (9:16)</option>
+                    </select>
+                `;
+                wrapper.appendChild(row);
+            }
+        }
+
+        function toggleTipInput(checkbox) {
+            const tipInput = checkbox.closest('.tip-control-area').querySelector('.step-tip-input');
+            tipInput.style.display = checkbox.checked ? 'block' : 'none';
+        }
+
+        function removeStepBox(btn) {
+            btn.closest('.step-box').remove();
+            reindexSteps();
+        }
+
+        function reindexSteps() {
+            const boxes = document.querySelectorAll('.step-box');
+            boxes.forEach((box, i) => {
+                box.querySelector('.step-title-num').innerText = `步驟 #${i + 1}`;
+            });
+        }
+
+        function compileHtmlCode() {
+            const num = document.getElementById('teachNum').value.trim() || '02';
+            const catTag = document.getElementById('categoryTag').value.trim() || '實作專欄';
+            const title = document.getElementById('teachTitle').value.trim();
+            const theme = document.getElementById('themeStyle').value;
+            const desc = document.getElementById('teachDesc').value.trim();
+            const materials = document.getElementById('teachMaterials').value.split(',').map(item => item.trim());
+
+            const heroImgName = document.getElementById('heroImgName').value.trim() || 'cover.jpg';
+            const heroCaption = document.getElementById('heroCaption').value.trim() || title;
+
+            const useMatImg = document.getElementById('useMaterialImg').checked;
+            const matImgName = document.getElementById('materialImgName').value.trim() || 'material.jpg';
+
+            // 根據主題配色設定全套連動色碼
+            let themeColor = '#0f766e'; 
+            let topBorderColor = '#0f766e';
+            let heroGradient = 'linear-gradient(to bottom, #fffbeb 0%, #ffffff 100%)';
+            let badgeBg = '#0f766e';
+            let matBoxBg = '#f0fdf4';
+            let matBoxBorder = '#bbf7d0';
+            let matTitleColor = '#166534';
+            let matLiColor = '#15803d';
+
+            if (theme === 'gold') {
+                themeColor = '#b45309';
+                topBorderColor = '#fca311';
+                heroGradient = 'linear-gradient(to bottom, #fff8e7 0%, #ffffff 100%)';
+                badgeBg = '#fca311';
+                matBoxBg = '#fffbeb';
+                matBoxBorder = '#fde68a';
+                matTitleColor = '#92400e';
+                matLiColor = '#b45309';
+            } else if (theme === 'navy') {
+                themeColor = '#1d4ed8';
+                topBorderColor = '#1e3a8a';
+                heroGradient = 'linear-gradient(to bottom, #eff6ff 0%, #ffffff 100%)';
+                badgeBg = '#1e3a8a';
+                matBoxBg = '#eff6ff';
+                matBoxBorder = '#bfdbfe';
+                matTitleColor = '#1e40af';
+                matLiColor = '#1d4ed8';
+            } else if (theme === 'brown') {
+                themeColor = '#78350f';
+                topBorderColor = '#92400e';
+                heroGradient = 'linear-gradient(to bottom, #fdf8f6 0%, #ffffff 100%)';
+                badgeBg = '#92400e';
+                matBoxBg = '#fdf8f6';
+                matBoxBorder = '#fdede8';
+                matTitleColor = '#78350f';
+                matLiColor = '#92400e';
+            }
+
+            let materialsHtml = '';
+            materials.forEach(m => {
+                if(m) materialsHtml += `<li><i class="fa-solid fa-check" style="color:${matLiColor};"></i> ${m}</li>\n`;
+            });
+
+            let materialImgHtml = '';
+            if (useMatImg) {
+                materialImgHtml = `
+                <div style="margin-top: 15px; text-align: center;">
+                    <img src="./${matImgName}" alt="實作材料參考圖" style="max-width: 100%; max-height: 350px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" onerror="this.style.display='none'">
+                </div>`;
+            }
+
+            let stepsHtml = '';
+            const stepBoxes = document.querySelectorAll('.step-box');
+
+            stepBoxes.forEach((box, index) => {
+                const sTitle = box.querySelector('.step-title-input').value.trim();
+                const sDesc = box.querySelector('.step-desc-input').value.trim();
+                const useTip = box.querySelector('.step-usetip-checkbox').checked;
+                const sTip = box.querySelector('.step-tip-input').value.trim();
+                const stepNum = index + 1;
+                
+                const itemRows = box.querySelectorAll('.img-item-row');
+                let imgsHtml = '';
+
+                itemRows.forEach((row) => {
+                    const fileName = row.querySelector('.photo-filename-input').value.trim() || 'cover-1.jpg';
+                    const ratioType = row.querySelector('.photo-ratio-select').value;
+                    const cssClass = ratioType === 'portrait' ? 'img-portrait' : 'img-landscape';
+
+                    imgsHtml += `<div class="img-wrap ${cssClass}">
+                        <img src="./${fileName}" alt="${fileName}" onerror="this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80'">
+                    </div>\n`;
+                });
+
+                let tipHtml = '';
+                if (useTip && sTip) {
+                    tipHtml = `
+                <div class="teacher-tip">
+                    <i class="fa-solid fa-lightbulb"></i> 黃老師教學叮嚀：${sTip}
+                </div>`;
+                }
+
+                stepsHtml += `
+            <div class="step-card">
+                <div class="step-title"><div class="step-badge" style="background:${badgeBg};">${stepNum}</div> ${sTitle}</div>
+                <p>${sDesc}</p>
+                <div class="step-grid-imgs">
+                    ${imgsHtml}
+                </div>
+                ${tipHtml}
+            </div>\n`;
+            });
+
+            return `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} - 陶藝與釉藥調配</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #14213d;
+            --accent-color: #fca311;
+            --text-main: #333333;
+            --bg-color: #f4f6f8;
+            --teach-theme: ${themeColor};
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.8;
+            padding: 20px;
+        }
+
+        .article-container {
+            max-width: 900px; margin: 20px auto 60px auto; background: white;
+            border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden;
+            border-top: 6px solid ${topBorderColor};
+        }
+
+        .article-header { padding: 30px 40px 20px 40px; border-bottom: 1px solid #e2e8f0; }
+        .breadcrumb { font-size: 0.85rem; color: #64748b; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb span { color: var(--teach-theme); }
+        .article-header h1 { font-size: 1.8rem; color: var(--primary-bg); font-weight: 800; line-height: 1.4; }
+
+        .hero-img-box {
+            width: 100%;
+            background: ${heroGradient};
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .hero-img-box img {
+            max-width: 100%; max-height: 500px; width: auto; height: auto;
+            object-fit: contain; border-radius: 12px; box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+        }
+        .img-caption {
+            font-size: 0.95rem; color: var(--teach-theme); margin-top: 15px; font-weight: 700;
+        }
+
+        .article-body { padding: 40px; }
+        p { margin-bottom: 16px; font-size: 1.05rem; color: #475569; }
+
+        /* 工具材料清單背景與文字色彩完全連動主題 */
+        .materials-box { background: ${matBoxBg}; border: 1px solid ${matBoxBorder}; border-radius: 10px; padding: 20px 25px; margin: 20px 0 30px 0; }
+        .materials-box h3 { color: ${matTitleColor}; font-size: 1.1rem; margin-bottom: 10px; font-weight: 800; }
+        .materials-box ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+        .materials-box li { font-size: 0.95rem; color: ${matLiColor}; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+        .step-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 25px; }
+        .step-title { font-size: 1.15rem; font-weight: 800; color: var(--primary-bg); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .step-badge { color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+
+        .step-grid-imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 15px 0; }
+        .img-wrap { background: transparent; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: none; }
+        .img-wrap img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block; }
+
+        .teacher-tip {
+            background: #fff8e7; border-left: 4px solid var(--accent-color);
+            padding: 12px 18px; border-radius: 0 8px 8px 0; font-size: 0.95rem;
+            color: #92400e; font-weight: 700; margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(252, 163, 17, 0.1);
+        }
+        .teacher-tip i { color: var(--accent-color); margin-right: 6px; }
+
+        .footer-nav { text-align: center; padding: 30px; background: #f8fafc; border-top: 1px solid #e2e8f0; }
+        .back-btn { background: var(--primary-bg); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.2s; }
+        .back-btn:hover { background: #1f365c; transform: translateY(-2px); }
+
+        @media (max-width: 768px) { .article-body { padding: 20px; } .article-header { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <div class="article-header">
+            <div class="breadcrumb"><i class="fa-solid fa-graduation-cap"></i> Teaching Zone <span>/</span> ${catTag} ${num}</div>
+            <h1>${title}</h1>
+        </div>
+
+        <div class="hero-img-box">
+            <img src="./${heroImgName}" alt="作品成品" onerror="this.src='../../sample-windchime.jpg'">
+            <div class="img-caption"><i class="fa-solid fa-sparkles"></i> ${heroCaption}</div>
+        </div>
+
+        <div class="article-body">
+            <p>${desc}</p>
+
+            <div class="materials-box">
+                <h3><i class="fa-solid fa-toolbox" style="color:${themeColor};"></i> 本次實作工具與材料清單</h3>
+                <ul>
+                    ${materialsHtml}
+                </ul>
+                ${materialImgHtml}
+            </div>
+
+            ${stepsHtml}
+        </div>
+
+        <div class="footer-nav">
+            <a href="../../teaching-home.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 返回教學天地大廳</a>
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+
+        function generateAndDownloadFile() {
+            const rawFileName = document.getElementById('fileNameInput').value.trim() || 'teacher02';
+            const cleanFileName = rawFileName.replace(/\.html$/i, '');
+            const code = compileHtmlCode();
+            
+            const blob = new Blob([code], { type: 'text/html;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${cleanFileName}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            document.getElementById('codeOutput').value = code;
+            document.getElementById('outputSection').style.display = 'block';
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateCodeOnly() {
+            const code = compileHtmlCode();
+            document.getElementById('codeOutput').value = code;
+            document.getElementById('outputSection').style.display = 'block';
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
