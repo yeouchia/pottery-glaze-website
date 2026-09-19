@@ -1,6 +1,7 @@
 Folder PATH listing
 Volume serial number is 2210-B0A3
 C:.
+│   admin-inventory.html
 │   BingSiteAuth.xml
 │   buy_clay.html
 │   c-index.html
@@ -16,6 +17,7 @@ C:.
 │   header_bg.jpg
 │   hover.wav
 │   index.html
+│   index.rar
 │   knowledge-home.html
 │   knowledge.html
 │   lecture.html
@@ -23,7 +25,9 @@ C:.
 │   Pottery_Website.rar-1
 │   sitemap.xml
 │   style.css
+│   teaching-home.html
 │   welcome.html
+│   welcome.rar
 │   
 ├───assets
 │   └───js
@@ -106,8 +110,33 @@ C:.
 │   ├───shaping
 │   │       shaping-1.html
 │   │       shaping-10.html
+│   │       shaping-11.html
+│   │       shaping-12.html
+│   │       shaping-13.html
+│   │       shaping-14.html
+│   │       shaping-15.html
+│   │       shaping-16.html
+│   │       shaping-17.html
+│   │       shaping-18.html
+│   │       shaping-19.html
 │   │       shaping-2.html
+│   │       shaping-20.html
+│   │       shaping-21.html
+│   │       shaping-22.html
+│   │       shaping-23.html
+│   │       shaping-24.html
+│   │       shaping-25.html
+│   │       shaping-26.html
+│   │       shaping-27.html
+│   │       shaping-28.html
+│   │       shaping-29.html
 │   │       shaping-3.html
+│   │       shaping-30.html
+│   │       shaping-31.html
+│   │       shaping-32.html
+│   │       shaping-33.html
+│   │       shaping-34.html
+│   │       shaping-35.html
 │   │       shaping-4.html
 │   │       shaping-5.html
 │   │       shaping-6.html
@@ -126,6 +155,11 @@ C:.
 │       lineage.mp3
 │       ui.js
 │       
+├───info
+│       about.html
+│       suppliers.html
+│       works.html
+│       
 ├───jiaoxue
 │       triaxial_basic.html
 │       triaxial_simulator.html
@@ -134,6 +168,55 @@ C:.
 │       phone_photo_edit.html
 │       photo_edit.html
 │       photo_edit個人版.html
+│       
+├───teacher-a
+│   │   teacher-a.html
+│   │   教學文章設定.html
+│   │   
+│   ├───01
+│   │       cover.JPG
+│   │       teacher01.html
+│   │       wait.jpg
+│   │       
+│   ├───02
+│   │       teacher02.html
+│   │       wait.jpg
+│   │       建構中.jpg
+│   │       
+│   └───03
+│           teacher03.html
+│           wait.jpg
+│           建構中.jpg
+│           
+├───teacher-b
+│   │   teacher-b.html
+│   │   
+│   ├───01
+│   │       cover.JPG
+│   │       teacher01.html
+│   │       
+│   ├───02
+│   │       b-wait.jpg
+│   │       cover.JPG
+│   │       teacher02.html
+│   │       wait.jpg
+│   │       
+│   └───03
+│           b-wait.jpg
+│           teacher03.html
+│           wait.jpg
+│           
+├───teacher-c
+│   │   teacher-c.html
+│   │   
+│   └───01
+│           c-wait.jpg
+│           cover.JPG
+│           teacher01.html
+│           wait.jpg
+│           
+├───teacher-to-txt
+│       教學文章設定.html
 │       
 ├───welcome
 │       1.png
@@ -158,11 +241,29 @@ C:.
 │       sound-target-ok.MP3
 │       sound-wizard.MP3
 │       
-└───yuanliao
-        b-index.html
-        b-script.js
-        b-style.css
-        index.html
-        script.js
-        style.css
+├───yuanliao
+│       b-index.html
+│       b-script.js
+│       b-style.css
+│       index.html
+│       script.js
+│       style.css
+│       
+└───製作教學網頁
+        cover-1.JPG
+        cover-10.JPG
+        cover-10.rar
+        cover-2.JPG
+        cover-3.JPG
+        cover-4.jpg
+        cover-5.JPG
+        cover-6.JPG
+        cover-7.JPG
+        cover-8.JPG
+        cover-9.jpg
+        cover.JPG
+        cover.rar
+        material.JPG
+        teacher-generator.html
+        teacher02.html
         

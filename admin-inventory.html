@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶藝與釉藥知識庫 - 內部文章總表管理系統 (黃老師專用)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 引入知識庫大腦 -->
+    <script src="./assets/js/knowledge-data.js"></script>
+
+    <style>
+        :root {
+            --primary: #14213d;
+            --accent: #fca311;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* 頂部控制面板 */
+        .admin-header {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .admin-title h1 { font-size: 1.8rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+        .admin-title p { color: var(--muted); font-size: 0.95rem; }
+
+        .btn-group { display: flex; gap: 12px; }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .btn:hover { background: #1f365c; transform: translateY(-2px); }
+        .btn-accent { background: var(--accent); color: var(--primary); }
+        .btn-accent:hover { background: #e6920b; }
+
+        /* 統計摘要卡片 */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .stat-card h3 { font-size: 2rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+        .stat-card p { color: var(--muted); font-size: 0.9rem; font-weight: 600; }
+
+        /* 資料表格樣式 */
+        .table-container {
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover { background-color: #f8fafc; }
+
+        .badge-cat {
+            background: #fff8e7;
+            color: #b45309;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid rgba(252,163,17,0.3);
+        }
+
+        .badge-id {
+            font-family: monospace;
+            background: #e2e8f0;
+            color: #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .article-link {
+            color: #1565c0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .article-link:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .admin-header { flex-direction: column; align-items: flex-start; }
+            .btn-group { width: 100%; flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 頂部控制面板 -->
+        <div class="admin-header">
+            <div class="admin-title">
+                <h1><i class="fa-solid fa-database" style="color: var(--accent);"></i> 文章資料庫自動管理總表</h1>
+                <p>即時讀取知識庫大腦（knowledge-data.js），自動清點分類、檔案名稱與文章標題。</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-accent" onclick="exportToCSV()">
+                    <i class="fa-solid fa-file-arrow-down"></i> 匯出 Excel / Word 表格檔
+                </button>
+                <a href="index.html" class="btn">
+                    <i class="fa-solid fa-house"></i> 返回首頁大廳
+                </a>
+            </div>
+        </div>
+
+        <!-- 統計摘要 -->
+        <div class="stats-bar" id="statsBar">
+            <!-- JavaScript 動態填入統計數據 -->
+        </div>
+
+        <!-- 資料表格 -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 8%;">序號</th>
+                        <th style="width: 20%;">大分類</th>
+                        <th style="width: 15%;">檔案 ID / 檔名</th>
+                        <th style="width: 45%;">文章主題 (標題)</th>
+                        <th style="width: 12%;">操作預覽</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                    <!-- JavaScript 動態填入文章清單 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            generateInventoryTable();
+        });
+
+        function generateInventoryTable() {
+            const tbody = document.getElementById('inventoryTableBody');
+            const statsBar = document.getElementById('statsBar');
+            
+            if (typeof knowledgeTree === 'undefined') {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red; padding:30px;">錯誤：找不到知識庫大腦檔案 (knowledge-data.js)！</td></tr>`;
+                return;
+            }
+
+            let totalCategories = knowledgeTree.length;
+            let totalArticles = 0;
+            let rowsHtml = '';
+            let globalIndex = 1;
+
+            knowledgeTree.forEach(group => {
+                group.articles.forEach(art => {
+                    totalArticles++;
+                    
+                    // 解析路徑以便預覽
+                    let previewUrl = art.url;
+                    
+                    rowsHtml += `
+                        <tr>
+                            <td><strong>#${globalIndex}</strong></td>
+                            <td><span class="badge-cat"><i class="fa-solid fa-folder-open"></i> ${group.category}</span></td>
+                            <td><span class="badge-id">${art.id}</span><br><small style="color:#64748b;">${art.url.split('/').pop()}</small></td>
+                            <td><strong>${art.title}</strong><br><small style="color:#718096;">標籤：${art.tag || '未分類'}</small></td>
+                            <td>
+                                <a href="${previewUrl}" target="_blank" class="article-link">
+                                    <i class="fa-solid fa-eye"></i> 預覽
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                    globalIndex++;
+                });
+            });
+
+            tbody.innerHTML = rowsHtml;
+
+            // 填入統計數據
+            statsBar.innerHTML = `
+                <div class="stat-card">
+                    <h3>${totalArticles}</h3>
+                    <p><i class="fa-solid fa-file-lines"></i> 總文章收錄數</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${totalCategories}</h3>
+                    <p><i class="fa-solid fa-layer-group"></i> 核心知識分類數</p>
+                </div>
+                <div class="stat-card">
+                    <h3>同步正常</h3>
+                    <p><i class="fa-solid fa-circle-check" style="color: #38a169;"></i> 資料庫大腦連結狀態</p>
+                </div>
+            `;
+        }
+
+        // 一鍵匯出成 CSV 檔案（可用 Excel 或 Word 直接開啟並複製表格）
+        function exportToCSV() {
+            if (typeof knowledgeTree === 'undefined') return;
+
+            let csvContent = "\uFEFF"; // UTF-8 BOM 避免中文亂碼
+            csvContent += "序號,大分類,檔案ID,標準檔名,文章主題(標題),標籤\n";
+
+            let index = 1;
+            knowledgeTree.forEach(group => {
+                group.articles.forEach(art => {
+                    let fileName = art.url.split('/').pop();
+                    let title = art.title.replace(/"/g, '""'); // 避免引號破壞格式
+                    let tag = (art.tag || '未分類').replace(/"/g, '""');
+                    
+                    csvContent += `${index},"${group.category}","${art.id}","${fileName}","${title}","${tag}"\n`;
+                    index++;
+                });
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `陶藝與釉藥知識庫_文章總表_${new Date().toISOString().slice(0,10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>

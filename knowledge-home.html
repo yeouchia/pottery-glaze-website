@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>陶藝與釉藥知識庫 - 總覽大廳</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 引入知識庫大腦，確保大廳搜尋能夠讀取所有文章 -->
+    <script src="./assets/js/knowledge-data.js"></script>
+
     <style>
         :root {
             --primary-bg: #14213d;
@@ -15,211 +19,101 @@
 
         * { box-sizing: border-box; }
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.6;
         }
 
         /* 頂部視覺化大廳橫幅 */
         .hero-banner {
             background: linear-gradient(135deg, #14213d 0%, #1f365c 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: white; padding: 40px 20px; text-align: center;
+            position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .hero-banner::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url('./header_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.2;
-            pointer-events: none;
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('./header_bg.jpg'); background-size: cover; background-position: center;
+            opacity: 0.2; pointer-events: none;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            margin: 0 0 10px 0;
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .hero-content h1 span {
-            color: var(--accent-color);
-        }
-
-        .hero-content p {
-            margin: 0 0 20px 0;
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.85);
-        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-content h1 { margin: 0 0 10px 0; font-size: 2rem; font-weight: 800; }
+        .hero-content h1 span { color: var(--accent-color); }
+        .hero-content p { margin: 0 0 20px 0; font-size: 1.05rem; color: rgba(255,255,255,0.85); }
 
         /* 搜尋列區塊 */
-        .search-box-wrap {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
+        .search-box-wrap { display: flex; justify-content: center; gap: 8px; margin-top: 15px; position: relative; }
         .search-box-wrap input {
-            width: 100%;
-            max-width: 450px;
-            padding: 12px 18px;
-            border-radius: 30px;
-            border: none;
-            font-size: 0.95rem;
-            outline: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 100%; max-width: 450px; padding: 12px 18px; border-radius: 30px;
+            border: none; font-size: 0.95rem; outline: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-family: inherit; font-weight: 700; color: #333;
         }
 
         /* 核心分類卡片網格區塊 */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
 
         .section-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary-bg);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 10px;
+            font-size: 1.3rem; font-weight: 800; color: var(--primary-bg); margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px; border-left: 5px solid var(--accent-color); padding-left: 10px;
         }
 
         .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 50px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px; margin-bottom: 50px;
         }
 
         .category-card {
-            background: white;
-            border-radius: 10px;
-            padding: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: white; border-radius: 10px; padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between;
         }
+        .category-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); }
 
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
+        .card-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.3s; }
+        .card-header h3 { margin: 0; font-size: 1.2rem; font-weight: 700; color: var(--primary-bg); }
+        .card-body p { margin: 0; font-size: 0.9rem; color: #666; line-height: 1.5; }
+        .card-footer { margin-top: 15px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 12px;
-        }
-
-        .card-icon {
-            width: 50px; height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-
-        .card-header h3 {
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-bg);
-        }
-
-        .card-body p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .card-footer {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* === 完美對應側邊欄分類色彩配色 === */
-        
-        /* 1. 陶藝入門 (紅系色調) */
+        /* 專屬分類色彩配色 */
         .card-intro { border-top: 4px solid #e53e3e; }
         .card-intro .card-icon { background-color: #fff5f5; color: #e53e3e; }
         .card-intro:hover .card-icon { background-color: #e53e3e; color: white; }
         .card-intro .card-footer { color: #e53e3e; }
 
-        /* 2. 成型技法 (藍系色調) */
         .card-shaping { border-top: 4px solid #3182ce; }
         .card-shaping .card-icon { background-color: #ebf8ff; color: #3182ce; }
         .card-shaping:hover .card-icon { background-color: #3182ce; color: white; }
         .card-shaping .card-footer { color: #3182ce; }
 
-        /* 3. 實用技巧 (綠系色調) */
         .card-skills { border-top: 4px solid #38a169; }
         .card-skills .card-icon { background-color: #f0fff4; color: #38a169; }
         .card-skills:hover .card-icon { background-color: #38a169; color: white; }
         .card-skills .card-footer { color: #38a169; }
 
-        /* 4. 釉藥基礎 (紫系色調) */
         .card-glaze { border-top: 4px solid #805ad5; }
         .card-glaze .card-icon { background-color: #faf5ff; color: #805ad5; }
         .card-glaze:hover .card-icon { background-color: #805ad5; color: white; }
         .card-glaze .card-footer { color: #805ad5; }
 
-        /* 5. 窯燒知識 (紅系色調) */
         .card-firing { border-top: 4px solid #e53e3e; }
         .card-firing .card-icon { background-color: #fff5f5; color: #e53e3e; }
         .card-firing:hover .card-icon { background-color: #e53e3e; color: white; }
         .card-firing .card-footer { color: #e53e3e; }
 
-        /* 6. 配方實驗 (藍系色調) */
         .card-experiment { border-top: 4px solid #3182ce; }
         .card-experiment .card-icon { background-color: #ebf8ff; color: #3182ce; }
         .card-experiment:hover .card-icon { background-color: #3182ce; color: white; }
         .card-experiment .card-footer { color: #3182ce; }
 
-        /* 7. 陶釉講義 (綠系色調 - 黃老師編著) */
         .card-lecture { border-top: 4px solid #38a169; }
         .card-lecture .card-icon { background-color: #f0fff4; color: #38a169; }
         .card-lecture:hover .card-icon { background-color: #38a169; color: white; }
         .card-lecture .card-footer { color: #38a169; }
 
-        /* 響應式微調 */
         @media (max-width: 768px) {
             .hero-banner h1 { font-size: 1.6rem; }
-            .hero-content p { font-size: 0.95rem; }
             .category-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -231,8 +125,10 @@
         <div class="hero-content">
             <h1>歡迎來到 <span>陶藝與釉藥知識庫</span></h1>
             <p>循序漸進，從基礎理論到進階實作，用最清楚的解答陪伴您理解陶藝。</p>
+            
+            <!-- 升級版大廳智慧搜尋：支援手機與電腦，按下 Enter 自動檢索並跳轉 -->
             <div class="search-box-wrap">
-                <input type="text" placeholder="🔍 輸入關鍵字快速尋找知識（例如：三角座標、揉土、還原燒）..." onkeypress="handleSearch(event)">
+                <input type="text" id="hallSearchInput" placeholder="🔍 輸入關鍵字快速尋找知識（例如：三角座標、手拉坯、還原燒）..." onkeypress="handleSearch(event)">
             </div>
         </div>
     </div>
@@ -244,100 +140,58 @@
         </div>
 
         <div class="category-grid">
-            <!-- 1. 陶藝入門 -->
             <a href="./knowledge.html?cat=intro" target="content_frame" class="category-card card-intro">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
-                        <h3>陶藝入門</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>從新手買泥指南、陶土與瓷土的差異，到各種常見初學者疑問與材料特性完整解析。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-seedling"></i></div><h3>陶藝入門</h3></div>
+                    <div class="card-body"><p>從新手買泥指南、陶土與瓷土的差異，到各種常見初學者疑問與材料特性完整解析。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <!-- 2. 成型技法 -->
             <a href="./knowledge.html?cat=shaping" target="content_frame" class="category-card card-shaping">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-hands-holding"></i></div>
-                        <h3>成型技法</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>手拉坯定中心技巧、手捏陶與泥條成型要領，掌握塑形的基本功與手作手感。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-hands-holding"></i></div><h3>成型技法</h3></div>
+                    <div class="card-body"><p>手拉坯定中心技巧、手捏陶與泥條成型要領，掌握塑形的基本功與手作手感。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <!-- 3. 實用技巧 -->
             <a href="./knowledge.html?cat=skills" target="content_frame" class="category-card card-skills">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                        <h3>實用技巧</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>作品為什麼會裂開？乾燥與練土的實戰除錯指南，解決製作過程中的各種疑難雜症。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div><h3>實用技巧</h3></div>
+                    <div class="card-body"><p>作品為什麼會裂開？乾燥與練土的實戰除錯指南，解決製作過程中的各種疑難雜症。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <!-- 4. 釉藥基礎 -->
             <a href="./knowledge.html?cat=glaze" target="content_frame" class="category-card card-glaze">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-flask"></i></div>
-                        <h3>釉藥基礎</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>深入淺出認識釉的本質、三大元素、玻璃質燒熔奧秘，以及金屬氧化物的豐富發色。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-flask"></i></div><h3>釉藥基礎</h3></div>
+                    <div class="card-body"><p>深入淺出認識釉的本質、三大元素、玻璃質燒熔奧秘，以及金屬氧化物的豐富發色。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <!-- 5. 窯燒知識 -->
             <a href="./knowledge.html?cat=firing" target="content_frame" class="category-card card-firing">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-fire-burner"></i></div>
-                        <h3>窯燒知識</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>素燒與釉燒的區別、燒窯溫度曲線設計，以及氧化燒與還原燒的氣氛控制差異。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-fire-burner"></i></div><h3>窯燒知識</h3></div>
+                    <div class="card-body"><p>素燒與釉燒的區別、燒窯溫度曲線設計，以及氧化燒與還原燒的氣氛控制差異。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <!-- 6. 配方實驗 -->
             <a href="./knowledge.html?cat=experiments" target="content_frame" class="category-card card-experiment">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-vial"></i></div>
-                        <h3>配方實驗</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>透過科學化的三角座標試驗與賽格爾式計算，建立清晰的釉藥實驗地圖與配方分析。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-vial"></i></div><h3>配方實驗</h3></div>
+                    <div class="card-body"><p>透過科學化的三角座標試驗與賽格爾式計算，建立清晰的釉藥實驗地圖與配方分析。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <!-- 7. 陶釉講義 (黃老師編著) -->
             <a href="./knowledge.html?cat=lecture" target="content_frame" class="category-card card-lecture">
                 <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-book-bookmark"></i></div>
-                        <h3>陶釉講義 (黃老師編著)</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>收錄陶瓷歷史類型、基礎釉藥知識、調配基礎、施燒技術與安全環保等七大專屬章節。</p>
-                    </div>
+                    <div class="card-header"><div class="card-icon"><i class="fa-solid fa-book-bookmark"></i></div><h3>陶釉講義 (黃老師編著)</h3></div>
+                    <div class="card-body"><p>收錄陶瓷歷史類型、基礎釉藥知識、調配基礎、施燒技術與安全環保等七大專屬章節。</p></div>
                 </div>
                 <div class="card-footer">進入主題 <i class="fa-solid fa-arrow-right"></i></div>
             </a>
@@ -345,13 +199,38 @@
     </div>
 
     <script>
+        // 賦予大廳搜尋列真實的全站文章檢索能力（同時支援手機虛擬鍵盤 Enter 與電腦點擊）
         function handleSearch(e) {
-            if (e.key === 'Enter') {
-                alert('✨ 提示：您可以使用首頁上方的全站搜尋框，或點擊上方任一主題卡片直接進入深入閱讀！');
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                const inputEl = document.getElementById('hallSearchInput') || e.target;
+                const keyword = inputEl.value.trim().toLowerCase();
+                if (!keyword) return;
+
+                if (typeof knowledgeTree === 'undefined') {
+                    alert('資料庫載入中，請稍候再試！');
+                    return;
+                }
+
+                let matchedArticle = null;
+                for (const group of knowledgeTree) {
+                    const found = group.articles.find(art => 
+                        art.title.toLowerCase().includes(keyword) || 
+                        (art.tag && art.tag.toLowerCase().includes(keyword))
+                    );
+                    if (found) {
+                        matchedArticle = found;
+                        break;
+                    }
+                }
+
+                if (matchedArticle) {
+                    // 自動跳轉到知識庫內頁，並在 iframe 中展開對應文章
+                    window.location.href = `./knowledge.html?article=${matchedArticle.id}`;
+                } else {
+                    alert(`🔍 找不到與「${keyword}」相關的文章，請嘗試其他關鍵字，或從下方 7 大主題大廳探索！`);
+                }
             }
         }
     </script>
-<script defer src="/_vercel/insights/script.js"></script>
-    
 </body>
 </html>

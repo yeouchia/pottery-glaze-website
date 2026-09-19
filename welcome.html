@@ -55,6 +55,10 @@
         /* === 1. 根目錄與顏色變數定義 結束 === */
 
         /* === 2. 頂部 Banner 標題區塊 (純白底) 開始 === */
+/* ======================================================== */
+/* 🔒 [CRITICAL LOCK] 電腦版頂部 Banner 核心架構 - 絕不可動 */
+/* ======================================================== */
+
         .top-banner {
             background: var(--card-bg);
             width: 100%;
@@ -182,6 +186,13 @@
         .share-circle-btn.fb { background-color: #1877f2; }
         .share-circle-btn.line { background-color: #00c300; }
         .share-circle-btn.copy { background-color: #64748b; }
+
+
+/* ======================================================== */
+/* 🔒 [CRITICAL LOCK] 電腦版頂部 Banner 核心架構 - 絕不可動 */
+/* ======================================================== */
+
+
         /* === 2. 頂部 Banner 標題區塊 (純白底) 結束 === */
 
         /* === 3. 功能導覽卡片區 (電腦版 4 欄) 開始 === */
@@ -433,7 +444,6 @@
         /* === 4. 探索陶藝知識 15大區塊與搜尋列 結束 === */
 
         /* === 5. App風格文章閱讀器 (滑動重疊層) 開始 === */
-        /* 保留原本的 Overlay 框架以防工具載入需要，教學文章將直接跳轉至知識庫 */
         .article-reader-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 3000; display: flex; flex-direction: column;
@@ -524,10 +534,9 @@
                 position: static !important;
             }
 
-            /* ★ 手機專屬魔法：順序與對齊大洗牌 ★ */
             .banner-title-group {
                 display: grid !important;
-                grid-template-columns: auto 1fr !important; /* 圖示與標題並排 */
+                grid-template-columns: auto 1fr !important;
                 align-items: center !important;
                 row-gap: 3vw !important;
                 column-gap: 2vw !important;
@@ -543,14 +552,14 @@
             .banner-icon {
                 grid-column: 1 !important;
                 grid-row: 1 !important;
-                font-size: 8vw !important; /* 圖示大小與標題協調 */
+                font-size: 8vw !important;
                 margin: 0 !important;
             }
 
             .banner-text h1 {
                 grid-column: 2 !important; 
                 grid-row: 1 !important;
-                text-align: left !important; /* 標題靠左對齊 */
+                text-align: left !important;
                 font-size: 6vw !important;
                 margin: 0 !important;
             }
@@ -558,29 +567,28 @@
             .banner-text p {
                 grid-column: 1 / -1 !important; 
                 grid-row: 2 !important;
-                text-align: left !important; /* 簡介靠左對齊 */
-                font-size: 3.5vw !important; /* 微縮字體確保只顯示2行 */
+                text-align: left !important;
+                font-size: 3.5vw !important;
                 letter-spacing: -0.2px !important;
                 line-height: 1.5 !important;
                 margin: 1vw 0 0 0 !important;
                 font-weight: 700 !important; 
-                white-space: nowrap !important; /* ★ 強制不換行，依靠 <br> 完美斷成2行 ★ */
+                white-space: nowrap !important;
             }
             
             .install-btn {
                 grid-column: 1 / -1 !important; 
                 grid-row: 3 !important;
-                justify-self: start !important; /* ★ 按鈕強制靠左 ★ */
+                justify-self: start !important;
                 margin: 2vw 0 0 0 !important;
                 padding: 2.2vw 4.5vw !important;
                 font-size: 3.6vw !important;
                 border-radius: 50px !important;
-                width: fit-content !important; /* 確保按鈕不會過寬 */
+                width: fit-content !important;
                 position: relative !important;
-                z-index: 15 !important; /* 確保按鈕層級高於 LULU */
+                z-index: 15 !important;
             }
 
-            /* ★ 分享區塊靠左 ★ */
             .banner-right {
                 width: 100% !important;
                 align-items: flex-start !important; 
@@ -594,16 +602,15 @@
             .share-buttons { gap: 3vw !important; }
             .share-circle-btn { width: 11vw !important; height: 11vw !important; font-size: 5.5vw !important; }
 
-            /* ★ LULU 完美降落右下角並破框 ★ */
             .banner-avatar { 
                 position: absolute !important;
-                bottom: -5vw !important;  
-                right: -3vw !important;   
-                width: 38vw !important;   /* 稍微縮小 LULU 讓出空間 */
-                max-width: 150px !important;
-                margin: 0 !important;     
+                bottom: -2vw !important;  
+                right: -2vw !important;   
+                width: 38vw !important;   
+                max-width: 140px !important;
+                margin: 0 !important;      
                 z-index: 10 !important;
-                pointer-events: none !important; /* ★ 魔法：防止 LULU 的鹿角擋住按鈕點擊 ★ */
+                pointer-events: none !important;
             }
 
             /* 手機版四大功能卡片壓縮版 */
@@ -691,7 +698,6 @@
                     <i class="fa-solid fa-layer-group banner-icon"></i>
                     <div class="banner-text">
                         <h1>陶藝與釉藥調配</h1>
-                        <!-- ★ 精簡文字以確保雙行顯示 ★ -->
                         <p>融合科學計算與藝術創作的陶藝中心。<br>分享陶瓷歷史、創作靈感與生活美學。</p>
                         <button class="install-btn" onmouseenter="playHover()" onclick="playClick(); showInstallGuide()">
                             <i class="fa-solid fa-mobile-screen-button"></i> 加入手機桌面 (APP)
@@ -709,13 +715,14 @@
             </div>
         </div>
 
+        <!-- 四大功能導覽卡片 (已完整保留您精細豐富的項目與精簡說明) -->
         <div class="cards-grid">
             <div class="feature-card card-calc" onmouseenter="playHover()">
                 <div class="card-header">
                     <div class="card-icon"><i class="fa-solid fa-calculator"></i></div>
                     <div class="card-title">精準釉藥計算</div>
                 </div>
-                <div class="card-desc">科學調配完美釉色之專業工具：</div>
+                <div class="card-desc">專業釉色科學調配工具：</div>
                 <ul class="card-list">
                     <li><i class="fa-solid fa-flask"></i> 原料轉釉式</li>
                     <li><i class="fa-solid fa-table"></i> 釉式轉原料</li>
@@ -723,20 +730,38 @@
                     <li><i class="fa-solid fa-chalkboard-user"></i> 賽格式與三角座標教學</li>
                 </ul>
             </div>
+            
             <div class="feature-card card-video" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><div class="card-title">豐富影音課程</div></div>
                 <div class="card-desc">完整 YouTube 教學影片庫：</div>
-                <ul class="card-list"><li><i class="fa-solid fa-landmark"></i> 陶瓷歷史與文化介紹</li><li><i class="fa-solid fa-hands-holding"></i> 陶瓷拉坯製作過程</li><li><i class="fa-solid fa-paintbrush"></i> 釉色與裝飾技法</li><li><i class="fa-solid fa-vial"></i> 釉藥調配實務</li></ul>
+                <ul class="card-list">
+                    <li><i class="fa-solid fa-landmark"></i> 陶瓷歷史與文化介紹</li>
+                    <li><i class="fa-solid fa-hands-holding"></i> 陶瓷拉坯製作過程</li>
+                    <li><i class="fa-solid fa-paintbrush"></i> 釉色與裝飾技法</li>
+                    <li><i class="fa-solid fa-vial"></i> 釉藥調配實務</li>
+                </ul>
             </div>
+            
             <div class="feature-card card-lecture" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-solid fa-book-open-reader"></i></div><div class="card-title">陶釉教學講義</div></div>
                 <div class="card-desc">完整七大章節陶瓷專書文稿：</div>
-                <ul class="card-list"><li><i class="fa-solid fa-book-bookmark"></i> 陶瓷歷史與五大名窯</li><li><i class="fa-solid fa-cubes-stacked"></i> 14種常用釉藥原料解析</li><li><i class="fa-solid fa-shapes"></i> 三角座標與賽格爾式理論</li><li><i class="fa-solid fa-fire-burner"></i> 窯爐操作與安全規範</li></ul>
+                <ul class="card-list">
+                    <li><i class="fa-solid fa-book-bookmark"></i> 陶瓷歷史與五大名窯</li>
+                    <li><i class="fa-solid fa-cubes-stacked"></i> 14種常用釉藥原料解析</li>
+                    <li><i class="fa-solid fa-shapes"></i> 三角座標與賽格爾式理論</li>
+                    <li><i class="fa-solid fa-fire-burner"></i> 窯爐操作與安全規範</li>
+                </ul>
             </div>
+            
             <div class="feature-card card-life" onmouseenter="playHover()">
                 <div class="card-header"><div class="card-icon"><i class="fa-solid fa-heart"></i></div><div class="card-title">陶藝生活與靈感</div></div>
                 <div class="card-desc">關注 FB 與 IG 獲得創作養分：</div>
-                <ul class="card-list"><li><i class="fa-solid fa-palette"></i> 個人原創作品分享</li><li><i class="fa-solid fa-fire-flame-curved"></i> 炎變の燒柴燒記錄</li><li><i class="fa-solid fa-school"></i> 鶯歌工商教學資源交流</li><li><i class="fa-solid fa-comments"></i> 留言板互動提問</li></ul>
+                <ul class="card-list">
+                    <li><i class="fa-solid fa-palette"></i> 個人原創作品分享</li>
+                    <li><i class="fa-solid fa-fire-flame-curved"></i> 炎變の燒柴燒記錄</li>
+                    <li><i class="fa-solid fa-school"></i> 鶯歌工商教學資源交流</li>
+                    <li><i class="fa-solid fa-comments"></i> 留言板互動提問</li>
+                </ul>
             </div>
         </div>
 
@@ -916,27 +941,20 @@
                 return;
             }
 
-            // 【智慧路由】：判斷點擊的是「工具/獨立頁面」還是「知識文章」
             const isToolOrApp = url.includes('yuanliao') || 
                                 url.includes('youzhi') || 
                                 url.includes('guestbook') || 
                                 url.includes('jiaoxue');
 
             if (isToolOrApp) {
-                // 如果是計算機工具或留言板，直接在當前 iframe 跳轉頁面
                 window.location.href = url;
             } else {
-                // 如果是教學文章，自動萃取檔名作為 ID (例如 './book/buy_clay.html' 萃取出 'buy_clay')
                 const articleId = url.split('/').pop().replace('.html', '');
-                
-                // 帶上參數，完美跳轉到我們新做的知識庫大廳！
                 window.location.href = 'knowledge.html?article=' + articleId;
             }
         }
 
-        function closeArticle() {
-            // 已廢棄：改由直接跳轉或透過首頁頂部導航列返回
-        }
+        function closeArticle() {}
 
         function filterCards() {
             const input = document.getElementById('searchInput');
@@ -977,7 +995,8 @@
         }
 
         function playClickSound() {
-            if (clickAudio) { clickAudio.currentTime = 0; clickAudio.volume = 0.15; var p = clickAudio.play(); if (p !== undefined) { p.catch(() => {}); } }
+            if (clickAudio) {
+                clickAudio.currentTime = 0; clickAudio.volume = 0.15; var p = clickAudio.play(); if (p !== undefined) { p.catch(() => {}); } }
         }
 
         function playHover() {
@@ -1021,7 +1040,7 @@
                 steps.innerHTML = `<div class="step-item"><i class="fa-solid fa-ellipsis-vertical"></i> 1. 點擊瀏覽器右上角的「選單 (三個點)」</div><div class="step-item"><i class="fa-solid fa-mobile-screen"></i> 2. 選擇「加到主畫面」或「安裝應用程式」</div><div class="step-item"><i class="fa-solid fa-check"></i> 3. 點擊「新增」，即可隨時開啟全螢幕 APP！</div>`;
             } else {
                 desc.innerHTML = "電腦版儲存方式：";
-                steps.innerHTML = `<div class="step-item"><i class="fa-solid fa-star"></i> 1. 請使用鍵盤 Ctrl+D (或 Cmd+D) 加入書籤</div><div class="step-item"><i class="fa-solid fa-mobile-screen"></i> 2. 若要體驗免網址列的 APP 模式，請使用您的手機瀏覽器開啟本站設定！</div>`;
+                steps.innerHTML = `<div class="step-item"><i class="fa-solid fa-star"></i> 1. 請使用鍵盤 Ctrl+D (或 Cmd+D) 加入書籤</div><div class="spec-item"><i class="fa-solid fa-mobile-screen"></i> 2. 若要體驗免網址列的 APP 模式，請使用您的手機瀏覽器開啟本站設定！</div>`;
             }
             modal.style.display = 'flex'; setTimeout(() => modal.classList.add('show'), 10);
         }
@@ -1030,7 +1049,5 @@
             const modal = document.getElementById('installModal'); modal.classList.remove('show'); setTimeout(() => modal.style.display = 'none', 300);
         }
     </script>
-<script defer src="/_vercel/insights/script.js"></script>
-    
 </body>
 </html>

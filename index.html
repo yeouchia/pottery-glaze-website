@@ -11,19 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="glass-logo.ico">
     
-    <!-- ========================================== -->
-    <!-- ======= CSS 樣式設定區塊 開始 ======= -->
-    <!-- ========================================== -->
     <style>
-        /* === 1. 根目錄與顏色變數定義 開始 === */
         :root {
-            --primary-bg: #14213d;      /* 主色：深海軍藍 */
-            --accent-color: #fca311;    /* 品牌點綴色：琥珀金 */
-            --text-light: #e5e5e5;      /* 淺色文字 */
-            --bg-color: #f4f6f8;        /* 網頁背景 */
-            --header-height: 68px;      /* Header 高度 */
+            --primary-bg: #14213d;      
+            --accent-color: #fca311;    
+            --text-light: #e5e5e5;      
+            --bg-color: #f4f6f8;        
+            --header-height: 68px;      
             
-            /* 下拉選單統一底色 */
             --gold-light: #fff8e7; 
             --gold-hover: #ffeed0; 
         }
@@ -31,467 +26,193 @@
         * { box-sizing: border-box; }
         
         html, body {
-            height: 100%; 
-            margin: 0;
-            padding: 0;
-            overflow: hidden; 
+            height: 100%; margin: 0; padding: 0; overflow: hidden; 
             font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            -webkit-text-size-adjust: 100% !important;
-            text-size-adjust: 100% !important;
+            background-color: var(--bg-color); display: flex; flex-direction: column;
+            -webkit-text-size-adjust: 100% !important; text-size-adjust: 100% !important;
             -webkit-tap-highlight-color: transparent;
         }
-        /* === 1. 根目錄與顏色變數定義 結束 === */
 
-        /* === 2. 頂部導航列 (Header) 外觀設定 開始 === */
         header {
-            flex-shrink: 0;
-            background-color: var(--primary-bg);
-            color: white;
-            height: var(--header-height);
-            display: flex;
-            align-items: center;
-            padding: 0 24px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
-            z-index: 1000;
-            position: relative;
+            flex-shrink: 0; background-color: var(--primary-bg); color: white;
+            height: var(--header-height); display: flex; align-items: center; padding: 0 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25); z-index: 1000; position: relative;
         }
 
         .header-bg-overlay {
-            position: absolute;
-            top: 0;
-            left: 200px;
-            right: 480px;
-            height: 100%;
-            background-image: url('./header_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.42;
-            pointer-events: none;
+            position: absolute; top: 0; left: 200px; right: 480px; height: 100%;
+            background-image: url('./header_bg.jpg'); background-size: cover; background-position: center;
+            opacity: 0.42; pointer-events: none;
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
             z-index: 1;
         }
 
         .header-container {
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 10;
+            width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;
+            position: relative; z-index: 10;
         }
-        /* === 2. 頂部導航列 (Header) 外觀設定 結束 === */
 
-        /* === 3. Logo 品牌與文字設定 開始 === */
         .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: white; 
-            margin-right: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease; 
-            padding: 4px 8px; 
-            border-radius: 6px;
-            flex-shrink: 0;
+            display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; 
+            margin-right: 10px; cursor: pointer; transition: all 0.3s ease; padding: 4px 6px; 
+            border-radius: 6px; flex-shrink: 0;
         }
-        
-        .brand-icon {
-            font-size: 1.9rem; 
-            color: var(--accent-color); 
-            transition: transform 0.3s ease;
-        }
-
+        .brand-icon { font-size: 1.6rem; color: var(--accent-color); transition: transform 0.3s ease; }
         .brand-text { display: flex; flex-direction: column; justify-content: center; }
-        .brand-text h1 { margin: 0; font-size: 1.25rem; font-weight: 800; letter-spacing: 1px; white-space: nowrap; line-height: 1.2; }
-        .brand-text .sub-en { font-size: 0.65rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); font-weight: 600; margin-top: 1px; white-space: nowrap; }
+        .brand-text h1 { margin: 0; font-size: 1.05rem; font-weight: 800; letter-spacing: 0.3px; white-space: nowrap; line-height: 1.2; }
+        .brand-text .sub-en { font-size: 0.5rem; letter-spacing: 0.8px; color: rgba(255,255,255,0.7); font-weight: 600; margin-top: 1px; white-space: nowrap; }
 
         .brand:hover { background-color: rgba(255, 255, 255, 0.08); }
         .brand:hover .brand-text h1 { color: var(--accent-color); }
-        .brand:hover .brand-icon { transform: scale(1.1) rotate(-5deg); }
-        /* === 3. Logo 品牌與文字設定 結束 === */
 
-        /* === 4. 主選單導航按鈕設定 開始 === */
-        .nav-menu { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; gap: 16px; }
-        .tools-group { display: flex; gap: 10px; align-items: center; }
+        .nav-menu { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; gap: 6px; }
+        .tools-group { display: flex; gap: 6px; align-items: center; }
 
         .nav-btn {
-            text-decoration: none;
-            font-size: 0.92rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            padding: 8px 16px; 
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
-            border: 1px solid transparent;
+            text-decoration: none; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.2px;
+            padding: 6px 9px; border-radius: 7px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; gap: 5px; white-space: nowrap; cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25); border: 1px solid transparent;
         }
 
-        /* 4-1. 第一至第四個按鈕：統一琥珀金漸層底色 */
         .nav-btn.theme-gold {
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 100%);
             color: var(--primary-bg);
         }
 
-        .nav-btn.theme-gold.icon-red i:first-child { color: #c0392b; font-size: 1.05em; }    
-        .nav-btn.theme-gold.icon-blue i:first-child { color: #1565c0; font-size: 1.05em; }   
-        .nav-btn.theme-gold.icon-green i:first-child { color: #2e7d32; font-size: 1.05em; }  
-        .nav-btn.theme-gold.icon-purple i:first-child { color: #6a1b9a; font-size: 1.05em; } 
+        .nav-btn.theme-gold.icon-red i:first-child { color: #c0392b; }    
+        .nav-btn.theme-gold.icon-blue i:first-child { color: #1565c0; }   
+        .nav-btn.theme-gold.icon-green i:first-child { color: #2e7d32; }  
+        .nav-btn.theme-gold.icon-teal i:first-child { color: #0f766e; }   
+        .nav-btn.theme-gold.icon-purple i:first-child { color: #6a1b9a; } 
 
-        .nav-btn.theme-gold i.fa-caret-down {
-            color: rgba(20, 33, 61, 0.6);
-            transition: transform 0.3s ease;
-        }
+        .nav-btn.theme-gold i.fa-caret-down { color: rgba(20, 33, 61, 0.6); transition: transform 0.3s ease; }
 
         .nav-btn.theme-gold:hover {
-            background: white; 
-            color: var(--accent-color); 
-            border-color: var(--accent-color);
-            transform: translateY(-3px) scale(1.04); 
-            box-shadow: 0 4px 14px rgba(252, 163, 17, 0.45);
+            background: white; color: var(--accent-color); border-color: var(--accent-color);
+            transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 12px rgba(252, 163, 17, 0.4);
         }
-        .nav-btn.theme-gold:hover i.fa-caret-down {
-            color: var(--accent-color);
-        }
+        .nav-btn.theme-gold:hover i.fa-caret-down { color: var(--accent-color); }
 
-        /* 4-2. 第五個按鈕 (留言板)：紫紅漸層過渡 */
         .nav-btn.theme-purple {
             background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%);
             color: white;
+            padding: 6px 10px;
         }
-        .nav-btn.theme-purple i:first-child { color: #ffd700; font-size: 1.05em; }
+        .nav-btn.theme-purple i:first-child { color: #ffd700; }
         .nav-btn.theme-purple:hover {
             background: white; color: #7b2cbf; border-color: #7b2cbf;
-            transform: translateY(-3px) scale(1.04); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
+            transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
         }
-        .nav-btn.theme-purple:hover i:first-child,
-        .nav-btn.theme-purple:hover i.fa-caret-down { color: #7b2cbf; }
-        /* === 4. 主選單導航按鈕設定 結束 === */
 
-        /* === 5. 右側社群與分享按鈕設定 開始 === */
-        .social-group { display: flex; gap: 12px; align-items: center; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 18px; flex-shrink: 0; }
-        .icon-btn { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; font-size: 1.1rem; box-shadow: 0 3px 6px rgba(0,0,0,0.3); position: relative; cursor: pointer; border: none; }
-        .icon-btn.yt { background-color: #FF0000; } .icon-btn.yt:hover { background-color: white; color: #FF0000; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.game { background-color: #4CAF50; } .icon-btn.game:hover { background-color: white; color: #4CAF50; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.fb { background-color: #1877F2; } .icon-btn.fb:hover { background-color: white; color: #1877F2; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); } .icon-btn.ig:hover { background: white; color: #C13584; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.fire { background-color: #FFC107; color: #14213d; } .icon-btn.fire:hover { background-color: white; color: #FFC107; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.school { background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%); color: white; } .icon-btn.school:hover { background: white; color: #7b2cbf; transform: translateY(-3px) scale(1.1); }
-        .icon-btn.share { background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; } .icon-btn.share:hover { background: white; color: #ff006e; transform: translateY(-3px) scale(1.1); }
-        /* === 5. 右側社群與分享按鈕設定 結束 === */
+        .social-group { display: flex; gap: 8px; align-items: center; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 10px; flex-shrink: 0; }
+        .icon-btn { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s; text-decoration: none; font-size: 0.95rem; box-shadow: 0 3px 6px rgba(0,0,0,0.3); border: none; cursor: pointer; }
+        .icon-btn.yt { background-color: #FF0000; } .icon-btn.yt:hover { background-color: white; color: #FF0000; }
+        .icon-btn.game { background-color: #4CAF50; } .icon-btn.game:hover { background-color: white; color: #4CAF50; }
+        .icon-btn.fb { background-color: #1877F2; } .icon-btn.fb:hover { background-color: white; color: #1877F2; }
+        .icon-btn.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); } .icon-btn.ig:hover { background: white; color: #C13584; }
+        .icon-btn.fire { background-color: #FFC107; color: #14213d; } .icon-btn.fire:hover { background-color: white; color: #FFC107; }
+        .icon-btn.school { background: linear-gradient(135deg, #7b2cbf 0%, #f72585 100%); color: white; } .icon-btn.school:hover { background: white; color: #7b2cbf; }
+        .icon-btn.share { background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; } .icon-btn.share:hover { background: white; color: #ff006e; }
 
-        /* === 6. 下拉選單與子項目外觀設定 開始 === */
         .dropdown { position: relative; }
-
         .dropdown-content { 
-            visibility: hidden;
-            opacity: 0;
-            transform: translateY(15px);
+            visibility: hidden; opacity: 0; transform: translateY(15px);
             position: absolute; left: 0; top: 100%; padding-top: 8px; min-width: 220px; z-index: 999999; 
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); pointer-events: none;
         }
-        
         .share-dropdown-content { 
-            visibility: hidden;
-            opacity: 0;
-            transform: translateY(15px);
+            visibility: hidden; opacity: 0; transform: translateY(15px);
             position: absolute; right: 0; top: 100%; padding-top: 8px; min-width: 180px; z-index: 999999; 
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); pointer-events: none;
         }
-        
-        .share-dropdown-content.show { 
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
+        .share-dropdown-content.show { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
 
-        /* === 下拉選單內部區塊 (電腦版開啟捲軸) === */
         .dropdown-inner { 
-            background-color: #ffffff; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
-            border-radius: 8px; 
-            border: 1px solid rgba(0,0,0,0.08); 
-            max-height: calc(100vh - var(--header-height) - 20px); 
-            overflow-y: auto; 
+            background-color: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+            border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); 
+            max-height: calc(100vh - var(--header-height) - 20px); overflow-y: auto; 
         }
 
-        /* === 美化下拉選單的自訂捲軸 === */
-        .dropdown-inner::-webkit-scrollbar {
-            width: 6px; 
-        }
-        .dropdown-inner::-webkit-scrollbar-track {
-            background: transparent; 
-            border-radius: 8px;
-        }
-        .dropdown-inner::-webkit-scrollbar-thumb {
-            background: #dcd7c7; 
-            border-radius: 8px;
-        }
-        .dropdown-inner::-webkit-scrollbar-thumb:hover {
-            background: #b5afa0; 
-        }
-        
         @media (min-width: 1251px) {
-            .dropdown:hover .dropdown-content { 
-                visibility: visible;
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-            }
+            .dropdown:hover .dropdown-content { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
             .dropdown:hover .nav-btn i.fa-caret-down { transform: rotate(180deg); }
         }
 
         .dropdown-item { color: #14213d; padding: 12px 18px; text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 700; white-space: nowrap; transition: all 0.2s ease; border-left: 6px solid transparent; background-color: #f9f9f9; cursor: pointer; border-bottom: 1px solid #eee; }
-        .dropdown-item:last-child { border-bottom: none; }
-        .dropdown-item i { width: 20px; text-align: center; font-size: 1.1em; flex-shrink: 0; }
+        .dropdown-item i { width: 20px; text-align: center; }
 
-        /* 階層縮排項目專用樣式 (電腦版) */
-        .dropdown-item.nested-item { padding-left: 2.5rem !important; }
-
-        .dropdown-item.item-red { background-color: var(--gold-light); border-left-color: #c0392b; } .dropdown-item.item-red i { color: #c0392b; } .dropdown-item.item-red:hover { background-color: var(--gold-hover); padding-left: 22px; }
-        .dropdown-item.item-blue { background-color: var(--gold-light); border-left-color: #1565c0; } .dropdown-item.item-blue i { color: #1565c0; } .dropdown-item.item-blue:hover { background-color: var(--gold-hover); padding-left: 22px; }
-        .dropdown-item.item-green { background-color: var(--gold-light); border-left-color: #2e7d32; } .dropdown-item.item-green i { color: #2e7d32; } .dropdown-item.item-green:hover { background-color: var(--gold-hover); padding-left: 22px; }
-        .dropdown-item.item-purple { background-color: var(--gold-light); border-left-color: #6a1b9a; } .dropdown-item.item-purple i { color: #6a1b9a; } .dropdown-item.item-purple:hover { background-color: var(--gold-hover); padding-left: 22px; }
-
-        .dropdown-item.item-line { background-color: #f0fff0; border-left-color: #00c300; } .dropdown-item.item-line i { color: #00c300; }
-        .dropdown-item.item-fb { background-color: #f0f7ff; border-left-color: #1877f2; } .dropdown-item.item-fb i { color: #1877f2; }
-        .dropdown-item.item-copy { background-color: #f3f4f6; border-left-color: #6b7280; } .dropdown-item.item-copy i { color: #6b7280; }
-        /* === 6. 下拉選單與子項目外觀設定 結束 === */
-
-        /* === 7. 主內容區與 Footer 設定 開始 === */
         main { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; background-color: white; position: relative; }
         .iframe-container { width: 100%; height: 100%; flex: 1; border: none; }
         iframe { width: 100%; height: 100%; border: none; display: block; }
         footer { flex-shrink: 0; background-color: #0f1a2e; color: #888; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.75rem; }
-        /* === 7. 主內容區與 Footer 設定 結束 === */
 
-        /* ========================================== */
-        /* ======= 8. 手機版 RWD 響應式區塊 開始 ======= */
-        /* ========================================== */
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 5px; }
 
         @media (max-width: 1250px) {
-            header { padding: 0 15px !important; }
+            header { padding: 0 12px !important; }
             .header-bg-overlay { display: none !important; }
-            
-            .mobile-menu-btn { 
-                display: block !important; 
-                flex-shrink: 0; 
-                margin-right: -5px; 
-            }
-            
-            .brand { 
-                margin-right: auto !important; 
-                max-width: calc(100% - 50px); 
-                overflow: hidden; 
-            }
-            .brand-icon { font-size: 1.5rem !important; }
-            .brand-text { overflow: hidden; }
-            .brand-text h1 { font-size: 1.15rem !important; text-overflow: ellipsis; overflow: hidden; }
-            .brand-text .sub-en { font-size: 0.55rem !important; letter-spacing: 0.5px !important; text-overflow: ellipsis; overflow: hidden; }
+            .mobile-menu-btn { display: block !important; flex-shrink: 0; margin-right: -5px; }
+            .brand { margin-right: auto !important; max-width: calc(100% - 45px); }
 
-            /* 側邊抽屜滑入魔法 (Side Drawer) */
             .nav-menu {
-                display: flex !important;
-                position: fixed !important; top: var(--header-height) !important;
-                left: 0 !important; right: 0 !important; bottom: 0 !important;
-                width: 100% !important; height: auto !important; max-height: calc(100vh - var(--header-height)) !important;
-                background-color: #14213d !important; flex-direction: column !important; justify-content: flex-start !important;
-                padding: 15px 20px 80px 20px !important; overflow-y: scroll !important; 
-                -webkit-overflow-scrolling: touch !important; touch-action: pan-y !important;
-                box-shadow: -5px 0 25px rgba(0,0,0,0.5) !important; z-index: 99999 !important;
-                
-                transform: translateX(100%);
-                visibility: hidden;
-                transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+                display: flex !important; position: fixed !important; top: var(--header-height) !important;
+                left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: auto !important;
+                max-height: calc(100vh - var(--header-height)) !important; background-color: #14213d !important;
+                flex-direction: column !important; justify-content: flex-start !important; padding: 15px 20px 80px 20px !important;
+                overflow-y: scroll !important; box-shadow: -5px 0 25px rgba(0,0,0,0.5) !important; z-index: 99999 !important;
+                transform: translateX(100%); visibility: hidden; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
             }
-
-            .nav-menu.active { 
-                transform: translateX(0);
-                visibility: visible;
-            }
-
-            /* 群組間距壓縮，讓整體更緊湊 */
-            .tools-group { 
-                flex-direction: column !important; 
-                width: 100% !important; 
-                gap: 5px !important; 
-                align-items: center !important; 
-            }
-
-            /* 確保包含選單的容器絕對垂直排列、無間隙，且所有 5 個大標題按鈕保持 85% 等寬 */
-            .dropdown { 
-                width: 85% !important; 
-                margin: 0 auto !important; 
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 0 !important; 
-            }
-
-            /* 五大主標題按鈕尺寸強力縮小，高度與字體變得細緻 */
-            .nav-btn {
-                width: 100% !important; justify-content: space-between !important; 
-                padding: 10px 16px !important; 
-                font-size: 0.95rem !important; 
-                font-weight: 800 !important; 
-                border-radius: 8px !important; 
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
-                transition: all 0.2s ease !important;
-                position: relative !important;
-                z-index: 10 !important; 
-                margin: 0 !important;
-            }
-            .nav-btn > div { display: flex; align-items: center; gap: 10px !important; }
-            .nav-btn i { font-size: 1.1rem !important; }
-
-            /* 防重疊結界！強制取消手機版觸控時的放大特效 */
-            .nav-btn:hover, .nav-btn:active {
-                transform: none !important;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
-            }
-
-            /* 終極母子連體魔法：展開時切平母標題下方圓角、消除底線與陰影 */
-            .dropdown.mobile-open .nav-btn {
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                box-shadow: none !important; 
-                border-bottom: none !important;
-            }
-
-            /* 手機版子選單：徹底拔除電腦版的位移干擾 */
-            .dropdown-content { 
-                display: grid !important; 
-                grid-template-rows: 0fr; 
-                opacity: 0;
-                visibility: hidden !important; 
-                position: static !important; 
-                top: auto !important;
-                transform: none !important;
-                width: 100% !important; box-shadow: none !important;
-                padding: 0 !important; 
-                margin: 0 !important; 
-                transition: grid-template-rows 0.35s ease, opacity 0.35s ease, visibility 0.35s, margin-bottom 0.35s;
-                pointer-events: none;
-            }
+            .nav-menu.active { transform: translateX(0); visibility: visible; }
+            .tools-group { flex-direction: column !important; width: 100% !important; gap: 8px !important; align-items: center !important; }
+            .dropdown { width: 90% !important; margin: 0 auto !important; display: flex !important; flex-direction: column !important; gap: 0 !important; }
+            .nav-btn { width: 100% !important; justify-content: space-between !important; padding: 10px 16px !important; font-size: 0.95rem !important; }
             
-            /* 展開時，底部產生 12px 安全距離，修正負邊距避免覆蓋按鈕 */
-            .dropdown.mobile-open .dropdown-content { 
-                grid-template-rows: 1fr; 
-                opacity: 1;
-                visibility: visible !important; 
-                margin-bottom: 12px !important; 
-                margin-top: 0 !important; /* <--- 修正：取消負邊距，讓它自然接在按鈕下方 */
-                pointer-events: auto;
-                filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); 
+            .dropdown.mobile-open .dropdown-content {
+                visibility: visible !important;
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                padding-top: 6px !important;
+                pointer-events: auto !important;
+                z-index: 999999 !important;
             }
-            
-            .dropdown.mobile-open .nav-btn i.fa-caret-down { transform: rotate(180deg); }
-
-            /* 子選單內部去邊界，達成與母標題的完美一體成型 */
+            .dropdown.mobile-open .nav-btn i.fa-caret-down {
+                transform: rotate(180deg);
+            }
+            .dropdown-content {
+                position: absolute !important;
+                left: 0;
+                top: 100%;
+                width: 100%;
+                transform: translateY(15px);
+                padding-top: 8px;
+            }
             .dropdown-inner {
-                max-height: none !important;     /* === 解除手機版的高度限制 === */
-                overflow-y: hidden !important;   /* === 關閉手機版的內部捲軸 === */
-                min-height: 0; 
-                background: var(--gold-light) !important; 
-                box-shadow: none !important; 
-                border-radius: 0 0 8px 8px !important; 
-                display: flex !important; flex-direction: column !important;
-                gap: 0 !important; 
-                border: none !important;
-                padding-top: 0 !important; /* <--- 修正：取消上方補償的內距 */
-                padding-bottom: 0 !important; 
-                margin: 0 !important;
+                max-height: calc(100vh - 200px) !important;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
+                border-radius: 8px !important;
             }
-            
-            /* 子選單項目的平面化與分隔線設定 */
-            .dropdown-item { 
-                border-radius: 0 !important; 
-                padding: 12px 18px !important; 
-                font-size: 0.9rem !important; 
-                font-weight: 800 !important; 
-                border-bottom: 1px solid rgba(0,0,0,0.05) !important; 
-                border-left: 4px solid transparent !important; 
-                background-color: transparent !important; 
-            }
-            .dropdown-item:last-child {
-                border-bottom: none !important; 
-            }
-            
-            /* 將左側色彩飾條保留 */
-            .dropdown-item.item-red { border-left-color: #c0392b !important; }
-            .dropdown-item.item-blue { border-left-color: #1565c0 !important; }
-            .dropdown-item.item-green { border-left-color: #2e7d32 !important; }
-            .dropdown-item.item-purple { border-left-color: #6a1b9a !important; }
-
-            .dropdown-item i { font-size: 1.05rem !important; }
-
-            /* 階層縮排項目專用樣式 (手機版) */
-            .dropdown-item.nested-item { padding-left: 3rem !important; }
-
-            /* 取消子選單手機版的點擊橫移動畫，防止畫面跳動 */
-            .dropdown-item:hover, .dropdown-item:active {
-                padding-left: 18px !important; 
-                background-color: var(--gold-hover) !important; 
-                transform: none !important;
-            }
-            .dropdown-item.nested-item:hover, .dropdown-item.nested-item:active {
-                padding-left: 3rem !important; 
+            .dropdown-item {
+                padding: 12px 18px !important;
+                font-size: 0.92rem !important;
             }
 
-            /* 社群圖示區塊向上壓縮，確保一頁顯示完畢 */
-            .social-group {
-                border-left: none !important; border-top: 1px solid rgba(255,255,255,0.15) !important;
-                padding-left: 0 !important; margin-left: 0 !important; 
-                margin-top: 10px !important; padding-top: 15px !important;
-                padding-bottom: 25px !important; width: 100% !important; 
-                display: flex !important; flex-direction: row !important;
-                flex-wrap: wrap !important; justify-content: center !important; gap: 10px !important;
-            }
-            .icon-btn { width: 36px !important; height: 36px !important; font-size: 1.15rem !important; }
-            .icon-btn::after { display: none !important; }
-
-            .share-dropdown-content {
-                position: fixed !important; bottom: 20px !important; left: 20px !important; right: 20px !important;
-                top: auto !important; width: auto !important;
-            }
-
-            footer {
-                padding: 3px 5px !important; 
-                font-size: clamp(9px, 2.5vw, 12px) !important; 
-                white-space: nowrap !important; 
-                line-height: 1.2 !important;
-            }
+            .social-group { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.15) !important; padding-left: 0 !important; margin-top: 10px !important; padding-top: 15px !important; width: 100% !important; justify-content: center !important; }
         }
-        /* ======= 8. 手機版 RWD 響應式區塊 結束 ======= */
     </style>
-    <!-- ========================================== -->
-    <!-- ======= CSS 樣式設定區塊 結束 ======= -->
-    <!-- ========================================== -->
 </head>
 <body onclick="unlockAudio()">
 
-    <!-- ========================================== -->
-    <!-- ======= Header 頂部導航列區塊 開始 ======= -->
-    <!-- ========================================== -->
     <header>
-        <!-- 羽化試片背景圖層 -->
         <div class="header-bg-overlay"></div>
 
         <div class="header-container">
-            <!-- === 網站 Logo 區塊 === -->
             <a href="./welcome.html" target="content_frame" class="brand" onclick="playClickSound()" onmouseenter="playHoverSound()">
                 <i class="fa-solid fa-jar brand-icon"></i>
                 <div class="brand-text">
@@ -500,187 +221,108 @@
                 </div>
             </a>
 
-            <!-- 手機版漢堡選單按鈕 -->
             <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="切換選單">
                 <i class="fa-solid fa-bars" id="menuIcon" style="transition: transform 0.3s ease;"></i>
             </button>
 
-            <!-- === 導覽列選單群組 === -->
             <nav class="nav-menu" id="navMenu">
                 <div class="tools-group">
                     
-                    <!-- === 1. 釉藥計算工具 (深紅系) 開始 === -->
+                    <!-- 1. 釉藥計算工具 -->
                     <div class="dropdown" id="calcDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-red" onmouseenter="playHoverSound()" onclick="toggleDropdown('calcDropdown')">
                             <div><i class="fa-solid fa-flask"></i> 釉藥計算工具</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="./yuanliao/b-index.html" target="content_frame" class="dropdown-item item-red protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-flask"></i> 原料轉釉式
-                                </a>
-                                <a href="./youzhi/a-index.html" target="content_frame" class="dropdown-item item-red protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-calculator"></i> 釉式轉原料
-                                </a>
-                                <a href="./youzhi-yuanliao/c-index.html" target="content_frame" class="dropdown-item item-red protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-right-left"></i> 雙向精準轉換
-                                </a>
+                                <a href="./yuanliao/b-index.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-flask" style="color:#c0392b;"></i> 原料轉釉式</a>
+                                <a href="./youzhi/a-index.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-calculator" style="color:#c0392b;"></i> 釉式轉原料</a>
+                                <a href="./youzhi-yuanliao/c-index.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-right-left" style="color:#c0392b;"></i> 雙向精準轉換</a>
                             </div>
                         </div>
                     </div>
-                    <!-- === 1. 釉藥計算工具 (深紅系) 結束 === -->
 
-                    <!-- === 2. 計算與理論教學 (深藍系) 開始 === -->
+                    <!-- 2. 計算釉藥配方 -->
                     <div class="dropdown" id="learnDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-blue" onmouseenter="playHoverSound()" onclick="toggleDropdown('learnDropdown')">
                             <div><i class="fa-solid fa-book-open"></i> 計算釉藥配方</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="./jiaoxue/triaxial_basic.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-chalkboard-user"></i> 三角座標基礎教學
-                                </a>
-                                <a href="./jiaoxue/triaxial_simulator.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-shapes"></i> 三角座標計算工具
-                                </a>
-                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-table-cells"></i> 賽格式(釉式)計算教學
-                                </a>
-                                <a href="javascript:void(0)" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('釉藥配方原理 內容準備中，敬請期待！');">
-                                    <i class="fa-solid fa-vial-circle-check"></i> 釉藥配方原理
-                                </a>
-                                <a href="./tools/tools.html" target="content_frame" class="dropdown-item item-blue" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-mortar-pestle"></i> 釉藥調配工具
-                                </a>
+                                <a href="./jiaoxue/triaxial_basic.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-chalkboard-user" style="color:#1565c0;"></i> 三角座標基礎教學</a>
+                                <a href="./jiaoxue/triaxial_simulator.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-shapes" style="color:#1565c0;"></i> 三角座標計算工具</a>
+                                <a href="./jiaoxue/sege.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-table-cells" style="color:#1565c0;"></i> 賽格式(釉式)計算教學</a>
+                                <a href="./tools/tools.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-mortar-pestle" style="color:#1565c0;"></i> 釉藥調配工具</a>
                             </div>
                         </div>
                     </div>
-                    <!-- === 2. 計算與理論教學 (深藍系) 結束 === -->
 
-                    <!-- === 3. 陶藝知識庫 (深綠系) 開始 === -->
-                    <!-- ★ 加上 ?v=new 強制瀏覽器讀取最新版本，破解快取問題 ★ -->
-                 
+                    <!-- 3. 陶藝知識庫 -->
+                    <div class="dropdown">
+                        <a href="./knowledge-home.html" target="content_frame" class="nav-btn theme-gold icon-green" onmouseenter="playHoverSound()" onclick="playClickSound(); handleMobileClick(event);">
+                            <div><i class="fa-solid fa-book-open-reader"></i> 陶藝知識庫</div>
+                        </a>
+                    </div>
 
-<!-- === 3. 陶藝知識庫 (深綠系) 開始 === -->
-<div class="dropdown">
-    <a href="./knowledge-home.html" target="content_frame" class="nav-btn theme-gold icon-green" onmouseenter="playHoverSound()" onclick="playClickSound(); handleMobileClick(event);">
-        <div><i class="fa-solid fa-book-open-reader"></i> 陶藝知識庫</div>
-    </a>
-</div>
-<!-- === 3. 陶藝知識庫 (深綠系) 結束 === -->
+                    <!-- 4. 教學天地 -->
+                    <div class="dropdown">
+                        <a href="./teaching-home.html" target="content_frame" class="nav-btn theme-gold icon-teal" onmouseenter="playHoverSound()" onclick="playClickSound(); handleMobileClick(event);">
+                            <div><i class="fa-solid fa-chalkboard-user"></i> 教學天地</div>
+                        </a>
+                    </div>
 
-
-
-                    <!-- === 3. 陶藝知識庫 (深綠系) 結束 === -->
-
-                    <!-- === 4. 影像編輯工具 (紫色系) 開始 === -->
+                    <!-- 5. 影像編輯工具 -->
                     <div class="dropdown" id="otherDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-gold icon-purple" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
                             <div><i class="fa-solid fa-image"></i> 影像編輯工具</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-desktop"></i> 電腦版影像編輯器
-                                </a>
-                                <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-mobile-screen"></i> 手機版影像編輯器
-                                </a>
+                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-desktop" style="color:#6a1b9a;"></i> 電腦版影像編輯器</a>
+                                <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-mobile-screen" style="color:#6a1b9a;"></i> 手機版影像編輯器</a>
                             </div>
                         </div>
                     </div>
-                    <!-- === 4. 影像編輯工具 (紫色系) 結束 === -->
 
-                    <!-- === 5. 其他 (紫紅漸層過渡下拉選單) 開始 === -->
+                    <!-- 6. 其他 (完整包含作品分享、關於本站、原料廠商、留言板) -->
                     <div class="dropdown" id="extraMenuDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-purple" onmouseenter="playHoverSound()" onclick="toggleDropdown('extraMenuDropdown')">
                             <div><i class="fa-solid fa-layer-group"></i> 其他</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
                         <div class="dropdown-content">
                             <div class="dropdown-inner">
-                                <a href="javascript:void(0)" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('作品分享 內容準備中，敬請期待！');">
-                                    <i class="fa-solid fa-images"></i> 作品分享
-                                </a>
-                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-store"></i> 原料／廠商資訊
-                                
-</a>
-                                <a href="guestbook.html" target="content_frame" class="dropdown-item item-purple protected-link" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)">
-                                    <i class="fa-solid fa-comments"></i> 留言板
-                                </a>
-
-
-
-
-                                <a href="javascript:void(0)" class="dropdown-item item-purple" onmouseenter="playHoverSound()" onclick="handleMobileClick(event); alert('關於本站！');">
-                                    <i class="fa-solid fa-circle-info"></i> 關於本站
-                              
-
-  </a>
-
-
-
-
-
+                                <a href="./info/suppliers.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-store" style="color:#7b2cbf;"></i> 原料／廠商資訊</a>
+                                <a href="./info/works.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-palette" style="color:#7b2cbf;"></i> 作品分享</a>
+                                <a href="guestbook.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-comments" style="color:#7b2cbf;"></i> 留言板</a>
+                                <a href="./info/about.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-circle-info" style="color:#7b2cbf;"></i> 關於本站</a>
                             </div>
                         </div>
                     </div>
-                    <!-- === 5. 其他 (紫紅漸層過渡下拉選單) 結束 === -->
 
                 </div>
 
-                <!-- === 右側社群與分享按鈕群組 開始 === -->
                 <div class="social-group">
-                    <a href="https://sites.google.com/view/t244/" target="_blank" class="icon-btn school" title="鶯歌工商-黃明文教學網站" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
-                    <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-gamepad"></i>
-                    </a>
-                    <a href="https://www.facebook.com/aawen.huang" target="_blank" class="icon-btn fb" title="Facebook" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.instagram.com/aawenhuang/" target="_blank" class="icon-btn ig" title="Instagram" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100063821328990" target="_blank" class="icon-btn fire" title="炎變の燒" onmouseenter="playHoverSound()" onclick="playClickSound()">
-                        <i class="fa-solid fa-fire"></i>
-                    </a>
+                    <a href="https://sites.google.com/view/t244/" target="_blank" class="icon-btn school" title="鶯歌工商-黃明文教學網站" onmouseenter="playHoverSound()" onclick="playClickSound()"><i class="fa-solid fa-graduation-cap"></i></a>
+                    <a href="https://www.youtube.com/watch?v=2Ds7vXhIpbY&list=PLJLeUnJWf_fvSa-NoPrj4NoHtp_n88qQa" target="_blank" class="icon-btn yt" title="課程影片" onmouseenter="playHoverSound()" onclick="playClickSound()"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="./game/index.html" target="_blank" class="icon-btn game" title="天堂小遊戲" onmouseenter="playHoverSound()" onclick="playClickSound()"><i class="fa-solid fa-gamepad"></i></a>
+                    <a href="https://www.facebook.com/aawen.huang" target="_blank" class="icon-btn fb" title="Facebook" onmouseenter="playHoverSound()" onclick="playClickSound()"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/aawenhuang/" target="_blank" class="icon-btn ig" title="Instagram" onmouseenter="playHoverSound()" onclick="playClickSound()"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100063821328990" target="_blank" class="icon-btn fire" title="炎變の燒" onmouseenter="playHoverSound()" onclick="playClickSound()"><i class="fa-solid fa-fire"></i></a>
                     
-                    <button class="icon-btn share" title="分享本站" onclick="toggleShareMenu(event); playClickSound();" onmouseenter="playHoverSound()">
-                        <i class="fa-solid fa-share-nodes"></i>
-                    </button>
+                    <button class="icon-btn share" title="分享本站" onclick="toggleShareMenu(event); playClickSound();" onmouseenter="playHoverSound()"><i class="fa-solid fa-share-nodes"></i></button>
 
                     <div id="shareDropdown" class="share-dropdown-content">
                         <div class="dropdown-inner">
-                            <a href="#" onclick="shareToFB(); return false;" class="dropdown-item item-fb">
-                                <i class="fa-brands fa-facebook"></i> 分享到 FB
-                            </a>
-                            <a href="#" onclick="shareToLine(); return false;" class="dropdown-item item-line">
-                                <i class="fa-brands fa-line"></i> 分享到 LINE
-                            </a>
-                            <a href="#" onclick="copyLink(); return false;" class="dropdown-item item-copy">
-                                <i class="fa-solid fa-link"></i> 複製連結
-                            </a>
+                            <a href="#" onclick="shareToFB(); return false;" class="dropdown-item"><i class="fa-brands fa-facebook" style="color:#1877f2;"></i> 分享到 FB</a>
+                            <a href="#" onclick="shareToLine(); return false;" class="dropdown-item"><i class="fa-brands fa-line" style="color:#00c300;"></i> 分享到 LINE</a>
+                            <a href="#" onclick="copyLink(); return false;" class="dropdown-item"><i class="fa-solid fa-link" style="color:#6b7280;"></i> 複製連結</a>
                         </div>
                     </div>
                 </div>
-                <!-- === 右側社群與分享按鈕群組 結束 === -->
-
             </nav>
         </div>
     </header>
-    <!-- ========================================== -->
-    <!-- ======= Header 頂部導航列區塊 結束 ======= -->
-    <!-- ========================================== -->
 
-
-    <!-- ========================================== -->
-    <!-- ======= Main 主內容顯示框架區塊 開始 ======= -->
-    <!-- ========================================== -->
     <main>
         <div class="iframe-container">
             <iframe name="content_frame" id="content-iframe" src="./welcome.html">
@@ -688,72 +330,42 @@
             </iframe>
         </div>
     </main>
-    <!-- ========================================== -->
-    <!-- ======= Main 主內容顯示框架區塊 結束 ======= -->
-    <!-- ========================================== -->
 
-
-    <!-- ========================================== -->
-    <!-- ======= Footer 頁尾區塊 開始 ======= -->
-    <!-- ========================================== -->
     <footer>
         &copy; 2026 陶藝與釉藥調配 ｜ 開發與維護：黃明文老師 (Ming-Win Huang)
     </footer>
-    <!-- ========================================== -->
-    <!-- ======= Footer 頁尾區塊 結束 ======= -->
-    <!-- ========================================== -->
 
-
-    <!-- ========================================== -->
-    <!-- ======= 音效檔案預載區塊 開始 ======= -->
-    <!-- ========================================== -->
     <audio id="hoverSound" src="hover.wav" preload="auto"></audio>
     <audio id="clickSound" src="click.wav" preload="auto"></audio>
     <audio id="bgMusic" src="good.mp3" loop preload="auto"></audio>
-    <!-- ========================================== -->
-    <!-- ======= 音效檔案預載區塊 結束 ======= -->
-    <!-- ========================================== -->
 
-
-    <!-- ========================================== -->
-    <!-- ======= JavaScript 互動腳本區塊 開始 ======= -->
-    <!-- ========================================== -->
    <script>
-        // --- 1. 手機版漢堡選單切換 (增加圖示旋轉效果) ---
         function toggleMenu() {
-            playClickSound(); // 點擊時播放音效
+            playClickSound();
             const menu = document.getElementById('navMenu');
             const icon = document.getElementById('menuIcon');
             menu.classList.toggle('active');
             if (menu.classList.contains('active')) {
                 icon.className = "fa-solid fa-xmark";
-                icon.style.transform = "rotate(90deg)"; // 展開時轉半圈
+                icon.style.transform = "rotate(90deg)";
                 document.body.style.overflow = 'hidden';
             } else {
                 icon.className = "fa-solid fa-bars";
-                icon.style.transform = "rotate(0deg)"; // 關閉時轉回來
+                icon.style.transform = "rotate(0deg)";
                 document.body.style.overflow = '';
             }
         }
 
-        // --- 2. 手機版下拉選單：智慧手風琴展開切換 (Accordion) ---
         function toggleDropdown(id) {
             playClickSound();
             if (window.innerWidth <= 1250) {
                 const target = document.getElementById(id);
                 const isCurrentlyOpen = target.classList.contains('mobile-open');
-
-                // 點擊新選單前，先自動幫使用者關閉其他已展開的選單，保持畫面整潔
                 document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('mobile-open'));
-
-                // 如果原本是關閉的，就把它打開
-                if (!isCurrentlyOpen) {
-                    target.classList.add('mobile-open');
-                }
+                if (!isCurrentlyOpen) target.classList.add('mobile-open');
             }
         }
 
-        // --- 3. 手機版點擊連結後自動收起選單 ---
         function handleMobileClick(event) {
             playClickSound();
             if (window.innerWidth <= 1250) {
@@ -767,7 +379,6 @@
             }
         }
 
-        // --- 4. 點擊畫面其他地方自動收起分享選單 ---
         document.addEventListener('click', function(e) {
             const shareDropdown = document.getElementById('shareDropdown');
             const shareBtn = document.querySelector('.icon-btn.share');
@@ -782,21 +393,13 @@
             menu.classList.toggle('show');
         }
 
-        // --- 5. 社群分享功能核心 (完美相容手機與電腦) ---
-        function getSiteUrl() {
-            return window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
-        }
+        function getSiteUrl() { return window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html'); }
 
-        // FB 分享修復：手機版改用系統原生分享面板，確保成功進入發文畫面
         function shareToFB() {
-            const siteMainUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/index.html');
+            const siteMainUrl = getSiteUrl();
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            
             if (isMobile && navigator.share) {
-                navigator.share({
-                    title: '陶藝與釉藥調配',
-                    url: siteMainUrl
-                }).catch((e) => console.log('分享取消或失敗', e));
+                navigator.share({ title: '陶藝與釉藥調配', url: siteMainUrl }).catch((e) => {});
             } else {
                 window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteMainUrl)}`, '_blank', 'width=600,height=400');
             }
@@ -807,14 +410,12 @@
             const url = getSiteUrl();
             const textToShare = encodeURIComponent('推薦這個實用的陶藝與釉藥調配工具：\n' + url);
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
             if (isMobile) {
                 window.location.href = `https://line.me/R/msg/text/?${textToShare}`;
             } else {
                 window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank', 'width=500,height=500');
             }
-            const shareDropdown = document.getElementById('shareDropdown');
-            if (shareDropdown) shareDropdown.classList.remove('show');
+            document.getElementById('shareDropdown').classList.remove('show');
         }
 
         function copyLink() {
@@ -823,16 +424,13 @@
             }).catch(() => {
                 alert('複製失敗，請手動複製網址。');
             });
-            const shareDropdown = document.getElementById('shareDropdown');
-            if (shareDropdown) shareDropdown.classList.remove('show');
+            document.getElementById('shareDropdown').classList.remove('show');
         }
 
-        // --- 6. 音效控制系統 ---
         var hoverAudio = document.getElementById("hoverSound");
         var clickAudio = document.getElementById("clickSound");
         var bgMusic = document.getElementById("bgMusic");
 
-        // 第一次點擊畫面解鎖音效限制並播放背景音樂 (10% 音量)
         function unlockAudio() {
             if(hoverAudio) { hoverAudio.play().then(() => { hoverAudio.pause(); hoverAudio.currentTime = 0; }).catch((e) => {}); }
             if(clickAudio) { clickAudio.play().then(() => { clickAudio.pause(); clickAudio.currentTime = 0; }).catch((e) => {}); }
@@ -840,7 +438,6 @@
             document.body.onclick = null;
         }
 
-        // 滑鼠懸停音效 (100% 音量)
         function playHoverSound() {
             if (hoverAudio) {
                 hoverAudio.currentTime = 0; hoverAudio.volume = 1.0;
@@ -849,7 +446,6 @@
             }
         }
 
-        // 點擊音效 (100% 音量)
         function playClickSound() {
             if (clickAudio) {
                 clickAudio.currentTime = 0; clickAudio.volume = 1.0;
@@ -858,10 +454,5 @@
             }
         }
     </script>
-    <!-- ========================================== -->
-    <!-- ======= JavaScript 互動腳本區塊 結束 ======= -->
-    <!-- ========================================== -->
-<script defer src="/_vercel/insights/script.js"></script>
-    
 </body>
 </html>

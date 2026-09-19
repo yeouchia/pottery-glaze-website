@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教學天地 - 陶藝與釉藥調配</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #14213d;
+            --accent-color: #fca311;
+            --text-main: #333333;
+            --bg-color: #f8fafc;
+            --teach-theme: #0f766e;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 15px 20px;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.4;
+        }
+
+        .container { max-width: 1450px; margin: 0 auto; padding: 0 20px; }
+        
+        .sub-header {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #cbd5e1;
+            padding: 12px 20px; border-radius: 8px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .sub-header-title {
+            font-size: 1.15rem; font-weight: 700; color: #334155;
+            display: flex; align-items: center; gap: 8px; margin: 0;
+            letter-spacing: -0.5px;
+        }
+        .sub-header-desc {
+            font-size: 0.82rem; color: #64748b; font-weight: 500; margin: 0;
+        }
+
+        .category-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 25px; margin-bottom: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .sub-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .container {
+                padding: 0 10px;
+            }
+        }
+
+        .category-card {
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+            text-decoration: none; color: inherit; display: flex; flex-direction: column;
+            border-top: 5px solid var(--teach-theme); position: relative;
+        }
+        .category-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18); 
+        }
+
+        .category-img-box {
+            width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background-color: #0f172a; position: relative;
+        }
+        .category-img-box img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 1.3s cubic-bezier(0.25, 1, 0.5, 1), filter 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: brightness(1); 
+        }
+        .category-card:hover .category-img-box img {
+            transform: scale(1.25); 
+            filter: brightness(0.78); 
+        }
+
+        .center-title-badge {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            background: rgba(255, 255, 255, 0.55); 
+            backdrop-filter: blur(4px); 
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 12px 22px;
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 1.3s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease;
+            z-index: 2;
+        }
+        .category-card:hover .center-title-badge {
+            background: rgba(255, 255, 255, 0.88); 
+            transform: translate(-50%, -50%) scale(1.12);
+        }
+
+        .badge-text {
+            display: inline-block;
+            color: #111111; 
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-align: center;
+            white-space: nowrap;
+            transform: scale(1);
+            transition: transform 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .category-card:hover .badge-text {
+            transform: scale(1.28);
+        }
+
+        .category-body { padding: 16px 18px 18px 18px; display: flex; flex-direction: column; flex-grow: 1; }
+        .category-body p { margin: 0 0 12px 0; font-size: 0.9rem; color: #64748b; line-height: 1.4; flex-grow: 1; }
+        
+        .category-footer {
+            font-size: 0.9rem; font-weight: 800; display: flex; align-items: center; gap: 6px;
+        }
+
+        .back-home-bar { text-align: center; }
+        .back-home-btn {
+            background: var(--primary-bg); color: white; padding: 8px 20px; border-radius: 20px;
+            text-decoration: none; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s;
+        }
+        .back-home-btn:hover { background: #1f365c; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sub-header">
+            <h2 class="sub-header-title">
+                <i class="fa-solid fa-compass" style="color: var(--teach-theme);"></i> 你對什麼感興趣呢？
+            </h2>
+            <p class="sub-header-desc">挑選一個您想探索的領域，開啟您的專業陶藝創作指南</p>
+        </div>
+
+        <div class="category-grid">
+            
+            <!-- 分類 1：手拉坯教學 -->
+            <a href="./teacher-a/teacher-a.html" target="content_frame" class="category-card" style="border-top-color: #0284c7;">
+                <div class="category-img-box">
+                    <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=600&q=80" alt="手拉坯教學">
+                    <div class="center-title-badge">
+                        <span class="badge-text">手拉坯成型教學</span>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <p>從定位、開孔拉高到修坯與流口設計，掌握器皿流暢線條。</p>
+                    <div class="category-footer" style="color: #0284c7;">
+                        <i class="fa-solid fa-rotate"></i> 進入手拉坯專區 <i class="fa-solid fa-arrow-right" style="margin-left: auto;"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 分類 2：手捏陶教學 -->
+            <a href="./teacher-b/teacher-b.html" target="content_frame" class="category-card" style="border-top-color: #0f766e;">
+                <div class="category-img-box">
+                    <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80" alt="手捏陶教學">
+                    <div class="center-title-badge">
+                        <span class="badge-text">手捏陶與雕塑造型</span>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <p>收錄泥片拍打、LULU造型風鈴與生活器皿手作步驟，賦予生命。</p>
+                    <div class="category-footer" style="color: #0f766e;">
+                        <i class="fa-solid fa-hands-holding"></i> 進入手捏陶專區 <i class="fa-solid fa-arrow-right" style="margin-left: auto;"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 分類 3：裝飾技法教學 -->
+            <a href="./teacher-c/teacher-c.html" target="content_frame" class="category-card" style="border-top-color: #d97706;">
+                <div class="category-img-box">
+                    <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=600&q=80" alt="裝飾技法教學">
+                    <div class="center-title-badge">
+                        <span class="badge-text">表面裝飾與施釉技法</span>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <p>探索化妝土彩繪、刻花、釉藥搭配與鐵鏽肌理的高溫表現技法。</p>
+                    <div class="category-footer" style="color: #d97706;">
+                        <i class="fa-solid fa-paintbrush"></i> 進入裝飾技法專區 <i class="fa-solid fa-arrow-right" style="margin-left: auto;"></i>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="back-home-bar">
+            <a href="welcome.html" target="content_frame" class="back-home-btn"><i class="fa-solid fa-house"></i> 返回首頁大廳</a>
+        </div>
+    </div>
+
+</body>
+</html>
