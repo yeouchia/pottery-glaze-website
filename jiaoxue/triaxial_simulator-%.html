@@ -342,7 +342,15 @@
     <!-- 右側：配方表生成區 -->
     <div class="right-panel">
         <div class="table-header-container">
-            <h3 id="table-title" style="margin: 0; font-size: 1.1em;">配方表 (66 個配方)</h3>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <h3 id="table-title" style="margin: 0; font-size: 1.1em;">配方表 (66 個配方)</h3>
+                <div id="sum-scale-selector" style="display: flex; gap: 8px; font-size: 12px; align-items: center; background: #f8f9fa; padding: 3px 8px; border-radius: 4px; border: 1px solid #ddd;">
+                    <span style="font-weight: bold; color: #555;">總和：</span>
+                    <label style="cursor: pointer;"><input type="radio" name="sumScale" value="100" checked> 百分百 (100)</label>
+                    <label style="cursor: pointer;"><input type="radio" name="sumScale" value="50"> 百分之50</label>
+                    <label style="cursor: pointer;"><input type="radio" name="sumScale" value="33.333333333333336"> 百分之33</label>
+                </div>
+            </div>
             <button class="copy-btn" onclick="copyTableToWord()">複製配方表 (Word橫格式)</button>
         </div>
         
@@ -362,7 +370,8 @@
     let state = {
         a: 100, b: 0, c: 0,
         step: 5, mode: 'half', locked: null,
-        matA: '釜戶長石', matB: '石灰石', matC: '高嶺土'
+        matA: '釜戶長石', matB: '石灰石', matC: '高嶺土',
+        sumScale: 100
     };
 
     const DOM = {
@@ -381,6 +390,24 @@
         drawTernaryPlot();
         generateTables(); 
     };
+
+    document.querySelectorAll('input[name="sumScale"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            state.sumScale = parseFloat(e.target.value);
+            generateTables();
+        });
+    });
+
+    function formatVal(val) {
+        let scaled = val * (state.sumScale / 100);
+        if (state.sumScale === 100) {
+            return Math.round(scaled);
+        } else if (state.sumScale === 50) {
+            return Number(scaled.toFixed(1));
+        } else {
+            return Number(scaled.toFixed(2));
+        }
+    }
 
     DOM.radios.forEach(radio => {
         radio.addEventListener('change', (e) => {
@@ -682,9 +709,9 @@
                 tr.id = `row-${r.a}-${r.b}-${r.c}`;
                 tr.innerHTML = `
                     <td>${r.id}</td>
-                    <td class="color-a">${r.a}</td>
-                    <td class="color-b">${r.b}</td>
-                    <td class="color-c">${r.c}</td>
+                    <td class="color-a">${formatVal(r.a)}</td>
+                    <td class="color-b">${formatVal(r.b)}</td>
+                    <td class="color-c">${formatVal(r.c)}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -712,7 +739,6 @@
         if (currentRecipes.length === 0) return;
         
         const tempDiv = document.createElement('div');
-        
         const maxRowsPerCol = 15; 
         
         let numCols = 4;
@@ -784,9 +810,9 @@
                         let tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td style="border: 1px solid black; padding: 4px 2px;">${r.id}</td>
-                            <td style="border: 1px solid black; padding: 4px 2px; color: #c0392b;">${r.a}</td>
-                            <td style="border: 1px solid black; padding: 4px 2px; color: #27ae60;">${r.b}</td>
-                            <td style="border: 1px solid black; padding: 4px 2px; color: #2980b9;">${r.c}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #c0392b;">${formatVal(r.a)}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #27ae60;">${formatVal(r.b)}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #2980b9;">${formatVal(r.c)}</td>
                         `;
                         tbody.appendChild(tr);
                     });
@@ -820,7 +846,7 @@
         
         try {
             document.execCommand('copy');
-            alert('✅ 完美 Word 配方表已複製！\n\n(💡 提示：超過 60 個配方時，系統會自動標記為第 2 頁，並在貼上 Word 時自動分頁！)');
+            alert('✅ 完美 Word 配方表已複製！\n\n(💡 提示：當前選取的總和比例已自動套用到複製的表格中！)');
         } catch (err) {
             alert('複製失敗，請檢查瀏覽器權限。');
         }
@@ -831,11 +857,6 @@
 
     updateMaterialNames();
     updateDOM();
-
-
-
-
-
 </script>
 
 </body>

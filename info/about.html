@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於本站與作者 - 陶藝與釉藥調配</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #14213d;
+            --accent-color: #fca311;
+            --text-main: #333333;
+            --bg-color: #f8fafc;
+            --teach-theme: #0f766e;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 20px;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main); line-height: 1.6;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding-bottom: 40px; }
+
+        .about-header {
+            background: white; border-radius: 12px; padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--accent-color);
+            margin-bottom: 25px; text-align: center;
+        }
+        .about-header h1 { margin: 0 0 10px 0; font-size: 1.8rem; color: var(--primary-bg); font-weight: 800; }
+        .about-header p { margin: 0; color: #64748b; font-size: 1.05rem; }
+
+        .about-section {
+            background: white; border-radius: 12px; padding: 25px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        .about-section h2 {
+            font-size: 1.3rem; color: var(--primary-bg); font-weight: 800;
+            margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
+            border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;
+        }
+        .about-section h2 i { color: var(--accent-color); }
+        .about-section p { margin: 0 0 15px 0; color: #475569; font-size: 0.98rem; text-align: justify; }
+
+        .feature-list {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px;
+        }
+        @media (max-width: 768px) {
+            .feature-list { grid-template-columns: 1fr; }
+        }
+        .feature-item {
+            background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;
+            display: flex; gap: 12px; align-items: flex-start;
+        }
+        .feature-item i { font-size: 1.2rem; color: var(--teach-theme); margin-top: 3px; }
+        .feature-item div h4 { margin: 0 0 4px 0; font-size: 1rem; color: var(--primary-bg); font-weight: 700; }
+        .feature-item div p { margin: 0; font-size: 0.88rem; color: #64748b; }
+
+        .author-box {
+            display: flex; gap: 25px; align-items: center; background: #fff8e7;
+            padding: 25px; border-radius: 10px; border: 1px solid rgba(252, 163, 17, 0.3);
+        }
+        @media (max-width: 768px) {
+            .author-box { flex-direction: column; text-align: center; }
+        }
+        .author-info h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: var(--primary-bg); font-weight: 800; }
+        .author-info .title-tag { display: inline-block; background: var(--accent-color); color: var(--primary-bg); padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; }
+        .author-info p { margin: 0; font-size: 0.92rem; color: #334155; }
+
+        .back-bar { text-align: center; margin-top: 30px; }
+        .back-btn {
+            background: var(--primary-bg); color: white; padding: 10px 25px; border-radius: 30px;
+            text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.2s;
+        }
+        .back-btn:hover { background: #1f365c; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="about-header">
+            <h1><i class="fa-solid fa-jar" style="color: var(--accent-color);"></i> 關於本站與作者</h1>
+            <p>結合科學計算與陶藝美學的數位教學與研究園地</p>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fa-solid fa-bullseye"></i> 網站建立初衷</h2>
+            <p>陶瓷是一門兼具感性藝術創作與嚴謹理化科學的學問。從土料選擇、形體雕塑、釉藥配方設計到高溫窯燒，每個環節都蘊含深厚的經驗累積與數據邏輯。</p>
+            <p>本站由<strong>黃明文老師</strong>親自規劃與開發，旨在打破傳統陶瓷教學中繁複且生硬的計算門檻。透過網頁數位工具與互動介面，將抽象的「賽格式釉式（Seger Formula）」、化學原料轉換以及三角座標試驗具象化，讓學生與陶藝同好能更有效率地掌握釉藥奧秘，提升創作成功率。</p>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fa-solid fa-toolbox"></i> 核心功能與特色</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <h4>精準釉藥計算</h4>
+                        <p>提供原料轉釉式、釉式轉原料及雙向精準轉換，科學化調配完美釉色。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <div>
+                        <h4>全方位教學天地</h4>
+                        <p>涵蓋手拉坯、手捏陶雕塑與表面裝飾施釉技法，圖文並茂的完整步驟指引。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <div>
+                        <h4>豐富陶藝知識庫</h4>
+                        <p>收錄陶瓷歷史、五大名窯、燒成原理與常見瑕疵對策的專業文獻解答。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-image"></i>
+                    <div>
+                        <h4>實用影像工具</h4>
+                        <p>專為陶藝作品記錄與影像處理打造的桌機與手機版編輯利器。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2><i class="fa-solid fa-user-graduate"></i> 作者簡介</h2>
+            <div class="author-box">
+                <div class="author-info">
+                    <h3>黃明文 老師 (Ming-Win Huang)</h3>
+                    <span class="title-tag">新北市立鶯歌工商 陶瓷工程科教師</span>
+                    <p>長期深耕陶瓷工藝教育與釉藥化學研究，結合多年實務創作經驗與現代資訊技術，致力於推動陶瓷美學與科學數據結合的數位化教學，帶領學子在泥土與高溫的焠鍊中開拓創作視野。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-bar">
+            <a href="../welcome.html" class="back-btn"><i class="fa-solid fa-house"></i> 返回首頁大廳</a>
+        </div>
+    </div>
+
+</body>
+</html>
