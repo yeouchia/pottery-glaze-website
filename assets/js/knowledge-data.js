@@ -123,7 +123,33 @@ const knowledgeTree = [
    { id: "glaze_basics-17", title: "助熔劑~鹼土類氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-17.html" },
    { id: "glaze_basics-18", title: "釉藥的中性氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-18.html" },
    { id: "glaze_basics-19", title: "釉藥中的氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-19.html" },
-   { id: "glaze_basics-20", title: "氧化物與釉面性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-20.html" }
+   { id: "glaze_basics-20", title: "氧化物與釉面性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-20.html" },
+
+
+   { id: "glaze_basics-21", title: "釉藥組成與熔融溫度", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-21.html" },
+   { id: "glaze_basics-22", title: "常見釉藥原料的氧化物來源", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-22.html" },
+   { id: "glaze_basics-23", title: "釉藥組成與熔融行為", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-23.html" },
+   { id: "glaze_basics-24", title: "釉面硬度與耐久性", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-24.html" },
+   { id: "glaze_basics-25", title: "光澤釉與霧面釉的形成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-25.html" },
+   { id: "glaze_basics-26", title: "B₂O₃ 硼氧化物與硼熔塊", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-26.html" },
+   { id: "glaze_basics-27", title: "B₂O₃ 的助熔作用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-27.html" },
+   { id: "glaze_basics-28", title: "釉藥原料與氧化物的關係", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-28.html" },
+   { id: "glaze_basics-29", title: "氧化物之間的相互作用與比例", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-29.html" },
+   { id: "glaze_basics-30", title: "釉藥配方 → 氧化物 → Seger／UMF", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-30.html" },
+
+
+
+   { id: "glaze_basics-31", title: "熔塊（Frit）基礎：從原料到釉藥應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-31.html" },
+   { id: "glaze_basics-32", title: "熔塊（Frit）是什麼？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-32.html" },
+   { id: "glaze_basics-33", title: "為什麼要把生釉原料製成熔塊（Frit）？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-33.html" },
+   { id: "glaze_basics-34", title: "熔塊（Frit）如何製作？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-34.html" },
+   { id: "glaze_basics-35", title: "熔塊（Frit）在釉中的作用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-35.html" },
+   { id: "glaze_basics-36", title: "熔塊（Frit）與生釉的差異", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-36.html" },
+   { id: "glaze_basics-37", title: "不同種類熔塊（Frit）的應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-37.html" },
+   { id: "glaze_basics-38", title: "熔塊（Frit）在釉藥配方計算中的角色", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-38.html" },
+   { id: "glaze_basics-39", title: "熔塊（Frit）的化學組成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-39.html" },
+   { id: "glaze_basics-40", title: "如何從輕鬆從生活中取得熔塊（Frit）", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-40.html" }
+
 
 
 
