@@ -1,8 +1,8 @@
 // assets/js/related.js
-// 陶藝與釉藥知識庫 - 全自動頂部品牌導流與底部相關文章派發引擎
+// 陶藝與釉藥知識庫 - 全自動頂部品牌導流與底部相關文章精準派發引擎
 
 document.addEventListener("DOMContentLoaded", function() {
-    // 0. 自動注入專屬樣式表（包含頂部品牌橫幅與手機最佳化之底部相關文章排版）
+    // 0. 自動注入專屬樣式表
     if (!document.getElementById('dynamic-global-style')) {
         const styleEl = document.createElement('style');
         styleEl.id = 'dynamic-global-style';
@@ -49,44 +49,46 @@ document.addEventListener("DOMContentLoaded", function() {
                 transform: translateY(-1px);
             }
 
-            /* 底部相關文章清單樣式 (手機最佳化輕巧版) */
+            /* 底部相關文章清單樣式 */
             .related {
-                margin-top: 20px;
-                padding: 12px 16px;
+                margin-top: 30px;
+                padding: 16px 20px;
                 background-color: #f8f9fa;
-                border-radius: 6px;
-                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
             }
             .related h3 {
                 margin-top: 0;
-                font-size: 0.95rem;
+                font-size: 1rem;
                 color: #14213d;
-                margin-bottom: 8px;
+                margin-bottom: 12px;
                 border-bottom: 2px solid #fca311;
-                padding-bottom: 4px;
+                padding-bottom: 6px;
+                font-weight: 700;
             }
             .related a {
                 display: block !important;          
-                margin-top: 6px !important;         
-                padding: 8px 10px !important;
+                margin-top: 8px !important;         
+                padding: 10px 14px !important;
                 background-color: #ffffff !important;
-                border-radius: 4px !important;
+                border-radius: 6px !important;
                 border: 1px solid #e2e8f0 !important;
                 text-decoration: none !important;   
                 color: #1565c0 !important;          
                 font-weight: 600 !important;        
-                font-size: 0.88rem !important;
-                transition: background-color 0.2s ease;
+                font-size: 0.9rem !important;
+                transition: all 0.2s ease;
             }
             .related a:hover {
                 background-color: #f1f5f9 !important;
                 color: #0d47a1 !important;
+                transform: translateX(4px);
             }
         `;
         document.head.appendChild(styleEl);
     }
 
-    // 1. 自動檢查：若文章被獨立開啟（未透過首頁 iframe），自動安插頂部品牌橫幅
+    // 1. 自動檢查：若文章被獨立開啟，安插頂部品牌橫幅
     if (window.self === window.top) {
         const topBannerHtml = `
             <div class="top-brand-banner">
@@ -100,37 +102,54 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.insertAdjacentHTML('afterbegin', topBannerHtml);
     }
 
-    // 2. 自動取得當前網頁路徑與對應文章資料
-    const currentPath = window.location.pathname;
-    
+    // 2. 精準辨識當前文章：從 HTML 檔名（例如 shaping-21.html）反查 knowledgeTree
+    const pathname = window.location.pathname;
+    const filenameMatch = pathname.match(/([a-zA-Z0-9_-]+)\.html$/);
+    const currentFileName = filenameMatch ? filenameMatch[1] : '';
+
     if (typeof knowledgeTree === 'undefined') {
         console.warn("Knowledge base data (knowledgeTree) not found.");
         return;
     }
 
     let currentArticle = null;
-    let currentCategoryGroup = null;
 
+    // 透過比對文章 ID 或 url 是否包含檔名來精準定位
     for (const group of knowledgeTree) {
-        const found = group.articles.find(art => currentPath.includes(art.id) || currentPath.endsWith(art.url.replace('./', '')));
+        const found = group.articles.find(art => {
+            return art.id === currentFileName || art.url.includes(currentFileName);
+        });
         if (found) {
             currentArticle = found;
-            currentCategoryGroup = group;
             break;
         }
     }
 
-    if (!currentArticle) return;
+    const container = document.getElementById("dynamic-related-articles");
+    if (!container) return;
 
-    // 3. 篩選相同 Tag 的相關文章
+    if (!currentArticle) {
+        container.innerHTML = `
+            <div class="related">
+                <h3>相關文章</h3>
+                <p style="font-size: 0.9rem; color: #666;">目前此文章無對應標籤資料。</p>
+            </div>
+        `;
+        return;
+    }
+
+    // 3. 精準篩選相同 Tag 的相關文章（排除自己）
     let candidateArticles = [];
     
     knowledgeTree.forEach(group => {
         group.articles.forEach(art => {
             if (art.id !== currentArticle.id && art.tag === currentArticle.tag) {
                 let adjustedUrl = art.url;
-                if (currentPath.includes('/book/')) {
-                    adjustedUrl = art.url.replace('./book/', '../');
+                // 處理相對路徑轉換
+                if (pathname.includes('/book/')) {
+                    // 計算目前在 book 底下的哪一層，動態補上 ../
+                    const depth = pathname.split('/book/')[1].split('/').length - 1;
+                    adjustedUrl = '../'.repeat(depth) + art.url.replace('./book/', '');
                 }
                 candidateArticles.push({
                     ...art,
@@ -140,19 +159,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 4. 隨機選取最多 3 篇
+    // 4. 隨機選取最多 3 篇同標籤文章
     candidateArticles.sort(() => 0.5 - Math.random());
     const selectedArticles = candidateArticles.slice(0, 3);
 
     // 5. 動態產生底部相關文章
-    const container = document.getElementById("dynamic-related-articles");
-    if (!container) return;
-
     if (selectedArticles.length === 0) {
         container.innerHTML = `
             <div class="related">
-                <h3>相關文章</h3>
-                <p style="font-size: 0.9rem; color: #666;">目前此標籤下尚無其他相關文章，歡迎繼續探索其他分類！</p>
+                <h3>相關文章 (${currentArticle.tag})</h3>
+                <p style="font-size: 0.9rem; color: #666;">目前「${currentArticle.tag}」標籤下尚無其他相關文章，歡迎繼續探索其他分類！</p>
             </div>
         `;
         return;

@@ -1,5 +1,5 @@
 // assets/js/knowledge-data.js
-// 陶藝與釉藥知識庫 - 分類樹狀結構 (終極升級版 - 支援深度錨點)
+// 陶藝與釉藥知識庫 - 分類樹狀結構 (標籤完美對應升級版)
 
 const knowledgeTree = [
     {
@@ -53,33 +53,40 @@ const knowledgeTree = [
         icon: "fa-hands-holding",
         articles: [
             { id: "shaping-1", title: "陶土的成形技法有哪些主要方式？", tag: "成型技法", url: "./book/shaping/shaping-1.html" },
-{ id: "shaping-2", title: "手捏陶藝是什麼？", tag: "手捏成型", url: "./book/shaping/shaping-2.html" },
-{ id: "shaping-3", title: "手捏陶藝基本技法", tag: "手捏成型", url: "./book/shaping/shaping-3.html" },
-{ id: "shaping-4", title: "手捏成型常見問題", tag: "手捏成型", url: "./book/shaping/shaping-4.html" },
-{ id: "shaping-5", title: "手捏陶工作桌的選擇與材質", tag: "手捏成型", url: "./book/shaping/shaping-5.html" },
-
-{ id: "shaping-6", title: "盤築法是什麼？", tag: "手捏成型", url: "./book/shaping/shaping-6.html" },
-{ id: "shaping-7", title: "陶藝盤築技巧", tag: "手捏成型", url: "./book/shaping/shaping-7.html" },
-{ id: "shaping-8", title: "如何讓盤築作品不倒？", tag: "手捏成型", url: "./book/shaping/shaping-8.html" },
-{ id: "shaping-9", title: "盤築成型常見問題", tag: "手捏成型", url: "./book/shaping/shaping-9.html" },
-{ id: "shaping-10", title: "大型作品如何盤築？", tag: "手捏成型", url: "./book/shaping/shaping-10.html" },
-
-{ id: "shaping-11", title: "土板成型是什麼？", tag: "成型技法", url: "./book/shaping/shaping-11.html" },
-{ id: "shaping-12", title: "陶板如何製作？", tag: "成型技法", url: "./book/shaping/shaping-12.html" },
-{ id: "shaping-13", title: "土板厚度如何控制？", tag: "成型技法", url: "./book/shaping/shaping-13.html" },
-{ id: "shaping-14", title: "土板為什麼會翹曲？", tag: "成型技法", url: "./book/shaping/shaping-14.html" },
-{ id: "shaping-15", title: "土板作品如何組合？", tag: "成型技法", url: "./book/shaping/shaping-15.html" },
-
-
-{ id: "shaping-16", title: "模具成型是什麼？需要什麼設備？", tag: "成型技法", url: "./book/shaping/shaping-16.html" },
-{ id: "shaping-17", title: "陶藝石膏模具的製作", tag: "成型技法", url: "./book/shaping/shaping-17.html" },
-{ id: "shaping-18", title: "單面模、多片模", tag: "成型技法", url: "./book/shaping/shaping-18.html" },
-{ id: "shaping-19", title: "壓模成型、注將成型", tag: "成型技法", url: "./book/shaping/shaping-19.html" },
-{ id: "shaping-20", title: "模具成型的優缺點", tag: "成型技法", url: "./book/shaping/shaping-20.html" }
-
-
-
-
+            { id: "shaping-2", title: "手捏陶藝是什麼？", tag: "手捏成型", url: "./book/shaping/shaping-2.html" },
+            { id: "shaping-3", title: "手捏陶藝基本技法", tag: "手捏成型", url: "./book/shaping/shaping-3.html" },
+            { id: "shaping-4", title: "手捏成型常見問題", tag: "手捏成型", url: "./book/shaping/shaping-4.html" },
+            { id: "shaping-5", title: "手捏陶工作桌的選擇與材質", tag: "手捏成型", url: "./book/shaping/shaping-5.html" },
+            { id: "shaping-6", title: "盤築法是什麼？", tag: "盤築成型", url: "./book/shaping/shaping-6.html" },
+            { id: "shaping-7", title: "陶藝盤築技巧", tag: "盤築成型", url: "./book/shaping/shaping-7.html" },
+            { id: "shaping-8", title: "如何讓盤築作品不倒？", tag: "盤築成型", url: "./book/shaping/shaping-8.html" },
+            { id: "shaping-9", title: "盤築成型常見問題", tag: "盤築成型", url: "./book/shaping/shaping-9.html" },
+            { id: "shaping-10", title: "大型作品如何盤築？", tag: "盤築成型", url: "./book/shaping/shaping-10.html" },
+            { id: "shaping-11", title: "土板成型是什麼？", tag: "陶板成型", url: "./book/shaping/shaping-11.html" },
+            { id: "shaping-12", title: "陶板如何製作？", tag: "陶板成型", url: "./book/shaping/shaping-12.html" },
+            { id: "shaping-13", title: "土板厚度如何控制？", tag: "陶板成型", url: "./book/shaping/shaping-13.html" },
+            { id: "shaping-14", title: "土板為什麼會翹曲？", tag: "陶板成型", url: "./book/shaping/shaping-14.html" },
+            { id: "shaping-15", title: "土板作品如何組合？", tag: "陶板成型", url: "./book/shaping/shaping-15.html" },
+            { id: "shaping-16", title: "模具成型是什麼？需要什麼設備？", tag: "石膏模具", url: "./book/shaping/shaping-16.html" },
+            { id: "shaping-17", title: "陶藝石膏模具的製作", tag: "石膏模具", url: "./book/shaping/shaping-17.html" },
+            { id: "shaping-18", title: "單面模、多片模", tag: "石膏模具", url: "./book/shaping/shaping-18.html" },
+            { id: "shaping-19", title: "壓模成型、注將成型", tag: "石膏模具", url: "./book/shaping/shaping-19.html" },
+            { id: "shaping-20", title: "模具成型的優缺點", tag: "石膏模具", url: "./book/shaping/shaping-20.html" },
+            { id: "shaping-21", title: "手拉坯成型是什麼？陶藝最常見的輪製成型法", tag: "手拉坯", url: "./book/shaping/shaping-21.html" },
+            { id: "shaping-22", title: "手拉坯為什麼要對中心？陶土定中心的重要性", tag: "手拉坯", url: "./book/shaping/shaping-22.html" },
+            { id: "shaping-23", title: "手拉坯怎麼開孔與拉高？基本成型步驟", tag: "手拉坯", url: "./book/shaping/shaping-23.html" },
+            { id: "shaping-24", title: "手拉坯常見問題與失敗原因", tag: "手拉坯", url: "./book/shaping/shaping-24.html" },
+            { id: "shaping-25", title: "手拉坯成型後為什麼要修坯？", tag: "手拉坯", url: "./book/shaping/shaping-25.html" },
+            { id: "shaping-26", title: "為什麼陶藝作品都不做成實心？都是空心造型？", tag: "成型技法", url: "./book/shaping/shaping-26.html" },
+            { id: "shaping-27", title: "手拉坯成型後的坯體常用的裝飾技法？", tag: "手拉坯", url: "./book/shaping/shaping-27.html" },
+            { id: "shaping-28", title: "手拉坯如何控制陶壁厚度？", tag: "手拉坯", url: "./book/shaping/shaping-28.html" },
+            { id: "shaping-29", title: "擠出成型是什麼？", tag: "成型技法", url: "./book/shaping/shaping-29.html" },
+            { id: "shaping-30", title: "旋壓成型是什麼？", tag: "成型技法", url: "./book/shaping/shaping-30.html" },
+            { id: "shaping-31", title: "注漿成型是什麼？液態陶土如何進入石膏模具", tag: "注漿成型", url: "./book/shaping/shaping-31.html" },
+            { id: "shaping-32", title: "什麼是高壓注漿？", tag: "注漿成型", url: "./book/shaping/shaping-32.html" },
+            { id: "shaping-33", title: "注漿量產的馬桶是透過怎樣組合坯體？", tag: "注漿成型", url: "./book/shaping/shaping-33.html" },
+            { id: "shaping-34", title: "什麼是陶瓷泥漿？為什麼要用石膏模？", tag: "注漿成型", url: "./book/shaping/shaping-34.html" },
+            { id: "shaping-35", title: "注漿的過程？如何控制泥漿厚度？", tag: "注漿成型", url: "./book/shaping/shaping-35.html" }
         ]
     },
     {
@@ -94,13 +101,32 @@ const knowledgeTree = [
         category: "釉藥基礎",
         icon: "fa-flask",
         articles: [
-            { id: "glaze_basics-1", title: "何謂釉藥、釉的本質？", tag: "基礎理論", url: "./book/glaze_basics/glaze_basics-1.html" },
-            { id: "glaze_basics-2", title: "認識釉藥三大元素", tag: "基礎理論", url: "./book/glaze_basics/glaze_basics-2.html" },
-            { id: "glaze_basics-3", title: "釉的種類？", tag: "基礎理論", url: "./book/glaze_basics/glaze_basics-3.html" },
-            { id: "glaze_basics-4", title: "玻璃質如何結合在陶瓷？揭開釉藥燒熔的奧秘？", tag: "基礎理論", url: "./book/glaze_basics/glaze_basics-4.html" },
-            { id: "glaze_basics-5", title: "上釉有那些方式？", tag: "實務技法", url: "./book/glaze_basics/glaze_basics-5.html" },
-            { id: "glaze_basics-6", title: "何謂釉上彩與釉下彩？", tag: "呈色與裝飾", url: "./book/glaze_basics/glaze_basics-6.html" },
-            { id: "glaze_basics-7", title: "金屬氧化物的發色：各種不同的金屬氧化物呈色", tag: "呈色與裝飾", url: "./book/glaze_basics/glaze_basics-7.html" }
+            { id: "glaze_basics-1", title: "釉陶藝釉藥基礎", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-1.html" },
+            { id: "glaze_basics-2", title: "什麼是釉藥？", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-2.html" },
+            { id: "glaze_basics-3", title: "釉藥的形成與作用", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-3.html" },
+            { id: "glaze_basics-4", title: "釉藥與陶瓷坯體的關係", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-4.html" },
+            { id: "glaze_basics-5", title: "釉藥在陶瓷中的功能", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-5.html" },
+            { id: "glaze_basics-6", title: "認識釉藥的基本組成概念", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-6.html" },
+            { id: "glaze_basics-7", title: "釉藥從生料到熔融的過程", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-7.html" },
+      { id: "glaze_basics-8", title: "釉藥與玻璃的關係", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-8.html" },
+      { id: "glaze_basics-9", title: "釉藥在生活與科技上的應用", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-9.html" },
+      { id: "glaze_basics-10", title: "釉藥有毒嗎？", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-10.html" },
+
+      { id: "glaze_basics-11", title: "釉藥組成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-11.html" },
+      { id: "glaze_basics-12", title: "釉藥的三大基本成分", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-12.html" },
+      { id: "glaze_basics-13", title: "釉藥的三大基本成分~二氧化矽 SiO₂", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-13.html" },
+      { id: "glaze_basics-14", title: "釉藥的三大基本成分~氧化鋁 Al₂O₃", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-14.html" },
+      { id: "glaze_basics-15", title: "釉藥的三大基本成分~助熔劑的作用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-15.html" },
+
+
+   { id: "glaze_basics-16", title: "助熔劑~鹼性氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-16.html" },
+   { id: "glaze_basics-17", title: "助熔劑~鹼土類氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-17.html" },
+   { id: "glaze_basics-18", title: "釉藥的中性氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-18.html" },
+   { id: "glaze_basics-19", title: "釉藥中的氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-19.html" },
+   { id: "glaze_basics-20", title: "氧化物與釉面性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-20.html" }
+
+
+
         ]
     },
     {
