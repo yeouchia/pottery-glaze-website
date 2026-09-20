@@ -3,174 +3,341 @@
   <!-- 核心頁面 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/welcome.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://pottery-glaze.vercel.app/knowledge-home.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://pottery-glaze.vercel.app/knowledge.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teaching-home.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/lecture.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/guestbook.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.7</priority>
+  </url>
+
+  <!-- 資訊與作品頁面 -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/info/about.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/info/suppliers.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/info/works.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.8</priority>
   </url>
 
   <!-- 釉藥計算與轉換工具 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/yuanliao/index.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/yuanliao/b-index.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/youzhi/index.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/youzhi/a-index.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/youzhi-yuanliao/c-index.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- 教學與工具頁面 -->
   <url>
     <loc>https://pottery-glaze.vercel.app/jiaoxue/triaxial_basic.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/jiaoxue/triaxial_simulator.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/photo_edit/photo_edit.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/photo_edit/phone_photo_edit.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pottery-glaze.vercel.app/game/index.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.4</priority>
+  </url>
+
+  <!-- 教師專區 -->
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-a/teacher-a.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-a/01/teacher01.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-a/02/teacher02.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-a/03/teacher03.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-b/teacher-b.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-b/01/teacher01.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-b/02/teacher02.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-b/03/teacher03.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-c/teacher-c.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pottery-glaze.vercel.app/teacher-c/01/teacher01.html</loc><lastmod>2026-09-20</lastmod><priority>0.7</priority>
   </url>
 
   <!-- ========================================== -->
   <!-- ======= 黃老師編著：陶釉講義系列 (lecture) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch1_history.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch2_glaze_basics.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch3_glaze_mixing.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch4_glaze_application.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch5_pottery_making.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch6_safety_env.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch7_aesthetics.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch1_history.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch2_glaze_basics.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch3_glaze_mixing.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch4_glaze_application.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch5_pottery_making.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch6_safety_env.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/lecture/ch7_aesthetics.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
   <!-- ========================================== -->
   <!-- ======= 一、陶藝入門 (intro-1 ~ 40) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-1.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-2.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-3.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-4.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-5.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-6.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-7.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-8.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-9.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-10.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-11.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-12.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-13.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-14.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-15.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-16.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-17.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-18.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-19.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-20.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-21.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-22.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-23.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-24.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-25.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-26.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-27.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-28.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-29.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-30.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-31.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-32.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-33.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-34.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-35.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-36.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-37.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-38.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-39.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-40.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-2.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-3.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-4.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-5.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-6.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-7.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-8.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-9.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-10.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-11.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-12.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-13.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-14.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-15.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-16.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-17.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-18.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-19.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-20.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-21.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-22.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-23.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-24.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-25.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-26.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-27.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-28.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-29.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-30.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-31.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-32.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-33.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-34.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-35.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-36.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-37.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-38.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-39.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/intro/intro-40.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
   <!-- ========================================== -->
-  <!-- ======= 二、成型技法 (shaping-1 ~ 10) ======= -->
+  <!-- ======= 二、成型技法 (shaping-1 ~ 35) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-1.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-2.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-3.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-4.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-5.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-6.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-7.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-8.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-9.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-10.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-2.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-3.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-4.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-5.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-6.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-7.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-8.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-9.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-10.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-11.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-12.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-13.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-14.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-15.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-16.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-17.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-18.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-19.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-20.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-21.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-22.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-23.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-24.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-25.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-26.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-27.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-28.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-29.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-30.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-31.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-32.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-33.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-34.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/shaping/shaping-35.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
   <!-- ========================================== -->
   <!-- ======= 三、實用技巧 (skills) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/skills/skills-1.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/skills/skills-1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
   <!-- ========================================== -->
   <!-- ======= 四、釉藥基礎 (glaze_basics) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-1.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-2.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-3.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-4.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-5.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-6.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-7.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-2.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-3.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-4.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-5.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-6.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-7.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-8.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-9.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-10.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-11.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-12.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-13.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-14.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-15.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-16.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-17.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-18.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-19.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-20.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-21.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-22.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-23.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-24.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-25.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-26.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-27.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-28.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-29.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-30.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-31.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-32.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-33.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-34.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-35.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-36.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-37.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-38.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-39.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-40.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-41.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-42.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-43.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-44.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-45.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-46.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-47.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-48.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-49.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-50.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-51.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-52.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-53.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-54.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-55.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-56.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-57.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-58.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-59.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-60.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-61.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-62.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-63.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-64.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-65.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x2.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x3.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x4.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x5.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x6.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/glaze_basics/glaze_basics-x7.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
   <!-- ========================================== -->
   <!-- ======= 五、窯燒知識 (firing) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-1.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-2.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-3.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-4.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-2.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-3.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/firing/firing-4.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
   <!-- ========================================== -->
   <!-- ======= 六、配方實驗 (experiments) ======= -->
   <!-- ========================================== -->
-  <url><loc>https://pottery-glaze.vercel.app/book/experiments/experiments-1.html</loc><lastmod>2026-09-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://pottery-glaze.vercel.app/book/experiments/experiments-1.html</loc><lastmod>2026-09-20</lastmod><priority>0.8</priority></url>
 
 </urlset>
