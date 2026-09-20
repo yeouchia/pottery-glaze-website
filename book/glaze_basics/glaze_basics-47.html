@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiO₂／Al₂O₃比例與釉藥性質：掌控陶瓷釉面質感的科學密碼 - 陶藝與釉藥知識</title>
+<meta name="description" content="深入解析陶瓷釉藥中最重要的科學指標：SiO₂（二氧化矽）與Al₂O₃（氧化鋁）的比例。了解矽鋁比如何決定釉面的光澤、無光、流動性與熱膨脹，讓您的陶藝創作擺脫盲目試誤。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     - .chart-container: 動態圖表容器
+     ========================================= */
+
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  .chart-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉面性質分析</div>
+  <span class="eyebrow">進階釉藥理論</span>
+  <h1>SiO₂／Al₂O₃比例與釉藥性質：掌控陶瓷釉面質感的科學密碼</h1>
+  <div class="lead">
+    <strong>深度導讀：</strong>在陶瓷藝術的世界裡，釉藥的表面質感千變萬化，從清澈透亮的玻璃光澤，到溫潤如玉的無光觸感，再到粗獷斑駁的岩石肌理，這一切的變化並非全然仰賴運氣，而是受控於一組嚴密的化學密碼——二氧化矽（SiO₂）與氧化鋁（Al₂O₃）的比例。二氧化矽是構成玻璃質網絡的骨幹，而氧化鋁則是穩定這個網絡並調節流動性的關鍵。當我們將這兩者的莫耳數相互比較，得出的「矽鋁比（Si/Al Ratio）」就如同釉藥的 DNA，直接決定了釉藥在高溫熔融後的物理狀態與冷卻後的結晶行為。對於致力於釉藥研發或尋求穩定品質的陶藝創作者而言，深入理解並學會控制這個比例，是從「盲目試誤」跨越到「精準設計」的最重要里程碑。本文將為您全面解析這兩個核心氧化物的作用機制，以及它們的比例如何深刻影響釉面的光澤度、流掛現象、熱膨脹係數，甚至是金屬發色的表現。
+  </div>
+  <div class="tags">
+    <span class="tag">陶藝</span>
+    <span class="tag">釉藥組成</span>
+    <span class="tag">矽鋁比</span>
+    <span class="tag">玻璃化</span>
+    <span class="tag">無光釉</span>
+    <span class="tag">光澤釉</span>
+    <span class="tag">陶瓷材料</span>
+  </div>
+
+  <h2>一、二氧化矽（SiO₂）在釉藥中的核心角色</h2>
+  <p>要探討比例，我們必須先深刻認識比例的分子。在陶瓷化學中，二氧化矽（SiO₂）被分類為酸性氧化物（RO₂），它是地球上最豐富的物質之一，也是所有陶瓷釉藥不可或缺的靈魂。沒有它，釉藥就只是一層無法附著的粉末。</p>
+  
+  <h3>玻璃形成劑的基本定義</h3>
+  <p>在微觀世界裡，二氧化矽具有形成「矽氧四面體」的獨特能力。當經過高溫加熱後，這些四面體會互相連結，形成一種無規則的、連續的三維網絡結構。這種結構在冷卻後不會形成整齊的晶體，而是形成我們肉眼所見的透明、無定形的「玻璃相」。因此，二氧化矽被稱為「玻璃形成劑（Glass Former）」，它是構成陶瓷表面那一層光滑防護衣的最基礎骨架。</p>
+
+  <h3>SiO₂含量對熔點的直接影響</h3>
+  <p>純粹的石英（二氧化矽）熔點極高，大約在 1713℃，這遠遠超過了傳統陶藝窯爐的極限。在釉藥配方中，雖然我們需要大量的二氧化矽來形成玻璃，但如果其含量過高，而缺乏足夠的助熔劑（如鉀、鈉、鈣）來打破其堅固的網絡，釉藥就會變得極度「耐火」。結果就是在正常燒成溫度下無法完全熔化，導致表面呈現乾澀、粗糙，甚至像砂紙一樣的觸感。因此，二氧化矽的含量必須受到嚴格的控制與計算。</p>
+
+  <h3>提供抗化學侵蝕與物理強度的關鍵</h3>
+  <p>除了視覺效果，二氧化矽更是確保日用陶瓷安全的守護者。一個含有充足且比例正確的二氧化矽的釉面，其化學穩定性極高，能夠抵抗酸性食物（如檸檬汁、醋）或強鹼性清潔劑的侵蝕，防止釉藥內部可能含有的重金屬游離溶出。同時，緊密的矽氧網絡也賦予了釉面極高的物理硬度，使其在日常使用中不易被刀叉刮傷，確保了餐具的耐用度與安全性。</p>
+
+  <h2>二、氧化鋁（Al₂O₃）的穩定與調節功能</h2>
+  <p>如果二氧化矽是建造房屋的磚塊，那麼氧化鋁（Al₂O₃）就是鋼筋與水泥。作為中性氧化物（R₂O₃），氧化鋁在釉藥中扮演著極其關鍵的「穩定劑」角色，它的存在讓釉藥的行為變得可控且適合立體器物的披覆。</p>
+
+  <h3>穩定劑（中性氧化物）的作用機制</h3>
+  <p>氧化鋁之所以被稱為穩定劑，是因為它可以靈活地嵌入由二氧化矽構成的玻璃網絡之中，填補結構中的空隙，或者部分替代矽原子的位置。這種微觀結構的介入，使得原本可能因為助熔劑過多而變得脆弱或不穩定的玻璃相，獲得了極大的化學與熱力學穩定性。它能拓寬釉藥的熔融溫度範圍，使釉藥在達到成熟溫度後，不會因為稍微過溫就迅速沸騰或起泡。</p>
+
+  <h3>提升釉漿黏滯度防止流掛</h3>
+  <p>這是氧化鋁在實務操作中最顯著的功能。當窯爐溫度達到 1200℃ 以上時，釉藥會轉變為液態。如果配方中缺乏氧化鋁，這層液態玻璃會像水一樣迅速流淌，從垂直的器壁上滑落，最終堆積在作品底部，甚至黏死在窯板上。氧化鋁的作用就像是在湯裡加入太白粉勾芡，它能大幅提高高溫熔融狀態下的「黏滯度（Viscosity）」，讓液態釉藥能夠穩穩地依附在陡峭的器壁上，即使是複雜的雕塑表面也能均勻包覆。</p>
+
+  <h3>阻礙晶體生長與促成無光效果</h3>
+  <p>氧化鋁還有一個有趣的兩面性。適量的氧化鋁能阻止釉藥在冷卻時產生不必要的結晶，保持玻璃的清透度；但是，當氧化鋁的比例超過了玻璃網絡所能容納的極限（即達到飽和狀態）時，多餘的氧化鋁會在冷卻過程中促使微小的晶體（如鈣長石晶體）析出。這些密布在表面的微小晶體會打散光線的折射，從而創造出觸感細緻、不反光的「無光釉（Matte Glaze）」效果。</p>
+
+  <h2>三、認識矽鋁比（Si/Al Ratio）的黃金密碼</h2>
+  <p>了解了矽與鋁各自的特性後，我們就可以進入核心概念：將兩者結合來看的「矽鋁比」。單看二氧化矽或氧化鋁的絕對重量是沒有意義的，它們之間的「相對比例」才是決定釉面質感的最終裁判。</p>
+
+  <h3>矽鋁比的數學計算方式</h3>
+  <p>計算矽鋁比非常直觀。在完成釉式計算（Seger Formula）並將鹼性金屬氧化物（RO/R₂O）歸一化為 1 之後，我們會得到氧化鋁與二氧化矽的莫耳當量數值。只需將二氧化矽的數值除以氧化鋁的數值（SiO₂ ÷ Al₂O₃），得出的商數即為矽鋁比。例如，若 SiO₂ 為 4.0，Al₂O₃ 為 0.4，則矽鋁比為 10。</p>
+
+  <h3>助熔劑不變前提下的比較基準</h3>
+  <p>要讓矽鋁比發揮預測功能，必須建立在一個前提之下：即助熔劑（RO/R₂O）的總量與種類組合是固定或相似的。因為不同的助熔劑（例如高鈣配方與高鋇配方）對矽鋁網絡的溶解力不同。在經典的高溫石灰-鉀/鈉釉中，我們將助熔劑設為基準點（1.0），在此恆定的起跑線上，矽鋁比的變化就能精確地反映出釉面的物理與光學變化。</p>
+
+  <h3>預測釉面質感的科學指標</h3>
+  <p>矽鋁比就像是釉藥的質譜儀。傳統陶藝家透過經驗法則得知，某個配方加多了瓷土會變無光；而現代陶藝家則知道，這正是因為瓷土（含有豐富氧化鋁）降低了整體的矽鋁比。透過計算這個比值，我們可以在進窯燒製之前，就以極高的準確率預測出該配方燒成後會是透明亮面、半光澤（Satin）、還是完全無光，大幅縮短了新釉藥開發的實驗週期。</p>
+
+  <h2>四、高矽鋁比：打造清透的高光澤釉</h2>
+  <p>當配方中的二氧化矽含量遠大於氧化鋁時，我們稱之為「高矽鋁比」。這種結構特徵最常用於製作需要呈現底層土色、化妝土圖案，或是需要高度平滑表面的日用器皿。</p>
+
+  <h3>光澤釉的典型比例區間（通常大於 8）</h3>
+  <p>在高溫還原或氧化燒成（約 1250℃）的條件下，當矽鋁比介於 8 到 12 之間時，通常會產生優良的光澤釉（Gloss Glaze）。在這個區間內，氧化鋁的量剛好足以穩定釉漿，而充足的二氧化矽則確保了豐富的玻璃相生成。常見的高溫透明釉，其比例多半落在 9 到 10 附近，這是一個能兼顧流動性與平整度的最佳平衡點。</p>
+
+  <h3>表面平滑度與光線折射的關係</h3>
+  <p>高矽鋁比的釉藥在熔融時擁有極佳的流平性。想像平靜的湖面，當沒有微小晶體（如低矽鋁比時會產生的晶體）阻礙時，高溫下的液態玻璃會拉平表面的張力。冷卻固化後，這種純淨無瑕的玻璃結構能讓光線直接穿透或產生如鏡面般的鏡面反射（Specular Reflection），使得釉面看起來晶瑩剔透、閃閃發光。</p>
+
+  <h3>過高矽鋁比導致的生澀與未熔風險</h3>
+  <p>然而，這並不意味著二氧化矽越多越好。當矽鋁比超過 12，甚至達到 15 以上時，由於二氧化矽過度飽和，原有的助熔劑已經無法將其完全熔化。這些未熔解的石英顆粒會殘留在釉層中，導致原本應該光亮的表面變得白濁、生澀，觸感粗糙。這種情況並非真正的無光釉，而是一種「燒成不足（Under-fired）」的瑕疵，其釉面容易卡垢且不衛生。</p>
+
+  <h2>五、低矽鋁比：溫潤如玉的無光釉（Matte）</h2>
+  <p>相反地，當配方中增加了大量的氧化鋁（通常透過添加高嶺土或氧化鋁粉），使得矽鋁比大幅下降時，釉藥的性格將發生戲劇性的轉變，展現出低調、內斂的美感。</p>
+
+  <h3>無光釉的形成原理與微觀結構</h3>
+  <p>真正的無光釉並不是因為「沒有熔化」，而是在高溫時完全熔化，卻在降溫冷卻的過程中發生了「微結晶」。當矽鋁比較低時，多餘的氧化鋁無法安定地待在玻璃網絡中，它會與鈣等助熔劑結合，析出極其微小的晶體網絡。這些微晶體布滿了釉層表面，形成了微觀下的凹凸起伏。當光線照射時，會發生漫反射（Diffuse Reflection），從而產生柔和、不刺眼的視覺效果。</p>
+
+  <h3>典型的低比值區間（通常在 4 到 6 之間）</h3>
+  <p>要穩定地形成高溫無光釉，矽鋁比通常需要控制在 4 到 6 之間（有時甚至低至 3.5，這取決於冷卻速度與鈣的含量）。這個區間的釉藥黏滯度極高，非常不容易流動，因此特別適合施作在有立體雕花或深刻紋理的作品上，它不會因為流掛而掩蓋了胚體的細節，反而能凸顯出雕塑的層次。</p>
+
+  <h3>區分真正的無光釉與燒成不足的瑕疵</h3>
+  <p>陶藝新手常犯的錯誤，是將溫度不夠導致的生澀釉面誤認為無光釉。真正的無光釉（True Matte）其矽鋁比在正確區間內，經過充足的高溫熔融，釉層緻密且防水，只是表面布滿微晶體。而燒成不足的釉面（如上述高矽鋁比但溫度不夠），其內部充滿氣孔，無法承受日常使用的考驗。透過釉式計算檢視矽鋁比，是辨別兩者最科學的方法。</p>
+
+  <!-- 動態生成圖表區塊 -->
+  <div class="chart-container">
+    <canvas id="ratioChart" width="600" height="300"></canvas>
+    <p style="font-size: 14px; color: #777367; margin-top: 15px;">圖：高溫釉藥中 SiO₂/Al₂O₃ 比例（矽鋁比）與表面質感的關係光譜</p>
+  </div>
+
+  <h2>六、矽鋁比對熱膨脹係數與釉裂的影響</h2>
+  <p>釉藥與陶土在燒製過程中會經歷劇烈的膨脹與收縮。如果兩者的步調不一致，就會產生瑕疵。矽鋁比不僅控制著光澤，也暗中操控著釉藥的熱膨脹係數（CTE），是解決釉裂問題的關鍵所在。</p>
+
+  <h3>熱膨脹係數與坯釉契合度</h3>
+  <p>當陶瓷從窯爐最高溫逐漸冷卻至室溫時，釉層和素坯都會收縮。如果釉層的收縮率大於素坯，釉層就會像穿了太緊的衣服一樣，被拉扯出無數細小的裂紋，這就是所謂的「釉裂（Crazing）」。為了解決這個問題，我們必須設法降低釉藥的熱膨脹係數，使其與坯體完美契合。</p>
+
+  <h3>增加二氧化矽以降低釉裂機率</h3>
+  <p>在所有氧化物中，二氧化矽具有相對較低的熱膨脹係數。當我們遇到釉裂問題時，最常見且有效的調整策略，就是在配方中增加石英粉（純 SiO₂）的比例。這會提高整體的矽鋁比，讓玻璃網絡變得更加緊密堅固，從而降低整體的熱膨脹係數，達到消除裂紋的目的。</p>
+
+  <h3>氧化鋁對整體熱穩定性的貢獻</h3>
+  <p>氧化鋁同樣具有降低熱膨脹係數的功能，但其效果略遜於二氧化矽，且過度添加會導致釉面變得無光或過於黏稠。然而，維持適當的氧化鋁含量，能大幅提升釉藥的抗熱震性（Thermal Shock Resistance）。這意味著具有良好矽鋁比例的器皿，在經歷快速的冷熱交替（如倒入沸水再放入冷水）時，更不容易發生崩裂。</p>
+
+  <h2>七、矽鋁比與釉藥發色金屬的交互作用</h2>
+  <p>當我們在基礎釉中加入過渡金屬（如鐵、銅、鈷）來產生顏色時，這些金屬的發色表現會受到基礎釉微觀結構的強烈影響。矽鋁比的不同，能讓同一種金屬氧化物展現出截然不同的風貌。</p>
+
+  <h3>鐵紅釉在不同比例下的發色變化</h3>
+  <p>以氧化鐵為例，在東方傳統陶瓷中極為重要。在「高矽鋁比」的基礎釉中（如青瓷 Celadon），少量的鐵在高溫還原下會完美融入玻璃網絡，呈現出清澈通透的青綠色。然而，當我們將基礎釉調整為「低矽鋁比」（如天目茶碗 Tenmoku 的基礎設定），由於氧化鋁含量高，鐵原子難以完全溶入玻璃相中，多餘的鐵會在冷卻時於表面析出，形成我們熟知的鐵鏽斑、柿子紅或結晶花紋。</p>
+
+  <h3>銅綠與銅紅釉對矽鋁比的敏感度</h3>
+  <p>氧化銅是另一個敏感的發色劑。在富含二氧化矽（高矽鋁比）的鹼性透明釉中，銅會展現出鮮豔透亮的土耳其藍或祖母綠；而在高溫還原氣氛中，高矽環境有助於銅原子形成膠體，散發出迷人的牛血紅。但如果基礎釉的氧化鋁偏高（低矽鋁比），銅的發色往往會變得沉悶、混濁，甚至偏向暗黑色，失去原有的清透感。</p>
+
+  <h3>結晶釉對極端低鋁高矽的特殊需求</h3>
+  <p>如果您想燒製出表面有著巨大如花朵般結晶的「鋅結晶釉」，那麼您必須打破常規。這類釉藥需要極端的配方設定：通常會將二氧化矽拉高以利結晶生長，同時極具破壞性地「大幅降低甚至完全移除氧化鋁」。因為氧化鋁會增加黏稠度並阻礙大型晶體的生長。這種刻意營造的極端矽鋁比，展現了陶瓷化學中為達特殊藝術效果而作出的精準妥協。</p>
+
+  <h2>八、實務調整：如何利用原料微調比例</h2>
+  <p>明白了理論後，最後我們必須回到工作室的秤量桌前。當我們透過計算發現配方的矽鋁比偏離目標時，該如何透過增減實際的天然礦物來進行修正？</p>
+
+  <h3>增加石英粉以單純提高矽含量</h3>
+  <p>這是最簡單直接的調整方式。如果您希望釉面變得更亮、或是為了解決釉裂問題而需要提高矽鋁比，最單純的做法就是在原配方中額外添加石英粉（Silica/Quartz）。石英的化學成分幾乎是 100% 的二氧化矽，因此它的加入不會干擾其他助熔劑或氧化鋁的數值，能精準且單一地拉高 X 軸的數據。</p>
+
+  <h3>利用高嶺土同步補充矽與鋁</h3>
+  <p>如果您希望降低矽鋁比以製作無光釉，您需要增加氧化鋁。然而，市面上純粹的氧化鋁粉（Alumina Hydrate）熔點極高且不易熔合。陶藝家通常會選擇添加「高嶺土（Kaolin / 瓷土）」。高嶺土的分子式為 Al₂O₃ · 2SiO₂ · 2H₂O，這意味著每加入一份氧化鋁，也會同時帶入兩份的二氧化矽。雖然兩者都增加了，但由於增加的比例是 1:2，相比於原配方中通常大於 1:8 的比例，添加高嶺土依然能有效地將整體的矽鋁比往下拉低，促成無光效果，同時高嶺土還能改善生釉漿的懸浮性，防止沉澱。</p>
+
+  <h3>計算與試燒的迭代驗證過程</h3>
+  <p>無論計算多麼精確，天然礦物的批次差異與窯爐環境的變數依然存在。利用三角座標系統（Triaxial Blend）或線性網格進行試片調配，是驗證計算結果的必經之路。您可以設定一個高矽鋁比的頂點，和一個低矽鋁比的頂點，透過調配出中間的漸層試片，觀察釉面從高光澤、半光澤（Satin）逐漸過渡到完全無光的過程。這不僅能幫您找到最完美的比例落點，更是一套能建立深厚材料直覺的科學實作法。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">矽鋁比常見問答 FAQ</div>
+    <p><strong>Q：任何釉藥都可以只看矽鋁比來判斷表面質感嗎？</strong><br>
+    A：不完全是。矽鋁比在「高溫釉（Cone 9-10）」且助熔劑組成（尤其是高鈣配方）相對穩定的情況下，預測精準度最高。如果配方中含有大量的硼（Boron）、鋅（Zinc）或極高比例的鋇（Barium），這些元素本身就會強烈影響結晶行為與光澤，此時單看矽鋁比可能會產生誤差，必須綜合評估。</p>
+    
+    <p><strong>Q：我按照網路上的無光釉配方調配，為什麼燒出來卻是亮面的？</strong><br>
+    A：這通常與「冷卻速度」有關。無光釉的形成依賴於冷卻時的微結晶。如果您的窯爐冷卻速度太快（例如保溫效果差的小型電窯），玻璃相會迅速凝固，微晶體來不及生長，原本設計為無光的配方也會呈現亮面。遇到這種情況，您可以嘗試在降溫至 1050℃ 左右時設定「持溫（Hold）」程序，給予晶體生長的時間。</p>
+
+    <p><strong>Q：如果我的釉藥嚴重流淌，我應該調整矽還是鋁？</strong><br>
+    A：流淌通常是因為高溫黏滯度不足或是助熔劑過多。最有效的調整方法是增加「氧化鋁」（透過添加高嶺土），這能顯著提高釉漿在高溫時的濃稠度，防止流掛。同時，適度增加二氧化矽也能提高整體的熔點。這兩者通常會同步進行微調。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+
+<script>
+  // 使用 HTML5 Canvas 動態繪製 SiO2/Al2O3 比例光譜圖
+  window.onload = function() {
+    const canvas = document.getElementById('ratioChart');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 40;
+    const graphWidth = width - padding * 2;
+    const graphHeight = 80;
+    const startY = height / 2 - 20;
+
+    // 定義區間比例 (Si/Al Ratio 範圍： 2 到 14)
+    const minRatio = 2;
+    const maxRatio = 14;
+
+    function getX(ratio) {
+      return padding + ((ratio - minRatio) / (maxRatio - minRatio)) * graphWidth;
+    }
+
+    // 1. 繪製漸層光譜背景
+    const gradient = ctx.createLinearGradient(padding, 0, width - padding, 0);
+    gradient.addColorStop(0, "#e1ddcf");    // 極低比例：乾澀未熔
+    gradient.addColorStop(0.2, "#a39c87");  // 無光區
+    gradient.addColorStop(0.4, "#dcd7c7");  // 半光澤區
+    gradient.addColorStop(0.7, "#fbfaf5");  // 光澤區
+    gradient.addColorStop(1, "#d8d4c5");    // 極高比例：未熔
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.roundRect(padding, startY, graphWidth, graphHeight, 10);
+    ctx.fill();
+    ctx.strokeStyle = "#c6c1b3";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // 2. 繪製分界線與文字
+    const regions = [
+      { name: "未熔/粗糙", start: 2, end: 4, color: "#777367" },
+      { name: "無光 (Matte)", start: 4, end: 6, color: "#39372f" },
+      { name: "半光 (Satin)", start: 6, end: 8, color: "#39372f" },
+      { name: "光澤 (Gloss)", start: 8, end: 12, color: "#39372f" },
+      { name: "未熔/生澀", start: 12, end: 14, color: "#777367" }
+    ];
+
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    
+    regions.forEach(region => {
+      // 畫分隔線
+      if(region.start > minRatio) {
+        ctx.beginPath();
+        ctx.moveTo(getX(region.start), startY);
+        ctx.lineTo(getX(region.start), startY + graphHeight);
+        ctx.strokeStyle = "rgba(255,255,255,0.7)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      
+      // 標示區域文字
+      const midPoint = (region.start + region.end) / 2;
+      ctx.fillStyle = region.color;
+      ctx.font = "bold 15px 'Noto Sans TC'";
+      ctx.fillText(region.name, getX(midPoint), startY + graphHeight / 2);
+    });
+
+    // 3. 繪製底部刻度 (Si/Al Ratio)
+    ctx.fillStyle = "#39372f";
+    ctx.font = "13px 'Noto Sans TC'";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    
+    for(let i = minRatio; i <= maxRatio; i+=2) {
+      const x = getX(i);
+      ctx.beginPath();
+      ctx.moveTo(x, startY + graphHeight);
+      ctx.lineTo(x, startY + graphHeight + 8);
+      ctx.strokeStyle = "#777367";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      
+      ctx.fillText(i, x, startY + graphHeight + 12);
+    }
+
+    // 標題與說明
+    ctx.font = "bold 16px 'Noto Sans TC'";
+    ctx.fillText("矽鋁比 (Si/Al Ratio) 數值", width / 2, startY + graphHeight + 40);
+
+    // 上方說明箭頭
+    ctx.font = "14px 'Noto Sans TC'";
+    ctx.fillStyle = "#6c6654";
+    ctx.textAlign = "left";
+    ctx.fillText("⟵ 氧化鋁比例增加 (黏稠、易結晶)", padding, startY - 20);
+    ctx.textAlign = "right";
+    ctx.fillText("二氧化矽比例增加 (清透、易流動) ⟶", width - padding, startY - 20);
+  }
+</script>
+</body>
+</html>

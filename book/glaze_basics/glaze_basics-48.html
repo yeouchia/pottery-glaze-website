@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiO₂／Al₂O₃線性圖上的釉藥配方比較：解讀陶瓷化學的視覺地圖 - 陶藝與釉藥知識</title>
+<meta name="description" content="透過SiO₂／Al₂O₃線性圖比較不同陶瓷釉藥配方。深入解析光澤釉、無光釉、冰裂釉與結晶釉在座標圖上的落點差異，協助陶藝家精準掌握釉面質感與化學數據的關聯。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     - .chart-container: 動態圖表容器
+     ========================================= */
+
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  .chart-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉藥對比分析</div>
+  <span class="eyebrow">視覺化材料科學</span>
+  <h1>SiO₂／Al₂O₃線性圖上的釉藥配方比較：解讀陶瓷化學的視覺地圖</h1>
+  <div class="lead">
+    <strong>深度導讀：</strong>對於致力於研究釉藥的陶藝家而言，配方簿裡密密麻麻的重量百分比往往像是一串串未經解碼的亂碼。我們很難僅憑肉眼看出一個配方為何會發亮，另一個為何卻呈現粗糙的無光質感。為了解決這個問題，前輩科學家們發明了著名的「SiO₂／Al₂O₃ 線性座標圖（如史都爾圖 Stull Chart）」，將複雜的化學當量轉換為直觀的視覺落點。當我們將不同的釉藥配方同時標記在這張地圖上進行比較時，奇妙的事情發生了：原本抽象的材料特性，瞬間變成了具有空間關係的幾何點位。透過觀察這些落點在圖表上的相對位置、它們與各個質感區域（光澤、無光、未熔）邊界的距離，我們不僅能一眼看出配方之間的根本差異，還能精準預測它們在高溫燒成後的物理行為。本文將帶您深入探討如何透過線性圖來比較截然不同的釉藥配方，從經典的光澤釉與無光釉的對決，到冰裂紋與平滑釉的膨脹係數拉鋸，乃至於不同發色金屬對座標位置的嚴苛要求。學會閱讀這張「陶瓷化學地圖」，您將不再迷失於無盡的試誤之中，而是能夠像戰略家一樣，胸有成竹地調度每一種礦物原料，創造出心目中最完美的釉面質感。
+  </div>
+  <div class="tags">
+    <span class="tag">陶藝</span>
+    <span class="tag">釉藥組成</span>
+    <span class="tag">配方比較</span>
+    <span class="tag">史都爾圖</span>
+    <span class="tag">陶瓷化學</span>
+    <span class="tag">無光釉</span>
+    <span class="tag">釉式計算</span>
+  </div>
+
+  <h2>一、線性圖表的核心概念與比較基準</h2>
+  <p>在我們將不同的釉藥配方放上擂台進行比較之前，必須先確立公平的競技規則。SiO₂／Al₂O₃ 線性圖之所以具有強大的預測能力，正是因為它建立在嚴謹的化學當量與歸一化基礎之上。理解這個地圖的座標軸與前提，是進行有意義比較的先決條件。</p>
+
+  <h3>為什麼要在同一張圖上比較？</h3>
+  <p>如果您只是單獨計算一個配方的化學組成，您得到的只是一組孤立的數字（例如 SiO₂=3.5，Al₂O₃=0.4）。這組數字雖然有意義，但缺乏對照組，很難讓初學者產生直覺的感受。當我們把三個、五個甚至十個熟悉的釉藥配方同時轉換並點在同一張線性圖上時，您會立刻看到它們分佈的「聚落」。有些聚集在光澤區，有些偏向無光區。透過這種視覺化的群體比較，我們能迅速建立起「座標移動」與「質感變化」之間的連結，這比死記硬背數字有效得多。</p>
+
+  <h3>助熔劑 (RO/R₂O) 固定為 1 的重要性</h3>
+  <p>這是線性圖比較的鐵律：所有的點位，都必須是經過「塞格爾公式（Seger Formula）」歸一化處理後的結果。也就是說，我們強制將所有配方的鹼性金屬氧化物（助熔劑，如 K₂O、CaO）總和設為 1.0。只有在助熔劑引擎馬力相同的基準線上，去比較 X 軸（二氧化矽）與 Y 軸（氧化鋁）的含量，這種比較才具有科學意義。如果助熔劑的總量或種類差異過大（例如一個全鈣釉與一個全鋇釉），即使它們在線性圖上的落點相同，燒出來的質感也會有顯著落差。</p>
+
+  <h3>座標點之間的距離代表什麼物理意義？</h3>
+  <p>在線性圖上，兩個點之間的「幾何距離」直接反映了它們在化學組成上的「差異程度」。如果配方 A 與配方 B 在圖表上靠得很近，意味著它們在燒成後的物理性質（如熔點、黏滯度、光澤度）會非常相似，您可能可以互相替代它們的原料。反之，如果配方 A 在圖表的右下角，配方 B 在左上角，這段遙遠的距離代表了兩者在玻璃網絡結構上有著天壤之別。了解距離的意義，有助於我們在改良配方時，判斷需要添加多少原料才能跨越質感的邊界。</p>
+
+  <h2>二、光澤透明釉與無光釉的座標對決</h2>
+  <p>陶藝家最常面臨的抉擇，就是選擇亮面還是霧面。在線性圖上，光澤透明釉與無光釉盤據著兩個截然不同的領地，透過比較這兩者的座標落點，我們能深刻理解氧化鋁在抑制玻璃化過程中的關鍵作用。</p>
+
+  <h3>經典光澤釉的標準落點解析</h3>
+  <p>一個發育良好、表面平滑的高溫光澤釉（Gloss Glaze），其座標通常落在線性圖的中間偏右區域。以 Cone 10（約1280℃）為例，其二氧化矽（X軸）通常落在 3.5 到 5.0 之間，而氧化鋁（Y軸）則落在 0.3 到 0.5 之間。這個區域的矽鋁比（Si/Al）大約在 9 到 11 左右。在這個座標位置，氧化鋁的含量足以讓釉漿附著在胚體上而不至於瘋狂流淌，同時又有充足的二氧化矽能形成緻密、高度反光的平靜玻璃網絡，不會產生干擾光線折射的微結晶。</p>
+
+  <h3>無光釉配方的鋁矽特徵</h3>
+  <p>與光澤釉遙遙相對的，是位於圖表左上方的無光釉（Matte Glaze）區域。無光釉的座標特徵是「高鋁、低矽」。其氧化鋁（Y軸）數值經常逼近或超過 0.6，而二氧化矽（X軸）可能退縮到 2.0 到 3.0 之間。這使得矽鋁比大幅下降到 4 甚至更低。在這個極端的座標點上，過多的氧化鋁無法完全融入玻璃相中，因此在冷卻階段會強制析出微細的晶體，這些密布的微晶體打散了光線，賦予了釉面溫潤、消光且如蛋殼般的獨特觸感。</p>
+
+  <h3>兩者在配方重量上的根本差異</h3>
+  <p>如果我們把這兩個落點還原成物理原料的重量，您會發現它們的配方表截然不同。光澤釉的配方中，通常含有高比例的石英粉與適量的長石；而無光釉的配方中，石英粉的比例會被大幅削減，取而代之的是大量的「高嶺土（瓷土）」或直接添加氧化鋁粉。高嶺土富含氧化鋁，正是它將無光釉的座標強行拉抬到線性圖的左上方。理解了這個座標差異，您就能隨心所欲地在亮與霧之間切換。</p>
+
+  <h2>三、冰裂紋釉與平滑釉的膨脹係數比較</h2>
+  <p>除了視覺的光澤度，線性圖還能揭示釉藥與胚體之間看不見的力學拉鋸。釉面是否會產生裂紋（Crazing），很大程度上取決於配方在線性圖 X 軸上的位置，這牽涉到材料熱膨脹係數的精密計算。</p>
+
+  <h3>冰裂紋釉 (Crazing) 的危險區域</h3>
+  <p>當陶瓷從高溫冷卻時，如果釉層的收縮率大於素胚，就會被拉扯出裂紋。在線性圖上，容易產生冰裂紋的配方，其座標往往偏向圖表的「左側與下側」。這意味著該配方缺乏足夠的二氧化矽（低 X 軸），且可能含有較高比例的高膨脹係數助熔劑（如氧化鈉、氧化鉀）。這種結構鬆散的玻璃網絡，對於溫度變化的抵抗力極差。雖然許多青瓷創作者刻意追求這種「開片」美感，但在實用食器上，這卻是必須避免的衛生死角。</p>
+
+  <h3>如何透過座標移動修復釉裂</h3>
+  <p>當我們把一個發生嚴重釉裂的配方點在線性圖上後，修復的策略就變得非常明確：我們必須將座標點「往右上方推移」。具體的做法是在配方中逐步增加「石英（SiO₂）」的重量，有時也會稍微增加高嶺土。增加石英能直接拉高 X 軸的數值，使釉藥進入矽鋁比較高的區域。由於二氧化矽本身具有非常低的熱膨脹係數，增加它的含量能有效收緊玻璃網絡，降低整體收縮率，從而使釉面與胚體達到物理上的契合，消除裂紋。</p>
+
+  <h3>矽鋁比在熱膨脹中的拉鋸戰</h3>
+  <p>比較會裂與不裂的配方座標，我們能學到一個重要的材料學定律：在相同的助熔劑條件下，較高的矽鋁比通常伴隨著較低的熱膨脹係數。然而，這場拉鋸戰並非毫無限制。如果為了防止釉裂而無止盡地增加石英，座標點會過度向右移動，最終突破光澤區的邊界，進入「未熔/生澀區（Unmelted）」。因此，最完美的平滑釉配方，其座標必須精準地停留在既能完全玻璃化，又具有足夠二氧化矽以抵抗收縮的黃金平衡點上。</p>
+
+  <h2>四、高溫瓷釉與陶釉的配方轉換</h2>
+  <p>線性圖上的區域劃分並非一成不變，它會隨著窯爐溫度的改變而發生整體的「位移」。比較高溫（Cone 10）與中低溫（Cone 6）配方在圖表上的差異，是掌握溫度轉換技術的關鍵。</p>
+
+  <h3>燒成溫度對座標區域的影響</h3>
+  <p>經典的史都爾圖（Stull Chart）是基於 Cone 10（約1280℃）的環境繪製的。在這個溫度下，窯爐有足夠的熱能去熔化大量的氧化鋁與二氧化矽，因此光澤區與無光區的範圍相當寬廣。但是，如果我們將溫度降到 Cone 6（約1220℃），原本地圖上的「未熔區」邊界就會大幅向左下角逼近。也就是說，原本在 1280℃ 可以完美熔化的光澤釉座標，在 1220℃ 時可能就變成了一灘無法熔解的粗糙粉末。</p>
+
+  <h3>高溫瓷釉 (Cone 10) 的座標要求</h3>
+  <p>典型的高溫瓷釉，其座標落點可以非常「奔放」。由於高溫提供了強大的熔融動能，配方中可以容納高達 4.0 到 5.5 單位的二氧化矽，以及 0.4 到 0.6 單位的氧化鋁。這種高矽高鋁的體質，賦予了高溫瓷器極佳的硬度、耐酸鹼性以及清脆的敲擊聲。在線性圖上，它們高高在上，代表了陶瓷材料物理強度的頂峰。</p>
+
+  <h3>低溫陶釉配方在線性圖上的位移</h3>
+  <p>為了在較低的溫度（如 Cone 6）下獲得與高溫釉相同的光澤與質感，我們必須調整配方，使其座標「向左下方移動」。這意味著我們必須減少耐火的矽與鋁，同時引入更強效的助熔劑（如硼、鋰或鋅）。將一個成功的 Cone 6 釉藥標記在 Cone 10 的線性圖上時，您會發現它的落點異常偏向原點（矽鋁數值皆低）。這種跨溫度的座標比較，清楚地揭示了「熱能與化學組成」之間的互補關係：熱能不足時，就必須靠降低耐火材料的座標來補償。</p>
+
+  <h2>五、透過座標預測發色金屬的表現</h2>
+  <p>線性圖不僅能預測質地的亮與霧，更能決定金屬氧化物發色的成敗。不同的過渡金屬（如鐵、銅、鈷）對於基礎釉的矽鋁結構有著截然不同的喜好，比較它們在圖表上的最佳落點，能大幅提高彩釉的燒成良率。</p>
+
+  <h3>銅紅與銅綠在不同座標的發色機制</h3>
+  <p>氧化銅是陶瓷中最具戲劇性的發色劑。如果我們希望燒出清澈的土耳其藍或綠色，基礎釉的座標必須落在高矽鋁比的「光澤區」右側，且助熔劑中需要含有較高的鹼金屬（如鈉）。清透的玻璃網絡能讓銅離子完美展現藍綠色階。然而，如果我們追求的是高溫還原下的「銅紅釉（辰砂釉）」，除了控制還原氣氛外，座標也必須精心設計，通常需要適度的矽，但氧化鋁不能太高，以免阻礙銅膠體粒子的聚集與發色。</p>
+
+  <h3>鐵紅釉與青瓷釉的座標分水嶺</h3>
+  <p>同樣是添加氧化鐵，座標位置決定了它是青瓷還是天目。傳統青瓷釉（Celadon）的座標深植於高矽鋁比的光澤區，高矽環境讓少量的鐵能均勻溶入玻璃相，呈現玉一般的青綠色。反之，著名的「柿子紅釉」或「鐵鏽斑天目」，其座標必須強烈偏向左上方的「無光區/高鋁區」。極高的氧化鋁（以及較低的矽）迫使多餘的鐵在冷卻時無法被玻璃網絡容納，進而在表面大量析出紅褐色的鐵結晶。這是一道明顯的座標分水嶺。</p>
+
+  <h3>結晶釉的極端座標需求與挑戰</h3>
+  <p>如果您想挑戰表面長出巨大冰花圖案的「鋅結晶釉」，您必須將座標推向線性圖的極端邊緣。這類配方要求極高的二氧化矽（提供生長空間）以及「幾乎為零」的氧化鋁（去除黏滯度，讓晶核自由游動）。在傳統線性圖上，結晶釉的落點會緊貼著 X 軸的最底端。這種極端座標的代價是釉藥極易流淌成災，這正是比較圖表所揭示的：追求極致的藝術效果，往往需要跨越常規物理穩定性的邊界。</p>
+
+  <h2>六、從單一配方到網格試驗 (Grid Test) 的座標佈局</h2>
+  <p>理解了單一配方的落點後，專業陶藝家會利用線性圖作為實驗計畫的藍圖。透過有系統的「網格試驗（Grid Test）」，我們可以在圖表上框出一個未知的領域，並進行全面性的材料探索。</p>
+
+  <h3>網格試驗的邏輯與目的</h3>
+  <p>與其每次只修改一個變數（盲目試誤），網格試驗採取的是「地毯式搜索」。陶藝家會在線性圖上選定一個感興趣的區塊（例如從半光澤過渡到完全無光的交界地帶），然後在這個區塊內均勻地設定多個座標點（例如 4x4 共 16 個點）。這 16 個點代表了 16 個不同矽鋁比例的配方。一次燒出這 16 個試片，等於是將圖表上的抽象理論，轉化為真實可觸摸的質感漸層光譜。</p>
+
+  <h3>如何在線性圖上規劃四個端點</h3>
+  <p>執行網格試驗的第一步，是在線性圖上標出矩形的四個角落，這四個點稱為「極端配方（Corner Glazes）」。<br>
+  - A 點（左下）：低矽、低鋁<br>
+  - B 點（右下）：高矽、低鋁<br>
+  - C 點（左上）：低矽、高鋁<br>
+  - D 點（右上）：高矽、高鋁<br>
+  確保這四個點都在同一組助熔劑（RO=1）的基礎上。這四個邊界框定了我們這次實驗的探索極限。</p>
+
+  <h3>漸層配方的數學推導與視覺化</h3>
+  <p>決定了四個端點的重量配方後，內部的 12 個配方並不需要重新進行複雜的分子計算。我們只需透過簡單的「體積或重量等比例混合」，就能完美重現線性圖上的幾何位置。當這 16 片試片出窯並按照圖表位置排列在桌上時，您將親眼看見釉面如何隨著 X 軸（加矽）變得越來越亮，以及如何隨著 Y 軸（加鋁）變得越來越霧且黏稠。這正是比較座標所能帶來最強大的科學實證力量。</p>
+
+  <!-- 動態生成圖表區塊：比較不同配方 -->
+  <div class="chart-container">
+    <canvas id="compareChart" width="650" height="420"></canvas>
+    <p style="font-size: 14px; color: #777367; margin-top: 15px;">圖：不同釉藥配方在 SiO₂/Al₂O₃ 線性圖上的落點比較與物理意義</p>
+  </div>
+
+  <h2>七、常見釉藥瑕疵的座標診斷與修正</h2>
+  <p>燒窯失敗是陶藝創作的常態，但有了線性圖的輔助，每一次失敗的試片都是一個珍貴的數據點。透過將瑕疵配方標記在地圖上，我們可以進行精準的「座標診斷」，並找出正確的修正路徑。</p>
+
+  <h3>釉面起泡與針孔的座標特徵</h3>
+  <p>如果燒出來的釉面布滿了像火山口一樣的針孔，或是包覆著未破裂的氣泡，這通常意味著釉藥在最高溫時「太過濃稠」，導致胚體釋放的氣體無法順利逸出。在線性圖上，這類配方往往落在 Y 軸（氧化鋁）偏高的區域。氧化鋁賦予的高黏滯度困住了氣泡。修正的路徑是將座標「往下移」，也就是減少配方中高嶺土或氧化鋁的比例，讓高溫液態玻璃變得較為稀薄，有助於氣泡排出並將表面流平。</p>
+
+  <h3>釉流掛 (Running) 的黏滯度問題與座標調整</h3>
+  <p>與起泡相反，如果釉藥像瀑布一樣流到棚板上，把作品的底部死死黏住，這表示高溫黏滯度嚴重不足。在地圖上，這個配方的落點必定非常靠近底部的 X 軸（極低的氧化鋁）。此時，最理智的急救方法是將座標「往上提」。在配方中加入 5% 到 10% 的高嶺土，這能迅速補充氧化鋁，增加釉漿的抗流掛能力，讓它能安分地待在垂直的器壁上。</p>
+
+  <h3>生澀未熔 (Dry) 的誤區與正確修正路徑</h3>
+  <p>當釉面呈現粉狀、乾澀、摸起來像砂紙時，新手常誤以為這是無光釉。但如果我們將座標畫出來，會發現它可能落在圖表的極右側（矽超載）或極右上方（矽鋁雙重超載）的「未熔區」。這表示配方中的耐火材料超出了助熔劑的熔解極限。正確的修正路徑是將座標「往左下角拉回」，也就是同時減少石英與瓷土的量；或是維持坐標不變，但修改助熔劑（例如加入硼），等於是換上一顆馬力更強的引擎，來推動這個沉重的配方。</p>
+
+  <h2>八、建立個人專屬的線性圖資料庫</h2>
+  <p>學習比較座標的最終目的，不是為了仰賴書本上的標準圖表，而是為了建立屬於您自己工作室的專屬地圖。因為每一個工作室的窯爐、土條與原料特性，都是獨一無二的。</p>
+
+  <h3>紀錄試片座標的長期價值</h3>
+  <p>強烈建議您，每一次進行釉藥實驗時，不要只在試片背面寫上配方編號，而應同時紀錄下它的「SiO₂與Al₂O₃當量數值」。當您累積了五十片、一百片試片後，將它們的座標統一輸入到一張數位圖表中。您會驚訝地發現，屬於您自己窯爐的「光澤區邊界」、「易裂區邊界」將清晰地浮現出來。這份資料庫是任何市售參考書都無法取代的無價之寶。</p>
+
+  <h3>結合數位工具與軟體輔助計算</h3>
+  <p>雖然理解手算邏輯非常重要，但在實務上，我們應該善用現代科技。現在有許多優秀的開源釉藥計算軟體（如 Glazy），或是我們網站提供的計算工具，能瞬間幫您完成歸一化，並自動將配方標記在內建的 Stull Chart 上。您可以輕鬆地在軟體中重疊十幾個配方進行交叉比對，這讓配方的比較與改良變得前所未有的高效與精準。</p>
+
+  <h3>打破配方迷思，回歸科學數據</h3>
+  <p>在陶藝界，常有前輩傳承下來的「祖傳秘方」，蒙上一層神秘面紗。然而，當我們將這些秘方轉換為座標點，與其他普通配方放在線性圖上比較時，神秘感便會消散，取而代之的是清晰的化學邏輯。學會使用 SiO₂／Al₂O₃ 線性圖，就是掌握了破譯陶瓷密碼的鑰匙。它讓我們不再恐懼未知的材料，而是能夠帶著自信與理性，在藝術的領域裡進行最狂野且精準的科學探險。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">釉藥配方比較常見問答 FAQ</div>
+    <p><strong>Q：兩個配方在線性圖上的座標一模一樣，燒出來的顏色和質感會完全相同嗎？</strong><br>
+    A：不一定。線性圖只比較了「矽」與「鋁」。如果配方 A 的助熔劑全是「鈣」，而配方 B 的助熔劑全是「鋇」，即使它們的矽鋁座標相同，B 配方很可能會呈現無光，而 A 是亮面。此外，如果添加的發色金屬（如鐵、鈷）不同，顏色當然也會不同。座標相同代表它們的「玻璃骨架」相似，但最終質感仍需綜合助熔劑的種類來評估。</p>
+    
+    <p><strong>Q：我用的土是低溫陶土，也可以用這套高溫的比較方法嗎？</strong><br>
+    A：比較方法的「邏輯」是通用的，但「地圖的邊界」不同。高溫（1250℃）的線性圖光澤區範圍很大；若在低溫（1050℃）下，耐火的矽鋁如果太多就會未熔。因此，低溫釉的配方在圖表上的落點必須大幅向「左下角（低矽、低鋁）」移動，並且必須依賴強效助熔劑（如熔塊鉛、硼）。您需要參考專門為低溫繪製的線性圖區域，不能直接套用高溫的區域判定。</p>
+
+    <p><strong>Q：要如何準確知道我所買的天然礦物（如長石）在圖表上的確切座標貢獻？</strong><br>
+    A：天然礦物確實存在批次差異。如果您追求極致的座標精準度，必須向原料供應商索取該批次原料的「化學分析表（COA）」，並將實際的成分百分比代入釉式軟體中重新計算。否則，使用理論分子式計算出來的座標，只能視為一個「相對位置的參考點」，這也是為什麼最終仍需要試燒來驗證的原因。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+
+<script>
+  // 使用 HTML5 Canvas 動態繪製 SiO2/Al2O3 線性圖，並比較多個配方落點
+  window.onload = function() {
+    const canvas = document.getElementById('compareChart');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 55;
+    
+    // 設定座標範圍 (SiO2: 1.0 ~ 6.0, Al2O3: 0.1 ~ 0.9)
+    const minX = 1.0;
+    const maxX = 6.0;
+    const minY = 0.1;
+    const maxY = 0.9;
+    
+    // 座標轉換函數
+    function getX(value) {
+      return padding + ((value - minX) / (maxX - minX)) * (width - padding * 2);
+    }
+    
+    function getY(value) {
+      return height - padding - ((value - minY) / (maxY - minY)) * (height - padding * 2);
+    }
+
+    // 1. 繪製背景質地區域 (示意)
+    // 無光區 (Matte)
+    ctx.fillStyle = "#e8e4d6";
+    ctx.beginPath();
+    ctx.moveTo(getX(1.0), getY(0.9));
+    ctx.lineTo(getX(3.0), getY(0.9));
+    ctx.lineTo(getX(2.5), getY(0.4));
+    ctx.lineTo(getX(1.0), getY(0.4));
+    ctx.fill();
+    
+    // 光澤區 (Gloss)
+    ctx.fillStyle = "#f1f0e4";
+    ctx.beginPath();
+    ctx.moveTo(getX(2.5), getY(0.4));
+    ctx.lineTo(getX(3.0), getY(0.9));
+    ctx.lineTo(getX(5.0), getY(0.9));
+    ctx.lineTo(getX(6.0), getY(0.5));
+    ctx.lineTo(getX(4.0), getY(0.1));
+    ctx.lineTo(getX(1.0), getY(0.1));
+    ctx.fill();
+
+    // 2. 繪製 XY 軸與格線
+    ctx.strokeStyle = "#e1ddcf";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for(let i = 1.0; i <= 6.0; i += 0.5) {
+      ctx.moveTo(getX(i), height - padding);
+      ctx.lineTo(getX(i), padding);
+    }
+    for(let j = 0.1; j <= 0.9; j += 0.1) {
+      ctx.moveTo(padding, getY(j));
+      ctx.lineTo(width - padding, getY(j));
+    }
+    ctx.stroke();
+
+    ctx.strokeStyle = "#777367";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, height - padding);
+    ctx.lineTo(width - padding, height - padding);
+    ctx.stroke();
+
+    // 標籤
+    ctx.fillStyle = "#39372f";
+    ctx.font = "13px 'Noto Sans TC', sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    for(let i = 1.0; i <= 6.0; i += 0.5) {
+      ctx.fillText(i.toFixed(1), getX(i), height - padding + 8);
+    }
+    ctx.font = "bold 15px 'Noto Sans TC'";
+    ctx.fillText("SiO₂ (二氧化矽) 莫耳數", width / 2, height - padding + 28);
+
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.font = "13px 'Noto Sans TC', sans-serif";
+    for(let j = 0.1; j <= 0.9; j += 0.1) {
+      ctx.fillText(j.toFixed(1), padding - 8, getY(j));
+    }
+    ctx.save();
+    ctx.translate(padding - 40, height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.font = "bold 15px 'Noto Sans TC'";
+    ctx.fillText("Al₂O₃ (氧化鋁) 莫耳數", 0, 0);
+    ctx.restore();
+
+    // 區域文字說明
+    ctx.fillStyle = "rgba(108, 102, 84, 0.4)";
+    ctx.font = "bold 24px 'Noto Sans TC'";
+    ctx.textAlign = "center";
+    ctx.fillText("無光區 (Matte)", getX(1.8), getY(0.7));
+    ctx.fillText("光澤透明區 (Gloss)", getX(4.0), getY(0.45));
+    ctx.fillText("未熔 / 乾澀", getX(5.3), getY(0.75));
+    ctx.fillText("易釉裂區", getX(1.8), getY(0.2));
+
+    // 3. 繪製對比配方點
+    const points = [
+      { x: 3.8, y: 0.4, color: "#4a7c59", label: "A. 標準透明釉", desc: "平滑光澤" },
+      { x: 2.2, y: 0.65, color: "#c05a5a", label: "B. 經典無光釉", desc: "高鋁微結晶" },
+      { x: 2.0, y: 0.25, color: "#e08d3c", label: "C. 冰裂紋釉", desc: "低矽高膨脹" },
+      { x: 5.5, y: 0.8, color: "#5b5545", label: "D. 嚴重未熔", desc: "過度耐火" }
+    ];
+
+    points.forEach(pt => {
+      const px = getX(pt.x);
+      const py = getY(pt.y);
+      
+      // 點
+      ctx.beginPath();
+      ctx.arc(px, py, 7, 0, Math.PI * 2);
+      ctx.fillStyle = pt.color;
+      ctx.fill();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // 文字背景與文字
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.fillRect(px + 10, py - 18, 105, 36);
+      
+      ctx.fillStyle = "#39372f";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.font = "bold 13px 'Noto Sans TC'";
+      ctx.fillText(pt.label, px + 12, py - 5);
+      ctx.font = "12px 'Noto Sans TC'";
+      ctx.fillStyle = pt.color;
+      ctx.fillText(pt.desc, px + 12, py + 10);
+    });
+
+    // 畫修正方向箭頭 (從 C 到 A)
+    ctx.beginPath();
+    // 計算箭頭起始與結束點 (留出圓圈空間)
+    const startX = getX(points[2].x) + 10;
+    const startY = getY(points[2].y) - 5;
+    const endX = getX(points[0].x) - 10;
+    const endY = getY(points[0].y) + 5;
+    
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+    ctx.strokeStyle = "#e08d3c";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]); // reset
+
+    // 畫箭頭頂端
+    const angle = Math.atan2(endY - startY, endX - startX);
+    ctx.beginPath();
+    ctx.moveTo(endX, endY);
+    ctx.lineTo(endX - 10 * Math.cos(angle - Math.PI/6), endY - 10 * Math.sin(angle - Math.PI/6));
+    ctx.lineTo(endX - 10 * Math.cos(angle + Math.PI/6), endY - 10 * Math.sin(angle + Math.PI/6));
+    ctx.fillStyle = "#e08d3c";
+    ctx.fill();
+    
+    // 箭頭文字說明
+    ctx.fillStyle = "#e08d3c";
+    ctx.textAlign = "center";
+    ctx.font = "bold 12px 'Noto Sans TC'";
+    ctx.fillText("增加石英修正釉裂", (startX + endX)/2 - 10, (startY + endY)/2 - 10);
+  }
+</script>
+</body>
+</html>

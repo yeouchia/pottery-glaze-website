@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何閱讀 SiO₂／Al₂O₃ 線性圖？精準掌握釉面質感的視覺指南</title>
+<meta name="description" content="深入學習如何閱讀陶瓷釉藥的 SiO₂／Al₂O₃ 線性圖。透過解析座標點的移動軌跡與斜率變化，幫助您精準預測釉面光澤、黏度與燒成結果，建立系統化的配釉硬實力。">
+<style>
+  /* =========================================
+     全域與版面基礎設定 (嚴格遵循核心配色與網站風格)
+     ========================================= */
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0; text-align: justify;}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  /* 視覺化圖表容器 */
+  .canvas-container {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    text-align: center;
+    overflow-x: auto;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .canvas-caption {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  /* 相關文章按鈕設計 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜分析工具</div>
+  <span class="eyebrow">專業知識教案</span>
+  <h1>如何閱讀 SiO₂／Al₂O₃ 線性圖？</h1>
+  
+  <div class="lead">
+    <strong>深度解析：</strong>當我們學會了釉式計算，並將陶瓷材料轉化為線性圖上的一個個座標點後，真正的挑戰才剛開始。這張圖表並不會自動告訴您這款釉藥好不好看，它需要您具備「閱讀」與「解碼」的能力。在陶藝創作中，閱讀 SiO₂／Al₂O₃ 線性圖就像是在研讀一份高溫化學的氣象預報。透過觀察座標點的移動軌跡、理解斜率（矽鋁比）的意義，以及辨識圖表上不同區域的物理特徵，我們能在窯爐點火之前，精準預測釉面的光澤度、流動性與可能出現的瑕疵。本篇文章將帶您掌握閱讀線性圖的核心心法，從基礎的座標意義到進階的版塊分析，讓您具備看圖說故事的硬實力，將理論數據轉化為提升燒成技術與配釉成功率的終極武器。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">釉藥組成</span><span class="tag">線性圖</span><span class="tag">矽鋁比</span><span class="tag">賽格式</span><span class="tag">高溫釉</span><span class="tag">陶瓷材料</span><span class="tag">釉式計算</span>
+  </div>
+
+  <h2>一、閱讀前的基礎心法：確立座標與溫度的前提</h2>
+  <p>在我們急著解讀圖表上的落點代表什麼意義之前，必須先為這張圖表建立穩固的客觀前提。如果忽略了這些前提，所有的閱讀與預測都將成為海市蜃樓。閱讀線性圖的第一步，是確認我們看的是「同一張地圖」。</p>
+
+  <h3>認清 X 軸與 Y 軸的意義</h3>
+  <p>每次拿到一張線性圖，請先養成確認座標軸的習慣。在標準的釉藥化學圖表中，橫向的 X 軸代表氧化鋁（Al₂O₃），它象徵著釉藥的「阻力」與「黏度」；縱向的 Y 軸代表二氧化矽（SiO₂），它象徵著釉藥的「玻璃質」與「透亮度」。這兩個軸線的單位必須是經過賽格式轉換後的「莫耳數」，而非陶瓷材料的原始重量。確認軸線定義，是避免將黏度誤判為光澤的基礎防線。</p>
+
+  <h3>溫度是決定閱讀標準的首要條件</h3>
+  <p>線性圖上的區域分界（例如哪裡是透明區、哪裡是生燒區）並不是絕對靜止的，它們會隨著窯爐的熱能而劇烈變動。一張專為 1250°C 高溫釉繪製的線性圖，如果拿來解讀 1180°C 的中溫配方，原本預期的「透明亮面區」可能會完全無法熔化。因此，在閱讀任何圖表前，請務必先在圖表角落尋找該圖表適用的「標靶燒成溫度」與「氣氛條件（氧化或還原）」。溫度，是解碼圖表的首要鑰匙。</p>
+
+  <h3>助熔劑總量（歸一化）的隱形影響</h3>
+  <p>除了溫度，我們還必須意識到，這張二維圖表是建立在助熔劑（RO/R₂O）被強迫歸一化為「1」的基礎之上。這意味著圖表上的每個點都擁有 1 單位的助熔能量。在閱讀時，我們必須假設比較的配方群組擁有相近的助熔劑屬性（例如都是以鈣鋇為主，或以鈉鉀為主）。如果助熔劑的活躍程度差異過大，圖表上的預測區域就會產生嚴重的偏移，這是高階解讀時必須時刻放在心上的隱形變數。</p>
+
+  <h2>二、掌握原點出發的視角：斜率與比例的關係</h2>
+  <p>線性圖上最直觀的視覺特徵之一，就是從原點（0,0）向外放射的直線。這些直線的斜度，直接對應了我們最關心的核心指標：矽鋁比。看懂斜率，就能瞬間掌握配方的性格。</p>
+
+  <h3>放射線代表的等比例意義</h3>
+  <p>在數學上，通過原點的直線代表了一種等比例關係。在 SiO₂／Al₂O₃ 線性圖中，落在同一條放射線上的所有座標點，都擁有完全一致的矽鋁比。例如，點 (0.3, 3.0) 與點 (0.5, 5.0) 都落在斜率為 10 的直線上。這意味著，在閱讀圖表時，只要順著斜線看過去，您就能立刻將數十個配方分門別類，抓出哪些配方擁有相同的化學骨架特徵，而不需要重新依賴計算機。</p>
+
+  <h3>高斜率（高矽鋁比）的視覺特徵</h3>
+  <p>當配方點落在極度陡峭的射線上（例如比例大於 12），這代表 Y 軸（二氧化矽）的優勢遠大於 X 軸（氧化鋁）。在視覺閱讀上，這種高斜率直接與「高光澤」、「高透光度」以及「高流動性」畫上等號。因為豐富的玻璃形成物在熔融後會產生極度平整的液面，但也因為缺乏氧化鋁的阻力，這類配方在立體陶土作品上非常容易產生流掛現象。看到陡峭的落點，就要在心裡預警流釉的風險。</p>
+
+  <h3>低斜率（低矽鋁比）的視覺特徵</h3>
+  <p>相反地，如果配方點落在趨近水平、較為平緩的射線上（例如比例低於 6），代表氧化鋁的勢力開始強大。在圖表解讀上，低斜率意味著釉液極為濃稠，冷卻時難以形成平滑的鏡面。這類配方燒出來的結果多半是霧面、消光，甚至帶有粗糙的土質觸感。對於喜愛溫潤茶具質感的陶藝家來說，低斜率的放射線區域，就是他們開發鋁無光釉的最佳尋寶地帶。</p>
+
+  <h2>三、解析座標點的移動軌跡：向右或向上的意義</h2>
+  <p>閱讀線性圖不僅僅是看單一個點，更重要的是看「點與點之間的相對關係」。當我們修改配方時，座標點在圖表上移動的方向，精準地暗示了釉面物理特性的轉變。</p>
+
+  <h3>單純向右移動（增加氧化鋁）</h3>
+  <p>假設您在原配方中額外添加了高嶺土（主要是增加氧化鋁），座標點在圖表上便會向右方水平移動。閱讀這條水平向右的軌跡，您應該要在腦海中浮現：釉藥的黏度正在急速增加，流動性受到抑制，且釉面會從原本的亮面逐漸過渡為半啞光、甚至是完全的霧面。向右移動，是我們用來煞車（防止流釉）與降低光澤度的標準動作。</p>
+
+  <h3>單純向上移動（增加二氧化矽）</h3>
+  <p>如果您選擇在配方中添加石英粉，座標點便會沿著 Y 軸垂直向上移動。這條向上的軌跡代表著玻璃網絡正在不斷擴建。在助熔劑足夠熔化這些額外石英的前提下，向上的移動會讓釉面變得更硬、更亮、折射率更高。但如果在圖表上爬得太高，超出了助熔劑的極限，原本清澈的釉面就會因為未熔石英的殘留而變得白濁粗糙。</p>
+
+  <h3>向右上角等比例移動（增加骨架總量）</h3>
+  <p>當我們同時等比例地增加二氧化矽與氧化鋁時，座標點會順著斜線向右上角移動。這是一個常被誤讀的軌跡。許多人以為比例不變，燒出來就一樣；但在線性圖上，距離原點越遠，代表耐火骨架的絕對總量越龐大。閱讀這種向右上的移動軌跡，必須意識到釉藥的「耐火度」正在提升。要讓右上角的配方完美熔融，您必須提供更高的燒成溫度或更長的保溫時間，否則只會得到一塊生燒的粉狀物。</p>
+
+  <!-- 動態視覺化：圖表閱讀與移動軌跡 Canvas -->
+  <div class="canvas-container">
+    <canvas id="readingChart" width="750" height="420"></canvas>
+    <div class="canvas-caption">圖表：如何閱讀線性圖？座標點移動軌跡與釉面特性預測</div>
+  </div>
+
+  <h2>四、解讀圖表上的核心版塊：透明亮面區</h2>
+  <p>經過前人的無數次配釉實驗，SiO₂／Al₂O₃ 線性圖上已經浮現了幾個具有鮮明特徵的「化學版塊」。學會辨識這些版塊的疆界，是快速判斷配方良莠的關鍵，其中最重要的就是「透明亮面區」。</p>
+
+  <h3>黃金比例區間的數值範圍</h3>
+  <p>對於常規的 1230°C - 1250°C 氧化燒高溫釉，透明亮面區通常呈現為一個狹長的橢圓形，橫跨在斜率（比例）8 到 11 之間。具體在 X 軸與 Y 軸上，大約是氧化鋁 0.25 到 0.45 莫耳，二氧化矽 2.5 到 4.5 莫耳的範圍內。當您閱讀圖表，發現某個配方精準降落在這個區域時，您可以有八成以上的把握，這將是一款表面平滑、透亮且反光極佳的釉藥。</p>
+
+  <h3>為什麼這區最適合做基礎釉？</h3>
+  <p>這個版塊之所以被稱為黃金區域，是因為它在「光澤度」與「黏度」之間取得了最完美的化學平衡。二氧化矽提供了足夠的玻璃質，讓釉面防水且堅硬；而氧化鋁則提供了恰到好處的懸浮力，讓釉液在熔融狀態下能緊緊抱住陶土坯體，不至於過度流淌。任何想要研發色釉的陶藝家，都會將起點設定在這個版塊的正中央，以確保添加色料後的穩定性。</p>
+
+  <h3>亮面區的邊緣風險（冰裂與流淌）</h3>
+  <p>閱讀版塊時，也要注意其邊緣地帶。如果配方點落在透明亮面區的「左上緣」（矽高鋁低），釉面雖然極亮，但極易因為缺乏氧化鋁的牽制而產生流釉，也常因為膨脹係數的劇烈變化而產生嚴重的冰裂紋（開片）。如果落在「右下緣」，雖然還是亮面，但可能會帶有一絲乳濁感，透明度不如中心點來得純粹。</p>
+
+  <h2>五、解讀圖表上的核心版塊：無光與霧面區</h2>
+  <p>對於喜歡自然、質樸或是現代極簡風格的陶藝創作者來說，「透明亮面區」並不是唯一的目標。在線性圖的另一側，隱藏著一個充滿沉穩魅力的版塊——「無光與霧面區」。</p>
+
+  <h3>鋁無光釉的座標特徵</h3>
+  <p>在圖表上，無光與霧面區通常位於透明亮面區的右下方。這個區域的特徵是斜率較低（矽鋁比通常在 4 到 7 之間），且 X 軸的氧化鋁數值顯著偏高（通常大於 0.4 或 0.5 莫耳）。閱讀到這個區域的配方，代表高濃度的氧化鋁成功阻礙了玻璃的完全熔平，釉面在冷卻時會產生微細起伏，散射光線，形成觸感溫潤、不反光的經典「鋁無光」質感。</p>
+
+  <h3>矽無光與結晶的潛在落點</h3>
+  <p>無光釉不只一種。在圖表的極左上方（極高矽、極低鋁），有時也會出現另一種無光區間，這通常被稱為「矽無光」或「未熔石英無光」。因為矽含量過高無法完全熔解，導致釉面粗糙。此外，如果在此區域搭配特定的鹼土金屬（如鋅或鋇），並配合特殊的降溫曲線，這個區域也是產生「高溫結晶釉」的溫床。閱讀這類邊緣版塊，需要配合對助熔劑屬性的高度敏銳度。</p>
+
+  <h3>如何在圖表上精準調控霧面程度</h3>
+  <p>霧面並非只有 0 與 100 的差別。透過閱讀圖表，我們可以在「亮面區」與「無光區」的交界處，精準調控釉面的光澤度。如果我們希望得到帶有一點絲綢光澤的「緞面釉（Satin）」，只需將配方點設定在亮面區與無光區的交界線上（例如比例 7.5 左右）。看懂這條邊界線，就等於掌握了調控光澤度的無段變速開關。</p>
+
+  <h2>六、識別圖表上的危險警告區：生燒與過熔</h2>
+  <p>一張完整的線性圖，不僅會告訴我們哪裡風景優美，更會標示出充滿危險的懸崖峭壁。在閱讀圖表時，學會識別「生燒區」與「過熔區」，能幫您省下無數次清理窯板的悲慘時光。</p>
+
+  <h3>右上角高絕對數值的生燒陷阱</h3>
+  <p>圖表的右上方（例如 SiO₂ > 5.0 且 Al₂O₃ > 0.6 的區域），是典型的高溫生燒區。閱讀到落入此區的配方時，您必須意識到：雖然它們的比例可能很完美，但整體的耐火骨架實在太龐大了。在一般的 1230°C 窯爐中，現有的 1 單位助熔劑根本無法消化這些材料。燒出來的結果將會是一層乾澀、粗糙、完全沒有玻璃質感的粉末，輕輕一摳就會掉落。</p>
+
+  <h3>左下角低絕對數值的過熔危機</h3>
+  <p>相對地，圖表的左下角（例如 SiO₂ < 2.0 且 Al₂O₃ < 0.2 的區域），則是過熔區。落在此處的配方，耐火骨架極度單薄。在高溫下，這些釉藥會像沸騰的糖水一樣劇烈起泡、四處流竄，甚至在冷卻前就已經揮發或被素燒坯完全吸收，表面只留下一層乾癟的殘渣。這是毀壞作品與窯具的極高風險區，閱讀時應極力避開。</p>
+
+  <h3>溫度變動如何重塑危險邊界</h3>
+  <p>危險區的邊界是會隨著窯溫而移動的。如果您今天將窯爐設定從 1230°C 提高到 1280°C，原本右上角的「生燒區」邊界就會向外退縮，部分原本生燒的配方會因為獲得了足夠的熱能而進入「亮面區」。閱讀圖表時，必須將溫度這個隱形參數疊加在視網膜上，動態地評估危險邊界的實際位置。</p>
+
+  <h2>七、實戰演練：從試片結果反推圖表落點</h2>
+  <p>閱讀圖表的最高境界，不是只會從數字看圖，而是能夠在看到一塊燒壞的陶藝試片時，立刻在腦海中浮現圖表，並反向推導出它的落點位置，進而擬定修正策略。</p>
+
+  <h3>將預期與實際燒成結果進行比對</h3>
+  <p>假設您根據圖表，調配了一款落在「透明亮面區」正中央的釉藥，但開窯後卻發現試片呈現嚴重的乳濁與未熔感。這時，您不能懷疑圖表畫錯了，而是要從實務面找原因。可能是秤料時多加了陶土（導致落點實際偏右），或是窯爐的真實溫度根本沒達到預期（導致危險區向內擴張）。這種「比對落差」，是揪出工作室潛藏問題的最佳利器。</p>
+
+  <h3>釉面太乾澀時的圖表修正策略</h3>
+  <p>當您看著一塊乾澀無光的失敗試片，如果您想將它修正為透明亮面，圖表會告訴您該怎麼做。在圖表上，您需要將配方點從右側或上方拉回中央。在實務操作上，這意味著您必須「減少配方中的高嶺土或石英比例」，或是「增加助熔劑（如添加更多的長石或石灰石，這等於變相降低矽鋁的相對莫耳數）」，迫使座標點朝著左下方的熔融區移動。</p>
+
+  <h3>釉面太流動時的圖表修正策略</h3>
+  <p>如果試片上的釉藥像眼淚一樣流到了底座，代表黏度嚴重不足。在腦海中的圖表上，這個配方正處於左側的危險邊緣。修正策略非常明確：向右移動。您只需要在原配方中加入適量的高嶺土（增加氧化鋁），就能在圖表上將座標點向右拉進安全區，賦予釉液足夠的煞車能力，同時還能改善發色與釉面厚度。</p>
+
+  <h2>八、跨越圖表的限制：立體化的配釉思維</h2>
+  <p>這篇文章教您如何將釉藥的化學本質濃縮到一張二維的線性圖上。然而，要成為真正的陶瓷材料專家，您最終必須學會「跨越這張圖表」，理解那些無法被畫在 X 軸與 Y 軸上的隱形力量。</p>
+
+  <h3>著色劑與特殊添加物的干擾</h3>
+  <p>常規的 SiO₂／Al₂O₃ 線性圖是建立在「基礎釉（白釉或透明釉）」的前提下。當我們加入極少量的金屬著色劑（如 1% 的氧化鈷）時，對圖表的影響不大。但如果我們加入了高達 8% 的氧化鐵來製作黑釉，或是加入大量的金紅石，這些金屬氧化物會成為極強的助熔劑，徹底打亂原本歸一化的平衡，讓整個圖表的有效區域產生劇變。閱讀色釉圖表時，必須將這股干擾力納入考量。</p>
+
+  <h3>陶瓷土的搭配與介面反應</h3>
+  <p>圖表只告訴我們釉藥本身的性格，卻沒有考慮它與下方陶土坯體的「相容性」。即使是在圖表安全區內的透明釉，如果塗在含鐵量極高的紅土上，或是素燒溫度過低的坯體上，交界處產生的化學反應（如氣泡逸出、膨脹係數衝突）依然會導致釉面產生針孔或縮釉。釉與土，是一場無法分割的雙人舞。</p>
+
+  <h3>線性圖作為導航而非終點的哲學</h3>
+  <p>總結來說，閱讀 SiO₂／Al₂O₃ 線性圖，是陶藝家與化學規律對話的過程。它是一套強大的導航系統，能在廣袤的配方大海中為您指明方向，避免觸礁。但請永遠記住，圖表是死的，窯火是活的。唯有將圖表上的理性預測，與開窯那一瞬間的感性驚喜結合，並透過不斷的試片驗證，您才能真正掌握這門迷人的火之藝術，創造出獨一無二的釉藥作品。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">線性圖閱讀與實務 FAQ</div>
+    <p><strong>Q：如果我照著圖表的「透明亮面區」配料，燒出來卻是冰裂（開片），這是為什麼？</strong><br>
+    A：線性圖主要預測的是「熔融狀態與光澤度」，它無法精準預測「膨脹係數」。如果配方中的助熔劑（如高鈉、高鉀）膨脹係數過大，即使它在圖表上處於完美的透明區，冷卻時依然會因為與坯體收縮不一致而產生冰裂。解決冰裂需調整助熔劑結構，或微調矽鋁的絕對量。</p>
+    
+    <p><strong>Q：我可以把兩張不同助熔劑系統（例如一個純鈣釉、一個高鋅釉）的配方，放在同一張圖表上比較嗎？</strong><br>
+    A：可以放在一起看，但「解讀標準」必須分開。高鋅釉的無光區邊界，與純鈣釉的無光區邊界，在圖表上的絕對位置是不同的。把它們硬湊在一起看，容易對光澤度的預測產生誤判。</p>
+    
+    <p><strong>Q：初學者剛接觸釉式計算，應該如何開始練習閱讀圖表？</strong><br>
+    A：最好的方法是「做一組單一變數試片」。找一個成功的基礎透明釉，固定其他材料不變，只分批加入 5%、10%、15% 的高嶺土。把這四個配方的點畫在圖表上，然後與燒出來的四塊試片對照。您會親眼看見點位向右移動時，釉面是如何從亮面逐漸變成霧面的，這是最深刻的學習法。</p>
+  </div>
+
+  <div class="related">
+    <h3>相關文章</h3>
+    <!-- === 動態相關文章區塊 開始 === -->
+    <div id="dynamic-related-articles"></div>
+    <script src="../../assets/js/knowledge-data.js"></script>
+    <script src="../../assets/js/related.js"></script>
+    <!-- === 動態相關文章區塊 結束 === -->
+  </div>
+
+</article>
+</main>
+
+<!-- 動態繪製 線性圖閱讀指南 Canvas Script -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('readingChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const width = canvas.width;
+    const height = canvas.height;
+    
+    // 邊界設定
+    const padding = { top: 40, right: 40, bottom: 60, left: 70 };
+    const chartWidth = width - padding.left - padding.right;
+    const chartHeight = height - padding.top - padding.bottom;
+    
+    const maxX = 0.8;
+    const maxY = 6.0;
+    
+    function getX(val) { return padding.left + (val / maxX) * chartWidth; }
+    function getY(val) { return height - padding.bottom - (val / maxY) * chartHeight; }
+    
+    // 背景
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    
+    // 網格與軸線
+    ctx.strokeStyle = '#eaeaea';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let i = 0; i <= maxY; i++) {
+        ctx.moveTo(padding.left, getY(i));
+        ctx.lineTo(width - padding.right, getY(i));
+    }
+    for (let i = 0; i <= maxX; i += 0.1) {
+        ctx.moveTo(getX(i), padding.top);
+        ctx.lineTo(getX(i), height - padding.bottom);
+    }
+    ctx.stroke();
+
+    // 軸標題與刻度
+    ctx.fillStyle = '#777367';
+    ctx.font = '13px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i <= maxY; i++) {
+        ctx.fillText(i.toFixed(1), padding.left - 10, getY(i));
+    }
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    for (let i = 0; i <= maxX; i += 0.1) {
+        ctx.fillText((Math.round(i*10)/10).toFixed(1), getX(i), height - padding.bottom + 10);
+    }
+    
+    ctx.fillStyle = '#39372f';
+    ctx.font = 'bold 15px sans-serif';
+    ctx.fillText('X軸：Al₂O₃ (增加黏度 / 降低光澤)', width / 2, height - 20);
+    ctx.save();
+    ctx.translate(20, height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Y軸：SiO₂ (增加玻璃質 / 硬度)', 0, 0);
+    ctx.restore();
+
+    ctx.strokeStyle = '#a09c91';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top);
+    ctx.lineTo(padding.left, height - padding.bottom);
+    ctx.lineTo(width - padding.right, height - padding.bottom);
+    ctx.stroke();
+    
+    // 繪製中心基準點
+    const basePt = { x: 0.35, y: 3.5 };
+    ctx.beginPath();
+    ctx.arc(getX(basePt.x), getY(basePt.y), 8, 0, Math.PI*2);
+    ctx.fillStyle = '#39372f';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    ctx.fillStyle = '#39372f';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('原配方落點 (基準)', getX(basePt.x) + 15, getY(basePt.y) - 10);
+
+    // 繪製指示箭頭函式
+    function drawArrow(fromX, fromY, toX, toY, color, text, align = 'center') {
+      const headlen = 12;
+      const dx = toX - fromX;
+      const dy = toY - fromY;
+      const angle = Math.atan2(dy, dx);
+      
+      ctx.beginPath();
+      ctx.moveTo(fromX, fromY);
+      ctx.lineTo(toX, toY);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(toX, toY);
+      ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+      ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+      ctx.fillStyle = color;
+      ctx.fill();
+      
+      // 標註文字
+      ctx.fillStyle = color;
+      ctx.font = 'bold 14px sans-serif';
+      ctx.textAlign = align;
+      
+      let textX = toX;
+      let textY = toY;
+      
+      if(dx > 0 && Math.abs(dy) < 10) { textX += 15; textY += 5; ctx.textAlign = 'left'; } // 向右
+      if(dy < 0 && Math.abs(dx) < 10) { textY -= 15; ctx.textAlign = 'center'; } // 向上
+      if(dx > 0 && dy < 0) { textX += 15; textY -= 10; ctx.textAlign = 'left'; } // 向右上
+      if(dx < 0 && dy > 0) { textX -= 15; textY += 20; ctx.textAlign = 'right'; } // 向左下
+      
+      ctx.fillText(text, textX, textY);
+    }
+    
+    // 向右移動 (增加鋁)
+    drawArrow(getX(basePt.x) + 15, getY(basePt.y), getX(basePt.x + 0.25), getY(basePt.y), '#e74c3c', '軌跡向右：變稠、轉霧面');
+    
+    // 向上移動 (增加矽)
+    drawArrow(getX(basePt.x), getY(basePt.y) - 15, getX(basePt.x), getY(basePt.y + 1.5), '#3498db', '軌跡向上：變亮、白濁風險');
+    
+    // 向右上移動 (增加骨架總量)
+    drawArrow(getX(basePt.x) + 10, getY(basePt.y) - 10, getX(basePt.x + 0.18), getY(basePt.y + 1.8), '#7f8c8d', '軌跡向右上：耐火度提升 (生燒風險)');
+    
+    // 向左下移動 (減少骨架總量)
+    drawArrow(getX(basePt.x) - 10, getY(basePt.y) + 10, getX(basePt.x - 0.15), getY(basePt.y - 1.5), '#f39c12', '軌跡向左下：易流動 (過熔風險)');
+
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiO₂／Al₂O₃ 比例計算公式：陶瓷釉藥配方的數學與化學解析</title>
+<meta name="description" content="完整解析陶瓷釉藥中 SiO₂／Al₂O₃ 比例的計算公式。從原料重量、分子量轉換到賽格式歸一化，一步步帶領陶藝創作者掌握釉式計算的邏輯，建立科學配釉的硬實力。">
+<style>
+  /* =========================================
+     全域與版面基礎設定 (嚴格遵循核心配色與網站風格)
+     ========================================= */
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0; text-align: justify;}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  /* 視覺化圖表容器 */
+  .canvas-container {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    text-align: center;
+    overflow-x: auto;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .canvas-caption {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  /* 相關文章按鈕設計 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">專業知識教案</span>
+  <h1>SiO₂／Al₂O₃ 比例計算公式</h1>
+  
+  <div class="lead">
+    <strong>深度解析：</strong>在學習陶藝與釉藥組成的過程中，許多創作者最害怕碰觸的領域，往往就是充滿數字與化學符號的「釉式計算」。然而，要真正掌握陶瓷材料在高溫窯爐中的變化，我們無法永遠停留在憑感覺秤重的階段。本篇文章將為您揭開「SiO₂／Al₂O₃ 比例計算公式」的神秘面紗。這個看似複雜的數學過程，其實有著極為清晰的邏輯步驟。從原始配方的克數重量出發，經過分子量的轉換、莫耳數的運算，再到賽格式（Seger Formula）的歸一化處理，最終我們將萃取出二氧化矽與氧化鋁的純粹數值，並得出影響釉面光澤與流動性的黃金比例。這不僅僅是一堂化學數學課，更是每一位渴望突破創作瓶頸、追求精準燒成技術的陶藝家，所必須經歷的蛻變之旅。跟著我們的步驟，您會發現，釉藥計算其實就是一場有跡可循的解謎遊戲。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">釉藥組成</span><span class="tag">釉式計算</span><span class="tag">賽格式</span><span class="tag">分子量</span><span class="tag">莫耳數</span><span class="tag">矽鋁比</span><span class="tag">陶瓷材料</span>
+  </div>
+
+  <h2>一、從配方表到化學式的轉譯：計算比例的前置作業</h2>
+  <p>在我們拿起計算機開始輸入公式之前，必須先建立一個重要的核心觀念：我們在工作室裡秤出來的重量，並不等於窯爐裡真實發生的化學反應數量。進行 SiO₂／Al₂O₃ 比例計算的第一個門檻，就是學會將「物理重量」轉譯為「化學數量」。這個前置作業，是所有科學配釉的基石。</p>
+
+  <h3>重量配方的侷限性</h3>
+  <p>大部分的傳統釉藥配方，都是以公克或重量百分比來書寫的（例如：長石 45、碳酸鈣 15、高嶺土 10、石英 30）。這種紀錄方式非常適合日常操作，但它掩蓋了物質的真實面貌。因為不同的礦物粉末有著不同的密度與重量，100克的石英與100克的碳酸鈣，裡面含有的有效化學粒子數量是完全不對等的。如果直接拿重量來相除，得到的數字將毫無化學意義可言。</p>
+
+  <h3>莫耳數概念的導入</h3>
+  <p>為了看清釉藥在高溫下究竟是怎麼結合的，化學界發明了「莫耳（Mole）」這個單位。莫耳數就像是計算原子的「打數」，它讓我們能以「個數」來衡量物質，而非重量。透過莫耳數，我們才能精確知道配方裡提供了多少個矽原子來搭建玻璃網絡，又提供了多少個鋁原子來維持結構穩定。將重量轉換為莫耳數，是計算矽鋁比無可閃避的關鍵步驟。</p>
+
+  <h3>釉式計算的必備工具</h3>
+  <p>在進行這場數學轉譯時，您不需要具備高深的微積分能力，但您必須準備幾項基本工具：一台精確的計算機、一張常見陶瓷原料的「分子量對照表」，以及一份紀錄詳實的原始釉藥配方。此外，具備基礎的 Excel 或電子試算表操作能力，將能幫助您在未來處理大量複合礦物（如長石，其本身就含有鉀、鈉、鋁、矽等多種元素）時，免去繁瑣的人工手算，大幅提升計算效率與準確度。</p>
+
+  <h2>二、認識分子量：化學計算的基石</h2>
+  <p>在將重量轉換為莫耳數的過程中，我們需要一個轉換的橋樑，這個橋樑就是「分子量」。了解分子量的意義與來源，是順利推進計算公式的核心環節，否則我們將在面對複雜的陶瓷材料時迷失方向。</p>
+
+  <h3>什麼是分子量？</h3>
+  <p>簡單來說，分子量就是一個化學分子相對於碳原子的相對重量。每一個化學元素都有其固定的原子量（例如矽是 28.1，氧是 16），當這些元素結合成礦物分子時，我們將其原子量相加，便得到了該物質的分子量。例如，二氧化矽（SiO₂）的分子量大約是 28.1 + (16 × 2) = 60.1。這個數值告訴我們，60.1克的石英粉裡面，恰好含有 1 莫耳的 SiO₂ 粒子。</p>
+
+  <h3>常見陶瓷材料的分子量概覽</h3>
+  <p>在陶藝實務中，我們經常接觸的原料分子量差異極大。例如純粹的石灰石（碳酸鈣 CaCO₃）分子量約為 100；而陶藝用的高嶺土（理論化學式 Al₂O₃·2SiO₂·2H₂O）分子量則高達 258 左右；至於結構複雜的鉀長石（K₂O·Al₂O₃·6SiO₂），其理論分子量更是高達 556。這意味著，同樣是添加 100 克的原料，長石所能提供的莫耳數，遠比碳酸鈣來得少。</p>
+
+  <h3>查詢與確認分子量的方法</h3>
+  <p>要取得精準的分子量，陶藝創作者可以查閱專業的陶瓷化學書籍、材料供應商提供的礦物分析報告（COA），或是使用線上的釉藥資料庫。需要特別注意的是，自然界開採的礦石往往含有雜質，其實際分子量可能會與教科書上的「理論化學式」略有出入。對於要求極度精確的工業生產，通常會採用化驗所提供的實際數據；而對於個人陶藝工作室，使用理論分子量已足夠進行有效的趨勢分析。</p>
+
+  <h2>三、第一步：將原料重量轉換為莫耳數</h2>
+  <p>當我們掌握了原始配方的重量以及各原料的分子量後，真正的運算就正式開始了。第一步，我們必須將所有秤重出來的礦物，全部「打掉重練」，轉換成以莫耳為單位的化學數量。</p>
+
+  <h3>重量的精確秤量與紀錄</h3>
+  <p>要確保公式計算的準確性，源頭的數據必須精確。請確保您的原始配方重量總和（通常設定為 100% 或 100 克）沒有遺漏。在記錄時，除了寫下原料名稱，最好也一併標註該原料在您工作室中的化學代表式。例如：「釜戶長石 40克」、「澳洲高嶺土 15克」。這些重量數字，將成為我們除法公式的分子。</p>
+
+  <h3>除法公式的實際應用</h3>
+  <p>轉換的核心公式非常單純：**莫耳數 ＝ 實際重量 ÷ 該原料的分子量**。假設您的配方中使用了 30 克的石英（SiO₂，分子量 60.1），那麼石英所提供的莫耳數就是 30 ÷ 60.1 ≈ 0.499 莫耳。我們需要針對配方表中的每一項原料，逐一進行這個除法運算。計算出來的小數點通常會保留到第三位或第四位，以維持後續累加時的精確度。</p>
+
+  <h3>處理複合礦物的莫耳數分配</h3>
+  <p>這裡是最容易讓初學者卡關的地方。有些單純的原料（如碳酸鋇）只提供單一氧化物；但像「長石」這類的複合礦物，1 莫耳的長石，不僅提供了 1 莫耳的 K₂O，還同時附帶了 1 莫耳的 Al₂O₃ 以及 6 莫耳的 SiO₂。因此，當您算出長石的總莫耳數後，必須依照其化學結構的比例，將這些莫耳數「分配」到對應的鹼性金屬、氧化鋁與二氧化矽的欄位中進行累加。這是一個需要細心與條理的歸納過程。</p>
+
+  <!-- 動態視覺化：計算流程圖 Canvas -->
+  <div class="canvas-container">
+    <canvas id="flowChart" width="800" height="300"></canvas>
+    <div class="canvas-caption">圖表：SiO₂／Al₂O₃ 比例計算流程示意圖</div>
+  </div>
+
+  <h2>四、第二步：賽格式（Seger Formula）的歸一化運算</h2>
+  <p>當我們把所有原料都拆解成各類氧化物的莫耳數並加總後，我們會得到一堆看似雜亂無章的數字。這時，我們必須導入赫爾曼·賽格（Hermann Seger）的偉大發明：歸一化（Normalization），這也是釉式計算中最優雅的一步。</p>
+
+  <h3>助熔劑（RO/R₂O）群組的統整</h3>
+  <p>在賽格式的理論中，我們將釉藥分為三大區塊。第一區塊是扮演助熔角色的鹼金屬與鹼土金屬（RO/R₂O），例如 K₂O、Na₂O、CaO、MgO 等。我們首先要做的，是將這些分布在不同原料裡的助熔劑莫耳數，全部加總起來，得到一個「助熔劑總莫耳數」。這個數值代表了該釉藥發動熔融反應的總引擎動力。</p>
+
+  <h3>歸一化的數學意義</h3>
+  <p>所謂的「歸一化」，就是強迫讓剛才算出來的「助熔劑總莫耳數」變成「1」。為什麼要這麼做？因為只有當我們將不同配方的助熔能力拉到同一個比較基準點（基準值為 1）時，後面的氧化鋁與二氧化矽數值，才有公平比較的空間。這就像是我們在比較兩台車的耗油量時，必須統一將行駛距離設定為 100 公里，這樣得出的數據才有參考價值。</p>
+
+  <h3>重新換算矽與鋁的相對莫耳數</h3>
+  <p>在數學操作上，歸一化其實就是找除數。我們將剛才加總得到的「助熔劑總莫耳數」當作分母，然後將配方中**所有的氧化物數值（包含矽與鋁）**，都除以這個分母。經過這道除法洗禮後，助熔劑的總和會完美地變成 1.00，而二氧化矽與氧化鋁的數值則會跟著等比例縮放，成為符合賽格標準格式的最終莫耳數值。</p>
+
+  <h2>五、第三步：萃取 SiO₂ 與 Al₂O₃ 數值</h2>
+  <p>經過了繁瑣的莫耳數分配與優雅的歸一化除法後，我們終於來到了收割成果的階段。在這個步驟中，我們的目標是從整張展開的釉式表格中，精準地提取出我們需要的兩個關鍵數據。</p>
+
+  <h3>確認氧化鋁的總來源</h3>
+  <p>在配方中，氧化鋁（Al₂O₃）的來源往往不只一個。它可能同時來自於長石、高嶺土，甚至是某些特殊的色料。在剛剛的歸一化步驟完成後，請將目光鎖定在「中性氧化物」的欄位。這個經過標準化縮放後的 Al₂O₃ 數值，代表了在 1 單位的助熔劑基礎下，釉藥所擁有的黏度阻力與結構骨架的強度。請將這個數字獨立記錄下來。</p>
+
+  <h3>彙整二氧化矽的所有貢獻者</h3>
+  <p>同樣地，二氧化矽（SiO₂）幾乎存在於所有的陶土與多數的陶瓷材料中。舉凡石英粉、長石、滑石、高嶺土，都會貢獻矽元素。在歸一化後的報表中，請找到「酸性氧化物」欄位下的 SiO₂ 數值。這個數字象徵著該配方生成玻璃網絡的總體量能。確認這個數字是所有矽來源的總和後，將其與氧化鋁並列。</p>
+
+  <h3>數值檢核與常見錯誤排除</h3>
+  <p>在萃取這兩個數值時，這是一個很好的檢錯時機。對於一般常見的 1230°C 高溫透明釉，歸一化後的 Al₂O₃ 通常會落在 0.3 到 0.5 之間，而 SiO₂ 則多在 3.0 到 5.0 之間徘徊。如果您計算出來的氧化鋁高達 2.0，或是二氧化矽只有 0.5，那極有可能是前置的分子量除法算錯，或是複合礦物的莫耳數分配有遺漏。在進行下一步的比例計算前，務必對數據的合理性進行初步的邏輯檢核。</p>
+
+  <h2>六、核心步驟：SiO₂／Al₂O₃ 比例公式詳解</h2>
+  <p>當我們手中握有經過賽格式標準化洗禮的 SiO₂ 與 Al₂O₃ 數值後，我們終於來到了本篇文章的重頭戲：計算矽鋁比例。這個最後的數學動作雖然簡單，卻能一錘定音地揭示釉面的未來走向。</p>
+
+  <h3>最終的除法運算邏輯</h3>
+  <p>這個比例公式的核心，就是一個簡單的除法：將萃取出的 **SiO₂ 數值，直接除以 Al₂O₃ 的數值**。在數學表達上，它計算的是「當氧化鋁為 1 時，二氧化矽的相對倍數」。之所以用矽來除以鋁，是因為在多數的釉藥結構中，二氧化矽的份量都遠大於氧化鋁。將除法設計為 SiO₂ ÷ Al₂O₃，能讓我們得到一個大於 1 的整數或略帶小數的數字（例如 8、10、12），這比計算 Al₂O₃ ÷ SiO₂（會得到一堆 0.1 幾的瑣碎小數）要直觀且容易記憶得多。</p>
+
+  <h3>比例數值的判讀標準</h3>
+  <p>算出來的數字該如何解讀？在一般的陶藝經驗法則中，如果得出的比例數字較高（例如 10 到 12 以上），代表玻璃形成物佔據絕對優勢，釉面通常會朝向高光澤、高透亮的方向發展，但也可能伴隨較高的流動性。如果算出來的比例較低（例如 5 到 7 之間），代表氧化鋁的勢力強大，釉面會受到強烈的阻力而無法完全熔平，進而展現出溫潤的霧面、消光質感，或是粗糙的無光效果。這個數字，就是我們判讀釉面質感的風向標。</p>
+
+  <h3>無理數與小數點的取捨原則</h3>
+  <p>在實際按計算機時，這個除法往往會產生無限循環的小數（例如 9.33333...）。在陶藝實務中，我們不需要鑽牛角尖於極端的精確度。通常將這個矽鋁比數值四捨五入保留到小數點後第一位（例如 9.3）或第二位就已非常足夠。因為窯爐內部的溫度分佈、氣氛變化以及原料中難以避免的微量雜質，其所造成的變數誤差，遠大於小數點後第三位的數學差異。掌握宏觀的比例趨勢，才是學習釉式計算的真諦。</p>
+
+  <h2>七、實際案例推演：從長石釉配方到最終比例</h2>
+  <p>光說不練假把戲。為了讓您更清楚這套公式的運作流程，我們將透過一個經典的高溫長石基礎釉配方，帶您實際走一遍從重量到比例的完整數學旅程。</p>
+
+  <h3>原始配方的設定與解析</h3>
+  <p>假設我們有一個極為簡化的基礎釉配方，重量百分比如下：鉀長石 50%、碳酸鈣 20%、高嶺土 10%、石英 20%，總計 100%。為了方便計算，我們採用理論分子量：鉀長石 (K₂O·Al₂O₃·6SiO₂) 分子量 556；碳酸鈣 (CaCO₃，提供 CaO) 分子量 100；高嶺土 (Al₂O₃·2SiO₂·2H₂O) 分子量 258；石英 (SiO₂) 分子量 60。</p>
+
+  <h3>逐步運算的數據展示</h3>
+  <p>第一步，轉莫耳數：<br>
+  - 鉀長石：50 ÷ 556 ≈ 0.09 莫耳。<br>
+  - 碳酸鈣：20 ÷ 100 = 0.20 莫耳。<br>
+  - 高嶺土：10 ÷ 258 ≈ 0.039 莫耳。<br>
+  - 石英：20 ÷ 60 ≈ 0.333 莫耳。</p>
+  <p>第二步，分配與加總氧化物：<br>
+  - 助熔劑 (RO/R₂O)：來自長石的 K₂O (0.09) + 來自碳酸鈣的 CaO (0.20) = 總助熔劑 0.29。<br>
+  - 氧化鋁 (Al₂O₃)：來自長石 (0.09) + 來自高嶺土 (0.039) = 總鋁 0.129。<br>
+  - 二氧化矽 (SiO₂)：來自長石 (0.09 × 6 = 0.54) + 來自高嶺土 (0.039 × 2 = 0.078) + 純石英 (0.333) = 總矽 0.951。</p>
+  <p>第三步，賽格式歸一化（全數除以助熔劑總和 0.29）：<br>
+  - 助熔劑：0.29 ÷ 0.29 = 1.00<br>
+  - Al₂O₃：0.129 ÷ 0.29 ≈ 0.44<br>
+  - SiO₂：0.951 ÷ 0.29 ≈ 3.28</p>
+
+  <h3>計算結果的實務意義探討</h3>
+  <p>最後一步，套用 SiO₂／Al₂O₃ 比例公式：<br>
+  **3.28 (矽) ÷ 0.44 (鋁) ≈ 7.45**。<br>
+  這個比例 7.45 告訴我們什麼？這是一個界於亮面與霧面之間的邊緣比例。在 1250°C 的窯火下，它可能不會是那種清澈如水的鏡面釉，而是帶有微微溫潤感、甚至略微消光的緞面（Satin）質感。這就是透過數學計算，我們在未曾動手揉土、未曾開窯之前，就能擁有的強大預測能力。</p>
+
+  <h2>八、善用現代工具：讓釉式計算自動化</h2>
+  <p>如果您剛才看那一串算式感到頭暈目眩，請不要氣餒。在理解了計算背後的化學邏輯後，我們完全可以將這些繁雜的四則運算，交給現代化的數位工具來處理。</p>
+
+  <h3>傳統手算的價值與意義</h3>
+  <p>儘管現在有許多軟體可用，但我仍強烈建議每一位學習陶瓷材料的創作者，至少要用筆和紙（或簡單的計算機）親自推演過兩三次完整的賽格式轉換。唯有透過親手將重量除以分子量、親自分配複合礦物的氧化物，您才能深刻體會到礦物結構中的微妙平衡。手算，是建立化學直覺與肌肉記憶無可取代的過程。</p>
+
+  <h3>數位釉藥計算軟體的優勢</h3>
+  <p>一旦您掌握了底層邏輯，坊間有許多成熟的釉藥計算軟體（如 Glazy 等）可以為您代勞。這些軟體內建了全球各地的原料資料庫，您只需要輸入配方名稱與重量，軟體就會在一秒內幫您完成所有的分子量轉換、歸一化，並直接在畫面上顯示出精確的 SiO₂／Al₂O₃ 比例，甚至還會自動幫您標記在線性圖的座標上。這極大地提高了配釉的效率，也減少了人為按錯計算機的風險。</p>
+
+  <h3>建立個人的自動化試算表</h3>
+  <p>除了使用現成的軟體，許多進階的陶藝家會使用 Excel 或 Google Sheets 建立一套屬於自己的自動化試算表。您可以將常用的原料（如鶯歌特產的陶土、您習慣購買的合成灰）其真實的化驗分子量輸入表單。每當有新靈感時，只需填入重量，試算表就能自動吐出矽鋁比。這不僅是計算工具，更是您在陶藝創作生涯中，最寶貴的個人知識資料庫。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">釉式計算常見問答 FAQ</div>
+    <p><strong>Q：如果我不知道我買的長石正確的分子量怎麼辦？</strong><br>
+    A：天然礦物確實會有批次差異。您可以向原料供應商索取化學分析報告（COA）來換算；如果無法取得，在進行趨勢分析時，使用標準的「理論分子量」作為計算基準也是被陶藝界廣泛接受的做法。重點是保持計算基準的一致性。</p>
+    
+    <p><strong>Q：為什麼在計算二氧化矽時，長石的莫耳數要乘以 6？</strong><br>
+    A：這是因為「莫耳分配」的關係。以鉀長石（K₂O·Al₂O₃·6SiO₂）為例，在它的化學結構式中，1 個分子的鉀長石裡包含了 6 個分子的 SiO₂。所以當您算出長石的總莫耳數後，必須乘以 6，才是它真正貢獻給整個釉藥系統的矽含量。</p>
+    
+    <p><strong>Q：比例算出來有小數點很多位，會影響結果嗎？</strong><br>
+    A：在陶藝實務上，小數點後第二位之後的數字差異，對於燒成結果的影響微乎其微。因為窯溫的波動、塗釉的厚薄、甚至素燒坯的吸水率，都會造成比小數點更大的誤差。建議將比例四捨五入至小數點後第一位或第二位即可。</p>
+    
+    <p><strong>Q：不進行歸一化，直接拿總矽除以總鋁可以嗎？</strong><br>
+    A：在數學除法上，因為歸一化是將矽與鋁「同除以一個常數」，所以不歸一化直接拿總矽除以總鋁，得出的「比值」是一樣的。但為了日後能與其他配方進行客觀的全面比較（包含助熔劑的檢視），依循標準的賽格式歸一化流程，仍是陶藝化學的標準規範。</p>
+  </div>
+
+  <div class="related">
+    <h3>相關文章</h3>
+    <!-- === 動態相關文章區塊 開始 === -->
+    <div id="dynamic-related-articles"></div>
+    <script src="../../assets/js/knowledge-data.js"></script>
+    <script src="../../assets/js/related.js"></script>
+    <!-- === 動態相關文章區塊 結束 === -->
+  </div>
+
+</article>
+</main>
+
+<!-- 動態繪製 計算流程圖 Canvas Script -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('flowChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    
+    // 背景
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    
+    // 定義區塊樣式
+    const boxWidth = 140;
+    const boxHeight = 50;
+    const radius = 8;
+    const startY = (height - boxHeight) / 2;
+    
+    // 繪製圓角矩形函式
+    function drawRoundRect(x, y, w, h, r, bgColor, borderColor, text1, text2) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      
+      ctx.fillStyle = bgColor;
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = borderColor;
+      ctx.stroke();
+      
+      ctx.fillStyle = '#39372f';
+      ctx.textAlign = 'center';
+      if(text2) {
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText(text1, x + w/2, y + 20);
+        ctx.font = '12px sans-serif';
+        ctx.fillStyle = '#777367';
+        ctx.fillText(text2, x + w/2, y + 38);
+      } else {
+        ctx.font = 'bold 15px sans-serif';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text1, x + w/2, y + h/2);
+        ctx.textBaseline = 'alphabetic'; // reset
+      }
+    }
+    
+    // 繪製箭頭函式
+    function drawArrow(fromX, fromY, toX, toY) {
+      const headlen = 10;
+      const dx = toX - fromX;
+      const dy = toY - fromY;
+      const angle = Math.atan2(dy, dx);
+      
+      ctx.beginPath();
+      ctx.moveTo(fromX, fromY);
+      ctx.lineTo(toX, toY);
+      ctx.strokeStyle = '#dcd7c7';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(toX, toY);
+      ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+      ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+      ctx.fillStyle = '#dcd7c7';
+      ctx.fill();
+    }
+
+    // 繪製計算流程四個步驟
+    const gap = 60;
+    const startX = 40;
+    
+    // Step 1
+    const x1 = startX;
+    drawRoundRect(x1, startY, boxWidth, boxHeight, radius, '#f1f0e4', '#dcd7c7', '1. 原料重量', '(公克或百分比)');
+    
+    // Arrow 1 (除以分子量)
+    drawArrow(x1 + boxWidth, startY + boxHeight/2, x1 + boxWidth + gap, startY + boxHeight/2);
+    ctx.fillStyle = '#c0392b';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('÷ 分子量', x1 + boxWidth + gap/2, startY + boxHeight/2 - 10);
+    
+    // Step 2
+    const x2 = x1 + boxWidth + gap;
+    drawRoundRect(x2, startY, boxWidth, boxHeight, radius, '#e8f4f8', '#bce0fd', '2. 取得莫耳數', '(化學粒子數量)');
+    
+    // Arrow 2 (賽格式歸一化)
+    drawArrow(x2 + boxWidth, startY + boxHeight/2, x2 + boxWidth + gap, startY + boxHeight/2);
+    ctx.fillStyle = '#27ae60';
+    ctx.fillText('÷ 助熔劑總和', x2 + boxWidth + gap/2, startY + boxHeight/2 - 10);
+    ctx.fillText('(歸一化)', x2 + boxWidth + gap/2, startY + boxHeight/2 + 20);
+    
+    // Step 3
+    const x3 = x2 + boxWidth + gap;
+    drawRoundRect(x3, startY, boxWidth, boxHeight, radius, '#fcf3cf', '#f7dc6f', '3. 萃取氧化物', '(取得 SiO₂ & Al₂O₃)');
+    
+    // Arrow 3 (相除運算)
+    drawArrow(x3 + boxWidth, startY + boxHeight/2, x3 + boxWidth + gap, startY + boxHeight/2);
+    ctx.fillStyle = '#2980b9';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillText('SiO₂ ÷ Al₂O₃', x3 + boxWidth + gap/2, startY + boxHeight/2 - 10);
+    
+    // Step 4
+    const x4 = x3 + boxWidth + gap;
+    drawRoundRect(x4, startY, boxWidth, boxHeight, radius, '#f6f4e9', '#6c6654', '4. 得出矽鋁比', '(預測釉面質感)');
+    
+    // 裝飾性標題
+    ctx.fillStyle = '#6c6654';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('化學配方轉譯流程圖', 40, 50);
+    ctx.strokeStyle = '#dcd7c7';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(40, 65);
+    ctx.lineTo(240, 65);
+    ctx.stroke();
+  });
+</script>
+
+</body>
+</html>
