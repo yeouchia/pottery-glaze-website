@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RO 類／鹼土與二價金屬原料：掌握釉藥的高溫骨架與霧面質感</title>
+<meta name="description" content="全面解析陶藝釉藥中的 RO 類二價金屬原料，包含鈣質、鎂質、鋇質、鍶質與鋅質原料。了解石灰石、滑石、白雲石與氧化鋅如何決定高溫釉藥的硬度、霧面質感與特殊結晶效果。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .svg-container: 動態圖表容器
+     ========================================= */
+
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .svg-container {
+    width: 100%;
+    margin: 32px 0;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  #dynamic-related-articles h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  #dynamic-related-articles a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  #dynamic-related-articles a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  #dynamic-related-articles a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  #dynamic-related-articles a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥原料｜RO 類二價金屬</div>
+  <span class="eyebrow">原料配方解析</span>
+  <h1>RO 類／鹼土與二價金屬原料：掌握釉藥的高溫骨架與霧面質感</h1>
+  
+  <div class="lead">
+    <strong>導讀：</strong>在陶瓷化學的塞格爾釉式（Seger Formula）中，助熔劑被分為 R₂O 與 RO 兩大陣營。如果說 R₂O（鉀、鈉、鋰）是讓釉藥迅速熔化的急先鋒，那麼 RO 類（鹼土與二價金屬）就是負責撐起高溫結構的穩定骨幹。RO 類包含了鈣（Ca）、鎂（Mg）、鋇（Ba）、鍶（Sr）與鋅（Zn）。這些金屬在中低溫時往往不動如山，但當窯溫攀升至 1200°C 以上時，它們便會展現出強大的助熔實力。更重要的是，RO 類金屬是決定釉面最終質感的幕後推手——無論是堅硬耐磨的透明食用釉、溫潤如玉的奶油霧面、還是絢麗奪目的大型結晶釉，都與這五種二價金屬的精密調配息息相關。本文將帶您深入認識這些不可或缺的高溫釉藥原料。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝原料</span>
+    <span class="tag">RO類金屬</span>
+    <span class="tag">鈣質原料</span>
+    <span class="tag">鎂質原料</span>
+    <span class="tag">霧面釉</span>
+    <span class="tag">結晶釉</span>
+    <span class="tag">釉藥配方</span>
+    <span class="tag">高溫燒成</span>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect width="100%" height="100%" fill="none"/>
+      
+      <!-- Chart Title -->
+      <text x="300" y="30" font-family="sans-serif" font-size="18" font-weight="bold" fill="#39372f" text-anchor="middle">RO 類金屬在釉面質感與色彩影響上的分佈矩陣</text>
+      
+      <!-- Axis Lines -->
+      <!-- X-axis (Texture) -->
+      <line x1="100" y1="200" x2="500" y2="200" stroke="#dcd7c7" stroke-width="2" />
+      <text x="500" y="215" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="end">高光澤 (Glossy)</text>
+      <text x="100" y="215" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="start">強霧面 (Matte)</text>
+      
+      <!-- Y-axis (Color response) -->
+      <line x1="300" y1="60" x2="300" y2="340" stroke="#dcd7c7" stroke-width="2" />
+      <text x="310" y="70" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="start">強烈干涉色彩發色</text>
+      <text x="310" y="335" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="start">對色彩影響中立</text>
+
+      <!-- Data Points & Labels -->
+      <!-- 鈣 (Ca) - High Gloss, Neutral Color -->
+      <circle cx="420" cy="280" r="12" fill="#6c6654" />
+      <text x="420" y="260" font-family="sans-serif" font-size="14" font-weight="bold" fill="#39372f" text-anchor="middle">鈣 (CaO)</text>
+
+      <!-- 鎂 (Mg) - High Matte, Neutral/Slight influence -->
+      <circle cx="160" cy="270" r="12" fill="#6c6654" />
+      <text x="160" y="250" font-family="sans-serif" font-size="14" font-weight="bold" fill="#39372f" text-anchor="middle">鎂 (MgO)</text>
+
+      <!-- 鋇 (Ba) - Matte, High Color influence -->
+      <circle cx="200" cy="120" r="12" fill="#6c6654" />
+      <text x="200" y="100" font-family="sans-serif" font-size="14" font-weight="bold" fill="#39372f" text-anchor="middle">鋇 (BaO)</text>
+
+      <!-- 鍶 (Sr) - Matte to semi-gloss, Moderate Color influence -->
+      <circle cx="250" cy="160" r="12" fill="#6c6654" />
+      <text x="250" y="140" font-family="sans-serif" font-size="14" font-weight="bold" fill="#39372f" text-anchor="middle">鍶 (SrO)</text>
+
+      <!-- 鋅 (Zn) - Glossy (Crystalline), High Color influence -->
+      <circle cx="450" cy="100" r="12" fill="#6c6654" />
+      <text x="450" y="80" font-family="sans-serif" font-size="14" font-weight="bold" fill="#39372f" text-anchor="middle">鋅 (ZnO)</text>
+
+      <!-- Note -->
+      <text x="300" y="380" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="middle">* 此矩陣為高溫(1230°C以上)氧化燒條件下的典型表現趨勢。</text>
+    </svg>
+  </div>
+
+  <h2>一、RO 類金屬在塞格爾釉式中的關鍵地位</h2>
+  <p>在陶藝釉藥的化學宇宙中，RO 代表的是鹼土金屬（Alkaline Earth Metals）以及部分的二價過渡金屬。與極端活潑、隨時準備溶解矽酸鹽的鹼金屬（R₂O）不同，RO 類金屬有著截然不同的脾氣與物理貢獻。理解它們的行為模式，是陶藝家邁向精準控制釉面質感的必經之路。</p>
+
+  <h3>1. RO 類與 R₂O 類助熔劑的根本差異</h3>
+  <p>在塞格爾釉式中，R₂O（鉀、鈉、鋰）與 RO（鈣、鎂、鋇、鍶、鋅）共同組成了總和為 1.0 莫耳的助熔劑群體。最大的差異在於「熔融的溫度節點」。R₂O 類金屬在相對較低的溫度（如 1050°C）就開始劇烈作用；而絕大多數的 RO 類原料，在低溫階段幾乎只是以固體粉末的形態懸浮在熔體中。這也就是為什麼，如果您把高溫配方放進低溫窯裡燒，釉面會顯得乾澀且佈滿白粉，因為那些鈣與鎂根本還沒甦醒。</p>
+
+  <h3>2. 高溫環境下的強效助熔表現</h3>
+  <p>然而，當窯爐溫度突破 1150°C，甚至逼近 1250°C 時，RO 類金屬便會發生戲劇性的轉變。此時，它們與二氧化矽結合的矽酸鹽結構會迅速崩解並液化，展現出極端強大的助熔能力。在高溫配方中，RO 類通常佔據了助熔劑 1.0 總量中的 0.7 甚至 0.8。它們的大量存在，確保了釉藥在高溫下能完全成熟，並形成緻密交織的立體玻璃網絡。</p>
+
+  <h3>3. 提升釉面硬度與化學穩定性的核心</h3>
+  <p>為什麼我們不乾脆全部用 R₂O 來做釉，要在高溫時引入這麼多 RO 金屬呢？答案是「硬度」與「耐用性」。過高的鉀與鈉會讓玻璃變得極為脆弱，容易被餐具刮傷，甚至被果汁中的酸性物質侵蝕。而鈣、鎂等二價金屬，由於其離子鍵結力強，冷卻後能大幅提升玻璃層的抗拉強度與抗化學腐蝕能力。對於日常使用的馬克杯與餐盤來說，充足的 RO 類原料是確保食安與釉面壽命的絕對核心。</p>
+
+  <h2>二、鈣質原料：最普及的高溫透明釉基石</h2>
+  <p>鈣（Ca）是地球上最豐富的元素之一，也是陶藝歷史上使用最久、最為普及的釉藥助熔劑。無論是傳統的東方青瓷，還是現代西方的透明食器釉，幾乎都脫離不了鈣的支撐。它能創造出堅硬、透明且耐磨的完美表面。</p>
+
+  <h3>1. 碳酸鈣與石灰石的普遍應用</h3>
+  <p>在工作室中，我們最常使用的鈣來源是「碳酸鈣（Calcium Carbonate, CaCO₃）」，或是天然開採研磨的「石灰石（Limestone）」。當碳酸鈣在窯爐內加熱至 800°C 左右時，會釋放出二氧化碳（CO₂），留下純粹的氧化鈣（CaO）與矽酸網絡結合。適量的鈣在高溫下能使釉面具有優異的流動性與極佳的光澤，且對色彩金屬（如鐵、鈷）的發色影響較為中立，是調配基礎透明釉的首選材料。</p>
+
+  <h3>2. 輕質碳酸鈣的懸浮特性與釉漿調整</h3>
+  <p>您在原料行可能會看到一種名為「輕質碳酸鈣（Precipitated Calcium Carbonate）」的產品。它與一般重質碳酸鈣在化學成分上完全相同，差異在於它是透過化學沉澱法人工合成的，粉末極端細緻且蓬鬆。這種物理特性能大幅改善釉漿在桶內的「懸浮性」。如果您調配的釉漿很容易沉澱到底部結成硬塊，將配方中的部分碳酸鈣替換為輕質碳酸鈣，就能有效讓粉末均勻懸浮於水中，便於施釉操作。</p>
+
+  <h3>3. 矽灰石（Wollastonite）：自帶矽酸鹽的特殊選擇</h3>
+  <p>除了碳酸鈣，另一種優秀的鈣質原料是「矽灰石（Wollastonite, CaSiO₃）」。矽灰石本身就是天然的矽酸鈣礦物，它的優勢在於：由於不含碳酸根，燒製過程中不會釋放二氧化碳氣體。這對於容易產生針孔或氣泡的高溫快燒工業陶瓷，或是黏度極高的藝術釉藥來說，是極佳的替代方案。此外，矽灰石呈針狀結晶，混入胎土中還能有效提升素坯的乾燥強度並降低收縮率。</p>
+
+  <h2>三、鎂質原料：溫潤霧面與高溫強度的創造者</h2>
+  <p>如果說鈣帶來的是晶瑩剔透的光澤，那麼鎂（Mg）帶來的就是如奶油般絲滑的霧面質感。鎂質原料是現代陶藝家在追求低調、內斂、不反光表面時，最為倚重的秘密武器。</p>
+
+  <h3>1. 滑石（Talc）與氧化鎂的物理特性</h3>
+  <p>「滑石（Talc, 3MgO·4SiO₂·H₂O）」是釉藥中最常見的鎂質來源。滑石是一種質地極軟的含水矽酸鎂礦物。當滑石加入高溫釉中，氧化鎂（MgO）便會展現出它極高的熔點特性。氧化鎂不易完全溶於液態玻璃中，而是會與矽結合，形成無數微細的矽酸鎂晶體散佈在釉層中。這些微晶體會漫射光線，破壞原本平滑如鏡的反光，從而產生出極度細膩、摸起來溫潤柔和的「鎂質霧面（Magnesium Matte）」。</p>
+
+  <h3>2. 輕質碳酸鎂的強烈收縮與縮釉特效</h3>
+  <p>另一種常見的鎂來源是「碳酸鎂（Magnesium Carbonate）」，特別是「輕質碳酸鎂」。輕質碳酸鎂極度蓬鬆，具有非常驚人的吸水量與乾燥收縮率。如果您在配方中加入超過 15% 的輕質碳酸鎂，釉漿在素坯上乾燥時就會因為過度收縮而嚴重龜裂。燒成後，這些裂痕會向內蜷縮，露出底下的土胎，形成猶如動物斑紋或乾旱大地的「縮釉（Crawling Glaze）」特效。這是藝術陶藝中非常經典的肌理表現手法。</p>
+
+  <h3>3. 鎂質霧面釉的微觀結晶機制</h3>
+  <p>與鋁質霧面（因氧化鋁未完全熔化而產生的粗糙霧面）不同，鎂質霧面本質上是一種「微結晶釉」。這意味著降溫的速度會強烈影響霧面的質感。如果您將含有高量滑石的釉藥快速冷卻，鎂來不及結晶，釉面可能會顯得半透明甚至帶有光澤；唯有在最高溫後進行適當的緩冷或持溫，讓矽酸鎂微晶有充足的時間生長，才能獲得最完美的絲絨般奶油觸感。此外，鎂還能極大幅度地提升釉面的硬度與抗磨損能力。</p>
+
+  <h2>四、白雲石（Dolomite）：鈣與鎂的天然完美複合礦物</h2>
+  <p>在地球的地質演化中，鈣與鎂這對兄弟經常結伴而行。當這兩種元素在石灰岩地層中經過長時間的置換反應，便形成了陶藝界中廣受歡迎的複合礦物——白雲石。</p>
+
+  <h3>1. 白雲石的礦物結構與鈣鎂比例</h3>
+  <p>白雲石（Dolomite，CaCO₃·MgCO₃）是碳酸鈣與碳酸鎂的天然雙鹽礦物。在理想狀態下，白雲石提供了 1 莫耳的鈣與 1 莫耳的鎂，比例接近完美的 1:1。這種天然的共生結構，使得白雲石在高溫窯爐中的表現，比我們人工將純碳酸鈣與純碳酸鎂混合在一起還要均勻且優異。由於它同時兼具了鈣的強效助熔流動性與鎂的霧面結晶特性，使得白雲石成為調配霧面釉時最為方便的基礎原料。</p>
+
+  <h3>2. 創造絲滑霧面與奶油質感的絕佳配方</h3>
+  <p>如果您想設計一款手感極佳的「奶油白霧面釉（Buttery Matte Glaze）」，白雲石絕對是配方中的主角。在 1230°C 的環境下，將白雲石的比例拉高至 15% 到 25%，搭配適量的長石與高嶺土，高溫時液態釉會變得相當黏稠。冷卻後，表面會呈現出不透光、帶有些微乳白色調的極致霧面。這種質地非常適合用來表現器皿的立體造型，並且不易留下指紋。</p>
+
+  <h3>3. 實務配方中取代單一鈣鎂的計算技巧</h3>
+  <p>在工作室中，我們常遇到配方缺料的情況。如果原始配方中同時有碳酸鈣與滑石，您可以使用白雲石來進行替換。但請注意，這必須依賴「塞格爾釉式」進行分子量的重新計算，因為白雲石同時引入了鈣與鎂，而滑石還帶入了額外的矽酸。不能單純用重量替換，必須透過軟體精確計算，確保 RO 類中鈣與鎂的莫耳比例維持不變，才能成功複製出相同的釉面光澤。</p>
+
+  <h2>五、鋇質原料：危險卻迷人的色彩干涉者</h2>
+  <p>鋇（Barium）在陶藝材料學中是一個充滿爭議與魅力的元素。它有著顯著的毒性風險，但在某些特定的藝術發色與極端霧面質感的表現上，卻又有著其他元素難以企及的魔力。</p>
+
+  <h3>1. 碳酸鋇的助熔特性與霧面效果</h3>
+  <p>鋇主要透過「碳酸鋇（Barium Carbonate, BaCO₃）」引入釉中。鋇的原子量極大，在低溫時完全是個頑固的耐火物，極易造成釉面乾澀。但當溫度突破 1200°C 後，鋇會發揮出強勁的助熔效果。大量添加碳酸鋇（如 20% 以上）時，它會形成一種獨特且極端乾燥的「鋇質霧面（Barium Matte）」。這種霧面缺乏鎂質霧面的絲滑感，反而帶有一種冷峻、甚至如石頭般的粗獷質感，常被雕塑家運用於立體作品的表面裝飾。</p>
+
+  <h3>2. 鋇對銅元素的強烈色彩催化（如鋇銅藍）</h3>
+  <p>鋇之所以讓許多陶藝家趨之若鶩，是因為它對「氧化銅」有著不可思議的催化作用。在傳統的高鈣或高鎂釉中，銅在氧化燒下通常呈現出無聊的綠色。但是，如果您在配方中加入大量的碳酸鋇，鋇會劇烈干涉銅離子的電子軌域，使其發出極端飽和、帶有強烈螢光感的「鋇銅藍（Barium Blue）」或深邃的孔雀綠。這種濃烈的色彩是其他任何無毒替代品都難以完全百分之百復刻的。</p>
+
+  <h3>3. 鋇的毒性風險與安全操作規範</h3>
+  <p>美麗往往伴隨著危險。碳酸鋇具有劇毒，人體若誤食會引起嚴重的肌肉痙攣甚至危及生命。更重要的是，即使燒成了釉面，如果配方中矽鋁比例不足，鋇離子極容易被酸性食物（如檸檬汁、咖啡）溶出。因此，**絕對禁止將含有高比例鋇的釉藥使用於任何食用食器內部**。在調配含有碳酸鋇的釉漿時，也必須全程佩戴 N95 等級以上的防塵口罩，並嚴格清洗雙手與工具。</p>
+
+  <h2>六、鍶質原料：安全且優異的鋇替代品</h2>
+  <p>由於碳酸鋇的毒性疑慮與食安法規的趨嚴，現代陶藝界致力於尋找安全的替代方案。而元素週期表中與鋇同屬於鹼土金屬、化學性質極為相近的「鍶（Strontium）」，便順理成章地成為了最佳救星。</p>
+
+  <h3>1. 碳酸鍶的化學特性與無毒優勢</h3>
+  <p>鍶通常以「碳酸鍶（Strontium Carbonate, SrCO₃）」的形式使用。鍶最大的優點，就是它在人體內沒有像鋇那樣的強烈毒性，使用起來極為安全。在高溫環境下，碳酸鍶的行為模式與碳酸鋇高度重疊，它同樣具備強勁的助熔能力，且能促使釉藥形成細緻的霧面質感，並提升玻璃層的抗刮硬度。</p>
+
+  <h3>2. 鍶在霧面釉中的表現與鋇的差異</h3>
+  <p>雖然鍶被視為鋇的替代品，但兩者在燒成結果上仍有微妙的差異。鍶產生的霧面通常比鋇來得稍微「溫潤」一些，帶有微弱的光澤，不如鋇那般乾澀。在色彩干涉方面，鍶同樣能促進銅的藍綠色發色，但其藍色的飽和度與深度，通常會比原版的「鋇銅藍」略遜一籌。儘管如此，對於講求安全的實用食器而言，使用碳酸鍶來創造迷人的霧面藍綠色，已是現代配方的最佳解方。</p>
+
+  <h3>3. 如何在釉式中精準替換鋇與鍶</h3>
+  <p>若您手邊有一份經典的鋇霧面釉配方想改為安全版本，請切記「不能使用重量直接 1:1 替換」。因為鋇的原子量（137）遠大於鍶（87.6）。如果您直接用相同重量的碳酸鍶替換碳酸鋇，會導致釉式中的 RO 莫耳數暴增，釉藥可能會因為過度助熔而變成高光澤的流動液體，完全喪失霧面效果。正確的做法是，將原配方中 BaO 的「莫耳數」直接替換為等量的 SrO 莫耳數（通常換算下來，碳酸鍶的重量會只有碳酸鋇的 3/4 左右）。</p>
+
+  <h2>七、鋅質原料：從平滑無瑕到絢麗結晶</h2>
+  <p>鋅（Zinc）在 RO 類家族中是個極為特殊的存在。它不屬於傳統的鹼土金屬，而是過渡金屬，這使得它的助熔行徑與光學表現獨樹一格。少量使用時它是平滑釉面的好幫手；大量使用時，它卻能創造出陶瓷史上最令人驚嘆的視覺奇觀——結晶釉。</p>
+
+  <h3>1. 氧化鋅與煆燒氧化鋅的收縮率差異</h3>
+  <p>在工作室中，我們使用的是「氧化鋅（Zinc Oxide, ZnO）」。純淨的生氧化鋅粉末極端細緻且蓬鬆，吸水量極大。如果直接大量加入釉漿中，會導致釉層在素坯上乾燥時產生嚴重龜裂與脫落。為了解決這個問題，廠商會將氧化鋅預先用高溫素燒，使其收縮並轉變為密度較高的「煆燒氧化鋅（Calcined Zinc Oxide）」。在調配含有超過 5% 鋅的配方時，強烈建議使用煆燒過的氧化鋅以確保釉漿的物理穩定性。</p>
+
+  <h3>2. 中高溫下的強效助熔與減少針孔作用</h3>
+  <p>在中高溫（1180°C - 1250°C）配方中，少量的氧化鋅（約 2% - 5%）是非常優異的輔助助熔劑。它不僅能降低熔點，更神奇的是，鋅能極大幅度地降低液態玻璃的表面張力。這使得釉藥在高溫下變得更具延展性，能夠輕易撫平素坯排氣時留下的氣孔，是解決釉面「針孔」與「橘皮」瑕疵的特效藥。此外，少量的鋅能增加透明釉的光澤度與折射率，使其看起來更加通透晶瑩。</p>
+
+  <h3>3. 矽酸鋅大結晶釉的絕對核心成因</h3>
+  <p>當我們將配方中的氧化鋅比例瘋狂拉高（通常佔總重量的 25% 甚至 30% 以上），並且刻意降低氧化鋁（高嶺土）的含量時，奇蹟就會發生。在高溫完全熔融後，我們將窯溫降至約 1050°C - 1100°C 並持溫數小時。此時，過飽和的鋅原子會與二氧化矽結合，以鈦或鉬為晶核，在釉面上瘋狂生長出肉眼可見的、宛如冰花或扇葉般的「矽酸鋅大型結晶」。這就是大名鼎鼎的結晶釉（Crystalline Glaze），而氧化鋅正是這場華麗演出的絕對核心。</p>
+
+  <h2>八、綜合應用與配方調整策略</h2>
+  <p>了解了鈣、鎂、鋇、鍶、鋅的各自個性後，我們在調配釉藥時，不應該只偏執於單一一種原料。高階的配方設計，往往是多種 RO 金屬精巧平衡的藝術。</p>
+
+  <h3>1. 多重 RO 原料的共熔效應（Eutectic Effect）</h3>
+  <p>大自然的物理法則告訴我們，混合物的熔點往往低於其單一成分。在塞格爾釉式的 1.0 助熔劑總額中，如果您將 RO 的部分（假設為 0.7 莫耳）全部只用鈣，其熔點會相當高。但如果您將這 0.7 拆分成 0.4 的鈣、0.2 的鎂、與 0.1 的鋅，這種複合配方會因為「共熔效應」，在更低的溫度下就能產生平滑緻密的熔體，且綜合了鈣的硬度、鎂的溫潤與鋅的平滑，大幅提升了釉面的整體品質。</p>
+
+  <h3>2. 根據燒成溫度選擇適合的二價金屬</h3>
+  <p>不同的 RO 金屬，其發揮實力的溫度帶不盡相同。在設計 1230°C（Cone 6）以上的配方時，鈣與鎂絕對是首選的主力骨幹；但如果您受限於設備，只能燒製 1150°C 左右的中低溫，這時鈣鎂的助熔力就會顯得疲軟。此時，您應該適度降低鈣的比例，轉而引入更多在較低溫就能活躍的鋅，或是依賴 R₂O 類（鋰、鉀）與硼系原料來補足助熔力不足的問題。</p>
+
+  <h3>3. 測試與紀錄：建立專屬的釉藥資料庫</h3>
+  <p>二價金屬對釉面質感的影響極其敏感。有時候僅僅是將碳酸鈣增加 3%，或是把滑石替換成白雲石，都會讓原本光亮的透明釉瞬間轉為乳白霧面。建議各位創作者在測試新配方時，採用「線條測試法（Line Blend）」，以單一 RO 變數進行 5% 到 10% 的遞增測試，並詳細記錄每一片試片的燒成溫度與厚薄表現。唯有透過系統性的科學記錄，才能將這些複雜的化學變化，內化為您創作時得心應手的強大工具。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">RO 類金屬原料常見問答 FAQ</div>
+    <p><strong>Q：為什麼我的高溫霧面釉配方，燒出來卻是亮面的？</strong><br>
+    A：有兩個可能原因。第一是「窯溫太高」導致鎂或鈣完全熔入玻璃中無法析出微晶體；第二是「冷卻太快」，霧面釉需要時間生長微晶體，如果窯爐降溫過於迅速，玻璃結構會被凍結在光澤狀態。建議在最高溫後設定 30 分鐘的緩冷程序。</p>
+    <p><strong>Q：食用的碗盤可以用含有鋅的釉藥嗎？</strong><br>
+    A：少量的鋅（5%以下）作為輔助助熔劑，燒成平滑的透明釉是安全的。但若是大面積的「結晶釉」，由於為了促使結晶生長，配方中嚴重缺乏穩定劑（氧化鋁），這類釉面的抗酸鹼能力極弱，重金屬極易溶出，不建議作為盛裝熱食或酸性飲料的實用餐具。</p>
+    <p><strong>Q：買不到矽灰石，可以用碳酸鈣加石英粉取代嗎？</strong><br>
+    A：從最終化學組成來看是可以的。矽灰石（CaSiO₃）就等於氧化鈣加上二氧化矽。您可以透過釉式計算軟體，用碳酸鈣與石英粉來補足相對應的莫耳數。但請注意，使用碳酸鈣會在窯內產生氣體，且失去矽灰石獨特的針狀結晶物理特性，釉漿的收縮與排氣狀態會有些許不同。</p>
+    <p><strong>Q：如果要修復很容易流釉的配方，該增加哪種 RO 原料？</strong><br>
+    A：如果釉藥太稀、容易流掛，通常是因為助熔劑（特別是鹼金屬鈉鉀）過多。您可以嘗試增加「高嶺土」來提升黏度，或是增加高熔點的「鈣（碳酸鈣）」與「鎂（滑石）」來抑制高溫時的過度流動，讓釉面更加挺立。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>
