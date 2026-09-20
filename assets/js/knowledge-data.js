@@ -148,9 +148,18 @@ const knowledgeTree = [
    { id: "glaze_basics-37", title: "不同種類熔塊（Frit）的應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-37.html" },
    { id: "glaze_basics-38", title: "熔塊（Frit）在釉藥配方計算中的角色", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-38.html" },
    { id: "glaze_basics-39", title: "熔塊（Frit）的化學組成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-39.html" },
-   { id: "glaze_basics-40", title: "如何從輕鬆從生活中取得熔塊（Frit）", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-40.html" }
+   { id: "glaze_basics-40", title: "如何從輕鬆從生活中取得熔塊（Frit）", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-40.html" },
 
-
+   { id: "glaze_basics-41", title: "認識「SiO₂／Al₂O₃ 線性圖」", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-41.html" },
+   { id: "glaze_basics-42", title: "什麼是 SiO₂／Al₂O₃ 比例？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-42.html" },
+   { id: "glaze_basics-43", title: "SiO₂／Al₂O₃ 比例計算公式", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-43.html" },
+   { id: "glaze_basics-44", title: "SiO₂／Al₂O₃線性圖表示法", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-44.html" },
+   { id: "glaze_basics-45", title: "如何閱讀 SiO₂／Al₂O₃ 線性圖？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-45.html" },
+   { id: "glaze_basics-46", title: "實際案例：從配方到線性圖", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-46.html" },
+   { id: "glaze_basics-47", title: "SiO₂／Al₂O₃比例與釉藥性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-47.html" },
+   { id: "glaze_basics-48", title: "SiO₂／Al₂O₃線性圖上的釉藥配方比較", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-48.html" },
+   { id: "glaze_basics-49", title: "SiO₂／Al₂O₃比例不能單獨判斷釉藥", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-49.html" },
+   { id: "glaze_basics-50", title: "SiO₂／Al₂O₃線性圖的實際應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-50.html" }
 
 
         ]
