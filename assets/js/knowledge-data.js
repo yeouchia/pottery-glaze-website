@@ -170,8 +170,15 @@ const knowledgeTree = [
   { id: "glaze_basics-57", title: "磷系原料／P₂O₅", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-57.html" },
   { id: "glaze_basics-58", title: "釉藥的著色氧化物", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-58.html" },
   { id: "glaze_basics-59", title: "特殊功能與特殊效果原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-59.html" },
-  { id: "glaze_basics-60", title: "陶瓷顏料與色料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-60.html" }
+  { id: "glaze_basics-60", title: "陶瓷顏料與色料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-60.html" },
  
+
+  { id: "glaze_basics-61", title: "釉藥的種類", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-61.html" },
+  { id: "glaze_basics-62", title: "透明釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-62.html" },
+  { id: "glaze_basics-63", title: "半透明釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-63.html" },
+  { id: "glaze_basics-64", title: "不透明釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-64.html" },
+  { id: "glaze_basics-65", title: "乳濁釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-65.html" }
+
 
 
 
