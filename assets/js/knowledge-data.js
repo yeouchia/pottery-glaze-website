@@ -159,7 +159,21 @@ const knowledgeTree = [
    { id: "glaze_basics-47", title: "SiO₂／Al₂O₃比例與釉藥性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-47.html" },
    { id: "glaze_basics-48", title: "SiO₂／Al₂O₃線性圖上的釉藥配方比較", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-48.html" },
    { id: "glaze_basics-49", title: "SiO₂／Al₂O₃比例不能單獨判斷釉藥", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-49.html" },
-   { id: "glaze_basics-50", title: "SiO₂／Al₂O₃線性圖的實際應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-50.html" }
+   { id: "glaze_basics-50", title: "SiO₂／Al₂O₃線性圖的實際應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-50.html" },
+
+  { id: "glaze_basics-51", title: "釉藥原料的基本認識", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-51.html" },
+  { id: "glaze_basics-52", title: "鹼金屬類／R₂O 原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-52.html" },
+  { id: "glaze_basics-53", title: "RO 類／鹼土與二價金屬原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-53.html" },
+  { id: "glaze_basics-54", title: "Al₂O₃／鋁質與中間體原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-54.html" },
+  { id: "glaze_basics-55", title: "硼系原料／B₂O₃", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-55.html" },
+  { id: "glaze_basics-56", title: "SiO₂／RO₂ 類網絡形成與特殊氧化物", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-56.html" },
+  { id: "glaze_basics-57", title: "磷系原料／P₂O₅", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-57.html" },
+  { id: "glaze_basics-58", title: "釉藥的著色氧化物", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-58.html" },
+  { id: "glaze_basics-59", title: "特殊功能與特殊效果原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-59.html" },
+  { id: "glaze_basics-60", title: "陶瓷顏料與色料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-60.html" }
+ 
+
+
 
 
         ]
