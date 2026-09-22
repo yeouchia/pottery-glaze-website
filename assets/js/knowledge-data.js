@@ -173,13 +173,49 @@ const knowledgeTree = [
   { id: "glaze_basics-60", title: "陶瓷顏料與色料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-60.html" },
  
 
-  { id: "glaze_basics-61", title: "釉藥的種類", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-61.html" },
-  { id: "glaze_basics-62", title: "透明釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-62.html" },
-  { id: "glaze_basics-63", title: "半透明釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-63.html" },
-  { id: "glaze_basics-64", title: "不透明釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-64.html" },
-  { id: "glaze_basics-65", title: "乳濁釉", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-65.html" }
+  { id: "glaze_basics-61", title: "釉藥的種類與全面解析", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-61.html" },
+  { id: "glaze_basics-62", title: "釉藥的基礎釉類", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-62.html" },
+  { id: "glaze_basics-63", title: "依釉面效果分類", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-63.html" },
+  { id: "glaze_basics-64", title: "釉藥的溫度與氣氛", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-64.html" },
+  { id: "glaze_basics-65", title: "釉藥的表面質感", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-65.html" },
+
+  { id: "glaze_basics-66", title: "釉藥的燒成", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-66.html" },
+  { id: "glaze_basics-67", title: "釉藥的特性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-67.html" },
+  { id: "glaze_basics-68", title: "釉藥的特性-透明性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-68.html" },
+  { id: "glaze_basics-69", title: "釉藥的特性-乳濁性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-69.html" },
+  { id: "glaze_basics-70", title: "釉藥的特性-光澤與霧面", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-70.html" },
+
+  { id: "glaze_basics-71", title: "釉藥的熔融性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-71.html" },
+  { id: "glaze_basics-72", title: "釉藥的流動性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-72.html" },
+  { id: "glaze_basics-73", title: "釉藥的黏度", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-73.html" },
+  { id: "glaze_basics-74", title: "釉藥的表面張力", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-74.html" },
+  { id: "glaze_basics-75", title: "釉藥的收縮與膨脹", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-75.html" },
+  { id: "glaze_basics-76", title: "釉藥與坯體的適合性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-76.html" },
+  { id: "glaze_basics-77", title: "釉藥的結晶", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-77.html" },
+  { id: "glaze_basics-78", title: "釉藥的失透", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-78.html" },
+  { id: "glaze_basics-79", title: "釉面質感的形成", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-79.html" },
 
 
+
+
+  { id: "glaze_basics-80", title: "釉藥的呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-80.html" },
+  { id: "glaze_basics-81", title: "為什麼釉藥會有顏色？", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-81.html" },
+  { id: "glaze_basics-82", title: "釉藥呈色的基本原理", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-82.html" },
+  { id: "glaze_basics-83", title: "金屬氧化物與呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-83.html" },
+  { id: "glaze_basics-84", title: "氧化鐵呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-84.html" },
+  { id: "glaze_basics-85", title: "氧化銅呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-85.html" },
+  { id: "glaze_basics-86", title: "氧化鈷呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-86.html" },
+  { id: "glaze_basics-87", title: "氧化鉻呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-87.html" },
+  { id: "glaze_basics-88", title: "二氧化錳呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-88.html" },
+  { id: "glaze_basics-89", title: "其他金屬氧化物呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-89.html" },
+  { id: "glaze_basics-90", title: "釉藥發色劑與色料呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-90.html" },
+
+  { id: "glaze_basics-91", title: "氧化燒與還原燒的呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-91.html" },
+  { id: "glaze_basics-92", title: "陶土與瓷土對釉的呈色影響", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-92.html" },
+  { id: "glaze_basics-93", title: "釉中結晶與呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-93.html" },
+  { id: "glaze_basics-94", title: "基礎色釉的調製概念", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-94.html" },
+  { id: "glaze_basics-95", title: "釉藥施用與調製", tag: "釉藥的應用", url: "./book/glaze_basics/glaze_basics-95.html" },
+  { id: "glaze_basics-96", title: "釉藥燒成與變化", tag: "釉藥的燒成", url: "./book/glaze_basics/glaze_basics-96.html" }
 
 
 
