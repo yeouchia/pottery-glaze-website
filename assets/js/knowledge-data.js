@@ -225,10 +225,42 @@ const knowledgeTree = [
         category: "窯燒知識",
         icon: "fa-fire-burner",
         articles: [
-            { id: "firing-1", title: "燒窯溫度曲線設計", tag: "實務操作", url: "./book/firing/firing-1.html" },
-            { id: "firing-2", title: "什麼是素燒與釉燒？", tag: "燒成觀念", url: "./book/firing/firing-2.html" },
-            { id: "firing-3", title: "燒成技術~氧化燒", tag: "氣氛控制", url: "./book/firing/firing-3.html" },
-            { id: "firing-4", title: "燒成技術~還原燒", tag: "氣氛控制", url: "./book/firing/firing-4.html" }
+     
+   { id: "firing-1", title: "窯爐與釉燒", tag: "窯爐與釉燒", url: "./book/firing/firing-1.html" },    
+   { id: "firing-2", title: "釉藥加熱後的變化", tag: "窯爐與釉燒", url: "./book/firing/firing-2.html" }, 
+   { id: "firing-3", title: "釉藥的熔融與玻璃化過程", tag: "窯爐與釉燒", url: "./book/firing/firing-3.html" }, 
+   { id: "firing-4", title: "釉藥與坯體的反應", tag: "窯爐與釉燒", url: "./book/firing/firing-4.html" }, 
+   { id: "firing-5", title: "釉藥未燒熟、成熟、過熟(火)", tag: "窯爐與釉燒", url: "./book/firing/firing-5.html" }, 
+   { id: "firing-6", title: "窯爐燒成溫度對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-6.html" }, 
+   { id: "firing-7", title: "窯爐燒成氣氛對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-7.html" }, 
+   { id: "firing-8", title: "燒成曲線對釉面的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-8.html" }, 
+   { id: "firing-9", title: "保溫對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-9.html" }, 
+   { id: "firing-10", title: "冷卻速度與釉面變化", tag: "窯爐與釉燒", url: "./book/firing/firing-10.html" }, 
+
+
+   { id: "firing-11", title: "結晶形成", tag: "窯爐與釉燒", url: "./book/firing/firing-11.html" },    
+   { id: "firing-12", title: "坯釉適合性與燒成", tag: "窯爐與釉燒", url: "./book/firing/firing-12.html" }, 
+   { id: "firing-13", title: "常見陶藝窯爐種類與特性解析", tag: "認識窯爐", url: "./book/firing/firing-13.html" }, 
+   { id: "firing-14", title: "如何選購適合的窯爐", tag: "認識窯爐", url: "./book/firing/firing-14.html" }, 
+   { id: "firing-15", title: "客製化窯爐需求", tag: "認識窯爐", url: "./book/firing/firing-15.html" }, 
+   { id: "firing-16", title: "電窯基本結構與運作原理", tag: "認識窯爐", url: "./book/firing/firing-16.html" }, 
+   { id: "firing-17", title: "瓦斯窯基本結構與運作原理", tag: "認識窯爐", url: "./book/firing/firing-17.html" }, 
+
+
+
+
+   { id: "firing-21", title: "燒窯溫度曲線設計", tag: "窯爐燒成技術", url: "./book/firing/firing-21.html" },
+   { id: "firing-22", title: "什麼是素燒與釉燒？", tag: "窯爐與釉燒", url: "./book/firing/firing-22.html" },
+   { id: "firing-23", title: "燒成技術~氧化燒", tag: "窯爐燒成技術", url: "./book/firing/firing-23.html" },
+   { id: "firing-24", title: "燒成技術~還原燒", tag: "窯爐燒成技術", url: "./book/firing/firing-24.html" }
+
+
+
+
+
+
+
+
         ]
     },
     {
