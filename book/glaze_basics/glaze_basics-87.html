@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釉藥的呈色：陶瓷世界裡的變色龍「氧化鉻」</title>
+<meta name="description" content="深入探討陶藝釉藥中「氧化鉻」的呈色原理。從經典的不透明鉻綠、神奇的鉻錫粉紅，到遇見鋅的棕褐色轉變，全面解析這位釉藥化學中的變色龍與配方技巧。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     ========================================= */
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  
+  .chart-container {
+    background: #fffdf8;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+    text-align: center;
+  }
+
+  /* 相關文章按鈕卡片設計 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥的呈色｜金屬氧化物</div>
+  <span class="eyebrow">基礎與進階釉藥理論</span>
+  <h1>釉藥的呈色：陶瓷世界裡的變色龍「氧化鉻」</h1>
+  
+  <div class="lead">
+    <strong>專家引言：</strong>在陶藝的色彩煉金術中，「氧化鉻」絕對是一位個性鮮明且充滿戲劇性的角色。如果您以為它只能帶來軍綠色或沉悶的草綠色，那可就太小看這位釉藥化學中的「變色龍」了。氧化鉻（Cr₂O₃）本身是一種極度耐火、難以熔融的綠色粉末，當它單獨存在於標準釉藥中時，確實會呈現出遮蔽力極強、不透明的厚重鉻綠色。然而，這只是它的第一層面貌。當氧化鉻在配方中與其他特定的化學元素相遇時，便會觸發令人驚嘆的色彩突變：遇見了氧化錫與高鈣環境，它能奇蹟般地轉化為嬌豔欲滴的粉紅色與寶石紅；若不小心碰上了氧化鋅，它又會瞬間黯淡，變成充滿大地氣息的棕褐色。本文將為您全面解析氧化鉻這充滿驚喜的發色機制，帶您精準掌握這位多變的色彩魔術師。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">釉藥的呈色</span><span class="tag">氧化鉻</span><span class="tag">鉻綠</span><span class="tag">鉻錫粉紅</span><span class="tag">不透明釉</span><span class="tag">釉藥化學</span><span class="tag">金屬發色</span><span class="tag">窯變</span>
+  </div>
+
+  <h2>一、氧化鉻的基本特性與陶藝應用歷史</h2>
+  <p>要駕馭氧化鉻的多變性，首先必須了解它在物理與化學上的原始樣貌。與銅、鈷等活躍的媒熔劑不同，氧化鉻是一位難以撼動的「硬漢」。</p>
+  
+  <h3>1. 什麼是氧化鉻？高溫中的穩定守護者</h3>
+  <p>氧化鉻（Chromium(III) Oxide，化學式 Cr₂O₃）在常溫下是一種非常細緻的暗綠色粉末。它在陶瓷化學中最顯著的物理特徵是「極高的熔點」（高達 2435°C），這遠遠超出了所有傳統陶藝窯爐的燒成極限。這意味著，當氧化鉻被加入釉漿中並送入 1200°C 的窯爐時，它並不會像氧化銅或氧化鈷那樣輕易地融化並完全溶解於玻璃網絡中。相反地，大量的細微鉻顆粒會懸浮在熔融的釉藥中，這種特性直接決定了鉻釉極強的「不透明度」與厚重感。</p>
+
+  <h3>2. 陶瓷工業與工藝史上的鉻綠應用</h3>
+  <p>由於氧化鉻極度耐高溫且不易揮發，它在工業陶瓷與建築磁磚上的應用非常廣泛。早在 19 世紀，歐洲的陶瓷工廠就開始大量使用氧化鉻來印製綠色的裝飾圖案，因為無論窯火如何猛烈，它都不會暈開或褪色。在藝術陶瓷領域，由於純粹的鉻綠有時顯得過於生硬，陶藝家們經過漫長的試驗，發現將其與微量的鈷、鐵等元素混合，能創造出更柔和、貼近自然植物的綠色，成為了花盆與戶外陶藝品的經典用色。</p>
+
+  <h3>3. 氧化鉻的耐火度對釉面質感的影響</h3>
+  <p>正是因為氧化鉻難以熔融，它在釉藥配方中扮演著強烈的「抗熔劑（Refractory）」角色。這表示加入過多的氧化鉻會使原本具有流動性、表面光亮的透明釉，變得黏稠、生澀甚至表面粗糙。如果在配方中添加超過 2% 的氧化鉻，燒出來的表面很可能會從亮面轉為「無光（Matte）」或「乾澀」，甚至產生細微的起泡與針孔。因此，控制添加量是調配鉻釉的首要法則。</p>
+
+  <div class="chart-container">
+    <svg viewBox="0 0 650 350" width="100%" height="100%">
+      <rect width="650" height="350" fill="#faf9f3" rx="10"></rect>
+      
+      <!-- 中心氧化鉻 -->
+      <circle cx="325" cy="175" r="45" fill="#388e3c" stroke="#2e7d32" stroke-width="3"></circle>
+      <text x="325" y="170" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">氧化鉻</text>
+      <text x="325" y="190" font-family="sans-serif" font-size="12" fill="#e8f5e9" text-anchor="middle">Cr₂O₃</text>
+      
+      <!-- 分支 1：純基礎釉 -> 綠色 -->
+      <path d="M 325 130 L 325 70" stroke="#777367" stroke-width="2" marker-end="url(#arrow)"></path>
+      <text x="335" y="110" font-family="sans-serif" font-size="12" fill="#6c6654" text-anchor="start">一般透明釉 / 高溫</text>
+      <rect x="275" y="30" width="100" height="40" fill="#2e7d32" rx="5"></rect>
+      <text x="325" y="55" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">不透明鉻綠</text>
+
+      <!-- 分支 2：加錫與鈣 -> 粉紅 -->
+      <path d="M 370 175 L 480 175" stroke="#777367" stroke-width="2" marker-end="url(#arrow)"></path>
+      <text x="385" y="165" font-family="sans-serif" font-size="12" fill="#6c6654" text-anchor="start">遇見 氧化錫 + 高鈣</text>
+      <rect x="490" y="155" width="120" height="40" fill="#e91e63" rx="5"></rect>
+      <text x="550" y="180" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">鉻錫粉紅 / 紅</text>
+
+      <!-- 分支 3：加鋅 -> 褐 -->
+      <path d="M 280 175 L 170 175" stroke="#777367" stroke-width="2" marker-end="url(#arrow)"></path>
+      <text x="260" y="165" font-family="sans-serif" font-size="12" fill="#6c6654" text-anchor="end">遇見 氧化鋅</text>
+      <rect x="40" y="155" width="120" height="40" fill="#795548" rx="5"></rect>
+      <text x="100" y="180" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">暗棕色 / 褐色</text>
+
+      <!-- 分支 4：加鉛 -> 黃 -->
+      <path d="M 325 220 L 325 280" stroke="#777367" stroke-width="2" marker-end="url(#arrow)"></path>
+      <text x="335" y="260" font-family="sans-serif" font-size="12" fill="#6c6654" text-anchor="start">遇見 氧化鉛 (低溫)</text>
+      <rect x="275" y="290" width="100" height="40" fill="#ffb300" rx="5"></rect>
+      <text x="325" y="315" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">鉻鉛橘黃</text>
+      
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#777367" />
+        </marker>
+      </defs>
+    </svg>
+    <p style="font-size:13px; color:#777367; margin-top:10px;">圖表 3：氧化鉻在不同基礎釉化學環境下的變色龍效應</p>
+  </div>
+
+  <h2>二、最經典的發色：不透明的鉻綠釉</h2>
+  <p>在沒有其他特殊元素干擾的標準基礎釉中，氧化鉻最原始、也最穩定的展現就是綠色。但這種綠色與我們熟知的氧化銅綠有著本質上的區別。</p>
+
+  <h3>1. 鉻綠發色的基本原理與添加比例</h3>
+  <p>當微量的氧化鉻（約 0.5% 至 2%）加入標準的高溫透明釉中時，會呈現出濃郁且帶有軍裝色彩的草綠色。由於它的著色力相當強，不需要添加太多就能達到色彩飽和。值得注意的是，如果添加超過 2%，不僅顏色會迅速變暗、變黑，釉面還會因為無法負荷其耐火性而失去玻璃光澤。因此，實務上如果希望得到更深邃的綠，通常是混入微量的氧化鈷，而不是無限制地增加氧化鉻的比例。</p>
+
+  <h3>2. 鉻綠與銅綠的視覺差異比較</h3>
+  <p>同樣是綠色，氧化鉻與氧化銅燒出來的質感完全不同。氧化銅在釉中會完全溶解，因此「銅綠」往往具有玻璃般的透明感與清澈度，能透出底下的陶土顏色，且容易流動；相對地，氧化鉻因為難以熔融，許多微小的鉻顆粒懸浮在釉層中干擾了光線的穿透，因此「鉻綠」呈現出強烈的「不透明性（Opacity）」。它能像油漆一樣完全覆蓋底下的土色，給人一種扎實、厚重且不流動的穩定視覺感。</p>
+
+  <h3>3. 如何調配出鮮豔而不沉悶的鉻綠</h3>
+  <p>純粹的鉻綠有時會被批評為「死板」或「塑料感太重」。陶藝家為了讓綠色更有層次，通常會採取兩種策略：第一，在配方中減少氧化鉻的用量（降至 0.5% 以下），並加入少量的氧化鈷（如 0.2%），這能調和出一種清爽明亮的薄荷綠或翡翠綠。第二，選擇含有較高比例「氧化鈣（如碳酸鈣）」的基礎釉，鈣能稍微促進鉻在玻璃質中的顯色鮮豔度，使其不那麼暗沉。</p>
+
+  <h2>三、魔法般的化學反應：鉻錫紅與粉紅釉</h2>
+  <p>這是氧化鉻最令人著迷的變身術。在陶瓷化學中，將原本是綠色的鉻，轉變為浪漫的粉紅色，被稱為「鉻錫紅（Chrome-Tin Pink）」效應。</p>
+
+  <h3>1. 鉻錫紅發色的化學機制</h3>
+  <p>這個神奇的反應需要兩位主角：極微量的「氧化鉻」與大量的「氧化錫（Tin Oxide，通常作為白色的乳濁劑）」。在高溫熔融的過程中，鉻的微小粒子會沉積在氧化錫的晶體表面上，改變了光線反射的波長。原本該反射綠光的鉻，在錫晶體的襯托下，奇蹟般地反射出粉紅、玫瑰紅甚至深酒紅色的光譜。這種色彩極度浪漫且穩定，是陶瓷工業中製作紅色系色粉（Stain）最核心的技術。</p>
+
+  <h3>2. 基礎釉配方對鉻錫紅的嚴格要求</h3>
+  <p>要成功喚醒這個粉紅魔法，條件非常嚴苛，絕不能隨便拿一個透明釉來調配。第一法則：**基礎釉中必須含有大量的鈣（Calcium，至少超過 10%）**，鈣是穩定這種紅色晶體結構的必備元素。第二法則：**絕對不能含有任何「鋅（Zinc）」**，即使是微量的鋅也會立刻破壞紅色結構，使其變成難看的灰褐色。第三法則：氧化鉻的添加量必須「極少」，通常只需 0.1% 到 0.2%，而氧化錫則需要 5% 到 8% 左右，一旦鉻加太多，粉紅色就會被自身的綠色給吞噬。</p>
+
+  <h3>3. 實務調配的比例與燒成技巧</h3>
+  <p>對於個人工作室來說，自行調配鉻錫紅是一項挑戰，因為只要秤量有微小誤差或攪拌不均，釉面就會出現紅綠夾雜的詭異斑點。因此，實務上常會先將這少量的鉻與錫加水，在研缽中研磨成極度均勻的「色漿」，再混入大桶的含鈣基礎釉中。在燒成方面，鉻錫粉紅在氧化燒與還原燒中都能存活，但氧化燒的色彩通常會更加純淨亮麗；若窯爐通風不良，有時紅色會顯得有些暗沉。</p>
+
+  <h2>四、鋅元素的干擾：從綠色到棕褐色的轉變</h2>
+  <p>如果說錫是氧化鉻的魔仙棒，那麼「鋅」就是氧化鉻的死對頭。在配方中這兩者的相遇，是許多新手配釉失敗的常見陷阱。</p>
+
+  <h3>1. 氧化鋅對氧化鉻的強烈影響</h3>
+  <p>氧化鋅（Zinc Oxide）在釉藥中常被用來增加光澤、促進熔融或降低熱膨脹率。然而，當基礎釉中含有鋅，且您又加入了氧化鉻希望得到綠色或粉紅色時，化學災難就發生了。鋅與鉻在高溫下會產生強烈的化學結合，形成一種名為「亞鉻酸鋅」的尖晶石結構。這種結構完全破壞了原本的綠色或紅色光譜，使得釉藥出窯後，呈現出混濁的卡其色、枯草色或暗褐色。</p>
+
+  <h3>2. 棕褐色釉的配方設計與應用</h3>
+  <p>雖然這種變色通常是意料之外的「失敗」，但對於經驗豐富的陶藝家來說，這反而是一種可以被利用的呈色技巧。如果您正在尋找一種充滿大地氣息、不透明且帶有粗獷質感的棕色或茶褐色，那麼刻意將「氧化鉻與氧化鋅」混合加入釉藥中，就能燒出非常穩定、具有古樸民藝風格的「鉻鋅褐釉」。這種顏色非常適合用來表現木紋肌理或秋季枯葉的創作意象。</p>
+
+  <h3>3. 避免意外變色的排窯與配方檢查</h3>
+  <p>這項化學反應提醒我們，在塗佈含有鉻綠或鉻錫粉紅的釉下彩繪顏料時，外層罩掛的「透明釉」必須極度謹慎地挑選。市面上許多現成的透明釉為了增加光澤度，都添加了氧化鋅。如果您用這種「含鋅透明釉」罩在粉紅色的彩繪上，燒出來圖案全部會變成難看的褐色。因此，**「無鋅透明釉（Zinc-Free Clear Glaze）」**是所有使用鉻系顏料創作者的必備材料。</p>
+
+  <h2>五、低溫釉中的驚喜：鉻鉛黃與橘色</h2>
+  <p>在過去的傳統低溫陶器中，氧化鉻還有一項較少為現代人所知、但色彩極度鮮豔的變身，那就是與鉛結合產生的黃色。</p>
+
+  <h3>1. 鉻與鉛結合的低溫發色原理</h3>
+  <p>當溫度設定在 1000°C 以下的低溫燒成環境，且基礎釉中含有極高比例的「氧化鉛（Lead Oxide）」時，微量的氧化鉻（約 1%）會與鉛發生反應，產生出明亮刺眼的黃色、甚至是亮橘色。這種被稱為「鉻黃（Chrome Yellow）」的呈色，在古代是少數能取得鮮豔黃色釉的穩定方法之一。其色彩的鮮豔度與陽光的金黃色極為相似，曾被大量應用於低溫彩繪與裝飾瓷磚上。</p>
+
+  <h3>2. 鉻黃顏料的歷史與毒性考量</h3>
+  <p>儘管鉻黃色彩迷人，但在現代陶藝工作室中已經幾乎絕跡。原因在於，高鉛釉本身就具有極高的重金屬溶出危險，對人體神經系統有毒害；而低溫燒成的鉻鉛化合物更是不穩定。當這些器皿接觸到酸性食物時，鉛與鉻都有極高的機率溶出。因此，基於安全考量，現代陶藝教育與實用器皿的製作，已經全面禁止使用這類鉻鉛低溫配方。</p>
+
+  <h3>3. 現代無鉛配方如何取代傳統鉻黃</h3>
+  <p>為了在不使用鉛的情況下依然能獲得鮮豔的黃色與橘色，現代的陶瓷化學家開發出了安全的替代方案。他們利用鋯（Zirconium）、釩（Vanadium）與鐠（Praseodymium）等稀土元素，在高溫下煆燒成穩定的陶瓷色粉（Stains）。這些現代色粉不僅無毒、能在高溫中生存，而且可以直接加入無鉛的高溫透明釉中，完美取代了危險的傳統鉻鉛黃，保障了創作者與使用者的健康。</p>
+
+  <h2>六、氧化鉻的覆蓋力與釉下彩應用</h2>
+  <p>氧化鉻「安分守己、不亂跑」的物理特性，使它成為製作精密繪畫顏料（釉下彩）的絕佳原料。</p>
+
+  <h3>1. 強大不透明度對底色的遮蔽效果</h3>
+  <p>由於氧化鉻在釉中是懸浮而非完全溶解，它賦予了釉藥強大的「遮蓋力（Hiding Power）」。如果您使用深色或含有大量鐵質的紅土進行創作，塗上一般的透明銅綠釉，底下的深色土會讓綠色變暗發黑；但如果您塗上的是含有氧化鉻的不透明綠釉，它能像厚實的壓克力顏料一樣，完美遮蔽底下的土色，呈現出釉藥原本純粹的綠。這對於希望在深色陶土上表現鮮豔綠色的創作者來說是一大福音。</p>
+
+  <h3>2. 鉻綠顏料在釉下彩繪中的穩定性</h3>
+  <p>在釉下彩繪（Underglaze）的技法中，創作者最怕的就是畫好的線條在高溫下暈開或模糊。氧化鉻高達兩千多度的熔點，讓它在高溫窯爐中猶如磐石般穩定。用含有氧化鉻的顏料在素坯上描繪樹葉或幾何圖案，無論燒多高溫，線條邊緣都會保持極度銳利、清晰，完全不會有類似氧化銅或氧化鈷那種「流動暈染」的現象。</p>
+
+  <h3>3. 搭配其他金屬氧化物的彩繪疊加</h3>
+  <p>因為其不流動的特性，鉻系顏料非常適合用來作為多層次彩繪的底色或邊界線。您可以先用鉻綠畫出植物的莖葉，再用鈷藍畫出花朵。即使兩者的邊緣重疊，在高溫下也不會發生混濁糊掉的情況。只要確保外層罩掛的透明釉是不含鋅的配方，氧化鉻在釉下彩繪的世界裡，絕對是一位最值得信賴、使命必達的色彩夥伴。</p>
+
+  <h2>七、燒成氣氛與氧化鉻的穩定性</h2>
+  <p>了解了配方中的化學干擾後，我們來看看窯爐內的氣氛（氧氣的多寡）對氧化鉻有何影響。</p>
+
+  <h3>1. 氧化燒與還原燒中的色彩一致性</h3>
+  <p>與氧化銅在氧化燒變綠、還原燒變紅的劇烈變化不同，氧化鉻在氣氛變化中表現得相當冷靜。無論窯爐內是充滿氧氣的「氧化燒」，還是充滿一氧化碳、剝奪氧氣的「還原燒」，鉻的綠色以及鉻錫粉紅的結構，基本上都能保持穩定不變。這意味著，如果您在同一窯中同時燒製青瓷（需還原）與鉻綠釉作品，鉻綠釉並不會因為還原氣氛而遭到破壞，這為陶藝家在排窯時提供了極大的便利性。</p>
+
+  <h3>2. 鉻元素在高溫下的低揮發性</h3>
+  <p>銅在高溫下容易氣化導致「飛銅」，但氧化鉻的揮發性極低。在標準的 1200°C 到 1250°C 燒成範圍內，氧化鉻會乖乖地留在它被塗佈的地方，不會揮發去污染旁邊純白色的作品。這種低揮發性再次印證了它作為穩定呈色劑的價值，讓創作者可以安心地將深綠色的鉻釉作品與其他淺色作品緊密排列在同一個窯板上，而不必擔心色彩互相干擾。</p>
+
+  <h3>3. 燒成曲線對鉻釉表面光澤的影響</h3>
+  <p>雖然顏色穩定，但由於氧化鉻具有抗熔性，它對「溫度」卻非常敏感。如果在燒成時溫度不足，或者沒有足夠的「持溫時間（Hold Time）」，鉻釉很容易因為熔融不完全而顯得乾枯、粗糙，甚至像砂紙一樣。為了獲得平滑的鉻釉表面，建議在達到最高溫時設定 20 至 30 分鐘的持溫，讓釉藥有充分的時間軟化流平，並將懸浮的鉻顆粒平順地包裹在玻璃質內。</p>
+
+  <h2>八、實務操作：氧化鉻的安全與配釉指南</h2>
+  <p>最後，我們必須嚴肅看待在工作室中處理氧化鉻粉末的安全規範，以及解決其難以攪拌的實務痛點。</p>
+
+  <h3>1. 鉻粉塵的潛在危險與防護措施</h3>
+  <p>在化學分類中，鉻有「三價鉻」與「六價鉻」之分。六價鉻具有高毒性與致癌性，幸好，我們陶藝使用的綠色氧化鉻是相對穩定且毒性較低的「三價鉻（Cr₂O₃）」。儘管如此，任何微細的金屬粉塵吸入肺部都會造成不可逆的傷害。在工作室秤量、混合乾燥的氧化鉻粉末時，**絕對必須佩戴 N95 等級的防塵口罩，並在通風良好的環境下操作**。清理桌面時請使用濕海綿擦拭，嚴禁使用掃把揚起粉塵。</p>
+
+  <h3>2. 研磨與過篩：解決鉻粉結塊與斑點問題</h3>
+  <p>許多新手第一次調配鉻釉時，出窯後會發現綠色釉面上布滿了難看的深色斑點。這是因為氧化鉻粉末在水中極易結塊，且因為難以熔融，這些結塊到了高溫也不會化開。解決之道是：千萬不要直接把粉末倒進大桶水裡！應該先取少量的水與基礎釉，將氧化鉻粉末在研缽中用力研磨成毫無顆粒的泥漿狀，再倒入大桶中攪拌，最後務必讓整桶釉漿通過 100 目或 120 目的細篩網至少兩次，才能確保釉色均勻純淨。</p>
+
+  <h3>3. 添加量極限與過度飽和的起泡風險</h3>
+  <p>再次強調「少即是多」的原則。氧化鉻的著色極限通常在 2% 左右。如果您為追求更深的綠色而加入 4% 甚至 5% 的氧化鉻，它不會變深綠，而是會因為釉藥無法負荷這麼多抗熔劑，導致釉面失去張力，在高溫下產生密集的細小氣泡與針孔（Pinholes），嚴重時釉面甚至會剝落或呈現火山渣般的焦枯狀態。如果真的需要深沉的暗綠，請將氧化鉻控制在 1.5%，並額外添加 1% 的黃氧化鐵與 0.2% 的氧化鈷，這才是正解。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">氧化鉻呈色常見問答 FAQ</div>
+    <p><strong>Q：我想調出漂亮的粉紅色，但手邊的透明釉不知道有沒有含鋅，該怎麼辦？</strong><br>
+    A：最保險的做法是查閱該透明釉的成分表或化學式。如果無法確認，請在廢棄的小陶片上試燒一塊。塗上您的鉻錫粉紅色漿，罩上該透明釉，如果燒出來變成土黃色或褐色，就代表該透明釉含有鋅，不能用於鉻錫紅配方；若保持粉紅色，則代表安全可用。</p>
+    <p><strong>Q：為什麼我用氧化鉻畫的線條，燒出來摸起來粗粗的、凸凸的？</strong><br>
+    A：這代表您顏料中的氧化鉻濃度太高，且缺乏提供玻璃質的基礎釉粉。氧化鉻本身不會融化，純畫上去就像塗了一層耐火土。建議將氧化鉻粉與透明釉粉以 1:3 甚至 1:4 的比例混合後再進行彩繪，這樣燒出來的線條才會平整並融入釉面。</p>
+    <p><strong>Q：含氧化鉻的釉藥可以用來做食用的餐盤或杯子嗎？</strong><br>
+    A：如果您的基礎釉配方設計良好（矽、鋁比例足夠），且氧化鉻的添加量在 2% 以內，並達到完全燒結的溫度，三價鉻在釉面中是相當穩定的。然而，若釉面出現乾澀、無光或起泡，代表玻璃質未完全封閉，就有溶出風險。為求最高安全標準，實用食器的內部接觸面，仍建議使用安全的白釉或透明釉。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div class="related" id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>

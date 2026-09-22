@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釉藥施用與調製：從精準配方到完美上釉的完整指南</title>
+<meta name="description" content="深入解析陶藝釉藥調製的關鍵步驟。從稱量、球磨、過篩到控制釉漿濃度與流動性，探討沉澱防止劑與CMC的應用，並完整介紹浸釉、淋釉、刷釉與噴釉等多層施釉的厚度控制技術。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     =========================================
+     - 全域變數 (--bg, --paper等): 控制網站主要色彩
+     - .page: 頁面主要容器與陰影外觀
+     - .article: 內文區塊的留白與邊距
+     - .breadcrumb, .eyebrow: 頂部文章分類標籤
+     - h1, h2, h3: 標題層級字體與大小設定
+     - .lead: 開場文引言區塊
+     - .tags, .tag: 關鍵字半圓滑外框標記
+     - .notice, .summary, .faq-box: 提示與常見問答區塊
+     - .table-wrap, table: 表格自適應與樣式
+     - .related a: 相關文章按鈕卡片設計
+     ========================================= */
+
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  .svg-container {
+    width: 100%;
+    margin: 32px 0;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  /* 將連結設計成獨立的按鈕卡片 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜燒成技術｜釉藥施用與調製</div>
+  <span class="eyebrow">基礎與進階技術</span>
+  <h1>釉藥施用與調製：從精準配方到完美上釉的完整指南</h1>
+  
+  <div class="lead">
+    <strong>核心導讀：</strong>釉藥施用與調製，是陶藝創作中最具科學性與工藝深度的環節之一。無論您的陶瓷配方多麼完美，如果無法將其正確地轉換成具備適當濃度與流動性的液態釉漿，並以精準的厚度附著於坯體之上，最終的燒成品質都將大打折扣。釉藥的準備絕非單純把乾燥粉料加水混合，它牽涉到高精度的稱量、球磨粉碎、嚴謹的網目過篩，以及對於釉漿懸浮性、解膠與凝膠狀態的深刻理解。
+    <br><br>
+    透過加入適當的沉澱防止劑、附著劑（如CMC）與調整比重，我們能夠讓釉漿長時間保持在最佳的工作狀態。而在實際施塗階段，針對不同器形與創作需求，陶藝家必須靈活運用浸釉、淋釉、刷釉與噴釉等多元技法，甚至挑戰多層次施釉的複雜疊加。本文將帶您全面解析釉藥從乾粉到完美附著的每一道工序，幫助您精準掌握厚度控制，大幅提升燒成成功率。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span>
+    <span class="tag">釉藥施用與調製</span>
+    <span class="tag">釉漿濃度</span>
+    <span class="tag">釉藥混合與過篩</span>
+    <span class="tag">解膠與凝膠</span>
+    <span class="tag">CMC附著劑</span>
+    <span class="tag">浸釉與淋釉</span>
+    <span class="tag">多層施釉</span>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 800 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+      <!-- 定義箭頭 -->
+      <defs>
+        <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#6c6654" />
+        </marker>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+        </filter>
+      </defs>
+
+      <!-- 標題 -->
+      <text x="400" y="30" font-size="20" font-weight="bold" fill="#39372f" text-anchor="middle" font-family="sans-serif">標準釉藥調製核心流程</text>
+
+      <!-- 步驟 1 -->
+      <rect x="50" y="70" width="110" height="60" rx="8" fill="#fbfaf5" stroke="#dcd7c7" stroke-width="2" filter="url(#shadow)"/>
+      <text x="105" y="105" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">1. 精準稱量</text>
+      <text x="105" y="123" font-size="12" fill="#777367" text-anchor="middle">依配方比例配料</text>
+
+      <line x1="160" y1="100" x2="200" y2="100" stroke="#6c6654" stroke-width="2" marker-end="url(#arrowHead)"/>
+
+      <!-- 步驟 2 -->
+      <rect x="210" y="70" width="110" height="60" rx="8" fill="#fbfaf5" stroke="#dcd7c7" stroke-width="2" filter="url(#shadow)"/>
+      <text x="265" y="105" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">2. 球磨混合</text>
+      <text x="265" y="123" font-size="12" fill="#777367" text-anchor="middle">加水研磨至細緻</text>
+
+      <line x1="320" y1="100" x2="360" y2="100" stroke="#6c6654" stroke-width="2" marker-end="url(#arrowHead)"/>
+
+      <!-- 步驟 3 -->
+      <rect x="370" y="70" width="110" height="60" rx="8" fill="#fbfaf5" stroke="#dcd7c7" stroke-width="2" filter="url(#shadow)"/>
+      <text x="425" y="105" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">3. 網目過篩</text>
+      <text x="425" y="123" font-size="12" fill="#777367" text-anchor="middle">濾除雜質與粗粒</text>
+
+      <line x1="480" y1="100" x2="520" y2="100" stroke="#6c6654" stroke-width="2" marker-end="url(#arrowHead)"/>
+
+      <!-- 步驟 4 -->
+      <rect x="530" y="70" width="110" height="60" rx="8" fill="#fbfaf5" stroke="#dcd7c7" stroke-width="2" filter="url(#shadow)"/>
+      <text x="585" y="105" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">4. 比重調整</text>
+      <text x="585" y="123" font-size="12" fill="#777367" text-anchor="middle">控管濃度流動性</text>
+
+      <line x1="640" y1="100" x2="680" y2="100" stroke="#6c6654" stroke-width="2" marker-end="url(#arrowHead)"/>
+
+      <!-- 步驟 5 -->
+      <rect x="690" y="70" width="80" height="60" rx="8" fill="#eeeadd" stroke="#dcd7c7" stroke-width="2" filter="url(#shadow)"/>
+      <text x="730" y="105" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">5. 熟成</text>
+      <text x="730" y="123" font-size="12" fill="#777367" text-anchor="middle">靜置24時</text>
+
+      <!-- 輔助說明 -->
+      <text x="400" y="180" font-size="14" fill="#6c6654" text-anchor="middle">註：添加 CMC 附著劑或沉澱防止劑通常於步驟 2 或步驟 4 進行，以確保完美懸浮與結合。</text>
+    </svg>
+  </div>
+
+  <h2>一、釉藥調製的基本流程與精準稱量</h2>
+  <p>在陶藝製作的領域中，將抽象的化學配方轉換成實際可用的釉漿，其第一步永遠是嚴謹的原料稱量。這個步驟的確實與否，直接決定了窯爐燒成後作品的成敗與色彩展現。</p>
+
+  <h3>1. 為什麼精準稱量如此重要？</h3>
+  <p>釉藥配方通常由多種礦物粉末組成，包含作為玻璃形成劑的石英、提供熔融作用的長石或熔塊，以及賦予色彩的金屬氧化物。在稱量時，基礎原料（如長石、高嶺土）稍微有些微的誤差可能不會造成災難性的後果，但對於發色劑（如氧化鈷、氧化銅）而言，即使是 0.1 克的差距，都可能讓預期的優雅天青色變成深沉死板的暗藍色。因此，工作室必須配備精準度至少達到 0.1 克甚至 0.01 克的電子秤，並確實歸零扣除容器重量，才能確保每次調配的釉藥色澤穩定一致，避免批次間產生嚴重的色差問題。</p>
+
+  <h3>2. 乾拌與初步混合的技巧</h3>
+  <p>許多初學者在稱量完所有粉料後，會直接將水一口氣倒入，這往往會導致粉料結塊，形成外濕內乾的「湯圓」，後續極難攪拌均勻。正確的流程應該是在乾燥狀態下，先將所有的粉料進行充分的「乾拌」。透過將配方中的大宗原料與微量的金屬氧化物均勻混合，可以有效預防發色劑聚集在單一區域。待乾燥原料徹底混合均勻後，再分次緩慢加入適量的水分，邊加水邊攪拌，這樣能讓水分子溫和地滲透進礦物顆粒之間，為接下來的球磨或過篩步驟打下良好的基礎。</p>
+
+  <h3>3. 避免粉塵飛揚的安全防護</h3>
+  <p>陶瓷原料中含有大量的游離二氧化矽（石英粉末），這些微細的粉塵若長期被吸入人體肺部，將會導致無法逆轉的矽肺症等呼吸道疾病。因此，在進行釉藥稱量與乾拌的過程中，揚塵是無法避免的風險。操作者必須全程佩戴通過認證的防塵口罩（如 N95 或 P100 等級的防護面罩），並且最好能在配有局部排氣通風設備的工作檯面上進行操作。維持良好的工作環境不僅是對個人健康的負責，也能確保散落的微量粉塵不會隨意汙染其他正在製作的純白瓷土作品。</p>
+
+  <h2>二、釉藥的混合、球磨與過篩處理</h2>
+  <p>單純的攪拌無法完全打破礦物原料在乾燥過程中產生的團聚現象，為了讓釉藥在燒成時能夠完美熔融，我們必須仰賴機械力量進行深度加工。</p>
+
+  <h3>1. 球磨機的作用與研磨時間控制</h3>
+  <p>球磨機是專業陶藝工作室不可或缺的設備。它的原理是利用一個密閉的旋轉瓷罐，內部裝填了高硬度的氧化鋁研磨球，當瓷罐旋轉時，研磨球不斷互相撞擊與摩擦，將混合了水分的粗糙釉料徹底擊碎研磨。經過球磨處理的釉漿，顆粒會變得極度細緻，這不僅能降低釉藥的熔融溫度，還能讓金屬氧化物更完美地融入玻璃基質中，發色更加均勻。一般而言，基礎釉的球磨時間約為數小時至半天不等，時間過短達不到細化效果，時間過長則可能導致顆粒過度微小，增加釉層乾燥時的收縮率，進而引發燒成前的裂釉風險。</p>
+
+  <h3>2. 過篩的重要性與網目選擇</h3>
+  <p>無論釉藥是否有經過球磨處理，上釉前「過篩」都是絕對不可省略的鐵律。過篩的主要目的是濾除未被擊碎的結塊原料、意外掉入的灰塵雜質，或是未完全溶解的色料顆粒。陶藝界常用的不鏽鋼網目規格多落在 80 目至 120 目之間。數字越大，代表一平方英吋內的孔洞越多，篩網越細緻。針對一般透明釉或色釉，100 目的篩網能提供絕佳的平衡；但若配方中含有刻意保留粗糙質感的粗砂或斑點色料，則可能需要降級使用 60 目或 80 目的篩網，以免將設計所需的特殊效果全數濾除。</p>
+
+  <h3>3. 確保釉漿質地細緻均勻的關鍵</h3>
+  <p>過篩通常需要重複進行兩到三次。第一次過篩時，可以使用毛刷或橡皮刮刀輔助，輕輕將濃稠的釉漿推擠過網孔；隨後的幾次過篩則應順暢地流下。除了物理性的過篩，讓調配好的釉漿「靜置熟成」也是讓質地均勻的秘密武器。剛調好的釉料往往充滿氣泡，且黏土顆粒尚未完全吸收水分。將釉漿加蓋靜置 24 小時後重新攪拌，可以讓水分子徹底滲透包覆每一個礦物顆粒，釉漿的流動性會變得更加柔順，大幅降低施釉時產生氣孔或針孔的機率。</p>
+
+  <h2>三、釉漿濃度與流動性的科學控管</h2>
+  <p>釉漿的狀態直接決定了施塗的難易度與最終厚度。如果只是憑藉肉眼或感覺來加水，很難在長期創作中維持穩定的品質。</p>
+
+  <h3>1. 如何測量與調整釉漿比重</h3>
+  <p>「比重」（Specific Gravity）是衡量釉漿濃度的科學指標，代表釉漿密度與水密度的比值。測量方式非常簡單：使用一個精確量測為 100 毫升（ml）的量筒，將攪拌均勻的釉漿注滿至刻度線，然後放在電子秤上秤重（需扣除量筒空重）。如果這 100 毫升的釉漿重 145 克，則其比重就是 1.45。多數陶藝釉藥的理想比重落在 1.40 到 1.50 之間。若比重過高代表水分太少，需要少量多次地加水攪拌再測；若比重過低代表太稀，則必須將釉漿靜置一晚，待固體沉澱後，將表層多餘的清水小心倒除，藉此重新拉高比重數值。</p>
+
+  <h3>2. 影響釉漿流動性的各項變因</h3>
+  <p>兩桶比重完全相同的釉漿，可能會有截然不同的流動性（黏度）。流動性受到配方中黏土含量（如高嶺土、膨潤土）的劇烈影響。黏土比例越高的釉藥，其流變性越差，感覺像泥漿一樣滯水；而富含熔塊或長石的釉藥則流動得像牛奶。此外，工作室的環境溫度與水質也會產生影響。在氣溫較高的夏季，水分蒸發快，釉漿容易變得濃稠；而若使用含有大量鈣鎂離子的硬水來調配釉藥，水中的礦物質可能會與釉藥成分產生微弱的絮凝反應，進一步改變整體的流動感。</p>
+
+  <h3>3. 濃度對燒成結果的直接影響</h3>
+  <p>釉漿濃度的掌控失誤，會在出窯時無情地顯現出來。當釉漿濃度過高（太稠）時，素燒坯表面會附著過厚的釉層，在乾燥或進窯初期就容易發生收縮龜裂，燒成後更會導致嚴重的流釉、起泡或「縮釉」（Crawling）現象，露出光禿禿的土胎。反之，若釉漿調得太稀，釉層薄如蟬翼，燒成後不僅無法展現應有的色澤與玻璃光澤，甚至會產生乾澀、粗糙的表面。因此，記錄每一款專屬釉藥的最佳比重數據，是確保作品品質穩定的不二法門。</p>
+
+  <h2>四、釉藥沉澱問題與解膠、凝膠現象</h2>
+  <p>釉藥不是單純的溶液，而是一種由固體顆粒懸浮在水中的「懸浮液」。理解懸浮狀態的化學與物理機制，能有效解決釉藥沉底硬化的噩夢。</p>
+
+  <h3>1. 為什麼釉藥會產生沉澱與硬結？</h3>
+  <p>當我們將調好的釉漿靜置幾天後，經常會發現桶子底部沉積了堅硬如石的固體，這被稱為「硬結」（Hard panning）。這是因為釉藥配方中缺乏足夠的懸浮載體（如具有細微片狀結構的高嶺土）。尤其是那些含有大量重金屬氧化物、碳酸鋇或大顆粒熔塊的配方，在重力作用下會迅速沉降到底部，並且顆粒間緊密咬合，將水分完全擠出。一旦發生嚴重的沉澱與硬結，陶藝家往往需要花費極大的體力使用攪拌棒甚至電動攪拌器，才能勉強將其重新打散，這對日常工作效率是極大的折損。</p>
+
+  <h3>2. 解膠劑與凝膠劑的化學作用原理</h3>
+  <p>為了解決懸浮問題，我們必須介入釉漿的電離子狀態。當釉漿中加入「解膠劑」（Deflocculant，如矽酸鈉、水玻璃），它會改變黏土顆粒表面的電荷，讓顆粒之間產生強烈的互相排斥力。這能讓釉漿在含水量極低的情況下依然保持高度流動性，常見於注漿成型的泥漿中。相反地，如果我們需要讓釉漿變稠且不易沉澱，則會加入「凝膠劑/絮凝劑」（Flocculant，常見如硫酸鎂/瀉鹽、氯化鈣）。絮凝劑能中和顆粒間的排斥力，促使它們在水中形成一種鬆散的「紙牌屋」網狀結構，把重金屬與熔塊顆粒安穩地托住，防止它們沉底結塊。</p>
+
+  <h3>3. 實務上如何運用絮凝劑改善釉漿狀態</h3>
+  <p>在實務操作中，如果發現釉藥容易快速沉澱，或是在過篩後感覺像水一樣沒有附著力，這時就可以利用「瀉鹽」（硫酸鎂）來進行絮凝。做法是將少量的瀉鹽溶解在溫水中製成飽和溶液，然後逐滴加入釉漿中並快速攪拌。您會神奇地發現，原本稀薄如水的釉漿，會在幾秒鐘內變得像優格一樣滑順且具有微黏性。這種狀態的釉漿不僅完全不會發生底部硬結的問題，在進行浸釉或淋釉時，也能更均勻、平整地附著在陶瓷坯體表面，大幅改善操作手感。</p>
+
+  <h2>五、沉澱防止劑與附著劑的應用：CMC的作用</h2>
+  <p>現代陶藝家有許多強大的添加劑可以使用，這些有機或無機的材料就像是釉藥的魔術師，能大幅改變釉漿的物理性質，適應各種施釉技法。</p>
+
+  <h3>1. CMC（羧甲基纖維素）在釉藥中的多重角色</h3>
+  <p>CMC（Carboxymethyl Cellulose，羧甲基纖維素）是一種極為常見的有機水溶性高分子聚合物。在釉藥調製中，它同時扮演著「懸浮劑」與「附著劑」的雙重角色。將預先溶解成膠狀的 CMC 加入釉漿中，它可以極大地增加液體的黏度，有效防止重原料沉澱。更重要的是，當含有 CMC 的釉漿塗抹在坯體上並乾燥後，CMC 會形成一層堅韌的薄膜，將粉料牢牢鎖在坯體表面。這意味著您在搬運作品或進行多層施釉時，底層的釉藥不會輕易因為手指的摩擦而剝落，提供絕佳的生坯強度（Green strength）。</p>
+
+  <h3>2. 其他常見的懸浮劑與沉澱防止劑</h3>
+  <p>除了有機的 CMC，無機的天然礦石也是優秀的沉澱防止劑。最知名的就是「膨潤土」（Bentonite）以及高純度的鎂鋁矽酸鹽（如市售的 Veegum T 或 Macaloid）。膨潤土具有極強的吸水膨脹特性，只需在乾燥釉料總重中添加 1% 到 2%，就能為釉漿提供強大的懸浮力與黏性。但必須注意的是，膨潤土非常容易結塊，必須在「乾拌」階段就與其他粉料徹底混合均勻再加水；若直接投入水中，會立刻變成難以攪散的膠狀疙瘩。無機懸浮劑的好處是不會像 CMC 那樣隨著時間腐敗發臭，能讓釉漿長期保存。</p>
+
+  <h3>3. 附著劑如何幫助釉藥緊密結合坯體</h3>
+  <p>對於低溫素燒或氣孔率極低的坯體，釉漿往往很難順利附著，水流會直接滑落。這時候，附著劑就發揮了關鍵作用。加入黏結劑（Glaze Binders）的釉漿，能減緩水分被坯體吸收的速度，讓施釉過程變得可控。這對於市售的「刷釉專用釉（Brush-on Glaze）」尤為重要。廠商在配方中加入了大量的有機樹脂與 CMC，讓創作者可以像使用壓克力顏料一樣，用筆刷在毫無吸水力的坯體上反覆塗刷而不留明顯刷痕。不過，由於這些有機物會在入窯 300°C 左右燃燒殆盡，因此在燒成初期務必保持窯爐通風，避免產生還原悶燒或異味。</p>
+
+  <h2>六、經典上釉技法：浸釉與淋釉的實務操作</h2>
+  <p>浸泡與澆淋是歷史最悠久、也是工作室中最講求效率的大面積施釉法，它們完全仰賴素坯的吸水性來達成厚度控制。</p>
+
+  <h3>1. 浸釉的黃金秒數與坯體吸水率</h3>
+  <p>浸釉（Dipping）是將素燒過的陶瓷器物完全沉入均勻的釉漿中，停留短暫時間後取出。這個過程依賴素燒坯內部的毛細孔像海綿一樣迅速吸走釉漿中的水分，使固態粉末沉積在表面。素燒的溫度（通常在 850°C - 1000°C 之間）會決定毛細孔的數量；素燒溫度越低，吸水力越強。一般而言，一次完美的浸釉大約只需要 3 到 5 秒鐘。浸泡時間過長，會導致釉層過厚甚至因過度潮濕而崩塌。使用專業的「浸釉夾（Tongs）」夾住器物的底部或邊緣，可以讓大面積一次性上釉，僅在夾具接觸處留下微小的痕跡供後續修補。</p>
+
+  <h3>2. 淋釉技巧與內外壁施釉順序</h3>
+  <p>對於口徑較小、內部較深的瓶子或大碗，無法使用浸釉夾，此時必須採用淋釉（Pouring）的方式。標準的程序永遠是「先內後外」。操作者會先將釉漿倒入器物內部，轉動器身讓釉漿均勻覆蓋內壁，隨即迅速倒出多餘的釉漿。等待內部稍微乾燥後，再將器物倒置放在轉盤上，用勺子盛滿釉漿從底部邊緣緩慢傾倒，讓釉料如瀑布般均勻流下覆蓋外壁。這種技法不僅能確保深處無死角，陶藝家也能刻意利用淋釉流動的軌跡，創造出釉藥交疊、具備動態美感的自然邊緣痕跡。</p>
+
+  <h3>3. 處理流釉與底部清理的細節</h3>
+  <p>無論是浸釉還是淋釉，釉漿無可避免地會流向器物的最底部，甚至沾附在圈足上。如果在進窯前沒有徹底清除底部的釉藥，燒成時玻璃化的釉料會將作品與窯板死死黏合，導致作品報廢。為了預防這個悲劇，在上釉前，陶藝家通常會先用毛筆沾取「撥水劑」（Wax Resist，液態蠟）仔細塗抹在圈足與底部。撥水劑能有效排開水分，讓沾上的釉珠輕易用海綿擦去。此外，施釉後務必用微濕的海綿將圈足周圍擦拭得一乾二淨，並保留適當的無釉緩衝區，以應對高溫下可能產生的流釉現象。</p>
+
+  <h2>七、進階裝飾技法：刷釉與噴釉的應用</h2>
+  <p>當浸釉與淋釉無法滿足局部的色彩控制或複雜立體造型時，刷塗與噴霧技術便成為陶藝家展現精細工藝的利器。</p>
+
+  <h3>1. 刷釉的筆觸控制與疊加方式</h3>
+  <p>刷釉（Brushing）最大的優勢在於精準的局部控制，極適合彩繪創作或為複雜公仔雕塑上色。然而，未經處理的純水釉漿乾燥極快，直接用毛筆塗刷容易留下嚴重的筆觸且厚薄不均。因此，刷釉必須使用含有足量 CMC 附著劑的特調釉漿。在塗刷時，最忌諱一次塗得太厚。正確的技法應採用「十字交叉法」：第一層由左至右平塗，等待表面水分被吸收、光澤消失後；第二層由上至下垂直塗抹；視需求再疊加第三層。這種經緯交錯的塗刷方式，能有效撫平筆痕，燒成後幾乎看不出手作的刷塗痕跡，呈現均勻飽滿的釉面。</p>
+
+  <h3>2. 噴釉設備選擇與氣壓調整</h3>
+  <p>對於漸層設計、超大型雕塑或是想要製造極薄釉層的作品，噴釉（Spraying）是唯一解方。這需要準備空氣壓縮機、專用噴槍以及具備水洗過濾系統的噴釉抽風櫃。釉漿在噴槍中藉由高壓空氣霧化成細微粒附著於坯體。氣壓（PSI）的設定極為關鍵：壓力過大會將原本附著的粉末吹散；壓力過小則會噴出粗糙的釉滴，造成表面不平整。噴釉時，噴嘴應與作品保持約 15 到 20 公分的距離，手部保持穩定均速的橫向或縱向移動，逐層將釉色均勻地覆蓋上去。</p>
+
+  <h3>3. 局部遮蔽與多重色彩交融技術</h3>
+  <p>噴釉特別適合用來創作柔和的色彩過渡與重疊效果。陶藝家經常結合「遮蔽技法」來進行創作。例如，使用耐水膠帶、液態乳膠或剪裁好的紙片貼在坯體上，噴上第一種釉色後，撕去遮蔽物，再噴上第二種顏色，藉此獲得邊緣銳利清晰的幾何圖騰。另一方面，如果不使用遮蔽物，讓兩種不同發色的噴霧在交界處自然重疊，燒成後這兩種金屬氧化物會在高溫下互相交融反應，產生夢幻般的漸層窯變色彩。需要注意的是，噴釉產生的粉塵極其細微，操作時絕對必須佩戴高等級的防護面罩。</p>
+
+  <h2>八、多層施釉技巧與釉藥厚度控制</h2>
+  <p>厚度是釉藥燒成美感的靈魂。如何準確判斷厚薄，並在多層疊加中避免崩塌，是每位陶藝家必須跨越的技術門檻。</p>
+
+  <h3>1. 判斷合適的釉層厚度標準</h3>
+  <p>對於大多數的透明釉與單色釉來說，理想的釉層乾燥厚度大約落在 1.0 毫米至 1.5 毫米之間；而某些特殊的乳濁釉或志野釉，則可能需要厚達 2 毫米以上才能展現其豐潤的質感。判斷厚度最簡單且準確的方法，是使用陶藝針錐或大頭針，在作品不顯眼的邊緣（或底足附近）輕輕刺入釉層直到觸碰坯體，透過針尖陷入的深度來直觀感受釉藥的厚度。如果發現不足，可以再次短暫浸泡；若過厚，則可能需要用刀片輕輕刮薄，或者直接將釉層洗掉重新來過，切莫心存僥倖進窯。</p>
+
+  <h3>2. 多層施釉的乾燥時間與附著風險</h3>
+  <p>當我們需要將兩種以上的釉藥疊加（例如在基礎底釉上覆蓋一層效果釉），面臨的最大挑戰是「附著力喪失」。當第一層釉已經完全乾燥，素坯的毛細孔已經被粉料填滿，失去了吸水能力。此時若強行浸泡第二層釉，水分無處可去，會直接把第一層釉浸濕軟化，導致兩層釉藥像泥石流一樣一起從坯體上滑落。為了避免這種情況，進行多層施釉時，必須在第一層釉「表面水分剛消失、但尚未完全乾燥死硬」的半濕狀態下，迅速施加第二層；或者在第一層釉漿中加入 CMC 附著劑進行強化固化。</p>
+
+  <h3>3. 避免縮釉與裂釉的厚度管理策略</h3>
+  <p>厚度失控是造成諸多釉面缺陷的主因。當釉層塗敷過厚，乾燥過程中的物理收縮率會大於底層的素坯，導致燒成前釉層表面出現細微的網狀裂痕；進入高溫階段後，這些裂痕處的釉藥受熱捲曲，無法順利平鋪熔融，就會形成嚴重的「縮釉」（Crawling），裸露出底部的陶土。另一方面，厚度也會放大熱膨脹係數不匹配所引發的問題。如果配方本身容易產生「裂釉」（Crazing，開片），釉層越厚，開片的紋路就會越加粗大明顯。因此，嚴格控管釉漿比重、規範浸釉秒數，是遠離燒成缺陷的根本之道。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">釉藥調製與施用常見問答 FAQ</div>
+    <p><strong>Q：買來的粉狀市售釉藥，可以直接加水就用嗎？</strong><br>
+    A：雖然可以直接加水，但強烈建議一定要經過「充分攪拌與 100 目過篩」。市售粉料在運送過程中容易受潮結塊，直接使用往往會產生未溶解的顆粒，導致燒成後表面出現斑點或氣泡。過篩能確保質地絕對細緻均勻。</p>
+    <p><strong>Q：為什麼我用筆刷塗抹自己調的浸泡用釉漿，乾了之後一直掉粉？</strong><br>
+    A：浸釉配方通常只依賴坯體吸水性附著，不含黏結劑。若要改為筆刷塗抹，必須在釉漿中加入適量的 CMC（羧甲基纖維素）或專用附著劑。CMC 乾燥後會形成保護膜，將粉末牢牢鎖在表面，解決掉粉問題並消除刷痕。</p>
+    <p><strong>Q：釉藥放久了底部結成一大塊像石頭一樣，是不是壞掉了？</strong><br>
+    A：並沒有壞掉，這稱為「硬結」現象，是重金屬氧化物與熔塊自然沉澱擠壓造成的。您可以使用堅固的木棍用力將其重新搗碎攪拌，或者添加幾滴瀉鹽（硫酸鎂）水溶液作為絮凝劑，就能大幅改善未來沉澱結塊的問題。</p>
+    <p><strong>Q：不小心上釉上得太厚了，除了洗掉還有補救方法嗎？</strong><br>
+    A：如果是在乾燥前發現，可用手指或海綿輕輕抹除多餘的部分；若已經完全乾燥，則可以使用金屬刮刀或砂紙輕輕將表面均勻刮薄。但若厚度極度不均，最保險的作法依然是將整件作品拿到水槽徹底洗淨，乾燥兩天後重新上釉。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>

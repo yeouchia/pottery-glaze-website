@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釉藥的呈色：千變萬化的氧化銅與發色原理</title>
+<meta name="description" content="深入探討陶藝釉藥中「氧化銅」的呈色原理，從氧化燒的翠綠、還原燒的銅紅到高鹼性釉的土耳其藍。完整解析釉藥配方、燒成氣氛與金屬氧化物的迷人變化。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     ========================================= */
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  
+  .chart-container {
+    background: #fffdf8;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+    text-align: center;
+  }
+
+  /* 相關文章按鈕卡片設計 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥的呈色｜金屬氧化物</div>
+  <span class="eyebrow">基礎與進階釉藥理論</span>
+  <h1>釉藥的呈色：千變萬化的氧化銅</h1>
+  
+  <div class="lead">
+    <strong>專家引言：</strong>在陶瓷釉藥的廣闊世界裡，金屬氧化物就像是賦予陶藝作品生命的魔法粉末，其中，「氧化銅」無疑是最具魅力、變化也最難以捉摸的呈色劑。它不僅僅是一種單純的著色原料，更是陶藝創作者與窯火交心對話的最佳見證。在傳統陶瓷化學中，氧化銅會隨著窯爐內「燒成氣氛」的改變，展現出完全不同的視覺面貌。當氧氣充足時，它能化身為生機盎然的翠綠或深沉的織部綠；然而，若在燒成過程中剝奪了氧氣，它便會宛如魔術般，轉化為如紅寶石般迷人且珍貴的銅紅與辰砂釉。此外，只要稍微改變基礎釉的酸鹼值，它甚至能孕育出充滿異國情調的土耳其藍。本文將從化學原理出發，帶您全面解析氧化銅的發色秘密。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">釉藥的呈色</span><span class="tag">氧化銅</span><span class="tag">銅綠</span><span class="tag">銅紅</span><span class="tag">辰砂釉</span><span class="tag">織部釉</span><span class="tag">窯變</span><span class="tag">土耳其藍</span>
+  </div>
+
+  <h2>一、氧化銅在釉藥中的基本特性與歷史淵源</h2>
+  <p>在我們探討色彩變化之前，必須先了解這項金屬氧化物的本質，以及它在陶瓷發展史中扮演的關鍵角色。氧化銅在釉藥配方中不僅影響顏色，更直接改變了釉的物理性質。</p>
+  
+  <h3>1. 什麼是氧化銅？陶瓷發色的靈魂</h3>
+  <p>氧化銅（化學式 CuO 或 Cu2O）在未經燒製的原始狀態下，通常呈現黑色的細微粉末狀。當陶藝家將這些黑色粉末少量地加入透明或白色的基礎釉漿中，並施塗於素燒坯體上送入窯爐後，奇妙的化學反應便會展開。在高溫熔融的過程中，銅離子會與釉藥中的矽酸鹽網絡緊密結合，改變了光線射入釉層後的折射與吸收波長，從而使我們肉眼看見鮮豔的色彩。只要百分之一到三的極少添加量，就能讓整件作品煥然一新。</p>
+
+  <h3>2. 歷史上的銅綠與銅紅陶瓷</h3>
+  <p>人類利用銅來裝飾陶瓷的歷史極為悠久。早在中國漢代，工匠就發現將銅礦粉末混入含有大量鉛的低溫釉中，可以燒製出極具代表性的「漢綠釉」；到了唐代，舉世聞名的唐三彩中那抹斑斕生動的綠色，同樣也是氧化銅的傑作。而到了明清兩代，景德鎮的匠人們掌握了高溫還原燒的技術，成功讓銅在高溫下還原出純粹的紅色，創造出了令後世藏家趨之若鶩的「祭紅」與「郎窯紅」，將銅的工藝推向了巔峰。</p>
+
+  <h3>3. 氧化銅在基礎釉中的溶解度與流動性</h3>
+  <p>除了作為強大的呈色劑，氧化銅在釉藥化學中還扮演著極為強烈的「媒熔劑（Flux）」角色。這意味著在配方中加入銅，會大幅降低該釉藥的整體熔點，並顯著增加其在高溫狀態下的流動性。如果陶藝家在調配時添加了過高比例的氧化銅，不但燒出來的顏色會從翠綠轉為死黑，釉藥還極有可能因為過度流動而形成「流釉」，甚至滴落損壞珍貴的窯板，因此控制添加量是實務上的重要課題。</p>
+
+  <div class="chart-container">
+    <svg viewBox="0 0 600 250" width="100%" height="100%">
+      <rect width="600" height="250" fill="#faf9f3" rx="10"></rect>
+      <!-- 中間原料 -->
+      <circle cx="300" cy="125" r="40" fill="#39372f"></circle>
+      <text x="300" y="120" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">氧化銅</text>
+      <text x="300" y="140" font-family="sans-serif" font-size="12" fill="#dcd7c7" text-anchor="middle">CuO</text>
+      
+      <!-- 箭頭左 -->
+      <path d="M 240 125 L 140 125" stroke="#777367" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#arrow)"></path>
+      <text x="190" y="115" font-family="sans-serif" font-size="14" fill="#6c6654" text-anchor="middle">充足氧氣</text>
+      <text x="190" y="145" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="middle">(氧化燒)</text>
+      
+      <!-- 箭頭右 -->
+      <path d="M 360 125 L 460 125" stroke="#777367" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#arrow)"></path>
+      <text x="410" y="115" font-family="sans-serif" font-size="14" fill="#6c6654" text-anchor="middle">缺氧環境</text>
+      <text x="410" y="145" font-family="sans-serif" font-size="12" fill="#777367" text-anchor="middle">(還原燒)</text>
+      
+      <!-- 結果左 -->
+      <circle cx="90" cy="125" r="45" fill="#4caf50" stroke="#388e3c" stroke-width="3"></circle>
+      <text x="90" y="120" font-family="sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="bold">銅綠</text>
+      <text x="90" y="145" font-family="sans-serif" font-size="13" fill="#e8f5e9" text-anchor="middle">Cu²⁺ 離子</text>
+      
+      <!-- 結果右 -->
+      <circle cx="510" cy="125" r="45" fill="#d32f2f" stroke="#b71c1c" stroke-width="3"></circle>
+      <text x="510" y="120" font-family="sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="bold">銅紅</text>
+      <text x="510" y="145" font-family="sans-serif" font-size="13" fill="#ffebee" text-anchor="middle">純銅膠體</text>
+
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#777367" />
+        </marker>
+      </defs>
+    </svg>
+    <p style="font-size:13px; color:#777367; margin-top:10px;">圖表 1：氧化銅在不同燒成氣氛下的化學轉變與呈色差異</p>
+  </div>
+
+  <h2>二、氧化燒成下的氧化銅：翠綠與碧綠的展現</h2>
+  <p>在現代電窯中最常見的「氧化燒」環境裡，氧化銅展現出最穩定也最普遍的綠色調。然而，綠色的深淺與質感，會受到釉藥配方極大的影響。</p>
+
+  <h3>1. 氧化氣氛的定義與對銅的影響</h3>
+  <p>所謂的「氧化燒」，是指在窯爐升溫與保溫的整個過程中，爐膛內都有充足的氧氣供應。在這種富氧環境下，銅元素會以二價銅離子（Cu²⁺）的形式穩定存在於融化的玻璃質中。由於二價銅離子在可見光光譜中主要吸收紅光與藍光，並將綠光反射出來，因此我們的眼睛便會看見深淺不一的綠色。這也是絕大多數初學陶藝者第一次接觸金屬呈色時，最容易成功且效果最直觀的燒成方式。</p>
+
+  <h3>2. 影響綠色深淺的基礎釉配方因素</h3>
+  <p>雖然同樣是氧化燒成，但基礎釉（Base Glaze）中不同化學成分的搭配，會讓銅綠產生戲劇性的變化。例如，當釉藥配方中含有高比例的「鉛（Lead）」時，銅會呈現出非常溫潤、鮮豔的草綠色，也就是傳統低溫陶器常見的發色；若配方中富含「鋇（Barium）」，則會使綠色轉向帶有些微藍調的冷翠色，甚至能燒出迷人的消光啞光綠；而如果釉中含有大量的「鈣（Calcium）」與「鎂（Magnesium）」，顏色可能會偏向較為沉穩的墨綠色。</p>
+
+  <h3>3. 著名的織部釉（Oribe）及其特色</h3>
+  <p>談到氧化銅的綠色，就絕對不能不提日本茶道文化中極具代表性的「織部釉（Oribe Glaze）」。源自日本安土桃山時代的織部燒，大量運用了含有氧化銅的高溫透明釉。陶藝家通常會將織部綠釉局部施掛於器皿上，任其在高溫下自然流淌，並與釉下鐵繪的深色圖案形成強烈對比。經典的織部釉往往呈現出一種深邃、具有玻璃光澤且充滿生命力的濃綠色，至今仍是許多現代陶藝家熱愛且爭相鑽研的經典釉系。</p>
+
+  <h2>三、還原燒成下的氧化銅：迷人且困難的銅紅</h2>
+  <p>相對於氧化燒的穩定，將銅轉化為紅色則是一項技術與運氣的雙重考驗。銅紅釉被視為陶瓷工藝史上最浪漫，同時也最難以駕馭的成就之一。</p>
+
+  <h3>1. 還原氣氛如何將銅轉化為紅色？</h3>
+  <p>當窯爐溫度上升至特定階段時，若我們刻意減少窯爐內的氧氣供應（例如關閉通風口並增加瓦斯燃料），窯內就會產生大量的「一氧化碳（CO）」。這些急需氧氣的氣體會強行奪取釉藥中氧化銅的氧原子，這個過程稱為「還原」。在強烈的還原氣氛下，原本的二價銅離子會失去氧，轉變為極微小的「純銅金屬膠體粒子（Copper Colloids）」懸浮在釉層中。當光線穿透釉層打在這些奈米級的銅粒子上時，便會折射出令人驚豔的鮮紅色。</p>
+
+  <h3>2. 著名的銅紅釉：辰砂、祭紅與郎窯紅</h3>
+  <p>在東方陶瓷史上，銅紅釉擁有極高的歷史地位與極具詩意的名稱。因為其色彩猶如天然的紅色硃砂礦石，因此常被稱為「辰砂釉」。而在明代宣德年間，為了祭祀日壇而特別燒製的深紅釉色，則被譽為「祭紅」，其色澤內斂沉穩不刺眼。到了清代康熙年間，督陶官郎廷極更是改良了配方與燒成技術，創燒出釉層透亮、色彩鮮明如牛血，且有著「脫口垂足郎不流」特性的「郎窯紅」（西方稱之為 Sang de boeuf），將銅紅技術推向了藝術巔峰。</p>
+
+  <h3>3. 燒製銅紅的困難點與溫度控制</h3>
+  <p>要成功燒出完美的銅紅，是一項極具挑戰性的任務。首先，還原的時間點與強度必須極度精準，過早還原會讓釉藥變黑發灰，太晚還原則會因為銅離子已被玻璃質包裹而無法變色，最終依然呈現綠色。其次，銅紅釉在燒結後期的冷卻過程也至關重要，若降溫過慢，微小的銅粒子會重新聚集變大，導致顏色混濁甚至轉為肝臟般的暗褐色。此外，每次窯爐內的氣流分布不均，也會使得同一窯內的作品產生「一面紅、一面綠」的窯變現象，使得每一件銅紅作品都成為無法複製的孤品。</p>
+
+  <h2>四、鹼性釉與氧化銅的浪漫相遇：土耳其藍</h2>
+  <p>除了常見的紅與綠，當氧化銅遇到特定的基礎釉配方時，還能產生極具異國風情的藍色調，這就是著名的土耳其藍釉。</p>
+
+  <h3>1. 鹼金屬（鈉、鉀）對銅發色的影響</h3>
+  <p>化學原理顯示，金屬氧化物的呈色會受到其周圍玻璃基質環境的強烈影響。當基礎釉的配方中含有極高比例的「鹼金屬氧化物」——特別是氧化鈉（Na₂O）與氧化鉀（K₂O），且幾乎不含鋁和硼時，釉層內的化學鍵結會發生改變。這種高鹼性的環境會拉扯銅離子，使其吸收光譜發生偏移，原本反射綠光的機制會轉向反射藍綠色至純藍色的光段，從而孕育出鮮亮動人的土耳其藍色。</p>
+
+  <h3>2. 中東地區的土耳其藍歷史與配方特色</h3>
+  <p>土耳其藍（Turquoise Blue）最早盛行於中東與伊斯蘭世界的陶瓷藝術中。古代波斯與土耳其的陶工，利用當地富含鈉的鹽鹼植物灰燼，混合石英砂與少量氧化銅，燒製出色彩如綠松石般璀璨的清真寺磁磚與日常器皿。由於這種高鹼釉在低溫下就能融化，且色彩純淨度極高，因此在中世紀的伊斯蘭陶器裝飾中佔有統治地位，其獨特的視覺魅力至今仍深深影響著當代陶藝的色彩美學。</p>
+
+  <h3>3. 土耳其藍釉的燒成限制與表面網狀裂紋（開片）</h3>
+  <p>儘管土耳其藍無比美麗，但在實務應用上卻有著難以克服的物理缺陷。因為高比例的鹼金屬（鈉、鉀）具有極高的「熱膨脹係數」，這導致釉層在高溫熔融後冷卻時，收縮的幅度遠大於內部的陶瓷坯體。這種張力不平衡必然會導致釉面產生密集的網狀裂紋（即陶藝界稱的「開片」）。雖然開片在藝術表現上十分迷人，但也意味著釉面無法完全防水，且容易藏污納垢，因此土耳其藍釉通常較少被應用於盛裝液體或食物的實用食器內部。</p>
+
+  <h2>五、氧化銅的揮發性與窯爐內的「窯變」</h2>
+  <p>氧化銅不僅在釉面上活躍，它在高溫下更會轉變為氣體狀態，在窯爐中四處流竄，為陶藝家帶來意想不到的驚喜與困擾。</p>
+
+  <h3>1. 高溫下銅的揮發現象與溫度臨界點</h3>
+  <p>在所有常見的陶瓷金屬著色劑（如鐵、鈷、錳）中，銅是唯一具有強烈「揮發性」的元素。當窯爐內的溫度攀升超過 1000°C 之後，釉藥配方中的氧化銅會開始氣化，並隨著窯內的熱氣流飄散。溫度越高、持溫時間越長，銅的揮發量就越大。這種特性使得含銅釉藥在經過高溫燒成後，其表面的銅含量往往會低於原始配方，導致色彩邊緣出現褪色或邊界模糊的現象。</p>
+
+  <h3>2. 飛銅現象：對鄰近作品的意外影響</h3>
+  <p>氧化銅氣化後並不會憑空消失，而是會附著在窯內其他作品的表面，這就是業界俗稱的「飛銅（Fuming 或 Flashing）」。如果一件施了銅紅或銅綠釉的作品，旁邊緊鄰著一件純白釉或透明釉的作品，燒成出窯後，您通常會發現那件純白作品朝向銅釉的一側，染上了一層淡淡的粉紅色或淺綠色光暈。這種無意的色彩渲染，有時會破壞了原本素雅的設計，但有時卻又帶來宛如水墨暈染般美麗的意外效果。</p>
+
+  <h3>3. 陶藝家如何利用揮發性創造特殊窯變</h3>
+  <p>熟知銅揮發特性的專業陶藝家，不會將其視為缺點，而是將其轉化為創作的利器。有些創作者會刻意使用「匣缽（Saggar）」將作品封閉起來，並在缽內撒上銅粉與木炭，利用局部強烈還原與銅蒸氣無孔不入的特性，在不上釉的裸坯表面燻烤出絢麗多姿的紅、紫、金等金屬光澤，這便是令人著迷的「燻燒窯變」。透過精準掌握窯爐氣流與擺窯位置，揮發性成為了拓展創作邊界的絕佳工具。</p>
+
+  <h2>六、氧化銅與其他金屬氧化物的混合呈色</h2>
+  <p>單一的氧化銅已經足夠精彩，但如果將它與其他金屬氧化物依比例混合，便能調配出更具層次感與深度的新色彩。</p>
+
+  <h3>1. 銅與鐵的混合：沉穩的橄欖綠與秋意</h3>
+  <p>氧化鐵是陶瓷中最基礎的發色劑。當我們將少量的氧化銅（呈現亮綠色）與適量的氧化鐵（呈現黃褐色或棕色）混合於釉藥中時，兩者會相互疊加，產生出非常自然、沉穩的「橄欖綠」或「枯葉色」。這種色彩降低了純銅綠的鮮豔與刺眼，賦予了作品一種歷經歲月洗禮的古樸質感，非常適合應用於茶具或帶有秋季意象的自然風格陶藝創作中。</p>
+
+  <h3>2. 銅與鈷的混合：深邃的藍綠色調</h3>
+  <p>氧化鈷以其強大且穩定的藍色發色著稱。若將微量的鈷加入銅綠釉中，藍與綠的交織會誕生出如深海般迷人的「孔雀藍」或「藍綠色（Teal）」。由於鈷的呈色能力極強，只需極微量（約 0.5% 以下）便能將銅的綠色大幅拉向藍色端。這種混合配方在氧化燒成下極為穩定，能燒出層次豐富且具有現代感的色彩，是許多歐美現代陶藝家愛用的色彩配方策略。</p>
+
+  <h3>3. 銅與鈦、金紅石的交融：斑駁與結晶效果</h3>
+  <p>二氧化鈦（Titanium Dioxide）或天然的金紅石（Rutile，含有鈦與鐵）在釉藥中不僅能產生微黃色，更重要的是它們具有強烈的「促結晶」與「乳濁」作用。當氧化銅遇上鈦元素時，鈦會在冷卻過程中促使釉面形成細微的結晶體，這些結晶會干擾光線的折射。結果就是，原本均勻的銅綠表面會浮現出有如流星雨般交錯的斑駁紋理，或是呈現出綠中帶黃、具有絲絨光澤的複雜肌理，大幅提升了釉面的視覺豐富度。</p>
+
+  <h2>七、氧化銅的安全性與食器釉藥的考量</h2>
+  <p>儘管氧化銅能帶來絕美的色彩，但在製作日常盛裝食物與飲料的食器時，必須極度重視其化學穩定性與潛在的安全風險。</p>
+
+  <h3>1. 銅釉的酸鹼釋出風險（重金屬溶出）</h3>
+  <p>如前所述，氧化銅是一種強烈的媒熔劑，它會改變釉藥玻璃質的網絡結構。如果基礎釉中的矽酸鹽（SiO₂）與氧化鋁（Al₂O₃）含量不足，無法將銅離子牢牢包裹在穩定的玻璃結構中，那麼燒成後的釉面就可能處於不穩定的狀態。當我們使用這種器皿盛裝酸性液體（如檸檬汁、咖啡、果醋或葡萄酒）時，酸性物質會逐漸侵蝕釉面，導致游離的銅離子溶出並混入食物中，長期攝入會對人體肝臟與健康造成嚴重危害。</p>
+
+  <h3>2. 如何調配安全的實用食器銅釉</h3>
+  <p>為了確保食器安全，調配含銅釉藥時必須遵循嚴格的化學準則。首先，必須確保基礎釉配方中有足夠的玻璃形成劑（矽）與穩定劑（鋁），以建立堅固的抗酸網絡。其次，氧化銅的添加比例應嚴格控制在 2% 到 3% 以下，過量的銅是導致溶出的主因。最後，必須確保作品在窯爐中達到「完全熔融與熟成」的指定溫度，避免因燒結不完全而留下微小的孔隙，增加酸液滲透的風險。</p>
+
+  <h3>3. 日常使用銅綠或銅紅餐具的注意事項</h3>
+  <p>對於一般消費者或陶藝創作者來說，最安全的實務做法是「分區施釉」。在製作馬克杯、湯碗或發酵罐時，內部接觸食物的表面應盡量使用經過安全測試的透明釉或白釉；而迷人的銅綠、銅紅或土耳其藍等裝飾性釉藥，則施塗於器皿的外部。此外，若發現家中的銅綠色陶杯在使用一段時間後，表面出現褪色、失去光澤或變灰暗的現象，這通常是釉面抗酸性不足已被侵蝕的警訊，應立即停止將其作為食器使用，轉作純裝飾品為佳。</p>
+
+  <h2>八、實務操作：如何精準控制氧化銅的發色？</h2>
+  <p>了解了理論之後，將知識轉化為實體作品的過程中，配方比例、備料工序與窯爐控制，是影響最終成敗的三大核心實務。</p>
+
+  <h3>1. 釉藥配方中氧化銅的添加比例建議</h3>
+  <p>在調配階段，精準的秤重是第一步。如果是要燒製氧化氣氛下的「銅綠釉」，一般建議的添加比例落在 1% 到 5% 之間。1% 呈現極淡的青水綠，3% 為標準的翠綠，超過 5% 則容易因為銅飽和而開始發黑發暗，甚至產生金屬枯澀感。若目標是還原燒的「銅紅釉」，由於紅色膠體極易顯色，所需的銅含量反而極低，通常僅需添加 0.3% 到 1% 的氧化銅，搭配少量的氧化錫（SnO₂）作為還原輔助劑，便能達到最佳的紅豔效果。</p>
+
+  <h3>2. 研磨細度與釉漿均勻度對發色的影響</h3>
+  <p>氧化銅粉末本身極易產生微小的結塊。如果不經過充分的研磨就直接混入釉漿，燒成後的作品表面會出現難看的黑色斑點，顏色也無法均勻展現。專業的做法是，將秤量好的氧化銅與少量基礎釉放入球磨機中研磨數小時，或是用研缽徹底磨細後，再將整桶釉漿反覆通過 100 目甚至 120 目的細篩網。只有確保銅金屬均勻懸浮於液體中，才能在燒結後得到如玉般溫潤、色彩無瑕的完美釉面。</p>
+
+  <h3>3. 燒成曲線與持溫時間的實務設定策略</h3>
+  <p>無論配方多麼完美，最後的決戰點仍在窯爐的溫度曲線（Firing Schedule）設定。在達到最高目標溫度（如 1230°C）時，設定 15 到 30 分鐘的「持溫（Hold）」，能讓融化的釉藥有足夠時間撫平氣泡，並讓銅離子徹底融入玻璃質中，這能大幅提升釉面的光澤度與色彩的深邃感。如果是燒製銅紅，冷卻階段的氣氛與速度控制更加關鍵；通常會採用相對較快的冷卻速度降至 1000°C 以下，以「凍結」紅色的銅膠體，避免其在緩慢降溫中重新氧化而失去美麗的紅色。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">氧化銅呈色常見問答 FAQ</div>
+    <p><strong>Q：為什麼我照著書上的配方調了銅紅釉，電窯燒出來卻是綠色的？</strong><br>
+    A：這是新手最常遇到的問題。一般的電窯（未加裝特殊還原設備）在燒成過程中充滿氧氣，屬於「氧化燒」。銅紅必須在缺氧的「還原燒」（通常使用瓦斯窯或柴窯）環境中才能將銅離子轉化為紅色的銅膠體。在氧化環境中燒製銅紅配方，只會呈現出淡綠色或透明無色。</p>
+    <p><strong>Q：我可以用銅幣或銅線自己磨粉來代替市售的氧化銅嗎？</strong><br>
+    A：理論上金屬銅在高溫下確實會氧化並產生顏色，但市售的氧化銅（CuO 或 Cu2O）是經過化學提純的標準化原料，能確保每次發色的一致性。生活中的銅製品通常含有鋅、鎳等其他合金雜質，直接加入釉藥中會導致發色不純、產生不可預期的黑斑或毒性，不建議用於精密的釉藥調配。</p>
+    <p><strong>Q：我的白釉杯子出窯後，旁邊為什麼會染上一片淡淡的粉紅色？</strong><br>
+    A：這是典型的「飛銅」現象。因為氧化銅在 1000°C 以上容易揮發成氣體，如果您的白釉作品在窯內緊鄰著一件施有銅紅釉或高濃度銅釉的作品，氣化的銅就會附著在白釉上。要避免這種情況，排窯時應將含銅釉藥與純白釉藥保持適當距離，或放置在不同的層板上。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div class="related" id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+</article>
+</main>
+</body>
+</html>
