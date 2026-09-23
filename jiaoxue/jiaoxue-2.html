@@ -70,6 +70,17 @@
         .level-C { background-color: #fff3cd; color: #664d03; border-color: #ffecb5; }
         .level-D { background-color: #f8d7da; color: #842029; border-color: #f5c2c7; }
         .level-E { background-color: #e2d9f3; color: #432874; border-color: #d1c4e9; }
+
+        /* 頁尾超連結樣式 */
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: var(--primary-accent);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -137,12 +148,16 @@
 
     <footer>
         <div class="container text-center mb-3 mt-2">
-            <p class="small text-muted mb-0">陶藝與釉藥知識網站 | Pottery & Glaze Knowledge Base</p>
+            <p class="small text-muted mb-0">
+                <a href="https://pottery-glaze.vercel.app/" target="_parent" class="footer-link">
+                    陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026
+                </a>
+            </p>
         </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
@@ -247,7 +262,7 @@
 204.96|磷酸錳|MnHPO4·3H2O|④硫酸鹽與磷酸鹽|MnO, P2O5|C 特殊|🧪 特殊陶瓷/磷酸鹽
 381.37|硼酸鈉|Na2B4O7·10H2O|⑤硝酸鹽與化學品|Na2O, B2O3|B 參考|✅ 硼砂(十水四硼酸鈉)；常見化學原料
 97.44|硫化鋅|ZnS|⑤硝酸鹽與化學品|ZnO|C 特殊|🧪 一般陶藝不常直接使用
-144.48|硫化鎘|CdS|⑤硝酸鹽與化學品|CdO|E 歷史|⛔ 鎘系色料/特殊材料；具高風險
+144.48|硫化鎘|CdS|⑤硝酸鹽與化學品|CdO|E 歷史|⛔ 鎘系色料/特殊材料|具高風險
 247.80|硫化銀|Ag2S|⑤硝酸鹽與化學品|Ag2O|C 特殊|🧪 一般陶藝釉藥並不常作直接原料
 95.61|硫化銅|CuS|⑤硝酸鹽與化學品|CuO|C 特殊|🧪 特殊/研究材料
 101.10|硝酸鉀(硝石)|KNO3|⑤硝酸鹽與化學品|K2O|C 特殊|⚠️ 化學原料；非一般釉藥首選原料
@@ -338,7 +353,7 @@
 -|磷灰石|Ca5(F/Cl)(PO4)3|⑥礦物|CaO, P2O5|C 特殊|🧪 F/Cl 位點可變非固定分子量
 -|霞石正長岩|K2O·3Na2O·4Al2O3·8SiO2(約)|⑥礦物|Na2O, K2O, Al2O3, SiO2|A 常用|✅ 熔點比長石更低的強效鹼金屬助熔劑
 -|球黏土 (Ball Clay)|Al2O3·2SiO2·2H2O+雜質|⑥礦物|Al2O3, SiO2|A 常用|✅ 高可塑性，增強釉漿附著力與懸浮性
--|草木灰 (Wood Ash)|變動組成|⑥礦物|CaO, K2O, SiO2, P2O5|B 參考|✅ 傳統灰釉核心，富含鈣、鉀及微量磷
+-|草木灰 (Wood Ash)|變動組成|⑥礦物|CaO, K2O, SiO2, P2O5|B 參考|✅ 傳統灰釉核心，富含鈣, 鉀及微量磷
 -|硼矽熔塊|變動組成|⑤硝酸鹽與化學品|B2O3, SiO2, Na2O|A 常用|✅ 將水溶性硼酸鹽預燒穩定化的現代安全硼源
 -|鉍熔塊|變動組成|⑤硝酸鹽與化學品|Bi2O3, SiO2|B 參考|✅ 無毒替代傳統鉛釉的低溫強效助熔劑
 40.10|碳化矽|SiC|⑤硝酸鹽與化學品|Si, C|C 特殊|🧪 高溫放出CO，可作為局部還原劑(如還原銅紅)
@@ -381,7 +396,7 @@
                              : item.level.includes('B') ? 'level-B' 
                              : item.level.includes('C') ? 'level-C' 
                              : item.level.includes('D') ? 'level-D' 
-                             : 'level-E';
+                             : item.level.includes('E' ) ? 'level-E' : '';
 
             return `
                 <tr>
