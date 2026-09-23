@@ -157,7 +157,7 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
@@ -429,13 +429,15 @@
                 "order": [] 
             });
 
+            // 修正類別篩選邏輯：使用正規表達式精準對應欄位文字
             $('#filterCategory').on('change', function() {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                table.column(3).search(val ? '^' + val + '.*' : '', true, false).draw();
+                var val = $(this).val();
+                table.column(3).search(val ? val : '', true, false).draw();
             });
 
+            // 修正實務等級篩選邏輯
             $('#filterLevel').on('change', function() {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                var val = $(this).val();
                 table.column(5).search(val ? val : '', true, false).draw();
             });
         });
