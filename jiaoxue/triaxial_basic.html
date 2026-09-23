@@ -319,6 +319,17 @@
             box-sizing: border-box;
         }
 
+        /* 頁尾超連結樣式 */
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
         /* =========================================================
            ★ 手機版專屬響應式結界 (極致壓縮版，絕對不出現左右滾動條) ★
            ★ 以下代碼絕對不會影響電腦版任何排版 ★
@@ -424,7 +435,7 @@
     <!-- 第一段：基本概念 -->
     <div class="section-block">
         <h2 class="section-title">一、 什麼是「三角座標試驗法」？</h2>
-        <p>釉藥是由多種原料混合而成。但是，如果我們只是憑經驗：<br>
+        <p>釉藥是由多種原料混合而成。但是, 如果我們只是憑經驗：<br>
         <span class="highlight-text">「這個多加一點、那個少加一點。」</span><br>
         就很難知道到底是哪一個比例造成釉面變化。</p>
 
@@ -604,7 +615,7 @@
         </div>
 
         <h3 class="sub-title"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> 注意：一種原料不一定只扮演一種角色</h3>
-        <p>例如：<strong>長石</strong>並不是「只有助熔劑」。它本身含有 K₂O、Na₂O、Al₂O₃、SiO₂、CaO 等成分，所以長石是一種<strong>「複合型原料」</strong>。學生要清楚區分「原料」與「原料裡面的氧化物」這兩個概念。</p>
+        <p>例如：<strong>長石</strong>並不是實驗「只有助熔劑」。它本身含有 K₂O、Na₂O、Al₂O₃、SiO₂、CaO 等成分，所以長石是一種<strong>「複合型原料」</strong>。學生要清楚區分「原料」與「原料裡面的氧化物」這兩個概念。</p>
 
         <h3 class="sub-title">📌 三角座標法的優缺點</h3>
         <div class="pros-cons-container">
@@ -693,7 +704,7 @@
     </div>
 
     <!-- 總結與口訣 -->
-    <div class="section-block" style="background-color: var(--primary-bg); color: white; border-radius: 0 0 12px 12px;">
+    <div class="section-block" style="background-color: var(--primary-bg); color: white;">
         <h2 style="text-align: center; color: var(--accent-color);">🌟 給學生的最後總結</h2>
         <p style="text-align: center; font-size: 1.1em;">三角座標法可以理解成：<br><strong>「用三角形建立一張釉藥實驗地圖。」</strong></p>
         
@@ -709,6 +720,15 @@
                 「21點初學 ABC 找方向，66點細節實戰挖寶藏！」
             </p>
         </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="section-block" style="background-color: #ffffff; text-align: center; padding: 25px 20px; border-top: 1px solid var(--border-color); border-radius: 0 0 12px 12px;">
+        <p class="small text-muted mb-0">
+            <a href="https://pottery-glaze.vercel.app/" target="_parent" class="footer-link">
+                陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026
+            </a>
+        </p>
     </div>
 
 </div>
