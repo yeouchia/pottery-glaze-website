@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶瓷原料與釉藥化學導航總表 | 陶藝與釉藥知識網站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #eee7d8;
+            --content-bg: #fbfaf5;
+            --card-bg: #f1f0e4;
+            --sub-card-bg: #f6f4e9;
+            --border-color: #d8d4c5;
+            --text-main: #39372f;
+            --text-muted: #777367;
+            --primary-accent: #6c6654;
+            --light-accent: #e8e4d6;
+            --font-serif: 'Noto Serif TC', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.6; padding-bottom: 40px; }
+        h1, h2, h3, h4, h5, h6, .brand-font { font-family: var(--font-serif); }
+
+        /* 壓縮後的精簡大標題區塊 */
+        .hero-section { 
+            background-color: var(--content-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 1rem 1.5rem; 
+            margin-top: 1rem; 
+            margin-bottom: 0.8rem; 
+            box-shadow: 0 2px 10px rgba(57, 55, 47, 0.03); 
+        }
+        .hero-title { color: var(--text-main); font-weight: 700; font-size: 1.5rem; margin-bottom: 0.2rem; }
+
+        /* 壓縮後的精簡篩選區塊 */
+        .control-panel { 
+            background-color: var(--content-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 0.8rem 1.2rem; 
+            margin-bottom: 0.8rem; 
+            box-shadow: 0 2px 8px rgba(57, 55, 47, 0.02);
+        }
+        .form-select { background-color: var(--sub-card-bg); border: 1px solid var(--border-color); color: var(--text-main); font-size: 0.9rem; padding: 0.35rem 2.25rem 0.35rem 0.75rem; }
+        .form-select:focus { background-color: var(--content-bg); border-color: var(--primary-accent); box-shadow: 0 0 0 0.2rem rgba(108, 102, 84, 0.15); }
+
+        /* 明亮表格區塊 */
+        .table-container { background-color: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.2rem; overflow-x: auto; box-shadow: 0 4px 15px rgba(57, 55, 47, 0.06); margin-bottom: 2rem; }
+        table.dataTable { border-collapse: collapse !important; width: 100% !important; }
+        table.dataTable th, table.dataTable td { border-color: var(--border-color) !important; padding: 10px 8px; vertical-align: middle; font-size: 0.9rem; }
+        table.dataTable thead th { background-color: var(--light-accent) !important; color: var(--text-main); font-family: var(--font-serif); font-weight: 600; border-bottom: 2px solid var(--border-color) !important; }
+        table.dataTable tbody tr { background-color: #ffffff; }
+        table.dataTable tbody tr:nth-of-type(even) { background-color: #faf9f5; }
+        table.dataTable tbody tr:hover { background-color: #f1f0e4; }
+
+        .badge-cat { background-color: var(--light-accent); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.25em 0.5em; border-radius: 4px; font-size: 0.8rem; font-weight: 500;}
+        .badge-oxide { background-color: #fdfdf9; color: var(--primary-accent); border: 1px solid #d8d4c5; font-family: var(--font-sans); font-size: 0.85rem; padding: 0.2em 0.4em; border-radius: 4px; font-weight: 700;}
+        .badge-level { padding: 0.25em 0.5em; border-radius: 4px; font-size: 0.8rem; font-weight: bold; border: 1px solid transparent; display: inline-block;}
+        
+        .level-A { background-color: #d1e7dd; color: #0f5132; border-color: #badbcc; }
+        .level-B { background-color: #cff4fc; color: #055160; border-color: #b6effb; }
+        .level-C { background-color: #fff3cd; color: #664d03; border-color: #ffecb5; }
+        .level-D { background-color: #f8d7da; color: #842029; border-color: #f5c2c7; }
+        .level-E { background-color: #e2d9f3; color: #432874; border-color: #d1c4e9; }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-2">
+        <!-- 精簡版大標題 -->
+        <header class="hero-section">
+            <h1 class="hero-title"><i class="fa-solid fa-jar me-2" style="color: var(--primary-accent);"></i>陶瓷原料與釉藥化學導航總表</h1>
+            <p class="text-muted mb-0 small">專為釉藥實驗與配方計算設計的基礎數據庫。</p>
+        </header>
+
+        <!-- 壓縮版篩選器 -->
+        <div class="control-panel">
+            <div class="row g-2 align-items-center">
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light text-muted small fw-bold border-stone">類別篩選</span>
+                        <select id="filterCategory" class="form-select form-select-sm">
+                            <option value="">顯示全部類別</option>
+                            <option value="①顏料">① 陶瓷器顏料</option>
+                            <option value="②氧化物">② 氧化物類</option>
+                            <option value="③碳酸鹽">③ 碳酸鹽類</option>
+                            <option value="④硫酸鹽與磷酸鹽">④ 硫酸鹽與磷酸鹽類</option>
+                            <option value="⑤硝酸鹽與化學品">⑤ 硝酸鹽與化學品</option>
+                            <option value="⑥礦物">⑥ 礦物類</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light text-muted small fw-bold border-stone">實務等級</span>
+                        <select id="filterLevel" class="form-select form-select-sm">
+                            <option value="">顯示全部等級 (A~E)</option>
+                            <option value="A 常用">🟢 A 常用原料 (核心基礎)</option>
+                            <option value="B 參考">🟢 B 可用 / 參考</option>
+                            <option value="C 特殊">🟡 C 特殊用途 (特種/色料)</option>
+                            <option value="D 工藝">🟠 D 間接 / 工藝</option>
+                            <option value="E 歷史">🔴 E 歷史 / 高風險</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 表格區塊 -->
+        <div class="table-container">
+            <table id="materialTable" class="table table-hover align-middle" style="width:100%">
+                <thead>
+                    <tr>
+                        <th width="14%">原料名稱</th>
+                        <th width="15%">化學式</th>
+                        <th width="10%">分子量</th>
+                        <th width="12%">來源分類</th>
+                        <th width="15%">提供氧化物</th>
+                        <th width="10%">實務級別</th>
+                        <th width="24%">使用狀態與備註</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- 動態生成資料區 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center mb-3 mt-2">
+            <p class="small text-muted mb-0">陶藝與釉藥知識網站 | Pottery & Glaze Knowledge Base</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        const rawDataStr = `
+-|錳桃紅|含 Mn 及 P 的 Al2O3|①顏料|Mn, P|C 特殊|🧪 鋁氧化物基體中的 Mn、P 顯色系統
+-|鉻鋁綠|Al2O3 和 Cr2O3 固溶體|①顏料|Cr2O3, Al2O3|C 特殊|🧪 與現代陶瓷顏料分類相符；Cr–Al 類可作陶瓷色料
+-|鉻鐵黑|Fe2O3 和 Cr2O3 固溶體|①顏料|Fe2O3, Cr2O3|C 特殊|🧪 屬金屬氧化物複合顏料的合理範圍
+-|釉上紅|Fe2O3 和 Al2O3 固溶體|①顏料|Fe2O3, Al2O3|C 特殊|🧪 Fe系陶瓷色料可依基體與燒成條件形成不同紅色系統
+159.69|鐵紅|Fe2O3|①顏料|Fe2O3|A 常用|✅ 現代陶瓷仍廣泛使用鐵系色料
+151.99|鉻綠|Cr2O3|①顏料|Cr2O3|A 常用|✅ 屬現代陶瓷常見無機色料類型
+-|鉻鈦黃|將 Sb 與 Cr 固溶的 TiO2|①顏料|Sb, Cr, TiO2|C 特殊|🧪 現代陶瓷顏料中確有 TiO2/金紅石結構的 Sb、Cr 系黃色顏料
+-|鉻錫紫|Cr 或 Cr 與 Co 固溶的 SnO2|①顏料|Cr, Co, SnO2|C 特殊|🧪 Cr–Sn 類陶瓷顏料是現代陶瓷色料的重要類型
+-|釩錫黃|V 固溶的 SnO2|①顏料|V, SnO2|C 特殊|🧪 現代資料有 Sn–V 黃色陶瓷顏料/色料類型
+-|銻錫灰|Sb 固溶的 SnO2|①顏料|Sb, SnO2|C 特殊|🧪 現代陶瓷資料有 Sn–Sb 灰色顏料系統
+-|釩鋯黃|V 固溶的 ZrO2|①顏料|V, ZrO2|C 特殊|🧪 現代陶瓷資料有 Zr–V 黃/藍綠色系統
+-|天藍色|Zn–Co–Al 系尖晶石|①顏料|Co, Zn, Al|C 特殊|🧪 尖晶石是現代陶瓷顏料的重要穩定晶體結構，Co–Al 類可形成藍色系
+-|孔雀綠|Zn–Co–Al–Cr 系尖晶石|①顏料|Co, Cr, Zn, Al|C 特殊|🧪 尖晶石複合顏料可用於陶瓷釉/胎；實際色調受組成與釉基體影響
+-|茶紅|Zn–Al–Cr–Fe 系尖晶石|①顏料|Fe, Cr, Zn, Al|C 特殊|🧪 Zn–Fe–Cr 類尖晶石是現代陶瓷棕色系色料的典型結構
+-|栗茶|Zn–Al–Cr–Fe 系尖晶石|①顏料|Fe, Cr, Zn, Al|C 特殊|🧪 與茶紅同屬原表所列 Zn–Al–Cr–Fe 系
+-|黑茶|Zn–Mn–Al–Cr–Fe 系尖晶石|①顏料|Mn, Cr, Fe, Zn, Al|C 特殊|🧪 多元尖晶石系黑/深棕色顏料符合現代陶瓷色料分類
+-|黑|Co–Mn–Cr–Fe 系尖晶石|①顏料|Co, Mn, Cr, Fe|C 特殊|🧪 Co–Mn–Cr–Fe 尖晶石屬現代陶瓷黑色複合顏料的合理類型
+-|褐色|Mn–Cr 系尖晶石|①顏料|Mn, Cr|C 特殊|🧪 與現代陶瓷尖晶石型褐色/黑色顏料分類相符
+-|鉻鋁紅|Zn–Al–Cr–Fe 系尖晶石|①顏料|Cr, Fe, Zn, Al|C 特殊|🧪 現代陶瓷顏料可透過 Cr、Fe 等在尖晶石結構中的固溶調整色調
+-|銻黃|PbO·Sb2O3|①顏料|Pb, Sb|E 歷史|⛔ 明確標示高風險/歷史與材料知識
+-|黃|含 Sn、Al、Fe、Zn 等之複氧化物固熔體|①顏料|Sn, Fe, Zn, Al|C 特殊|🧪 現代複合無機顏料確有此類多元素固溶系統
+-|鮮綠|3CaO·Cr2O3·3SiO2|①顏料|Cr2O3, CaO, SiO2|C 特殊|🧪 Ca–Cr–Si 石榴石型陶瓷顏料有材料學依據
+-|鉻錫紅|Cr 固溶的 CaO·SnO2·SiO2|①顏料|Cr, CaO, SnO2, SiO2|C 特殊|🧪 Cr–Sn 類紅/粉紅陶瓷顏料是現代陶瓷色料的重要類型
+-|土耳其藍|V 固溶的 ZrO2·SiO2|①顏料|V, ZrO2, SiO2|C 特殊|🧪 現代陶瓷資料有 Si–Zr–V turquoise/藍綠色顏料系統
+-|鋯黃|Pr 固溶的 ZrO2·SiO2|①顏料|Pr, ZrO2, SiO2|C 特殊|🧪 現代陶瓷資料有 Si–Zr–Pr 鋯結構黃色顏料
+-|淡紅/珊瑚紅|Fe 固溶的 ZrO2·SiO2|①顏料|Fe, ZrO2, SiO2|C 特殊|🧪 現代資料有 Fe–Si–Zr 類包覆/鋯基紅粉紅陶瓷色料
+-|鋯灰|Mn、Co、Ni 等固溶的 ZrO2·SiO2|①顏料|Mn, Co, Ni, ZrO2, SiO2|C 特殊|🧪 現代陶瓷資料有 Zr–Co–Ni 灰色顏料系統
+144.48|鎘黃|CdS|①顏料|Cd, S|E 歷史|⛔ 明確標示高風險/現代多採封裝色料
+-|硒紅|CdS 和 CdSe 的固溶體|①顏料|Cd, S, Se|E 歷史|⛔ 明確標示高風險/封裝色料
+29.88|氧化鋰|Li2O|②氧化物|Li2O|C 特殊|🧪 特殊但可取得，氧化物＋鋰質原料
+25.01|氧化鈹|BeO|②氧化物|BeO|E 歷史|📚 通常不作一般陶藝直接原料，保留作材料知識
+61.98|氧化鈉|Na2O|②氧化物|Na2O|A 常用|✅ 重要釉藥氧化物
+94.20|氧化鉀|K2O|②氧化物|K2O|A 常用|✅ 重要釉藥氧化物
+40.30|氧化鎂(苦土/鎂)|MgO|②氧化物|MgO|A 常用|✅ 重要釉藥氧化物
+56.08|氧化鈣(石灰/生石灰)|CaO|②氧化物|CaO|A 常用|✅ 重要釉藥氧化物
+103.62|氧化鍶|SrO|②氧化物|SrO|C 特殊|🧪 特殊來源，特殊釉藥氧化物
+153.33|氧化鋇|BaO|②氧化物|BaO|C 特殊|⚠️ 工業/特殊原料，保留並標示安全性
+101.96|氧化鋁|Al2O3|②氧化物|Al2O3|A 常用|✅ 核心陶瓷氧化物
+60.08|二氧化矽(硅石/石英)|SiO2|②氧化物|SiO2|A 常用|✅ 核心陶瓷氧化物
+141.94|五氧化磷|P2O5|②氧化物|P2O5|C 特殊|🧪 研究/特殊釉
+181.88|三氧化二釩|V2O5|②氧化物|V2O5|C 特殊|🧪 研究/特殊材料
+151.99|三氧化鉻|Cr2O3|②氧化物|Cr2O3|B 參考|⚠️ 視等級而定，呈色氧化物
+71.84|氧化鐵(II)|FeO|②氧化物|FeO|C 特殊|📚 通常不以純 FeO 作一般陶藝原料
+231.53|四氧化三鐵|Fe3O4|②氧化物|Fe3O4|C 特殊|🧪 鐵系材料
+159.69|氧化鐵(III)|Fe2O3|②氧化物|Fe2O3|A 常用|✅ 核心呈色原料
+74.93|氧化鈷(II)|CoO|②氧化物|CoO|C 特殊|⚠️ 特殊色料原料
+240.80|四氧化三鈷|Co3O4|②氧化物|Co3O4|C 特殊|⚠️ 特殊色料原料
+74.69|氧化鎳|NiO|②氧化物|NiO|C 特殊|⚠️ 特殊色料原料
+79.55|氧化銅|CuO|②氧化物|CuO|A 常用|✅ 核心呈色原料
+81.38|氧化鋅|ZnO|②氧化物|ZnO|A 常用|✅ 核心釉藥原料
+143.94|氧化鉬|MoO3|②氧化物|MoO3|C 特殊|🧪 研究/特殊材料
+128.41|氧化鎘|CdO|②氧化物|CdO|E 歷史|⛔ 高風險材料，僅作材料知識
+150.71|氧化錫|SnO2|②氧化物|SnO2|A 常用|✅ 核心陶瓷原料
+291.52|三氧化銻|Sb2O3|②氧化物|Sb2O3|C 特殊|🧪 特殊材料
+307.52|四氧化銻|Sb2O4|②氧化物|Sb2O4|D 工藝|📚 少見，保留作知識
+323.50|五氧化銻|Sb2O5|②氧化物|Sb2O5|D 工藝|📚 少見，保留作知識
+231.84|氧化鎢|WO3|②氧化物|WO3|C 特殊|🧪 研究/特殊材料
+231.74|氧化銀|Ag2O|②氧化物|Ag2O|D 工藝|📚 保留作知識
+223.20|氧化鉛(II)|PbO|②氧化物|PbO|E 歷史|⛔ 現代一般陶藝不作推薦，歷史材料＋安全警示
+685.60|四氧化三鉛(鉛丹)|Pb3O4|②氧化物|Pb3O4|E 歷史|⛔ 不作一般陶藝推薦，歷史材料＋安全警示
+465.96|三氧化鉍|Bi2O3|②氧化物|Bi2O3|C 特殊|🧪 特殊但可取得，特殊釉藥材料
+325.81|氧化鑭|La2O3|②氧化物|La2O3|C 特殊|🧪 研究/功能材料
+172.12|氧化鈰|CeO2|②氧化物|CeO2|C 特殊|🧪 工業材料，特殊材料
+1021.81|氧化鐠|Pr6O11|②氧化物|Pr6O11|C 特殊|🧪 研究/色料
+336.48|氧化釹|Nd2O3|②氧化物|Nd2O3|C 特殊|🧪 研究/功能材料
+123.22|氧化鋯|ZrO2|②氧化物|ZrO2|A 常用|✅ 工業陶瓷常見，核心陶瓷材料
+842.08|八氧化三鈾|U3O8|②氧化物|U3O8|E 歷史|⛔ 放射性相關，僅作歷史材料知識
+286.03|三氧化鈾|UO3|②氧化物|UO3|E 歷史|⛔ 放射性相關，僅作歷史材料知識
+70.94|一氧化錳|MnO|②氧化物|MnO|C 特殊|🧪 特殊形式，保留
+86.94|二氧化錳|MnO2|②氧化物|MnO2|A 常用|✅ 常見來源，核心呈色原料
+197.84|三氧化砷素|As2O3|②氧化物|As2O3|E 歷史|⛔ 高毒性，僅作歷史材料知識
+229.84|五氧化砷素|As2O5|②氧化物|As2O5|E 歷史|⛔ 高毒性，僅作歷史材料知識
+138.20|碳酸鉀|K2CO3|③碳酸鹽|K2O|B 參考|✅ 現代仍有材料化學與釉藥用途
+100.09|碳酸鈣(石灰石)|CaCO3|③碳酸鹽|CaO|A 常用|✅ 加熱分解後提供 CaO
+275.74|碳酸銀|Ag2CO3|③碳酸鹽|Ag2O|C 特殊|🧪 非一般陶藝常備原料
+534.74|鹽基性碳酸鈷|2CoCO3·3Co(OH)2·H2O|③碳酸鹽|CoO|C 特殊|⚠️ 屬特殊陶瓷色料，需注意暴露與安全
+147.63|碳酸鍶|SrCO3|③碳酸鹽|SrO|B 參考|✅ 現代陶瓷與釉藥中仍有明確用途
+221.11|鹽基性碳酸銅|CuCO3·Cu(OH)2|③碳酸鹽|CuO|C 特殊|⚠️ 一般陶藝中通常依配方選擇其他銅化合物
+105.99|碳酸鈉(蘇打灰)|Na2CO3|③碳酸鹽|Na2O|B 參考|✅ 可溶性使其與長石等礦物型原料的使用方式不同
+775.63|鹽基性碳酸鉛|2PbCO3·Pb(OH)2|③碳酸鹽|PbO|E 歷史|⛔ 現代一般陶藝不宜視為一般使用原料
+197.34|碳酸鋇|BaCO3|③碳酸鹽|BaO|B 參考|⚠️ 有現代陶瓷用途，但屬需注意毒性的專用原料
+-|鹽基性碳酸鎂|MgCO3·Mg(OH)2·H2O|③碳酸鹽|MgO|E 歷史|📚 現代通常有滑石/白雲石等來源
+114.95|碳酸錳|MnCO3|③碳酸鹽|MnO|C 特殊|🧪 一般使用頻率通常低於二氧化錳
+73.89|碳酸鋰|Li2CO3|③碳酸鹽|Li2O|B 參考|✅ 現代陶瓷中有明確鋰系釉藥用途
+136.14|硫酸鈣|CaSO4|④硫酸鹽與磷酸鹽|CaO, SO3|D 工藝|🏺 一般原料/硫酸鹽
+145.15|硫酸鈣(燒石膏)|CaSO4·0.5H2O|④硫酸鹽與磷酸鹽|CaO, SO3|D 工藝|🏺 半水石膏；成型相關
+172.17|硫酸鈣(石膏)|CaSO4·2H2O|④硫酸鹽與磷酸鹽|CaO, SO3|D 工藝|🏺 天然石膏；工藝材料
+303.26|硫酸鉛|PbSO4|④硫酸鹽與磷酸鹽|PbO, SO3|E 歷史|⛔ 高風險/歷史材料
+233.39|硫酸鋇|BaSO4|④硫酸鹽與磷酸鹽|BaO, SO3|C 特殊|⚠️ 釉料/特殊原料
+136.14|硬石膏|CaSO4|④硫酸鹽與磷酸鹽|CaO, SO3|D 工藝|📚 天然礦物/石膏系
+233.39|重晶石|BaSO4|④硫酸鹽與磷酸鹽|BaO, SO3|C 特殊|⚠️ 天然礦物/釉料原料
+121.95|磷酸鋁|AlPO4|④硫酸鹽與磷酸鹽|Al2O3, P2O5|C 特殊|🧪 特殊陶瓷/耐火材料
+310.18|磷酸鈣|Ca3(PO4)2|④硫酸鹽與磷酸鹽|CaO, P2O5|C 特殊|🧪 特殊陶瓷/磷酸鹽
+172.09|磷酸(氫)鈣|CaHPO4·2H2O|④硫酸鹽與磷酸鹽|CaO, P2O5|C 特殊|🧪 磷酸鹽/前驅物
+254.05|(焦性)磷酸鈣|Ca2P2O7|④硫酸鹽與磷酸鹽|CaO, P2O5|C 特殊|🧪 高溫反應相/特殊陶瓷
+357.99|磷酸鈉|Na2HPO4·12H2O|④硫酸鹽與磷酸鹽|Na2O, P2O5|C 特殊|🧪 化學原料/磷酸鹽
+446.06|(焦性)磷酸鈉|Na4P2O7·10H2O|④硫酸鹽與磷酸鹽|Na2O, P2O5|C 特殊|🧪 化學原料/特殊陶瓷
+204.96|磷酸錳|MnHPO4·3H2O|④硫酸鹽與磷酸鹽|MnO, P2O5|C 特殊|🧪 特殊陶瓷/磷酸鹽
+381.37|硼酸鈉|Na2B4O7·10H2O|⑤硝酸鹽與化學品|Na2O, B2O3|B 參考|✅ 硼砂(十水四硼酸鈉)；常見化學原料
+97.44|硫化鋅|ZnS|⑤硝酸鹽與化學品|ZnO|C 特殊|🧪 一般陶藝不常直接使用
+144.48|硫化鎘|CdS|⑤硝酸鹽與化學品|CdO|E 歷史|⛔ 鎘系色料/特殊材料；具高風險
+247.80|硫化銀|Ag2S|⑤硝酸鹽與化學品|Ag2O|C 特殊|🧪 一般陶藝釉藥並不常作直接原料
+95.61|硫化銅|CuS|⑤硝酸鹽與化學品|CuO|C 特殊|🧪 特殊/研究材料
+101.10|硝酸鉀(硝石)|KNO3|⑤硝酸鹽與化學品|K2O|C 特殊|⚠️ 化學原料；非一般釉藥首選原料
+169.87|硝酸銀|AgNO3|⑤硝酸鹽與化學品|Ag2O|C 特殊|🧪 特殊/研究材料
+331.21|硝酸鉛|Pb(NO3)2|⑤硝酸鹽與化學品|PbO|E 歷史|⛔ 現代一般陶藝不宜作為推薦原料
+333.90|吐酒石|C4H4O6KSb·0.5H2O|⑤硝酸鹽與化學品|K2O, Sb2O3|E 歷史|📚 特殊/歷史材料
+77.98|水鋁氧|Al(OH)3|⑤硝酸鹽與化學品|Al2O3|B 參考|✅ 陶瓷、耐火與化學原料
+74.09|消石灰|Ca(OH)2|⑤硝酸鹽與化學品|CaO|B 參考|✅ 工業與陶瓷相關原料
+168.72|(無水)錫酸|H2SnO3|⑤硝酸鹽與化學品|SnO2|C 特殊|🧪 通常視為偏錫酸，不宜與 SnO2 混同
+78.97|(金屬)硒|Se|⑤硝酸鹽與化學品|Se|C 特殊|🧪 非一般陶藝常備原料
+116.98|釩酸銨|NH4VO3|⑤硝酸鹽與化學品|V2O5|C 特殊|🧪 特殊/工業/研究材料
+58.10|氟化鉀|KF|⑤硝酸鹽與化學品|K2O, F|C 特殊|⚠️ 需注意腐蝕性與加熱行為
+78.07|氟化鈣|CaF2|⑤硝酸鹽與化學品|CaO, F|C 特殊|⚠️ 螢石是天然礦物來源
+41.99|氟化鈉|NaF|⑤硝酸鹽與化學品|Na2O, F|C 特殊|⚠️ 特殊化學原料，標示安全性
+62.30|氟化鎂|MgF2|⑤硝酸鹽與化學品|MgO, F|C 特殊|⚠️ 特殊玻璃/陶瓷化學相關
+25.94|氟化鋰|LiF|⑤硝酸鹽與化學品|Li2O, F|C 特殊|⚠️ 特殊化學/功能材料
+61.83|硼酸|H3BO3|⑤硝酸鹽與化學品|B2O3|A 常用|✅ 常見化學原料
+69.62|(無水)硼酸|B2O3|⑤硝酸鹽與化學品|B2O3|B 參考|✅ 特殊陶瓷/玻璃原料
+511.60|焦性銻酸鈉|Na2H2Sb2O7·6H2O|⑤硝酸鹽與化學品|Na2O, Sb2O5|E 歷史|📚 歷史色料/乳濁化學
+633.93|鈾酸鈉|Na2U2O7|⑤硝酸鹽與化學品|Na2O, UO3|E 歷史|⛔ 放射性相關材料，僅作歷史與材料知識
+411.85|氯化金|H[AuCl4]·4H2O|⑤硝酸鹽與化學品|Au, Cl|C 特殊|🧪 貴金屬化學/特殊裝飾材料
+143.32|氯化銀|AgCl|⑤硝酸鹽與化學品|Ag2O, Cl|C 特殊|🧪 非一般釉藥常備原料
+58.44|氯化鈉|NaCl|⑤硝酸鹽與化學品|Na2O, Cl|D 工藝|🏺 陶瓷/鹽釉相關化學材料
+517.90|氯化白金|H2[PtCl6]·6H2O|⑤硝酸鹽與化學品|Pt, Cl|C 特殊|🧪 貴金屬/特殊材料
+194.19|鉻酸鉀|K2CrO4|⑤硝酸鹽與化學品|K2O, CrO3|E 歷史|⛔ 特殊/高風險化學材料
+294.18|重鉻酸鉀|K2Cr2O7|⑤硝酸鹽與化學品|K2O, CrO3|E 歷史|⛔ 不屬一般陶藝推薦原料
+323.19|鉻酸鉛|PbCrO4|⑤硝酸鹽與化學品|PbO, CrO3|E 歷史|⛔ 高風險/歷史色料材料
+253.32|鉻酸鋇(原表鉻酸銀)|BaCrO4|⑤硝酸鹽與化學品|BaO, CrO3|C 特殊|🧪 原表錯誤保留作紀錄
+60.08|(無水)矽酸|SiO2|⑤硝酸鹽與化學品|SiO2|A 常用|✅ 核心陶瓷原料
+-|矽酸鈉|Na2O·xSiO2|⑤硝酸鹽與化學品|Na2O, SiO2|B 參考|✅ 可變組成，依x而變
+379.33|醋酸鉛|Pb(C2H3O2)2·3H2O|⑤硝酸鹽與化學品|PbO|E 歷史|⛔ 現代一般陶藝不宜作為推薦原料
+81.38|氧化鋅(化學品表)|ZnO|⑤硝酸鹽與化學品|ZnO|A 常用|✅ 常見陶瓷/釉藥原料
+183.70|亞鉛尖晶石|ZnO·Al2O3|⑥礦物|ZnO, Al2O3|C 特殊|🧪 礦物/相組成
+278.21|灰長石|CaO·Al2O3·2SiO2|⑥礦物|CaO, Al2O3, SiO2|A 常用|✅ 釉與坯體成分來源
+135.94|灰鈦石|CaO·TiO2|⑥礦物|CaO, TiO2|C 特殊|🧪 鈣鈦礦的舊式氧化物寫法
+411.78|硼酸鈣|2CaO·3B2O3·5H2O|⑥礦物|CaO, B2O3|C 特殊|🧪 名稱過於籠統，需進一步確認礦物身份
+258.16|高嶺礦|Al2O3·2SiO2·2H2O|⑥礦物|Al2O3, SiO2|A 常用|✅ 高嶺石的理想氧化物表示
+284.21|霞石|Na2O·Al2O3·2SiO2|⑥礦物|Na2O, Al2O3, SiO2|A 常用|✅ 理想式合理
+379.27|滑石|3MgO·4SiO2·H2O|⑥礦物|MgO, SiO2|A 常用|✅ 天然滑石為含水鎂矽酸鹽
+-|褐鐵礦|Fe2O3·nH2O|⑥礦物|Fe2O3|B 參考|✅ 混合/可變組成
+316.30|鉀霞石|K2O·Al2O3·2SiO2|⑥礦物|K2O, Al2O3, SiO2|C 特殊|🧪 礦物身份需校訂
+796.56|絹雲母|K2O·3Al2O3·6SiO2·2H2O|⑥礦物|K2O, Al2O3, SiO2|B 參考|✅ 天然組成可能變動
+79.87|金紅石|TiO2|⑥礦物|TiO2|A 常用|✅ 標準礦物金紅石
+585.85|堇青石|2MgO·2Al2O3·5SiO2|⑥礦物|MgO, Al2O3, SiO2|B 參考|✅ 重要耐熱陶瓷相
+196.00|榍石|CaO·TiO2·SiO2|⑥礦物|CaO, TiO2, SiO2|C 特殊|🧪 陶瓷結晶相研究
+140.69|苦土橄欖石|2MgO·SiO2|⑥礦物|MgO, SiO2|C 特殊|🧪 鎂橄欖石
+60.08|硅石|SiO2|⑥礦物|SiO2|A 常用|✅ 泛指二氧化矽/矽石
+223.84|鉻鐵鑛|FeO·Cr2O3|⑥礦物|FeO, Cr2O3|C 特殊|🧪 天然成分可變
+222.51|矽鋅礦|2ZnO·SiO2|⑥礦物|ZnO, SiO2|C 特殊|🧪 原表分子量略有差異
+116.16|矽灰石|CaO·SiO2|⑥礦物|CaO, SiO2|A 常用|✅ 標準礦物矽灰石
+162.05|矽線石|Al2O3·SiO2|⑥礦物|Al2O3, SiO2|B 參考|✅ 標準礦物矽線石
+524.45|硬玉|Na2O·Al2O3·4SiO2|⑥礦物|Na2O, Al2O3, SiO2|E 歷史|📚 原表分子量與化學式不相符已修正
+136.14|硬石膏|CaSO4|⑥礦物|CaO, SO3|D 工藝|🏺 標準礦物硬石膏
+162.05|紅柱石|Al2O3·SiO2|⑥礦物|Al2O3, SiO2|B 參考|✅ 標準礦物紅柱石
+231.53|磁鐵鑛|FeO·Fe2O3|⑥礦物|FeO, Fe2O3|B 參考|✅ 磁鐵礦
+100.39|斜頑火石|MgO·SiO2|⑥礦物|MgO, SiO2|C 特殊|🧪 頑火石的理想式
+233.39|重晶石|BaSO4|⑥礦物|BaO, SO3|C 特殊|⚠️ 標準礦物重晶石
+375.28|重土長石|BaO·Al2O3·2SiO2|⑥礦物|BaO, Al2O3, SiO2|C 特殊|🧪 天然長石可有固溶與取代
+101.10|硝石|KNO3|⑥礦物|K2O|E 歷史|📚 標準礦物硝石
+183.30|鋯(鋯石)|ZrO2·SiO2|⑥礦物|ZrO2, SiO2|A 常用|✅ 對應鋯石的理想組成
+58.32|水鎂石(氫氧化鎂)|Mg(OH)2|⑥礦物|MgO|C 特殊|🧪 原名水滑石與化學式不一致已更正
+156.00|水礬土|Al2O3·3H2O|⑥礦物|Al2O3|B 參考|✅ 天然礦物組成變動
+556.66|正(鉀)長石|K2O·Al2O3·6SiO2|⑥礦物|K2O, Al2O3, SiO2|A 常用|✅ 實際礦物可能為正長石等多形
+60.08|石英(硅石)|SiO2|⑥礦物|SiO2|A 常用|✅ 石英是 SiO2 的一種晶型
+142.27|尖晶石|MgO·Al2O3|⑥礦物|MgO, Al2O3|C 特殊|🧪 標準鎂鋁尖晶石
+810.50|曹灰硼石|Na2O·2CaO·5B2O3·16H2O|⑥礦物|Na2O, CaO, B2O3|C 特殊|🧪 需進一步礦物學確認
+524.44|鈉長石|Na2O·Al2O3·6SiO2|⑥礦物|Na2O, Al2O3, SiO2|A 常用|✅ 鈉長石類理想氧化物表示
+119.98|水鋁石|Al2O3·H2O|⑥礦物|Al2O3|B 參考|✅ 對應 AlO(OH) 的氧化物＋水表示
+151.71|鈦鐵礦|FeO·TiO2|⑥礦物|FeO, TiO2|C 特殊|🧪 標準礦物鈦鐵礦
+216.55|透輝石|CaO·MgO·2SiO2|⑥礦物|CaO, MgO, SiO2|B 參考|✅ 標準礦物透輝石
+86.94|軟錳礦|MnO2|⑥礦物|MnO2|A 常用|✅ 標準礦物軟錳礦
+184.40|白雲石|MgCO3·CaCO3|⑥礦物|MgO, CaO|A 常用|✅ 天然礦物可有少量取代
+556.66|微斜長石|K2O·Al2O3·6SiO2|⑥礦物|K2O, Al2O3, SiO2|A 常用|✅ 標準礦物微斜長石
+209.94|冰晶石|3NaF·AlF3|⑥礦物|Na2O, Al2O3, F|C 特殊|⚠️ 特殊陶瓷與工業用途
+100.09|石灰石|CaCO3|⑥礦物|CaO|A 常用|✅ 標準礦物/岩石原料
+78.07|螢石|CaF2|⑥礦物|CaO, F|C 特殊|⚠️ 標準礦物螢石
+266.79|錫榴石|CaO·SnO2·SiO2|⑥礦物|CaO, SnO2, SiO2|C 特殊|🧪 可與鈣錫矽酸鹽陶瓷相連結
+828.68|明礬石|K2O·3Al2O3·4SO3·6H2O|⑥礦物|K2O, Al2O3|C 特殊|🧪 特殊陶瓷化學
+426.05|多鋁紅柱石|3Al2O3·2SiO2|⑥礦物|Al2O3, SiO2|B 參考|✅ 對應莫來石的理想組成
+-|蒙德土|-|⑥礦物|-|E 歷史|📚 原表未提供化學式與分子量
+612.80|葉長石|Li2O·Al2O3·8SiO2|⑥礦物|Li2O, Al2O3, SiO2|B 參考|✅ 理想鋰長石組成
+360.31|葉蠟石|Al2O3·4SiO2·H2O|⑥礦物|Al2O3, SiO2|A 常用|✅ 標準礦物葉蠟石
+252.00|鋰霞石|Li2O·Al2O3·2SiO2|⑥礦物|Li2O, Al2O3, SiO2|B 參考|✅ 標準礦物鋰霞石
+162.05|藍晶石|Al2O3·SiO2|⑥礦物|Al2O3, SiO2|B 參考|✅ 標準礦物藍晶石
+372.12|鋰輝石|Li2O·Al2O3·4SiO2|⑥礦物|Li2O, Al2O3, SiO2|B 參考|✅ 天然礦物常有元素取代
+84.31|菱苦土鏡(鑛)|MgCO3|⑥礦物|MgO|B 參考|✅ 對應菱鎂礦
+-|鱗雲母|K2LixAl4Si6O21(OH/F)|⑥礦物|K2O, Li2O, Al2O3, SiO2|C 特殊|🧪 複雜層狀矽酸鹽無固定分子量
+-|磷灰石|Ca5(F/Cl)(PO4)3|⑥礦物|CaO, P2O5|C 特殊|🧪 F/Cl 位點可變非固定分子量
+-|霞石正長岩|K2O·3Na2O·4Al2O3·8SiO2(約)|⑥礦物|Na2O, K2O, Al2O3, SiO2|A 常用|✅ 熔點比長石更低的強效鹼金屬助熔劑
+-|球黏土 (Ball Clay)|Al2O3·2SiO2·2H2O+雜質|⑥礦物|Al2O3, SiO2|A 常用|✅ 高可塑性，增強釉漿附著力與懸浮性
+-|草木灰 (Wood Ash)|變動組成|⑥礦物|CaO, K2O, SiO2, P2O5|B 參考|✅ 傳統灰釉核心，富含鈣、鉀及微量磷
+-|硼矽熔塊|變動組成|⑤硝酸鹽與化學品|B2O3, SiO2, Na2O|A 常用|✅ 將水溶性硼酸鹽預燒穩定化的現代安全硼源
+-|鉍熔塊|變動組成|⑤硝酸鹽與化學品|Bi2O3, SiO2|B 參考|✅ 無毒替代傳統鉛釉的低溫強效助熔劑
+40.10|碳化矽|SiC|⑤硝酸鹽與化學品|Si, C|C 特殊|🧪 高溫放出CO，可作為局部還原劑(如還原銅紅)
+79.87|鈦白粉|TiO2|⑤硝酸鹽與化學品|TiO2|A 常用|✅ 高純度工業二氧化鈦，強效乳濁與促晶劑
+221.11|孔雀石|Cu2CO3(OH)2|⑥礦物|CuO|C 特殊|🧪 天然含銅礦物，具獨特發色效果但易生氣泡
+537.50|綠柱石|3BeO·Al2O3·6SiO2|⑥礦物|BeO, Al2O3, SiO2|D 工藝|📚 特種陶瓷用，含鈹具毒性，一般陶藝少用
+225.81|氧化釔|Y2O3|②氧化物|Y2O3|D 工藝|📚 用於穩定氧化鋯晶相，成本高昂
+-|金水 (Gold Luster)|含金有機金屬樹脂|⑤硝酸鹽與化學品|Au|C 特殊|🧪 釉上低溫烤花用，燒結後析出純金膜
+-|白金水 (Platinum Luster)|含鉑有機金屬樹脂|⑤硝酸鹽與化學品|Pt|C 特殊|🧪 釉上低溫烤花用，燒結後析出銀白色鉑金膜
+-|骨灰 (Bone Ash)|Ca3(PO4)2 (主要)|⑥礦物|CaO, P2O5|C 特殊|🧪 骨質瓷核心原料，在釉藥中可產生蛋白石般的分相乳濁效果
+277.64|氧化銦|In2O3|②氧化物|In2O3|D 工藝|📚 特殊導電薄膜與功能陶瓷
+159.60|二氧化碲|TeO2|②氧化物|TeO2|D 工藝|📚 特種碲酸鹽玻璃與特殊用途
+382.52|氧化鉺|Er2O3|②氧化物|Er2O3|C 特殊|🧪 稀土色料，不受氣氛影響產生穩定的粉紅色
+441.89|五氧化二鉭|Ta2O5|②氧化物|Ta2O5|D 工藝|📚 高成本特種玻璃與科研用
+283.28|矽酸鉛 (熔塊)|PbO·SiO2|⑤硝酸鹽與化學品|PbO, SiO2|E 歷史|⛔ 傳統低溫鉛釉熔塊，因重金屬毒性現代極少使用
+223.20|黃丹 (密陀僧)|PbO|②氧化物|PbO|E 歷史|⛔ 即氧化鉛(II)，歷史強效低溫助熔劑，具毒性
+411.78|硼鈣石 (Colemanite)|2CaO·3B2O3·5H2O|⑥礦物|CaO, B2O3|B 參考|✅ 實務上極受歡迎的天然不溶性硼源 (原表稱硼酸鈣)
+177.71|黃氧化鐵|Fe2O3·H2O|①顏料|Fe2O3|A 常用|✅ 提供較細緻分散的鐵元素，燒成失水後轉為鐵紅
+        `;
+
+        const rawRows = rawDataStr.trim().split('\n');
+        let parsedData = rawRows.map(row => {
+            const [mw, name, formula, cat, oxides, level, note] = row.split('|');
+            return { mw, name, formula, cat, oxides, level, note };
+        });
+
+        const strokeCollator = new Intl.Collator('zh-TW', { collation: 'stroke' });
+        parsedData.sort((a, b) => strokeCollator.compare(a.name, b.name));
+
+        const tableBody = document.getElementById('table-body');
+        const htmlRows = parsedData.map(item => {
+            const mwDisplay = item.mw === '-' ? '<span class="text-muted">-</span>' : item.mw;
+            const formattedFormula = item.formula.replace(/(\d+)/g, '<sub>$1</sub>');
+            
+            const oxideBadges = item.oxides.split(',').filter(o => o.trim() !== '-').map(o => 
+                `<span class="badge-oxide">${o.trim().replace(/(\d+)/g, '<sub>$1</sub>')}</span>`
+            ).join(' ');
+
+            const levelClass = item.level.includes('A') ? 'level-A' 
+                             : item.level.includes('B') ? 'level-B' 
+                             : item.level.includes('C') ? 'level-C' 
+                             : item.level.includes('D') ? 'level-D' 
+                             : 'level-E';
+
+            return `
+                <tr>
+                    <td class="fw-bold" style="color: var(--primary-accent);">${item.name}</td>
+                    <td class="font-monospace text-secondary" style="font-size: 1.05rem;">${formattedFormula}</td>
+                    <td class="font-monospace fw-semibold">${mwDisplay}</td>
+                    <td><span class="badge-cat">${item.cat}</span></td>
+                    <td>${oxideBadges}</td>
+                    <td><span class="badge-level ${levelClass}">${item.level}</span></td>
+                    <td class="small text-secondary">${item.note}</td>
+                </tr>
+            `;
+        }).join('');
+
+        tableBody.innerHTML = htmlRows;
+
+        $(document).ready(function() {
+            var table = $('#materialTable').DataTable({
+                "language": {
+                    "search": "全表快速搜尋：",
+                    "lengthMenu": "每頁顯示 _MENU_ 筆",
+                    "zeroRecords": "查無符合條件的原料",
+                    "info": "顯示第 _START_ 至 _END_ 筆，總計 _TOTAL_ 筆",
+                    "infoEmpty": "無可用資料",
+                    "infoFiltered": "(從 _MAX_ 筆資料中篩選)",
+                    "paginate": { "first": "首頁", "previous": "上一頁", "next": "下一頁", "last": "末頁" }
+                },
+                "pageLength": 100,
+                "lengthMenu": [15, 25, 50, 100, 200],
+                "order": [] 
+            });
+
+            $('#filterCategory').on('change', function() {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                table.column(3).search(val ? '^' + val + '.*' : '', true, false).draw();
+            });
+
+            $('#filterLevel').on('change', function() {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                table.column(5).search(val ? val : '', true, false).draw();
+            });
+        });
+    </script>
+</body>
+</html>
