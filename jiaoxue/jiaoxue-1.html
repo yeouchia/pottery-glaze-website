@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素 vs 原料：陶藝與釉藥化學資料庫 | 陶藝與釉藥知識網站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS for advanced table features -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #eee7d8;
+            --content-bg: #fbfaf5;
+            --card-bg: #f1f0e4;
+            --sub-card-bg: #f6f4e9;
+            --border-color: #d8d4c5;
+            --text-main: #39372f;
+            --text-muted: #777367;
+            --primary-accent: #6c6654;
+            --light-accent: #e8e4d6;
+            --quote-bg: #eeeadd;
+            --font-serif: 'Noto Serif TC', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+
+        h1, h2, h3, h4, h5, h6, .brand-font {
+            font-family: var(--font-serif);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--content-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(57, 55, 47, 0.03);
+        }
+        .navbar-brand {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--text-main) !important;
+            font-size: 1.3rem;
+        }
+        .nav-link {
+            color: var(--text-main) !important;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-accent) !important;
+        }
+
+        /* Hero Header */
+        .hero-section {
+            background-color: var(--content-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(57, 55, 47, 0.04);
+        }
+        .hero-title {
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 850px;
+        }
+
+        /* Cards */
+        .custom-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(57, 55, 47, 0.03);
+        }
+        .sub-card {
+            background-color: var(--sub-card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.2rem;
+            height: 100%;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background-color: var(--quote-bg);
+            border-left: 4px solid var(--primary-accent);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        /* Filter & Search Bar Area */
+        .control-panel {
+            background-color: var(--content-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .form-control, .form-select {
+            background-color: var(--sub-card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: var(--content-bg);
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 0.25rem rgba(108, 102, 84, 0.15);
+            color: var(--text-main);
+        }
+        .btn-custom {
+            background-color: var(--primary-accent);
+            color: #fff;
+            border: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .btn-custom:hover {
+            opacity: 0.9;
+            color: #fff;
+        }
+        .btn-outline-custom {
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            background-color: transparent;
+            font-weight: 500;
+        }
+        .btn-outline-custom:hover {
+            background-color: var(--primary-accent);
+            color: #fff;
+        }
+
+        /* Table Styling */
+        .table-container {
+            background-color: var(--content-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            box-shadow: 0 4px 15px rgba(57, 55, 47, 0.04);
+            margin-bottom: 2rem;
+        }
+        table.dataTable {
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+        table.dataTable th, table.dataTable td {
+            border-color: var(--border-color) !important;
+            padding: 12px 10px;
+            vertical-align: middle;
+            font-size: 0.95rem;
+        }
+        table.dataTable thead th {
+            background-color: var(--light-accent) !important;
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color) !important;
+        }
+        table.dataTable tbody tr {
+            background-color: var(--content-bg);
+        }
+        table.dataTable tbody tr:nth-of-type(even) {
+            background-color: var(--sub-card-bg);
+        }
+        table.dataTable tbody tr:hover {
+            background-color: var(--card-bg);
+        }
+
+        /* Badges & Tags */
+        .badge-role {
+            background-color: var(--light-accent);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+            padding: 0.35em 0.65em;
+            border-radius: 4px;
+        }
+        .badge-level-a { background-color: #d1e7dd; color: #0f5132; border: #badbcc 1px solid; }
+        .badge-level-b { background-color: #cff4fc; color: #055160; border: #b6effb 1px solid; }
+        .badge-level-c { background-color: #fff3cd; color: #664d03; border: #ffecb5 1px solid; }
+        .badge-level-d { background-color: #f8d7da; color: #842029; border: #f5c2c7 1px solid; }
+        .badge-level-e { background-color: #e2d9f3; color: #432874; border: #d1c4e9 1px solid; }
+        .badge-level-f { background-color: #e2e3e5; color: #383d41; border: #d6d8db 1px solid; }
+
+        /* Glossary Section */
+        .glossary-card {
+            background-color: var(--content-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .term-title {
+            font-family: var(--font-serif);
+            color: var(--primary-accent);
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-bottom: 2px solid var(--light-accent);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--content-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero-section">
+            <span class="badge badge-role mb-2">陶藝科學與化學基礎</span>
+            <h1 class="hero-title">元素 vs 原料：釉藥化學元素對照與應用資料庫</h1>
+            <p class="hero-subtitle">
+                在陶藝創作與釉藥配方設計中，從地質礦物（如長石、石英、碳酸鈣）到原子層級的化學元素，透過 Seger 施格公式（UMF）進行理性解構與量化控制。本頁面完整收錄化學元素在陶瓷高溫反應中的角色、氧化物歸屬、可用原料及級別分類，協助陶藝工作者精準掌握釉藥熔融、發色與結構變化。
+            </p>
+            <div class="quote-box mb-0 mt-3">
+                「釉藥不是玄學，而是高溫下的礦物化學與物理平衡。理解元素與原料的對應關係，是掌握釉身質感、色彩發色與燒成穩定性的關鍵。」
+            </div>
+        </header>
+
+        <!-- Glossary Section (Mandatory requirement 2: nwf, int, luster, etc.) -->
+        <section id="glossary-section" class="glossary-card">
+            <h2 class="brand-font mb-4"><i class="fa-solid fa-book-open me-2" style="color: var(--primary-accent);"></i>核心專業名詞深度解析</h2>
+            <p class="text-muted mb-4">為幫助初學者與進階陶藝家正確解讀表格中的專有名詞與化學代號，以下針對 <strong>NWF</strong>、<strong>INT</strong>、<strong>Luster</strong> 及 Seger 施格公式相關群組進行詳細說明：</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="sub-card">
+                        <div class="term-title">NWF (Network Former)</div>
+                        <p class="small mb-0"><strong>玻璃形成劑（Network Former）</strong>：如矽（Si）、硼（B）、磷（P）等。它們能在高溫熔融狀態下互相鍵結，形成穩定的三維網狀結構（如矽氧四面體 $	ext{SiO}_4$），是构成玻璃質地與釉面骨架的基石。</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="sub-card">
+                        <div class="term-title">INT (Intermediate)</div>
+                        <p class="small mb-0"><strong>中間物（Intermediate）</strong>：如鋁（Al）、鈦（Ti）、鋯（Zr）、鋅（Zn）等。它們在化學性質上介於玻璃形成劑與網狀修飾劑之間，既能進入玻璃網狀結構中強固結構，也能在特定條件下扮演助熔或乳濁角色。</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="sub-card">
+                        <div class="term-title">NWM (Network Modifier)</div>
+                        <p class="small mb-0"><strong>網狀修飾劑 / 助熔劑</strong>：如鉀（K）、鈉（Na）、鈣（Ca）、鎂（Mg）等。它們會嵌入玻璃網狀結構的空隙中，破壞強大的 $	ext{Si-O}$ 鍵，有效降低熔點、調整黏度與膨脹係數。</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="sub-card">
+                        <div class="term-title">Luster (彩虹光澤)</div>
+                        <p class="small mb-0"><strong>金屬光澤 / 珍珠彩光（Luster）</strong>：如鉍（Bi）、銀（Ag）、銅（Cu）等元素在特殊還原燒或低溫熏燒下，於釉面析出極薄的金屬微粒或干涉層，呈現絢麗奪目的彩虹光澤效果。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Control Panel / Filter Section -->
+        <div class="control-panel" id="database-section">
+            <h3 class="brand-font mb-3"><i class="fa-solid fa-filter me-2" style="color: var(--primary-accent);"></i>資料庫篩選與查詢</h3>
+            <p class="text-muted small mb-3">您可以利用下方篩選器快速檢索特定 UMF 歸屬、常見氧化物類別或重要級別的化學元素與原料來源。</p>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">依 Seger (UMF) 歸屬篩選：</label>
+                    <select id="filterUMF" class="form-select form-select-sm">
+                        <option value="">全部 UMF 歸屬</option>
+                        <option value="RO">RO (一價/二價鹼土金屬助熔劑)</option>
+                        <option value="R₂O">R₂O (一價鹼金屬助熔劑)</option>
+                        <option value="R₂O₃">R₂O₃ (三價中性/骨架氧化物，如 Al₂O₃)</option>
+                        <option value="RO₂">RO₂ (四價玻璃形成劑，如 SiO₂)</option>
+                        <option value="無">無 / 揮發 / 氣態 / 其它</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">依重要級別篩選：</label>
+                    <select id="filterLevel" class="form-select form-select-sm">
+                        <option value="">全部級別 (A~F)</option>
+                        <option value="A">A 級 (核心基礎元素)</option>
+                        <option value="B">B 級 (重要輔助/修飾/助熔)</option>
+                        <option value="C">C 級 (特種呈色/乳濁)</option>
+                        <option value="D">D 級 (特殊工業/高溫/限制)</option>
+                        <option value="E">E 級 (稀有/裝飾/貴金屬)</option>
+                        <option value="F">F 級 (氣態/惰性/燒失不入釉)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Data Table Container (Mandatory Requirement 1 & 3) -->
+        <div class="table-container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="brand-font mb-0">元素 vs 原料對照總表</h3>
+                <span class="text-muted small">共收錄 69 筆陶瓷化學元素與礦物原料對應資料</span>
+            </div>
+            
+            <table id="elementTable" class="table table-striped table-hover align-middle" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>原子序</th>
+                        <th>符號</th>
+                        <th>元素名稱</th>
+                        <th>UMF (Seger) 歸屬</th>
+                        <th>常見氧化物</th>
+                        <th>可用原料來源</th>
+                        <th>釉藥化學 / 網路角色</th>
+                        <th>級別</th>
+                        <th>釉藥與高溫化學表現摘要</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold text-center">1</td>
+                        <td><span class="badge badge-role font-monospace">H</span></td>
+                        <td class="fw-bold">氫</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">氣態</code></td>
+                        <td>無 (高溫氣氛環境)</td>
+                        <td>還原劑</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>存在於結晶水或為還原燒的關鍵動力，不入釉式。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">2</td>
+                        <td><span class="badge badge-role font-monospace">He</span></td>
+                        <td class="fw-bold">氦</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>惰性氣體</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>氣態，不參與高溫化學反應。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">3</td>
+                        <td><span class="badge badge-role font-monospace">Li</span></td>
+                        <td class="fw-bold">鋰</td>
+                        <td>RO / R₂O</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Li₂O</code></td>
+                        <td>碳酸鋰、鋰輝石、透鋰長石</td>
+                        <td>強助熔劑 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>強烈降溫助熔、降膨脹係數，易引發分相或結晶。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">4</td>
+                        <td><span class="badge badge-role font-monospace">Be</span></td>
+                        <td class="fw-bold">鈹</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">BeO</code></td>
+                        <td>綠柱石、氧化鈹</td>
+                        <td>助熔劑 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>具高溫絕緣性與特種陶瓷用途，有毒性，不建議一般釉藥 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">5</td>
+                        <td><span class="badge badge-role font-monospace">B</span></td>
+                        <td class="fw-bold">硼</td>
+                        <td>R₂O₃ (特例)</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">B₂O₃</code></td>
+                        <td>硼酸、硼砂、硼鈣石、硼熔塊</td>
+                        <td>玻璃形成 (NWF)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>UMF 算在中性，但實為極強的低溫玻璃形成劑與助熔劑。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">6</td>
+                        <td><span class="badge badge-role font-monospace">C</span></td>
+                        <td class="fw-bold">碳</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">CO, CO₂</code></td>
+                        <td>碳酸鹽燒失物、碳化矽</td>
+                        <td>還原劑</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>高溫下會燒失，提供局部或全窯還原氣氛。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">7</td>
+                        <td><span class="badge badge-role font-monospace">N</span></td>
+                        <td class="fw-bold">氮</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>氮化物</td>
+                        <td>氮化陶瓷</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>傳統矽酸鹽不留存，用於工業氮化矽陶瓷。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">8</td>
+                        <td><span class="badge badge-role font-monospace">O</span></td>
+                        <td class="fw-bold">氧</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">O²⁻</code></td>
+                        <td>幾乎所有礦物原料</td>
+                        <td>網絡陰離子</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>陶瓷系統的核心基礎，連接著所有金屬與類金屬。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">9</td>
+                        <td><span class="badge badge-role font-monospace">F</span></td>
+                        <td class="fw-bold">氟</td>
+                        <td>附加陰離子</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">F⁻</code></td>
+                        <td>螢石、冰晶石、含氟礦物</td>
+                        <td>修飾劑</td>
+                        <td class="text-center"><span class="badge badge-level-b">B</span></td>
+                        <td>可大幅降低熔點，破壞矽氧網路，注意揮發與安全 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">10</td>
+                        <td><span class="badge badge-role font-monospace">Ne</span></td>
+                        <td class="fw-bold">氖</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>惰性氣體</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>氣態，不參與高溫化學反應。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">11</td>
+                        <td><span class="badge badge-role font-monospace">Na</span></td>
+                        <td class="fw-bold">鈉</td>
+                        <td>RO / R₂O</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Na₂O</code></td>
+                        <td>鈉長石、霞石正長岩、碳酸鈉、熔塊</td>
+                        <td>強助熔劑 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>高膨脹係數易生冰裂，能使銅轉為鮮豔藍色調。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">12</td>
+                        <td><span class="badge badge-role font-monospace">Mg</span></td>
+                        <td class="fw-bold">鎂</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">MgO</code></td>
+                        <td>滑石、碳酸鎂、菱鎂礦、白雲石</td>
+                        <td>助熔 / 霧面 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>高溫助熔，冷卻時易生成微晶而產生極佳的滑順無光釉。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">13</td>
+                        <td><span class="badge badge-role font-monospace">Al</span></td>
+                        <td class="fw-bold">鋁</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Al₂O₃</code></td>
+                        <td>高嶺土、球黏土、氧化鋁、長石</td>
+                        <td>中間物 (INT)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>穩定釉層、防止流釉，調整光澤度與熔融範圍。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">14</td>
+                        <td><span class="badge badge-role font-monospace">Si</span></td>
+                        <td class="fw-bold">矽</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">SiO₂</code></td>
+                        <td>石英、矽石、燧石、長石、黏土</td>
+                        <td>玻璃形成 (NWF)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>主要玻璃形成物 ，構成釉與胎的核心骨架。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">15</td>
+                        <td><span class="badge badge-role font-monospace">P</span></td>
+                        <td class="fw-bold">磷</td>
+                        <td>RO₂ (等效)</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">P₂O₅</code></td>
+                        <td>骨灰、磷灰石、磷酸鹽</td>
+                        <td>玻璃形成 (NWF)</td>
+                        <td class="text-center"><span class="badge badge-level-b">B</span></td>
+                        <td>易產生分相乳濁（如鈞窯藍）、骨瓷基礎，也可促晶。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">16</td>
+                        <td><span class="badge badge-role font-monospace">S</span></td>
+                        <td class="fw-bold">硫</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">SO₂, SO₃</code></td>
+                        <td>硫酸鹽雜質</td>
+                        <td>揮發性雜質</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>常為原料雜質，易致釉面起泡或形成表面浮渣。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">17</td>
+                        <td><span class="badge badge-role font-monospace">Cl</span></td>
+                        <td class="fw-bold">氯</td>
+                        <td>附加陰離子</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Cl⁻</code></td>
+                        <td>氯化物</td>
+                        <td>揮發物</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>高溫幾乎完全揮發（如鹽燒），極少留存於一般釉層。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">18</td>
+                        <td><span class="badge badge-role font-monospace">Ar</span></td>
+                        <td class="fw-bold">氬</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>惰性氣體</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>氣態，不參與高溫化學反應。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">19</td>
+                        <td><span class="badge badge-role font-monospace">K</span></td>
+                        <td class="fw-bold">鉀</td>
+                        <td>RO / R₂O</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">K₂O</code></td>
+                        <td>鉀長石、雲母、含鉀熔塊、碳酸鉀</td>
+                        <td>強助熔劑 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>表現似鈉但熔融黏度較高，光澤溫潤。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">20</td>
+                        <td><span class="badge badge-role font-monospace">Ca</span></td>
+                        <td class="fw-bold">鈣</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">CaO</code></td>
+                        <td>碳酸鈣、石灰石、矽灰石、白雲石、木灰</td>
+                        <td>助熔 / 穩定 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>最普及的高溫助熔劑，增加釉面硬度與耐磨性。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">21</td>
+                        <td><span class="badge badge-role font-monospace">Sc</span></td>
+                        <td class="fw-bold">鈧</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Sc₂O₃</code></td>
+                        <td>氧化鈧、含鈧材料</td>
+                        <td>中間物 (INT)</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>科研材料，高成本、少見 ，性質介於鋁與釔之間。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">22</td>
+                        <td><span class="badge badge-role font-monospace">Ti</span></td>
+                        <td class="fw-bold">鈦</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">TiO₂</code></td>
+                        <td>金紅石、鈦白粉、鈦鐵礦</td>
+                        <td>中間 / 乳濁 / 促晶</td>
+                        <td class="text-center"><span class="badge badge-level-b">B</span></td>
+                        <td>強烈改變發色，引發鐵鏽花結晶，或與其他著色劑產生複合色彩。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">23</td>
+                        <td><span class="badge badge-role font-monospace">V</span></td>
+                        <td class="fw-bold">釩</td>
+                        <td>附加 (R₂O₅)</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">V₂O₅</code></td>
+                        <td>五氧化二釩、偏釩酸銨</td>
+                        <td>特殊呈色</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>產生黃、綠色 ，常搭配鋯形成穩定的黃色料。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">24</td>
+                        <td><span class="badge badge-role font-monospace">Cr</span></td>
+                        <td class="fw-bold">鉻</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Cr₂O₃</code></td>
+                        <td>氧化鉻、鉻鐵礦</td>
+                        <td>特殊呈色</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>強勢綠色，微量搭配錫可產生粉紅色（鉻錫紅）。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">25</td>
+                        <td><span class="badge badge-role font-monospace">Mn</span></td>
+                        <td class="fw-bold">錳</td>
+                        <td>RO / R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">MnO₂, Mn₂O₃</code></td>
+                        <td>二氧化錳、碳酸錳</td>
+                        <td>呈色 / 助熔</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>產生紫、棕、黑 ，具強大助熔能力，呈色受氣氛影響。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">26</td>
+                        <td><span class="badge badge-role font-monospace">Fe</span></td>
+                        <td class="fw-bold">鐵</td>
+                        <td>RO / R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">FeO, Fe₂O₃</code></td>
+                        <td>紅/黑/黃氧化鐵、磁鐵礦、褐鐵礦</td>
+                        <td>呈色 / 助熔 / 促晶</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>最常見呈色元素 ，氧化黃紅褐，還原呈青瓷綠或天目黑。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">27</td>
+                        <td><span class="badge badge-role font-monospace">Co</span></td>
+                        <td class="fw-bold">鈷</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">CoO, Co₃O₄</code></td>
+                        <td>氧化鈷、碳酸鈷</td>
+                        <td>特殊呈色</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>著色力極強 ，微量即可產生強烈藍色。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">28</td>
+                        <td><span class="badge badge-role font-monospace">Ni</span></td>
+                        <td class="fw-bold">鎳</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">NiO</code></td>
+                        <td>氧化鎳、含鎳礦物</td>
+                        <td>特殊呈色</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>產生綠、灰、棕、褐 ，有助於柔和或改變其他著色劑色調。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">29</td>
+                        <td><span class="badge badge-role font-monospace">Cu</span></td>
+                        <td class="fw-bold">銅</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">CuO, Cu₂O</code></td>
+                        <td>氧化銅、碳酸銅、孔雀石</td>
+                        <td>特殊呈色</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>氧化呈綠/藍，還原得辰砂紅，氣氛影響明顯 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">30</td>
+                        <td><span class="badge badge-role font-monospace">Zn</span></td>
+                        <td class="fw-bold">鋅</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">ZnO</code></td>
+                        <td>氧化鋅、鋅熔塊、鋅礦</td>
+                        <td>助熔 / 促晶 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>高溫強助熔，大量使用為結晶釉核心促晶劑，影響鉻等發色。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">31</td>
+                        <td><span class="badge badge-role font-monospace">Ga</span></td>
+                        <td class="fw-bold">鎵</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Ga₂O₃</code></td>
+                        <td>氧化鎵</td>
+                        <td>中間物 (INT)</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>研究 / 工業陶瓷材料 ，性質類似鋁。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">32</td>
+                        <td><span class="badge badge-role font-monospace">鍺</span></td>
+                        <td class="fw-bold">鍺</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">GeO₂</code></td>
+                        <td>二氧化鍺</td>
+                        <td>玻璃形成 (NWF)</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>特殊玻璃 / 陶瓷材料 ，成本高昂，性質類似矽。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">33</td>
+                        <td><span class="badge badge-role font-monospace">As</span></td>
+                        <td class="fw-bold">砷</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">As₂O₃, As₂O₅</code></td>
+                        <td>砷化合物</td>
+                        <td>早期乳濁劑</td>
+                        <td class="text-center"><span class="badge badge-level-e">E</span></td>
+                        <td>歷史乳濁 / 玻璃用途，高毒性，不建議使用 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">34</td>
+                        <td><span class="badge badge-role font-monospace">Se</span></td>
+                        <td class="fw-bold">硒</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">SeO₂</code></td>
+                        <td>硒化物、硒色料</td>
+                        <td>特殊色料</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>產生紅、橙、粉紅特殊色 ，高溫極易揮發。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">35</td>
+                        <td><span class="badge badge-role font-monospace">Br</span></td>
+                        <td class="fw-bold">溴</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>鹵素氣體</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>高溫揮發，無釉藥應用。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">36</td>
+                        <td><span class="badge badge-role font-monospace">Kr</span></td>
+                        <td class="fw-bold">氪</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>惰性氣體</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>氣態，不參與化學反應。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">37</td>
+                        <td><span class="badge badge-role font-monospace">Rb</span></td>
+                        <td class="fw-bold">銣</td>
+                        <td>RO / R₂O</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Rb₂O</code></td>
+                        <td>鋰雲母、銣長石、pollucite</td>
+                        <td>強助熔劑 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>性質介於鉀與銫之間，非一般陶藝原料 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">38</td>
+                        <td><span class="badge badge-role font-monospace">Sr</span></td>
+                        <td class="fw-bold">鍶</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">SrO</code></td>
+                        <td>碳酸鍶、鍶熔塊</td>
+                        <td>助熔 / 霧面 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-b">B</span></td>
+                        <td>替代鋇或鈣，能產生特殊無光表面與優異硬度 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">39</td>
+                        <td><span class="badge badge-role font-monospace">Y</span></td>
+                        <td class="fw-bold">釔</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Y₂O₃</code></td>
+                        <td>氧化釔、釔系材料</td>
+                        <td>特殊陶瓷 / 穩定</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>用於穩定氧化鋯晶相，高成本 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">40</td>
+                        <td><span class="badge badge-role font-monospace">Zr</span></td>
+                        <td class="fw-bold">鋯</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">ZrO₂, ZrSiO₄</code></td>
+                        <td>鋯英砂、氧化鋯</td>
+                        <td>乳濁 / 促晶</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>最普及的白色乳濁劑與矽酸鋯色料基底 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">41</td>
+                        <td><span class="badge badge-role font-monospace">Nb</span></td>
+                        <td class="fw-bold">鈮</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Nb₂O₅</code></td>
+                        <td>五氧化二鈮、鈮礦</td>
+                        <td>工業陶瓷 / 色料</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>光學與壓電陶瓷，研究用途 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">42</td>
+                        <td><span class="badge badge-role font-monospace">Mo</span></td>
+                        <td class="fw-bold">鉬</td>
+                        <td>附加 (RO₃)</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">MoO₃</code></td>
+                        <td>三氧化鉬、鉬化合物</td>
+                        <td>表面結晶</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>特殊用途 ，可引發特殊的低溫表面結晶與虹彩膜層。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">43</td>
+                        <td><span class="badge badge-role font-monospace">Tc</span></td>
+                        <td class="fw-bold">鎝</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>人造放射性</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>無自然穩定來源，無法應用。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">44</td>
+                        <td><span class="badge badge-role font-monospace">Ru</span></td>
+                        <td class="fw-bold">釕</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">RuO₂</code></td>
+                        <td>氧化釕、釕化合物</td>
+                        <td>導電陶瓷 / 色料</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>高成本特殊用途 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">45</td>
+                        <td><span class="badge badge-role font-monospace">Rh</span></td>
+                        <td class="fw-bold">銠</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Rh₂O₃</code></td>
+                        <td>銠化合物</td>
+                        <td>貴金屬裝飾</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>高成本 ，特殊貴金屬效果。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">46</td>
+                        <td><span class="badge badge-role font-monospace">Pd</span></td>
+                        <td class="fw-bold">鈀</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">PdO</code></td>
+                        <td>鈀化合物</td>
+                        <td>貴金屬裝飾</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>高成本 ，特殊貴金屬水裝飾。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">47</td>
+                        <td><span class="badge badge-role font-monospace">Ag</span></td>
+                        <td class="fw-bold">銀</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Ag, Ag₂O</code></td>
+                        <td>銀化合物 (如硝酸銀)、銀金屬</td>
+                        <td>金屬裝飾 / Luster</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>裝飾用途 ，還原氣氛下可析出金屬薄膜光澤。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">48</td>
+                        <td><span class="badge badge-role font-monospace">Cd</span></td>
+                        <td class="fw-bold">鎘</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">CdO, CdSe</code></td>
+                        <td>鎘化合物、鎘硒色料</td>
+                        <td>特殊色料</td>
+                        <td class="text-center"><span class="badge badge-level-e">E</span></td>
+                        <td>產生鮮豔紅黃色，高毒性，工業需嚴格管制 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">49</td>
+                        <td><span class="badge badge-role font-monospace">In</span></td>
+                        <td class="fw-bold">銦</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">In₂O₃</code></td>
+                        <td>氧化銦</td>
+                        <td>功能陶瓷</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>高成本 ，導電薄膜應用。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">50</td>
+                        <td><span class="badge badge-role font-monospace">Sn</span></td>
+                        <td class="fw-bold">錫</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">SnO₂</code></td>
+                        <td>氧化錫、錫石</td>
+                        <td>乳濁劑</td>
+                        <td class="text-center"><span class="badge badge-level-a">A</span></td>
+                        <td>古典白色乳濁劑，也是銅紅釉發色的關鍵助色劑 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">51</td>
+                        <td><span class="badge badge-role font-monospace">Sb</span></td>
+                        <td class="fw-bold">銻</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Sb₂O₃, Sb₂O₅</code></td>
+                        <td>氧化銻、銻礦</td>
+                        <td>黃色料 / 乳濁</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>傳統銻黃顏料，具微毒性，需注意安全 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">52</td>
+                        <td><span class="badge badge-role font-monospace">Te</span></td>
+                        <td class="fw-bold">碲</td>
+                        <td>附加 (RO₂)</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">TeO₂</code></td>
+                        <td>二氧化碲</td>
+                        <td>特種玻璃</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>研究 / 特殊用途 ，碲酸鹽玻璃。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">53</td>
+                        <td><span class="badge badge-role font-monospace">I</span></td>
+                        <td class="fw-bold">碘</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>鹵素</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>高溫揮發，無應用。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">54</td>
+                        <td><span class="badge badge-role font-monospace">Xe</span></td>
+                        <td class="fw-bold">氙</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>惰性氣體</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>氣態，不反應。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">55</td>
+                        <td><span class="badge badge-role font-monospace">Cs</span></td>
+                        <td class="fw-bold">銫</td>
+                        <td>RO / R₂O</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Cs₂O</code></td>
+                        <td>pollucite、含銫長石類</td>
+                        <td>強助熔劑 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>反應劇烈且成本高昂，極少用 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">56</td>
+                        <td><span class="badge badge-role font-monospace">Ba</span></td>
+                        <td class="fw-bold">鋇</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">BaO</code></td>
+                        <td>碳酸鋇、硫酸鋇、鋇熔塊</td>
+                        <td>助熔 / 霧面 (NWM)</td>
+                        <td class="text-center"><span class="badge badge-level-b">B</span></td>
+                        <td>可造就細緻微晶無光釉，碳酸鋇需注意安全 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">57-71</td>
+                        <td><span class="badge badge-role font-monospace">La~Lu</span></td>
+                        <td class="fw-bold">鑭系稀土</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">各類氧化物</code></td>
+                        <td>稀土氧化物群 (如氧化釹、氧化鉺)</td>
+                        <td>光學 / 變色 / 螢光</td>
+                        <td class="text-center"><span class="badge badge-level-c">C/D</span></td>
+                        <td>發色依賴內層電子躍遷，光源變色效應佳，受氣氛干擾較小。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">72</td>
+                        <td><span class="badge badge-role font-monospace">Hf</span></td>
+                        <td class="fw-bold">鉿</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">HfO₂</code></td>
+                        <td>氧化鉿、鋯礦伴生材料</td>
+                        <td>特種高溫陶瓷</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>常伴隨鋯存在，熔點極高 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">73</td>
+                        <td><span class="badge badge-role font-monospace">Ta</span></td>
+                        <td class="fw-bold">鉭</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Ta₂O₅</code></td>
+                        <td>五氧化二鉭、鉭礦</td>
+                        <td>特種玻璃</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>高成本科研用 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">74</td>
+                        <td><span class="badge badge-role font-monospace">W</span></td>
+                        <td class="fw-bold">鎢</td>
+                        <td>附加 (RO₃)</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">WO₃</code></td>
+                        <td>三氧化鎢、鎢化合物</td>
+                        <td>表面結晶</td>
+                        <td class="text-center"><span class="badge badge-level-d">D</span></td>
+                        <td>特殊晶釉 / 虹彩效果 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">75-77</td>
+                        <td><span class="badge badge-role font-monospace">Re~Ir</span></td>
+                        <td class="fw-bold">貴金屬族</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">多種</code></td>
+                        <td>金屬 / 氧化物</td>
+                        <td>極高溫材料</td>
+                        <td class="text-center"><span class="badge badge-level-e">E/F</span></td>
+                        <td>一般無應用，部分氧化物具揮發性劇毒。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">78</td>
+                        <td><span class="badge badge-role font-monospace">Pt</span></td>
+                        <td class="fw-bold">鉑</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Pt</code></td>
+                        <td>鉑金屬 / 鉑化合物 (白金水)</td>
+                        <td>金屬裝飾</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>鉑金裝飾 / Luster 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">79</td>
+                        <td><span class="badge badge-role font-monospace">Au</span></td>
+                        <td class="fw-bold">金</td>
+                        <td>附加</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Au</code></td>
+                        <td>金化合物 (金水)、金屬金</td>
+                        <td>金屬裝飾 / 紫金</td>
+                        <td class="text-center"><span class="badge badge-level-c">C</span></td>
+                        <td>金彩裝飾 ，奈米金微粒可製成鮮紅色金紅釉。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">80</td>
+                        <td><span class="badge badge-role font-monospace">Hg</span></td>
+                        <td class="fw-bold">汞</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">HgO</code></td>
+                        <td>汞化合物</td>
+                        <td>無</td>
+                        <td class="text-center"><span class="badge badge-level-e">E</span></td>
+                        <td>高毒性，極易揮發，不建議 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">81</td>
+                        <td><span class="badge badge-role font-monospace">Tl</span></td>
+                        <td class="fw-bold">鉈</td>
+                        <td>RO / R₂O</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Tl₂O</code></td>
+                        <td>鉈化合物</td>
+                        <td>特種玻璃</td>
+                        <td class="text-center"><span class="badge badge-level-e">E</span></td>
+                        <td>高毒性，現已禁用 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">82</td>
+                        <td><span class="badge badge-role font-monospace">Pb</span></td>
+                        <td class="fw-bold">鉛</td>
+                        <td>RO</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">PbO</code></td>
+                        <td>紅丹、黃丹、矽酸鉛熔塊</td>
+                        <td>極強低溫助熔</td>
+                        <td class="text-center"><span class="badge badge-level-e">E(昔A)</span></td>
+                        <td>歷史上極強大的低溫助熔劑，因重金屬毒性多已被淘汰或限制。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">83</td>
+                        <td><span class="badge badge-role font-monospace">Bi</span></td>
+                        <td class="fw-bold">鉍</td>
+                        <td>R₂O₃</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">Bi₂O₃</code></td>
+                        <td>氧化鉍、含鉍熔塊</td>
+                        <td>低溫助熔 / 特殊釉</td>
+                        <td class="text-center"><span class="badge badge-level-b">B</span></td>
+                        <td>無毒替代鉛的極佳選擇，特定曲線下可得鉍結晶彩虹釉 。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">84-91</td>
+                        <td><span class="badge badge-role font-monospace">Po~Ac</span></td>
+                        <td class="fw-bold">放射金屬</td>
+                        <td>無</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">無</code></td>
+                        <td>無</td>
+                        <td>放射性元素</td>
+                        <td class="text-center"><span class="badge badge-level-f">F</span></td>
+                        <td>半衰期短或具強放射性，無應用。</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-center">92</td>
+                        <td><span class="badge badge-role font-monospace">U</span></td>
+                        <td class="fw-bold">鈾</td>
+                        <td>RO₂</td>
+                        <td><code style="color: var(--primary-accent); font-weight: 600;">UO₂, UO₃</code></td>
+                        <td>鈾化合物、鈾礦</td>
+                        <td>歷史發光色料</td>
+                        <td class="text-center"><span class="badge badge-level-e">E</span></td>
+                        <td>歷史黃 / 橙釉 ，具放射性危險，不建議一般使用 。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Additional Educational Section -->
+        <div class="row g-4 mt-2">
+            <div class="col-md-6">
+                <div class="custom-card h-100">
+                    <h3 class="brand-font mb-3"><i class="fa-solid fa-atom me-2" style="color: var(--primary-accent);"></i>Seger 施格公式 (UMF) 簡介</h3>
+                    <p class="text-muted">
+                        施格公式（Unity Molecular Formula, UMF）將釉藥中複雜的原料分子比例換算為以莫耳數為單位的氧化物比例，並將其分為三大群組：
+                    </p>
+                    <ul class="small mb-0 ps-3">
+                        <li><strong>RO / R₂O (鹼金屬與鹼土金屬)</strong>：分子量總和調整為 1.0，負責釉藥的熔融與流動性。</li>
+                        <li><strong>R₂O₃ (兩性與中性氧化物)</strong>：主要為氧化鋁 ($	ext{Al}_2	ext{O}_3$)，負責控制釉藥黏度、硬度與防止流釉。</li>
+                        <li><strong>RO₂ (酸性玻璃形成劑)</strong>：主要為氧化矽 ($	ext{SiO}_2$)，構成釉面主體骨架。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="custom-card h-100">
+                    <h3 class="brand-font mb-3"><i class="fa-solid fa-lightbulb me-2" style="color: var(--primary-accent);"></i>網站導覽與主題介紹</h3>
+                    <p class="text-muted">
+                        本站（<a href="https://pottery-glaze.vercel.app/" target="_blank" style="color: var(--primary-accent); text-decoration: underline;">陶藝與釉藥知識網站</a>）致力於推廣陶藝科學化與現代釉藥配方研究。涵蓋內容包括：
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <span class="badge badge-role">陶藝與陶瓷知識</span>
+                        <span class="badge badge-role">釉藥基礎與種類</span>
+                        <span class="badge badge-role">釉藥配方與釉式</span>
+                        <span class="badge badge-role">釉藥計算工具</span>
+                        <span class="badge badge-role">陶土與瓷土</span>
+                        <span class="badge badge-role">燒成技術</span>
+                        <span class="badge badge-role">陶瓷材料</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p class="mb-1 fw-bold" style="color: var(--text-main);">陶藝與釉藥知識網站 | Pottery & Glaze Knowledge Base</p>
+            <p class="small text-muted mb-0">&copy; 2026 Pottery Glaze Knowledge. All rights reserved. 內容由專業陶藝內容編輯與釉藥化學資料庫維護。</p>
+        </div>
+    </footer>
+
+    <!-- jQuery & DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var table = $('#elementTable').DataTable({
+                "language": {
+                    "search": "全表快速搜尋：",
+                    "lengthMenu": "每頁顯示 _MENU_ 筆",
+                    "zeroRecords": "找不到符合的化學元素或原料資料",
+                    "info": "顯示第 _PAGE_ 頁，共 _PAGES_ 頁（總計 _TOTAL_ 筆）",
+                    "infoEmpty": "無可用資料",
+                    "infoFiltered": "(從 _MAX_ 筆資料中篩選)",
+                    "paginate": {
+                        "first": "首頁",
+                        "previous": "上一頁",
+                        "next": "下一頁",
+                        "last": "末頁"
+                    }
+                },
+                "pageLength": 15,
+                "lengthMenu": [10, 15, 25, 50, 100],
+                "order": [[0, "asc"]]
+            });
+
+            // Custom dropdown filters
+            $('#filterUMF').on('change', function() {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                table.column(3).search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+
+
+
+            $('#filterLevel').on('change', function() {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                table.column(7).search(val ? '^' + val : '', true, false).draw();
+            });
+        });
+    </script>
+</body>
+</html>
