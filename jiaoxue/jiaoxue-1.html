@@ -233,6 +233,17 @@
             color: var(--text-muted);
             font-size: 0.9rem;
         }
+        
+        /* Footer Link Styling */
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: var(--primary-accent);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -262,7 +273,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="sub-card">
                         <div class="term-title">NWF (Network Former)</div>
-                        <p class="small mb-0"><strong>玻璃形成劑（Network Former）</strong>：如矽（Si）、硼（B）、磷（P）等。它們能在高溫熔融狀態下互相鍵結，形成穩定的三維網狀結構（如矽氧四面體 $	ext{SiO}_4$），是构成玻璃質地與釉面骨架的基石。</p>
+                        <p class="small mb-0"><strong>玻璃形成劑（Network Former）</strong>：如矽（Si）、硼（B）、磷（P）等。它們能在高溫熔融狀態下互相鍵結，形成穩定的三維網狀結構（如矽氧四面體 $\text{SiO}_4$），是构成玻璃質地與釉面骨架的基石。</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -274,7 +285,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="sub-card">
                         <div class="term-title">NWM (Network Modifier)</div>
-                        <p class="small mb-0"><strong>網狀修飾劑 / 助熔劑</strong>：如鉀（K）、鈉（Na）、鈣（Ca）、鎂（Mg）等。它們會嵌入玻璃網狀結構的空隙中，破壞強大的 $	ext{Si-O}$ 鍵，有效降低熔點、調整黏度與膨脹係數。</p>
+                        <p class="small mb-0"><strong>網狀修飾劑 / 助熔劑</strong>：如鉀（K）、鈉（Na）、鈣（Ca）、鎂（Mg）等。它們會嵌入玻璃網狀結構的空隙中，破壞強大的 $\text{Si-O}$ 鍵，有效降低熔點、調整黏度與膨脹係數。</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -1112,8 +1123,8 @@
                     </p>
                     <ul class="small mb-0 ps-3">
                         <li><strong>RO / R₂O (鹼金屬與鹼土金屬)</strong>：分子量總和調整為 1.0，負責釉藥的熔融與流動性。</li>
-                        <li><strong>R₂O₃ (兩性與中性氧化物)</strong>：主要為氧化鋁 ($	ext{Al}_2	ext{O}_3$)，負責控制釉藥黏度、硬度與防止流釉。</li>
-                        <li><strong>RO₂ (酸性玻璃形成劑)</strong>：主要為氧化矽 ($	ext{SiO}_2$)，構成釉面主體骨架。</li>
+                        <li><strong>R₂O₃ (兩性與中性氧化物)</strong>：主要為氧化鋁 ($\text{Al}_2\text{O}_3$)，負責控制釉藥黏度、硬度與防止流釉。</li>
+                        <li><strong>RO₂ (酸性玻璃形成劑)</strong>：主要為氧化矽 ($\text{SiO}_2$)，構成釉面主體骨架。</li>
                     </ul>
                 </div>
             </div>
@@ -1140,8 +1151,11 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p class="mb-1 fw-bold" style="color: var(--text-main);">陶藝與釉藥知識網站 | Pottery & Glaze Knowledge Base</p>
-            <p class="small text-muted mb-0">&copy; 2026 Pottery Glaze Knowledge. All rights reserved. 內容由專業陶藝內容編輯與釉藥化學資料庫維護。</p>
+            <p class="small text-muted mb-0">
+                <a href="https://pottery-glaze.vercel.app/" target="_parent" class="footer-link">
+                    陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026
+                </a>
+            </p>
         </div>
     </footer>
 
@@ -1179,8 +1193,6 @@
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
                 table.column(3).search(val ? '^' + val + '$' : '', true, false).draw();
             });
-
-
 
             $('#filterLevel').on('change', function() {
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
