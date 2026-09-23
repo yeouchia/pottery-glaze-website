@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full bg-stone-50 text-stone-800">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陶瓷釉藥－氧化物導航與實務定位系統</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clay: { 50: '#fdfbf7', 100: '#f7f2e8', 200: '#ebdcc5', 300: '#dec29d', 500: '#b88955', 700: '#8c5e31', 900: '#482d16' },
+            glaze: { 50: '#f0f7f7', 100: '#daecee', 500: '#3a8891', 700: '#286269', 900: '#193e43' },
+            celadon: { 50: '#f2f8f5', 100: '#dfefe7', 500: '#529b79', 700: '#3a6f57' }
+          },
+          fontFamily: { sans: ['Inter', 'Noto Sans TC', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f0ec; }
+    ::-webkit-scrollbar-thumb { background: #d4cebe; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #b5ac97; }
+    .badge-a { @apply bg-emerald-100 text-emerald-800 border-emerald-300; }
+    .badge-b { @apply bg-teal-100 text-teal-800 border-teal-300; }
+    .badge-c { @apply bg-amber-100 text-amber-800 border-amber-300; }
+    .badge-d { @apply bg-orange-100 text-orange-800 border-orange-300; }
+    .badge-e { @apply bg-rose-100 text-rose-800 border-rose-300; }
+    .badge-f { @apply bg-slate-200 text-slate-800 border-slate-400; }
+    .card-transition { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans bg-stone-100 text-stone-800 antialiased">
+
+  <header class="bg-stone-900 text-stone-100 border-b border-stone-800 sticky top-0 z-30 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-600 to-clay-700 flex items-center justify-center text-amber-100 font-bold text-xl shadow-inner">
+            <i class="fa-solid fa-jar"></i>
+          </div>
+          <div>
+            <h1 class="text-lg sm:text-xl font-bold tracking-tight text-amber-50">陶瓷釉藥－氧化物導航與實務定位系統</h1>
+            <p class="text-xs text-stone-400">Ceramic Glaze Material Oxide Navigation System</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-clay-900 text-amber-100 border-b border-amber-900/30 py-4 px-4 sm:px-6 shadow-inner">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3 text-sm">
+        <span class="bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-md border border-amber-500/30 font-semibold text-xs whitespace-nowrap">三層分工架構</span>
+        <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+          <span class="bg-stone-800 px-2.5 py-1 rounded border border-stone-700 text-stone-300">📦 ① 六大類＝來源</span>
+          <i class="fa-solid fa-arrow-right text-amber-500 text-xs hidden sm:inline"></i>
+          <span class="bg-glaze-900 px-2.5 py-1 rounded border border-glaze-700 text-glaze-100">🧪 ② 氧化物＝導航</span>
+          <i class="fa-solid fa-arrow-right text-amber-500 text-xs hidden sm:inline"></i>
+          <span class="bg-celadon-700 px-2.5 py-1 rounded border border-celadon-500 text-celadon-50 font-medium">🎯 ③ 定位＝實務</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="space-y-6">
+      <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-5">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="relative w-full sm:w-96">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="text" id="search-input" oninput="handleSearchInput(this.value)" 
+              placeholder="搜尋名稱、化學式、氧化物 (如: CaCO3, CaO)..." 
+              class="w-full pl-10 pr-4 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:bg-white transition-all">
+          </div>
+          <button onclick="resetAllFilters()" class="px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-sm font-medium transition-colors border border-stone-300">
+            <i class="fa-solid fa-rotate-left mr-1"></i>重置篩選
+          </button>
+        </div>
+
+        <hr class="border-stone-200">
+
+        <div>
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">🧭 選擇導航模式</label>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <button id="mode-btn-oxide" onclick="setSearchMode('oxide')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border flex items-center justify-center space-x-2 transition-all bg-amber-50 border-amber-600 text-amber-900 shadow-sm"><i class="fa-solid fa-atom text-amber-600"></i><span>🔵 1. 依氧化物尋找</span></button>
+            <button id="mode-btn-seger" onclick="setSearchMode('seger')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border flex items-center justify-center space-x-2 transition-all bg-stone-50 border-stone-300 text-stone-700 hover:bg-stone-100"><i class="fa-solid fa-layer-group text-glaze-500"></i><span>🟢 2. 依 Seger 類別</span></button>
+            <button id="mode-btn-function" onclick="setSearchMode('function')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border flex items-center justify-center space-x-2 transition-all bg-stone-50 border-stone-300 text-stone-700 hover:bg-stone-100"><i class="fa-solid fa-fire text-orange-600"></i><span>🔥 3. 依釉藥功能</span></button>
+            <button id="mode-btn-category" onclick="setSearchMode('category')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border flex items-center justify-center space-x-2 transition-all bg-stone-50 border-stone-300 text-stone-700 hover:bg-stone-100"><i class="fa-solid fa-cubes text-clay-700"></i><span>🧱 4. 依原始六大類</span></button>
+          </div>
+        </div>
+
+        <div class="bg-stone-50 p-3.5 rounded-lg border border-stone-200">
+          <div class="flex items-center justify-between mb-2">
+            <span id="mode-chip-title" class="text-xs font-bold text-stone-700">選擇氧化物標籤：</span>
+            <span id="active-filter-summary" class="text-xs text-amber-700 font-medium"></span>
+          </div>
+          <div id="mode-chips-container" class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1"></div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider">🎯 釉藥使用定位篩選</label>
+            <div class="space-x-2 text-xs">
+              <button onclick="toggleAllRatings(true)" class="text-amber-700 hover:underline">全選</button><span class="text-stone-300">|</span>
+              <button onclick="toggleAllRatings(false)" class="text-amber-700 hover:underline">取消全選</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+            <!-- A to F Checkboxes -->
+            <label class="rating-filter-chip flex items-center space-x-2 p-2 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 cursor-pointer text-xs"><input type="checkbox" checked value="A" onchange="handleRatingFilterChange()" class="rounded text-emerald-600 focus:ring-emerald-500"><span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px]">A</span><span class="font-medium text-emerald-900">常用原料</span></label>
+            <label class="rating-filter-chip flex items-center space-x-2 p-2 rounded-lg border border-teal-200 bg-teal-50 hover:bg-teal-100 cursor-pointer text-xs"><input type="checkbox" checked value="B" onchange="handleRatingFilterChange()" class="rounded text-teal-600 focus:ring-teal-500"><span class="w-5 h-5 rounded-full bg-teal-600 text-white font-bold flex items-center justify-center text-[10px]">B</span><span class="font-medium text-teal-900">可用/參考</span></label>
+            <label class="rating-filter-chip flex items-center space-x-2 p-2 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 cursor-pointer text-xs"><input type="checkbox" checked value="C" onchange="handleRatingFilterChange()" class="rounded text-amber-600 focus:ring-amber-500"><span class="w-5 h-5 rounded-full bg-amber-600 text-white font-bold flex items-center justify-center text-[10px]">C</span><span class="font-medium text-amber-900">特殊用途</span></label>
+            <label class="rating-filter-chip flex items-center space-x-2 p-2 rounded-lg border border-orange-200 bg-orange-50 hover:bg-orange-100 cursor-pointer text-xs"><input type="checkbox" checked value="D" onchange="handleRatingFilterChange()" class="rounded text-orange-600 focus:ring-orange-500"><span class="w-5 h-5 rounded-full bg-orange-600 text-white font-bold flex items-center justify-center text-[10px]">D</span><span class="font-medium text-orange-900">間接/工藝</span></label>
+            <label class="rating-filter-chip flex items-center space-x-2 p-2 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 cursor-pointer text-xs"><input type="checkbox" checked value="E" onchange="handleRatingFilterChange()" class="rounded text-rose-600 focus:ring-rose-500"><span class="w-5 h-5 rounded-full bg-rose-600 text-white font-bold flex items-center justify-center text-[10px]">E</span><span class="font-medium text-rose-900">歷史保留</span></label>
+            <label class="rating-filter-chip flex items-center space-x-2 p-2 rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200 cursor-pointer text-xs"><input type="checkbox" checked value="F" onchange="handleRatingFilterChange()" class="rounded text-slate-700 focus:ring-slate-600"><span class="w-5 h-5 rounded-full bg-slate-700 text-white font-bold flex items-center justify-center text-[10px]">F</span><span class="font-medium text-slate-900">不建議</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between px-1">
+        <div class="text-sm text-stone-600">找到 <span id="results-count" class="font-bold text-amber-800 text-base">0</span> 筆原料</div>
+        <div class="text-xs text-stone-500 flex items-center space-x-1"><i class="fa-solid fa-lightbulb text-amber-500"></i><span>點擊卡片查看詳細規格</span></div>
+      </div>
+
+      <div id="materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+      <div id="empty-state" class="hidden text-center py-12 bg-white rounded-xl border border-dashed border-stone-300 p-6">
+        <div class="w-16 h-16 mx-auto bg-stone-100 rounded-full flex items-center justify-center text-stone-400 mb-3 text-2xl"><i class="fa-solid fa-filter-circle-xmark"></i></div>
+        <h3 class="text-stone-700 font-bold text-lg mb-1">找不到符合條件的原料</h3>
+        <button onclick="resetAllFilters()" class="px-4 py-2 mt-2 bg-amber-700 text-white text-sm rounded-lg hover:bg-amber-800">重置篩選</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="material-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-200">
+      <div id="modal-content" class="p-6 space-y-6"></div>
+    </div>
+  </div>
+
+  <script>
+    let state = {
+      rawMaterials: [],
+      searchMode: 'oxide',
+      activeFilterValue: '全部',
+      ratingFilters: ['A', 'B', 'C', 'D', 'E', 'F'],
+      searchQuery: ''
+    };
+
+    const modeChipOptions = {
+      oxide: ['全部', 'CaO', 'MgO', 'SiO2', 'Al2O3', 'K2O', 'Na2O', 'B2O3', 'P2O5', 'ZnO', 'TiO2', 'BaO', 'Cr2O3', 'CdO', 'PbO', 'Fe2O3', 'CuO'],
+      seger: ['全部', 'RO', 'R2O', 'R2O3', 'RO2', '色料', '特殊'],
+      function: ['全部', '助熔', '成玻', '乳濁', '著色', '特殊', '歷史'],
+      category: ['全部', '①顏料', '②氧化物', '③碳酸鹽', '④硫酸鹽與磷酸鹽', '⑤硝酸鹽與化學品', '⑥礦物']
+    };
+
+    // 自動讀取 JSON 檔案
+    window.onload = function() {
+      fetch('dataset.json')
+        .then(response => {
+          if (!response.ok) throw new Error('無法載入 dataset.json');
+          return response.json();
+        })
+        .then(rawData => {
+          // 轉換 CSV 輸出的中文欄位為系統可讀格式
+          state.rawMaterials = rawData.map(item => {
+            const getVal = (key1, key2) => item[key1] !== undefined ? item[key1] : (item[key2] || '');
+            const rawMain = getVal('提供氧化物(主)', 'main_oxides');
+            const rawSec = getVal('提供氧化物(次)', 'secondary_oxides');
+            
+            return {
+              id: getVal('系統編號', 'id'),
+              name_zh: getVal('原料名稱', 'name_zh'),
+              formula: getVal('化學式', 'formula'),
+              mw: getVal('分子量', 'mw'),
+              loi: getVal('燒失量(LOI%)', 'loi'),
+              source_category: getVal('原始分類', 'source_category'),
+              main_oxides: String(rawMain).split(/[\/,]/).map(s => s.trim()).filter(Boolean),
+              secondary_oxides: String(rawSec).split(/[\/,]/).map(s => s.trim()).filter(Boolean),
+              seger_category: getVal('Seger類別', 'seger_category'),
+              primary_function: getVal('主要功能', 'primary_function'),
+              rating: String(getVal('釉藥定位', 'rating')).match(/[A-F]/)?.[0] || 'F',
+              rating_full: getVal('釉藥定位', 'rating_full'),
+              glaze_status: getVal('使用狀態', 'glaze_status'),
+              usage_notes: getVal('實務備註與警示', 'usage_notes')
+            };
+          });
+          renderModeChips();
+          renderMaterialsGrid();
+        })
+        .catch(error => {
+          console.error(error);
+          document.getElementById('materials-grid').innerHTML = '<div class="col-span-full text-center text-red-500 py-10 font-bold">無法載入資料庫，請確認 dataset.json 檔案已放置於同一資料夾。</div>';
+        });
+    };
+
+    function setSearchMode(mode) {
+      state.searchMode = mode;
+      state.activeFilterValue = '全部';
+      ['oxide', 'seger', 'function', 'category'].forEach(m => {
+        document.getElementById(`mode-btn-${m}`).className = m === mode 
+          ? "px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border flex items-center justify-center space-x-2 transition-all bg-amber-50 border-amber-600 text-amber-900 shadow-sm"
+          : "px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border flex items-center justify-center space-x-2 transition-all bg-stone-50 border-stone-300 text-stone-700 hover:bg-stone-100";
+      });
+      renderModeChips();
+      renderMaterialsGrid();
+    }
+
+    function renderModeChips() {
+      const container = document.getElementById('mode-chips-container');
+      const title = document.getElementById('mode-chip-title');
+      const options = modeChipOptions[state.searchMode] || [];
+      const titlesMap = { oxide: "🔵 選擇導航氧化物：", seger: "🟢 選擇 Seger 當量類別：", function: "🔥 選擇釉藥功能標籤：", category: "🧱 選擇原始六大類：" };
+      title.innerText = titlesMap[state.searchMode];
+
+      container.innerHTML = options.map(opt => {
+        const isActive = opt === state.activeFilterValue;
+        const activeClass = isActive ? "bg-amber-700 text-white font-semibold shadow-sm" : "bg-white text-stone-700 hover:bg-stone-200 border border-stone-300";
+        return `<button onclick="setFilterValue('${opt}')" class="px-2.5 py-1 rounded-md text-xs transition-colors ${activeClass}">${opt}</button>`;
+      }).join('');
+    }
+
+    function setFilterValue(val) { state.activeFilterValue = val; renderModeChips(); renderMaterialsGrid(); }
+    
+    function handleRatingFilterChange() {
+      const checkboxes = document.querySelectorAll('.rating-filter-chip input[type="checkbox"]');
+      state.ratingFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+      renderMaterialsGrid();
+    }
+
+    function toggleAllRatings(enable) {
+      document.querySelectorAll('.rating-filter-chip input[type="checkbox"]').forEach(cb => cb.checked = enable);
+      state.ratingFilters = enable ? ['A', 'B', 'C', 'D', 'E', 'F'] : [];
+      renderMaterialsGrid();
+    }
+
+    function handleSearchInput(val) { state.searchQuery = val.trim().toLowerCase(); renderMaterialsGrid(); }
+
+    function resetAllFilters() {
+      state.searchQuery = ''; state.activeFilterValue = '全部';
+      document.getElementById('search-input').value = '';
+      toggleAllRatings(true); setSearchMode('oxide');
+    }
+
+    function formatChemicalFormula(formula) { return formula.replace(/(\d+)/g, '<sub>$1</sub>'); }
+
+    function getRatingBadge(rating, fullText) {
+      const bgMap = { 'A': 'badge-a', 'B': 'badge-b', 'C': 'badge-c', 'D': 'badge-d', 'E': 'badge-e', 'F': 'badge-f' };
+      return `<span class="px-2 py-0.5 rounded-md text-[11px] font-bold border ${bgMap[rating] || 'badge-f'}">${fullText || rating}</span>`;
+    }
+
+    function renderMaterialsGrid() {
+      const grid = document.getElementById('materials-grid');
+      const emptyState = document.getElementById('empty-state');
+      
+      const filtered = state.rawMaterials.filter(item => {
+        if (!state.ratingFilters.includes(item.rating)) return false;
+        
+        if (state.searchQuery) {
+          const q = state.searchQuery;
+          const match = [item.name_zh, item.formula, item.primary_function, item.usage_notes].some(val => String(val).toLowerCase().includes(q)) || 
+                        item.main_oxides.some(o => o.toLowerCase().includes(q));
+          if (!match) return false;
+        }
+
+        if (state.activeFilterValue !== '全部') {
+          const target = state.activeFilterValue;
+          if (state.searchMode === 'oxide' && !item.main_oxides.includes(target) && !item.secondary_oxides.includes(target)) return false;
+          if (state.searchMode === 'seger' && !item.seger_category.includes(target)) return false;
+          if (state.searchMode === 'function' && !item.primary_function.includes(target)) return false;
+          if (state.searchMode === 'category' && item.source_category !== target) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('results-count').innerText = filtered.length;
+      
+      if (filtered.length === 0) {
+        grid.innerHTML = ''; emptyState.classList.remove('hidden'); return;
+      }
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(item => `
+        <div onclick="openMaterialModal('${item.id}')" class="bg-white rounded-xl border border-stone-200 p-5 shadow-sm hover:shadow-md card-transition cursor-pointer flex flex-col justify-between hover:border-amber-400">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-semibold text-stone-500 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">${item.source_category}</span>
+              ${getRatingBadge(item.rating, item.rating_full)}
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-stone-900 flex items-center justify-between">
+                <span>${item.name_zh}</span>
+                <span class="text-sm font-mono text-stone-500 font-normal ml-2">${formatChemicalFormula(item.formula)}</span>
+              </h3>
+            </div>
+            <div class="bg-stone-50 p-2.5 rounded border border-stone-200 text-xs space-y-1">
+              <div class="flex items-start">
+                <span class="font-bold text-stone-600 w-16 shrink-0">主氧化物:</span>
+                <div class="flex flex-wrap gap-1">${item.main_oxides.map(o => `<span class="bg-amber-100 text-amber-900 font-bold px-1.5 py-0.5 rounded border border-amber-300">${o}</span>`).join('')}</div>
+              </div>
+              ${item.secondary_oxides.length > 0 ? `
+              <div class="flex items-start mt-1">
+                <span class="font-bold text-stone-500 w-16 shrink-0">伴隨物:</span>
+                <div class="flex flex-wrap gap-1">${item.secondary_oxides.map(o => `<span class="bg-stone-200 text-stone-700 px-1.5 py-0.5 rounded">${o}</span>`).join('')}</div>
+              </div>` : ''}
+            </div>
+            <p class="text-[11px] text-stone-600 line-clamp-2 leading-relaxed bg-clay-50 p-2 rounded border border-clay-100">${item.usage_notes}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openMaterialModal(id) {
+      const item = state.rawMaterials.find(m => m.id === id);
+      if (!item) return;
+      const modal = document.getElementById('material-modal');
+      
+      document.getElementById('modal-content').innerHTML = `
+        <div class="flex items-start justify-between border-b border-stone-200 pb-4">
+          <div>
+            <div class="flex items-center space-x-2 mb-1">
+              <span class="text-xs font-semibold text-stone-500 bg-stone-100 px-2.5 py-0.5 rounded border border-stone-300">${item.source_category}</span>
+              ${getRatingBadge(item.rating, item.rating_full)}
+              <span class="text-xs bg-amber-50 text-amber-900 border border-amber-200 px-2 py-0.5 rounded font-bold">${item.glaze_status}</span>
+            </div>
+            <h2 class="text-xl font-bold text-stone-900 mt-1">${item.name_zh} <span class="text-base font-mono text-stone-500 ml-2 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">${formatChemicalFormula(item.formula)}</span></h2>
+          </div>
+          <button onclick="document.getElementById('material-modal').classList.add('hidden')" class="text-stone-400 hover:text-stone-700"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-stone-50 p-3.5 rounded-xl border border-stone-200 text-xs">
+          <div><span class="text-stone-500 block">分子量 (MW)</span><span class="font-bold font-mono text-stone-800 text-sm">${item.mw || '-'}</span></div>
+          <div><span class="text-stone-500 block">燒失量 (LOI %)</span><span class="font-bold font-mono text-stone-800 text-sm">${item.loi || '-'}</span></div>
+          <div><span class="text-stone-500 block">Seger 類別</span><span class="font-medium text-stone-800">${item.seger_category || '-'}</span></div>
+          <div><span class="text-stone-500 block">主要功能</span><span class="font-medium text-stone-800">${item.primary_function || '-'}</span></div>
+        </div>
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-stone-700 uppercase tracking-wider">實務經驗與備註說明</h4>
+          <p class="text-sm text-stone-700 bg-white p-3.5 rounded-xl border border-stone-200 leading-relaxed">${item.usage_notes}</p>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
