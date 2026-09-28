@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>實戰解析：66個三角座標試片燒成紀錄與配方分析</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === 教學文章版型設計規範 (Design System) === */
+        :root {
+            --primary-color: #14213d;
+            --accent-color: #fca311;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-color: #ffffff;
+            --content-width: 900px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0 20px 20px 20px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .article-container {
+            max-width: var(--content-width);
+            margin: 40px auto 0 auto;
+        }
+
+        .article-header {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .article-tag {
+            display: inline-block;
+            background-color: #fff8e7;
+            color: #b45309;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(252, 163, 17, 0.2);
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0 0 15px 0;
+            line-height: 1.35;
+        }
+
+        .article-meta {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+        }
+        
+        .article-meta i { color: var(--accent-color); }
+
+        .article-content h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 45px 0 20px 0;
+            padding-left: 12px;
+            border-left: 5px solid var(--accent-color);
+            line-height: 1.4;
+        }
+
+        .article-content p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* 圖片展示區塊 */
+        figure {
+            margin: 35px 0;
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        figure:hover img { transform: scale(1.02); }
+
+        figcaption {
+            padding: 14px 15px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #475569;
+            text-align: center;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        figcaption i { color: var(--accent-color); margin-right: 6px; }
+
+        /* 並排圖片網格 (適用於比較圖) */
+        .image-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 35px 0;
+        }
+        .image-grid-2 figure { margin: 0; }
+        
+        .tile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .tile-grid figure { margin: 0; }
+        .tile-grid figcaption { padding: 10px; font-size: 0.9rem; }
+
+        /* 重點提示框 */
+        .info-box {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+            font-size: 1rem;
+            color: #2b6cb0;
+            line-height: 1.6;
+        }
+        .info-box strong { color: #2c5282; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .info-box ul { margin: 0; padding-left: 20px; }
+
+        /* 頁底版權連結樣式 */
+        .site-footer-link {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .site-footer-link a {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .site-footer-link a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 1.5rem; }
+            .article-content p { font-size: 1rem; }
+            .image-grid-2 { grid-template-columns: 1fr; gap: 20px; }
+            .tile-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="article-container">
+        <!-- 文章頭部 -->
+        <header class="article-header">
+            <span class="article-tag">配方系統與實驗</span>
+            <h1 class="article-title">實戰解析：66個三角座標試片燒成紀錄與配方分析</h1>
+            <div class="article-meta">
+                <span><i class="fa-solid fa-user-pen"></i> 黃明文老師</span>
+                <span><i class="fa-solid fa-flask"></i> 釉藥實驗紀錄</span>
+            </div>
+        </header>
+
+        <!-- 文章本體 -->
+        <main class="article-content">
+            
+            <p>在學習釉藥化學時，我們常說「理論需要實務的驗證」。本學期，我們帶領學生透過嚴謹的三角座標配方系統，實際秤重、研磨並燒製了 66 個不同比例的試片，藉由系統化的變數控制，完整揭開「釜戶長石、石英、石灰石」這三大基礎原料之間的熔融奧秘。 1250度電窯氧化燒~1250恆溫30分鐘。</p>
+
+            <h2>一、66個試片的配方設計</h2>
+            <p>三角座標是一種系統化的測試方法。我們將三角形的三個頂點分別設定為三種原料的 100%，並以 5% 為一個級距，調配出 66 種不同的配方比例。下表為本次實驗的完整配方數據：</p>
+            
+            <figure>
+                <img src="./66.jpg" alt="66個三角座標配方表">
+                <figcaption><i class="fa-solid fa-table"></i> 66個試片的完整比例分配表 (單位：%)</figcaption>
+            </figure>
+
+            <div class="info-box">
+                <strong><i class="fa-solid fa-map-location-dot"></i> 頂點原料特性解析</strong>
+                <ul>
+                    <li><b>頂部角（釜戶長石）：</b> 提供鹼金屬助熔劑與氧化鋁，本身高溫能熔，但黏度極高。</li>
+                    <li><b>左下角（石灰石）：</b> 碳酸鈣，高溫時是非常強效的助熔劑，能大幅降低熔點並增加流動性。</li>
+                    <li><b>右下角（石英）：</b> 二氧化矽，是玻璃質的骨幹，熔點極高，需要足夠的助熔劑才能將其熔融。</li>
+                </ul>
+            </div>
+
+            <h2>二、精準量測與研磨實作</h2>
+            <p>要讓 66 個配方準確無誤地呈現漸層變化，第一步就是仰賴精確的微量秤。學生們依照表格數據，小心翼翼地量測出精確的克數。</p>
+            
+            <div class="image-grid-2">
+                <figure>
+                    <img src="./01.jpg" alt="使用微量秤量測石英">
+                    <figcaption><i class="fa-solid fa-scale-balanced"></i> 精準量測石英粉末</figcaption>
+                </figure>
+                <figure>
+                    <img src="./02.jpg" alt="使用微量秤量測釜戶長石">
+                    <figcaption><i class="fa-solid fa-scale-balanced"></i> 精準秤取釜戶長石</figcaption>
+                </figure>
+            </div>
+
+            <p>秤重完畢後，緊接著是耗費體力的研磨工作。必須使用乳缽將這三種不同特性的粉末加水徹底混合均勻，確保入窯高溫燒製時，能夠產生穩定的共熔反應（Eutectic reaction），隨後仔細塗佈於 L 型試片上。</p>
+
+            <div class="image-grid-2">
+                <figure>
+                    <img src="./03.jpg" alt="使用乳缽研磨混合釉藥">
+                    <figcaption><i class="fa-solid fa-mortar-pestle"></i> 均勻研磨確保微觀層面的混合</figcaption>
+                </figure>
+                <figure>
+                    <img src="./05.jpg" alt="仔細將釉藥施於試片上">
+                    <figcaption><i class="fa-solid fa-paintbrush"></i> 學生專注將釉漿施加於編號試片</figcaption>
+                </figure>
+            </div>
+
+            <h2>三、佈局與燒成結果總覽</h2>
+            <p>試片出窯後，我們將黑板上的三角座標圖表，實際還原在桌面上。透過視覺化的矩陣排列，學生可以非常直觀地看出原料比例對釉面的絕對影響。</p>
+
+            <figure>
+                <img src="./08.jpg" alt="黑板上的三角座標解說圖">
+                <figcaption><i class="fa-solid fa-chalkboard"></i> 實驗前的理論座標解說，確立長石、石灰石與石英的軸線方向</figcaption>
+            </figure>
+
+            <figure>
+                <img src="./07.jpg" alt="66個試片完整排列照">
+                <figcaption><i class="fa-solid fa-shapes"></i> 燒成出窯：完整的 66 塊三角座標試片排列，展現釉面的漸層過渡</figcaption>
+            </figure>
+
+            <h2>四、關鍵試片釉面解析 (Results)</h2>
+            <p>我們從 66 個試片中，挑選出位於不同極端區域的代表性編號進行局部特寫觀察：</p>
+
+            <div class="tile-grid">
+                <!-- 1號: 100% 長石 -->
+                <figure>
+                    <img src="./09.jpg" alt="編號1試片">
+                    <figcaption><b>【編號 1】</b><br>100% 長石。有熔融但黏度極高，呈現乳白濃稠狀。</figcaption>
+                </figure>
+                
+                <!-- 4號: 90% 長石, 10% 石灰石 -->
+                <figure>
+                    <img src="./10.jpg" alt="編號4試片">
+                    <figcaption><b>【編號 4】</b><br>加入10%石灰石後，助熔效果出現，釉面開始有流動與堆積現象。</figcaption>
+                </figure>
+
+                <!-- 7號: 85% 長石, 15% 石灰石 -->
+                <figure>
+                    <img src="./11.jpg" alt="編號7試片">
+                    <figcaption><b>【編號 7】</b><br>石灰石達15%，產生非常光滑的玻璃質感與透明度。</figcaption>
+                </figure>
+
+                <!-- 16號: 75% 長石, 25% 石灰石 -->
+                <figure>
+                    <img src="./12.jpg" alt="編號16試片">
+                    <figcaption><b>【編號 16】</b><br>高鈣配方，強烈助熔使其完全透明，透出底部陶土原色。</figcaption>
+                </figure>
+            </div>
+
+            <div class="tile-grid">
+                <!-- 24號: 70% 長石, 20% 石灰石, 10% 石英 -->
+                <figure>
+                    <img src="./13.jpg" alt="編號24試片">
+                    <figcaption><b>【編號 24】</b><br>加入適量石英，平衡了流動性，呈現穩定的透明泛白釉面。</figcaption>
+                </figure>
+
+                <!-- 31號: 65% 長石, 25% 石灰石, 10% 石英 -->
+                <figure>
+                    <img src="./14.jpg" alt="編號31試片">
+                    <figcaption><b>【編號 31】</b><br>比例均衡的區域，熔融度極佳的基礎透明釉質感。</figcaption>
+                </figure>
+
+                <!-- 34號: 65% 長石, 10% 石灰石, 25% 石英 -->
+                <figure>
+                    <img src="./15.jpg" alt="編號34試片">
+                    <figcaption><b>【編號 34】</b><br>石英比例拉高，助熔劑不足，導致釉面熔融不完全，呈現乾澀乳白。</figcaption>
+                </figure>
+
+                <!-- 44號: 60% 長石, 5% 石灰石, 35% 石英 -->
+                <figure>
+                    <img src="./16.jpg" alt="編號44試片">
+                    <figcaption><b>【編號 44】</b><br>極高石英且缺鈣，完全無法玻化，呈現生澀的消光粉末狀（未熟）。</figcaption>
+                </figure>
+            </div>
+
+            <p><b>總結：</b>越靠近右下角（高石英區）的試片，因為缺乏助熔劑，呈現出未熟、乾澀的狀態。而越靠近左下角（高石灰石區），則展現出強烈的流動性與透明度。落在三角形中左區域的試片，因為三種原料達到了最佳的平衡點，成功熔融成平滑透亮的基礎透明釉。這正是三角座標實驗最大的價值——幫助我們在未知的原料海洋中，精準定位出配方的黃金比例！</p>
+            
+        </main>
+    </div>
+
+    <!-- 動態載入相關文章的容器 -->
+    <div id="dynamic-related-articles"></div>
+
+    <!-- 頁面底部版權連結 -->
+    <div class="site-footer-link">
+        <a href="../../../index.html">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+    </div>
+
+    <!-- 載入全站共用的 JS (包含相關文章推薦邏輯) -->
+    <script src="../../../assets/js/related.js"></script>
+</body>
+</html>
