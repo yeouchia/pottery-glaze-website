@@ -2,6 +2,46 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    
+    <!-- 👇 終極防護引擎：放在 <head> 最上方，確保第一時間攔截 👇 -->
+    <script>
+    (function() {
+        const allowedDomains = [
+            'yeouchia.github.io', 
+            'pottery-glaze.vercel.app', 
+            'localhost', 
+            '127.0.0.1',
+            'usercontent.goog' 
+        ];
+
+        const currentUrl = window.location.href;
+        const protocol = window.location.protocol;
+
+        const isLocalFile = (protocol === 'file:');
+        const isUnauthorizedDomain = !isLocalFile && !allowedDomains.some(domain => currentUrl.includes(domain));
+
+        if (isLocalFile || isUnauthorizedDomain) {
+            // 1. 強制停止瀏覽器繼續解析後續的任何 HTML 與腳本！
+            window.stop(); 
+            
+            // 2. 徹底抹除整個網頁，替換為單純的警告畫面！
+            document.documentElement.innerHTML = `
+                <head><title>⚠️ 未授權的執行環境</title></head>
+                <body style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background-color:#f0f3f6;color:#333;font-family:'微軟正黑體',sans-serif;text-align:center;padding:20px;margin:0;">
+                    <h1 style="color:#c0392b;margin-bottom:10px;">⚠️ 未授權的執行環境</h1>
+                    <p style="color:#555;margin-bottom:30px;line-height:1.5;font-weight:bold;font-size:1.1rem;">
+                        您目前正在非官方授權的環境中使用《陶瓷釉藥計算系統》。<br>
+                        為保障軟體完整性與您的資訊安全，請前往官方網站使用。
+                    </p>
+                    <a href="https://pottery-glaze.vercel.app/" style="padding:12px 24px;background-color:#3498db;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:0.2s;box-shadow:0 2px 5px rgba(0,0,0,0.2);">返回官方網站</a>
+                </body>
+            `;
+            throw new Error("執行環境未授權，已終止系統。");
+        }
+    })();
+    </script>
+    <!-- 👆 防護引擎結束 👆 -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>陶瓷釉藥三角座標模擬器 - 極致滿版</title>
     <style>
@@ -207,79 +247,40 @@
             border: 1.5px solid #fdcb6e;
         }
 
-        /* =========================================================
-           ★ 手機版專屬響應式結界 (這段範圍內設定絕對不影響電腦版) ★
-           ========================================================= */
+        .footer-link {
+            color: #7f8c8d;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 12px;
+        }
+        .footer-link:hover {
+            color: #fca311;
+            text-decoration: underline;
+        }
+
         @media screen and (max-width: 900px) {
-            .container {
-                flex-direction: column !important; 
-                padding: 8px !important; /* 壓縮外框內距 */
-            }
-            .left-panel {
-                flex: none !important;
-                width: 100% !important; 
-            }
-            .right-panel {
-                flex: none !important;
-                width: 100% !important;
-                margin-top: 15px !important; 
-            }
-            .table-scroll-area {
-                overflow-x: auto !important; 
-            }
-            .multi-table-container {
-                min-width: 650px !important; 
-            }
-            canvas {
-                max-width: 100% !important;
-                height: auto !important;
-                margin-top: 0px !important; /* 取消上方多餘留白 */
-            }
-            
-            /* ★ 手機版專屬：極致垂直壓縮控制區 ★ */
-            .step-selector {
-                flex-wrap: wrap !important; 
-                padding: 3px 6px !important; /* 大幅壓縮內距 */
-                gap: 6px !important; /* 縮小選項間距 */
-                margin-bottom: 0px !important;
-                justify-content: center;
-            }
-            .step-selector strong, .step-selector label {
-                font-size: 11.5px !important; /* 縮小字體以塞入同一行 */
-            }
-            .controls-section {
-                gap: 2px !important; /* 縮小三個卷軸之間的垂直間距 */
-            }
-            .slider-group {
-                padding: 2px 4px !important; /* 壓縮卷軸列的上下空間 */
-                gap: 4px !important;
-            }
-            .material-select {
-                width: 80px !important; /* 稍微縮小下拉選單寬度 */
-                font-size: 11.5px !important;
-                padding: 1px 2px !important;
-            }
-            .value-display {
-                font-size: 12px !important;
-                width: 32px !important;
-            }
-            .lock-btn {
-                width: 58px !important; /* 縮小鎖定按鈕 */
-                font-size: 10px !important;
-                padding: 2px !important;
-            }
+            .container { flex-direction: column !important; padding: 8px !important; }
+            .left-panel { flex: none !important; width: 100% !important; }
+            .right-panel { flex: none !important; width: 100% !important; margin-top: 15px !important; }
+            .table-scroll-area { overflow-x: auto !important; }
+            .multi-table-container { min-width: 650px !important; }
+            canvas { max-width: 100% !important; height: auto !important; margin-top: 0px !important; }
+            .step-selector { flex-wrap: wrap !important; padding: 3px 6px !important; gap: 6px !important; margin-bottom: 0px !important; justify-content: center; }
+            .step-selector strong, .step-selector label { font-size: 11.5px !important; }
+            .controls-section { gap: 2px !important; }
+            .slider-group { padding: 2px 4px !important; gap: 4px !important; }
+            .material-select { width: 80px !important; font-size: 11.5px !important; padding: 1px 2px !important; }
+            .value-display { font-size: 12px !important; width: 32px !important; }
+            .lock-btn { width: 58px !important; font-size: 10px !important; padding: 2px !important; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- 左側：圖形與控制區 -->
     <div class="left-panel">
         <h3 class="plot-title">三角座標圖 (Ternary Plot)</h3>
-        
         <canvas id="ternaryCanvas" width="500" height="350"></canvas> 
-        
         <div style="margin-top: -10px; font-weight: bold; font-size: 1em; margin-bottom: 4px;">
             當前配比：
             <span class="color-a" id="lbl-a-val">100</span>% | 
@@ -339,11 +340,18 @@
         </div>
     </div>
 
-    <!-- 右側：配方表生成區 -->
     <div class="right-panel">
         <div class="table-header-container">
-            <h3 id="table-title" style="margin: 0; font-size: 1.1em;">配方表 (66 個配方)</h3>
-            <button class="copy-btn" onclick="copyTableToWord()">複製配方表 (Word橫格式)</button>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <h3 id="table-title" style="margin: 0; font-size: 1.1em;">配方表 (66 個配方)</h3>
+                <div id="sum-scale-selector" style="display: flex; gap: 8px; font-size: 12px; align-items: center; background: #f8f9fa; padding: 3px 8px; border-radius: 4px; border: 1px solid #ddd;">
+                    <span style="font-weight: bold; color: #555;">總和：</span>
+                    <label style="cursor: pointer;"><input type="radio" name="sumScale" value="100" checked> 百分百 (100)</label>
+                    <label style="cursor: pointer;"><input type="radio" name="sumScale" value="50"> 百分之50</label>
+                    <label style="cursor: pointer;"><input type="radio" name="sumScale" value="33.333333333333336"> 百分之33</label>
+                </div>
+            </div>
+            <button class="copy-btn" onclick="copyTableToWord()">複製配方表 (Word格式)</button>
         </div>
         
         <div style="font-size: 11.5px; color: #7f8c8d; margin-bottom: 0px;" id="table-hint">
@@ -351,9 +359,13 @@
         </div>
         
         <div class="table-scroll-area">
-            <div id="visual-tables-container" class="multi-table-container">
-                <!-- JS 注入表格 -->
-            </div>
+            <div id="visual-tables-container" class="multi-table-container"></div>
+        </div>
+
+        <div style="text-align: right; padding-top: 10px; margin-top: auto; border-top: 1px dashed #eee;">
+            <a href="https://pottery-glaze.vercel.app/" target="_parent" class="footer-link">
+                陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026
+            </a>
         </div>
     </div>
 </div>
@@ -362,7 +374,8 @@
     let state = {
         a: 100, b: 0, c: 0,
         step: 5, mode: 'half', locked: null,
-        matA: '釜戶長石', matB: '石灰石', matC: '高嶺土'
+        matA: '釜戶長石', matB: '石灰石', matC: '高嶺土',
+        sumScale: 100
     };
 
     const DOM = {
@@ -381,6 +394,24 @@
         drawTernaryPlot();
         generateTables(); 
     };
+
+    document.querySelectorAll('input[name="sumScale"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            state.sumScale = parseFloat(e.target.value);
+            generateTables();
+        });
+    });
+
+    function formatVal(val) {
+        let scaled = val * (state.sumScale / 100);
+        if (state.sumScale === 100) {
+            return Math.round(scaled);
+        } else if (state.sumScale === 50) {
+            return Number(scaled.toFixed(1));
+        } else {
+            return Number(scaled.toFixed(2));
+        }
+    }
 
     DOM.radios.forEach(radio => {
         radio.addEventListener('change', (e) => {
@@ -682,9 +713,9 @@
                 tr.id = `row-${r.a}-${r.b}-${r.c}`;
                 tr.innerHTML = `
                     <td>${r.id}</td>
-                    <td class="color-a">${r.a}</td>
-                    <td class="color-b">${r.b}</td>
-                    <td class="color-c">${r.c}</td>
+                    <td class="color-a">${formatVal(r.a)}</td>
+                    <td class="color-b">${formatVal(r.b)}</td>
+                    <td class="color-c">${formatVal(r.c)}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -712,7 +743,6 @@
         if (currentRecipes.length === 0) return;
         
         const tempDiv = document.createElement('div');
-        
         const maxRowsPerCol = 15; 
         
         let numCols = 4;
@@ -784,9 +814,9 @@
                         let tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td style="border: 1px solid black; padding: 4px 2px;">${r.id}</td>
-                            <td style="border: 1px solid black; padding: 4px 2px; color: #c0392b;">${r.a}</td>
-                            <td style="border: 1px solid black; padding: 4px 2px; color: #27ae60;">${r.b}</td>
-                            <td style="border: 1px solid black; padding: 4px 2px; color: #2980b9;">${r.c}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #c0392b;">${formatVal(r.a)}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #27ae60;">${formatVal(r.b)}</td>
+                            <td style="border: 1px solid black; padding: 4px 2px; color: #2980b9;">${formatVal(r.c)}</td>
                         `;
                         tbody.appendChild(tr);
                     });
@@ -820,7 +850,7 @@
         
         try {
             document.execCommand('copy');
-            alert('✅ 完美 Word 配方表已複製！\n\n(💡 提示：超過 60 個配方時，系統會自動標記為第 2 頁，並在貼上 Word 時自動分頁！)');
+            alert('✅ 完美 Word 配方表已複製！\n\n(💡 提示：當前選取的總和比例已自動套用到複製的表格中！)');
         } catch (err) {
             alert('複製失敗，請檢查瀏覽器權限。');
         }
@@ -831,11 +861,6 @@
 
     updateMaterialNames();
     updateDOM();
-
-
-
-
-
 </script>
 
 </body>
