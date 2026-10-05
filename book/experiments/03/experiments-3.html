@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>02實戰解析：66個三角座標試片燒成紀錄與配方分析</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --primary-color: #14213d; --accent-color: #fca311; --text-main: #334155; --text-muted: #64748b; --bg-color: #ffffff; --content-width: 900px; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Microsoft JhengHei', 'Segoe UI', Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; margin: 0; padding: 0 20px 20px 20px; -webkit-text-size-adjust: 100%; }
+        .article-container { max-width: var(--content-width); margin: 40px auto 0 auto; }
+        .article-header { margin-bottom: 35px; padding-bottom: 20px; border-bottom: 2px solid #f1f5f9; }
+        .article-tag { display: inline-block; background-color: #fff8e7; color: #b45309; font-size: 0.85rem; font-weight: 700; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(252, 163, 17, 0.2); margin-bottom: 15px; }
+        .article-title { font-size: 1.85rem; font-weight: 800; color: var(--primary-color); margin: 0 0 15px 0; line-height: 1.35; }
+        .article-meta { font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: center; gap: 15px; font-weight: 600; }
+        .article-meta i { color: var(--accent-color); }
+        .article-content h2 { font-size: 1.35rem; font-weight: 800; color: var(--primary-color); margin: 45px 0 20px 0; padding-left: 12px; border-left: 5px solid var(--accent-color); line-height: 1.4; }
+        .article-content p { font-size: 1.05rem; margin-bottom: 20px; text-align: justify; }
+        figure { margin: 35px 0; background: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        figure img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; }
+        figure:hover img { transform: scale(1.02); }
+        figcaption { padding: 14px 15px; font-size: 0.95rem; font-weight: 700; color: #475569; text-align: center; background: #f1f5f9; border-top: 1px solid #e2e8f0; }
+        figcaption i { color: var(--accent-color); margin-right: 6px; }
+        .image-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 35px 0; }
+        .image-grid-2 figure { margin: 0; }
+        .tile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .tile-grid figure { margin: 0; }
+        .tile-grid figcaption { padding: 10px; font-size: 0.9rem; }
+        .info-box { background-color: #ebf8ff; border-left: 4px solid #3182ce; padding: 20px; border-radius: 0 8px 8px 0; margin: 25px 0; font-size: 1rem; color: #2b6cb0; line-height: 1.6; }
+        .info-box strong { color: #2c5282; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .info-box ul { margin: 0; padding-left: 20px; }
+        .site-footer-link { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 40px; margin-bottom: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+        .site-footer-link a.home-link { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; }
+        .site-footer-link a.home-link:hover { color: var(--accent-color); }
+        .footer-share-wrapper { position: relative; display: inline-block; }
+        .footer-share-btn { background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 5px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+        .footer-share-btn:hover { color: var(--accent-color); background-color: rgba(252, 163, 17, 0.1); transform: scale(1.1); }
+        .share-dropdown-content { visibility: hidden; opacity: 0; transform: translateY(10px) translateX(-50%); position: absolute; bottom: 100%; left: 50%; margin-bottom: 10px; background-color: #ffffff; min-width: 150px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); z-index: 9999; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .share-dropdown-content.show { visibility: visible; opacity: 1; transform: translateY(0) translateX(-50%); }
+        .share-dropdown-item { color: #334155; padding: 12px 16px; text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 700; transition: background-color 0.2s ease; border-bottom: 1px solid #f1f5f9; }
+        .share-dropdown-item:last-child { border-bottom: none; }
+        .share-dropdown-item:hover { background-color: #f8fafc; color: var(--accent-color); }
+        @media (max-width: 768px) { .article-title { font-size: 1.5rem; } .article-content p { font-size: 1rem; } .image-grid-2 { grid-template-columns: 1fr; gap: 20px; } .tile-grid { grid-template-columns: 1fr 1fr; } .site-footer-link a.home-link { font-size: 0.75rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="article-container">
+        <!-- 文章頭部 -->
+        <header class="article-header">
+            <span class="article-tag">配方系統與實驗</span>
+            <h1 class="article-title">02實戰解析：66個三角座標試片燒成紀錄與配方分析</h1>
+            <div class="article-meta">
+                <span><i class="fa-solid fa-user-pen"></i> 黃明文老師</span>
+                <span><i class="fa-solid fa-flask"></i> 釉藥實驗紀錄</span>
+            </div>
+        </header>
+
+        <!-- ★ 根據實驗資料擴充的 main 內容 ★ -->
+        <main class="article-content">
+            
+            <p>延續前一篇「長石、石灰石、石英」的基礎三角座標實驗，本次實戰解析我們將配方系統推進至更具變化性的<strong>「霞正長石、石灰石、高嶺土」</strong>三元系統。在釉藥化學中，高嶺土不僅提供二氧化矽（SiO₂），更帶來高比例的氧化鋁（Al₂O₃），扮演調節釉漿黏度、防止流釉與促進微晶消光的關鍵角色。透過 5% 為一級距的 66 個座標試片，我們能夠完整觀察釉面如何在「鹼金屬熔融」、「鈣質強效助熔」與「鋁矽耐火骨架」三股力量的拉鋸下，演繹出冰裂長石釉、透明青瓷釉、結晶斑駁釉與絲絨鈣無光釉的多元面貌。</p>
+
+            <h2>一、66個試片的配方設計與原料特性</h2>
+            <p>本次三角座標實驗將頂點（編號 1）設定為 100% 霞正長石，往下每排遞減 5% 霞正長石（至最底排第 11 排為 50% 霞正長石）；左下角軸線由 0% 至 50% 遞增石灰石，右下角軸線則由 0% 至 50% 遞增高嶺土，共計交織出 66 組嚴謹的配方比例：</p>
+
+            <figure>
+                <img src="./配方表.jpg" alt="霞正長石、石灰石、高嶺土66個三角座標配方表">
+                <figcaption><i class="fa-solid fa-table"></i> 66個試片的完整比例分配表（霞正長石 100%~50% / 石灰石 0%~50% / 高嶺土 0%~50%）</figcaption>
+            </figure>
+
+            <div class="info-box">
+                <strong><i class="fa-solid fa-map-location-dot"></i> 三角座標頂點原料特性解析</strong>
+                <ul>
+                    <li><b>頂部角（霞正長石 Nepheline Syenite）：</b> 富含氧化鈉（Na₂O）與氧化鉀（K₂O）及氧化鋁，相較於一般正長石具有更低的熔點與更強的高溫助熔力，單獨燒成即可熔融成乳白帶冰裂的厚釉，但熱膨脹係數較高。</li>
+                    <li><b>左下角（石灰石 Whiting）：</b> 主要成分為碳酸鈣（CaCO₃），高溫分解後釋出氧化鈣（CaO），是極為強效的高溫助熔劑，能顯著降低釉藥黏度、提升透明度與流動性；但比例過高時則會在冷卻時析出結晶。</li>
+                    <li><b>右下角（高嶺土 Kaolin）：</b> 水合矽酸鋁（Al₂O₃·2SiO₂·2H₂O），在配方中補充關鍵的氧化鋁與二氧化矽。氧化鋁能大幅提高釉液的高溫黏度、抑制流釉並強化坯釉結合度，但含量過高時會導致熔點急遽上升而呈現無光或未熟乾澀狀。</li>
+                </ul>
+            </div>
+
+            <h2>二、三角座標佈局與三大區域燒成全貌</h2>
+            <p>試片出窯後，我們依照三角座標的編號順序在木桌上完整排列還原。從整體的視覺矩陣中，可以清楚看見三大原料軸線交織出的色澤與質感分界：頂部呈現溫潤乳白、左翼轉為深邃油亮的青褐玻璃質、右翼則漸變為潔白無光的耐火質地。</p>
+
+            <div class="image-grid-2">
+                <figure>
+                    <img src="./IMG_1197.jpg" alt="66個三角座標試片完整排列全景">
+                    <figcaption><i class="fa-solid fa-shapes"></i> 66 個三角座標試片完整佈局與三軸向標示全景</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1227.jpg" alt="66個三角座標試片近拍全貌">
+                    <figcaption><i class="fa-solid fa-grip"></i> 燒成出窯近拍：清楚展現從玻化亮面到無光乳濁的漸層過渡</figcaption>
+                </figure>
+            </div>
+
+            <p>為了更細膩地觀察各區塊的趨勢，我們將三角座標分為「頂部高長石區」、「左下高石灰石區」與「右下高高嶺土區」三個角度進行分區檢視：</p>
+
+            <div class="tile-grid">
+                <figure>
+                    <img src="./IMG_1228.jpg" alt="頂部霞正長石高比例區">
+                    <figcaption><i class="fa-solid fa-arrow-up"></i> <b>【頂部區（編號1~15）】</b><br>霞正長石 80%~100%，呈現厚實乳白與初步助熔透明化。</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1229.jpg" alt="左下角高石灰石助熔區">
+                    <figcaption><i class="fa-solid fa-arrow-down-left"></i> <b>【左下區（高石灰石軸線）】</b><br>強效鈣助熔產生高流動性、青褐色玻化與過飽和結晶。</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1230.jpg" alt="右下角高高嶺土耐火區">
+                    <figcaption><i class="fa-solid fa-arrow-down-right"></i> <b>【右下區（高高嶺土軸線）】</b><br>鋁矽含量攀升，釉面由半無光白釉逐步轉為生燒粉狀。</figcaption>
+                </figure>
+            </div>
+
+            <h2>三、頂部高霞正長石區：微量鈣助熔 vs. 鋁矽增稠（編號 1～10）</h2>
+            <p>我們首先聚焦於三角形最上方的第 1 至第 4 排（霞正長石佔 85%～100%）。在這個高鹼金屬長石的基底中，僅僅加入 5%～10% 的石灰石或高嶺土，就會對釉面的透明度、冰裂紋（開片）以及胎釉交界處的「火刺（紅褐色反應帶）」產生截然不同的影響：</p>
+
+            <div class="tile-grid">
+                <!-- 1號: 霞正長石100% -->
+                <figure>
+                    <img src="./IMG_1199.jpg" alt="編號1試片特寫">
+                    <figcaption><b>【編號 1】</b> (長100 / 灰0 / 土0)<br>100% 單味霞正長石。高溫熔融良好但黏度極高，呈現半透明乳白冰裂紋質感。</figcaption>
+                </figure>
+
+                <!-- 2號: 霞正長石95%, 石灰石5% -->
+                <figure>
+                    <img src="./IMG_1200.jpg" alt="編號2試片特寫">
+                    <figcaption><b>【編號 2】</b> (長95 / 灰5 / 土0)<br>加入 5% 石灰石助熔，上緣薄處開始透明化，且下緣與坯體鐵質反應浮現紅褐色火刺邊。</figcaption>
+                </figure>
+
+                <!-- 3號: 霞正長石95%, 高嶺土5% -->
+                <figure>
+                    <img src="./IMG_1201.jpg" alt="編號3試片特寫">
+                    <figcaption><b>【編號 3】</b> (長95 / 灰0 / 土5)<br>改加入 5% 高嶺土，氧化鋁提高了黏度與乳濁度，形成潔白厚實如凝脂的開片白釉。</figcaption>
+                </figure>
+            </div>
+
+            <div class="tile-grid">
+                <!-- 4號: 霞正長石90%, 石灰石10% -->
+                <figure>
+                    <img src="./IMG_1204.jpg" alt="編號4試片特寫">
+                    <figcaption><b>【編號 4】</b> (長90 / 灰10 / 土0)<br>石灰石提升至 10%，助熔效果大增，釉面大幅轉為清透，清楚透出坯體色澤與冰裂紋。</figcaption>
+                </figure>
+
+                <!-- 5號: 霞正長石90%, 石灰石5%, 高嶺土5% -->
+                <figure>
+                    <img src="./IMG_1202.jpg" alt="編號5試片特寫">
+                    <figcaption><b>【編號 5】</b> (長90 / 灰5 / 土5)<br>石灰石與高嶺土各 5%，兼具乳白厚釉感與下緣濃烈的紅褐色胎釉反應帶。</figcaption>
+                </figure>
+
+                <!-- 6號: 霞正長石90%, 高嶺土10% -->
+                <figure>
+                    <img src="./IMG_1203.jpg" alt="編號6試片特寫">
+                    <figcaption><b>【編號 6】</b> (長90 / 灰0 / 土10)<br>高嶺土達 10% 且無石灰石，完全不見紅褐火刺，釉層更加雪白、濃稠且開片明顯。</figcaption>
+                </figure>
+            </div>
+
+            <figure>
+                <img src="./IMG_1222.jpg" alt="編號5、6、9、10四片並列對照">
+                <figcaption><i class="fa-solid fa-magnifying-glass-chart"></i> 關鍵對照組（編號 5、6 與 9、10）：左列含 5% 石灰石（5號、9號）皆促進熔融並誘發暖紅褐色底韻；右列不含石灰石（9號、10號）則隨高嶺土增加而愈發純白不透。</figcaption>
+            </figure>
+
+            <h2>四、左翼高石灰石區：從青瓷玻化、劇烈流釉到鈣過飽和析晶</h2>
+            <p>沿著三角形左側邊緣往下觀察（編號 11 → 16 → 22 → 29 → 30 → 38 → 56），石灰石比例由 20% 一路攀升至 50%。這個區域完整示範了氧化鈣（CaO）在高溫下的兩面刃特性——適量時是極佳的透明助熔劑，過量時則會造成劇烈垂流與冷卻分相析晶：</p>
+
+            <div class="tile-grid">
+                <!-- 11號: 長80, 灰20, 土0 -->
+                <figure>
+                    <img src="./IMG_1205.jpg" alt="編號11試片特寫">
+                    <figcaption><b>【編號 11】</b> (長80 / 灰20 / 土0)<br>石灰石達 20%，長石中的微氣泡被完全排除，形成清澈透亮、帶青褐色調的玻璃質亮面釉。</figcaption>
+                </figure>
+
+                <!-- 16號: 長75, 灰25, 土0 -->
+                <figure>
+                    <img src="./IMG_1206.jpg" alt="編號16試片特寫">
+                    <figcaption><b>【編號 16】</b> (長75 / 灰25 / 土0)<br>石灰石 25%，上緣薄處呈青褐透明，下緣厚積釉處開始出現乳白分相與濃烈火刺紅線。</figcaption>
+                </figure>
+
+                <!-- 22號: 長70, 灰30, 土0 -->
+                <figure>
+                    <img src="./IMG_1207.jpg" alt="編號22試片特寫">
+                    <figcaption><b>【編號 22】</b> (長70 / 灰30 / 土0)<br>石灰石達 30%，高溫黏度顯著降低，厚釉向下垂流聚集成圓潤肥厚的雪白凝脂狀。</figcaption>
+                </figure>
+
+                <!-- 29號: 長65, 灰35, 土0 -->
+                <figure>
+                    <img src="./IMG_1208.jpg" alt="編號29試片特寫">
+                    <figcaption><b>【編號 29】</b> (長65 / 灰35 / 土0)<br>石灰石 35% 且無高嶺土，釉面強烈熔融泛出茶綠光澤，表面伴隨鈣質過飽和的白霧斑。</figcaption>
+                </figure>
+            </div>
+
+            <div class="tile-grid">
+                <!-- 30號: 長65, 灰30, 土5 -->
+                <figure>
+                    <img src="./IMG_1209.jpg" alt="編號30試片特寫">
+                    <figcaption><b>【編號 30】</b> (長65 / 灰30 / 土5)<br>相較於 29 號，僅加入 5% 高嶺土補充鋁矽，即消除白霧分相，化為極度清澈但強烈垂流的青綠透明釉！</figcaption>
+                </figure>
+
+                <!-- 38號: 長60, 灰35, 土5 -->
+                <figure>
+                    <img src="./IMG_1210.jpg" alt="編號38試片特寫">
+                    <figcaption><b>【編號 38】</b> (長60 / 灰35 / 土5)<br>共熔流動達到高峰！底部嚴重流釉積聚，凹槽處呈現清澈如玻璃珠般的翠綠冰裂與氣泡。</figcaption>
+                </figure>
+
+                <!-- 56號: 長50, 灰50, 土0 -->
+                <figure>
+                    <img src="./IMG_1211.jpg" alt="編號56試片特寫">
+                    <figcaption><b>【編號 56】</b> (長50 / 灰50 / 土0)<br>左下極限頂點！石灰石高達 50%，嚴重缺乏鋁矽網絡穩定，冷卻時產生明顯的白色鈣結晶團塊與黃綠玻化分相。</figcaption>
+                </figure>
+            </div>
+
+            <h2>五、橫向梯度實證：石灰石與高嶺土的消長拉鋸戰</h2>
+            <p>三角座標最迷人之處，在於「同一橫排（固定霞正長石比例）」由左至右的橫向觀察。當石灰石每次減少 5%、高嶺土每次增加 5% 時，我們可以精準捕捉到釉面從「亮面流釉」跨入「無光穩定」的臨界座標點。</p>
+
+            <p>首先觀察<strong>第 6 排右段（編號 19、20、21，霞正長石固定為 75%）</strong>的連續變化：</p>
+
+            <figure>
+                <img src="./IMG_1218.jpg" alt="編號19、20、21三片並排比較">
+                <figcaption><i class="fa-solid fa-arrows-left-right"></i> 第 6 排右側橫向漸變（編號 19 → 20 → 21）：隨著石灰石歸零、高嶺土升至 25%，光澤由亮面瞬間收斂為雪白消光</figcaption>
+            </figure>
+
+            <div class="tile-grid">
+                <figure>
+                    <img src="./IMG_1219.jpg" alt="編號19試片特寫">
+                    <figcaption><b>【編號 19】</b> (長75 / 灰10 / 土15)<br>10% 石灰石仍足以促成高度玻化，形成平滑亮麗、微透胎色的乳白亮面釉。</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1220.jpg" alt="編號20試片特寫">
+                    <figcaption><b>【編號 20】</b> (長75 / 灰5 / 土20)<br>石灰石降至 5%、高嶺土達 20%，黏度升高導致少許微氣孔滯留，光澤轉為溫潤半亮面。</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1221.jpg" alt="編號21試片特寫">
+                    <figcaption><b>【編號 21】</b> (長75 / 灰0 / 土25)<br>完全無石灰石助熔，25% 高嶺土使熔點大幅拉升，呈現不流動、潔白細膩的無光蛋白石質感。</figcaption>
+                </figure>
+            </div>
+
+            <p>接著我們檢視<strong>第 8 排全序列（編號 31 ～ 36，霞正長石固定為 65%）</strong>，這六片試片完整演繹了高溫黏度遞增的物理過程：</p>
+
+            <div class="image-grid-2">
+                <figure>
+                    <img src="./IMG_1217.jpg" alt="編號31與32試片對照">
+                    <figcaption><i class="fa-solid fa-code-compare"></i> <b>【編號 31】</b>(長65/灰25/土10) vs. <b>【編號 32】</b>(長65/灰20/土15)<br>31 號鈣高鋁低，凸稜透胎、凹槽積聚微黃結晶斑且具紅火刺；32 號高嶺土增至 15%，流動收斂並轉為灰白斑駁乳濁面。</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1216.jpg" alt="編號33與34試片對照">
+                    <figcaption><i class="fa-solid fa-code-compare"></i> <b>【編號 33】</b>(長65/灰15/土20) vs. <b>【編號 34】</b>(長65/灰10/土25)<br>33 號正好處於氣體逸出與高黏度封閉的臨界點，形成充滿氣孔與鐵斑的火山肌理；34 號則因熔融減緩轉為橘皮紋半無光白釉。</figcaption>
+                </figure>
+            </div>
+
+            <figure>
+                <img src="./IMG_1215.jpg" alt="編號35與36試片對照">
+                <figcaption><i class="fa-solid fa-code-compare"></i> <b>【編號 35】</b>(長65/灰5/土30) vs. <b>【編號 36】</b>(長65/灰0/土35)：35 號靠著僅存的 5% 石灰石燒結成厚實凝脂白釉（上緣帶微針孔）；36 號無鈣且高嶺土達 35%，呈現完全消光、純白緊實的耐火粉質表面。</figcaption>
+            </figure>
+
+            <h2>六、底排的驚喜發現：絲絨鈣無光釉與極限耐火區（編號 61、65、66）</h2>
+            <p>來到三角座標最底部的第 11 排（霞正長石降至 50%），這裡隱藏著本次實驗最令人驚豔的實用配方——<strong>編號 61（霞正長石 50%、石灰石 25%、高嶺土 25%）</strong>，以及右下角高嶺土高達 45%～50% 的極限耐火區（編號 65、66）：</p>
+
+            <div class="image-grid-2">
+                <figure>
+                    <img src="./IMG_1212.jpg" alt="編號61試片正面特寫">
+                    <figcaption><i class="fa-solid fa-star"></i> <b>【編號 61 正面】</b>(長50 / 灰25 / 土25)<br>鈣與高嶺土各佔 25%，發育出極為綿密、溫潤如奶油白巧克力般的頂級「鈣結晶無光白釉」。</figcaption>
+                </figure>
+                <figure>
+                    <img src="./IMG_1213.jpg" alt="編號61試片背面特寫">
+                    <figcaption><i class="fa-solid fa-star"></i> <b>【編號 61 另一面】</b>(長50 / 灰25 / 土25)<br>厚釉處圓潤肥厚、不垂流至底部，上緣薄處帶有自然的微細針孔肌理，質感極佳。</figcaption>
+                </figure>
+            </div>
+
+            <figure>
+                <img src="./IMG_1214.jpg" alt="編號65與66試片對照">
+                <figcaption><i class="fa-solid fa-triangle-exclamation"></i> <b>【編號 65】</b>(長50/灰5/土45) vs. <b>【編號 66】</b>(長50/灰0/土50)：右下角極限高嶺土區。65 號含 5% 石灰石，勉強燒結成平整的消光白瓷面；66 號高嶺土達 50% 且完全無鈣，因耐火度過高與高嶺土乾燥收縮，呈現未熟乾裂的生燒狀態。</figcaption>
+            </figure>
+
+            <div class="info-box">
+                <strong><i class="fa-solid fa-lightbulb"></i> 實驗總結與配方選用指南</strong>
+                <ul>
+                    <li><b>想調配「冰裂長石釉／志野風格厚白釉」：</b>請鎖定頂部區域（如<b>編號 1、3、5、6</b>），高比例霞正長石搭配 5%～10% 高嶺土，能創造肥厚溫潤且具大開片的玉質感。</li>
+                    <li><b>想調配「高透明青瓷／灰釉系亮面釉」：</b>請選擇中左翼區域（如<b>編號 11、19、30</b>），20%～30% 的石灰石搭配 5%～15% 的高嶺土，能獲得清澈透亮且流釉可控的完美玻璃相。</li>
+                    <li><b>想調配「絲絨質感無光白釉（Matte Glaze）」：</b>底排中段的<b>編號 61（長50 / 灰25 / 土25）</b>是絕佳的無光母釉典範！充足的氧化鈣與氧化鋁在冷卻時共同析出微細的鈣長石結晶，達到真正耐髒、溫潤不刺眼的消光效果，而非如<b>編號 66</b> 般因生燒未熟所造成的乾澀表面。</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="dynamic-related-articles"></div>
+
+    <div class="site-footer-link">
+        <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+        <div class="footer-share-wrapper">
+            <button class="footer-share-btn" onclick="toggleShareMenu(event)" title="分享這篇文章"><i class="fa-solid fa-share-nodes"></i></button>
+            <div id="shareDropdown" class="share-dropdown-content">
+                <a href="#" onclick="shareToFB(event)" class="share-dropdown-item"><i class="fa-brands fa-facebook" style="color:#1877f2;"></i> 分享到 FB</a>
+                <a href="#" onclick="shareToLine(event)" class="share-dropdown-item"><i class="fa-brands fa-line" style="color:#00c300;"></i> 分享到 LINE</a>
+                <a href="#" onclick="copyLink(event)" class="share-dropdown-item"><i class="fa-solid fa-link" style="color:#6b7280;"></i> 複製連結</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../assets/js/related.js"></script>
+    <script>
+        function getShareUrl() { try { if (window.top !== window.self && window.top.location.href.includes('knowledge.html')) { return window.top.location.href; } return window.location.href; } catch(e) { return window.location.href; } }
+        function toggleShareMenu(event) { event.stopPropagation(); event.preventDefault(); document.getElementById('shareDropdown').classList.toggle('show'); }
+        document.addEventListener('click', function(e) { const menu = document.getElementById('shareDropdown'); if (menu && menu.classList.contains('show')) { menu.classList.remove('show'); } });
+        function shareToFB(e) { e.preventDefault(); const url = getShareUrl(); if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) && navigator.share) { navigator.share({ title: document.title, url: url }).catch(()=>{}); } else { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400'); } document.getElementById('shareDropdown').classList.remove('show'); }
+        function shareToLine(e) { e.preventDefault(); const url = getShareUrl(); const text = encodeURIComponent('推薦這篇精彩的陶藝教學文章：\n' + url); if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) { window.location.href = `https://line.me/R/msg/text/?${text}`; } else { window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank', 'width=500,height=500'); } document.getElementById('shareDropdown').classList.remove('show'); }
+        function copyLink(e) { e.preventDefault(); navigator.clipboard.writeText(getShareUrl()).then(() => alert('✨ 文章網址已複製！')).catch(() => alert('複製失敗')); document.getElementById('shareDropdown').classList.remove('show'); }
+    </script>
+</body>
+</html>
