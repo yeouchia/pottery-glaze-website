@@ -130,18 +130,18 @@ const knowledgeTree = [
             { id: "glaze_chem-14", title: "14 什麼是莫耳？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-14.html" },
             { id: "glaze_chem-15", title: "15 什麼是 Seger Formula（釉式）？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-15.html" },
             { id: "glaze_chem-16", title: "16 原料配方如何轉換成釉式？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-16.html" },
-            { id: "glaze_chem-17", title: "17 釉式如何反推原料配方？實例計算教學01", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-17.html" },
+            { id: "glaze_chem-17", title: "17 原料配方如何轉換成釉式？實例計算教學01", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-17.html" },
  
 
- { id: "glaze_chem-18", title: "18 釉式如何反推原料配方？實例計算教學02", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-18.html" },
- { id: "glaze_chem-19", title: "19 釉式如何反推原料配方？實例計算教學03", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-19.html" },
- { id: "glaze_chem-20", title: "20 釉式如何反推原料配方？實例計算教學04", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-20.html" },
- { id: "glaze_chem-21", title: "21 釉式如何反推原料配方？實例計算教學05", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-21.html" },
- { id: "glaze_chem-22", title: "22 釉式如何反推原料配方？實例計算教學06", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-22.html" },
- { id: "glaze_chem-23", title: "23 釉式如何反推原料配方？實例計算教學07", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-23.html" },
- { id: "glaze_chem-24", title: "24 釉式如何反推原料配方？實例計算教學08", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-24.html" },
- { id: "glaze_chem-25", title: "25 釉式如何反推原料配方？實例計算教學09", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-25.html" },
- { id: "glaze_chem-26", title: "26 釉式如何反推原料配方？實例計算教學10", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-26.html" },
+ { id: "glaze_chem-18", title: "18 原料配方如何轉換成釉式？實例計算教學02", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-18.html" },
+ { id: "glaze_chem-19", title: "19 原料配方如何轉換成釉式？實例計算教學03", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-19.html" },
+ { id: "glaze_chem-20", title: "20 原料配方如何轉換成釉式？實例計算教學04", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-20.html" },
+ { id: "glaze_chem-21", title: "21 原料配方如何轉換成釉式？實例計算教學05", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-21.html" },
+ { id: "glaze_chem-22", title: "22 原料配方如何轉換成釉式？實例計算教學06", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-22.html" },
+ { id: "glaze_chem-23", title: "23 原料配方如何轉換成釉式？實例計算教學07", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-23.html" },
+ { id: "glaze_chem-24", title: "24 原料配方如何轉換成釉式？實例計算教學08", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-24.html" },
+ { id: "glaze_chem-25", title: "25 原料配方如何轉換成釉式？實例計算教學09", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-25.html" },
+ { id: "glaze_chem-26", title: "26 原料配方如何轉換成釉式？實例計算教學10", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-26.html" },
 
 
 
