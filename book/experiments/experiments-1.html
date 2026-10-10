@@ -105,6 +105,46 @@
   .backtop{position:fixed;right:20px;bottom:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#5e594c;background:#f8f6ed;border:1px solid #d5d0c2;border-radius:50%;box-shadow:0 3px 12px rgba(60,55,43,.08)}
   @media(max-width:700px){.page{width:calc(100% - 18px);margin:12px auto 40px;border-radius:9px}.article{padding:28px 22px 45px}h1{font-size:25px}h2{font-size:20px}body{font-size:14px}.quick-grid{grid-template-columns:1fr}.lead,.notice,.summary,.tip,.final-box{padding:15px 16px}}
   @media print{body{background:white}.page{width:100%;margin:0;border:none;box-shadow:none}.backtop{display:none}}
+
+
+/* ===== 以下為新增的手機版表格自動壓縮修正 ===== */
+  @media(max-width: 700px) {
+    /* 確保表格容器在手機上不會溢出，且隱藏多餘的橫向捲軸 */
+    .table-wrap {
+      overflow-x: hidden !important;
+      width: 100% !important;
+    }
+    
+    /* 強制表格寬度貼齊手機螢幕，解除 620px 最小寬度限制 */
+    table {
+      min-width: 100% !important;
+      width: 100% !important;
+      table-layout: fixed !important; /* 強制均分或依內容自動收縮欄位 */
+    }
+    
+    /* 縮小儲存格的內距與字體，並強制文字換行 */
+    th, td {
+      padding: 8px 6px !important;
+      font-size: 13px !important;
+      word-break: break-word !important; /* 避免長文字或英文撐破格子 */
+      white-space: normal !important;
+    }
+  }
+  /* ============================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body id="top">
