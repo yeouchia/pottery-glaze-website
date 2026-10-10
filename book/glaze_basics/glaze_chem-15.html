@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>什麼是 Seger Formula（釉式）？用最簡單的方式讀懂陶瓷釉藥配方</title>
+<meta name="description" content="深入淺出解析什麼是 Seger Formula（釉式），從陶瓷釉藥配方、氧化物莫耳比例到 Unity Formula 單位釉式，帶領陶藝學習者用最簡單的方式讀懂釉式計算，掌握釉藥化學本質。">
+<style>
+  /* =========================================
+     核心配色與全域變數設定
+     ========================================= */
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --sub-card:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+    
+    /* SVG 高彩度強調色 */
+    --svg-orange: #FF6B35;
+    --svg-green: #00B294;
+    --svg-blue: #1976D2;
+    --svg-magenta: #D81B60;
+    --svg-gold: #FBC02D;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(950px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:56px 0 20px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--line);
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 14px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    background: linear-gradient(to right, var(--quote), transparent);
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:17px;
+    line-height: 1.85;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid var(--line);
+    background:var(--sub-card);
+    color:var(--muted);
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+    transition: all 0.2s ease;
+  }
+  .tag:hover {
+    background: var(--card);
+    color: var(--text);
+  }
+
+  .svg-container {
+    width: 100%;
+    margin: 24px 0;
+    background: var(--sub-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  svg {
+    max-width: 100%;
+    height: auto;
+    font-family: sans-serif;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:28px 32px;
+    margin:48px 0 32px;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:22px;
+    margin:0 0 20px;
+    color:#4c493e;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+
+  p{margin:16px 0; text-align: justify;}
+  ul,ol{padding-left:1.8em; margin:16px 0 24px;}
+  li{margin:8px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  /* 表格設定 */
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:var(--paper);
+  }
+
+  th,td{
+    border-bottom:1px solid var(--line);
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  th{
+    background:var(--quote);
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+
+  /* 相關文章按鈕卡片設計 */
+  .related h3 {
+    margin-top: 48px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 24px;
+    background: none;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid var(--line);      
+    border-radius: 8px;             
+    padding: 16px 40px 16px 20px;   
+    margin-top: 12px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: var(--accent);                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 12px rgba(70,62,45,.12); 
+    transform: translateY(-2px);
+  } 
+
+  .site-footer-link {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+  }
+  .site-footer-link a.home-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  .site-footer-link a.home-link:hover {
+    color: var(--accent);
+  }
+
+  @media(max-width:768px){
+    .page{ width:calc(100% - 16px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 20px 40px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    h3{font-size:18px}
+    body{font-size:15px}
+    .lead{padding:18px 20px; font-size:15px;}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥基礎｜釉藥化學基礎</div>
+  <span class="eyebrow">陶瓷化學核心觀念</span>
+  <h1>什麼是 Seger Formula（釉式）？用最簡單的方式讀懂陶瓷釉藥配方</h1>
+  
+  <div class="lead">
+    <strong>導言：</strong>同樣是釉藥配方，為何專業陶藝創作者總要觀察「釉式」？想像一下，兩位陶藝家使用了截然不同的原料清單：一位用了大量的長石與石英，另一位則依賴白雲石與高嶺土。光看這兩份重量數據，我們很難判定它們燒出來的模樣是否相似。因為不同的礦物會提供不同的化學成分組合。單憑「幾克土、幾克灰」，並無法揭露釉藥在高溫下交織出的化學真貌。此時，我們必須仰賴一項關鍵的陶瓷分析工具：<strong>Seger Formula（賽格式 / 釉式）</strong>。它就像是釉藥的化學 DNA 圖譜，將複雜的粉末重量，轉譯成一目瞭然的氧化物比例。這篇文章將循序漸進，帶領你跳脫死記硬背的化學符號，用最直覺、淺顯易懂的方式，全面破解釉式的奧秘！
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝</span>
+    <span class="tag">賽格式</span>
+    <span class="tag">Seger Formula</span>
+    <span class="tag">莫耳數</span>
+    <span class="tag">分子量</span>
+    <span class="tag">氧化物</span>
+    <span class="tag">釉式計算</span>
+    <span class="tag">陶瓷釉藥</span>
+    <span class="tag">Unity Formula</span>
+  </div>
+
+  <!-- ==================== H2 區塊 1 ==================== -->
+  <h2>一、什麼是 Seger Formula（釉式）的基本概念？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#777367"/>
+        </marker>
+      </defs>
+      <!-- Background elements -->
+      <rect x="50" y="50" width="200" height="200" rx="10" fill="#f1f0e4" stroke="#d8d4c5" stroke-width="2"/>
+      <rect x="550" y="50" width="200" height="200" rx="10" fill="#e8e4d6" stroke="#d8d4c5" stroke-width="2"/>
+      
+      <!-- Arrows -->
+      <path d="M 260 150 L 530 150" stroke="#777367" stroke-width="3" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Left side: Recipe -->
+      <text x="150" y="90" text-anchor="middle" font-size="20" font-weight="bold" fill="#39372f">原料配方 (重量)</text>
+      <text x="150" y="130" text-anchor="middle" font-size="16" fill="#777367">長石 40g</text>
+      <text x="150" y="160" text-anchor="middle" font-size="16" fill="#777367">石英 30g</text>
+      <text x="150" y="190" text-anchor="middle" font-size="16" fill="#777367">碳酸鈣 20g</text>
+      <text x="150" y="220" text-anchor="middle" font-size="16" fill="#777367">高嶺土 10g</text>
+      
+      <!-- Center: Transformation -->
+      <circle cx="400" cy="150" r="45" fill="#FF6B35"/>
+      <text x="400" y="145" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">轉換與</text>
+      <text x="400" y="165" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">計算</text>
+      
+      <!-- Right side: Seger Formula -->
+      <text x="650" y="90" text-anchor="middle" font-size="20" font-weight="bold" fill="#39372f">Seger Formula (釉式)</text>
+      <text x="650" y="130" text-anchor="middle" font-size="16" fill="#1976D2" font-weight="bold">CaO : 0.60</text>
+      <text x="650" y="160" text-anchor="middle" font-size="16" fill="#1976D2" font-weight="bold">K₂O : 0.40</text>
+      <text x="650" y="190" text-anchor="middle" font-size="16" fill="#00B294" font-weight="bold">Al₂O₃ : 0.35</text>
+      <text x="650" y="220" text-anchor="middle" font-size="16" fill="#D81B60" font-weight="bold">SiO₂ : 3.20</text>
+    </svg>
+  </div>
+  
+  <p>許多剛接觸陶藝的朋友，看到前人留下來的釉藥配方，往往只是一連串「名稱加上克數」的清單。然而，這對深入研究陶瓷科學來說是遠遠不夠的。為了真正理解材料在窯爐中的化學作用，我們必須認識這個強大的系統化工具。</p>
+
+  <h3>釉式的定義與起源</h3>
+  <p>Seger Formula（常被稱為賽格式或釉式）是由十九世紀德國陶瓷化學家 Hermann Seger 所提出的一種數學與化學模型。它的核心價值在於，將各種看似毫無關聯的自然礦物原料，統整歸納為它們在高溫燃燒後真正參與反應的「氧化物莫耳比例」。這表示，我們不再受限於各家礦場出產的礦物名稱差異，而是直搗黃龍，檢視構成這層玻璃質薄膜的最基本化學單元。</p>
+
+  <h3>為什麼不直接看原料重量？</h3>
+  <p>你可能會疑惑，既然配方是用秤量出來的，為何還要這麼麻煩地換算？假設今天我們拿了 100 克的碳酸鈣與 100 克的二氧化矽，雖然在天平上它們達到平衡，但這兩種物質的分子結構與質量完全不同。碳酸鈣在加熱過程中會釋放大量的二氧化碳氣體（這稱為灼燒減量），最終留在釉面裡的有效成分僅剩氧化鈣。如果只看原始重量，我們將嚴重誤判實際留在成品中的化學物質含量。因此，拋開單純的秤重思維，是邁向專業調釉的第一步。</p>
+
+  <h3>釉式與陶藝家的化學對話</h3>
+  <p>釉式就像是一套全球通用的陶瓷語言。當你與國外的陶藝家交流時，由於各國出產的長石或高嶺土成分略有差異，直接交換「重量配方」往往會燒出不同的結果。但如果你們交換的是「釉式」，對方就能根據當地的礦物資料，精準調配出化學結構一模一樣的替代方案。這不僅消除了材料來源不穩定的風險，也讓配方改良有了明確的科學依據，讓創作者能像指揮家一樣，精準調控每一種氧化物的聲量。</p>
+
+
+  <!-- ==================== H2 區塊 2 ==================== -->
+  <h2>二、從原料重量到氧化物莫耳的轉換原理</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Balance scale concept -->
+      <path d="M 400 250 L 400 100" stroke="#6c6654" stroke-width="6"/>
+      <path d="M 370 280 L 430 280 L 400 250 Z" fill="#6c6654"/>
+      <path d="M 150 100 L 650 100" stroke="#6c6654" stroke-width="6"/>
+      
+      <!-- Left plate (Weight) -->
+      <path d="M 100 150 L 200 150 L 150 100 Z" fill="none" stroke="#d8d4c5" stroke-width="2"/>
+      <circle cx="150" cy="130" r="40" fill="#00B294" opacity="0.8"/>
+      <text x="150" y="180" text-anchor="middle" font-size="18" font-weight="bold" fill="#39372f">原料重量 (克)</text>
+      <text x="150" y="205" text-anchor="middle" font-size="14" fill="#777367">天平上的真實質量</text>
+
+      <!-- Center logic -->
+      <rect x="330" y="60" width="140" height="40" rx="8" fill="#FBC02D"/>
+      <text x="400" y="85" text-anchor="middle" font-size="16" font-weight="bold" fill="#39372f">÷ 摩爾質量</text>
+
+      <!-- Right plate (Moles) -->
+      <path d="M 600 150 L 700 150 L 650 100 Z" fill="none" stroke="#d8d4c5" stroke-width="2"/>
+      <circle cx="630" cy="135" r="15" fill="#D81B60" opacity="0.8"/>
+      <circle cx="650" cy="120" r="15" fill="#D81B60" opacity="0.8"/>
+      <circle cx="670" cy="135" r="15" fill="#D81B60" opacity="0.8"/>
+      <text x="650" y="180" text-anchor="middle" font-size="18" font-weight="bold" fill="#39372f">莫耳數 (mol)</text>
+      <text x="650" y="205" text-anchor="middle" font-size="14" fill="#777367">化學粒子的真實數量</text>
+    </svg>
+  </div>
+  
+  <p>要真正學會計算與分析釉藥，我們必須在腦海中建立一個轉換開關，將巨觀的「秤重質量」轉化為微觀的「粒子數量」。這涉及到化學中最迷人也最實用的觀念。</p>
+
+  <h3>原料配方的迷思</h3>
+  <p>許多人在工作室裡小心翼翼地量取每一公克的土與粉，認為只要重量精準，釉色就會完美無缺。但他們忽略了，一克重的氧化鋇與一克重的氧化鈉，所包含的「粒子顆粒數」是截然不同的。高溫下的化學反應，並不是比誰比較重，而是比「誰的粒子比較多」。如果我們無法將重量統一轉換為數量的單位，就如同拿蘋果與橘子在做比較，永遠找不到配方失敗的真正原因。</p>
+
+  <h3>分子量與莫耳的關鍵角色</h3>
+  <p>在先前的基礎文章中，我們已經學過「分子量（或式量）」與「莫耳（Mole）」。這兩個概念是打破重量迷思的鑰匙。莫耳是科學家用來計算微小粒子數量的單位。由於各種元素的原子量不同（例如鈣比氧重得多），所以不同氧化物的一莫耳重量（莫耳質量）也會不同。透過查詢化學週期表上的原子量總和，我們就能知道每一種材料的分子量。將實際秤得的公克數，除以該物質的分子量，就能得出它所代表的莫耳數。這一步，是讓所有材料站在同一條起跑線上比較的關鍵。</p>
+
+  <h3>轉換計算的基本邏輯</h3>
+  <p>釉式轉換的邏輯其實非常直觀。首先，我們拆解配方中的每一樣原料，確認它在窯爐高溫中會留下哪些氧化物。接著，根據原料的純度與化學分析表，算出這些殘留氧化物的真實重量。最後，也是最重要的一步，利用公式「莫耳數 ＝ 質量 ÷ 摩爾質量」，將所有的公克數化為莫耳數。一旦全部轉換完畢，我們就能清楚地看見，在這個配方宇宙裡，究竟是哪一種氧化物的粒子佔了多數，又是誰在默默地發揮助熔的效果。</p>
+
+  <!-- ==================== H2 區塊 3 ==================== -->
+  <h2>三、釉式中的三大氧化物群組解析</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Three pillars of glaze -->
+      <!-- Group 1: Fluxes -->
+      <rect x="50" y="80" width="200" height="180" rx="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+      <text x="150" y="115" text-anchor="middle" font-size="20" font-weight="bold" fill="#1976D2">助熔劑群</text>
+      <text x="150" y="145" text-anchor="middle" font-size="16" fill="#1976D2">RO / R₂O</text>
+      <line x1="80" y1="160" x2="220" y2="160" stroke="#1976D2" stroke-dasharray="2,2"/>
+      <text x="150" y="190" text-anchor="middle" font-size="14" fill="#39372f">K₂O, Na₂O, CaO</text>
+      <text x="150" y="215" text-anchor="middle" font-size="14" fill="#39372f">MgO, BaO, ZnO</text>
+      <text x="150" y="240" text-anchor="middle" font-size="13" fill="#777367">降低熔點、引發熔融</text>
+
+      <!-- Group 2: Intermediates -->
+      <rect x="300" y="80" width="200" height="180" rx="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="2"/>
+      <text x="400" y="115" text-anchor="middle" font-size="20" font-weight="bold" fill="#388E3C">中間體群</text>
+      <text x="400" y="145" text-anchor="middle" font-size="16" fill="#388E3C">R₂O₃</text>
+      <line x1="330" y1="160" x2="470" y2="160" stroke="#388E3C" stroke-dasharray="2,2"/>
+      <text x="400" y="190" text-anchor="middle" font-size="14" fill="#39372f">Al₂O₃</text>
+      <text x="400" y="215" text-anchor="middle" font-size="14" fill="#39372f">B₂O₃ (部分情況)</text>
+      <text x="400" y="240" text-anchor="middle" font-size="13" fill="#777367">穩定結構、調整黏度</text>
+
+      <!-- Group 3: Glass formers -->
+      <rect x="550" y="80" width="200" height="180" rx="10" fill="#FCE4EC" stroke="#D81B60" stroke-width="2"/>
+      <text x="650" y="115" text-anchor="middle" font-size="20" font-weight="bold" fill="#D81B60">玻璃網絡形成群</text>
+      <text x="650" y="145" text-anchor="middle" font-size="16" fill="#D81B60">RO₂</text>
+      <line x1="580" y1="160" x2="720" y2="160" stroke="#D81B60" stroke-dasharray="2,2"/>
+      <text x="650" y="190" text-anchor="middle" font-size="14" fill="#39372f">SiO₂</text>
+      <text x="650" y="215" text-anchor="middle" font-size="14" fill="#39372f">TiO₂, ZrO₂</text>
+      <text x="650" y="240" text-anchor="middle" font-size="13" fill="#777367">構成釉面主體骨架</text>
+    </svg>
+  </div>
+
+  <p>為了讓龐雜的數據更具解讀價值，Seger Formula 將高溫下生成的氧化物，依照它們在玻璃熔體中扮演的角色，劃分為三大陣營。這種分類法幫助我們快速判斷配方的功能是否健全。</p>
+
+  <h3>助熔氧化物（RO / R₂O）</h3>
+  <p>這是釉藥的引擎，負責在較低的溫度下喚醒沉睡的礦物，促使它們融化成液態。在化學式中，它們通常呈現 RO（如氧化鈣 CaO、氧化鋅 ZnO、氧化鎂 MgO）或 R₂O（如氧化鈉 Na₂O、氧化鉀 K₂O）的形式。這些元素會切斷二氧化矽的堅固鍵結，降低整個系統的熔融溫度。在釉式表上，它們習慣被統一放置在最左側的欄位，作為檢視釉藥是否能順利成熟的第一指標。不同種類的助熔劑，還會賦予釉面不同的色澤反應與膨脹係數。</p>
+
+  <h3>中間氧化物（R₂O₃）</h3>
+  <p>這組氧化物就像是釉層裡的避震器與黏著劑，最典型的代表就是氧化鋁（Al₂O₃）。如果在融化的玻璃中沒有氧化鋁，釉漿在高溫下會像水一樣四處流淌，甚至從坯體上滑落。氧化鋁能有效增加高溫熔體的黏滯性，防止流釉，同時也能抑制過度結晶，使表面保持光澤。有時候，氧化硼（B₂O₃）也會被歸類在這個群組，雖然它同時具有強烈的助熔性質。在釉式排列中，中間群組穩穩地安插在中央位置。</p>
+
+  <h3>玻璃網絡形成者（RO₂）</h3>
+  <p>這是整座建築物的鋼筋混凝土，絕對不可或缺的主體結構。二氧化矽（SiO₂）是這個群體無可替代的主角。沒有它，就沒有陶瓷上那層堅硬耐磨的玻璃質。二氧化矽本身需要極高的溫度才能熔化，因此必須依賴左側的助熔劑來幫忙。除了矽之外，二氧化鈦（TiO₂）與二氧化鋯（ZrO₂）等能產生乳濁或結晶效果的氧化物，也常被歸類在此。它們通常被放在釉式表的最右側，其數值的高低，直接決定了釉面的耐久度與最終質感。</p>
+
+
+  <!-- ==================== H2 區塊 4 ==================== -->
+  <h2>四、Unity Formula 單位釉式的核心精神</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Normalizing process -->
+      <text x="400" y="50" text-anchor="middle" font-size="22" font-weight="bold" fill="#39372f">將助熔劑總和設為 1.00 的魔法</text>
+      
+      <!-- Before -->
+      <rect x="100" y="80" width="180" height="180" rx="8" fill="#f1f0e4" stroke="#d8d4c5" stroke-width="2"/>
+      <text x="190" y="110" text-anchor="middle" font-size="16" font-weight="bold" fill="#777367">計算得出的莫耳數</text>
+      <text x="190" y="140" text-anchor="middle" font-size="14" fill="#39372f">CaO: 0.12 mol</text>
+      <text x="190" y="165" text-anchor="middle" font-size="14" fill="#39372f">K₂O: 0.08 mol</text>
+      <line x1="120" y1="180" x2="260" y2="180" stroke="#d8d4c5"/>
+      <text x="190" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B35">總和: 0.20 mol</text>
+      <text x="190" y="235" text-anchor="middle" font-size="14" fill="#39372f">SiO₂: 0.64 mol</text>
+
+      <!-- Arrow -->
+      <path d="M 310 170 L 490 170" stroke="#00B294" stroke-width="4" stroke-dasharray="6,6" fill="none" marker-end="url(#arrow)"/>
+      <text x="400" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#00B294">全部除以 0.20</text>
+      <text x="400" y="195" text-anchor="middle" font-size="14" fill="#00B294">(統一化基準)</text>
+
+      <!-- After (Unity) -->
+      <rect x="520" y="80" width="180" height="180" rx="8" fill="#E8F5E9" stroke="#388E3C" stroke-width="2"/>
+      <text x="610" y="110" text-anchor="middle" font-size="16" font-weight="bold" fill="#388E3C">Unity Formula (單位釉式)</text>
+      <text x="610" y="140" text-anchor="middle" font-size="14" fill="#39372f">CaO: 0.60</text>
+      <text x="610" y="165" text-anchor="middle" font-size="14" fill="#39372f">K₂O: 0.40</text>
+      <line x1="540" y1="180" x2="680" y2="180" stroke="#388E3C"/>
+      <text x="610" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#D81B60">總和: 1.00</text>
+      <text x="610" y="235" text-anchor="middle" font-size="14" fill="#39372f">SiO₂: 3.20</text>
+    </svg>
+  </div>
+
+  <p>算出了所有氧化物的莫耳數後，數字通常會顯積極為雜亂，例如 0.123 莫耳的鈣配上 0.456 莫耳的矽，極難一眼看出彼此的比例關係。因此，化學家導入了「Unity Formula（單位釉式）」的概念。</p>
+
+  <h3>統一基準的意義</h3>
+  <p>想像你在比較兩張不同尺寸的地圖，如果沒有一個統一的比例尺，你絕對無法判斷哪一條路比較寬。單位釉式的作法，就是幫所有釉藥設定一個共通的比例尺。我們通常選擇「助熔氧化物（RO+R₂O）」作為這個定錨點。為什麼選助熔劑？因為它們是啟動釉藥熔融的關鍵，將其總量固定為 1，我們就能輕易比較出，在同樣的「熔融動力」下，這款配方攜帶了多少的鋁和矽。</p>
+
+  <h3>助熔劑總和為 1 的數學處理</h3>
+  <p>這個操作在數學上非常簡單，就是小學學過的「等比例縮放」。首先，將你算出的所有助熔劑莫耳數加總。假設加起來的總和是 0.25 莫耳。接著，把釉式表中所有的數據（包含鋁、矽以及其他所有添加物）都除以 0.25。經過這道數學手續，助熔劑的總和自然就變成了 1.00。其他氧化物的數值也會依相同比例放大，這個過程絕對不會改變任何化學成分之間的相對比例，卻能讓數據變得極度整齊易讀。</p>
+
+  <h3>單位化後的數據解讀</h3>
+  <p>當我們把配方變成單位釉式後，閱讀起來就輕鬆多了。例如看到 SiO₂ 寫著 3.0，我們心裡就能馬上翻譯：「哦！這表示相對於每一份的助熔劑，這個配方搭配了三份的二氧化矽。」透過這種格式，就算你拿的是 10 公克的小試片配方，去與工廠一次攪拌 1000 公斤的巨量配方做對比，只要它們的化學本質相同，單位釉式計算出來的數字就會一模一樣！這正是它被廣泛使用的最大魅力。</p>
+
+  <!-- ==================== H2 區塊 5 ==================== -->
+  <h2>五、為什麼陶瓷配方必須依賴釉式計算？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Why we need Seger -->
+      <circle cx="200" cy="150" r="70" fill="#FFC107" opacity="0.3"/>
+      <circle cx="600" cy="150" r="70" fill="#2196F3" opacity="0.3"/>
+      
+      <text x="200" y="140" text-anchor="middle" font-size="18" font-weight="bold" fill="#39372f">表象：</text>
+      <text x="200" y="165" text-anchor="middle" font-size="16" fill="#777367">粉末與重量</text>
+
+      <text x="600" y="140" text-anchor="middle" font-size="18" font-weight="bold" fill="#39372f">本質：</text>
+      <text x="600" y="165" text-anchor="middle" font-size="16" fill="#777367">高溫玻璃結構</text>
+
+      <!-- Connecting Bridge -->
+      <path d="M 280 140 Q 400 60 520 140" fill="none" stroke="#D81B60" stroke-width="5" marker-end="url(#arrow)"/>
+      <rect x="340" y="80" width="120" height="30" rx="5" fill="#D81B60"/>
+      <text x="400" y="101" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">釉式計算橋樑</text>
+      
+      <text x="400" y="210" text-anchor="middle" font-size="15" fill="#39372f">✓ 替換缺貨原料</text>
+      <text x="400" y="235" text-anchor="middle" font-size="15" fill="#39372f">✓ 解決流釉龜裂</text>
+      <text x="400" y="260" text-anchor="middle" font-size="15" fill="#39372f">✓ 預測霧面光澤</text>
+    </svg>
+  </div>
+
+  <p>或許有人認為，靠著長年累積的手感與經驗，不碰這些數字也能燒出好作品。然而，當環境變遷、原料停產，或是面臨技術瓶頸時，缺乏理論依據的配方往往會陷入困境。這就是為何我們必須擁抱這項技術。</p>
+
+  <h3>跨越原料差異的橋樑</h3>
+  <p>大自然的礦物並非工廠裡標準化的純淨產品。你昨天在Ａ地買的高嶺土，跟今天在Ｂ地買的高嶺土，裡面的鋁矽比例絕對有些微落差。當你發現愛用的某款長石突然斷貨了怎麼辦？如果只懂重量，你無法隨意拿別的長石直接一比一替換。但如果你有該配方的釉式紀錄，只要重新計算新長石的成分，增減一點石英或碳酸鈣，就能精準還原出舊有配方的化學組成，確保作品品質不妥協。</p>
+
+  <h3>預測熔融與釉面特徵</h3>
+  <p>學會看釉式，就等於擁有了預視未來釉面狀態的能力。透過觀察表中氧化鋁與二氧化矽的相對高低，我們可以大膽預測這款釉藥燒出來是晶瑩剔透的光澤面，還是溫潤柔和的消光霧面。同時，檢視左側助熔劑的陣容，如果發現鋰或硼的比例偏高，就能合理推測這是一款可以在較低溫度就開始活躍的配方。這種預測能力能為你省下無數次盲目試燒的時間與金錢。</p>
+
+  <h3>系統性除錯與改良</h3>
+  <p>當窯門打開，迎接你的卻是滿佈裂紋的表面（稱為開片或冰裂）時，不懂化學的人只能隨意瞎猜並盲目增減土粉。但懂得解讀數據的陶藝家會立刻檢視釉式：是不是鈉、鉀這類高膨脹係數的氧化物放太多了？又或者是矽的含量不足？有了明確的數據作為羅盤，你可以極具針對性地修改單一變數，這種系統性的除錯過程，是邁向專業工藝師不可或缺的核心能力。</p>
+
+
+  <!-- ==================== H2 區塊 6 ==================== -->
+  <h2>六、實作範例：從單一原料看釉式轉換</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Decomposition of CaCO3 -->
+      <rect x="100" y="100" width="160" height="100" rx="8" fill="#eee7d8" stroke="#d8d4c5" stroke-width="2"/>
+      <text x="180" y="145" text-anchor="middle" font-size="22" font-weight="bold" fill="#39372f">CaCO₃</text>
+      <text x="180" y="175" text-anchor="middle" font-size="14" fill="#777367">碳酸鈣 100g</text>
+
+      <path d="M 280 150 L 370 150" stroke="#FF6B35" stroke-width="4" marker-end="url(#arrow)"/>
+      <text x="325" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B35">高溫燒成</text>
+
+      <rect x="400" y="60" width="120" height="80" rx="8" fill="#E8F5E9" stroke="#388E3C" stroke-width="2"/>
+      <text x="460" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#388E3C">CaO</text>
+      <text x="460" y="125" text-anchor="middle" font-size="14" fill="#39372f">氧化鈣 (留於釉中)</text>
+
+      <rect x="400" y="160" width="120" height="80" rx="8" fill="#FCE4EC" stroke="#D81B60" stroke-width="2" stroke-dasharray="4,4"/>
+      <text x="460" y="200" text-anchor="middle" font-size="22" font-weight="bold" fill="#D81B60">CO₂ ↑</text>
+      <text x="460" y="225" text-anchor="middle" font-size="14" fill="#777367">二氧化碳 (揮發)</text>
+      
+      <path d="M 540 100 L 630 100" stroke="#388E3C" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="680" y="105" text-anchor="middle" font-size="16" font-weight="bold" fill="#39372f">進入釉式計算</text>
+    </svg>
+  </div>
+
+  <p>理論說了這麼多，我們直接拿一個最常見的原料來做大腦體操。了解單一成分的轉變邏輯後，就算遇到多種成分混合的複雜礦物（如長石），基本原理也是完全相通的。</p>
+
+  <h3>碳酸鈣的分解過程</h3>
+  <p>許多配方中都會加入碳酸鈣（CaCO₃）作為鈣質的來源。但你必須知道，碳酸鈣這個化合物在高溫下是不穩定的。當窯爐溫度逐漸攀升，它會發生劇烈的熱分解反應，斷裂成氧化鈣（CaO）與二氧化碳氣體（CO₂）。其中氣體會隨著窯爐的煙囪排出室外，真正乖乖留在釉層裡發揮助熔作用的，只剩下氧化鈣。這意味著，如果你秤了 100 克的碳酸鈣粉末，最終絕不可能得到 100 克的氧化物。</p>
+
+  <h3>莫耳質量的具體應用</h3>
+  <p>我們來算算看。假設你使用了剛好約 100 克的純碳酸鈣。查閱化學表得知，碳酸鈣的分子量非常接近 100 g/mol。因此這 100 克的粉末，剛好代表了 1 莫耳的 CaCO₃。根據化學反應原理，1 莫耳的碳酸鈣分解後，會產生 1 莫耳的 CaO 與 1 莫耳的氣體。氧化鈣（CaO）的分子量大約是 56 g/mol。也就是說，原本秤起來重達 100 克的材料，經過烈火淬鍊後，實際貢獻給釉面的有效物質，僅有 56 克，且數量正好是 1 莫耳。</p>
+
+  <h3>將結果填入釉式表</h3>
+  <p>在計算這份配方的釉式時，我們完全不需要理會那飛走的 44 克氣體，也不需要把原始的 100 克寫上去。我們關注的唯一重點，就是這原料帶來了「1 莫耳的 CaO」。我們會將這個數值歸類到釉式表左側的「助熔劑」欄位中，與其他來源的助熔物質合併。透過這樣一個接一個地拆解所有原料，我們就能描繪出這款釉藥完整的化學輪廓。</p>
+
+
+  <!-- ==================== H2 區塊 7 ==================== -->
+  <h2>七、釉式數值不是百分比！破除常見誤解</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Misconception warning -->
+      <polygon points="400,30 460,130 340,130" fill="#FFC107" stroke="#F57F17" stroke-width="3"/>
+      <text x="400" y="105" text-anchor="middle" font-size="30" font-weight="bold" fill="#F57F17">!</text>
+      
+      <rect x="150" y="160" width="500" height="100" rx="10" fill="#f1f0e4" stroke="#D81B60" stroke-width="2"/>
+      <text x="400" y="195" text-anchor="middle" font-size="18" font-weight="bold" fill="#D81B60">常見危險誤解</text>
+      <text x="400" y="225" text-anchor="middle" font-size="16" fill="#39372f">「看到 SiO₂ 寫著 3.5，就以為成分佔了 350% 或是 35% ？」</text>
+      <text x="400" y="245" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976D2">錯！它是相對於助熔劑總數為 1 的「莫耳相對比例」</text>
+    </svg>
+  </div>
+
+  <p>在學習的過程中，初學者最常犯的一個致命錯誤，就是用日常生活中的「重量百分比（%）」思維，來解讀眼前這份專業的化學比例表。</p>
+
+  <h3>數字背後的莫耳比例真相</h3>
+  <p>當你看到一張整理好的單位釉式表，上面寫著 CaO 0.7、K₂O 0.3、Al₂O₃ 0.4、SiO₂ 3.2，請務必在心中默念三次：「這不是重量，也不是百分比」。這些數字代表的是一種「相對的數量關係」。因為我們已經將助熔劑的總量強迫設定為基準值「1.0」，所以右側的 3.2，意義是「相對於 1 份的助熔劑，這份配方含有 3.2 份的二氧化矽」。這純粹是化學粒子的比例計數，跟公克數或重量佔比毫無瓜葛。</p>
+
+  <h3>錯誤解讀的嚴重後果</h3>
+  <p>如果誤將其當作重量比例來調配，災難將會發生。曾有人看見 SiO₂ 數值高達 4.0，就以為要拿總重量 40% 的純石英粉加進去，結果燒出了一鍋完全無法融化的生粉。因為矽原子的質量與鈣、鋇等元素完全不同，同樣莫耳數量的不同物質，在天平上秤起來的重量天差地遠。將莫耳比例當作秤重依據，絕對會徹底毀掉一個優良的配方設計。</p>
+
+  <h3>正確的釉式數據判讀法</h3>
+  <p>正確的使用方式是做「橫向與縱向的特徵比對」。你可以拿它跟著名的標準透明釉式比較：如果你的配方中 SiO₂ 數值比標準值高出許多，你就可以合理預期這款釉面會變得更硬、熔點更高、流動性下降。這是一種「趨勢與比例的判斷工具」，而不是讓你直接拿去電子秤上過磅的清單。將數據與實驗結果互相對照，才是它真正的價值所在。</p>
+
+
+  <!-- ==================== H2 區塊 8 ==================== -->
+  <h2>八、釉式如何協助分析釉面的光澤與質感？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- SiO2/Al2O3 Ratio scale -->
+      <text x="400" y="60" text-anchor="middle" font-size="20" font-weight="bold" fill="#39372f">矽鋁比 (SiO₂ / Al₂O₃) 與釉面質感</text>
+      
+      <!-- Gradient Bar -->
+      <defs>
+        <linearGradient id="glossGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8D6E63"/> <!-- Matte -->
+          <stop offset="50%" stop-color="#4FC3F7"/> <!-- Satin -->
+          <stop offset="100%" stop-color="#E1F5FE"/> <!-- Glossy -->
+        </linearGradient>
+      </defs>
+      <rect x="150" y="100" width="500" height="40" rx="20" fill="url(#glossGrad)" stroke="#d8d4c5"/>
+      
+      <!-- Indicators -->
+      <line x1="200" y1="90" x2="200" y2="150" stroke="#39372f" stroke-width="2"/>
+      <text x="200" y="175" text-anchor="middle" font-size="16" font-weight="bold" fill="#39372f">比例低 (約 1:5)</text>
+      <text x="200" y="200" text-anchor="middle" font-size="14" fill="#777367">無光 / 霧面 (Matte)</text>
+      <text x="200" y="220" text-anchor="middle" font-size="13" fill="#777367">鋁含量相對偏高</text>
+
+      <line x1="600" y1="90" x2="600" y2="150" stroke="#39372f" stroke-width="2"/>
+      <text x="600" y="175" text-anchor="middle" font-size="16" font-weight="bold" fill="#39372f">比例高 (約 1:10+)</text>
+      <text x="600" y="200" text-anchor="middle" font-size="14" fill="#777367">亮面 / 光澤 (Glossy)</text>
+      <text x="600" y="220" text-anchor="middle" font-size="13" fill="#777367">富含足夠的玻璃網絡</text>
+    </svg>
+  </div>
+
+  <p>懂得計算只是基本功，真正展現釉式威力的地方，在於它能作為預測釉面美學特徵的神奇水晶球。其中最經典的應用，就是對「矽鋁比」的深度剖析。</p>
+
+  <h3>矽鋁比（SiO₂/Al₂O₃）的關鍵影響</h3>
+  <p>在釉式中，我們經常將最右側的二氧化矽數值，除以中間的氧化鋁數值，得出一個稱為「矽鋁比」的指標。這個看似簡單的除法，卻隱藏著決定表面質感的巨大秘密。因為二氧化矽是形成平滑玻璃面的主力，而氧化鋁則會增加結構的黏度並阻礙光亮面的生成。透過觀察這兩者的比例拉鋸，我們就能在進窯燒製之前，大致掌握它出窯後反射光線的能力。</p>
+
+  <h3>霧面與光澤的化學成因</h3>
+  <p>一般而言，如果矽鋁比非常高（例如大於 10），表示有極度充裕的玻璃網絡形成者，燒出來通常會是平滑、反光極佳的亮面透明釉或光澤釉。相反地，如果刻意提高配方中的鋁含量，或是大幅降低矽的比例，讓矽鋁比下降到 5 左右甚至更低，釉面在高溫下會變得非常黏稠，冷卻時表面無法形成完美的平整玻璃層，甚至可能產生微小的結晶體。這時，光線照射在表面會產生漫反射，肉眼看起來就是帶有溫潤質感的消光霧面釉了。</p>
+
+  <h3>助熔劑種類對質感的微調</h3>
+  <p>當然，只看矽鋁比並不是絕對的鐵律。最左側的助熔劑大軍也扮演著微調的關鍵角色。舉例來說，高比例的氧化鋇（BaO）或是氧化鎂（MgO）也能促使特定類型的無光釉形成。而大量的氧化鈉與氧化鉀，則傾向於產生清澈透亮的強烈光澤。因此，綜合評估助熔劑的陣容搭配矽鋁比例，是進階配釉者必須熟練掌握的分析技術。</p>
+
+
+  <!-- ==================== H2 區塊 9 ==================== -->
+  <h2>九、釉式能預測一切嗎？燒成環境的變數</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Formula + Firing = Result -->
+      <rect x="80" y="100" width="160" height="100" rx="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+      <text x="160" y="145" text-anchor="middle" font-size="20" font-weight="bold" fill="#1976D2">完美的釉式</text>
+      <text x="160" y="170" text-anchor="middle" font-size="14" fill="#39372f">化學組成正確</text>
+
+      <text x="280" y="160" text-anchor="middle" font-size="40" font-weight="bold" fill="#777367">+</text>
+
+      <rect x="320" y="100" width="160" height="100" rx="10" fill="#FFF3E0" stroke="#FF6B35" stroke-width="2"/>
+      <text x="400" y="140" text-anchor="middle" font-size="20" font-weight="bold" fill="#FF6B35">燒成環境與變數</text>
+      <text x="400" y="165" text-anchor="middle" font-size="13" fill="#39372f">溫度、氣氛、冷卻</text>
+      <text x="400" y="185" text-anchor="middle" font-size="13" fill="#39372f">塗層厚度、坯體種類</text>
+
+      <text x="520" y="160" text-anchor="middle" font-size="40" font-weight="bold" fill="#777367">=</text>
+
+      <rect x="560" y="100" width="160" height="100" rx="10" fill="#E8F5E9" stroke="#388E3C" stroke-width="2"/>
+      <text x="640" y="145" text-anchor="middle" font-size="20" font-weight="bold" fill="#388E3C">最終陶瓷作品</text>
+      <text x="640" y="170" text-anchor="middle" font-size="14" fill="#39372f">獨一無二的結果</text>
+    </svg>
+  </div>
+
+  <p>許多新手學會了釉式計算後，彷彿獲得了武林秘笈，認為只要數據相同，燒出來的杯子就一定長得一模一樣。這是一個極度浪漫卻不切實際的幻想。陶瓷之所以迷人，正因為它絕不僅是紙上的數學題。</p>
+
+  <h3>溫度與保溫時間的影響</h3>
+  <p>釉式告訴你的，是材料在「達到完美熔融狀態」時的理論化學組成。但現實中，你的窯爐溫度有達到這個配方所需的熱能嗎？同樣的釉式配方，放在 1200 度燒製可能表面粗糙如砂紙，因為助熔劑尚未發揮作用；若提高到 1240 度並保溫半小時，可能就化作了一灘溫潤如玉的玻璃面。熱能累積（Heat Work）的不足或過剩，會徹底改寫同一個化學配方的最終外貌。</p>
+
+  <h3>氧化與還原氣氛的差異</h3>
+  <p>除了溫度，窯爐內的空氣狀態也是超級變數。如果配方中含有微量的氧化鐵，在空氣充足的氧化燒環境中，它可能會呈現溫暖的黃褐色；但若是減少窯內氧氣進入的還原燒狀態，同一份配方卻可能轉化為迷人的青瓷色調。即使你的釉式數據在小數點後三位都完全吻合，只要進了不同氣氛的窯，它們就像孿生兄弟被送往不同國家扶養，展現出截然不同的性格。</p>
+
+  <h3>物理條件的最終考驗</h3>
+  <p>別忘了施作手法！釉層上的太薄，會露出底土的粗糙感，甚至讓化學反應不完全；上的太厚，則容易在燒成時沸騰起泡或流淌到底板上。此外，素坯本身的材質（陶土或瓷土）、粉末研磨的細緻度、甚至是攪拌釉漿時的水分比例，都會左右最終的成敗。釉式是非常科學的分析依據，但它無法取代陶藝家對於材料物理特性的掌握與繁複的試燒實驗。</p>
+
+
+  <!-- ==================== H2 區塊 10 ==================== -->
+  <h2>十、陶藝家如何利用釉式建立專屬資料庫？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Database building cycle -->
+      <path d="M 250 150 A 150 100 0 1 1 550 150 A 150 100 0 1 1 250 150" fill="none" stroke="#d8d4c5" stroke-width="4" stroke-dasharray="8,8"/>
+      
+      <!-- Step 1 -->
+      <circle cx="400" cy="50" r="40" fill="#00B294"/>
+      <text x="400" y="45" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">記錄原始</text>
+      <text x="400" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">重量配方</text>
+      
+      <!-- Step 2 -->
+      <circle cx="550" cy="150" r="40" fill="#1976D2"/>
+      <text x="550" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">換算統一</text>
+      <text x="550" y="165" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">單位釉式</text>
+
+      <!-- Step 3 -->
+      <circle cx="400" cy="250" r="40" fill="#D81B60"/>
+      <text x="400" y="245" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">試燒並記錄</text>
+      <text x="400" y="265" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">視覺與觸感</text>
+
+      <!-- Step 4 -->
+      <circle cx="250" cy="150" r="40" fill="#FF6B35"/>
+      <text x="250" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">比對數據</text>
+      <text x="250" y="165" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFF">修正下標</text>
+      
+      <!-- Center text -->
+      <text x="400" y="145" text-anchor="middle" font-size="18" font-weight="bold" fill="#39372f">建立個人化</text>
+      <text x="400" y="170" text-anchor="middle" font-size="18" font-weight="bold" fill="#39372f">配方知識庫</text>
+    </svg>
+  </div>
+
+  <p>了解理論後，如何將這套高深的化學工具，落實到日常的工作室運營中？建立系統化的個人釉藥資料庫，是區分業餘愛好者與專業工作者的一道重要分水嶺。</p>
+
+  <h3>系統化紀錄試片數據</h3>
+  <p>每次開窯，都不該只是憑感覺說一句「這顏色好美」或「可惜失敗了」。專業的做法是，為每一塊試片編號，並在筆記本或電腦試算表中，詳細記錄這塊試片的「原始秤重配方」以及轉換後的「Seger Formula 數值」。同時，必須附註這次的燒成溫度、保溫時間、以及所使用的底土種類。長久下來，這份表格將成為你創作路上最珍貴的無形資產。</p>
+
+  <h3>追蹤變數與趨勢分析</h3>
+  <p>當你累積了數十甚至上百個試片數據後，釉式的強大功能就會完全顯現。你可以試著將這些試片依照「矽鋁比」的高低在桌面上排列，你會直觀地看見釉面從霧面逐漸轉向高光澤的物理漸變過程。若某天你想要一款「稍微再不亮一點，但不要太粗糙」的釉色，你只需要打開資料庫，尋找數據介於兩塊試片之間的數值，就能極為精準地調配出理想的微調版本，而不必再像無頭蒼蠅般瞎子摸象。</p>
+
+  <h3>傳承與配方交流的共同語言</h3>
+  <p>陶藝是一門講究經驗傳承的藝術。當你想向遠方的前輩請教，或是與同好分享一款得意的配方時，遞出一份標示清晰的單位釉式，遠比給出一堆不知純度的礦物名稱來得專業且有用。對方可以立刻解讀出你的化學邏輯，給予有建設性的改良建議，或是使用他手邊現有的類似原料進行等量替換。熟練運用釉式，能讓你順利接軌國際陶瓷社群的討論。</p>
+
+
+  <!-- ==================== H2 區塊 11 ==================== -->
+  <h2>十一、現代工具輔助：釉式計算軟體的應用</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Software Abstract UI -->
+      <rect x="150" y="50" width="500" height="200" rx="12" fill="#39372f"/>
+      
+      <!-- Top bar -->
+      <rect x="150" y="50" width="500" height="30" fill="#2a2822" rx="12"/>
+      <circle cx="170" cy="65" r="5" fill="#FF5252"/>
+      <circle cx="190" cy="65" r="5" fill="#FFC107"/>
+      <circle cx="210" cy="65" r="5" fill="#4CAF50"/>
+      <text x="400" y="70" text-anchor="middle" font-size="12" fill="#fff">釉藥計算器 軟體介面示意</text>
+
+      <!-- Content area -->
+      <rect x="170" y="95" width="220" height="135" rx="5" fill="#f1f0e4"/>
+      <text x="185" y="115" font-size="14" font-weight="bold" fill="#39372f">輸入重量</text>
+      <text x="185" y="140" font-size="12" fill="#777367">長石: 40</text>
+      <text x="185" y="160" font-size="12" fill="#777367">石英: 30</text>
+      <text x="185" y="180" font-size="12" fill="#777367">高嶺土: 10</text>
+      <rect x="185" y="200" width="80" height="20" rx="3" fill="#1976D2"/>
+      <text x="225" y="214" text-anchor="middle" font-size="10" fill="#fff">一鍵計算</text>
+
+      <rect x="410" y="95" width="220" height="135" rx="5" fill="#e8e4d6"/>
+      <text x="425" y="115" font-size="14" font-weight="bold" fill="#39372f">即時釉式結果</text>
+      <text x="425" y="140" font-size="12" fill="#388E3C">RO=1.00</text>
+      <text x="425" y="160" font-size="12" fill="#39372f">Al₂O₃: 0.35</text>
+      <text x="425" y="180" font-size="12" fill="#39372f">SiO₂: 3.20</text>
+      
+      <!-- Graph -->
+      <path d="M 520 215 L 520 135 L 610 135" stroke="#d8d4c5" fill="none"/>
+      <circle cx="565" cy="175" r="4" fill="#D81B60"/>
+    </svg>
+  </div>
+
+  <p>過去的前輩在沒有電腦的年代，必須拿著工程計算機、翻閱厚厚的原子量對照表，耗費大量時間手動計算小數點。現在，我們非常幸運，能夠依靠現代科技省下這繁瑣的過程。</p>
+
+  <h3>告別繁瑣的手工計算</h3>
+  <p>了解手算的原理非常重要，因為它奠定了你的化學邏輯觀念。但在日常實務操作中，我們強烈建議使用專門的釉藥計算軟體或是本網站提供的線上計算工具。你只需要把配方表上的礦物名稱選好，輸入你秤量的公克數，軟體就會在零點幾秒內，自動進行莫耳質量除法，並瞬間幫你換算成標準的 Unity Formula。把時間留給創意與實驗，把繁雜的數學交給電腦代勞。</p>
+
+  <h3>軟體中的原料資料庫對接</h3>
+  <p>現代軟體最強大的地方，在於它內建了極為龐大的全球礦物資料庫。不同品牌的長石、不同純度的白雲石，在軟體中都有極為詳盡的預設化學分析數據。如果你的材料行有提供原廠的化學檢驗單（COA），你甚至可以手動更新這些數據到軟體中。透過對接最精準的當地材料分析，你的釉式計算結果將會與實際燒成狀態達到前所未有的高度吻合。</p>
+
+  <h3>即時視覺化與配方調整</h3>
+  <p>許多進階軟體還提供了視覺化的史圖爾圖表（Stull Chart）。當你在介面上微調增加了 5 克的石英時，你可以立刻看到螢幕上的指示點朝著「高光澤、高熔點」的方向移動。這種即時的反饋機制，能讓陶藝創作者在完全不沾一滴泥水的情況下，在電腦前完成配方的初步設計與除錯。數位工具的輔助，讓釉式這個古老的化學工具，煥發出極具效率的新生命。</p>
+
+
+  <!-- ==================== H2 區塊 12 ==================== -->
+  <h2>十二、邁向進階：從讀懂釉式到設計專屬配方</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Steps to advanced formulation -->
+      <!-- Step 1 -->
+      <rect x="100" y="200" width="150" height="60" rx="5" fill="#f1f0e4" stroke="#d8d4c5" stroke-width="2"/>
+      <text x="175" y="235" text-anchor="middle" font-size="16" font-weight="bold" fill="#39372f">讀懂與分析</text>
+
+      <!-- Step 2 -->
+      <rect x="250" y="140" width="150" height="120" rx="5" fill="#e8e4d6" stroke="#d8d4c5" stroke-width="2"/>
+      <text x="325" y="175" text-anchor="middle" font-size="16" font-weight="bold" fill="#39372f">微調單一變數</text>
+
+      <!-- Step 3 -->
+      <rect x="400" y="80" width="150" height="180" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="2"/>
+      <text x="475" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#388E3C">原料反推計算</text>
+
+      <!-- Step 4 -->
+      <rect x="550" y="20" width="150" height="240" rx="5" fill="#FFF3E0" stroke="#FF6B35" stroke-width="2"/>
+      <text x="625" y="55" text-anchor="middle" font-size="16" font-weight="bold" fill="#FF6B35">原創專屬配方</text>
+      
+      <!-- Trend line -->
+      <path d="M 175 200 L 325 140 L 475 80 L 625 20" fill="none" stroke="#D81B60" stroke-width="4" stroke-dasharray="6,6"/>
+      <circle cx="175" cy="200" r="6" fill="#D81B60"/>
+      <circle cx="325" cy="140" r="6" fill="#D81B60"/>
+      <circle cx="475" cy="80" r="6" fill="#D81B60"/>
+      <circle cx="625" cy="20" r="6" fill="#D81B60"/>
+    </svg>
+  </div>
+
+  <p>恭喜你走到這一步！當你不再害怕那些英文字母與小數點，並理解了統一基準的意義後，你已經超越了單純「照抄配方」的初學者階段，準備好迎向真正的釉藥設計大門。</p>
+
+  <h3>掌握基礎釉式的分析</h3>
+  <p>學習的路徑總是循序漸進的。在初期，你不必急著發明全新的東西。你可以先從網路上或書籍中找尋幾款經典且廣受好評的透明釉、無光釉配方，試著把它們輸入軟體，觀察它們的單位釉式落在哪個區間。去體會「原來穩定的透明釉，其鋁跟矽的比例大約落在這個範圍」，把這些基準點深深印在腦海裡，作為日後調整的指南針。</p>
+
+  <h3>嘗試微調單一變數</h3>
+  <p>當你對基礎架構有了概念後，可以開始進行簡單的「單一變數實驗」。例如，挑選一款現有的配方，保持助熔劑與氧化鋁的數值完全不動，僅僅透過增減石英的重量，來改變釉式中的 SiO₂ 數值，做一組階梯式的試片（例如 2.5, 3.0, 3.5）。燒成後，你會無比清晰地看見化學變化帶來的物理影響。這種扎實的練習，是累積實力的不二法門。</p>
+
+  <h3>創造個人風格的化學起點</h3>
+  <p>最終的進階階段，是學會「逆向工程」。有時候你在某個國外網站看到一組極為夢幻的釉式數值，但裡面用到的礦泥台灣根本買不到。這時，你可以利用逆向反推技術，以這組夢幻的氧化物比例為目標，使用你工作室手邊現有的長石、石灰石、高嶺土，像拼圖一樣將它們的重量一點一滴拼湊，直到軟體算出來的結果與目標釉式吻合。從這一天起，你不再受限於材料的匱乏，而是能以化學為畫筆，自由設計出專屬於你的陶藝質感。</p>
+
+
+  <!-- ==================== FAQ 區塊 ==================== -->
+  <div class="faq-box">
+    <div class="faq-title">釉式計算常見問答 FAQ</div>
+    <p><strong>Q：Seger Formula（釉式）裡的數值，到底是不是重量百分比？</strong><br>
+    A：絕對不是。傳統的單位釉式（Unity Formula）是將「助熔氧化物的莫耳數總和」設定為 1。其他如氧化鋁、二氧化矽的數值，表示的是相對於這 1 份助熔劑的「莫耳比例」。它反映的是化學粒子的相對數量，而非秤重的克數或重量佔比。</p>
+    
+    <p><strong>Q：如果兩款配方的釉式數值一模一樣，燒出來的作品就會完全相同嗎？</strong><br>
+    A：不一定。雖然化學本質相同，但最後的成品外觀還受到極多物理變數影響。包含：窯爐的實際燒成溫度、保溫時間長短、氧化或還原的氣氛、釉層塗刷的厚薄，甚至是原料本身的顆粒粗細與微量雜質，都會讓外觀產生變化。釉式是分析基礎，實作試燒仍不可省。</p>
+
+    <p><strong>Q：為什麼不直接看原料重量就好，還得這麼麻煩換算成莫耳？</strong><br>
+    A：因為各種礦物的「摩爾質量」不同。例如 100 克的碳酸鈣和 100 克的石英，含有的有效粒子數目天差地遠。且碳酸鈣加熱會揮發二氧化碳氣體。只有將重量除以分子量轉成「莫耳數」，我們才能在同一基準線上，客觀比較高溫釉漿裡到底有多少粒子在起作用。</p>
+
+    <p><strong>Q：初學者數學不好，真的有辦法學會釉式設計嗎？</strong><br>
+    A：絕對可以！現今已有非常多好用的線上釉藥計算軟體。你只需要理解「為何要計算」以及「數字代表什麼意義（如矽鋁比影響光澤）」，繁雜的乘除法與分子量對照都可以完全交給電腦自動處理。理解化學邏輯，遠比會手算小數點重要得多。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+    <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+    <div class="footer-share-wrapper"></div>
+  </div>
+
+</article>
+</main>
+</body>
+</html>

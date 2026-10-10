@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>化學式中的下標怎麼看？從 SiO₂ 到陶瓷釉藥原料，一次學會</title>
+<meta name="description" content="專為陶藝與釉藥學習者設計的化學基礎教學。從最常見的 SiO₂、Al₂O₃ 出發，帶你輕鬆看懂化學式中的下標，並理解陶瓷燒成中的氣體揮發與原子重組，為釉式計算打好堅實基礎。">
+<style>
+  /* =========================================
+     程式碼功能與區塊設定標記
+     ========================================= */
+  :root {
+    --bg: #eee7d8;
+    --paper: #fbfaf5;
+    --card: #f1f0e4;
+    --line: #dcd7c7;
+    --text: #39372f;
+    --muted: #777367;
+    --accent: #6c6654;
+    --accent-light: #e8e4d6;
+    --quote: #eeeadd;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+
+  .page {
+    width: min(1000px, calc(100% - 32px));
+    margin: 34px auto 70px;
+    background: var(--paper);
+    border: 1px solid #e1ddcf;
+    border-radius: 12px;
+    box-shadow: 0 7px 24px rgba(70,62,45,.08);
+    overflow: hidden;
+  }
+
+  .article {
+    padding: 42px 56px 64px;
+  }
+
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    letter-spacing: .04em;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    color: #625d4e;
+    background: var(--accent-light);
+    border: 1px solid #dcd7c7;
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 13px;
+    font-weight: bold;
+  }
+
+  h1 {
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.45;
+    margin: 0 0 18px;
+    color: #35332c;
+  }
+
+  h2 {
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size: 26px;
+    line-height: 1.55;
+    margin: 56px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #ddd8ca;
+    color: #3e3b32;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 36px 0 16px;
+    color: #464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+
+  .lead {
+    background: var(--quote);
+    border: 1px solid #dedacd;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 24px 0 36px;
+    color: #4d4a40;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .tag {
+    border: 1px solid #d7d2c3;
+    background: #f8f6ed;
+    color: #706b5d;
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 13px;
+  }
+
+  .faq-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+
+  .faq-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 20px;
+    color: #4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 12px;
+  }
+
+  p { margin: 16px 0; }
+  ul, ol { padding-left: 1.8em; margin: 16px 0 28px; }
+  li { margin: 8px 0; }
+  strong { font-weight: 700; color: #2a2822; }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 28px 0 36px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+    background: #faf9f3;
+  }
+
+  th, td {
+    border-bottom: 1px solid #dfdccf;
+    padding: 16px 18px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: #ece9dc;
+    font-weight: 700;
+    color: #4d493e;
+    font-size: 16px;
+  }
+
+  td { font-size: 15px; }
+  tr:last-child td { border-bottom: none; }
+
+  .svg-container {
+    width: 100%;
+    text-align: center;
+    margin: 28px 0;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+  }
+
+  .svg-container svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .related h3 {
+    margin-top: 48px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 24px;
+  }
+  
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 16px 48px 16px 20px;   
+    margin-top: 12px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+   
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+   
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 20px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 18px; 
+    font-weight: normal; 
+  } 
+   
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 10px rgba(70,62,45,.1); 
+  } 
+  
+  .site-footer-link {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .site-footer-link a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  @media(max-width:768px){
+    .page { width: calc(100% - 16px); margin: 16px auto 40px; border-radius: 8px; }
+    .article { padding: 28px 20px 40px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 18px; }
+    .svg-container { padding: 12px; }
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥基礎｜釉藥化學基礎</div>
+  <span class="eyebrow">化學密碼解析</span>
+  <h1>化學式中的下標怎麼看？從 SiO₂ 到陶瓷釉藥原料，一次學會</h1>
+  
+  <div class="lead">
+    <strong>一看就懂的陶藝化學課：</strong>
+    當你翻開釉藥配方的專文書籍，或是瀏覽陶瓷材料行的網站時，一定會看到諸如 SiO₂、Al₂O₃、CaCO₃ 等符號。對於非化學背景的陶藝愛好者來說，這些被稱為「化學式」的英文與數字組合，往往讓人感到卻步。尤其是元素符號右下角那些小小的數字——我們稱之為「下標」，到底藏著什麼玄機？
+    <br><br>
+    為什麼二氧化矽（SiO₂）的氧後面有個 2，而碳酸鈣（CaCO₃）的碳後面卻沒有數字？其實，這些看似複雜的化學符號，是精確描述釉藥原料組成的世界共通語言。只要掌握了「下標」的閱讀規則，你不僅能輕鬆看懂各種礦物原料的成分比例，更能了解高溫窯燒時，原料會釋放什麼氣體、留下什麼精華。這篇文章將帶你從最基礎的觀念開始，一步步解開陶瓷原料的化學密碼，為後續學習釉式計算（Seger Formula）與調配專屬釉藥配方，建立最穩固的基石！
+  </div>
+  
+  <div class="tags">
+    <span class="tag">陶藝化學</span><span class="tag">化學元素</span><span class="tag">化學式</span><span class="tag">釉藥燒成</span><span class="tag">分子量</span><span class="tag">釉式計算</span><span class="tag">陶瓷材料</span>
+  </div>
+
+  <h2>一、什麼是化學式中的「下標」？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <text x="400" y="140" font-family="sans-serif" font-size="80" font-weight="bold" fill="#39372f" text-anchor="middle">
+        Si<tspan fill="#00838f">O</tspan><tspan fill="#ff6d00" font-size="50" dy="25">2</tspan>
+      </text>
+      <path d="M 520 170 Q 560 210 630 180" fill="none" stroke="#ff6d00" stroke-width="4" stroke-dasharray="6,6" />
+      <circle cx="635" cy="177" r="6" fill="#ff6d00" />
+      <text x="645" y="170" font-family="sans-serif" font-size="24" font-weight="bold" fill="#ff6d00">這就是下標</text>
+    </svg>
+  </div>
+  <p>在踏入深奧的釉藥化學領域之前，我們首先必須認識這套最基本的符號系統。當我們看到像 SiO₂ 這樣的化學式時，它其實是由兩個部分組成的：一個是代表元素的英文字母（如 Si 代表矽，O 代表氧），另一個則是寫在元素符號右下方的小數字。這個小數字，在化學領域中我們稱之為「下標」（Subscript）。它的作用非常明確，就是用來告訴我們在這個化學式中，特定原子的數量到底有幾個。</p>
+
+  <h3>1. 化學符號的語言邏輯</h3>
+  <p>在陶藝的世界裡，黏土經過高溫燒結會變成堅硬的陶瓷，釉藥粉末熔融後會形成光滑的玻璃質表面。這一切的變化，都是建立在化學元素的重新組合上。化學式就像是科學家為這些物質建立的縮寫代碼，讓我們能一目了然地知道原料是由哪些基本元素所構成。把它當作一種「材料食譜」，元素符號是食材，下標就是份量，認識化學符號正是陶藝家邁向科學化配釉的第一步。</p>
+  
+  <h3>2. 下標數字代表原子個數</h3>
+  <p>下標數字代表了原子的數量，但要特別注意一個鐵律：這個數字「只對它正前方的那個元素符號有效」。以 SiO₂ 為例，數字 2 是緊跟在字母 O 之後，所以它代表有 2 個氧原子；而它並不會影響到前面的 Si（矽）。這個看似簡單的規則，卻是初學者最容易混淆的地方，必須牢牢記住，我們才能準確無誤地拆解原料的化學組成。</p>
+  
+  <h3>3. 下標如何影響釉藥配方</h3>
+  <p>陶藝創作者為什麼需要懂這些小數字？因為不同的元素數量比例，會直接決定釉藥的熔點、流動性、發色效果與表面質感。例如，增加二氧化矽（SiO₂）的比例通常會提高釉藥的熔融溫度；而改變助熔劑中金屬元素的比例，則能讓釉面產生結晶或是消光的效果。看懂下標，能幫助你理解配方表中各種氧化物之間的微妙平衡，掌握調整釉藥特性的關鍵。</p>
+
+  <h2>二、沒有下標的元素，為什麼代表數量是 1？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <text x="400" y="130" font-family="sans-serif" font-size="70" font-weight="bold" fill="#39372f" text-anchor="middle">
+        C<tspan fill="#388e3c">a</tspan><tspan fill="#ff0000" font-size="35" dy="20">1</tspan><tspan dy="-20" fill="#39372f">C</tspan><tspan fill="#ff0000" font-size="35" dy="20">1</tspan><tspan dy="-20" fill="#39372f">O</tspan><tspan fill="#1976d2" font-size="45" dy="20">3</tspan>
+      </text>
+      <text x="400" y="210" font-family="sans-serif" font-size="22" font-weight="bold" fill="#d32f2f" text-anchor="middle">沒有寫數字的地方，其實都藏著一個隱形的「1」</text>
+    </svg>
+  </div>
+  <p>當你開始閱讀更多陶瓷釉藥的化學式時，一定會發現一個奇怪的現象：有些元素符號後面跟著數字，有些卻什麼都沒有。例如，在碳酸鈣（CaCO₃）這個常見的助熔劑原料中，氧（O）的後面有一個清晰的數字 3，但是鈣（Ca）和碳（C）的後面卻空空如也。這難道意味著它們的數量是零嗎？絕對不是！</p>
+
+  <h3>1. 化學界的極簡省略法</h3>
+  <p>在化學的世界裡，有一條不成文但極其重要的簡寫規則：「當元素的數量為 1 的時候，下標數字 1 必須省略不寫」。這就像我們在日常對話中，說「我買了一顆蘋果」通常簡稱「我買了蘋果」。如果每個元素都要把 1 寫出來，碳酸鈣就會變成 Ca₁C₁O₃，二氧化矽就會變成 Si₁O₂，不僅顯得累贅，視覺上也容易造成混亂。這種極簡標示法，有助於我們將注意力集中在那些數量大於 1 的關鍵元素上。</p>
+  
+  <h3>2. 碳酸鈣中的隱藏數字</h3>
+  <p>讓我們以陶藝中作為重要鈣質來源的碳酸鈣（CaCO₃）為例來進行實戰拆解。根據剛才學到的規則，Ca 後面沒有數字，所以在腦海中要自動補上隱形的 1，表示有 1 個鈣原子；C 後面沒有數字，所以有 1 個碳原子；O 後面有數字 3，所以有 3 個氧原子。只要掌握這個尋找「隱藏 1」的原則，再複雜的礦物名稱也難不倒你。</p>
+  
+  <h3>3. 忽略「1」的計算風險</h3>
+  <p>在進行釉式計算或是將原料重量換算成氧化物重量時，如果你忽略了那個隱形的 1，將會導致災難性的計算錯誤。例如在計算 CaCO₃ 的分子總重量時，如果你忘記加上鈣和碳的質量，算出來的數值就會完全偏離事實，進而導致你秤料時加入錯誤的克數。配方失去平衡後，燒出來的釉面可能會嚴重流掛、起泡或是無法熔融。</p>
+
+  <h2>三、從陶瓷骨架二氧化矽 (SiO₂) 看懂下標</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <circle cx="280" cy="125" r="50" fill="#00796b" />
+      <text x="280" y="133" font-family="sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Si (1)</text>
+      
+      <circle cx="480" cy="80" r="35" fill="#c62828" />
+      <text x="480" y="88" font-family="sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">O (1)</text>
+      
+      <circle cx="480" cy="170" r="35" fill="#c62828" />
+      <text x="480" y="178" font-family="sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">O (2)</text>
+      
+      <line x1="325" y1="110" x2="445" y2="85" stroke="#39372f" stroke-width="5" />
+      <line x1="325" y1="140" x2="445" y2="165" stroke="#39372f" stroke-width="5" />
+      
+      <text x="650" y="135" font-family="sans-serif" font-size="40" font-weight="bold" fill="#39372f" text-anchor="middle">SiO₂</text>
+    </svg>
+  </div>
+  <p>在所有的陶瓷與釉藥材料中，最核心、最不可或缺的成分，絕對非二氧化矽（SiO₂）莫屬。無論是粗獷的陶土、細緻的瓷土，還是各種高低溫釉藥，二氧化矽都是構成其骨架的主要物質。它在高溫熔融冷卻後會形成堅硬的玻璃網絡，賦予陶瓷極佳的物理強度與化學穩定性。我們就從這個最重要的分子式出發，來感受下標的魅力。</p>
+
+  <h3>1. 矽與氧的穩定比例</h3>
+  <p>當我們看到 SiO₂ 時，腦海中應該要能迅速浮現出它的組成藍圖：這裡面包含了 1 個矽（Si）原子與 2 個氧（O）原子。矽與氧在自然界中是最豐富的兩種元素，當它們以 1：2 的比例結合時，形成了我們常見的石英。這個化學比例極為穩定，能夠承受陶瓷燒成時動輒一千兩百多度的高溫而不輕易崩解。</p>
+  
+  <h3>2. 釉藥骨架的化學意義</h3>
+  <p>為什麼 SiO₂ 被稱為釉藥的骨架？你可以把釉藥想像成一棟建築物，二氧化矽就是這棟建築物的鋼筋。在釉式理論（Seger Formula）中，SiO₂ 被歸類為「玻璃網絡形成者」。它在熔融狀態下具有很高的黏度，冷卻後形成無定形的玻璃態結構。如果配方中缺少 SiO₂，釉層將無法成形，也無法牢牢附著在素燒坯體上。</p>
+  
+  <h3>3. 石英粉與化學式的對應</h3>
+  <p>在陶藝工作室的實務操作中，我們常購買的「石英粉」或是「矽石粉」，其主要化學成分就是 SiO₂。雖然自然界的礦石難免含有微量的雜質（如微量的鐵造成稍微偏黃），但在釉藥計算的實務上，我們通常將高純度的石英粉直接視為 100% 的 SiO₂ 來進行運算。看懂 SiO₂ 的下標，是將理論化學應用於陶藝調配的重要橋樑。</p>
+
+  <h2>四、為什麼氧化鋁 (Al₂O₃) 有兩個不同的下標？</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <text x="400" y="110" font-family="sans-serif" font-size="65" font-weight="bold" fill="#39372f" text-anchor="middle">
+        Al<tspan fill="#2e7d32" font-size="45" dy="20">2</tspan><tspan dy="-20" fill="#39372f">O</tspan><tspan fill="#c2185b" font-size="45" dy="20">3</tspan>
+      </text>
+      <text x="250" y="200" font-family="sans-serif" font-size="22" font-weight="bold" fill="#2e7d32" text-anchor="middle">2 個鋁原子</text>
+      <text x="550" y="200" font-family="sans-serif" font-size="22" font-weight="bold" fill="#c2185b" text-anchor="middle">3 個氧原子</text>
+      <path d="M 370 120 Q 310 160 250 170" fill="none" stroke="#2e7d32" stroke-width="3" />
+      <path d="M 440 120 Q 500 160 550 170" fill="none" stroke="#c2185b" stroke-width="3" />
+    </svg>
+  </div>
+  <p>除了二氧化矽之外，氧化鋁（Al₂O₃）是陶藝釉藥中另一個佔有舉足輕重地位的化學成分。當我們仔細觀察 Al₂O₃ 這個化學式時，會發現它比 SiO₂ 稍微複雜一些：它同時擁有兩個明碼標示的下標數字。在 Al 的右下方有一個 2，而在 O 的右下方則有一個 3。這意味著在這個化學式單位中，鋁原子與氧原子的數量比例是 2：3。</p>
+
+  <h3>1. 鋁與氧的多重比例</h3>
+  <p>這種「多重下標」的化學式在陶瓷原料中非常普遍。它告訴我們，化學物質的組成並非總是簡單的一對一或一對二。在微觀世界裡，只要有一批純的氧化鋁粉末，其內部的鋁和氧總數量比例將永遠維持在 2：3 的恆定狀態。這個穩定的比例關係，是我們計算氧化物莫耳數與重量百分比時，絕對不能搞錯的核心數據。</p>
+  
+  <h3>2. 電荷平衡的自然法則</h3>
+  <p>為什麼會是 2：3 這個奇特的比例呢？這取決於元素的「化合價」（也就是元素在化學反應中得失電子的能力）。鋁傾向於釋放三個電子（+3 價），而氧傾向於接收兩個電子（-2 價）。為了讓整體物質達到不帶電的平衡狀態，它們必須以 2 個鋁搭配 3 個氧的方式結合。這就是大自然為了追求穩定而寫下的數學方程式。</p>
+  
+  <h3>3. 氧化鋁在釉藥中的穩定作用</h3>
+  <p>在釉藥配方中，Al₂O₃ 扮演著「中介者」或「穩定劑」的角色。適量的氧化鋁可以顯著提高釉漿在高溫時的黏度，防止釉藥在窯內像水一樣流淌成災，破壞窯板。同時，它也能增加釉面的硬度、耐磨性，並有助於形成高雅的無光釉（Matte Glaze）質感。透過高嶺土或長石來引入 Al₂O₃，是每個陶藝家必修的配釉學分。</p>
+
+  <h2>五、下標不是裝飾品：它如何決定物質的根本性質</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <text x="220" y="80" font-family="sans-serif" font-size="32" font-weight="bold" fill="#39372f" text-anchor="middle">一氧化碳 (CO)</text>
+      <text x="220" y="130" font-family="sans-serif" font-size="24" fill="#c62828" text-anchor="middle">還原氣氛、有毒氣體</text>
+      <text x="220" y="180" font-family="sans-serif" font-size="20" fill="#777367" text-anchor="middle">C : O = 1 : 1</text>
+      
+      <line x1="400" y1="50" x2="400" y2="200" stroke="#dcd7c7" stroke-width="3" stroke-dasharray="8,4" />
+      
+      <text x="580" y="80" font-family="sans-serif" font-size="32" font-weight="bold" fill="#39372f" text-anchor="middle">二氧化碳 (CO₂)</text>
+      <text x="580" y="130" font-family="sans-serif" font-size="24" fill="#00796b" text-anchor="middle">氧化氣氛、溫室氣體</text>
+      <text x="580" y="180" font-family="sans-serif" font-size="20" fill="#777367" text-anchor="middle">C : O = 1 : 2</text>
+    </svg>
+  </div>
+  <p>學習看懂化學式中的下標，並非只是為了應付死板的化學考試，它對於陶藝家在實際調配與燒成釉藥時具有決定性的影響。許多人會誤以為，只要化學式裡包含的英文字母一樣，它們就是差不多的東西。這種觀念在化學領域是極度危險的。下標的任何一點改變，都意味著原子的排列比例發生了變化，這會創造出物理與化學性質截然不同的全新物質。</p>
+
+  <h3>1. 數字不同，物質全變</h3>
+  <p>讓我們用窯爐燒成時常遇到的氣體來舉例。一氧化碳的化學式是 CO，二氧化碳的化學式是 CO₂。兩者都只包含碳和氧，差別僅在於氧原子的下標是 1 還是 2。然而，CO 是一種在還原燒時會強烈奪取釉藥中氧原子的活性氣體，且對人體有劇毒；而 CO₂ 則是安全的溫室氣體，性質穩定。這個簡單的下標差異，造就了完全不同的物質特性。</p>
+  
+  <h3>2. 微觀結構決定巨觀特徵</h3>
+  <p>在固體原料中也是一樣的道理。下標反映的是分子或晶體內部原子間的結合狀態，屬於微觀的結構層面。當原子比例改變，它們在空間中堆疊的晶格結構就會不同，進而影響該礦物的硬度、熔點、折射率以及吸水性。例如，氧化亞鐵（FeO，黑色）與氧化鐵（Fe₂O₃，紅褐色）在釉藥中發出的顏色與助熔效果就有顯著差異。</p>
+  
+  <h3>3. 配方解讀的嚴謹性</h3>
+  <p>因此，當我們在閱讀配方表或是進行材料替換時，必須保持極高的嚴謹性。你不能因為找不到二氧化鈦（TiO₂），就隨便用某種想像中的「TiO」來代替。下標就像是物質的 DNA 序列，錯了一個數字，就等於拿錯了材料。培養對下標數字的敏感度，能讓你避免在實務配釉中犯下昂貴且耗時的錯誤。</p>
+
+  <h2>六、下標與式量計算的緊密關係</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <text x="400" y="70" font-family="sans-serif" font-size="32" font-weight="bold" fill="#39372f" text-anchor="middle">計算 CaCO₃ 的分子量 (式量)</text>
+      
+      <rect x="150" y="100" width="140" height="100" fill="#e8f5e9" rx="8" />
+      <text x="220" y="140" font-family="sans-serif" font-size="24" font-weight="bold" fill="#2e7d32" text-anchor="middle">Ca × 1</text>
+      <text x="220" y="175" font-family="sans-serif" font-size="20" fill="#2e7d32" text-anchor="middle">40.0</text>
+      
+      <text x="315" y="155" font-family="sans-serif" font-size="32" font-weight="bold" fill="#39372f" text-anchor="middle">+</text>
+      
+      <rect x="330" y="100" width="140" height="100" fill="#e3f2fd" rx="8" />
+      <text x="400" y="140" font-family="sans-serif" font-size="24" font-weight="bold" fill="#1565c0" text-anchor="middle">C × 1</text>
+      <text x="400" y="175" font-family="sans-serif" font-size="20" fill="#1565c0" text-anchor="middle">12.0</text>
+      
+      <text x="495" y="155" font-family="sans-serif" font-size="32" font-weight="bold" fill="#39372f" text-anchor="middle">+</text>
+      
+      <rect x="510" y="100" width="140" height="100" fill="#fce4ec" rx="8" />
+      <text x="580" y="140" font-family="sans-serif" font-size="24" font-weight="bold" fill="#c2185b" text-anchor="middle">O × 3</text>
+      <text x="580" y="175" font-family="sans-serif" font-size="20" fill="#c2185b" text-anchor="middle">(16.0 × 3)</text>
+      
+      <text x="400" y="235" font-family="sans-serif" font-size="26" font-weight="bold" fill="#39372f" text-anchor="middle">總和 = 40.0 + 12.0 + 48.0 = 100.0</text>
+    </svg>
+  </div>
+  <p>在我們進行釉藥配方的分析與轉換時，常常需要計算原料的「分子量」或是「式量」。而下標數字，正是決定這些質量計算正確與否的關鍵乘數。如果把下標看錯或是忽略不計，整個配方的計算結果將會出現嚴重的偏差，這也是從感性陶藝跨入理性釉式計算時最重要的數學基礎。</p>
+
+  <h3>1. 式量計算的基本邏輯</h3>
+  <p>計算分子量或式量的基本邏輯非常直觀：把化學式中每一種元素的「原子量」（可從元素週期表中查出），乘以它的「下標數字（原子數量）」，然後把所有的結果加總起來。以上圖的碳酸鈣（CaCO₃）為例，鈣(Ca)的原子量約40，碳(C)約12，氧(O)約16。因為氧有3個，所以必須將16乘以3等於48。最後將 40 + 12 + 48 結合，得出 CaCO₃ 的式量約為 100。</p>
+  
+  <h3>2. 下標作為乘數的重要性</h3>
+  <p>下標數字就像是一個放大鏡，它會將特定元素在整體物質中的質量比重放大。假設你在計算 SiO₂ 的式量時，不小心忽略了氧後面的下標 2，只算了一個氧的重量。正確的 SiO₂ 式量應該是 60，錯誤計算會變成 44。這高達 36% 的誤差，將會導致你在換算原料重量時，加入過少或過多的石英，最終燒出來的釉藥絕對無法達到預期的熔融狀態。</p>
+  
+  <h3>3. 電腦計算軟體的輔助與盲點</h3>
+  <p>現在有許多方便的釉藥計算軟體（如 Glazy 等）可以幫我們自動計算分子量與氧化物比例。這雖然減輕了心算的負擔，但我們依然不能放棄自己看懂化學式下標的能力。因為當你需要手動輸入一種新的在地礦物材料，或是檢查軟體資料庫中是否有錯誤的化學式時，理解下標的原始意義，將是你發現問題並進行修正的最有力武器。</p>
+
+  <h2>七、遇到括號怎麼辦？化學式中括號與下標的乘法規則</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      <text x="400" y="110" font-family="sans-serif" font-size="70" font-weight="bold" fill="#39372f" text-anchor="middle">
+        Mg<tspan fill="#1976d2">(</tspan>OH<tspan fill="#1976d2">)</tspan><tspan fill="#c2185b" font-size="45" dy="20">2</tspan>
+      </text>
+      <text x="400" y="200" font-family="sans-serif" font-size="24" font-weight="bold" fill="#c2185b" text-anchor="middle">括號外的 2，代表整組 (OH) 都要乘以 2 份！</text>
+      <path d="M 520 130 Q 560 170 610 180" fill="none" stroke="#c2185b" stroke-width="3" stroke-dasharray="6,4" />
+    </svg>
+  </div>
+  <p>當你在研究各種陶瓷原料的化學式時，一定會遇到一種比單純元素符號更複雜的形式：帶有括號的化學式。例如，常用作鎂質助熔劑的氫氧化鎂，其化學式為 Mg(OH)₂。這個括號出現的用意是什麼？括號外面的下標 2 又該怎麼解讀呢？這往往是許多人在學習化學式時遇到的第二個卡關點，但其實只要掌握數學的乘法分配律，就能輕鬆破解。</p>
+
+  <h3>1. 原子團的整體概念</h3>
+  <p>括號的出現是為了表示化學式中存在一個「原子團」（或稱「根」）。原子團是由幾個不同的原子緊密結合在一起，在化學反應中通常以一個整體的形式參與運作的結構。在 Mg(OH)₂ 中，(OH) 就是一個氫氧根。把它括起來，就是在向讀者宣告：「這是一個不可分割的小團體，請把它當作一個整體來看待」。</p>
+  
+  <h3>2. 括號外數字的乘法分配</h3>
+  <p>括號外面的下標數字，其作用完全等同於數學方程式中的乘法分配律。它表示這個括號內的「整組」原子團數量有幾份。因此，你必須將括號外的下標，乘上括號內每一種元素的隱藏下標（或明示下標）。在 Mg(OH)₂ 中，括號內有 1 個 O 和 1 個 H，乘上外面的 2 之後，正確的原子總數是 1 個 Mg（鎂）、2 個 O（氧）和 2 個 H（氫）。</p>
+  
+  <h3>3. 常見帶括號的釉藥原料</h3>
+  <p>在陶瓷釉藥原料中，除了氫氧根 (OH) 之外，我們還經常會遇到碳酸根 (CO₃)、硫酸根 (SO₄) 等原子團。例如，能同時提供鈣和鎂的白雲石，其理想化學成分是碳酸鈣鎂 CaMg(CO₃)₂，這表示它含有兩個碳酸根。理解這些原子團作為一個整體的概念，不僅能正確計算原子數量，更能幫助我們預測這些原料在高溫燒成時會釋放出多少氣體。</p>
+
+  <h2>八、下標與係數的差異：位置不同，意義大不相同</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      
+      <!-- Equation Text -->
+      <text x="140" y="140" font-family="sans-serif" font-size="52" font-weight="bold" fill="#39372f" text-anchor="middle">
+        <tspan fill="#00838f">2</tspan> C<tspan fill="#1976d2">u</tspan>O
+      </text>
+      
+      <text x="240" y="140" font-family="sans-serif" font-size="52" font-weight="bold" fill="#39372f" text-anchor="middle">+</text>
+      
+      <text x="320" y="140" font-family="sans-serif" font-size="52" font-weight="bold" fill="#39372f" text-anchor="middle">C</text>
+      
+      <!-- Big Clear Arrow -->
+      <text x="420" y="140" font-family="sans-serif" font-size="64" font-weight="bold" fill="#39372f" text-anchor="middle">→</text>
+      
+      <text x="540" y="140" font-family="sans-serif" font-size="52" font-weight="bold" fill="#39372f" text-anchor="middle">
+        <tspan fill="#00838f">2</tspan> C<tspan fill="#1976d2">u</tspan>
+      </text>
+      
+      <text x="630" y="140" font-family="sans-serif" font-size="52" font-weight="bold" fill="#39372f" text-anchor="middle">+</text>
+      
+      <text x="720" y="140" font-family="sans-serif" font-size="52" font-weight="bold" fill="#39372f" text-anchor="middle">
+        C<tspan fill="#c2185b">O</tspan><tspan fill="#c2185b" font-size="30" dy="18">2</tspan>
+      </text>
+      
+      <!-- Explanatory Text Below -->
+      <text x="400" y="240" font-family="sans-serif" font-size="24" fill="#777367" text-anchor="middle">還原燒過程中的原子重新分配（大數字是係數，小數字是下標）</text>
+    </svg>
+  </div>
+  <p>在學習化學式的過程中，另一個極易混淆的觀念是「係數」（Coefficient）與「下標」的區別。有時候我們會在化學式或反應方程式的最前面看到一個正常大小的數字，例如上述圖表中的「2 CuO」，這個前面的數字 2 就是係數。雖然係數和下標都是數字，而且都會影響原子的總數計算，但它們代表的化學意義卻有著天壤之別。</p>
+
+  <h3>1. 內部組成與外部數量的差異</h3>
+  <p>我們可以這樣生動地區分：下標決定了物質的「內部組成比例」，也就是它決定了這個物質「到底是什麼」。如果改變了下標，物質的本質就變了。而係數則決定了物質的「外部數量份數」，也就是它決定了「有多少份」這個物質。2 CuO 代表有兩份獨立的氧化銅化學式單位，每一份內部的銅與氧比例依然是穩定的 1：1。改變係數，就像是增加或減少食譜的份量，但不會改變這道菜的本質口味。</p>
+  
+  <h3>2. 係數在反應式中的角色</h3>
+  <p>係數通常出現在描述窯爐燒成變化的「化學反應方程式」中。它的存在是為了平衡方程式左右兩邊的原子數量，確保「質量守恆定律」得以成立。也就是說，反應前有多少個碳原子、氧原子，反應後也必須有相同數量的碳原子和氧原子。我們只能透過調整最前面的「係數」來配平方程式，絕對不能為了讓數量相等而去竄改物質原本的「下標」。</p>
+  
+  <h3>3. 正確判讀化學方程式</h3>
+  <p>當化學式前面加上了係數，我們該如何計算原子總數呢？非常簡單，把最前面的係數乘上原本化學式中各元素的下標（包含隱藏的 1）即可。以 2 CuO 為例，因為係數是 2（有兩份），所以銅的總數是 1 × 2 = 2 個，氧的總數也是 1 × 2 = 2 個。這種計算方式在分析窯爐內部的氧化還原反應時非常實用。</p>
+
+  <h2>九、陶瓷燒成中的原子重新分配：還原燒與係數的應用</h2>
+  <p>為了更生動地體會係數與下標的差別，我們將場景轉移到溫度高達 1250°C 的瓦斯窯內部。在燒成過程中，特別是當我們採用「還原燒（Reduction firing）」技巧時，窯內的氧氣供應會被刻意阻斷減少，導致瓦斯燃燒不完全而產生游離碳（C）或一氧化碳。這些物質會貪婪地從釉藥原料中奪取氧原子，從而改變金屬著色氧化物的化學狀態，產生令人驚豔的色彩變化。</p>
+
+  <h3>1. 原子守恆與質量不滅</h3>
+  <p>回頭看看剛剛第八節圖表中的方程式：<strong>2 CuO + C → 2 Cu + CO₂</strong>。這完美展示了窯內的劇烈變化中，原子是不會憑空消失或產生的。方程式左邊（反應前）有 2 個銅、2 個氧、1 個碳；方程式右邊（反應後）依然是 2 個銅、1 個碳和 2 個氧。係數與下標的巧妙搭配，確保了這個守恆定律得以成立，讓我們能預測燒成後會留下什麼，又會揮發什麼。</p>
+  
+  <h3>2. 還原燒剝奪氧原子的奧秘</h3>
+  <p>在這個還原反應中，反應物 CuO（氧化銅）是物質的本質，前面的係數 2 表示需要兩份。當它與 1 份碳（C）相遇後，高溫下活潑的碳強行奪走了銅身上的氧，形成了 CO₂（二氧化碳氣體逸散出煙囪）。注意這裡的產物 CO₂，下標 2 告訴我們它是一個碳結合了兩個氧的新氣體物質。原本的銅被剝奪了氧，被強迫還原成了純粹的金屬銅（2 Cu）。</p>
+  
+  <h3>3. 銅紅發色的化學機制</h3>
+  <p>這個剝奪氧原子的過程，正是陶藝界著名的「辰砂釉」或「銅紅釉」的發色原理。當 CuO 失去氧，變成微小的純銅分子群（膠體銅）懸浮在熔融的玻璃釉層中時，冷卻後受到光線折射，原本綠色的氧化銅就會奇蹟般地呈現出鮮豔的紅色。這個過程完美展示了化學式的微觀變化（失去氧原子）如何直接對應到肉眼可見的釉面色彩巨變。陶藝中的色彩魔法，其實都是嚴謹的科學。</p>
+
+  <h2>十、陶藝常見原料化學式與下標總整理</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料 / 氧化物名稱</th>
+          <th>化學式</th>
+          <th>組成元素與數量 (下標解析)</th>
+          <th>在釉藥中的主要功能</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>二氧化矽 (石英)</td>
+          <td>SiO₂</td>
+          <td>Si: 1, O: 2</td>
+          <td>玻璃網絡形成者，構成釉藥的高溫骨架</td>
+        </tr>
+        <tr>
+          <td>氧化鋁</td>
+          <td>Al₂O₃</td>
+          <td>Al: 2, O: 3</td>
+          <td>穩定劑，增加高溫黏度，防止流釉</td>
+        </tr>
+        <tr>
+          <td>氧化鈣</td>
+          <td>CaO</td>
+          <td>Ca: 1, O: 1</td>
+          <td>強效鹼性助熔劑 (高溫)，增加硬度</td>
+        </tr>
+        <tr>
+          <td>碳酸鈣</td>
+          <td>CaCO₃</td>
+          <td>Ca: 1, C: 1, O: 3</td>
+          <td>釉藥中最常見的 CaO 主要來源粉末</td>
+        </tr>
+        <tr>
+          <td>氧化鎂</td>
+          <td>MgO</td>
+          <td>Mg: 1, O: 1</td>
+          <td>助熔劑，降低膨脹係數，易產生平滑無光澤</td>
+        </tr>
+        <tr>
+          <td>碳酸鋇</td>
+          <td>BaCO₃</td>
+          <td>Ba: 1, C: 1, O: 3</td>
+          <td>BaO 來源，產生消光效果與促進特定晶體生長</td>
+        </tr>
+        <tr>
+          <td>氧化鋅</td>
+          <td>ZnO</td>
+          <td>Zn: 1, O: 1</td>
+          <td>助熔劑，大量且緩降溫使用可產生美麗結晶釉</td>
+        </tr>
+        <tr>
+          <td>二氧化鈦</td>
+          <td>TiO₂</td>
+          <td>Ti: 1, O: 2</td>
+          <td>強力乳濁劑，使透明釉變白不透明，或產生結晶斑</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>為了幫助大家將前面所學的知識融會貫通，我們整理了一份陶藝工作室中最常見的原料與氧化物化學式對照表。這張表格不僅列出了它們的化學式，更詳盡地解析了其中所包含的元素種類與精確數量。當你在閱讀這張表時，請試著不要只是死背文字，而是將視線聚焦在化學式的下標上，並在腦海中快速進行「拆解練習」。</p>
+
+  <h3>1. 鹼金屬氧化物的規律</h3>
+  <p>如果你仔細比較 CaO、MgO、ZnO，會發現它們的下標結構驚人地相似，都是隱藏的 1：1 金屬原子與氧原子組合。在釉式理論中，它們通常被歸類在同一組（稱為 RO 群或鹼性氧化物群）。下標的規律性，往往反映了元素在週期表中的化學性質相似性，它們都能在不同溫度區間發揮熔化矽砂的作用。</p>
+  
+  <h3>2. 複雜礦物的下標特徵</h3>
+  <p>觀察表格，你會發現釉藥理論中常討論的「氧化物」（如 CaO），與我們實際購買秤重的「原料粉末」（如碳酸鈣 CaCO₃）在化學式上有所不同。原料礦物往往比最終存在於釉中的氧化物含有更多的元素（如碳與額外的氧）。這提醒我們，在進行配方運算時，必須清楚區分「原料買來時的狀態」與「燒成冷卻後的狀態」。</p>
+  
+  <h3>3. 建立直覺的閱讀習慣</h3>
+  <p>你可以嘗試將表格的「組成元素與數量」這一欄遮住，隨機挑選一個化學式，自己大聲唸出它的元素與數量。如果不確定，再回顧我們之前講述的「隱藏的 1」與「下標只管前方元素」的兩大原則。透過這種自我測驗，能最快地將這些短期記憶轉化為長期的直覺知識，讓你在日後面對長石或高嶺土等更複雜的配方時游刃有餘。</p>
+
+  <h2>十一、從下標看陶瓷燒成時的化學變化：原料的熱分解</h2>
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="12" />
+      
+      <!-- CaCO3 -->
+      <text x="250" y="120" font-family="sans-serif" font-size="60" font-weight="bold" fill="#39372f" text-anchor="middle">
+        CaCO<tspan fill="#d81b60" font-size="40" dy="15">3</tspan>
+      </text>
+      
+      <!-- Arrow -->
+      <text x="400" y="120" font-family="sans-serif" font-size="60" font-weight="bold" fill="#39372f" text-anchor="middle">→</text>
+      
+      <!-- CaO -->
+      <text x="520" y="120" font-family="sans-serif" font-size="60" font-weight="bold" fill="#39372f" text-anchor="middle">CaO</text>
+      
+      <!-- + -->
+      <text x="610" y="120" font-family="sans-serif" font-size="48" font-weight="bold" fill="#39372f" text-anchor="middle">+</text>
+      
+      <!-- CO2 + Up arrow -->
+      <text x="710" y="120" font-family="sans-serif" font-size="60" font-weight="bold" fill="#39372f" text-anchor="middle">
+        CO<tspan fill="#d81b60" font-size="40" dy="15">2</tspan><tspan fill="#777367" font-size="45" dy="-18">↑</tspan>
+      </text>
+      
+      <!-- Lines and Labels -->
+      <line x1="250" y1="150" x2="250" y2="190" stroke="#39372f" stroke-width="2" stroke-dasharray="6,4"/>
+      <text x="250" y="225" font-family="sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">反應前：3 個氧</text>
+      
+      <line x1="520" y1="150" x2="520" y2="210" stroke="#388e3c" stroke-width="3" stroke-dasharray="6,4"/>
+      <text x="520" y="245" font-family="sans-serif" font-size="22" font-weight="bold" fill="#388e3c" text-anchor="middle">留在釉面：1 個氧</text>
+      
+      <line x1="710" y1="150" x2="710" y2="190" stroke="#d81b60" stroke-width="3" stroke-dasharray="6,4"/>
+      <text x="710" y="225" font-family="sans-serif" font-size="22" font-weight="bold" fill="#d81b60" text-anchor="middle">高溫揮發流失：2 個氧</text>
+    </svg>
+  </div>
+  <p>我們學習解讀化學式下標的終極目的，並不是為了在紙上談兵，而是為了真實理解窯爐裡高溫世界發生的奇妙物理與化學變化。在陶藝燒成的過程中，我們投入窯內的原料粉末並不是原封不動地熔化。許多碳酸鹽類礦石原料在達到約 800°C~900°C 的特定溫度時，會發生「熱分解反應」，也就是原本的化學物質會因為高熱斷裂，重新分裂成金屬氧化物與氣體。而看懂下標，能讓我們像擁有透視眼一樣，清楚看見這些氧原子是如何分道揚鑣的。</p>
+
+  <h3>1. 高溫下的熱分解反應</h3>
+  <p>最經典的例子就是碳酸鈣（CaCO₃）的熱分解：<strong>CaCO₃ → CaO + CO₂↑</strong>（向上的箭頭代表氣體揮發脫離釉面）。我們用剛剛學會的下標知識來檢驗這個過程：反應前的 CaCO₃ 裡有 3 個氧。經過高溫分裂後，生成了成為強力助熔劑的氧化鈣（CaO，佔據 1 個氧），它會留在素坯表面與石英一起熔化成釉面；同時也生成了二氧化碳（CO₂，帶走了 2 個氧），這個氣體會從釉層表面冒泡，最後經由煙囪排到大氣中。這就是下標告訴我們的完整故事。</p>
+  
+  <h3>2. 燒失量 (LOI) 的物理現象</h3>
+  <p>上述碳酸鈣分解跑掉的 CO₂ 重量，在陶瓷工程中被稱為「燒失量」（Loss on Ignition, LOI）。透過化學式計算，100 克的碳酸鈣在高溫分解後，真正留在釉層裡發揮助熔作用的 CaO 只有約 56 克，而高達 44 克的氣體會揮發流失。這表示如果你在配方裡加了 100 克的碳酸鈣粉，其實只有一半多一點的重量真正留了下來。理解這點，是調配不流釉配方的關鍵。</p>
+  
+  <h3>3. 從原料到氧化物的實務轉換</h3>
+  <p>既然各種碳酸鹽類原料（如碳酸鎂 MgCO₃、碳酸鋇 BaCO₃）在窯內都會分解成氧化物與氣體，這也就是為什麼專業的釉藥配方理論，不是以秤重「原料克數」來比較，而是統一轉換成「氧化物比例」來分析。因為留下來的氧化物，才是最終構成那層美麗玻璃質的真正主角。而要完成這項原料與氧化物之間的換算，看懂化學式並計算熱分解前後的比例，絕對是不可或缺的工具。</p>
+
+  <h2>十二、總結：從看懂下標，到理解釉藥配方與釉式</h2>
+  <p>恭喜你，堅持讀到了這裡！我們從最基礎的 SiO₂ 出發，探討了沒有寫數字的隱藏 1、多重下標的 Al₂O₃，再到令人頭疼的括號乘法計算，以及容易混淆的反應式係數觀念，最後在窯爐的高溫分解與還原反應中，驗證了這一切數字背後的物理與化學真實意義。這些看似微不足道的小數字，其實精準地描繪了微觀世界中原子的排列組合，更是串聯起陶瓷材料科學與窯爐實務操作的重要紐帶。現在，化學式中的下標對你來說，已經不再是陌生的亂碼了。</p>
+
+  <h3>1. 知識的串連與應用</h3>
+  <p>掌握了化學式的閱讀與下標的含意，你已經具備了挑戰更高階陶藝知識的資格。接下來的最佳實踐，就是去檢視你目前正在使用的釉藥配方。試著找出配方表上的每一項原料（例如長石、高嶺土、方解石），查出它們的化學式，並練習拆解它們的原子組成。這會讓你對自己每天接觸、攪拌的礦石粉末，有更深刻且本質的認識。</p>
+  
+  <h3>2. 為釉式計算打好地基</h3>
+  <p>在未來的學習旅程中，如果你想深入學習鼎鼎大名的「釉式計算（Seger Formula）」，將配方中的重量百分比，精準地轉換為科學化的氧化物莫耳數比例，那麼今天學會的「下標與分子量計算」就是唯一的橋樑。這項技能能將「秤上的克數」完美轉換為「化學反應的比例」，讓你從此脫離盲目試錯的困境。</p>
+  
+  <h3>3. 實踐科學配釉的下一步</h3>
+  <p>釉藥化學是一門深奧但無比迷人的學問。每一種元素的加入、每一次比例的微調，甚至氣體的揮發與保留，都可能在烈火的洗禮下誕生出獨一無二的藝術效果。不要害怕這些化學符號，把它們當成幫助你精確掌控釉藥特性的得力助手。帶著這些基礎化學知識走進工作室，大膽地實驗與探索，你一定能調配出更加穩定、更具個人特色的專屬釉藥！</p>
+
+  <div class="faq-box">
+    <div class="faq-title">化學式下標與陶瓷應用 常見問答 FAQ</div>
+    <p><strong>Q：如果我只想憑直覺配釉，不學這些化學式可以嗎？</strong><br>
+    A：當然可以，許多傳統陶藝家也是透過長年的試錯累積出寶貴經驗。但學習化學知識能讓你「知其然，更知其所以然」。當配方出現流釉、起泡等瑕疵，或是某些原料停產需要尋找替代品時，懂化學式能幫你快速精準地找到解法，大幅減少盲目試錯的成本與時間。</p>
+    <p><strong>Q：圖表中的碳酸鈣分解會產生 CO₂，這會導致釉面產生氣泡瑕疵嗎？</strong><br>
+    A：非常有機會！這就是為什麼燒窯時需要設定適當的「升溫曲線」。如果升溫太快，釉面已經提早熔融封閉，而底下的碳酸鈣還在分解產生 CO₂ 氣體，這些氣體就會被困在釉層中，冷卻後形成氣泡或針孔。看懂反應式，能幫你更科學地排解窯燒瑕疵。</p>
+    <p><strong>Q：在計算分子量時，原子量小數點後面的數字需要全部算進去嗎？</strong><br>
+    A：對於日常的陶藝工作室釉藥計算來說，通常將原子量四捨五入到整數或小數點後第一位（例如 O=16，Si=28.1）就已經足夠精確了。過度苛求小數點，反而會讓計算變得繁瑣，且實際使用電子秤量粉末時，也很難達到實驗室等級的微克精度。</p>
+  </div>
+
+  <div class="related">
+    <h3>相關文章</h3>
+    <!-- === 動態相關文章區塊 開始 === -->
+    <div id="dynamic-related-articles"></div>
+    <script src="../../assets/js/knowledge-data.js"></script>
+    <script src="../../assets/js/related.js"></script>
+    <!-- === 動態相關文章區塊 結束 === -->
+  </div>
+</article>
+
+<div class="site-footer-link">
+    <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+    <div class="footer-share-wrapper"></div>
+</div>
+
+</main>
+</body>
+</html>

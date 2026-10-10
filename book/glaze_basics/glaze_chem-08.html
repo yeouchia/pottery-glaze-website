@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>括號化學式怎麼計算？從陶瓷原料學會括號與下標的計算方法</title>
+<meta name="description" content="專為陶藝與釉藥創作者設計的化學基礎指南。透過鮮豔圖解與淺顯易懂的文字，帶你輕鬆學會括號化學式的計算，掌握陶瓷原料配方與燒成密碼。">
+<style>
+  :root {
+    --bg: #eee7d8;
+    --paper: #fbfaf5;
+    --card: #f1f0e4;
+    --sub-card: #f6f4e9;
+    --line: #d8d4c5;
+    --text: #39372f;
+    --muted: #777367;
+    --accent: #6c6654;
+    --accent-light: #e8e4d6;
+    --quote: #eeeadd;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+  .page {
+    width: min(1000px, calc(100% - 40px));
+    margin: 40px auto 80px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(70,62,45,.1);
+    overflow: hidden;
+  }
+  .article {
+    padding: 50px 60px 70px;
+  }
+  .breadcrumb {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    color: #625d4e;
+    background: var(--accent-light);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  h1 {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    color: #35332c;
+  }
+  h2 {
+    font-family: "Noto Serif TC", serif;
+    font-size: 26px;
+    line-height: 1.6;
+    margin: 60px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
+    color: #3e3b32;
+  }
+  h3 {
+    font-size: 20px;
+    margin: 36px 0 14px;
+    color: #464238;
+    border-left: 5px solid var(--accent);
+    padding-left: 12px;
+  }
+  .lead {
+    background: var(--quote);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 30px 0 40px;
+    color: #4d4a40;
+    font-size: 17px;
+    line-height: 1.9;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .tag {
+    border: 1px solid #d7d2c3;
+    background: #f8f6ed;
+    color: #706b5d;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+  .faq-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 30px;
+    margin: 40px 0;
+  }
+  .faq-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 20px;
+    color: #4c493e;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  p { margin: 16px 0; }
+  ul, ol { padding-left: 2em; margin: 16px 0 28px; }
+  li { margin: 8px 0; }
+  strong { font-weight: 700; color: #2a2822; }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 30px 0 40px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+    background: var(--sub-card);
+  }
+  th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 16px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #ece9dc;
+    font-weight: 700;
+    color: #4d493e;
+    font-size: 16px;
+  }
+  .svg-container {
+    text-align: center;
+    margin: 30px 0;
+    background: var(--card);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .related h3 { margin-top: 50px; border: none; padding: 0; font-size: 24px; }
+  .site-footer-link {
+    margin-top: 60px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .site-footer-link a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .site-footer-link a:hover { color: var(--accent); }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥基礎｜釉藥化學基礎</div>
+  <span class="eyebrow">化學式與分子量計算</span>
+  <h1>括號化學式怎麼計算？掌握陶瓷原料的化學密碼</h1>
+  <div class="lead">
+    <strong>引言：</strong>在我們踏入陶藝與釉藥的奇妙世界時，常常會遇到各種化學式。有些配方看起來很單純，例如常見的石英（SiO₂），但當我們需要使用進階的陶瓷材料，如氫氧化鈣（Ca(OH)₂）或硫酸鋁（Al₂(SO₄)₃）時，化學式裡就會出現「括號」與「下標」。許多剛接觸釉藥燒成與陶瓷材料的陶藝創作者，看到這些帶有括號的化學符號，往往會感到困惑，不知道該如何計算裡面各個元素的數量。這篇文章並非要帶你鑽研艱深的高級化學理論，而是專為陶藝與釉藥學習者量身打造的實用指南。我們將透過淺顯易懂的圖解與循序漸進的邏輯，帶你一步步破解釉藥原料中的括號化學式。學會這些基礎後，你不僅能精準計算出每個化學元素的比重，還能更透徹地理解釉藥在窯爐高溫燒成時的變化，為後續的配方調整與釉式計算打下最堅實的基礎。
+  </div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">化學元素</span><span class="tag">括號化學式</span><span class="tag">釉藥燒成</span><span class="tag">陶瓷材料</span><span class="tag">分子量計算</span><span class="tag">釉式基礎</span><span class="tag">釉藥配方</span>
+  </div>
+
+  <!-- 主題 1 -->
+  <h2>一、為什麼陶瓷原料的化學式會有括號？</h2>
+  <div class="svg-container">
+    <svg width="600" height="250" viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="24" font-weight="bold" fill="#39372f" text-anchor="middle">Ca(OH)₂ 結構拆解</text>
+      <!-- Ca -->
+      <circle cx="150" cy="130" r="40" fill="#FF8C00"/>
+      <text x="150" y="138" font-family="sans-serif" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">Ca</text>
+      <!-- OH 1 -->
+      <path d="M 220 130 L 270 90" stroke="#6c6654" stroke-width="4"/>
+      <circle cx="300" cy="80" r="30" fill="#00C957"/>
+      <text x="300" y="88" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">O</text>
+      <circle cx="360" cy="80" r="20" fill="#1E90FF"/>
+      <text x="360" y="86" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">H</text>
+      <!-- OH 2 -->
+      <path d="M 220 130 L 270 170" stroke="#6c6654" stroke-width="4"/>
+      <circle cx="300" cy="180" r="30" fill="#00C957"/>
+      <text x="300" y="188" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">O</text>
+      <circle cx="360" cy="180" r="20" fill="#1E90FF"/>
+      <text x="360" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">H</text>
+      <!-- Brackets logic -->
+      <text x="480" y="110" font-family="sans-serif" font-size="20" font-weight="bold" fill="#D02090" text-anchor="middle">(OH)</text>
+      <text x="520" y="150" font-family="sans-serif" font-size="20" font-weight="bold" fill="#D02090" text-anchor="middle">基團出現 2 次</text>
+    </svg>
+  </div>
+  <p>在學習陶瓷材料的過程中，我們常會看到一些特殊的化學式。你可能會好奇，為什麼我們不直接把所有的字母和數字寫在一起，而非要加上括號呢？其實，括號的存在是為了幫助我們更清楚地辨識物質的內部結構。就像把一群特定的原子打包成一個「小組」，這個小組在化學反應中通常會一起行動。</p>
+  <h3>1. 辨識特定的化學基團</h3>
+  <p>在化學世界裡，某些元素喜歡綁定在一起形成一個穩定的團隊，我們稱之為「基團」。例如，在氫氧化鈣（Ca(OH)₂）中，氧（O）和氫（H）組成了一個氫氧根（OH）。加上括號，是為了告訴我們這是一個完整的團隊，而不是散落的個別原子。這種表示法在釉藥化學中非常重要，因為它暗示了原料在高溫下的分解行為。</p>
+  <h3>2. 簡化複雜的數量表達</h3>
+  <p>如果我們把 Ca(OH)₂ 寫成 CaO₂H₂，雖然原子的總數是一樣的，但卻無法一眼看出它的真實身分與化學性質。括號可以將複雜的結構化繁為簡。當我們看到括號外的數字時，就能立刻知道這個特定的「原子團隊」在整個分子中重複出現了幾次。這不僅讓化學式更簡潔，也大幅降低了計算分子量時出錯的機率。</p>
+  <h3>3. 釉藥原料中的實際意義</h3>
+  <p>許多陶藝使用的原料都含有這類基團。例如碳酸根（CO₃）或硫酸根（SO₄）。理解這些帶有括號或特定基團的化學式，能幫助我們判斷該原料在窯爐內達到特定溫度時，會釋放出什麼氣體（如水蒸氣或二氧化碳），以及最終留在釉面中的金屬氧化物是什麼。這是掌握釉藥配方變化的第一步關鍵。</p>
+
+  <!-- 主題 2 -->
+  <h2>二、最核心的基礎：括號外下標的乘法規則</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">下標乘法規則圖解</text>
+      <rect x="150" y="70" width="300" height="100" fill="#fff" stroke="#D02090" stroke-width="3" rx="10"/>
+      <text x="210" y="130" font-family="sans-serif" font-size="36" font-weight="bold" fill="#00C957">O</text>
+      <text x="250" y="130" font-family="sans-serif" font-size="36" font-weight="bold" fill="#1E90FF">H</text>
+      <text x="170" y="130" font-family="sans-serif" font-size="40" font-weight="bold" fill="#39372f">(</text>
+      <text x="290" y="130" font-family="sans-serif" font-size="40" font-weight="bold" fill="#39372f">)</text>
+      <text x="320" y="150" font-family="sans-serif" font-size="30" font-weight="bold" fill="#FF4500">2</text>
+      <path d="M 320 110 Q 280 50 220 80" stroke="#FF4500" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 330 110 Q 300 50 260 80" stroke="#FF4500" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF4500" />
+        </marker>
+      </defs>
+      <text x="400" y="100" font-family="sans-serif" font-size="16" font-weight="bold" fill="#FF4500">× 2 (乘進去)</text>
+    </svg>
+  </div>
+  <p>要破解帶有括號的化學式，我們只需要掌握一個最重要、也最基本的數學規則：乘法。這個規則就像是打開寶箱的鑰匙，只要搞懂了，再複雜的陶瓷化學式都能迎刃而解。</p>
+  <h3>1. 括號外的數字代表什麼？</h3>
+  <p>在化學式中，如果括號的右下角出現了一個小數字（我們稱為下標），這個數字代表整個括號內的「基團」需要被複製的次數。你可以把它想像成超市裡的套裝組合包。如果一個組合包裡有 1 顆蘋果和 1 根香蕉，而你買了 2 包，那麼你總共就會有 2 顆蘋果和 2 根香蕉。</p>
+  <h3>2. 乘法分配律的應用</h3>
+  <p>當我們計算原子數量時，必須把括號外面的小數字，乘上括號裡面每一種化學元素的數量。請特別注意，是「每一種」元素都要乘。以 Ca(OH)₂ 為例，括號內的 O 是一個，H 也是一個，外面的下標是 2，所以我們要把 O 乘以 2，把 H 也乘以 2。最後得到的結果就是 2 個氧原子與 2 個氫原子。</p>
+  <h3>3. 常見的初學者盲點</h3>
+  <p>很多剛開始學習釉藥配方的初學者，會不小心只把數字乘給最靠近它的那個元素。例如看到 Ca(OH)₂，就以為只有 H 變成了 2 個，而 O 還是 1 個，這是一個非常常見的誤解。永遠記得，括號就像一道防護罩，外面的數字必須平均分配給防護罩裡面的每一個成員，絕不能偏心。</p>
+
+  <!-- 主題 3 -->
+  <h2>三、基礎實戰：氫氧化鈣 Ca(OH)₂ 的計算過程</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">Ca(OH)₂ 數量清單</text>
+      <rect x="50" y="60" width="150" height="100" fill="#FF8C00" rx="8"/>
+      <text x="125" y="100" font-family="sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">Ca</text>
+      <text x="125" y="140" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">1 個</text>
+      
+      <rect x="225" y="60" width="150" height="100" fill="#00C957" rx="8"/>
+      <text x="300" y="100" font-family="sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">O</text>
+      <text x="300" y="140" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">1 × 2 = 2 個</text>
+      
+      <rect x="400" y="60" width="150" height="100" fill="#1E90FF" rx="8"/>
+      <text x="475" y="100" font-family="sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">H</text>
+      <text x="475" y="140" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">1 × 2 = 2 個</text>
+    </svg>
+  </div>
+  <p>為了讓大家更熟悉，我們直接用釉藥中偶爾會接觸到的強鹼性物質——氫氧化鈣（熟石灰）來進行完整的步驟拆解。透過實作，你會發現這其實比算數還簡單。</p>
+  <h3>1. 拆解化學式元素</h3>
+  <p>拿到一個化學式，第一步是冷靜地把它拆開。在 Ca(OH)₂ 中，我們可以看到三個大寫字母，這代表有三種化學元素：Ca（鈣）、O（氧）、H（氫）。不在括號內的 Ca，旁邊沒有數字，代表它的數量就是 1。這部分非常直觀，也是計算的起點。</p>
+  <h3>2. 處理括號內的元素</h3>
+  <p>接著，我們鎖定括號 (OH)₂。括號裡面有 O 和 H，它們原本的數量都是 1。根據我們上一節學到的乘法規則，將外面的 2 乘進去：氧原子的數量 = 1 × 2 = 2；氫原子的數量 = 1 × 2 = 2。就這麼簡單，我們已經掌握了每一種原子的精確數量。</p>
+  <h3>3. 結算總數與意義</h3>
+  <p>最後，我們把所有的結果加總起來。Ca(OH)₂ 這個物質，包含了 1 個鈣原子、2 個氧原子和 2 個氫原子。如果你要進一步計算它的總分子量（式量），只需要將這三種元素的原子量（可從元素週期表查詢）分別乘以它們的數量，然後相加即可。這種系統化的拆解方式，能確保你在日後的配方換算中萬無一失。</p>
+
+  <!-- 主題 4 -->
+  <h2>四、進階挑戰：括號內外都有下標的 Al₂(SO₄)₃</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">硫酸鋁 Al₂(SO₄)₃ 複雜計算</text>
+      
+      <text x="150" y="120" font-family="sans-serif" font-size="30" font-weight="bold" fill="#8B4513">Al</text>
+      <text x="180" y="140" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FF4500">2</text>
+      
+      <text x="210" y="120" font-family="sans-serif" font-size="36" font-weight="bold" fill="#39372f">(</text>
+      
+      <text x="240" y="120" font-family="sans-serif" font-size="30" font-weight="bold" fill="#DAA520">S</text>
+      <text x="280" y="120" font-family="sans-serif" font-size="30" font-weight="bold" fill="#00C957">O</text>
+      <text x="310" y="140" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FF4500">4</text>
+      
+      <text x="340" y="120" font-family="sans-serif" font-size="36" font-weight="bold" fill="#39372f">)</text>
+      <text x="370" y="140" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FF4500">3</text>
+      
+      <path d="M 370 100 Q 350 50 260 80" stroke="#D02090" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+      <path d="M 375 90 Q 350 40 310 80" stroke="#D02090" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+      
+      <defs>
+        <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#D02090" />
+        </marker>
+      </defs>
+      
+      <text x="480" y="90" font-family="sans-serif" font-size="16" font-weight="bold" fill="#D02090">S: 1 × 3 = 3</text>
+      <text x="480" y="120" font-family="sans-serif" font-size="16" font-weight="bold" fill="#D02090">O: 4 × 3 = 12</text>
+    </svg>
+  </div>
+  <p>當你熟悉了基本規則後，我們來挑戰一個讓許多新手頭痛的化學式：硫酸鋁，它的化學式是 Al₂(SO₄)₃。這個式子看起來之所以嚇人，是因為它的括號裡面本身就有數字，而括號外面又有數字。別怕，我們一樣一步步來。</p>
+  <h3>1. 釐清括號外的獨立元素</h3>
+  <p>首先看括號前面的部分，也就是 Al₂。Al 是鋁元素，右下角有一個 2。這表示在整個化合物中，鋁原子的數量就是 2 個。由於它不在括號裡面，所以完全不受後面括號的影響。我們可以先把這個確認下來放旁邊。</p>
+  <h3>2. 處理括號內自帶的下標</h3>
+  <p>現在進入重頭戲，看括號內部：SO₄。這是一個硫酸根基團，裡面包含了 1 個硫原子（S）和 4 個氧原子（O）。這裡氧原子本身就已經帶有下標 4，代表這個「小組」內部，氧的數量是硫的 4 倍。這點必須先確認清楚。</p>
+  <h3>3. 括號內外下標的相乘</h3>
+  <p>最後一步，括號外面有一個下標 3，代表這個 (SO₄) 小組總共有 3 份。因此，我們必須把括號內的數量分別乘上 3。硫（S）的數量：1 × 3 = 3 個。氧（O）的數量：4 × 3 = 12 個。總結起來，Al₂(SO₄)₃ 包含了 2 個鋁、3 個硫，以及多達 12 個氧。只要掌握「內外相乘」的口訣，再複雜的下標都不會算錯。</p>
+
+  <!-- 主題 5 -->
+  <h2>五、遇到化學式前方的「大數字（係數）」怎麼辦？</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">係數與下標的差異</text>
+      
+      <text x="200" y="130" font-family="sans-serif" font-size="48" font-weight="bold" fill="#DC143C">2</text>
+      <text x="250" y="130" font-family="sans-serif" font-size="36" font-weight="bold" fill="#39372f">Ca(OH)</text>
+      <text x="385" y="150" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FF4500">2</text>
+      
+      <path d="M 215 80 Q 280 20 330 70" stroke="#DC143C" stroke-width="3" fill="none" marker-end="url(#arrow3)"/>
+      <defs>
+        <marker id="arrow3" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#DC143C" />
+        </marker>
+      </defs>
+      <text x="400" y="60" font-family="sans-serif" font-size="16" font-weight="bold" fill="#DC143C">乘上「整個」化學式</text>
+    </svg>
+  </div>
+  <p>在閱讀釉藥化學的反應式（例如描述窯爐內高溫反應的式子）時，你可能會看到化學式的最前方出現了一個大寫的數字，例如 2Ca(OH)₂。這個大數字叫做「係數」，它的作用範圍和括號下標有著根本的不同，絕對不能混淆。</p>
+  <h3>1. 係數代表「總份數」</h3>
+  <p>化學式前方的係數，代表的是這個完整化合物的「總數量」或「總份數」。如果是 2Ca(OH)₂，就表示有兩份完整的氫氧化鈣。這就像是你買了兩盒完全相同的套裝商品，盒子裡所有的東西，數量全部都要翻倍。</p>
+  <h3>2. 先算分子，再乘係數</h3>
+  <p>計算時的最佳策略，是先假裝這個係數不存在，專心算出「一份」化合物裡包含哪些原子。我們前面已經算過，一份 Ca(OH)₂ 包含 1 個 Ca、2 個 O、2 個 H。既然現在最前方有一個係數 2，我們就把剛剛得到的所有數字通通乘以 2。</p>
+  <h3>3. 下標與係數的結合計算</h3>
+  <p>所以，2Ca(OH)₂ 的最終結果是：鈣（Ca）有 1 × 2 = 2 個；氧（O）有 2 × 2 = 4 個；氫（H）有 2 × 2 = 4 個。請務必牢記：括號右下角的數字只管括號裡面的人；但最前面的大數字（係數），管的是整條化學式裡的所有人。區分這兩者的權限範圍，是學好陶瓷化學的基本功。</p>
+
+  <!-- 主題 6 -->
+  <h2>六、為什麼陶藝工作者需要學習這個？</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">釉藥計算的知識階梯</text>
+      
+      <rect x="50" y="120" width="120" height="50" fill="#4682B4" rx="5"/>
+      <text x="110" y="150" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">讀懂化學式</text>
+      
+      <rect x="200" y="90" width="120" height="50" fill="#20B2AA" rx="5"/>
+      <text x="260" y="120" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">計算分子量</text>
+      
+      <rect x="350" y="60" width="120" height="50" fill="#FF8C00" rx="5"/>
+      <text x="410" y="90" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">氧化物換算</text>
+      
+      <rect x="500" y="30" width="80" height="50" fill="#C71585" rx="5"/>
+      <text x="540" y="60" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">釉式</text>
+      
+      <path d="M 170 145 L 200 115" stroke="#39372f" stroke-width="3" fill="none"/>
+      <path d="M 320 115 L 350 85" stroke="#39372f" stroke-width="3" fill="none"/>
+      <path d="M 470 85 L 500 55" stroke="#39372f" stroke-width="3" fill="none"/>
+    </svg>
+  </div>
+  <p>你或許會問，作為一個喜歡捏陶、喜歡看窯燒美麗結果的創作者，只要會照著配方表秤重就好了，為什麼需要花時間搞懂括號化學式的計算？因為要成為獨立調配釉藥的高手，你必須知其然，更要知其所以然。</p>
+  <h3>1. 解讀原物料的真實組成</h3>
+  <p>當我們購買陶瓷原料時，包裝上往往標示著複雜的化學式。如果你無法準確讀懂裡面的元素比例，就很難判斷這種材料在釉藥中到底能提供多少助熔劑（如 CaO 或 K₂O），或是多少骨架成分（如 SiO₂）。讀懂化學式，是我們評估原料價值的放大鏡。</p>
+  <h3>2. 精準的分子量與式量計算</h3>
+  <p>釉藥配方的調整並非單純的重量增減。我們在進行「塞格式（Seger Formula，簡稱釉式）」計算時，必須將原料的重量轉換為「莫耳數」。這中間的橋樑就是物質的分子量或式量。如果括號裡的數字算錯了，整個分子量的計算就會全盤皆輸，導致最後燒出來的釉面效果與預期天差地遠。</p>
+  <h3>3. 理解窯爐內的高溫反應</h3>
+  <p>在 1200 度以上的高溫窯燒過程中，釉藥原料會發生激烈的化學分解。例如碳酸鎂（MgCO₃）會分解出二氧化碳氣體。正確計算化學式內的元素，能讓我們預測燃燒過程中氣體的釋放量，進而避免釉面產生嚴重的縮釉或針孔瑕疵。這些看似枯燥的計算，其實都與最終的作品美感息息相關。</p>
+
+  <!-- 主題 7 -->
+  <h2>七、常見陶瓷原料實戰：碳酸白雲石</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">白雲石 CaMg(CO₃)₂</text>
+      
+      <rect x="50" y="70" width="100" height="80" fill="#FF8C00" rx="8"/>
+      <text x="100" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Ca: 1</text>
+      
+      <rect x="170" y="70" width="100" height="80" fill="#DAA520" rx="8"/>
+      <text x="220" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Mg: 1</text>
+      
+      <rect x="320" y="70" width="120" height="80" fill="#00C957" rx="8"/>
+      <text x="380" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">C: 1×2=2</text>
+      
+      <rect x="460" y="70" width="120" height="80" fill="#1E90FF" rx="8"/>
+      <text x="520" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">O: 3×2=6</text>
+    </svg>
+  </div>
+  <p>為了讓理論與實務結合，我們來看看釉藥中最常使用的原料之一：白雲石。白雲石是提供鈣（Ca）與鎂（Mg）的優良來源，它的理想化學式通常寫作 CaMg(CO₃)₂。這是一個非常經典的括號化學式範例。</p>
+  <h3>1. 確認外部元素</h3>
+  <p>我們先看括號外面的部分：Ca 和 Mg。它們的右下角都沒有數字，代表這兩種元素的數量都是 1 個。在釉藥計算中，這意味著純淨的白雲石可以同時提供等比例的氧化鈣和氧化鎂，是極佳的助熔劑組合材料。</p>
+  <h3>2. 計算碳酸根基團</h3>
+  <p>接著看括號內部：CO₃，這是碳酸根。裡面有 1 個碳原子（C）和 3 個氧原子（O）。括號外面帶有下標 2，因此我們進行乘法：碳（C）有 1 × 2 = 2 個；氧（O）有 3 × 2 = 6 個。這裡的氧原子數量比較多，需要特別細心加總。</p>
+  <h3>3. 將結果應用於配方思考</h3>
+  <p>總結來說，CaMg(CO₃)₂ 含有 1 個 Ca、1 個 Mg、2 個 C 和 6 個 O。當我們將白雲石加入釉藥並進行高溫燒成時，碳與部分氧會結合變成二氧化碳揮發掉，留下所需的鈣與鎂氧化物。能夠精準算清這 6 個氧原子，對於後續進階的氧化物莫耳質量計算將有極大幫助。</p>
+
+  <!-- 主題 8 -->
+  <h2>八、初學者最容易犯的三個致命錯誤</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">常見計算地雷區</text>
+      
+      <line x1="200" y1="60" x2="200" y2="180" stroke="#d8d4c5" stroke-width="2"/>
+      <line x1="400" y1="60" x2="400" y2="180" stroke="#d8d4c5" stroke-width="2"/>
+      
+      <circle cx="100" cy="90" r="25" fill="#DC143C"/>
+      <text x="100" y="97" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+      <text x="100" y="140" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">漏乘括號內</text>
+      <text x="100" y="160" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">後方元素</text>
+      
+      <circle cx="300" cy="90" r="25" fill="#DC143C"/>
+      <text x="300" y="97" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+      <text x="300" y="140" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">忽略括號內</text>
+      <text x="300" y="160" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">原有下標</text>
+      
+      <circle cx="500" cy="90" r="25" fill="#DC143C"/>
+      <text x="500" y="97" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">3</text>
+      <text x="500" y="140" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">係數與下標</text>
+      <text x="500" y="160" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">權限混淆</text>
+    </svg>
+  </div>
+  <p>即使學會了規則，在實際操作時，我們的大腦偶爾還是會出現短路。根據過去教學的經驗，我們整理出初學者在計算括號化學式時，最常踩到的三個地雷。提早認識它們，能幫你省下大量除錯的時間。</p>
+  <h3>1. 偏心計算：只乘第一個元素</h3>
+  <p>最經典的錯誤，就是在計算 Ca(OH)₂ 時，只把氧（O）乘以 2，卻把氫（H）拋在腦後，以為氫只有 1 個。再次強調，括號是公平的，外面的下標必須無差別地乘給括號內的每一個化學元素，絕對不能厚此薄彼。</p>
+  <h3>2. 忘記累加：忽略內部原有的下標</h3>
+  <p>當處理像 Al₂(SO₄)₃ 這種複雜化學式時，很多人會把氧原子的數量直接算成 3 個，完全忘記氧在硫酸根（SO₄）內部原本就已經帶有下標 4 了。正確的做法是將原有的 4 乘以括號外的 3，得到 12。別讓裡面的數字憑空消失。</p>
+  <h3>3. 階級混淆：搞混係數與下標的作用範圍</h3>
+  <p>遇到 2Mg(OH)₂ 時，有些人會把最前面的係數 2 也乘到括號外面的下標上，把規則攪得一團亂。請嚴格遵守計算順序：先搞定一個分子的組成（處理括號與下標），確認無誤後，最後再統一乘上最前面的大數字係數。分步驟來，才是最穩妥的策略。</p>
+
+  <!-- 主題 9 -->
+  <h2>九、圖表統整：各類化學式的計算邏輯對照</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">計算邏輯視覺化比較</text>
+      
+      <rect x="50" y="70" width="140" height="100" fill="#20B2AA" rx="6"/>
+      <text x="120" y="100" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">無括號</text>
+      <text x="120" y="130" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">SiO₂</text>
+      <text x="120" y="155" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">直觀讀取數字</text>
+      
+      <rect x="230" y="70" width="140" height="100" fill="#FF8C00" rx="6"/>
+      <text x="300" y="100" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">有括號</text>
+      <text x="300" y="130" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">Mg(OH)₂</text>
+      <text x="300" y="155" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">括號內外相乘</text>
+      
+      <rect x="410" y="70" width="140" height="100" fill="#C71585" rx="6"/>
+      <text x="480" y="100" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">有係數</text>
+      <text x="480" y="130" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">2Al₂O₃</text>
+      <text x="480" y="155" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">先算組成再翻倍</text>
+    </svg>
+  </div>
+  <p>為了幫助大腦建立清晰的思考迴路，我們可以將陶瓷化學式的計算邏輯，簡化成三種基本的處理模式。在面對任何不熟悉的釉藥原料時，只要先套用這個模式，就能迅速找對方向。</p>
+  <h3>1. 直觀讀取模式（無括號）</h3>
+  <p>對於像 SiO₂（石英）或 Al₂O₃（氧化鋁）這類沒有括號的單純化合物，不需要複雜的乘法，看見什麼數字就是多少數量。這類原料結構穩定，在初階釉藥配方中最常出現，適合用來建立自信。</p>
+  <h3>2. 內外相乘模式（含括號）</h3>
+  <p>只要看到括號出現，如 Mg(OH)₂（氫氧化鎂），腦中就要立刻亮起警示燈，啟動「乘法分配律」。記得把括號外的數字確實乘給括號內的每一位成員。這是進階化學學習的必經之路。</p>
+  <h3>3. 全局翻倍模式（含係數）</h3>
+  <p>如果化學式的最前方有巨大的數字，請先將其擱置，專心解構後方的化合物結構。等所有原子的數量都結算清楚後，再統一乘上這個係數。這種模式通常出現於分析窯燒過程中化學反應的階段。</p>
+
+  <!-- 主題 10 -->
+  <h2>十、自我檢測：你真的掌握了嗎？</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">小測驗：Zn(NO₃)₂ 中有多少氧原子？</text>
+      
+      <circle cx="150" cy="110" r="45" fill="#4682B4"/>
+      <text x="150" y="115" font-family="sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">A: 3</text>
+      
+      <circle cx="300" cy="110" r="45" fill="#00C957"/>
+      <text x="300" y="115" font-family="sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">B: 6</text>
+      
+      <circle cx="450" cy="110" r="45" fill="#FF8C00"/>
+      <text x="450" y="115" font-family="sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">C: 5</text>
+      
+      <text x="300" y="180" font-family="sans-serif" font-size="16" font-weight="bold" fill="#C71585" text-anchor="middle">提示：內外下標相乘喔！</text>
+    </svg>
+  </div>
+  <p>學習需要透過反覆演練來加深記憶。我們準備了三個不同難度的陶瓷相關化學式小練習。請在心裡試著計算出各個元素的原子數量，藉此檢驗自己是否已經完全吸收了前面的知識精華。</p>
+  <h3>1. 難度一：Mg(OH)₂</h3>
+  <p>這是我們提過的氫氧化鎂。請計算裡面的鎂（Mg）、氧（O）、氫（H）各有幾個？正確答案是：Mg有1個，而括號外的 2 乘進去，所以 O 有 2 個，H 也有 2 個。如果你能不假思索地回答出來，代表基礎觀念已經過關。</p>
+  <h3>2. 難度二：Ba(NO₃)₂</h3>
+  <p>這是一種硝酸鋇。我們來看氧（O）的數量。括號內的氧本身已經有下標 3，括號外又有下標 2。按照規則，3 × 2 = 6。所以這個化合物總共包含了 6 個氧原子。如果你有留意到括號內原有的下標，恭喜你順利避開了陷阱。</p>
+  <h3>3. 難度三：3Ca(OH)₂</h3>
+  <p>最前方加上了係數 3。首先算出單一 Ca(OH)₂ 包含 1 個 Ca、2 個 O、2 個 H。接著將所有數量乘以 3，得到最終結果：3 個鈣、6 個氧、6 個氫。能成功解出這題，代表你的化學計算能力已經足夠應付多數釉藥配方的分析需求了。</p>
+
+  <!-- 主題 11 -->
+  <h2>十一、連接下一步：為什麼要算分子量（式量）？</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="40" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">從數量到質量的跨越</text>
+      
+      <circle cx="150" cy="110" r="40" fill="#1E90FF"/>
+      <text x="150" y="115" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">原子數量</text>
+      
+      <path d="M 210 110 L 260 110" stroke="#6c6654" stroke-width="4" marker-end="url(#arrow4)"/>
+      <defs>
+        <marker id="arrow4" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#6c6654" />
+        </marker>
+      </defs>
+      
+      <rect x="270" y="80" width="80" height="60" fill="#FF8C00" rx="6"/>
+      <text x="310" y="115" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">× 原子量</text>
+      
+      <path d="M 370 110 L 420 110" stroke="#6c6654" stroke-width="4" marker-end="url(#arrow4)"/>
+      
+      <circle cx="480" cy="110" r="40" fill="#00C957"/>
+      <text x="480" y="115" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">分子量</text>
+    </svg>
+  </div>
+  <p>學會了計算化學式中原子的數量，我們這堂課的終極目標是什麼？答案是為了計算「分子量」或「式量」。在釉藥的微觀世界中，我們不能僅靠肉眼秤重，必須知道這些分子到底有多「重」。</p>
+  <h3>1. 原子的專屬體重計</h3>
+  <p>每種化學元素都有固定的相對重量，也就是「原子量」。例如氧（O）約為 16，鈣（Ca）約為 40。當我們精準算出化學式中有多少個原子後，只要將數量乘上對應的原子量，全部加起來，就能得到這個化合物的總式量。</p>
+  <h3>2. 避免計算誤差的骨牌效應</h3>
+  <p>如果在第一步處理括號數量時出錯（例如漏算了氧原子的倍數），那麼乘出來的式量就會產生巨大的偏差。這個錯誤的數字若繼續套用到釉藥配方的莫耳數換算中，將導致最終窯燒出的釉色、熔融點或表面質感完全失真。</p>
+  <h3>3. 通往釉式的必經之路</h3>
+  <p>分子量（式量）是將現實中的「公克」轉換為化學世界的「莫耳數」的關鍵轉換器。學會了括號化學式，你已經拿到了這把轉換器的鑰匙。這將幫助你順利銜接到更進階的 Seger Formula（釉式）計算領域，開啟陶瓷配方設計的大門。</p>
+
+  <!-- 主題 12 -->
+  <h2>十二、結語：化學式不是障礙，而是配方的地圖</h2>
+  <div class="svg-container">
+    <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f1f0e4" rx="8"/>
+      <text x="300" y="50" font-family="Noto Sans TC, sans-serif" font-size="22" font-weight="bold" fill="#39372f" text-anchor="middle">化學解碼，看見陶瓷之美</text>
+      
+      <path d="M 100 130 C 200 80, 400 180, 500 90" stroke="#20B2AA" stroke-width="4" fill="none" stroke-dasharray="8,8"/>
+      <circle cx="100" cy="130" r="15" fill="#FF8C00"/>
+      <circle cx="300" cy="135" r="15" fill="#1E90FF"/>
+      <circle cx="500" cy="90" r="15" fill="#C71585"/>
+      
+      <text x="100" y="165" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">化學符號</text>
+      <text x="300" y="170" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">精準計算</text>
+      <text x="500" y="125" font-family="sans-serif" font-size="16" font-weight="bold" fill="#39372f" text-anchor="middle">釉藥呈現</text>
+    </svg>
+  </div>
+  <p>從最初的不知所措，到現在能夠有條理地拆解 Ca(OH)₂ 或 Al₂(SO₄)₃，你已經在釉藥化學的學習道路上邁出了非常重要的一步。化學式中的括號，不再是讓人頭痛的數學障礙，而是指引我們看透材料本質的實用線索。</p>
+  <h3>1. 掌握基團的組成規律</h3>
+  <p>透過這篇文章，我們了解到括號是為了把特定的化學基團打包在一起，而外面的下標則是這個包裹的總數。只要緊扣「內外相乘」的原則，就能把隱藏在符號背後的真實元素比例翻找出來。規律永遠是學習化學最可靠的朋友。</p>
+  <h3>2. 建立嚴謹的分析態度</h3>
+  <p>陶藝創作看似感性，充滿了手工的溫度與偶然的窯變，但其背後的釉藥發展卻是一門極其嚴謹的科學。學會細心區分下標與係數，不漏算任何一個原子，這種講求精確的科學態度，能幫助我們在配方實驗中少走許多冤枉路。</p>
+  <h3>3. 邁向進階陶瓷知識殿堂</h3>
+  <p>當你對各種釉藥原料的化學式不再感到畏懼，就能更從容地閱讀進階的陶瓷材料學文獻與配方分析。讀懂化學式，是陶藝創作者將直覺與科學完美結合的起點，也是我們逐步解開釉藥高溫燒成變化奧秘的第一把鑰匙。繼續前進吧，下個階段的分子量計算正等著你！</p>
+
+  <!-- FAQ 區塊 -->
+  <div class="faq-box">
+    <div class="faq-title">括號化學式計算 FAQ</div>
+    <p><strong>Q：如果陶瓷原料配方中沒有括號，我是不是就不需要乘法？</strong><br>
+    A：是的。如果化學式如 SiO₂，沒有括號也沒有前方的係數，你只需要直觀讀取元素右下角的數字即可。Si 沒有數字代表 1 個，O 的右下角是 2 代表 2 個。</p>
+    <p><strong>Q：為什麼有時候看到化學式中間有個「點」（例如 CaSO₄ · 2H₂O）？</strong><br>
+    A：化學式中的「點」代表這個化合物含有結晶水。點後面的 2H₂O 意味著每一個硫酸鈣分子都伴隨著兩個水分子。計算時，你需要把點後面的物質視為一個整體加入總重量計算中，其計算邏輯與係數相似，點後面的係數要乘上整個水分子（H₂O）。</p>
+    <p><strong>Q：計算這些原子數量，真的對釉藥燒成有幫助嗎？</strong><br>
+    A：絕對有幫助。精確計算原子的數量能幫助你換算莫耳數，進而建立精準的塞格式（釉式）。釉式能預測釉藥在窯爐內的熔融溫度、表面光澤度，甚至預先判斷是否會產生冰裂紋等效果，是科學化調配釉藥不可或缺的工具。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+    <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+    <div class="footer-share-wrapper"></div>
+  </div>
+
+</article>
+</main>
+</body>
+</html>

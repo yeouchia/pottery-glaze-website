@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>元素是什麼？元素符號怎麼看？ | 陶藝與釉藥知識</title>
+<meta name="description" content="深入淺出介紹化學元素、週期表、原子序數與化學性質。為陶藝與釉藥學習者解析常見非金屬元素、金屬元素、鹼土金屬、鹼金屬等，輕鬆看懂元素符號與配方。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --card-sec:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+    display: flex;
+    align-items: center;
+  }
+  .h2-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  .related a { 
+    display: block; 
+    position: relative; 
+    background-color: var(--paper); 
+    border: 1px solid #dcd7c7;      
+    border-radius: 8px;             
+    padding: 14px 40px 14px 16px;   
+    margin-top: 10px;               
+    box-shadow: 0 2px 5px rgba(70,62,45,.05); 
+    color: #2c5e7b;                 
+    font-weight: 700;               
+    text-decoration: none; 
+    transition: all 0.2s ease; 
+  } 
+  .related a:last-child { 
+    border-bottom: 1px solid #dcd7c7;  
+  } 
+  .related a::after { 
+    content: "〉"; 
+    position: absolute; 
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);    
+    color: var(--muted);            
+    font-size: 16px; 
+    font-weight: normal; 
+  } 
+  .related a:hover { 
+    background-color: #ffffff; 
+    border-color: #b5afa0; 
+    box-shadow: 0 4px 8px rgba(70,62,45,.1); 
+  } 
+  .site-footer-link {
+    margin-top: 40px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .home-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .home-link:hover {
+    text-decoration: underline;
+  }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+  
+  .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card-sec);
+      padding: 16px;
+  }
+  .chart-container svg {
+      width: 100%;
+      height: auto;
+      display: block;
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥化學基礎｜02</div>
+  <span class="eyebrow">基礎觀念解析</span>
+  <h1>02 元素是什麼？元素符號怎麼看？</h1>
+  
+  <div class="lead">
+    <strong>一看就懂：</strong>在上一章〈01 認識元素週期表〉中，我們初步了解了週期表的輪廓。接下來真正需要理解的，就是「元素」本身到底是什麼，以及如何正確閱讀它們的「元素符號」。對陶藝創作者與釉藥學習者來說，化學元素並不是只存在於課堂上的抽象名詞，而是構成每一把土、每一種釉藥配方、甚至是每一次高溫燒成色彩變化的核心基礎。當我們開始接觸陶瓷配方時，經常會看到諸如 SiO₂、Al₂O₃、CaO 或 Fe₂O₃ 這樣的化學式，其中包含了矽、鋁、鈣、鐵與氧等不同元素。本篇文章將帶領大家從最基礎的概念出發，認識什麼是化學元素、原子序數與化學性質。我們會進一步探討金屬元素、非金屬元素、鹼土金屬與鹼金屬在釉藥燒成中扮演的關鍵角色，並徹底學會元素符號的辨識與大小寫規則，讓你未來看到釉式與配方時，不再感到陌生與畏懼。
+  </div>
+  
+  <div class="tags">
+    <span class="tag">化學元素</span>
+    <span class="tag">週期表</span>
+    <span class="tag">原子序數</span>
+    <span class="tag">化學性質</span>
+    <span class="tag">非金屬元素</span>
+    <span class="tag">金屬元素</span>
+    <span class="tag">鹼土金屬</span>
+    <span class="tag">鹼金屬</span>
+    <span class="tag">釉藥燒成</span>
+    <span class="tag">陶藝知識</span>
+  </div>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <circle cx="12" cy="12" r="4"></circle>
+      <line x1="12" y1="2" x2="12" y2="8"></line>
+      <line x1="12" y1="16" x2="12" y2="22"></line>
+      <line x1="2" y1="12" x2="8" y2="12"></line>
+      <line x1="16" y1="12" x2="22" y2="12"></line>
+    </svg>
+    一、什麼是「化學元素」？構成物質的最基本單位
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 250">
+          <rect x="0" y="0" width="500" height="250" fill="none" />
+          <circle cx="250" cy="125" r="40" fill="#fbfaf5" stroke="#b5afa0" stroke-width="3"/>
+          <text x="250" y="130" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--text)">原子</text>
+          
+          <path d="M 210,125 Q 150,50 100,125" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5,5"/>
+          <path d="M 290,125 Q 350,50 400,125" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5,5"/>
+          <path d="M 250,165 Q 250,220 250,220" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5,5"/>
+
+          <rect x="40" y="105" width="80" height="40" rx="8" fill="#eeeadd" stroke="#b5afa0" stroke-width="2"/>
+          <text x="80" y="130" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">質子</text>
+
+          <rect x="380" y="105" width="80" height="40" rx="8" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="420" y="130" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">中子</text>
+          
+          <rect x="210" y="200" width="80" height="40" rx="8" fill="#e2dcc8" stroke="#b5afa0" stroke-width="2"/>
+          <text x="250" y="225" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">電子</text>
+          
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">元素的微觀組成：原子的結構</text>
+      </svg>
+  </div>
+
+  <h3>1. 元素的定義與科學基礎</h3>
+  <p>在自然界中，所有我們看得見、摸得著的物質，都是由極微小的粒子所組成。化學元素，指的就是具有相同「原子序數」（也就是原子核內質子數相同）的一類原子的總稱。你可以把它想像成構成大千世界的基本積木，不同的積木（元素）可以互相組合，拼湊出無限多種的化合物與礦物。目前人類已知的元素有一百多種，它們各自擁有獨特的物理與化學性質。在化學研究中，元素是無法再透過一般化學反應分解成更簡單物質的最基本成分。</p>
+  
+  <h3>2. 元素與陶瓷材料的深厚淵源</h3>
+  <p>對於陶藝工作者而言，我們每天揉捏的黏土、塗刷的釉漿，本質上都是各種化學元素的聚合體。例如，釉藥中最關鍵的二氧化矽（SiO₂），就是由「矽」與「氧」兩種元素所組成。當我們說「這支釉藥需要補一點鋁」時，實際上是指調整配方中含有「鋁」元素的礦物比例。理解化學元素，是我們從「依樣畫葫蘆」的經驗法則，跨入「自主設計配方」領域的必經之路。不論是流動系列茶碗還是高溫燒結的雕塑，其背後的成敗都取決於元素間的相互作用。</p>
+
+  <h3>3. 元素與原料的層次差異</h3>
+  <p>初學者常犯的迷思，就是把「元素」和「陶瓷原料」劃上等號。必須澄清的是，元素代表的是化學上的基本種類，而陶瓷原料則是存在於自然界中、含有多種元素的複合礦物。例如，「鈣」是一種元素，而我們常用的原料「碳酸鈣（大理石粉）」則是一種含有鈣、碳、氧等多種元素的化合物。在調配釉藥時，我們無法直接拿一塊純金屬鈣丟進釉桶，而是要透過碳酸鈣這類原料，在窯爐高溫燒成中分解，釋放出鈣的氧化物來發揮助熔作用。分清楚這個概念，對於後續學習釉式計算至關重要。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+    </svg>
+    二、為什麼每種元素都有專屬的「名稱」與「符號」？
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 200">
+          <rect x="0" y="0" width="500" height="200" fill="none"/>
+          
+          <rect x="50" y="60" width="120" height="80" rx="10" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="110" y="95" text-anchor="middle" font-size="28" font-weight="bold" fill="var(--text)">矽</text>
+          <text x="110" y="125" text-anchor="middle" font-size="14" fill="var(--muted)">中文名稱</text>
+          
+          <path d="M 180,100 L 220,100" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <rect x="230" y="60" width="120" height="80" rx="10" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="290" y="95" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--text)">Silicon</text>
+          <text x="290" y="125" text-anchor="middle" font-size="14" fill="var(--muted)">英文名稱</text>
+
+          <path d="M 360,100 L 400,100" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="410" y="60" width="60" height="80" rx="10" fill="#eeeadd" stroke="#b5afa0" stroke-width="2"/>
+          <text x="440" y="95" text-anchor="middle" font-size="24" font-weight="bold" fill="var(--text)">Si</text>
+          <text x="440" y="125" text-anchor="middle" font-size="12" fill="var(--muted)">符號</text>
+          
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">元素名稱與符號的對應關係</text>
+          
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)" />
+            </marker>
+          </defs>
+      </svg>
+  </div>
+
+  <h3>1. 命名法則與歷史發展</h3>
+  <p>隨著科學的進步，化學家發現的元素越來越多。為了在國際間進行精確且無障礙的溝通，為每一種元素制定統一的名稱和符號成為必然。許多元素的命名背後都有著豐富的歷史故事，有些源自於該元素的顏色或特性（如氯 Chlorine 源自希臘文的「黃綠色」），有些則是為了紀念發現的地點或偉大的科學家。在中文世界裡，為了方便辨識其常溫下的物理狀態，科學前輩們巧妙地利用部首來分類，例如氣態元素用「气」部（氧、氫），固態金屬用「金」部（鐵、銅），固態非金屬則用「石」部（矽、碳）。</p>
+  
+  <h3>2. 中英文名稱與陶藝學習的關聯</h3>
+  <p>在學習釉藥配方時，我們經常需要查閱國內外文獻或購買進口原料。因此，熟悉元素的中文名稱與其英文對應是非常實用的技能。例如矽的英文是 Silicon，鋁是 Aluminium（或 Aluminum），鈣是 Calcium。當你在外國陶藝網站上看到 Calcium Carbonate，就能立刻反應出這是我們所說的碳酸鈣。透過中英文名稱的連結，陶藝創作者在面對五花八門的材料包裝時，就能更準確地掌握其核心成分，避免因為名稱翻譯的落差而買錯原料。</p>
+  
+  <h3>3. 符號化：化學界的通用語言</h3>
+  <p>如果每次記錄配方都要寫出冗長的中英文名稱，不僅耗時且容易出錯。因此，國際純化學和應用化學聯合會（IUPAC）統一規定了元素的化學符號。這些符號通常取自該元素拉丁文或英文名稱的第一個字母，若有重複，則加入第二個字母來做區分。例如，碳（Carbon）用 C 表示，而鈣（Calcium）為了與碳區別，則加上第二個字母變成 Ca。這些簡短的字母不僅是辨識元素的捷徑，更是書寫化學式與化學反應方程式的基石。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4 7 4 4 20 4 20 7"></polyline>
+      <line x1="9" y1="20" x2="15" y2="20"></line>
+      <line x1="12" y1="4" x2="12" y2="20"></line>
+    </svg>
+    三、元素符號的大小寫規則：看懂化學式的關鍵
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 220">
+          <rect x="0" y="0" width="500" height="220" fill="none"/>
+          
+          <rect x="40" y="60" width="180" height="120" rx="12" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="130" y="90" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">正確寫法</text>
+          <text x="90" y="140" text-anchor="middle" font-size="40" font-weight="bold" fill="var(--text)">S</text>
+          <text x="120" y="140" text-anchor="middle" font-size="30" font-weight="bold" fill="red">i</text>
+          <text x="160" y="135" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">(矽)</text>
+          <text x="130" y="170" text-anchor="middle" font-size="14" fill="var(--muted)">首字大寫，次字小寫</text>
+          
+          <rect x="280" y="60" width="180" height="120" rx="12" fill="#f6f4e9" stroke="#b5afa0" stroke-width="2" stroke-dasharray="4,4"/>
+          <text x="370" y="90" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">錯誤寫法</text>
+          <text x="350" y="140" text-anchor="middle" font-size="40" font-weight="bold" fill="var(--text)">S</text>
+          <text x="380" y="140" text-anchor="middle" font-size="40" font-weight="bold" fill="red">I</text>
+          <line x1="330" y1="125" x2="400" y2="125" stroke="red" stroke-width="3"/>
+          <text x="370" y="170" text-anchor="middle" font-size="14" fill="var(--muted)">易混淆或錯誤</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">元素符號大小寫規則範例</text>
+      </svg>
+  </div>
+
+  <h3>1. 第一字母大寫，第二字母小寫的鐵則</h3>
+  <p>在書寫與閱讀元素符號時，最重要的國際規範就是「大小寫絕對不能隨便」。如果一個元素符號只有一個字母，它必定是大寫（例如氧 O、碳 C、硼 B）。如果它由兩個字母組成，那麼第一個字母必須大寫，第二個字母必須小寫（例如矽 Si、鋁 Al、鈉 Na）。這不僅是排版上的美觀問題，更是確保化學式不被誤讀的科學標準。不論是在手寫筆記或是網站資料建檔時，嚴格遵守這項規則，才能展現陶藝配方紀錄的專業度。</p>
+  
+  <h3>2. 大小寫錯誤帶來的嚴重後果</h3>
+  <p>為什麼要如此嚴格要求大小寫？因為一個字母的大小寫差異，可能代表著完全不同的化學物質。最經典的例子就是 Co 與 CO。Co（C大寫，o小寫）代表的是金屬元素「鈷」，在陶藝中它是強烈的藍色發色劑，只要微量就能讓釉藥呈現深邃的藍色。而 CO（C大寫，O大寫）則代表由碳和氧組成的化合物「一氧化碳」，這是在還原燒成中常見的還原性氣體。如果在紀錄配方時把氧化鈷（CoO）寫錯大小寫，不僅會讓行家一頭霧水，更可能在交流中產生嚴重的誤解。</p>
+  
+  <h3>3. 如何在複雜配方中快速拆解符號</h3>
+  <p>當我們看到一個長串的陶瓷礦物化學式時（例如鉀長石 KAlSi₃O₈），正確的大小寫觀念能幫助我們像切蛋糕一樣，精準地把元素拆解開來。遇到大寫字母，就代表一個新元素的開始。因此，從 KAlSi₃O₈ 中，我們可以清楚切分出 K（鉀）、Al（鋁）、Si（矽）以及 O（氧）四種元素，而不會錯誤地把 Si 拆成 S（硫）和 i，或是把 Al 當作 A 和 l。掌握了這個小訣竅，任何複雜的陶瓷配方在你眼中都會變得條理分明。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+      <line x1="3" y1="9" x2="21" y2="9"></line>
+      <line x1="9" y1="21" x2="9" y2="9"></line>
+    </svg>
+    四、認識「週期表」：化學元素的完整地圖與分類
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 240">
+          <rect x="0" y="0" width="500" height="240" fill="none"/>
+          
+          <rect x="30" y="60" width="440" height="150" rx="8" fill="#f6f4e9" stroke="#d8d4c5" stroke-width="2"/>
+          
+          <!-- 簡化版週期表區塊 -->
+          <rect x="50" y="80" width="60" height="110" fill="#eeeadd" stroke="#b5afa0" stroke-width="1"/>
+          <text x="80" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">鹼金屬</text>
+          <text x="80" y="130" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">鹼土金屬</text>
+
+          <rect x="130" y="100" width="160" height="90" fill="#e8e4d6" stroke="#b5afa0" stroke-width="1"/>
+          <text x="210" y="150" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">過渡金屬區</text>
+          
+          <rect x="310" y="80" width="140" height="110" fill="#e2dcc8" stroke="#b5afa0" stroke-width="1"/>
+          <text x="380" y="140" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">非金屬與類金屬</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">週期表區塊與釉藥元素的關係</text>
+      </svg>
+  </div>
+
+  <h3>1. 週期表的起源與結構原理</h3>
+  <p>俄國科學家門得列夫在19世紀發明了元素週期表，這堪稱是化學史上最偉大的地圖。他將當時已知的元素依照特定規律排列，不僅讓混亂的化學元素有了系統，更成功預測了尚未發現的元素性質。現代的週期表是依照「原子序數」從小到大依序排列的。橫向的行稱為「週期（Period）」，代表電子層數的增加；縱向的列稱為「族（Group）」，位在同一族的元素，由於最外層的電子數目相同，往往具有非常相似的化學性質。</p>
+  
+  <h3>2. 週期表對陶藝創作者的意義</h3>
+  <p>對釉藥研究者而言，週期表不是用來死背的，而是一份尋寶圖。在配製1260°C的高溫釉藥時，當我們需要尋找合適的助熔劑，只要看著週期表的第一族和第二族（鹼金屬與鹼土金屬），就能快速篩選出鈉、鉀、鈣、鎂等合適的候選元素。如果我們想要讓茶盞產生獨特的顏色變化，就可以把目光移向週期表中央的過渡金屬區。這張表清楚地揭示了元素之間的親屬關係，當某種原料缺貨時，我們甚至能利用同一族的元素來尋找替代方案。</p>
+  
+  <h3>3. 如何在週期表上找到釉藥常見元素</h3>
+  <p>為了減輕學習負擔，陶藝新手不需要一開始就面對整張週期表。我們可以先鎖定幾個特定區域：位於右上角的非金屬元素（如氧、矽），它們是構成釉藥玻璃網絡的主力；左側的活躍金屬（如鈉、鉀、鈣、鋇），它們是負責降低熔點的助熔劑；中間區塊的過渡元素（如鐵、銅、鈷、錳），則是負責賦予釉藥千變萬化色彩的魔法師。將焦點集中在這些與陶瓷息息相關的元素上，能大幅提升學習釉藥化學的效率與樂趣。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+    五、原子序數是什麼？決定化學性質的核心密碼
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 220">
+          <rect x="0" y="0" width="500" height="220" fill="none"/>
+          
+          <rect x="180" y="50" width="140" height="140" rx="12" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          
+          <text x="200" y="80" text-anchor="start" font-size="18" font-weight="bold" fill="var(--text)">14</text>
+          <text x="300" y="80" text-anchor="end" font-size="12" fill="var(--muted)">原子序數</text>
+          
+          <text x="250" y="130" text-anchor="middle" font-size="40" font-weight="bold" fill="var(--text)">Si</text>
+          
+          <text x="250" y="170" text-anchor="middle" font-size="16" fill="var(--text)">矽</text>
+
+          <path d="M 120,75 L 170,75" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+          <text x="110" y="80" text-anchor="end" font-size="14" fill="var(--text)">決定質子數量</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">週期表方塊中的原子序數標示</text>
+      </svg>
+  </div>
+
+  <h3>1. 原子結構與原子序數的定義</h3>
+  <p>要深入理解元素，我們必須把視角縮小到原子的內部。原子是由中心的原子核（包含帶正電的質子與不帶電的中子）以及外圍環繞的帶負電電子所組成。所謂的「原子序數」，指的就是原子核內「質子的數量」。在大自然中，質子數量決定了這個原子的真實身分。例如，只要原子核裡有 8 個質子，它就一定是氧元素；如果有 14 個質子，它就絕對是矽元素。原子序數就像是每種化學元素的專屬身分證字號，絕不重複。</p>
+  
+  <h3>2. 原子序數與化學性質的連動</h3>
+  <p>為什麼質子數量會決定化學性質呢？在電中性的原子中，質子數等於核外的電子數。而真正決定化學反應如何進行的，正是最外層的電子分佈狀態（價電子）。因此，原子序數不僅決定了元素在週期表上的精確位置，更直接牽動了它的電子排列方式，進而決定了它與其他元素結合時的活潑程度與鍵結行為。這就是為什麼有些元素極度不穩定，而有些元素（如惰性氣體）則安如泰山的原因。</p>
+  
+  <h3>3. 對陶瓷燒成與元素狀態的啟發</h3>
+  <p>在陶藝的燒成過程中，窯內的溫度動輒飆升至攝氏 1200 度以上。在這樣極端的環境下，原子序數所決定的化學穩定性就顯得格外重要。擁有特定電子組態的元素，在高溫下會傾向於與氧結合形成安定的氧化物，或是與二氧化矽熔融形成堅固的玻璃質網絡。理解原子序數與化學性質的關聯，能幫助我們體會為何配方中的不同材料會在特定的溫度區間產生熔解或結晶，這對於研發如炎變天目等特殊釉面具有極高的參考價值。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+      <polyline points="2 17 12 22 22 17"></polyline>
+      <polyline points="2 12 12 17 22 12"></polyline>
+    </svg>
+    六、金屬元素在陶藝中的角色：發色與助熔的關鍵
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 200">
+          <rect x="0" y="0" width="500" height="200" fill="none"/>
+          
+          <rect x="80" y="60" width="140" height="100" rx="10" fill="#eeeadd" stroke="#b5afa0" stroke-width="2"/>
+          <text x="150" y="100" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--text)">助熔劑</text>
+          <text x="150" y="130" text-anchor="middle" font-size="14" fill="var(--text)">Na, K, Ca, Mg</text>
+          
+          <rect x="280" y="60" width="140" height="100" rx="10" fill="#e2dcc8" stroke="#b5afa0" stroke-width="2"/>
+          <text x="350" y="100" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--text)">發色劑</text>
+          <text x="350" y="130" text-anchor="middle" font-size="14" fill="var(--text)">Fe, Cu, Co, Mn</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">金屬元素在釉藥中的兩大功能</text>
+      </svg>
+  </div>
+
+  <h3>1. 金屬元素的科學定義與普遍特徵</h3>
+  <p>在週期表中，金屬元素佔據了絕大部分的版圖（左側及中央區域）。從化學的角度來看，金屬元素的原子最外層電子較少，因此在化學反應中非常容易「失去電子」而形成帶正電的陽離子。在日常生活中，金屬通常具有良好的導電性、導熱性以及延展性，並且表面帶有金屬光澤。但在陶藝領域，我們幾乎不會使用純金屬狀態的材料，而是使用它們與氧結合後形成的「金屬氧化物」或是天然的礦石粉末。</p>
+  
+  <h3>2. 作為強效助熔劑的鹼性金屬氧化物</h3>
+  <p>在釉藥化學中，金屬元素最主要的任務之一就是擔任「助熔劑」。釉藥的骨幹二氧化矽（石英）熔點高達 1713°C，一般陶藝窯爐根本無法將其燒熔。此時，我們必須加入含有鈉、鉀、鈣、鎂、鋅等金屬元素的原料。這些金屬元素在高溫下會打斷二氧化矽緊密的網絡結構，促使釉藥在 1200°C 左右的較低溫度下順利熔解成玻璃態。這些金屬氧化物在釉式計算中通常歸類為 RO 或 R₂O 群組，是控制釉面平整與流動性的核心樞紐。</p>
+  
+  <h3>3. 形塑釉面質感的隱形推手</h3>
+  <p>除了降低熔點，不同的金屬元素還會為釉面帶來截然不同的物理質感。例如，添加適量的鈣元素（Ca）能讓釉面變得堅硬且耐磨，非常適合實用的餐具；而鋅元素（Zn）則在特定條件下能夠促進結晶體的生成，是燒製結晶釉不可或缺的成分。鋇元素（Ba）能賦予釉面極佳的霧面消光效果與溫潤的質感。陶藝家正是透過巧妙調配這些金屬元素的比例，在火的考驗下創造出光澤、啞光、透明或乳濁等多樣化的視覺藝術。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+      <line x1="12" y1="22.08" x2="12" y2="12"></line>
+    </svg>
+    七、非金屬與類金屬元素：構成玻璃質網絡的骨幹
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 220">
+          <rect x="0" y="0" width="500" height="220" fill="none"/>
+          
+          <circle cx="250" cy="120" r="30" fill="#fbfaf5" stroke="#b5afa0" stroke-width="3"/>
+          <text x="250" y="126" text-anchor="middle" font-size="18" font-weight="bold" fill="var(--text)">Si</text>
+          
+          <circle cx="170" cy="70" r="20" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="170" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">O</text>
+          
+          <circle cx="330" cy="70" r="20" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="330" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">O</text>
+          
+          <circle cx="170" cy="170" r="20" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="170" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">O</text>
+          
+          <circle cx="330" cy="170" r="20" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="330" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">O</text>
+
+          <line x1="225" y1="105" x2="185" y2="80" stroke="var(--accent)" stroke-width="3"/>
+          <line x1="275" y1="105" x2="315" y2="80" stroke="var(--accent)" stroke-width="3"/>
+          <line x1="225" y1="135" x2="185" y2="160" stroke="var(--accent)" stroke-width="3"/>
+          <line x1="275" y1="135" x2="315" y2="160" stroke="var(--accent)" stroke-width="3"/>
+          
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">矽氧四面體：玻璃網絡的基本單元</text>
+      </svg>
+  </div>
+
+  <h3>1. 非金屬與類金屬的化學定位</h3>
+  <p>相對於金屬元素容易失去電子的特性，非金屬元素（位於週期表右上方）在化學反應中傾向於「獲得電子」或與其他元素「共用電子」，形成堅固的共價鍵。類金屬（如硼、矽）則位於金屬與非金屬的交界帶，兼具兩者的部分特性。在陶瓷與玻璃科學中，這些非金屬與類金屬元素扮演著無可取代的「網絡形成者（Network Formers）」角色。沒有它們，釉藥就無法形成穩定的玻璃塗層，而是會在冷卻後變成一堆鬆散的粉末。</p>
+  
+  <h3>2. 矽（Si）與氧（O）：釉藥的絕對核心</h3>
+  <p>如果要選出陶瓷世界中最重要的兩種元素，絕對非「矽」與「氧」莫屬。矽與氧結合而成的二氧化矽（SiO₂），構成了自然界石英的主要成分，更是所有釉藥的絕對骨幹。在高溫下，矽氧四面體會互相連結，形成一個連續但無規則的三維網絡，這正是「玻璃質」的結構特徵。不論你是在製作極簡的手捏陶盤，還是精密的瓷器，配方中都必須維持足夠比例的矽與氧，才能確保釉面具有抗酸鹼、防滲水的保護功能。</p>
+  
+  <h3>3. 硼（B）：低溫與強效熔融的特例</h3>
+  <p>另一個在陶藝中極為重要的類金屬元素是「硼」。硼元素非常特別，它既能像矽一樣參與玻璃網絡的形成，本身又具有極強的助熔能力。加入含有硼元素的原料（如硼砂或硼熔塊），可以大幅度降低釉藥的燒成溫度。因此，在低溫樂燒或是需要高流動性的特殊效果釉中，硼是藝術家經常仰賴的秘密武器。理解矽與硼這些非金屬/類金屬的化學性質，有助於我們在調整釉面光澤與硬度時，找到最穩定的平衡點。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+    </svg>
+    八、鹼金屬與鹼土金屬：釉藥中最活躍的助熔劑
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 220">
+          <rect x="0" y="0" width="500" height="220" fill="none"/>
+          
+          <rect x="50" y="60" width="180" height="120" rx="8" fill="#eeeadd" stroke="#b5afa0" stroke-width="2"/>
+          <text x="140" y="90" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">鹼金屬 (R₂O)</text>
+          <text x="140" y="120" text-anchor="middle" font-size="14" fill="var(--text)">Na(鈉), K(鉀), Li(鋰)</text>
+          <text x="140" y="150" text-anchor="middle" font-size="13" fill="var(--muted)">熔點降幅大、膨脹率高</text>
+          
+          <rect x="270" y="60" width="180" height="120" rx="8" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="360" y="90" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">鹼土金屬 (RO)</text>
+          <text x="360" y="120" text-anchor="middle" font-size="14" fill="var(--text)">Ca(鈣), Mg(鎂), Ba(鋇)</text>
+          <text x="360" y="150" text-anchor="middle" font-size="13" fill="var(--muted)">增加硬度、穩定釉面</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">助熔劑家族的特性比較</text>
+      </svg>
+  </div>
+
+  <h3>1. 鹼金屬（第一族元素）的劇烈特性</h3>
+  <p>在元素週期表最左側的第一族，被稱為「鹼金屬」，包含了鋰（Li）、鈉（Na）、鉀（K）等。它們最外層只有一個電子，因此化學性質極度活潑，在自然界中從不以純金屬狀態存在。在陶瓷釉藥中，鹼金屬是最強烈的助熔劑，能劇烈地降低釉的熔點。鈉與鉀最常透過長石（Feldspar）這種天然礦物引入釉中。值得注意的是，鹼金屬會顯著提高釉面的熱膨脹係數，如果添加過量，釉面很容易在冷卻收縮時產生細密的裂紋（即開片）。</p>
+  
+  <h3>2. 鹼土金屬（第二族元素）的穩定力量</h3>
+  <p>緊鄰鹼金屬右側的第二族元素被稱為「鹼土金屬」，包括鎂（Mg）、鈣（Ca）、鍶（Sr）、鋇（Ba）等。相較於鹼金屬的劇烈，鹼土金屬的化學性質相對溫和穩定。在高溫（約 1100°C 以上）燒成時，鹼土金屬能發揮優異的助熔效果，與矽酸鹽網絡緊密結合。其中，鈣是最普遍、最便宜且最安全的助熔劑來源，幾乎存在於每一種中高溫釉藥配方中。鎂則常被用來創造柔和的奶油霧面效果，並能增強釉面的抗張強度。</p>
+  
+  <h3>3. 兩者的搭配與釉式平衡</h3>
+  <p>在實際調配釉藥時，極少會單獨使用鹼金屬或鹼土金屬作為唯一的助熔劑。一個優良且穩定的陶瓷釉面，必須依靠多種助熔劑的協同作用。通常，我們會以鉀、鈉等鹼金屬來啟動初期的熔融過程，並搭配鈣、鎂等鹼土金屬來維持高溫下的黏度與冷卻後的釉面硬度。透過調整這兩大家族元素的比例，陶藝家能夠精準控制釉藥的流動性、膨脹收縮率以及表面光澤，這正是 Seger UMF（釉式）計算系統中最核心的探討範疇。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+      <line x1="16" y1="8" x2="2" y2="22"></line>
+      <line x1="17.5" y1="15" x2="9" y2="6.5"></line>
+    </svg>
+    九、過渡金屬元素：為陶瓷帶來千變萬化的色彩
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 240">
+          <rect x="0" y="0" width="500" height="240" fill="none"/>
+          
+          <rect x="40" y="60" width="130" height="130" rx="65" fill="#fbfaf5" stroke="#8B4513" stroke-width="4"/>
+          <text x="105" y="115" text-anchor="middle" font-size="24" font-weight="bold" fill="var(--text)">Fe³⁺</text>
+          <text x="105" y="145" text-anchor="middle" font-size="14" fill="var(--text)">氧化燒 (黃/褐)</text>
+          
+          <rect x="330" y="60" width="130" height="130" rx="65" fill="#fbfaf5" stroke="#2F4F4F" stroke-width="4"/>
+          <text x="395" y="115" text-anchor="middle" font-size="24" font-weight="bold" fill="var(--text)">Fe²⁺</text>
+          <text x="395" y="145" text-anchor="middle" font-size="14" fill="var(--text)">還原燒 (青瓷/黑)</text>
+
+          <path d="M 180,125 L 310,125" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+          <text x="245" y="115" text-anchor="middle" font-size="14" fill="var(--text)">氣氛改變</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">過渡金屬的氧化態與發色關係</text>
+      </svg>
+  </div>
+
+  <h3>1. 什麼是過渡金屬？獨特的電子結構</h3>
+  <p>在週期表中央的一大塊區域，化學家稱之為「過渡金屬（Transition Metals）」。這裡包含了鐵（Fe）、銅（Cu）、鈷（Co）、錳（Mn）、鉻（Cr）等我們耳熟能詳的元素。從原子結構來看，過渡金屬具有特殊的 d 軌域電子。當光線照射到含有這些元素的玻璃質釉面時，d 軌域的電子會吸收特定波長的光能並發生躍遷，未被吸收的光線反射出來，就成為了我們肉眼看見的絢麗色彩。這就是為什麼過渡金屬能成為釉藥發色劑的科學原理。</p>
+  
+  <h3>2. 同一元素，多種色彩：氧化態的魔法</h3>
+  <p>過渡金屬最迷人的化學性質，就是它們經常擁有多種「氧化態」（即失去電子的數量不同）。這意味著同一種元素，在不同的燒成氣氛下會展現完全不同的顏色。以最常見的「鐵」為例：在充足氧氣的「氧化燒」中，鐵呈現高氧化態的三價鐵（Fe³⁺），燒出的是溫暖的黃褐色到紅褐色；但在缺氧的「還原燒」環境中，鐵被還原成二價鐵（Fe²⁺），則會呈現出青翠的青瓷綠或深邃的天目黑。這種由化學性質主導的色彩變化，是陶藝最令人著迷的藝術表現。</p>
+  
+  <h3>3. 濃度與其他元素的協同效應</h3>
+  <p>過渡金屬發色的強弱與配方設計息息相關。例如「鈷（Co）」是極強的發色劑，僅需 0.5% 就能染出濃郁的深藍色；而「鐵（Fe）」要達到飽和的天目黑，往往需要添加 8% 到 10% 以上。此外，過渡金屬的呈色還會受到周遭基礎釉成分（如鹼金屬種類）的影響。例如，銅元素在含有高比例鈉或鉀的鹼性釉中，會呈現明亮的土耳其藍；若在含鉛或高鈣的釉中，則會偏向草綠色。深入認識過渡金屬，是走向高階色彩釉藥研究的必經之路。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v20"></path>
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+    </svg>
+    十、鹵素與惰性氣體：在陶瓷燒成中的存在與影響
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 200">
+          <rect x="0" y="0" width="500" height="200" fill="none"/>
+          
+          <path d="M 100,160 Q 250,180 400,160" fill="none" stroke="#d8d4c5" stroke-width="10"/>
+          
+          <circle cx="200" cy="120" r="15" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="200" y="125" text-anchor="middle" font-size="12" fill="var(--text)">F</text>
+          
+          <circle cx="280" cy="90" r="15" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="280" y="95" text-anchor="middle" font-size="12" fill="var(--text)">Cl</text>
+          
+          <path d="M 200,100 L 180,50" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+          <path d="M 280,70 L 300,30" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+          
+          <text x="150" y="40" text-anchor="middle" font-size="14" fill="var(--muted)">高溫揮發逸出</text>
+          <text x="340" y="30" text-anchor="middle" font-size="14" fill="var(--muted)">可能產生氣泡</text>
+
+          <text x="250" y="190" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text)">釉層</text>
+          
+          <text x="250" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">鹵素在燒成中的揮發行為</text>
+      </svg>
+  </div>
+
+  <h3>1. 鮮少提及的邊緣角色：鹵素</h3>
+  <p>週期表的第 17 族被稱為「鹵素」，包含氟（F）、氯（Cl）等元素。在一般的陶藝討論中，鹵素很少被當作重點，因為它們極易揮發。然而，在某些陶瓷原料（如天然礦石或水）中，無可避免地會含有微量的氟或氯。在窯爐加熱的過程中，這些鹵素元素會與氫結合形成酸性氣體（如氟化氫）並揮發至空氣中。若排放不良，這些氣體不僅會對窯爐的耐火磚與電熱絲造成腐蝕損害，長期吸入也對人體有害，這也是為何燒窯時必須保持良好通風的原因。</p>
+  
+  <h3>2. 絕對穩定的旁觀者：惰性氣體</h3>
+  <p>位於週期表最右側第 18 族的元素稱為「惰性氣體」（如氦、氖、氬）。它們的最外層電子已經達到完美的飽和狀態，因此化學性質極端穩定，幾乎不與任何元素發生化學反應。在傳統的陶藝與釉藥製作中，惰性氣體並未扮演任何參與化學鍵結的角色。不過，在現代工業陶瓷或一些高科技的真空燒結製程中，科學家會將氬氣注入窯爐內作為保護氣體，藉由其絕對不反應的特性，來防止敏感的陶瓷材料在高溫下氧化變質。</p>
+  
+  <h3>3. 揮發與排氣對釉面的潛在影響</h3>
+  <p>雖然鹵素和某些氣態物質不是構成釉藥的主要成分，但它們在燒成過程中的「逃逸行為」卻會對作品產生影響。當原料中夾帶的碳酸根、硫化物或鹵化物在高溫下分解成氣體時，如果釉面已經提早熔融封閉，這些氣體就會被困在釉層中，冷卻後形成令人困擾的「針孔」或「氣泡」。因此，認識這些元素在受熱時的物理與化學變化，有助於我們設定更合理的「燒成溫度曲線」，在適當的階段進行保溫排氣，確保釉面的完美平滑。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+      <line x1="12" y1="22.08" x2="12" y2="12"></line>
+    </svg>
+    十一、元素、原子與化合物：如何組成陶藝常見原料？
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 240">
+          <rect x="0" y="0" width="500" height="240" fill="none"/>
+          
+          <circle cx="100" cy="120" r="30" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="100" y="125" text-anchor="middle" font-size="16" fill="var(--text)">Ca</text>
+          
+          <text x="150" y="125" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--text)">+</text>
+          
+          <circle cx="200" cy="120" r="30" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="200" y="125" text-anchor="middle" font-size="16" fill="var(--text)">C</text>
+          
+          <text x="250" y="125" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--text)">+</text>
+          
+          <circle cx="300" cy="120" r="30" fill="#fbfaf5" stroke="#b5afa0" stroke-width="2"/>
+          <text x="300" y="125" text-anchor="middle" font-size="16" fill="var(--text)">O₃</text>
+          
+          <path d="M 350,120 L 390,120" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="400" y="90" width="80" height="60" rx="8" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="440" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">CaCO₃</text>
+          <text x="440" y="135" text-anchor="middle" font-size="12" fill="var(--muted)">碳酸鈣</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">元素組合成化合物的過程</text>
+      </svg>
+  </div>
+
+  <h3>1. 從微觀概念區分元素與原子</h3>
+  <p>在學習釉藥化學的初期，我們必須將「元素」、「原子」與「化合物」這三個詞彙的層次釐清。如前所述，「元素」是一種巨觀的分類概念（例如：世界上所有的矽）；而「原子」則是微觀的實體粒子，是構成元素的最小單位。當我們討論原子量或分子量時，我們關注的是這些微觀粒子的相對質量。在日常陶藝實作中，我們不需要用顯微鏡去看原子，但將這些微觀概念內化，能幫助我們理解為什麼不同的礦粉在重量與反應上會有巨大的差異。</p>
+  
+  <h3>2. 化合物的誕生與化學式解讀</h3>
+  <p>當兩種或多種不同元素的原子，透過化學鍵結合在一起時，就形成了「化合物」。在化學中，我們使用「化學式」來表達化合物的精確組成。例如，碳酸鋇的化學式是 BaCO₃，這短短的一行字告訴我們，這個物質是由鋇（Ba）、碳（C）、氧（O）三種元素所組成的化合物。且右下角的數字表示了原子的比例：一個鋇原子搭配一個碳原子，再搭配三個氧原子。學會閱讀化學式，就能看透陶瓷原料的真實內涵，不再被商業包裝上華麗的名稱所迷惑。</p>
+  
+  <h3>3. 陶瓷原料多為複雜的混合物</h3>
+  <p>值得強調的是，自然界開採的陶瓷原料通常不是純淨的單一化合物，而是多種礦物的「混合物」。例如，我們購買的「鉀長石」粉末，雖然其理論化學式為 KAlSi₃O₈，但在實際開採中，裡面不可避免地會混雜少量的鈉長石、游離石英，甚至是微量的氧化鐵雜質。這就是為什麼即使照著書本上完美的理論配方調配，燒出來的結果還是可能有所落差。理解元素與礦物的這層關係，陶藝家才能更務實地看待配方，並養成每批新原料都要進行試燒的嚴謹習慣。</p>
+
+  <h2>
+    <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 2 22 22 22"></polygon>
+    </svg>
+    十二、從元素符號到釉藥燒成：解讀化學式與配方的實務應用
+  </h2>
+  
+  <div class="chart-container">
+      <svg viewBox="0 0 500 240">
+          <rect x="0" y="0" width="500" height="240" fill="none"/>
+          
+          <rect x="40" y="80" width="120" height="80" rx="8" fill="#eeeadd" stroke="#b5afa0" stroke-width="2"/>
+          <text x="100" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">元素符號</text>
+          <text x="100" y="140" text-anchor="middle" font-size="12" fill="var(--muted)">Si, Al, Ca...</text>
+          
+          <path d="M 170,120 L 210,120" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="220" y="80" width="120" height="80" rx="8" fill="#e8e4d6" stroke="#b5afa0" stroke-width="2"/>
+          <text x="280" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">化學式</text>
+          <text x="280" y="140" text-anchor="middle" font-size="12" fill="var(--muted)">SiO₂, Al₂O₃</text>
+          
+          <path d="M 350,120 L 390,120" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="400" y="80" width="80" height="80" rx="8" fill="#e2dcc8" stroke="#b5afa0" stroke-width="2"/>
+          <text x="440" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">釉式</text>
+          <text x="440" y="140" text-anchor="middle" font-size="12" fill="var(--muted)">UMF</text>
+
+          <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--text)">從元素到配方計算的學習路徑</text>
+      </svg>
+  </div>
+
+  <h3>1. 元素符號是進入釉式計算的門票</h3>
+  <p>我們花了這麼多篇幅認識元素與符號，最終的目的都是為了實際應用於釉藥開發。在現代釉藥學中，最具威力的工具莫過於「Seger Formula（賽格爾釉式）」。這個系統將所有釉藥成分歸納為 RO/R₂O（助熔劑群）、R₂O₃（中性體群）、RO₂（網絡形成群）。要看懂並計算釉式，第一步就是必須對 Si、Al、Ca、Mg、Na、K 等元素符號極度熟悉。當你能夠一眼辨識出 CaO 是助熔劑、Al₂O₃ 負責調節黏度，你就已經具備了分析與改良配方的基礎能力。</p>
+  
+  <h3>2. 設計專屬配方，從熟悉元素特性開始</h3>
+  <p>當你對元素的化學性質有了通盤了解，配釉將不再是盲目的抓藥。例如，當你發現一款手捏水果陶盤的釉面太過容易流動，經常黏在棚板上時，你可以根據元素的知識，判斷應該減少第一族的強效助熔劑（如鈉、鉀），或是增加富含鋁元素的高嶺土來提高熔體黏度。又或者，當你準備為 LULU 角色雕塑設計一款特殊的溫潤消光釉時，你會懂得利用鈣或鎂等鹼土金屬元素，在特定的降溫曲線下誘發微小結晶，創造出視覺與觸覺的雙重饗宴。</p>
+  
+  <h3>3. 化學與藝術的完美交融</h3>
+  <p>總結來說，化學元素並不是冰冷枯燥的科學名詞，而是窯火中跳動的精靈。每一個元素符號背後，都蘊藏著影響熔點、膨脹率、硬度與色彩的龐大能量。從看懂一個簡單的 O（氧），到拆解複雜的 KAlSi₃O₈，我們正在建立一套與陶藝材料溝通的專屬語言。只要循序漸進地掌握這些基礎，你就能把實驗室裡的化學理論，轉化為工作室裡一件件令人驚豔的藝術創作。在下一章，我們將進一步探討「原子量與分子量」，帶領大家正式進入陶瓷配方計算的核心領域。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">元素與符號常見問答 FAQ</div>
+    <p><strong>Q：學陶藝真的需要背下整張元素週期表嗎？</strong><br>
+    A：完全不需要！陶藝家通常只會頻繁接觸到十幾種特定元素。你只需要優先熟悉釉藥中常見的「矽、鋁、氧」，作為助熔劑的「鈣、鎂、鈉、鉀」，以及負責發色的過渡金屬「鐵、銅、鈷」等。隨著實作經驗增加，這些元素符號自然會深深印在你的腦海中。</p>
+    <p><strong>Q：為什麼有時候看到配方上寫著 CaO，有時候卻是碳酸鈣？兩者一樣嗎？</strong><br>
+    A：這兩者是不同的概念。「碳酸鈣 (CaCO₃)」是我們買到的實體原料粉末，而「CaO (氧化鈣)」則是碳酸鈣在高溫窯爐中釋放出二氧化碳後，真正留在釉藥裡發揮助熔作用的化學成分。我們在計算「釉式」時看的是 CaO，但在秤料時拿的是碳酸鈣。</p>
+    <p><strong>Q：我不小心把鈷的符號 Co 寫成 CO，會有什麼影響嗎？</strong><br>
+    A：在化學交流與電腦軟體計算上會造成嚴重錯誤。Co 是一個金屬元素「鈷」，而 CO 是碳和氧組成的化合物「一氧化碳」。這正是為什麼元素符號的第二個字母必須嚴格使用小寫的原因，養成正確的書寫習慣能避免許多不必要的麻煩。</p>
+    <p><strong>Q：如果我不知道某個原料的化學式，還能調釉藥嗎？</strong><br>
+    A：還是可以的！傳統陶藝往往仰賴經驗法則與大量的試片燒製（例如三角座標測試法）。但如果你懂得了元素與化學式，就能將經驗轉化為科學數據，大幅縮短嘗試錯誤的時間，也能更精準地預測燒成結果。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+    <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+    <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+</body>
+</html>

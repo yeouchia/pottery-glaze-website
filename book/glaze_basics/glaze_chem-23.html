@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學07（雙長石與鋇的應用）</title>
+<meta name="description" content="陶瓷釉式計算進階實戰！透過釜戶長石與霞正長石的雙長石搭配，以及碳酸鋇的應用，詳細拆解 100g 複雜配方。帶您掌握如何調整鉀鈉比例，並運用鋇元素創造獨特的微光釉面效果。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; 
+    font-size: 1.25em; 
+    font-weight: 900; 
+    background-color: #fff0f5; 
+    padding: 2px 8px; 
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; 
+    margin: 0 4px;
+  }
+
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 07</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學07</h1>
+  <div class="lead"><strong>進階挑戰：雙長石的黃金比例與鋇的微光魔法。</strong>當陶藝家想要精確控制釉藥的光澤度與發色時，單一長石往往無法滿足需求。這次，我們將混合「釜戶長石」與高鈉的「霞正長石」來調整鉀與鈉的比例，同時加入另一位重量級助熔劑「碳酸鋇」。透過 <strong>釜戶長石 25g、霞正長石 30g、碳酸鈣 15g、碳酸鋇 5g、高嶺土 15g、石英 10g</strong> 這份華麗的 100g 綜合配方，帶您進入高階釉藥調配的殿堂！</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">莫耳數</span><span class="tag">霞正長石</span><span class="tag">碳酸鋇</span><span class="tag">雙長石配方</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、為什麼要用「兩種長石」混合？碳酸鋇的作用又是什麼？</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <circle cx="120" cy="100" r="50" fill="#a9a9a9"/>
+    <text x="120" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">釜戶長石</text>
+    <text x="120" y="125" fill="#fff" font-size="12" text-anchor="middle">(高鉀 K₂O)</text>
+    
+    <text x="195" y="105" fill="#777" font-size="24" font-weight="bold" text-anchor="middle">+</text>
+    
+    <circle cx="270" cy="100" r="50" fill="#20b2aa"/>
+    <text x="270" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">霞正長石</text>
+    <text x="270" y="125" fill="#fff" font-size="12" text-anchor="middle">(高鈉 Na₂O)</text>
+    
+    <path d="M 340 100 L 400 100" stroke="#333" stroke-width="4" marker-end="url(#arrowhead)"/>
+    
+    <rect x="420" y="60" width="140" height="80" fill="#ffb347" rx="8"/>
+    <text x="490" y="95" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">鉀鈉黃金比例</text>
+    <text x="490" y="115" fill="#fff" font-size="14" text-anchor="middle">提升鮮豔發色</text>
+  </svg>
+  
+  <h3>1. 雙長石搭配：精準調控鉀（K₂O）與鈉（Na₂O）</h3>
+  <p>釜戶長石富含鉀（K₂O），能帶來堅硬的釉面與溫潤的光澤；而霞正長石（Nepheline Syenite）則富含大量的鈉（Na₂O）和鋁，其熔點比一般長石更低。鉀鈉的比例會直接影響色料（如銅、鈷）的發色反應。使用雙長石搭配，不僅能同時汲取兩者的優點，更能促使釉藥在窯內產生更豐富的熔融層次，讓發色更加鮮豔亮麗。</p>
+  
+  <h3>2. 碳酸鋇（Barium Carbonate）的特殊效應</h3>
+  <p>鋇（BaO）是一種非常獨特的重金屬助熔劑。在低溫時它會造成無光面，但在 1260°C 的高溫下，它會產生強烈的助熔作用，賦予釉面極具深度的「微光（Satin）」質感，並讓銅藍色或鐵釉產生極具魅力的結晶或窯變效果。計算時，千萬別忘了碳酸鋇跟碳酸鈣一樣，含有高達 23% 的二氧化碳燒失量。</p>
+
+  <h2>二、第一階段準備：建立 100g 實作的化學分析數據</h2>
+  <p>我們將使用以下比例：<strong>釜戶長石 25g、霞正長石 30g、碳酸鈣 15g、碳酸鋇 5g、高嶺土 15g、石英 10g</strong>（總重 100g）。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>CaO (%)</th>
+          <th>BaO (%)</th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>釜戶長石</strong></td>
+          <td>25g</td>
+          <td>6</td>
+          <td>4</td>
+          <td>1</td>
+          <td>-</td>
+          <td>17</td>
+          <td>72</td>
+        </tr>
+        <tr>
+          <td><strong>霞正長石</strong></td>
+          <td>30g</td>
+          <td>5</td>
+          <td>10</td>
+          <td>1</td>
+          <td>-</td>
+          <td>23</td>
+          <td>60</td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鈣</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>56</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鋇</strong></td>
+          <td>5g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>77</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>表格中為教學用「假設化學成分表」。已扣除碳酸鹽類的燒失量（碳酸鈣留 CaO 56%；碳酸鋇留 BaO 約 77%）。霞正長石鈉含量極高是其特徵。實際在進行釉藥調配時，<strong>必須以原料廠商提供的「實際原料分析表」為正確來源參考。</strong>
+  </div>
+
+  <h3>常用陶瓷氧化物分子量對照表（本次新增 BaO）</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td><strong>氧化鋇</strong></td><td><strong>BaO</strong></td><td><strong>153</strong></td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="18" font-weight="bold" text-anchor="middle">原料總重 (g) × 原料分析表內的各項成分百分比 = 氧化物實際重量</text>
+    <rect x="150" y="70" width="90" height="50" fill="#20b2aa" rx="5"/>
+    <text x="195" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">5g</text>
+    <text x="260" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">×</text>
+    <rect x="280" y="70" width="90" height="50" fill="#f4a460" rx="5"/>
+    <text x="325" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">77%</text>
+    <text x="390" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">=</text>
+    <rect x="410" y="70" width="100" height="50" fill="#cd5c5c" rx="5"/>
+    <text x="460" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">3.85g</text>
+    <text x="300" y="145" fill="#777" font-size="13" text-anchor="middle">(例如：碳酸鋇中的 BaO 實際殘留重量)</text>
+  </svg>
+  
+  <p>我們開始將這個 100g 的「便當」拆解成單一成分。記得將百分比轉換為小數。</p>
+  
+  <h3>1. 雙長石 (釜戶 25g + 霞正 30g) 的拆解（重點！）</h3>
+  <ul>
+    <li><strong>釜戶長石：</strong> K₂O: 25g × 0.06 = <strong>1.50g</strong>｜Na₂O: 25g × 0.04 = <strong>1.00g</strong>｜CaO: 25g × 0.01 = <strong>0.25g</strong>｜Al₂O₃: 25g × 0.17 = <strong>4.25g</strong>｜SiO₂: 25g × 0.72 = <strong>18.00g</strong></li>
+    <li><strong>霞正長石：</strong> K₂O: 30g × 0.05 = <strong>1.50g</strong>｜Na₂O: 30g × 0.10 = <strong>3.00g</strong>｜CaO: 30g × 0.01 = <strong>0.30g</strong>｜Al₂O₃: 30g × 0.23 = <strong>6.90g</strong>｜SiO₂: 30g × 0.60 = <strong>18.00g</strong></li>
+  </ul>
+
+  <h3>2. 其他原料的拆解</h3>
+  <ul>
+    <li><strong>碳酸鈣：</strong> 15g × 0.56 = <strong>8.40g</strong> CaO</li>
+    <li><strong>碳酸鋇：</strong> 5g × 0.77 = <strong>3.85g</strong> BaO</li>
+    <li><strong>高嶺土：</strong> 15g × 0.39 = <strong>5.85g</strong> Al₂O₃ ｜ 15g × 0.46 = <strong>6.90g</strong> SiO₂</li>
+    <li><strong>石英：</strong> 10g × 1.00 = <strong>10.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <p>公式：<strong>氧化物重量 (g) ÷ 該氧化物的分子量 = 莫耳數 (Mole)</strong>。</p>
+  
+  <h3>1. RO 組（助熔劑：鉀、鈉、鈣、鋇）莫耳數計算</h3>
+  <ul>
+    <li>K₂O (釜戶)：1.50g ÷ 94 = <strong>0.0160</strong></li>
+    <li>K₂O (霞正)：1.50g ÷ 94 = <strong>0.0160</strong></li>
+    <li>Na₂O (釜戶)：1.00g ÷ 62 = <strong>0.0161</strong></li>
+    <li>Na₂O (霞正)：3.00g ÷ 62 = <strong>0.0484</strong></li>
+    <li>CaO (釜戶)：0.25g ÷ 56 = <strong>0.0045</strong></li>
+    <li>CaO (霞正)：0.30g ÷ 56 = <strong>0.0054</strong></li>
+    <li>CaO (碳酸鈣)：8.40g ÷ 56 = <strong>0.1500</strong></li>
+    <li>BaO (碳酸鋇)：3.85g ÷ 153 = <strong>0.0252</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁）與 RO₂ 組（矽）莫耳數計算</h3>
+  <ul>
+    <li>Al₂O₃ (釜戶)：4.25g ÷ 102 = <strong>0.0417</strong></li>
+    <li>Al₂O₃ (霞正)：6.90g ÷ 102 = <strong>0.0676</strong></li>
+    <li>Al₂O₃ (高嶺土)：5.85g ÷ 102 = <strong>0.0574</strong></li>
+    <li>SiO₂ (釜戶)：18.00g ÷ 60 = <strong>0.3000</strong></li>
+    <li>SiO₂ (霞正)：18.00g ÷ 60 = <strong>0.3000</strong></li>
+    <li>SiO₂ (高嶺土)：6.90g ÷ 60 = <strong>0.1150</strong></li>
+    <li>SiO₂ (石英)：10.00g ÷ 60 = <strong>0.1667</strong></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <p>我們將剛剛算出的莫耳數進行加總，由於雙長石的關係，這裡的加總結構非常豐富。</p>
+  <ul>
+    <li><strong>K₂O 總和：</strong>0.0160 + 0.0160 = <strong>0.0320</strong></li>
+    <li><strong>Na₂O 總和：</strong>0.0161 + 0.0484 = <strong>0.0645</strong></li>
+    <li><strong>CaO 總和：</strong>0.0045 + 0.0054 + 0.1500 = <strong>0.1599</strong></li>
+    <li><strong>BaO 總和：</strong><strong>0.0252</strong></li>
+    <li><strong>Al₂O₃ 總和：</strong>0.0417 + 0.0676 + 0.0574 = <strong>0.1667</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.3000 + 0.3000 + 0.1150 + 0.1667 = <strong>0.8817</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點</h2>
+  <p>為了建立釉式的比較基準，我們將負責降溫的 RO 鹼性組（包含新加入的鋇 BaO）總和壓縮為 1.000。</p>
+  <h3>1. 算出本次配方的「基準尺」</h3>
+  <p>我們將第五步算出的 RO 組莫耳數加總：<br>
+  總鹼性莫耳數 = K₂O (0.0320) + Na₂O (0.0645) + CaO (0.1599) + BaO (0.0252) = <span class="baseline-value">0.2816</span></p>
+  <p>所以，<span class="baseline-value">0.2816</span> 就是我們這支含雙長石與鋇配方的歸一化基準點。</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將剛剛彙整的所有莫耳數，統統除以我們的基準值 <span class="baseline-value">0.2816</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】K₂O：0.0320 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2816</span> = <strong>0.114</strong></li>
+    <li class="color-ro">【RO組】Na₂O：0.0645 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2816</span> = <strong>0.229</strong></li>
+    <li class="color-ro">【RO組】CaO：0.1599 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2816</span> = <strong>0.568</strong></li>
+    <li class="color-ro">【RO組】BaO：0.0252 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2816</span> = <strong>0.089</strong></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>防呆檢查：</strong>以上 K₂O、Na₂O、CaO、BaO 相加 0.114 + 0.229 + 0.568 + 0.089 剛好等於 <strong>1.000</strong>，證明歸一化計算完全正確！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1667 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2816</span> = <strong>0.592</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.8817 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2816</span> = <strong>3.131</strong></li>
+  </ul>
+  
+  <h3>我們的 100g 雙長石＋鋇 範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> K₂O: 0.114, Na₂O: 0.229, CaO: 0.568, BaO: 0.089</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.592</span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 3.131</span>
+  </div>
+
+  <h2>八、實例解析：這支釉藥燒出來會怎樣？</h2>
+  <p>這支華麗的多重配方，融合了雙長石與鋇的特性，在實務上有著令人驚豔的表現：</p>
+  <h3>1. 鉀鈉比例反轉：明豔發色的基底</h3>
+  <p>在一般的長石配方中，K₂O 通常大於 Na₂O。但在這支我們加入了霞正長石的配方中，鈉（0.229）整整是鉀（0.114）的兩倍！高鈉含量的釉藥熔點更低，且對於如銅釉（Copper）或鈷釉（Cobalt）有極強的「催色」作用，能讓藍綠色調變得極度飽和鮮豔，這是單一鉀長石難以達到的。</p>
+  <h3>2. 碳酸鋇帶來的深邃「微光感（Satin）」</h3>
+  <p>BaO (0.089) 雖然在比例上看似不多，但作為重金屬助熔劑，它的影響力極大。在 1260°C 高溫下，少量的鋇不僅能幫助釉面熔融平滑，它還會改變光線在釉層內的折射方式，讓原本刺眼的亮面轉化為如珍珠或綢緞般深邃的「微光面」。搭配上厚實的鋁（0.592），這是一支非常具備高級藝術質感的基底透明釉。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">雙長石與鋇計算 常見問答 FAQ</div>
+    <p><strong>Q：這支配方的鋁（0.592）好像比之前的範例高？會有什麼影響？</strong><br>
+    A：你觀察得非常敏銳！因為霞正長石本身的 Al₂O₃（約23%）比一般長石高出許多，加上高嶺土，使得最終釉式的鋁相對偏高。高鋁會增加釉漿的黏度，讓釉面呈現出厚實溫潤的質感，不易產生流釉，但也可能讓釉面從完全透明稍微轉向半透明（失透）。</p>
+    <p><strong>Q：聽說碳酸鋇有毒，使用上要注意什麼？</strong><br>
+    A：沒錯，生料狀態的碳酸鋇粉末具有毒性，吸入或誤食會對人體造成傷害。在工作室秤料時務必佩戴 N95 等級以上的防護口罩，並確實清理桌面。一旦經過 1260°C 高溫燒結與矽結合後，通常會變得相對穩定，但為了安全起見，建議含鋇的釉藥還是盡量用於作品的外部裝飾，避免用於直接接觸酸性食物的器皿內部。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

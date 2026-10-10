@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學09（硼的特殊定位與降溫魔法）</title>
+<meta name="description" content="陶瓷釉式計算進階實戰！深入探討「硼砂」與「硼酸」的特殊化學性質。透過 100g 實例配方，解析硼（B₂O₃）為何能強烈降溫卻被歸類在 R₂O₃ 中性組，並探討其帶來的分相乳濁效果。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .color-b2o3 { color: #8a2be2; font-weight: bold; } /* 硼的專屬紫色，凸顯其特殊性 */
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; 
+    font-size: 1.25em; 
+    font-weight: 900; 
+    background-color: #fff0f5; 
+    padding: 2px 8px; 
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; 
+    margin: 0 4px;
+  }
+
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 09</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學09</h1>
+  <div class="lead"><strong>進階挑戰：打破規則的「硼（B₂O₃）」！</strong> 在陶瓷化學中，硼是一種擁有極強降溫與助熔能力的元素，但它在賽格式中卻隱藏著一個讓無數初學者「算錯基準點」的巨大陷阱。這次我們將透過 <strong>霞正長石 55g、碳酸鈣 7.5g、硼砂 12.5g、高嶺土 10g、石英 15g</strong> 這份 100g 包含「硼砂」的強烈降溫配方，為您揭開硼元素的化學定位與「分相乳濁」的神秘面紗！</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">莫耳數</span><span class="tag">硼砂</span><span class="tag">B₂O₃</span><span class="tag">乳濁分相</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、硼（B₂O₃）的身份認同危機：為何它不在 RO 組？</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <rect x="50" y="30" width="150" height="140" fill="#ffe4b5" stroke="#ffa500" stroke-width="2" rx="8"/>
+    <text x="125" y="60" fill="#d2691e" font-size="18" font-weight="bold" text-anchor="middle">RO 鹼性組</text>
+    <text x="125" y="90" fill="#333" font-size="14" text-anchor="middle">傳統助熔劑</text>
+    <text x="125" y="120" fill="#333" font-size="14" text-anchor="middle">K₂O, Na₂O, CaO</text>
+    
+    <rect x="225" y="30" width="150" height="140" fill="#e0ffff" stroke="#00ced1" stroke-width="2" rx="8"/>
+    <text x="300" y="60" fill="#008b8b" font-size="18" font-weight="bold" text-anchor="middle">R₂O₃ 中性組</text>
+    <text x="300" y="90" fill="#333" font-size="14" text-anchor="middle">安定劑＋骨幹</text>
+    <text x="300" y="120" fill="#333" font-size="16" font-weight="bold" text-anchor="middle">Al₂O₃</text>
+    <text x="300" y="150" fill="#8a2be2" font-size="18" font-weight="bold" text-anchor="middle">+ B₂O₃ (硼)</text>
+    
+    <rect x="400" y="30" width="150" height="140" fill="#f0fff0" stroke="#32cd32" stroke-width="2" rx="8"/>
+    <text x="475" y="60" fill="#228b22" font-size="18" font-weight="bold" text-anchor="middle">RO₂ 酸性組</text>
+    <text x="475" y="90" fill="#333" font-size="14" text-anchor="middle">玻璃形成劑</text>
+    <text x="475" y="120" fill="#333" font-size="14" text-anchor="middle">SiO₂</text>
+    
+    <path d="M 125 155 Q 210 190 280 165" fill="none" stroke="#d32f2f" stroke-width="3" stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
+    <text x="180" y="195" fill="#d32f2f" font-size="12" font-weight="bold" text-anchor="middle">具備降溫能力卻被分到中性組！</text>
+  </svg>
+  
+  <h3>1. 釉式計算最大的陷阱：硼不計入 RO 基準</h3>
+  <p>我們在前面的教學中學到：用來降溫的助熔劑（如鉀、鈉、鈣）通通放在 RO 組，且把它們加總設為 1.000 作為計算基準。但是，<strong>硼（B₂O₃）雖然是極強的降溫劑，卻因為其化學價數與結構特徵，在賽格式中被強制歸類在「R₂O₃ 中性組」！</strong> <br>這意味著，在計算歸一化基準點（分母）時，千萬不可以把硼加進去！</p>
+  
+  <h3>2. 硼砂（Borax）的「一料雙供」與超高燒失量</h3>
+  <p>硼砂是提供硼元素最常見的原料，但它其實是「硼酸鈉（Na₂B₄O₇·10H₂O）」。因此加入硼砂，你同時加入了 Na₂O（氧化鈉）與 B₂O₃（氧化硼）。此外，常見的十水硼砂含有將近 47% 的結晶水（極高的燒失量），在計算時必須特別注意它真正殘留下來的氧化物比例。</p>
+
+  <h2>二、第一階段準備：建立 100g 實作的化學分析數據</h2>
+  <p>我們的配方：<strong>霞正長石 55g、碳酸鈣 7.5g、硼砂 12.5g、高嶺土 10g、石英 15g</strong>（總重 100g）。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>CaO (%)</th>
+          <th><span class="color-b2o3">B₂O₃ (%)</span></th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>霞正長石</strong></td>
+          <td>55g</td>
+          <td>5</td>
+          <td>10</td>
+          <td>1</td>
+          <td>-</td>
+          <td>23</td>
+          <td>60</td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鈣</strong></td>
+          <td>7.5g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>56</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>硼砂 (十水)</strong></td>
+          <td>12.5g</td>
+          <td>-</td>
+          <td>16</td>
+          <td>-</td>
+          <td><span class="color-b2o3">37</span></td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>表格中為教學用「假設化學成分表」。此處的硼砂以常見的十水硼砂（Borax Decahydrate）計算，扣除約 47% 結晶水燒失量後，殘留約 16% Na₂O 與 37% B₂O₃。實際調配請依廠商數據為準。
+  </div>
+
+  <h3>常用陶瓷氧化物分子量對照表（本次新增 B₂O₃）</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td><strong class="color-b2o3">氧化硼</strong></td><td><strong class="color-b2o3">B₂O₃</strong></td><td><strong class="color-b2o3">70</strong></td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <p>公式：<strong>原料重量 × 該氧化物在分析表中的百分比 = 氧化物重量</strong>。</p>
+  
+  <h3>1. 霞正長石 (55g) 與 硼砂 (12.5g) 的拆解（重點！）</h3>
+  <ul>
+    <li><strong>霞正長石：</strong> K₂O: 55g × 0.05 = <strong>2.75g</strong>｜Na₂O: 55g × 0.10 = <strong>5.50g</strong>｜CaO: 55g × 0.01 = <strong>0.55g</strong>｜Al₂O₃: 55g × 0.23 = <strong>12.65g</strong>｜SiO₂: 55g × 0.60 = <strong>33.00g</strong></li>
+    <li><strong>硼砂：</strong> Na₂O: 12.5g × 0.16 = <strong>2.00g</strong> ｜ <span class="color-b2o3">B₂O₃: 12.5g × 0.37 = <strong>4.625g</strong></span></li>
+  </ul>
+
+  <h3>2. 其他原料的拆解</h3>
+  <ul>
+    <li><strong>碳酸鈣 (7.5g)：</strong> 7.5g × 0.56 = <strong>4.20g</strong> CaO</li>
+    <li><strong>高嶺土 (10g)：</strong> 10g × 0.39 = <strong>3.90g</strong> Al₂O₃ ｜ 10g × 0.46 = <strong>4.60g</strong> SiO₂</li>
+    <li><strong>石英 (15g)：</strong> 15g × 1.00 = <strong>15.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <p>公式：<strong>氧化物重量 (g) ÷ 該氧化物的分子量 = 莫耳數 (Mole)</strong>。</p>
+  
+  <h3>1. RO 組（助熔劑：鉀、鈉、鈣）莫耳數計算</h3>
+  <ul>
+    <li>K₂O (霞正)：2.75g ÷ 94 = <strong>0.0293</strong></li>
+    <li>Na₂O (霞正)：5.50g ÷ 62 = <strong>0.0887</strong></li>
+    <li>Na₂O (硼砂)：2.00g ÷ 62 = <strong>0.0323</strong></li>
+    <li>CaO (霞正)：0.55g ÷ 56 = <strong>0.0098</strong></li>
+    <li>CaO (碳酸鈣)：4.20g ÷ 56 = <strong>0.0750</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁、<span class="color-b2o3">硼</span>）與 RO₂ 組（矽）莫耳數計算</h3>
+  <ul>
+    <li><span class="color-b2o3">B₂O₃ (硼砂)：4.625g ÷ 70 = <strong>0.0661</strong></span></li>
+    <li>Al₂O₃ (霞正)：12.65g ÷ 102 = <strong>0.1240</strong></li>
+    <li>Al₂O₃ (高嶺土)：3.90g ÷ 102 = <strong>0.0382</strong></li>
+    <li>SiO₂ (霞正)：33.00g ÷ 60 = <strong>0.5500</strong></li>
+    <li>SiO₂ (高嶺土)：4.60g ÷ 60 = <strong>0.0767</strong></li>
+    <li>SiO₂ (石英)：15.00g ÷ 60 = <strong>0.2500</strong></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <p>我們將剛剛算出的莫耳數進行加總。</p>
+  <ul>
+    <li><strong>K₂O 總和：</strong>0.0293</li>
+    <li><strong>Na₂O 總和：</strong>0.0887(霞正) + 0.0323(硼砂) = <strong>0.1210</strong></li>
+    <li><strong>CaO 總和：</strong>0.0098 + 0.0750 = <strong>0.0848</strong></li>
+    <li><strong class="color-b2o3">B₂O₃ 總和：0.0661</strong></li>
+    <li><strong>Al₂O₃ 總和：</strong>0.1240 + 0.0382 = <strong>0.1622 (取0.1623)</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.5500 + 0.0767 + 0.2500 = <strong>0.8767</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點（避開陷阱！）</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="18" font-weight="bold" text-anchor="middle">加總 RO 鹼金屬（絕對不要加硼！）</text>
+    <rect x="100" y="70" width="80" height="50" fill="#f4a460" rx="4"/>
+    <text x="140" y="102" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">K₂O</text>
+    <text x="200" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">+</text>
+    <rect x="220" y="70" width="80" height="50" fill="#f4a460" rx="4"/>
+    <text x="260" y="102" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">Na₂O</text>
+    <text x="320" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">+</text>
+    <rect x="340" y="70" width="80" height="50" fill="#f4a460" rx="4"/>
+    <text x="380" y="102" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">CaO</text>
+    
+    <text x="440" y="102" fill="#d32f2f" font-size="20" font-weight="bold" text-anchor="middle">≠</text>
+    <rect x="460" y="70" width="80" height="50" fill="#fff" stroke="#d32f2f" stroke-width="3" rx="4"/>
+    <line x1="460" y1="70" x2="540" y2="120" stroke="#d32f2f" stroke-width="3"/>
+    <line x1="540" y1="70" x2="460" y2="120" stroke="#d32f2f" stroke-width="3"/>
+    <text x="500" y="102" fill="#8a2be2" font-size="16" font-weight="bold" text-anchor="middle">B₂O₃</text>
+  </svg>
+  
+  <p>在賽格式中，歸一化的基準只能是 <strong>RO 組鹼金屬總和</strong>。B₂O₃ 雖然能降溫，但它是 R₂O₃ 組的成員，絕對不能加進分母裡！</p>
+  <h3>1. 算出本次配方的「基準尺」</h3>
+  <p>總鹼性莫耳數 = K₂O (0.0293) + Na₂O (0.1210) + CaO (0.0848) = <span class="baseline-value">0.2351</span></p>
+  <p>所以，<span class="baseline-value">0.2351</span> 就是我們這支含硼配方的歸一化基準點。</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將所有彙整的莫耳數，統統除以我們的基準值 <span class="baseline-value">0.2351</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】K₂O：0.0293 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2351</span> = <strong>0.125</strong></li>
+    <li class="color-ro">【RO組】Na₂O：0.1210 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2351</span> = <strong>0.515</strong></li>
+    <li class="color-ro">【RO組】CaO：0.0848 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2351</span> = <strong>0.360</strong> <em>(微調以湊齊1.000)</em></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>防呆檢查：</strong>以上 K₂O、Na₂O、CaO 相加 0.125 + 0.515 + 0.360 剛好等於 <strong>1.000</strong>，基準完全正確！沒有加到硼！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3 color-b2o3">【R₂O₃組】B₂O₃：0.0661 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2351</span> = <strong>0.281</strong></li>
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1623 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2351</span> = <strong>0.690</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.8767 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2351</span> = <strong>3.729</strong></li>
+  </ul>
+  
+  <h3>我們的 100g 硼砂範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> K₂O: 0.125, Na₂O: 0.515, CaO: 0.360</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> <span class="color-b2o3">B₂O₃: 0.281</span>, Al₂O₃: 0.690</span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 3.729</span>
+  </div>
+
+  <h2>八、實例解析：這支「含硼配方」燒出來會怎樣？</h2>
+  <p>解碼這支配方，我們將會見識到「硼（B₂O₃）」在陶瓷化學中無可取代的兩大魔法：</p>
+  <h3>1. 強烈的流動與降溫效果</h3>
+  <p>在這支釉式中，我們除了擁有極高比例的鈉（0.515，主要來自霞正長石與硼砂）之外，還多了一股強大的外部勢力——B₂O₃ (0.281)。硼能直接切斷 SiO₂ 形成的堅硬玻璃網絡。這使得這支釉藥的熔融溫度會比一般的 1260°C 釉藥低非常多。如果在高溫窯中燒製，它的流動性將會像蜂蜜一樣活躍，甚至可能流出器皿底部。</p>
+  <h3>2. 分相乳濁（Liquid Phase Separation）的美學效應</h3>
+  <p>這是硼最迷人的特徵！因為硼玻璃與矽玻璃在高溫下的熔解與冷卻速度不同，當 B₂O₃ 比例偏高時，釉藥在冷卻過程中會發生「分相（像油與水一樣分離成兩種微觀的玻璃體）」。這種微觀分離會讓光線發生散射，產生藍白色的雲霧狀、乳濁感，甚至是如兔毫般的流紋。這正是著名的「鈞釉（Jun Glaze）」能夠呈現天空藍乳濁質感的科學核心！</p>
+
+  <div class="faq-box">
+    <div class="faq-title">硼的計算與應用 常見問答 FAQ</div>
+    <p><strong>Q：如果我不用硼砂，改用「硬硼酸鈣（Colemanite）」，計算上會有什麼不同嗎？</strong><br>
+    A：邏輯完全相同，只是「提供者」變了。硼砂（Na₂B₄O₇）提供的是 Na₂O 與 B₂O₃；而硬硼酸鈣提供的是 CaO 與 B₂O₃。不管來源是什麼，記住將金屬氧化物（Na₂O、CaO）放入 RO 組加總，而將 B₂O₃ 放入 R₂O₃ 組，就能精準掌握釉式。</p>
+    <p><strong>Q：為什麼硼（B₂O₃）不能放在 RO 組？它明明會降溫呀！</strong><br>
+    A：這是賽格（Seger）制定系統時的科學邏輯。RO 組是指「一價或二價的金屬氧化物（R₂O / RO）」。而硼的化學價數是正三價（B³⁺），與鋁（Al³⁺）相同，且硼在極端情況下甚至能像矽一樣自己形成玻璃網絡（硼玻璃）。因此在化學結構分類上，它必須被安置在中性組（R₂O₃），這是釉藥化學的鐵律。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學01</title>
+<meta name="description" content="深入陶瓷釉藥的科學計算，透過「釜戶長石、碳酸鈣、高嶺土、石英」四種原料的 100g 實際範例，帶您完整演練原料重量到賽格式（釉式）的轉換過程，解析 1260°C 亮面透明釉的配方秘密。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; /* 醒目的深紅色 */
+    font-size: 1.25em; /* 放大字體 */
+    font-weight: 900; /* 極粗體 */
+    background-color: #fff0f5; /* 淺粉色背景底 */
+    padding: 2px 8px; /* 增加留白讓它像個標籤 */
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; /* 虛線邊框增加注目度 */
+    margin: 0 4px;
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 01</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學01</h1>
+  <div class="lead"><strong>實戰第一課：</strong>在具備了釉式計算的基礎觀念後，我們準備進入真正的實戰演練！這次我們要挑戰一份更貼近真實工作室情境的配方。為了調整釉面的硬度與光澤，我們在基礎的三原料中加入了「石英（二氧化矽）」。透過<strong>釜戶長石 55g、碳酸鈣 20g、高嶺土 15g、石英 10g</strong> 這個經典比例，我們將再次一步步將它拆解、轉換，幫助您徹底熟練賽格式（Seger Formula）的計算流程。</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">莫耳數</span><span class="tag">石英</span><span class="tag">氧化物</span><span class="tag">釉式計算</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、為什麼這次的配方加入了「石英」？</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <circle cx="150" cy="100" r="50" fill="#a9a9a9"/>
+    <text x="150" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">長石 (主助熔)</text>
+    <circle cx="250" cy="100" r="50" fill="#db7093"/>
+    <text x="250" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">碳酸鈣 (助熔)</text>
+    <circle cx="350" cy="100" r="50" fill="#20b2aa"/>
+    <text x="350" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">高嶺土 (黏度)</text>
+    <circle cx="450" cy="100" r="50" fill="#ffb347"/>
+    <text x="450" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">石英 (骨幹)</text>
+    <path d="M 100 170 Q 300 210 500 170" fill="none" stroke="#6c6654" stroke-width="4" stroke-dasharray="8,4"/>
+    <text x="300" y="180" fill="#6c6654" font-size="14" font-weight="bold" text-anchor="middle">經典四角形透明釉系統</text>
+  </svg>
+  <p>在我們進行計算之前，先來了解這份配方的邏輯。長石、碳酸鈣與高嶺土是許多高溫釉藥的鐵三角，但有時候我們會發現：</p>
+  <h3>1. 強化釉面的玻璃質網絡</h3>
+  <p>石英（Quartz 或 Silica）在化學上幾乎是 100% 的二氧化矽（SiO₂）。它是構成玻璃結構的最核心骨幹。當我們覺得釉面太容易被金屬餐具刮傷，或是釉面稍微偏向無光時，直接補充純粹的石英粉，是提高釉面硬度與光澤度最直接的方法。</p>
+  <h3>2. 降低熱膨脹係數以防開片</h3>
+  <p>若燒出來的杯子在裝熱水時發出「劈啪」聲（即所謂的開片、冰裂），通常是因為釉藥的膨脹係數大於土坯。在配方中加入石英，可以有效降低釉藥整體的熱膨脹係數，讓釉藥與胎體更緊密地貼合。</p>
+
+  <h2>二、第一階段準備：建立 100g 實作的化學分析數據</h2>
+  <p>如同作菜需要先確認食材成分，我們要先建立本次實作配方的基準資料表。請注意，這次總重量加起來依然是 100g，這能幫助我們在視覺上直觀感受各原料的占比。</p>
+  
+  <h3>1. 本次實例配方與假設成分表</h3>
+  <p>我們將使用以下比例：<strong>釜戶長石 55g、碳酸鈣 20g、高嶺土 15g、石英 10g</strong>。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>CaO (%)</th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>釜戶長石</strong></td>
+          <td>55g</td>
+          <td>6</td>
+          <td>4</td>
+          <td>1</td>
+          <td>17</td>
+          <td>72</td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鈣 (石灰石)</strong></td>
+          <td>20g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>56</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>表格中為教學用「假設化學成分表」。實際在進行釉藥調配時，天然礦石每批開採的成分皆會浮動，<strong>必須以原料廠商提供的「實際原料分析表」為正確來源參考。</strong>
+  </div>
+
+  <h3>2. 常用陶瓷氧化物分子量對照表</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="18" font-weight="bold" text-anchor="middle">原料總重 (g) × 原料分析表內的各項成分百分比 = 氧化物實際重量</text>
+    <rect x="150" y="70" width="90" height="50" fill="#20b2aa" rx="5"/>
+    <text x="195" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">55g</text>
+    <text x="260" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">×</text>
+    <rect x="280" y="70" width="90" height="50" fill="#f4a460" rx="5"/>
+    <text x="325" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">17%</text>
+    <text x="390" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">=</text>
+    <rect x="410" y="70" width="100" height="50" fill="#cd5c5c" rx="5"/>
+    <text x="460" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">9.35g</text>
+    <text x="300" y="145" fill="#777" font-size="13" text-anchor="middle">(例如：釜戶長石中的氧化鋁重量)</text>
+  </svg>
+  <p>我們開始將這個 100g 的「便當」拆解成單一成分。記得將百分比轉換為小數（如 17% = 0.17）。</p>
+  
+  <h3>1. 釜戶長石 (55g) 的拆解</h3>
+  <ul>
+    <li>K₂O：55g × 0.06 = <strong>3.30g</strong></li>
+    <li>Na₂O：55g × 0.04 = <strong>2.20g</strong></li>
+    <li>CaO：55g × 0.01 = <strong>0.55g</strong></li>
+    <li>Al₂O₃：55g × 0.17 = <strong>9.35g</strong></li>
+    <li>SiO₂：55g × 0.72 = <strong>39.60g</strong></li>
+  </ul>
+
+  <h3>2. 碳酸鈣 (20g)、高嶺土 (15g) 與石英 (10g) 的拆解</h3>
+  <ul>
+    <li><strong>碳酸鈣：</strong> 20g × 0.56 = <strong>11.20g</strong> CaO</li>
+    <li><strong>高嶺土：</strong> 15g × 0.39 = <strong>5.85g</strong> Al₂O₃ ； 15g × 0.46 = <strong>6.90g</strong> SiO₂</li>
+    <li><strong>石英：</strong> 10g × 1.00 = <strong>10.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">氧化物重量 ÷ 專屬分子量 = 莫耳數</text>
+    <rect x="120" y="70" width="110" height="60" fill="#ff7f50" rx="5"/>
+    <text x="175" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">9.35g (Al₂O₃)</text>
+    <text x="255" y="105" fill="#333" font-size="24" font-weight="bold" text-anchor="middle">÷</text>
+    <rect x="280" y="70" width="80" height="60" fill="#87ceeb" rx="5"/>
+    <text x="320" y="105" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">102</text>
+    <text x="385" y="105" fill="#333" font-size="24" font-weight="bold" text-anchor="middle">=</text>
+    <rect x="410" y="70" width="90" height="60" fill="#32cd32" rx="5"/>
+    <text x="455" y="105" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">0.0917</text>
+  </svg>
+  <p>為了找出這些元素在窯爐中的「真實參加人數」，我們要除以各自的分子量。請將小數點至少算到第四位。</p>
+  
+  <h3>1. RO 組（助熔劑）莫耳數計算</h3>
+  <ul>
+    <li>K₂O (長石)：3.30g ÷ 94 = <strong>0.0351</strong></li>
+    <li>Na₂O (長石)：2.20g ÷ 62 = <strong>0.0355</strong></li>
+    <li>CaO (長石)：0.55g ÷ 56 = <strong>0.0098</strong></li>
+    <li>CaO (碳酸鈣)：11.20g ÷ 56 = <strong>0.2000</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁）與 RO₂ 組（矽）莫耳數計算</h3>
+  <ul>
+    <li>Al₂O₃ (長石)：9.35g ÷ 102 = <strong>0.0917</strong></li>
+    <li>Al₂O₃ (高嶺土)：5.85g ÷ 102 = <strong>0.0574</strong></li>
+    <li>SiO₂ (長石)：39.60g ÷ 60 = <strong>0.6600</strong></li>
+    <li>SiO₂ (高嶺土)：6.90g ÷ 60 = <strong>0.1150</strong></li>
+    <li>SiO₂ (石英)：10.00g ÷ 60 = <strong>0.1667</strong></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="18" font-weight="bold" text-anchor="middle">同種類的莫耳數必須全數加總（以 SiO₂ 為例）</text>
+    <rect x="50" y="70" width="110" height="50" fill="#a9a9a9" rx="4"/>
+    <text x="105" y="100" fill="#fff" font-size="14" text-anchor="middle">長石 0.6600</text>
+    <text x="180" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">+</text>
+    <rect x="200" y="70" width="110" height="50" fill="#20b2aa" rx="4"/>
+    <text x="255" y="100" fill="#fff" font-size="14" text-anchor="middle">高嶺 0.1150</text>
+    <text x="330" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">+</text>
+    <rect x="350" y="70" width="110" height="50" fill="#ffb347" rx="4"/>
+    <text x="405" y="100" fill="#fff" font-size="14" text-anchor="middle">石英 0.1667</text>
+    <text x="480" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">=</text>
+    <rect x="500" y="70" width="80" height="50" fill="#c71585" rx="4"/>
+    <text x="540" y="100" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">0.9417</text>
+  </svg>
+  <p>我們將剛剛算出的莫耳數，依照化學元素種類進行垂直加總。由於這次我們加入了石英，請特別注意 SiO₂ 的來源變成了三個地方！</p>
+  <ul>
+    <li><strong>K₂O 總和：</strong>0.0351</li>
+    <li><strong>Na₂O 總和：</strong>0.0355</li>
+    <li><strong>CaO 總和：</strong>0.0098 (長石) + 0.2000 (石灰) = <strong>0.2098</strong></li>
+    <li><strong>Al₂O₃ 總和：</strong>0.0917 (長石) + 0.0574 (高嶺) = <strong>0.1491</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.6600 + 0.1150 + 0.1667 = <strong>0.9417</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點</h2>
+  <p>如同前篇觀念所述，為了讓這支釉藥的化學式能夠與其他配方「在同一個天平上比較」，我們必須將負責降溫的 RO 鹼性組總和壓縮為 1.000。</p>
+  <h3>1. 算出本次配方的「基準尺」</h3>
+  <p>我們將第五步算出的 RO 組莫耳數加總：<br>
+  總鹼性莫耳數 = K₂O (0.0351) + Na₂O (0.0355) + CaO (0.2098) = <span class="baseline-value">0.2804</span></p>
+  <p>所以，<span class="baseline-value">0.2804</span> 就是我們這支含石英釉藥配方的歸一化基準點。</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將剛剛彙整的所有莫耳數，統統除以我們的基準值 <span class="baseline-value">0.2804</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】K₂O：0.0351 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2804</span> = <strong>0.125</strong></li>
+    <li class="color-ro">【RO組】Na₂O：0.0355 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2804</span> = <strong>0.127</strong></li>
+    <li class="color-ro">【RO組】CaO：0.2098 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2804</span> = <strong>0.748</strong></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>提示：</strong>以上 K₂O、Na₂O、CaO (即 RO 組) 相加 0.125 + 0.127 + 0.748 剛好等於 <strong>1.000</strong>，這就是歸一化基準！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1491 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2804</span> = <strong>0.531</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.9417 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2804</span> = <strong>3.358</strong></li>
+  </ul>
+  
+  <h3>我們的 100g（含石英）範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> K₂O: 0.125, Na₂O: 0.127, CaO: 0.748</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.531</span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 3.358</span>
+  </div>
+
+  <h2>八、實例解析：這支 1260°C 釉藥燒出來會怎樣？</h2>
+  <p>成功算出釉式後，我們終於可以開始解讀這串數字背後的物理意義：</p>
+  <h3>1. 觀察助熔劑（RO組）的特性</h3>
+  <p>這支釉藥的 CaO 高達 0.748。在 1260°C 的高溫下，高鈣釉通常意味著強烈的助熔效果，釉面會呈現出清澈、堅硬且具有玻璃光澤的特徵。若是配上微量鐵，非常適合表現傳統青瓷的透亮質感。</p>
+  <h3>2. 鋁矽比（Al₂O₃ 與 SiO₂ 的對話）</h3>
+  <p>我們來看看最重要的中性與酸性組：鋁 0.531、矽 3.358。將這個坐標帶入著名的 Stull Chart（史陶圖表），你會發現它穩穩地落在「光澤透明釉（Bright/Glossy）」的安全區域中心。<br>
+  比起未加石英的配方，這支加了 10g 石英的配方，其矽含量（3.358）充足，代表其玻璃網絡發育得非常強壯，是一支兼具硬度與耐用度的實用型食用級釉藥。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">實例計算 常見問答 FAQ</div>
+    <p><strong>Q：為什麼不直接增加長石就好，要特別加入石英？</strong><br>
+    A：長石雖然含有大量矽，但它同時也帶入鉀、鈉和鋁。如果你算完釉式發現「助熔劑已經足夠，但矽太低導致釉面軟弱」，這時若加入長石會破壞助熔比例；單純加入石英，則能「精準狙擊」提升 SiO₂ 的數值而不影響其他元素。</p>
+    <p><strong>Q：如果我不想算到小數點第四位可以嗎？</strong><br>
+    A：化學計算中的小數點偏差會產生「滾雪球效應」。尤其在計算莫耳數時（步驟二），因為要除以較大的分子量（如 102），建議至少保留小數點後四位。直到最後寫出最終釉式（步驟五）時，再四捨五入到小數點後二到三位即可。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

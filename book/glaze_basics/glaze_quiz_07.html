@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>互動測驗：原料百分比轉換賽格式（釉式）07</title>
+<meta name="description" content="互動式釉藥計算測驗！透過半自動填空與闖關解鎖模式，親手將原料重量百分比轉換為賽格式，驗證你的學習成果。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+    --correct:#2e7d32;
+    --error:#d32f2f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.6;
+    font-size:16px;
+  }
+  .page{
+    width:min(950px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{ padding:42px 56px 64px; }
+  h1{ font-size:28px; line-height:1.45; margin:0 0 18px; color:#35332c; border-bottom:2px solid var(--line); padding-bottom:12px;}
+  h2{ font-size:20px; color:#3e3b32; border-left: 5px solid var(--accent); padding-left:12px; margin-top:30px;}
+  .lead{ background:var(--quote); border:1px solid #dedacd; border-radius:8px; padding:16px 20px; margin:20px 0; color:#4d4a40; font-size:15px; }
+  
+  .table-wrap{ overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:8px; background:#fff;}
+  table{ width:100%; border-collapse:collapse; min-width:620px; }
+  th,td{ border-bottom:1px solid #dfdccf; padding:12px 14px; text-align:center; vertical-align:middle; font-size:15px;}
+  th{ background:#ece9dc; font-weight:700; color:#4d493e; }
+  tr:last-child td{border-bottom:none}
+  
+  /* 測驗區塊樣式 */
+  .step-container {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .step-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(100%);
+  }
+  .step-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c5e7b;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .step-status {
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  .status-waiting { color: #f57c00; }
+  .status-passed { color: var(--correct); font-weight: bold; }
+  
+  /* 輸入框樣式 */
+  input[type="number"] {
+    width: 70px;
+    padding: 6px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: 0.2s;
+    outline: none;
+  }
+  input[type="number"]:focus { border-color: #2c5e7b; }
+  input.correct { border-color: var(--correct); background-color: #e8f5e9; }
+  input.error { border-color: var(--error); background-color: #ffebee; }
+  
+  /* 動態顯示結果 */
+  .calc-result {
+    font-weight: bold;
+    color: #2c5e7b;
+    display: inline-block;
+    min-width: 50px;
+  }
+  .hidden { display: none !important; }
+  
+  /* 覆選框樣式 */
+  .checkbox-group { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0;}
+  .checkbox-label {
+    display: flex; align-items: center; gap: 6px;
+    background: #f1f0e4; padding: 8px 16px; border-radius: 99px; cursor: pointer; border:1px solid #dcd7c7;
+  }
+  .checkbox-label input { width: 18px; height: 18px; cursor: pointer;}
+  
+  /* 最終結果卡片 */
+  .final-card {
+    background: #e3f2fd; border: 2px dashed #64b5f6; padding: 24px; border-radius: 8px; text-align: center; font-size: 18px;
+  }
+  .color-ro { color: #d2691e; font-weight:bold;}
+  .color-r2o3 { color: #008b8b; font-weight:bold;}
+  .color-ro2 { color: #228b22; font-weight:bold;}
+
+  /* 紙片動畫畫布 */
+  #confetti-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;
+  }
+
+  /* ====== 情報區專屬表格佈局 ====== */
+  .info-flex-container { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+  .info-flex-container > div { flex: 1; min-width: 250px; }
+  .info-table-wrap { overflow-x: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; height: 100%; }
+  .info-table-wrap table { width: 100%; min-width: 100%; border-collapse: collapse; height: 100%; }
+  
+  /* ====== 色彩主題 ====== */
+  .table-theme-1 th { background-color: #FFE0B2; color: #E65100; border-bottom: 2px solid #FFCC80; }
+  .table-theme-1 td { background-color: #FFF8E1; border-bottom: 1px solid #FFECB3; color: #BF360C; font-weight: 500;}
+  .table-theme-2 th { background-color: #B3E5FC; color: #01579B; border-bottom: 2px solid #81D4FA; }
+  .table-theme-2 td { background-color: #E1F5FE; border-bottom: 1px solid #B3E5FC; color: #0277BD; font-weight: 500;}
+  .table-theme-3 th { background-color: #C8E6C9; color: #1B5E20; border-bottom: 2px solid #A5D6A7; }
+  .table-theme-3 td { background-color: #E8F5E9; border-bottom: 1px solid #C8E6C9; color: #2E7D32; font-weight: 500;}
+
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; font-size: 1.25em; font-weight: 900; background-color: #fff0f5; 
+    padding: 2px 8px; border-radius: 4px; border: 1px dashed #ffb6c1; margin: 0 4px;
+  }
+
+  /* 看答案按鈕樣式 */
+  button.show-ans-btn {
+    background: #f1f0e4;
+    color: #6c6654;
+    border: 1px solid #dcd7c7;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: normal;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0 0 0 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button.show-ans-btn:hover {
+    background: #e8e4d6;
+  }
+  
+  /* 按鈕樣式 */
+  button.action-btn {
+    background: #2c5e7b; color: #fff; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold;
+    border-radius: 6px; cursor: pointer; transition: 0.2s; display: block; margin: 20px auto;
+  }
+  button.action-btn:hover { background: #1e455e; }
+</style>
+</head>
+<body>
+<canvas id="confetti-canvas"></canvas>
+<main class="page">
+<article class="article">
+  <h1>互動測驗：原料百分比轉換賽格式（釉式）07</h1>
+  <div class="lead">
+    <strong>究極配方大師挑戰！</strong> 這次的配方達到了史無前例的複雜度。100g 內包含了高達 9 種原料！你將挑戰高達 7 種不同的 RO 助熔劑加總，而其中「氧化鎂 (MgO)」更是由四種不同的原料拼湊而成！<br>
+    系統會幫助你理解化學運算的每一步驟，但<strong>化學邏輯與歸一化判斷必須由你親自完成！</strong> 當輸入正確時，輸入框會亮綠燈；全部綠燈即可解鎖下一關。
+  </div>
+
+  <!-- 情報區 -->
+  <h2>📋 情報區：測驗基礎資料</h2>
+  <div class="info-flex-container">
+    <div>
+      <div class="info-table-wrap">
+        <table class="table-theme-1">
+          <tr><th colspan="2">1. 原料配方表</th></tr>
+          <tr><td>葉長石A38</td><td>53g</td></tr>
+          <tr><td>滑石</td><td>5g</td></tr>
+          <tr><td>白雲石</td><td>10g</td></tr>
+          <tr><td>碳酸鎂</td><td>6g</td></tr>
+          <tr><td>氧化鎂</td><td>3g</td></tr>
+          <tr><td>碳酸鋇</td><td>5g</td></tr>
+          <tr><td>氧化鋅</td><td>2g</td></tr>
+          <tr><td>高嶺土</td><td>10g</td></tr>
+          <tr><td>石英</td><td>6g</td></tr>
+          <tr><th>總重量</th><th>100g</th></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="info-table-wrap">
+        <table class="table-theme-2">
+          <tr><th colspan="3">2. 分子量對照表</th></tr>
+          <tr><td>Li₂O (30)</td><td>K₂O (94)</td><td>Na₂O (62)</td></tr>
+          <tr><td>CaO (56)</td><td>MgO (40)</td><td>BaO (153)</td></tr>
+          <tr><td>ZnO (81)</td><td>Al₂O₃ (102)</td><td>SiO₂ (60)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-table-wrap" style="margin-bottom: 30px;">
+    <table class="table-theme-3">
+      <thead>
+        <tr><th colspan="10">3. 原料分析表 (百分比 %)</th></tr>
+        <tr>
+          <th>原料名稱</th><th>Li₂O</th><th>K₂O</th><th>Na₂O</th><th>CaO</th><th>MgO</th><th>BaO</th><th>ZnO</th><th>Al₂O₃</th><th>SiO₂</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>葉長石A38</td><td>4</td><td>1</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>16</td><td>78</td></tr>
+        <tr><td>滑石</td><td>-</td><td>-</td><td>-</td><td>5</td><td>32</td><td>-</td><td>-</td><td>-</td><td>63</td></tr>
+        <tr><td>白雲石</td><td>-</td><td>-</td><td>-</td><td>30</td><td>22</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>碳酸鎂</td><td>-</td><td>-</td><td>-</td><td>-</td><td>48</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>氧化鎂</td><td>-</td><td>-</td><td>-</td><td>-</td><td>100</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>碳酸鋇</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>77</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>氧化鋅</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>100</td><td>-</td><td>-</td></tr>
+        <tr><td>高嶺土</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>39</td><td>46</td></tr>
+        <tr><td>石英</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>100</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr style="border:0; border-top:2px dashed #dcd7c7; margin:40px 0;">
+
+  <!-- 第一關：計算氧化物重量 -->
+  <div id="step1" class="step-container">
+    <div class="step-title">🛡️ 第一關：拆解原料（求氧化物重量）<span class="step-status status-waiting" id="s1-status">等待闖關...</span></div>
+    <p style="font-size:14px; color:#666;">📝 提示：請查閱上方「原料分析表」，填入對應的百分比數字（填入整數即可，如 4% 填 4）。系統會自動幫你乘以原料重量。</p>
+    
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>原料 (重量)</th><th>氧化物</th><th>輸入百分比(%)</th><th>自動計算結果 (g)</th></tr></thead>
+        <tbody>
+          <!-- 葉長石A38 53g -->
+          <tr><td rowspan="5" style="vertical-align:middle;">葉長石A38<br>(53g)</td>
+              <td>Li₂O</td><td><input type="number" data-step="1" data-ans="4" id="i1"> %</td><td>= <span class="calc-result" id="r1">?</span> g</td></tr>
+          <tr><td>K₂O</td><td><input type="number" data-step="1" data-ans="1" id="i2"> %</td><td>= <span class="calc-result" id="r2">?</span> g</td></tr>
+          <tr><td>Na₂O</td><td><input type="number" data-step="1" data-ans="1" id="i3"> %</td><td>= <span class="calc-result" id="r3">?</span> g</td></tr>
+          <tr><td>Al₂O₃</td><td><input type="number" data-step="1" data-ans="16" id="i4"> %</td><td>= <span class="calc-result" id="r4">?</span> g</td></tr>
+          <tr><td>SiO₂</td><td><input type="number" data-step="1" data-ans="78" id="i5"> %</td><td>= <span class="calc-result" id="r5">?</span> g</td></tr>
+          
+          <!-- 滑石 5g -->
+          <tr><td rowspan="3" style="vertical-align:middle; background:#faf9f3;">滑石<br>(5g)</td>
+              <td style="background:#faf9f3;">CaO</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="5" id="i6"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r6">?</span> g</td></tr>
+          <tr><td style="background:#faf9f3;">MgO</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="32" id="i7"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r7">?</span> g</td></tr>
+          <tr><td style="background:#faf9f3;">SiO₂</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="63" id="i8"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r8">?</span> g</td></tr>
+
+          <!-- 白雲石 10g -->
+          <tr><td rowspan="2" style="vertical-align:middle;">白雲石<br>(10g)</td>
+              <td>CaO</td><td><input type="number" data-step="1" data-ans="30" id="i9"> %</td><td>= <span class="calc-result" id="r9">?</span> g</td></tr>
+          <tr><td>MgO</td><td><input type="number" data-step="1" data-ans="22" id="i10"> %</td><td>= <span class="calc-result" id="r10">?</span> g</td></tr>
+
+          <!-- 單一成分原料 -->
+          <tr><td style="background:#faf9f3;">碳酸鎂 (6g)</td><td style="background:#faf9f3;">MgO</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="48" id="i11"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r11">?</span> g</td></tr>
+          <tr><td>氧化鎂 (3g)</td><td>MgO</td><td><input type="number" data-step="1" data-ans="100" id="i12"> %</td><td>= <span class="calc-result" id="r12">?</span> g</td></tr>
+          <tr><td style="background:#faf9f3;">碳酸鋇 (5g)</td><td style="background:#faf9f3;">BaO</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="77" id="i13"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r13">?</span> g</td></tr>
+          <tr><td>氧化鋅 (2g)</td><td>ZnO</td><td><input type="number" data-step="1" data-ans="100" id="i14"> %</td><td>= <span class="calc-result" id="r14">?</span> g</td></tr>
+
+          <!-- 高嶺土與石英 -->
+          <tr><td rowspan="2" style="vertical-align:middle; background:#faf9f3;">高嶺土<br>(10g)</td>
+              <td style="background:#faf9f3;">Al₂O₃</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="39" id="i15"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r15">?</span> g</td></tr>
+          <tr><td style="background:#faf9f3;">SiO₂</td><td style="background:#faf9f3;"><input type="number" data-step="1" data-ans="46" id="i16"> %</td><td style="background:#faf9f3;">= <span class="calc-result" id="r16">?</span> g</td></tr>
+          
+          <tr><td>石英 (6g)</td><td>SiO₂</td><td><input type="number" data-step="1" data-ans="100" id="i17"> %</td><td>= <span class="calc-result" id="r17">?</span> g</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 第二關：計算莫耳數 -->
+  <div id="step2" class="step-container step-disabled">
+    <div class="step-title">🛡️ 第二關：轉換微觀世界（求莫耳數總和）<span class="step-status status-waiting" id="s2-status">鎖定中...</span></div>
+    <p style="font-size:14px; color:#666;">📝 提示：系統已幫你把上一關算出的重量加總。請查閱「分子量對照表」，輸入各氧化物的專屬分子量！<br>(注意：MgO 的重量是 <strong>滑石 + 白雲石 + 碳酸鎂 + 氧化鎂</strong> 四者完美彙整後的總和！)</p>
+    
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>氧化物</th><th>總重量 (g)</th><th>輸入分子量</th><th>總莫耳數 (Mole)</th></tr></thead>
+        <tbody>
+          <tr><td>Li₂O</td><td>2.12g</td><td>÷ <input type="number" data-step="2" data-ans="30" id="i18"></td><td>= <span class="calc-result" id="r18">?</span></td></tr>
+          <tr><td>K₂O</td><td>0.53g</td><td>÷ <input type="number" data-step="2" data-ans="94" id="i19"></td><td>= <span class="calc-result" id="r19">?</span></td></tr>
+          <tr><td>Na₂O</td><td>0.53g</td><td>÷ <input type="number" data-step="2" data-ans="62" id="i20"></td><td>= <span class="calc-result" id="r20">?</span></td></tr>
+          <tr><td>CaO</td><td>3.25g</td><td>÷ <input type="number" data-step="2" data-ans="56" id="i21"></td><td>= <span class="calc-result" id="r21">?</span></td></tr>
+          <tr><td>MgO</td><td>9.68g</td><td>÷ <input type="number" data-step="2" data-ans="40" id="i22"></td><td>= <span class="calc-result" id="r22">?</span></td></tr>
+          <tr><td>BaO</td><td>3.85g</td><td>÷ <input type="number" data-step="2" data-ans="153" id="i23"></td><td>= <span class="calc-result" id="r23">?</span></td></tr>
+          <tr><td>ZnO</td><td>2.00g</td><td>÷ <input type="number" data-step="2" data-ans="81" id="i24"></td><td>= <span class="calc-result" id="r24">?</span></td></tr>
+          <tr><td>Al₂O₃</td><td>12.38g</td><td>÷ <input type="number" data-step="2" data-ans="102" id="i25"></td><td>= <span class="calc-result" id="r25">?</span></td></tr>
+          <tr><td>SiO₂</td><td>55.09g</td><td>÷ <input type="number" data-step="2" data-ans="60" id="i26"></td><td>= <span class="calc-result" id="r26">?</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 第三關：尋找基準點 -->
+  <div id="step3" class="step-container step-disabled">
+    <div class="step-title">🛡️ 第三關：歸一化邏輯（尋找基準點）<span class="step-status status-waiting" id="s3-status">鎖定中...</span></div>
+    <p style="font-size:14px; color:#666;">📝 提示一：請勾選出所有屬於「RO 鹼性組（助熔劑）」的元素。（這次有高達 7 種，請謹慎勾選！）</p>
+    
+    <div class="checkbox-group">
+      <label class="checkbox-label"><input type="checkbox" id="cb-li2o" data-correct="true"> Li₂O</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-k2o" data-correct="true"> K₂O</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-na2o" data-correct="true"> Na₂O</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-cao" data-correct="true"> CaO</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-mgo" data-correct="true"> MgO</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-bao" data-correct="true"> BaO</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-zno" data-correct="true"> ZnO</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-al2o3" data-correct="false"> Al₂O₃</label>
+      <label class="checkbox-label"><input type="checkbox" id="cb-sio2" data-correct="false"> SiO₂</label>
+    </div>
+
+    <div id="ro-sum-box" class="hidden" style="background:#fdf5e6; padding:16px; border-radius:6px; border:1px dashed #d2691e;">
+      📝 提示二：請將你勾選的 RO 組莫耳數相加，輸入你算出的基準點數值 <strong style="color:#d32f2f;">(※請輸入小數點後四位)</strong>：<br>
+      <div style="margin-top:10px; display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span>(0.0707) + (0.0056) + (0.0085) + (0.0580) + (0.2420) + (0.0252) + (0.0247) = </span>
+        <input type="number" step="0.0001" id="ro-sum-input" style="width:100px;">
+        <button type="button" class="show-ans-btn" data-target="ro-sum-input" data-ans="0.4347">看答案</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四關：釉式轉換運算 -->
+  <div id="step4" class="step-container step-disabled">
+    <div class="step-title">🛡️ 第四關：釉式轉換運算（全面除以基準點）<span class="step-status status-waiting" id="s4-status">鎖定中...</span></div>
+    <p style="font-size:14px; color:#666;">📝 提示：太棒了！你已經找到基準點 <span class="baseline-value">0.4347</span>。現在，請將第二關算出的「總莫耳數」，分別除以這個基準點。<br><strong style="color:#d32f2f;">(※重要指示：計算結果請「四捨五入至小數點後三位」，例如 0.163)</strong></p>
+    
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>氧化物</th><th>總莫耳數</th><th>÷ 基準點</th><th>賽格式數值</th></tr></thead>
+        <tbody>
+          <tr><td>Li₂O</td><td>0.0707</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.163" id="i27" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i27" data-ans="0.163">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>K₂O</td><td>0.0056</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.013" id="i28" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i28" data-ans="0.013">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>Na₂O</td><td>0.0085</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.020" id="i29" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i29" data-ans="0.020">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>CaO</td><td>0.0580</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.133" id="i30" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i30" data-ans="0.133">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>MgO</td><td>0.2420</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.557" id="i31" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i31" data-ans="0.557">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>BaO</td><td>0.0252</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.058" id="i32" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i32" data-ans="0.058">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>ZnO</td><td>0.0247</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.057" id="i33" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i33" data-ans="0.057">看答案</button>
+            </div>
+          </td></tr>
+          
+          <!-- RO 總和驗證列 -->
+          <tr style="background-color: #fff8e1; border-top: 2px dashed #ffb300; border-bottom: 2px dashed #ffb300;">
+            <td colspan="3" style="text-align: right; color: #e65100; font-weight: bold; padding: 12px 16px; line-height: 1.4;">
+              <span style="font-size: 18px;">🔥 RO 鹼性組加總驗證：</span><br>
+              <span style="font-size: 14px; color: #d84315;">
+                <span id="ro-sum-equation" class="hidden">(0.163 + 0.013 + 0.020 + 0.133 + 0.557 + 0.058 + 0.057)</span>
+                <button type="button" class="show-ans-btn" onclick="document.getElementById('ro-sum-equation').classList.remove('hidden'); this.classList.add('hidden');">看答案</button><br>
+                ★ 極度重要：相加必須為 1.000，代表成功建立比較基準！
+              </span>
+            </td>
+            <td style="font-size: 24px; font-weight: 900; color: #d32f2f; background-color: #ffe0b2;">
+              = 1.000
+            </td>
+          </tr>
+
+          <tr><td>Al₂O₃</td><td>0.1214</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="0.279" id="i34" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i34" data-ans="0.279">看答案</button>
+            </div>
+          </td></tr>
+          <tr><td>SiO₂</td><td>0.9182</td><td>÷ 0.4347</td><td>
+            <div style="display:flex; justify-content:center; align-items:center;">
+              = <input type="number" step="0.001" data-step="4" data-ans="2.112" id="i35" style="width:80px;">
+              <button type="button" class="show-ans-btn" data-target="i35" data-ans="2.112">看答案</button>
+            </div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 通關結果顯示 -->
+    <div id="final-result" class="final-card hidden" style="margin-top: 24px;">
+      <h3 style="margin-top:0;">🎉 測驗通過！這是你親手算出的極致賽格式：</h3>
+      <div style="text-align:left; display:inline-block; margin-top:10px;">
+        <span class="color-ro"><strong>RO組 (1.000)：</strong> Li₂O: 0.163, K₂O: 0.013, Na₂O: 0.020, CaO: 0.133, MgO: 0.557, BaO: 0.058, ZnO: 0.057</span><br>
+        <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.279</span><br>
+        <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 2.112</span>
+      </div>
+    </div>
+  </div>
+
+</article>
+</main>
+
+<script>
+  // 答案邏輯映射表 
+  const logicMap = {
+    // 葉長石A38
+    'i1': {w: 53, res: '2.12'}, 'i2': {w: 53, res: '0.53'}, 'i3': {w: 53, res: '0.53'}, 'i4': {w: 53, res: '8.48'}, 'i5': {w: 53, res: '41.34'},
+    // 滑石
+    'i6': {w: 5, res: '0.25'}, 'i7': {w: 5, res: '1.60'}, 'i8': {w: 5, res: '3.15'},
+    // 白雲石
+    'i9': {w: 10, res: '3.00'}, 'i10': {w: 10, res: '2.20'},
+    // 碳酸鎂
+    'i11': {w: 6, res: '2.88'},
+    // 氧化鎂
+    'i12': {w: 3, res: '3.00'},
+    // 碳酸鋇
+    'i13': {w: 5, res: '3.85'},
+    // 氧化鋅
+    'i14': {w: 2, res: '2.00'},
+    // 高嶺土
+    'i15': {w: 10, res: '3.90'}, 'i16': {w: 10, res: '4.60'},
+    // 石英
+    'i17': {w: 6, res: '6.00'},
+    
+    // 第二關 (Moles)
+    'i18': {moles: '0.0707'}, 'i19': {moles: '0.0056'}, 'i20': {moles: '0.0085'}, 'i21': {moles: '0.0580'}, 'i22': {moles: '0.2420'}, 'i23': {moles: '0.0252'}, 'i24': {moles: '0.0247'}, 'i25': {moles: '0.1214'}, 'i26': {moles: '0.9182'}
+  };
+
+  // 檢查該關卡是否全對
+  function checkStep(stepNum) {
+    const inputs = document.querySelectorAll(`input[data-step="${stepNum}"]`);
+    let allCorrect = true;
+    inputs.forEach(input => {
+      if (!input.classList.contains('correct')) allCorrect = false;
+    });
+
+    if (allCorrect) {
+      document.getElementById(`s${stepNum}-status`).textContent = '✅ 過關';
+      document.getElementById(`s${stepNum}-status`).className = 'step-status status-passed';
+      
+      if (stepNum < 4) {
+        // 解鎖下一關
+        const nextStep = document.getElementById(`step${stepNum + 1}`);
+        if (nextStep) {
+          nextStep.classList.remove('step-disabled');
+          document.getElementById(`s${stepNum + 1}-status`).textContent = '等待闖關...';
+        }
+      } else if (stepNum === 4) {
+        // 第四關通關，顯示最終結果與動畫
+        document.getElementById('final-result').classList.remove('hidden');
+        fireConfetti();
+      }
+    }
+  }
+
+  // 監聽關卡輸入框 (包含第一、二、四關)
+  document.querySelectorAll('input[type="number"][data-step]').forEach(input => {
+    input.addEventListener('input', function() {
+      const ans = parseFloat(this.getAttribute('data-ans'));
+      const val = parseFloat(this.value);
+      const step = this.getAttribute('data-step');
+      
+      // 容許極微小的浮點數誤差，或是使用者打出正確數字
+      if (val === ans) {
+        this.className = 'correct';
+        if (step === '1') {
+           document.getElementById('r' + this.id.substring(1)).textContent = logicMap[this.id].res;
+        } else if (step === '2') {
+           document.getElementById('r' + this.id.substring(1)).textContent = logicMap[this.id].moles;
+        }
+        checkStep(parseInt(step));
+      } else {
+        this.className = this.value !== '' ? 'error' : '';
+        if (step === '1' || step === '2') {
+            document.getElementById('r' + this.id.substring(1)).textContent = '?';
+        }
+      }
+    });
+  });
+
+  // 第三關 Checkbox 邏輯
+  const checkboxes = document.querySelectorAll('.checkbox-label input');
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', function() {
+      let correctChecked = 0;
+      let wrongChecked = 0;
+      checkboxes.forEach(c => {
+        if (c.checked) {
+          if (c.getAttribute('data-correct') === 'true') correctChecked++;
+          else wrongChecked++;
+        }
+      });
+      // 必須精準打勾 7 個，且不能勾錯的
+      if (correctChecked === 7 && wrongChecked === 0) {
+        document.getElementById('ro-sum-box').classList.remove('hidden');
+      } else {
+        document.getElementById('ro-sum-box').classList.add('hidden');
+      }
+    });
+  });
+
+  // 第三關 基準點輸入邏輯 (容錯範圍 0.4346 ~ 0.4348)
+  document.getElementById('ro-sum-input').addEventListener('input', function() {
+    const val = parseFloat(this.value);
+    if (val >= 0.4346 && val <= 0.4348) {
+      this.className = 'correct';
+      document.getElementById('s3-status').textContent = '✅ 過關';
+      document.getElementById('s3-status').className = 'step-status status-passed';
+      document.getElementById('step4').classList.remove('step-disabled');
+      document.getElementById('s4-status').textContent = '等待闖關...';
+    } else {
+      this.className = this.value !== '' ? 'error' : '';
+    }
+  });
+
+  // 看答案按鈕邏輯
+  document.querySelectorAll('.show-ans-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-target');
+      const ans = this.getAttribute('data-ans');
+      const targetInput = document.getElementById(targetId);
+      if(targetInput) {
+        targetInput.value = ans;
+        targetInput.dispatchEvent(new Event('input')); // 觸發驗證機制
+      }
+    });
+  });
+
+  // 簡易五彩紙片動畫函數
+  function fireConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const pieces = [];
+    const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+    
+    for (let i = 0; i < 150; i++) {
+      pieces.push({
+        x: canvas.width / 2, y: canvas.height / 2 + 100,
+        vx: (Math.random() - 0.5) * 20, vy: (Math.random() - 1) * 20 - 5,
+        size: Math.random() * 10 + 5, color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360, rotationSpeed: (Math.random() - 0.5) * 10
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let active = false;
+      pieces.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.5; // gravity
+        p.rotation += p.rotationSpeed;
+        if (p.y < canvas.height) active = true;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+      });
+      if (active) requestAnimationFrame(animate);
+      else canvas.remove(); // 清除畫布
+    }
+    animate();
+  }
+</script>
+</body>
+</html>

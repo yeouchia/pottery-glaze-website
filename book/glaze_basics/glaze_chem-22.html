@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學06（葉長石與鋰的應用）</title>
+<meta name="description" content="陶瓷釉式計算進階實戰！透過葉長石A38、碳酸鈣、氧化鋅的 100g 綜合配方，詳細拆解葉長石中 Li₂O（氧化鋰）的特殊助熔特性，帶您掌握低膨脹耐熱釉藥的配方計算。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; 
+    font-size: 1.25em; 
+    font-weight: 900; 
+    background-color: #fff0f5; 
+    padding: 2px 8px; 
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; 
+    margin: 0 4px;
+  }
+
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 06</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學06</h1>
+  <div class="lead"><strong>進階挑戰：探索「鋰」的降膨脹魔法！</strong> 在一般的鉀鈉長石之外，還有一種被陶藝家視為珍寶的礦物——「葉長石（Petalite）」。葉長石最大的特徵是它含有少許的氧化鋰（Li₂O），這是一種強大的助熔劑，能大幅降低釉藥的熱膨脹係數。這次，我們將透過 <strong>葉長石A38 55g、碳酸鈣 15g、氧化鋅 5g、高嶺土 15g、石英 10g</strong> 這份 100g 的抗熱震配方，帶您精確計算稀有元素「鋰」的釉式結構！</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">莫耳數</span><span class="tag">葉長石</span><span class="tag">氧化鋰</span><span class="tag">抗熱震</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、為什麼要特別使用「葉長石」？</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <rect x="50" y="30" width="220" height="140" fill="#fff0f5" stroke="#ffb6c1" stroke-width="2" rx="8"/>
+    <text x="160" y="60" fill="#d32f2f" font-size="18" font-weight="bold" text-anchor="middle">一般鉀鈉長石</text>
+    <text x="160" y="90" fill="#333" font-size="14" text-anchor="middle">含大量 K₂O 與 Na₂O</text>
+    <text x="160" y="120" fill="#333" font-size="14" text-anchor="middle">熱膨脹係數較高，易開片</text>
+    
+    <text x="300" y="100" fill="#777" font-size="24" font-weight="bold" text-anchor="middle">VS</text>
+    
+    <rect x="330" y="30" width="220" height="140" fill="#e0ffff" stroke="#00ced1" stroke-width="2" rx="8"/>
+    <text x="440" y="60" fill="#008b8b" font-size="18" font-weight="bold" text-anchor="middle">葉長石 (Petalite)</text>
+    <text x="440" y="90" fill="#333" font-size="14" text-anchor="middle">提供珍貴的 Li₂O (氧化鋰)</text>
+    <text x="440" y="120" fill="#333" font-size="14" text-anchor="middle">極低膨脹係數，抗熱震極佳</text>
+  </svg>
+  
+  <h3>1. 認識超強助熔劑：氧化鋰（Li₂O）</h3>
+  <p>在所有鹼金屬助熔劑中，鋰的原子量非常小，這代表相同重量下，它能提供更多的莫耳數來參與化學反應。氧化鋰是很強烈的助熔劑，能有效降低釉藥的熔融溫度，並且讓釉面呈現非常漂亮的明亮度與光澤感。</p>
+  
+  <h3>2. 對抗「開片」與「熱震」的最佳武器</h3>
+  <p>鉀（K₂O）和鈉（Na₂O）的熱膨脹係數很高，容易讓釉面產生冰裂（開片）。相反地，鋰（Li₂O）的熱膨脹係數極低。當我們將配方中的鉀鈉長石替換為葉長石時，釉藥與土坯的收縮率會更緊密貼合。這也是為什麼製作「砂鍋」、「直火陶鍋」或耐熱烤盤的釉藥時，葉長石幾乎是不可或缺的關鍵原料。</p>
+
+  <h2>二、第一階段準備：建立 100g 實作的化學分析數據</h2>
+  <p>我們將使用以下比例：<strong>葉長石A38 55g、碳酸鈣 15g、氧化鋅 5g、高嶺土 15g、石英 10g</strong>（總重 100g）。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>Li₂O (%)</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>葉長石A38</strong></td>
+          <td>55g</td>
+          <td>4</td>
+          <td>1</td>
+          <td>1</td>
+          <td>16</td>
+          <td>78</td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鈣</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>氧化鋅</strong></td>
+          <td>5g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>表格中為教學用「假設化學成分表」。天然葉長石除了主要的鋰、鋁、矽外，通常會伴隨微量的鉀與鈉。實際在進行釉藥調配時，<strong>必須以原料廠商提供的「實際原料分析表」為正確來源參考。</strong>
+  </div>
+
+  <h3>常用陶瓷氧化物分子量對照表（本次新增 Li₂O）</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td><strong>氧化鋰</strong></td><td><strong>Li₂O</strong></td><td><strong>30</strong></td></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td>氧化鋅</td><td>ZnO</td><td>81</td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="18" font-weight="bold" text-anchor="middle">原料總重 (g) × 原料分析表內的各項成分百分比 = 氧化物實際重量</text>
+    <rect x="150" y="70" width="90" height="50" fill="#20b2aa" rx="5"/>
+    <text x="195" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">55g</text>
+    <text x="260" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">×</text>
+    <rect x="280" y="70" width="90" height="50" fill="#f4a460" rx="5"/>
+    <text x="325" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">4%</text>
+    <text x="390" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">=</text>
+    <rect x="410" y="70" width="100" height="50" fill="#cd5c5c" rx="5"/>
+    <text x="460" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">2.20g</text>
+    <text x="300" y="145" fill="#777" font-size="13" text-anchor="middle">(例如：葉長石A38 中的 Li₂O 重量)</text>
+  </svg>
+  
+  <p>將混合便當拆解成單一成分。記得將百分比轉換為小數（如 4% = 0.04）。</p>
+  
+  <h3>1. 葉長石A38 (55g) 的拆解（重點！）</h3>
+  <ul>
+    <li><strong>Li₂O：</strong> 55g × 0.04 = <strong>2.20g</strong></li>
+    <li>K₂O： 55g × 0.01 = <strong>0.55g</strong></li>
+    <li>Na₂O： 55g × 0.01 = <strong>0.55g</strong></li>
+    <li>Al₂O₃： 55g × 0.16 = <strong>8.80g</strong></li>
+    <li>SiO₂： 55g × 0.78 = <strong>42.90g</strong></li>
+  </ul>
+
+  <h3>2. 其他原料的拆解</h3>
+  <ul>
+    <li><strong>碳酸鈣：</strong> 15g × 0.56 = <strong>8.40g</strong> CaO</li>
+    <li><strong>氧化鋅：</strong> 5g × 1.00 = <strong>5.00g</strong> ZnO</li>
+    <li><strong>高嶺土：</strong> 15g × 0.39 = <strong>5.85g</strong> Al₂O₃ ｜ 15g × 0.46 = <strong>6.90g</strong> SiO₂</li>
+    <li><strong>石英：</strong> 10g × 1.00 = <strong>10.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <p>公式：<strong>氧化物重量 (g) ÷ 該氧化物的分子量 = 莫耳數 (Mole)</strong>。</p>
+  
+  <h3>1. RO 組（助熔劑：鋰、鉀、鈉、鈣、鋅）莫耳數計算</h3>
+  <ul>
+    <li>Li₂O (葉長石)：2.20g ÷ 30 = <strong>0.0733</strong></li>
+    <li>K₂O (葉長石)：0.55g ÷ 94 = <strong>0.0059</strong></li>
+    <li>Na₂O (葉長石)：0.55g ÷ 62 = <strong>0.0089</strong></li>
+    <li>CaO (碳酸鈣)：8.40g ÷ 56 = <strong>0.1500</strong></li>
+    <li>ZnO (氧化鋅)：5.00g ÷ 81 = <strong>0.0617</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁）與 RO₂ 組（矽）莫耳數計算</h3>
+  <ul>
+    <li>Al₂O₃ (葉長石)：8.80g ÷ 102 = <strong>0.0863</strong></li>
+    <li>Al₂O₃ (高嶺土)：5.85g ÷ 102 = <strong>0.0574</strong></li>
+    <li>SiO₂ (葉長石)：42.90g ÷ 60 = <strong>0.7150</strong></li>
+    <li>SiO₂ (高嶺土)：6.90g ÷ 60 = <strong>0.1150</strong></li>
+    <li>SiO₂ (石英)：10.00g ÷ 60 = <strong>0.1667</strong></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <p>我們將剛剛算出的莫耳數，依照化學元素種類進行垂直加總。</p>
+  <ul>
+    <li><strong>Li₂O 總和：</strong>0.0733</li>
+    <li><strong>K₂O 總和：</strong>0.0059</li>
+    <li><strong>Na₂O 總和：</strong>0.0089</li>
+    <li><strong>CaO 總和：</strong>0.1500</li>
+    <li><strong>ZnO 總和：</strong>0.0617</li>
+    <li><strong>Al₂O₃ 總和：</strong>0.0863(葉長石) + 0.0574(高嶺) = <strong>0.1437</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.7150(葉長石) + 0.1150(高嶺) + 0.1667(石英) = <strong>0.9967</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點</h2>
+  <p>為了建立釉式的比較基準，我們將負責降溫的 RO 鹼性組（包含新加入的 Li₂O）總和壓縮為 1.000。</p>
+  <h3>1. 算出本次配方的「基準尺」</h3>
+  <p>我們將第五步算出的 RO 組莫耳數加總：<br>
+  總鹼性莫耳數 = Li₂O (0.0733) + K₂O (0.0059) + Na₂O (0.0089) + CaO (0.1500) + ZnO (0.0617) = <span class="baseline-value">0.2998</span></p>
+  <p>所以，<span class="baseline-value">0.2998</span> 就是我們這支抗熱震配方的歸一化基準點。</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將剛剛彙整的所有莫耳數，統統除以我們的基準值 <span class="baseline-value">0.2998</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】Li₂O：0.0733 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>0.245</strong></li>
+    <li class="color-ro">【RO組】K₂O：0.0059 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>0.020</strong></li>
+    <li class="color-ro">【RO組】Na₂O：0.0089 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>0.029</strong> <em>(因四捨五入微調以湊齊1.000)</em></li>
+    <li class="color-ro">【RO組】CaO：0.1500 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>0.500</strong></li>
+    <li class="color-ro">【RO組】ZnO：0.0617 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>0.206</strong></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>防呆檢查：</strong>以上 Li₂O、K₂O、Na₂O、CaO、ZnO 相加 0.245 + 0.020 + 0.029 + 0.500 + 0.206 剛好等於 <strong>1.000</strong>，證明歸一化計算完全正確！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1437 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>0.479</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.9967 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2998</span> = <strong>3.325</strong></li>
+  </ul>
+  
+  <h3>我們的 100g 葉長石範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> Li₂O: 0.245, K₂O: 0.020, Na₂O: 0.029, CaO: 0.500, ZnO: 0.206</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.479</span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 3.325</span>
+  </div>
+
+  <h2>八、實例解析：這支含「葉長石」的釉藥燒出來會怎樣？</h2>
+  <p>透過釉式解碼，我們可以看見「鋰」元素在釉藥結構中扮演的魔法角色：</p>
+  <h3>1. 卓越的抗開片與耐熱震能力</h3>
+  <p>在這支配方中，高膨脹係數的 K₂O 與 Na₂O 比例被壓得非常低（總和不到 0.05），取而代之的是高達 0.245 的超低膨脹係數元素——鋰（Li₂O）。這使得這層釉面在遇熱與冷卻的過程中收縮極小，能完美貼合土坯，是製作能夠直火加熱的陶鍋或烤盤的理想基礎結構。</p>
+  <h3>2. 鋅與鋰的平滑光澤搭配</h3>
+  <p>除了鋰的貢獻外，CaO (0.500) 與 ZnO (0.206) 的組合確保了釉面在 1260°C 能充分熔融。鋰能帶來極佳的光澤，而鋅則能使釉面平滑。搭配上 0.479 的鋁與 3.325 的矽，這支釉藥的玻璃網絡發育健全，呈現出強健、耐刮且光潔明亮的透明或半透明表面。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">葉長石與鋰元素計算 常見問答 FAQ</div>
+    <p><strong>Q：如果買不到葉長石，可以用「碳酸鋰」來取代鋰的來源嗎？</strong><br>
+    A：可以！碳酸鋰（Li₂CO₃）是純粹提供鋰的來源，但它有兩個缺點：一是價格非常昂貴；二是它是水溶性的，很容易隨著水分滲入素坯中，導致釉面實際殘留的鋰不足。葉長石（矽酸鋁鋰礦）因為是不溶於水的穩定礦物，因此是陶藝家更愛用的安全來源。</p>
+    <p><strong>Q：鋰的分子量只有 30，為什麼算出來的 UMF 比例（0.245）比想像中高這麼多？</strong><br>
+    A：這就是化學計算的奧妙！在步驟一中，Li₂O 的重量雖然只有 2.2g，但因為它的分子量極小（標準體重很輕），所以在步驟二「重量 ÷ 分子量」時，除以 30 得到的「顆粒數量（莫耳數）」就會相對放大。這證明了：在陶瓷化學裡，不能單看加入的粉末重量，原子的真實數量才是關鍵。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

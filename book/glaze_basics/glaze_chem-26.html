@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學10（骨灰與磷的應用）</title>
+<meta name="description" content="陶瓷釉式計算終極奧秘！透過包含磷酸鈣（骨灰）的 100g 配方範例，詳細拆解骨灰提供 CaO 與 P₂O₅ 的特殊定位，帶您掌握液相分相（Liquid Phase Separation）與乳濁鈞釉的計算技術。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .color-p2o5 { color: #4b0082; font-weight: bold; } /* 磷的專屬深紫色 */
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; 
+    font-size: 1.25em; 
+    font-weight: 900; 
+    background-color: #fff0f5; 
+    padding: 2px 8px; 
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; 
+    margin: 0 4px;
+  }
+
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 10</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學10</h1>
+  <div class="lead"><strong>終極秘密武器：液相分相與骨灰的魔法！</strong>許多陶藝家在追求傳統「鈞釉（Jun Glaze）」那如雲霧般的天青乳濁感，或是鐵紅釉（柿紅）的溫潤層次時，都會添加一種非常特別的原料——「骨灰（合成磷酸鈣）」。骨灰不僅提供助熔的鈣，更帶來了獨特的「五氧化二磷（P₂O₅）」，這是促使釉藥產生「液相分相（Liquid Phase Separation）」質感的終極關鍵。透過 <strong>霞正長石 50g、磷酸鈣(骨灰) 10g、碳酸鈣 10g、高嶺土 10g、石英 20g</strong> 這份配方，我們將為您揭開磷酸鹽在釉式中的計算奧秘！</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">莫耳數</span><span class="tag">骨灰</span><span class="tag">磷酸鈣</span><span class="tag">液相分相</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、解析骨灰（磷酸鈣）：一料雙供與 P₂O₅ 的特殊定位</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <rect x="50" y="50" width="160" height="100" fill="#a9a9a9" rx="8"/>
+    <text x="130" y="105" fill="#fff" font-size="20" font-weight="bold" text-anchor="middle">骨灰 (磷酸鈣)</text>
+    
+    <path d="M 230 80 L 320 60" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <path d="M 230 120 L 320 140" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <rect x="350" y="30" width="200" height="40" fill="#db7093" rx="4"/>
+    <text x="450" y="55" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">供給: CaO (歸於 RO 組)</text>
+    
+    <rect x="350" y="120" width="200" height="40" fill="#4b0082" rx="4"/>
+    <text x="450" y="145" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">供給: P₂O₅ (歸於 RO₂ 組)</text>
+  </svg>
+  
+  <h3>1. 磷酸鈣的化學雙重性</h3>
+  <p>天然骨灰或合成磷酸鈣（Calcium Phosphate, Ca₃(PO₄)₂），顧名思義是由鈣與磷酸根組成。當我們將它加入釉藥時，它會拆解成提供降溫助熔的 <strong>氧化鈣（CaO）</strong>，以及提供特殊網絡結構的 <strong>五氧化二磷（P₂O₅）</strong>。這意味著在計算時，我們必須將這 10g 的骨灰精準拆開。</p>
+  
+  <h3>2. P₂O₅ 該放在賽格式的哪裡？</h3>
+  <p>這又是一個計算陷阱！在賽格系統中，P₂O₅ 的化學行為類似於二氧化矽（SiO₂），它是一種「玻璃形成劑（Network Former）」。因此，<strong>五氧化二磷（P₂O₅）必須被放置在賽格式最右側的「RO₂ 酸性組」</strong>，絕對不可以與鋁放在一起，更不能算進 RO 基準中！</p>
+
+  <h2>二、第一階段準備：建立 100g 實作的化學分析數據</h2>
+  <p>我們的配方：<strong>霞正長石 50g、磷酸鈣(骨灰) 10g、碳酸鈣 10g、高嶺土 10g、石英 20g</strong>（總重 100g）。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>CaO (%)</th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+          <th><span class="color-p2o5">P₂O₅ (%)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>霞正長石</strong></td>
+          <td>50g</td>
+          <td>5</td>
+          <td>10</td>
+          <td>1</td>
+          <td>23</td>
+          <td>60</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>磷酸鈣 (骨灰)</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>54</td>
+          <td>-</td>
+          <td>-</td>
+          <td><span class="color-p2o5">46</span></td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鈣</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>56</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>10g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>20g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>表格中為教學用「假設化學成分表」。合成磷酸鈣因為已經過高溫煅燒，燒失量極低，我們以純粹的 CaO (約54%) 與 P₂O₅ (約46%) 比例來計算。實際調配請依廠商分析表為準。
+  </div>
+
+  <h3>常用陶瓷氧化物分子量對照表（本次新增 P₂O₅）</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+      <tr><td><strong class="color-p2o5">五氧化二磷</strong></td><td><strong class="color-p2o5">P₂O₅</strong></td><td><strong class="color-p2o5">142</strong></td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <p>公式：<strong>原料重量 × 該氧化物在分析表中的百分比 = 氧化物重量</strong>。</p>
+  
+  <h3>1. 霞正長石 (50g) 與 骨灰 (10g) 的拆解（重點！）</h3>
+  <ul>
+    <li><strong>霞正長石：</strong> K₂O: 50g × 0.05 = <strong>2.50g</strong>｜Na₂O: 50g × 0.10 = <strong>5.00g</strong>｜CaO: 50g × 0.01 = <strong>0.50g</strong>｜Al₂O₃: 50g × 0.23 = <strong>11.50g</strong>｜SiO₂: 50g × 0.60 = <strong>30.00g</strong></li>
+    <li><strong>磷酸鈣 (骨灰)：</strong> CaO: 10g × 0.54 = <strong>5.40g</strong> ｜ <span class="color-p2o5">P₂O₅: 10g × 0.46 = <strong>4.60g</strong></span></li>
+  </ul>
+
+  <h3>2. 其他原料的拆解</h3>
+  <ul>
+    <li><strong>碳酸鈣 (10g)：</strong> 10g × 0.56 = <strong>5.60g</strong> CaO</li>
+    <li><strong>高嶺土 (10g)：</strong> 10g × 0.39 = <strong>3.90g</strong> Al₂O₃ ｜ 10g × 0.46 = <strong>4.60g</strong> SiO₂</li>
+    <li><strong>石英 (20g)：</strong> 20g × 1.00 = <strong>20.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <p>公式：<strong>氧化物重量 (g) ÷ 該氧化物的分子量 = 莫耳數 (Mole)</strong>。</p>
+  
+  <h3>1. RO 組（助熔劑：鉀、鈉、鈣）莫耳數計算</h3>
+  <ul>
+    <li>K₂O (霞正)：2.50g ÷ 94 = <strong>0.0266</strong></li>
+    <li>Na₂O (霞正)：5.00g ÷ 62 = <strong>0.0806</strong></li>
+    <li>CaO (霞正)：0.50g ÷ 56 = <strong>0.0089</strong></li>
+    <li>CaO (骨灰)：5.40g ÷ 56 = <strong>0.0964</strong></li>
+    <li>CaO (碳酸鈣)：5.60g ÷ 56 = <strong>0.1000</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁）與 RO₂ 組（矽、<span class="color-p2o5">磷</span>）莫耳數計算</h3>
+  <ul>
+    <li>Al₂O₃ (霞正)：11.50g ÷ 102 = <strong>0.1127</strong></li>
+    <li>Al₂O₃ (高嶺土)：3.90g ÷ 102 = <strong>0.0382</strong></li>
+    <li>SiO₂ (霞正)：30.00g ÷ 60 = <strong>0.5000</strong></li>
+    <li>SiO₂ (高嶺土)：4.60g ÷ 60 = <strong>0.0767</strong></li>
+    <li>SiO₂ (石英)：20.00g ÷ 60 = <strong>0.3333</strong></li>
+    <li><span class="color-p2o5">P₂O₅ (骨灰)：4.60g ÷ 142 = <strong>0.0324</strong></span></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <p>我們將剛剛算出的莫耳數進行垂直加總。</p>
+  <ul>
+    <li><strong>K₂O 總和：</strong>0.0266</li>
+    <li><strong>Na₂O 總和：</strong>0.0806</li>
+    <li><strong>CaO 總和：</strong>0.0089(長石) + 0.0964(骨灰) + 0.1000(碳酸鈣) = <strong>0.2053 (取0.2054進位修正)</strong></li>
+    <li><strong>Al₂O₃ 總和：</strong>0.1127 + 0.0382 = <strong>0.1510 (取0.151)</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.5000 + 0.0767 + 0.3333 = <strong>0.9100</strong></li>
+    <li><strong class="color-p2o5">P₂O₅ 總和：0.0324</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點</h2>
+  <p>在賽格式中，歸一化的基準永遠是 <strong>RO 組鹼金屬的總和</strong>。</p>
+  <h3>算出本次配方的「基準尺」</h3>
+  <p>總鹼性莫耳數 = K₂O (0.0266) + Na₂O (0.0806) + CaO (0.2054) = <span class="baseline-value">0.3126</span></p>
+  <p>所以，<span class="baseline-value">0.3126</span> 就是我們這支含骨灰配方的歸一化基準點。請記得，P₂O₅ 是酸性組，絕對不要加進來！</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將所有彙整的莫耳數，統統除以我們的基準值 <span class="baseline-value">0.3126</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】K₂O：0.0266 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3126</span> = <strong>0.085</strong></li>
+    <li class="color-ro">【RO組】Na₂O：0.0806 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3126</span> = <strong>0.258</strong></li>
+    <li class="color-ro">【RO組】CaO：0.2054 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3126</span> = <strong>0.657</strong></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>防呆檢查：</strong>以上 K₂O、Na₂O、CaO 相加 0.085 + 0.258 + 0.657 剛好等於 <strong>1.000</strong>，基準完全正確！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1510 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3126</span> = <strong>0.483</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.9100 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3126</span> = <strong>2.911</strong></li>
+    <li class="color-ro2 color-p2o5">【RO₂組】P₂O₅：0.0324 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3126</span> = <strong>0.104</strong></li>
+  </ul>
+  
+  <h3>我們的 100g 骨灰（磷酸鈣）範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> K₂O: 0.085, Na₂O: 0.258, CaO: 0.657</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.483</span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 2.911, <span class="color-p2o5">P₂O₅: 0.104</span></span>
+  </div>
+
+  <h2>八、實例解析：這支「骨灰配方」為何能產生液相分相？</h2>
+  <p>透過數字解碼，我們終於觸碰到了鈞釉與乳濁釉的科學核心——「液相分相（Liquid Phase Separation）」：</p>
+  <h3>1. 磷酸鹽破壞玻璃網絡的魔法</h3>
+  <p>在冷卻的過程中，富含磷（P₂O₅ 0.104）的玻璃液，與富含矽（SiO₂ 2.911）的玻璃液，會像「水與油」一樣產生互不相溶的微觀分離現象。這種分離會形成無數奈米級的微小液滴懸浮在釉層中。當光線穿透這些微小液滴時，會發生「瑞利散射（Rayleigh scattering）」，讓透明的釉藥折射出如天空般的雲霧藍白乳光！</p>
+  <h3>2. 骨灰在銅紅釉與鐵紅釉中的神助攻</h3>
+  <p>除了乳濁外，P₂O₅ 也是製作「辰砂（銅紅）」或「柿紅（鐵紅）」的絕佳催化劑。適量的骨灰能保護微量的銅膠體或鐵結晶在釉層中穩定發育，避免在高溫中完全消散，讓紅色發色更加鮮豔且深邃。有了這支 1260°C 的基礎配方，您可以嘗試外加 1% 氧化銅，或是 8% 氧化鐵，去探索分相乳濁與金屬發色的無限可能！</p>
+
+  <div class="faq-box">
+    <div class="faq-title">骨灰與磷酸鹽計算 常見問答 FAQ</div>
+    <p><strong>Q：天然骨灰跟合成磷酸鈣有什麼差別？</strong><br>
+    A：天然骨灰（Bone Ash）是由動物骨骼高溫煅燒而成，除了磷酸鈣外，通常還含有微量的鎂、鐵或碳酸鹽等雜質，這些雜質往往能帶來無法預測的生動窯變。而工業合成的磷酸鈣純度極高，發色非常穩定可控。在計算上，兩者都視為提供 CaO 與 P₂O₅。</p>
+    <p><strong>Q：為什麼 P₂O₅ 不是放在中性組，而是放在跟 SiO₂ 一樣的 RO₂ 酸性組？</strong><br>
+    A：這是因為化學結構的關係！五氧化二磷（P₂O₅）在熔融狀態下，具有強大的能力可以自己形成玻璃網絡（稱為磷酸鹽玻璃）。因為它扮演的是建立結構骨幹的角色，所以被歸類在玻璃形成劑的 RO₂（酸性組）中。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

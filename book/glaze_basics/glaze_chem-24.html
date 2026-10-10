@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學08（天目釉外加比例）</title>
+<meta name="description" content="陶瓷釉式計算進階實戰！深入探討經典「天目釉」配方，解析碳酸鈣與滑石比例如何影響發色，並詳細示範「外加 8% 氧化鐵」在賽格式（Seger Formula）中的計算技巧。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .color-fe { color: #a52a2a; font-weight: bold; } /* 鐵的專屬紅色 */
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; 
+    font-size: 1.25em; 
+    font-weight: 900; 
+    background-color: #fff0f5; 
+    padding: 2px 8px; 
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; 
+    margin: 0 4px;
+  }
+
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 08</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學08</h1>
+  <div class="lead"><strong>天目釉的精妙微調：</strong>深邃的「天目（Tenmoku）」是陶藝史上最經典的鐵系釉藥。在天目釉中，碳酸鈣（提供 CaO）與滑石（提供 MgO）的比例，是決定釉面呈現鏡面黑、兔毫、還是油滴的關鍵樞紐。此外，色料通常採用「外加（Outer Addition）」的方式計算。透過這份 <strong>霞正長石 55g、碳酸鈣 7.5g、滑石 7.5g、高嶺土 15g、石英 15g，外加氧化鐵 8g</strong> 的配方，我們將帶您解析「外加百分比」在釉式矩陣中的處理技術！</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">天目釉</span><span class="tag">外加比例</span><span class="tag">氧化鐵</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、什麼是「外加（Outer Addition）」？為何鐵粉不放進基礎 100g 裡？</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <rect x="80" y="40" width="200" height="120" fill="#fff" stroke="#dcd7c7" stroke-width="3" rx="8"/>
+    <text x="180" y="80" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">基礎透明釉</text>
+    <text x="180" y="110" fill="#6c6654" font-size="16" text-anchor="middle">總重 = 100g</text>
+    <text x="180" y="135" fill="#777" font-size="14" text-anchor="middle">(長石+鈣+滑石+高嶺+石英)</text>
+    
+    <text x="320" y="105" fill="#333" font-size="30" font-weight="bold" text-anchor="middle">+</text>
+    
+    <circle cx="430" cy="100" r="45" fill="#a52a2a"/>
+    <text x="430" y="95" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">外加</text>
+    <text x="430" y="120" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">氧化鐵 8%</text>
+    
+    <path d="M 180 170 L 180 190 L 430 190 L 430 155" fill="none" stroke="#d32f2f" stroke-width="2" stroke-dasharray="4,4"/>
+    <text x="305" y="185" fill="#d32f2f" font-size="14" font-weight="bold" text-anchor="middle">實際總重量 = 108g</text>
+  </svg>
+  
+  <h3>1. 統一釉式基準的「外加法」</h3>
+  <p>在配製色釉時，陶藝家通常會先調出一桶完美的 100g「基礎透明釉」，然後再「外加」不同比例的色料（如 8% 的氧化鐵）。這樣做的好處是：<strong>無論你加了多少色料，基礎釉中鉀、鈉、鈣、鋁、矽的相對比例永遠不會改變</strong>。如果把氧化鐵算在 100g 內（內含），那麼加入鐵粉就會稀釋掉原本長石與石英的比例，導致釉的熔點與性質發生變化。</p>
+  
+  <h3>2. 鈣與鎂 1:1 的完美平衡</h3>
+  <p>在天目釉中，純粹的高鈣會讓鐵釉呈現出光滑如鏡的黑釉；而高鎂（來自滑石）則容易讓表面析出結晶（如柿目或茶葉末）。本配方將碳酸鈣與滑石設定在精確的 1:1（各 7.5g），這是一種常見的過渡狀態配方，能在 1260°C 的還原氣氛中引發豐富的鐵系變化。</p>
+
+  <h2>二、第一階段準備：建立實作的化學分析數據（含外加成分）</h2>
+  <p>我們的配方總重將是 108g：<strong>霞正長石 55g、碳酸鈣 7.5g、滑石 7.5g、高嶺土 15g、石英 15g，以及外加的氧化鐵 8g</strong>。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>CaO (%)</th>
+          <th>MgO (%)</th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+          <th>Fe₂O₃ (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>霞正長石</strong></td>
+          <td>55g</td>
+          <td>5</td>
+          <td>10</td>
+          <td>1</td>
+          <td>-</td>
+          <td>23</td>
+          <td>60</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>碳酸鈣</strong></td>
+          <td>7.5g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>56</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>滑石</strong></td>
+          <td>7.5g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>5</td>
+          <td>32</td>
+          <td>-</td>
+          <td>63</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>氧化鐵 <span class="color-fe">(外加)</span></strong></td>
+          <td>8g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td><span class="color-fe">100</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>工業級氧化鐵（Fe₂O₃）的純度極高，此處以 100% 計算。在賽格式中，氧化氣氛下的鐵（Fe₂O₃）被歸類於中性的 R₂O₃ 組。
+  </div>
+
+  <h3>常用陶瓷氧化物分子量對照表（本次新增 Fe₂O₃）</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td>氧化鎂</td><td>MgO</td><td>40</td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td><strong>氧化鐵</strong></td><td><strong class="color-fe">Fe₂O₃</strong></td><td><strong class="color-fe">160</strong></td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <p>公式：<strong>原料重量 × 該氧化物在分析表中的百分比 = 氧化物重量</strong>。</p>
+  
+  <h3>1. 霞正長石 (55g) 與 氧化鐵 (8g) 拆解</h3>
+  <ul>
+    <li><strong>霞正長石：</strong> K₂O: 55g × 0.05 = <strong>2.75g</strong>｜Na₂O: 55g × 0.10 = <strong>5.50g</strong>｜CaO: 55g × 0.01 = <strong>0.55g</strong>｜Al₂O₃: 55g × 0.23 = <strong>12.65g</strong>｜SiO₂: 55g × 0.60 = <strong>33.00g</strong></li>
+    <li><strong>氧化鐵（外加）：</strong> Fe₂O₃: 8g × 1.00 = <strong class="color-fe">8.00g</strong></li>
+  </ul>
+
+  <h3>2. 其他原料的拆解</h3>
+  <ul>
+    <li><strong>碳酸鈣 (7.5g)：</strong> 7.5g × 0.56 = <strong>4.20g</strong> CaO</li>
+    <li><strong>滑石 (7.5g)：</strong> 7.5g × 0.05 = <strong>0.38g</strong> CaO ｜ 7.5g × 0.32 = <strong>2.40g</strong> MgO ｜ 7.5g × 0.63 = <strong>4.73g</strong> SiO₂</li>
+    <li><strong>高嶺土 (15g)：</strong> 15g × 0.39 = <strong>5.85g</strong> Al₂O₃ ｜ 15g × 0.46 = <strong>6.90g</strong> SiO₂</li>
+    <li><strong>石英 (15g)：</strong> 15g × 1.00 = <strong>15.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <p>公式：<strong>氧化物重量 (g) ÷ 該氧化物的分子量 = 莫耳數 (Mole)</strong>。</p>
+  
+  <h3>1. RO 組（助熔劑：鉀、鈉、鈣、鎂）莫耳數計算</h3>
+  <ul>
+    <li>K₂O (霞正)：2.75g ÷ 94 = <strong>0.0293</strong></li>
+    <li>Na₂O (霞正)：5.50g ÷ 62 = <strong>0.0887</strong></li>
+    <li>CaO (霞正)：0.55g ÷ 56 = <strong>0.0098</strong></li>
+    <li>CaO (碳酸鈣)：4.20g ÷ 56 = <strong>0.0750</strong></li>
+    <li>CaO (滑石)：0.38g ÷ 56 = <strong>0.0067</strong></li>
+    <li>MgO (滑石)：2.40g ÷ 40 = <strong>0.0600</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁、鐵）與 RO₂ 組（矽）莫耳數計算</h3>
+  <ul>
+    <li>Al₂O₃ (霞正)：12.65g ÷ 102 = <strong>0.1240</strong></li>
+    <li>Al₂O₃ (高嶺土)：5.85g ÷ 102 = <strong>0.0574</strong></li>
+    <li><span class="color-fe">Fe₂O₃ (氧化鐵)：8.00g ÷ 160 = <strong>0.0500</strong></span></li>
+    <li>SiO₂ (霞正)：33.00g ÷ 60 = <strong>0.5500</strong></li>
+    <li>SiO₂ (滑石)：4.73g ÷ 60 = <strong>0.0788</strong></li>
+    <li>SiO₂ (高嶺土)：6.90g ÷ 60 = <strong>0.1150</strong></li>
+    <li>SiO₂ (石英)：15.00g ÷ 60 = <strong>0.2500</strong></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <p>我們將剛剛算出的莫耳數進行加總。</p>
+  <ul>
+    <li><strong>K₂O 總和：</strong>0.0293</li>
+    <li><strong>Na₂O 總和：</strong>0.0887</li>
+    <li><strong>CaO 總和：</strong>0.0098 + 0.0750 + 0.0067 = <strong>0.0915</strong></li>
+    <li><strong>MgO 總和：</strong>0.0600</li>
+    <li><strong>Al₂O₃ 總和：</strong>0.1240 + 0.0574 = <strong>0.1814</strong></li>
+    <li><strong class="color-fe">Fe₂O₃ 總和：0.0500</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.5500 + 0.0788 + 0.1150 + 0.2500 = <strong>0.9938</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點</h2>
+  <p>在賽格式中，即使我們外加了色料（鐵），歸一化的基準依然是以 <strong>RO 組鹼金屬總和</strong> 壓縮為 1.000。</p>
+  <h3>1. 算出本次配方的「基準尺」</h3>
+  <p>總鹼性莫耳數 = K₂O (0.0293) + Na₂O (0.0887) + CaO (0.0915) + MgO (0.0600) = <span class="baseline-value">0.2695</span></p>
+  <p>所以，<span class="baseline-value">0.2695</span> 就是我們這支天目釉配方的歸一化基準點。外加的鐵粉（Fe₂O₃）屬於 R₂O₃ 組，並不影響這個分母的計算。</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將所有彙整的莫耳數，統統除以我們的基準值 <span class="baseline-value">0.2695</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】K₂O：0.0293 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>0.108</strong> <em>(因四捨五入微調以湊齊1.000)</em></li>
+    <li class="color-ro">【RO組】Na₂O：0.0887 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>0.329</strong></li>
+    <li class="color-ro">【RO組】CaO：0.0915 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>0.340</strong></li>
+    <li class="color-ro">【RO組】MgO：0.0600 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>0.223</strong></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>防呆檢查：</strong>以上 K₂O、Na₂O、CaO、MgO 相加 0.108 + 0.329 + 0.340 + 0.223 剛好等於 <strong>1.000</strong>，基準完全正確！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1814 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>0.673</strong></li>
+    <li class="color-r2o3 color-fe">【R₂O₃組】Fe₂O₃：0.0500 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>0.186</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.9938 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.2695</span> = <strong>3.688</strong></li>
+  </ul>
+  
+  <h3>我們的 100g 基礎＋8% 鐵粉 範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> K₂O: 0.108, Na₂O: 0.329, CaO: 0.340, MgO: 0.223</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.673, <span class="color-fe">Fe₂O₃: 0.186</span></span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 3.688</span>
+  </div>
+
+  <h2>八、實例解析：這支「天目釉」燒出來會怎樣？</h2>
+  <p>解碼這支配方，我們能一窺古代天目釉在高溫窯爐中的奧秘：</p>
+  <h3>1. 鐵在 R₂O₃ 組的比例意義（0.186）</h3>
+  <p>在賽格式中，當 Fe₂O₃ 的數值來到 0.186（約為基礎外加 8%）時，它已經不是單純的「顏料」，鐵本身在高溫下也會扮演強烈的助熔劑角色。這個比例在還原氣氛中能燒出極具深度的黑褐色，若是厚釉處，甚至可能呈現黑中透亮的質感。</p>
+  <h3>2. 鈣與鎂的拉扯：油滴或柿目的關鍵</h3>
+  <p>這支配方的 CaO (0.340) 與 MgO (0.223) 取得了某種平衡。相較於純高鈣的平滑鏡面黑，加入了滑石的配方（MgO 0.223）能在釉藥冷卻過程中干擾玻璃的形成，促使富含鐵的微小結晶析出。如果在降溫階段給予適當的保溫（Hold），這支配方極有潛力燒出類似「油滴」或邊緣帶有「茶葉末」的迷人窯變。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">外加色料與天目計算 常見問答 FAQ</div>
+    <p><strong>Q：如果我把 8g 的鐵粉算在總重 100g 裡面（內含），會有什麼差別？</strong><br>
+    A：如果你設定長石、石英等原料加起來只有 92g，剩下 8g 是鐵，那麼基礎釉的鋁矽數值會被稀釋。採用「外加法（基礎 100g + 色料 8g）」，你可以非常清楚地維持基礎釉（鋁矽比）的原始物理特性，這在後續試釉時，是管理配方最科學也最方便的標準作法。</p>
+    <p><strong>Q：為什麼這支釉式的鋁（0.673）跟矽（3.688）都變得這麼高？</strong><br>
+    A：你觀察得非常仔細！這是因為「霞正長石」具有極高的鹼金屬（鈉），這使得我們算出來的基準點（分母）變得很小（僅 0.2695）。當鋁和矽除以一個很小的分母時，得出來的相對數值就會被放大。它依然落在典型的高溫光澤/天目釉範圍內。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

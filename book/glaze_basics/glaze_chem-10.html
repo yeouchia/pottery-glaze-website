@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陶藝常見原料的分子量怎麼算？從釉藥原料學會化學式計算 - 陶藝與釉藥知識</title>
+<meta name="description" content="專為陶藝與釉藥學習者設計的化學基礎教學。淺顯易懂地解析如何計算陶瓷常見原料（如石英、長石、碳酸鈣）的分子量與式量，帶您看懂化學式，為釉式計算打下堅實基礎。">
+<style>
+  :root {
+    --bg: #eee7d8;
+    --paper: #fbfaf5;
+    --card: #f1f0e4;
+    --card-sub: #f6f4e9;
+    --line: #d8d4c5;
+    --text: #39372f;
+    --muted: #777367;
+    --accent: #6c6654;
+    --accent-light: #e8e4d6;
+    --quote: #eeeadd;
+    
+    /* Vibrant colors for SVG graphics */
+    --svg-magenta: #E6007E;
+    --svg-gold: #FFB800;
+    --svg-emerald: #00B050;
+    --svg-sapphire: #0070C0;
+    --svg-orange: #FF6600;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+
+  .page {
+    width: min(1000px, calc(100% - 32px));
+    margin: 34px auto 70px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 7px 24px rgba(70, 62, 45, .08);
+    overflow: hidden;
+  }
+
+  .article {
+    padding: 42px 56px 64px;
+  }
+
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    letter-spacing: .04em;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    color: #625d4e;
+    background: var(--accent-light);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 13px;
+    font-weight: bold;
+  }
+
+  h1 {
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.45;
+    margin: 0 0 18px;
+    color: #35332c;
+    border-bottom: 4px solid var(--accent);
+    padding-bottom: 15px;
+  }
+
+  h2 {
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size: 26px;
+    line-height: 1.55;
+    margin: 60px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--line);
+    color: #3e3b32;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 36px 0 16px;
+    color: #464238;
+    border-left: 5px solid var(--accent);
+    padding-left: 12px;
+    background: var(--card-sub);
+    padding: 8px 12px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .lead {
+    background: var(--quote);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 30px;
+    margin: 24px 0 40px;
+    color: #4d4a40;
+    font-size: 17px;
+    line-height: 1.9;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+  }
+
+  .svg-container {
+    width: 100%;
+    margin: 20px 0 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  p { margin: 16px 0; }
+  ul, ol { padding-left: 1.8em; margin: 16px 0 24px; }
+  li { margin: 8px 0; }
+  strong { font-weight: 700; color: #2a2822; }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 24px 0 32px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+    background: var(--card-sub);
+  }
+
+  th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    background: var(--card);
+    font-weight: 700;
+    color: #4d493e;
+    font-size: 15px;
+  }
+
+  .faq-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 30px;
+    margin: 40px 0;
+  }
+
+  .faq-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 20px;
+    color: #4c493e;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 10px;
+  }
+  
+  .site-footer-link {
+    margin-top: 60px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+  }
+  
+  .site-footer-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  @media(max-width: 768px) {
+    .page { width: calc(100% - 20px); margin: 20px auto 40px; border-radius: 8px; }
+    .article { padding: 30px 20px 40px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 18px; }
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥基礎｜🧪 釉藥化學基礎</div>
+  <span class="eyebrow">化學式與分子量教學</span>
+  
+  <h1>陶藝常見原料的分子量怎麼算？從釉藥原料學會化學式計算</h1>
+  
+  <div class="lead">
+    <strong>導讀引言：</strong><br>
+    當我們走進陶藝工作室，架子上往往擺滿了一桶一桶看似大同小異的白色粉末：石英、高嶺土、長石、碳酸鈣、氧化鋅。表面上看起來它們都是差不多的材料，但如果把它們放進高溫的窯爐裡，它們卻會展現出完全不同的熔融行為、收縮率與化學反應。要解開這些粉末在高溫下的秘密，我們絕不能只停留在「加入幾公克」的經驗法則，而是必須深入了解它們的「化學式」與「分子量」。<br><br>
+    化學式就像是陶瓷原料的身分證，清楚標示了它是由哪些元素組成；而「分子量計算」則是我們解讀這張身分證的關鍵工具。本篇文章專為沒有深厚化學背景的陶藝愛好者與釉藥學習者設計，我們不會探討過於艱澀的純化學理論，而是專注於陶瓷釉藥領域最實用的角度。我們將一步步帶領您看懂化學式裡的英文字母與數字，學會如何計算常見原料的分子量。當您掌握了這項技能，您將不再只是盲目地照抄釉藥配方，而是能夠真正理解配方背後的化學邏輯，為未來學習更高階的莫耳換算與釉式（Seger Formula）打下最穩固的基礎。
+  </div>
+
+  <h2>一、為什麼陶藝家需要學習原料的分子量？</h2>
+  
+  <!-- 修復1：豐富陶藝原料項目的 SVG 圖表，採用網格排列避免重疊 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 1000 350" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      <text x="500" y="45" font-family="sans-serif" font-weight="bold" font-size="26" fill="#333" text-anchor="middle">陶藝常見釉藥原料大集合 (化學式基礎)</text>
+      
+      <!-- 第一排 -->
+      <g transform="translate(60, 80)">
+        <rect width="180" height="60" rx="8" fill="#FFF5E6" stroke="#FF6600" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FF6600" dominant-baseline="middle" text-anchor="middle">石英 (SiO₂)</text>
+      </g>
+      <g transform="translate(280, 80)">
+        <rect width="180" height="60" rx="8" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0070C0" dominant-baseline="middle" text-anchor="middle">長石 (KAlSi₃O₈)</text>
+      </g>
+      <g transform="translate(500, 80)">
+        <rect width="180" height="60" rx="8" fill="#E6FFED" stroke="#00B050" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="18" font-weight="bold" fill="#00B050" dominant-baseline="middle" text-anchor="middle">高嶺土 (Al₂O₃·2SiO₂)</text>
+      </g>
+      <g transform="translate(720, 80)">
+        <rect width="180" height="60" rx="8" fill="#FFF0F5" stroke="#E6007E" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">碳酸鈣 (CaCO₃)</text>
+      </g>
+
+      <!-- 第二排 -->
+      <g transform="translate(60, 160)">
+        <rect width="180" height="60" rx="8" fill="#FFF0F5" stroke="#E6007E" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">碳酸鎂 (MgCO₃)</text>
+      </g>
+      <g transform="translate(280, 160)">
+        <rect width="180" height="60" rx="8" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0070C0" dominant-baseline="middle" text-anchor="middle">氧化鋅 (ZnO)</text>
+      </g>
+      <g transform="translate(500, 160)">
+        <rect width="180" height="60" rx="8" fill="#FFF5E6" stroke="#FF6600" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FF6600" dominant-baseline="middle" text-anchor="middle">二氧化鈦 (TiO₂)</text>
+      </g>
+      <g transform="translate(720, 160)">
+        <rect width="180" height="60" rx="8" fill="#FFF0F5" stroke="#E6007E" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">碳酸鋇 (BaCO₃)</text>
+      </g>
+
+      <!-- 第三排 -->
+      <g transform="translate(60, 240)">
+        <rect width="180" height="60" rx="8" fill="#E6FFED" stroke="#00B050" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#00B050" dominant-baseline="middle" text-anchor="middle">滑石 (Mg₃Si₄O₁₀...)</text>
+      </g>
+      <g transform="translate(280, 240)">
+        <rect width="180" height="60" rx="8" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0070C0" dominant-baseline="middle" text-anchor="middle">矽酸鋯 (ZrSiO₄)</text>
+      </g>
+      <g transform="translate(500, 240)">
+        <rect width="180" height="60" rx="8" fill="#FFF5E6" stroke="#FFB800" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FFB800" dominant-baseline="middle" text-anchor="middle">氧化銅 (CuO)</text>
+      </g>
+      <g transform="translate(720, 240)">
+        <rect width="180" height="60" rx="8" fill="#FFF5E6" stroke="#FFB800" stroke-width="2"/>
+        <text x="90" y="35" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FFB800" dominant-baseline="middle" text-anchor="middle">氧化鐵 (Fe₂O₃)</text>
+      </g>
+    </svg>
+  </div>
+
+  <p>許多初學陶藝的人經常會有疑問：「我只是想把杯子燒出漂亮的顏色，有必要學這麼像國中理化課的分子量計算嗎？」答案是肯定的，因為陶藝本質上就是一門高溫化學的應用藝術。當你開始調配自己的釉藥時，分子量計算將會是你最強大的工具。</p>
+
+  <h3>釉藥配方的化學本質</h3>
+  <p>我們在調配釉藥時，通常是使用電子秤量取「公克數」。例如加入 100 克的碳酸鈣與 100 克的氧化鋅。然而，在化學微觀的世界裡，這兩種原料的 100 克所包含的「原子數量」是完全不一樣的。如果我們只看重量，就無法真正了解釉藥中究竟含有多少有效成份。分子量計算能幫助我們把「秤出來的重量」翻譯成「化學原子的數量」，這才是決定釉面質感的根本原因。</p>
+
+  <h3>預測高溫燒成變化</h3>
+  <p>陶瓷原料在超過 1200 度的高溫窯爐中，會發生劇烈的熱分解與熔融反應。有些原料（如碳酸鈣、碳酸鎂）會釋放出大量的氣體，導致重量大幅減輕；有些原料則會百分之百保留。如果不懂得分子量與化學式，我們就無法預測 100 克的生料進窯後，到底會剩下多少克參與玻璃化反應。學會計算，就能精準預估高溫下物質的轉化率與燒失量（LOI）。</p>
+
+  <h3>奠定釉式計算基礎</h3>
+  <p>在進階的釉藥學習中，我們一定會接觸到「塞格式（釉式，Seger Formula）」。這是一種以化學氧化物莫耳比例來分析釉藥的科學方法。從「配方克數重量」走到「釉式比例」，中間唯一的通道就是「分子量換算」。沒有分子量作為計算基準，所有的進階釉藥軟體或理論分析對我們來說都只會是一堆無意義的數字。這就是為什麼學習分子量是釉藥進階之路的必修課。</p>
+
+  <h2>二、分子量與式量：陶瓷材料的特殊性</h2>
+  
+  <!-- 修復2：大圓形，無文字重疊。確保 text-anchor="middle" 與 dominant-baseline="middle" -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <!-- 左側：獨立分子 -->
+      <text x="200" y="50" font-family="sans-serif" font-weight="bold" font-size="24" fill="#E6007E" text-anchor="middle">獨立分子 (例如: 氣體/液體)</text>
+      <!-- 大圓，文字在正中央 -->
+      <circle cx="200" cy="180" r="100" fill="#E6007E" opacity="0.8"/>
+      <text x="200" y="180" font-family="sans-serif" font-weight="bold" font-size="50" fill="#ffffff" dominant-baseline="central" text-anchor="middle">分子</text>
+      
+      <!-- 虛線分隔 -->
+      <line x1="400" y1="30" x2="400" y2="320" stroke="#d8d4c5" stroke-width="3" stroke-dasharray="8,8"/>
+
+      <!-- 右側：連續網狀結構 -->
+      <text x="600" y="50" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0070C0" text-anchor="middle">連續網狀結構 (陶瓷晶體)</text>
+      <!-- 大圓，文字在正中央 -->
+      <circle cx="600" cy="180" r="100" fill="#0070C0" opacity="0.8"/>
+      <text x="600" y="180" font-family="sans-serif" font-weight="bold" font-size="50" fill="#ffffff" dominant-baseline="central" text-anchor="middle">式量</text>
+      
+      <text x="600" y="310" font-family="sans-serif" font-size="16" fill="#555" text-anchor="middle">無獨立邊界，使用「式量」更為精確</text>
+    </svg>
+  </div>
+
+  <p>在正式開始計算之前，我們必須釐清一個化學上的專有名詞，這對於理解陶土與陶瓷材料的本質非常有幫助。那就是「分子量」與「式量」的區別，這兩者雖然計算方式相同，但背後的物理意義卻不一樣。</p>
+
+  <h3>獨立分子與連續網狀結構</h3>
+  <p>在一般的國中理化課本中，我們常以水（H₂O）或二氧化碳（CO₂）為例。這些物質在自然界中是由一顆一顆獨立的「分子」所組成，彼此之間界線分明，有各自獨立的運動空間。然而，陶藝使用的固體礦物原料，如石英（SiO₂）、氧化鋁（Al₂O₃），它們在微觀世界中並不是獨立的一顆顆分子，而是由無數個原子透過強大的化學鍵連接著，形成一整片巨大的「連續網狀結構」或「晶體陣列」。</p>
+
+  <h3>為什麼固體原料更適合稱「式量」</h3>
+  <p>因為像二氧化矽（石英）這樣的固體物質沒有明確邊界的「單一分子」，所以化學家發明了「化學式量」（簡稱式量）這個詞。寫出 SiO₂ 只是為了告訴我們，在這個巨大的礦物晶體中，矽原子與氧原子的「最簡整數比例」是 1：2，而不是說它只有 1 顆矽和 2 顆氧。因此，當我們針對這些固體礦物進行加總計算時，嚴格在化學學術上應該稱為計算「式量」，這才是最精確的說法。</p>
+
+  <h3>實務上的俗稱與妥協</h3>
+  <p>儘管理論上有分子量與式量這樣的區別，但在陶藝釉藥的實務交流、配方軟體操作，以及多數的入門陶瓷教材中，為了降低初學者的學習門檻，大家通常習慣將它們統一俗稱為「分子量計算」。在本文後續的篇幅中，我們也會依循這個業界習慣使用「分子量」一詞，但您心裡必須清楚這其實是陶瓷晶體的「式量」，這能展現出您對陶瓷材料擁有更深一層的科學素養。</p>
+
+  <h2>三、認識常用原子量：計算分子量的前置準備</h2>
+  
+  <!-- 修復3：箭頭圖與文字分離，明確的 padding，無重疊 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <!-- 第一個方塊 -->
+      <rect x="50" y="80" width="180" height="80" rx="12" fill="#FFF5E6" stroke="#FF6600" stroke-width="3"/>
+      <text x="140" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FF6600" dominant-baseline="middle" text-anchor="middle">查閱週期表</text>
+      <text x="140" y="140" font-family="sans-serif" font-size="14" fill="#333" dominant-baseline="middle" text-anchor="middle">尋找元素符號</text>
+      
+      <!-- 第一個箭頭 -->
+      <path d="M 245 120 L 315 120" stroke="#d8d4c5" stroke-width="6" marker-end="url(#arrow-flow)"/>
+
+      <!-- 第二個方塊 -->
+      <rect x="340" y="80" width="180" height="80" rx="12" fill="#E6F2FF" stroke="#0070C0" stroke-width="3"/>
+      <text x="430" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0070C0" dominant-baseline="middle" text-anchor="middle">確認原子量</text>
+      <text x="430" y="140" font-family="sans-serif" font-size="14" fill="#333" dominant-baseline="middle" text-anchor="middle">元素下方的數字</text>
+
+      <!-- 第二個箭頭 -->
+      <path d="M 535 120 L 605 120" stroke="#d8d4c5" stroke-width="6" marker-end="url(#arrow-flow)"/>
+      <defs>
+        <marker id="arrow-flow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#d8d4c5" />
+        </marker>
+      </defs>
+
+      <!-- 第三個方塊 -->
+      <rect x="630" y="80" width="180" height="80" rx="12" fill="#E6FFED" stroke="#00B050" stroke-width="3"/>
+      <text x="720" y="115" font-family="sans-serif" font-size="20" font-weight="bold" fill="#00B050" dominant-baseline="middle" text-anchor="middle">加總計算</text>
+      <text x="720" y="140" font-family="sans-serif" font-size="14" fill="#333" dominant-baseline="middle" text-anchor="middle">得出總分子量</text>
+    </svg>
+  </div>
+
+  <p>要計算一種原料的分子量，就像是我們要計算一整籃綜合水果的總重量一樣，我們必須先知道「每一種單一水果」的重量。在化學裡，這個代表單一元素質量的數值就叫做「原子量」。</p>
+
+  <h3>元素週期表的解讀技巧</h3>
+  <p>如果您手邊有一張元素週期表，你會在每個元素的方格裡看到幾個不同的數字。左上角或右上角通常有一個較小的整數（例如氧是 8，矽是 14），這是「原子序」，代表質子的數量，我們在計算分子量時不需要用到它。我們真正需要尋找的，是方格下方通常帶有小數點的數字，例如氧的下方寫著 15.999，這個數字就是「原子量」，代表該元素原子的相對質量大小。</p>
+
+  <h3>陶藝最常出現的十大元素</h3>
+  <p>雖然週期表上有一百多種元素，但不用擔心，陶藝配方中最常用的其實只有十幾種。強烈建議您可以將以下這些最常見元素的原子量做個簡單紀錄，這將大幅加快您的配方計算速度：
+  氧 (O) 約 16.00、矽 (Si) 約 28.09、鋁 (Al) 約 26.98、鈣 (Ca) 約 40.08、碳 (C) 約 12.01、鉀 (K) 約 39.10、鈉 (Na) 約 22.99、鎂 (Mg) 約 24.31、鋅 (Zn) 約 65.38、鐵 (Fe) 約 55.85。</p>
+
+  <h3>應用時的近似值取捨</h3>
+  <p>您可能會發現，不同版本的週期表或參考書籍，小數點後面的數字可能略有不同（例如 O 標示為 15.999 還是 16.00）。在極度精密的現代科學實驗中，這些微小差異至關重要；但在陶藝釉藥的實務計算中，因為我們使用的天然礦物原料本身就含有一定比例的雜質，我們通常取小數點後兩位，甚至使用最接近的整數或常用近似值即可，這完全足夠應付釉式分析的精確度需求，不會對燒成結果產生可視的偏差。</p>
+
+  <h2>四、化學式怎麼看？解碼釉藥原料的身分證</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <!-- 顯示化學式 -->
+      <text x="400" y="100" font-family="sans-serif" font-weight="bold" font-size="60" fill="#333" text-anchor="middle">
+        <tspan fill="#00B050">Ca</tspan>
+        <tspan fill="#FF6600">C</tspan>
+        <tspan fill="#0070C0">O</tspan>
+        <tspan fill="#E6007E" font-size="40" dy="15">3</tspan>
+      </text>
+
+      <!-- 說明框與指示線 -->
+      <path d="M 330 110 L 250 160" stroke="#00B050" stroke-width="2" fill="none"/>
+      <rect x="150" y="160" width="100" height="40" rx="5" fill="#E6FFED" stroke="#00B050"/>
+      <text x="200" y="185" font-family="sans-serif" font-weight="bold" fill="#00B050" text-anchor="middle">鈣 (Ca)</text>
+
+      <path d="M 400 110 L 400 160" stroke="#FF6600" stroke-width="2" fill="none"/>
+      <rect x="350" y="160" width="100" height="40" rx="5" fill="#FFF5E6" stroke="#FF6600"/>
+      <text x="400" y="185" font-family="sans-serif" font-weight="bold" fill="#FF6600" text-anchor="middle">碳 (C)</text>
+
+      <path d="M 460 110 L 520 160" stroke="#0070C0" stroke-width="2" fill="none"/>
+      <rect x="470" y="160" width="100" height="40" rx="5" fill="#E6F2FF" stroke="#0070C0"/>
+      <text x="520" y="185" font-family="sans-serif" font-weight="bold" fill="#0070C0" text-anchor="middle">氧 (O)</text>
+
+      <path d="M 500 115 L 600 115" stroke="#E6007E" stroke-width="2" stroke-dasharray="4,4" fill="none"/>
+      <rect x="610" y="95" width="120" height="40" rx="5" fill="#FFF0F5" stroke="#E6007E"/>
+      <text x="670" y="120" font-family="sans-serif" font-weight="bold" fill="#E6007E" text-anchor="middle">下標代表 3 個</text>
+    </svg>
+  </div>
+
+  <p>在計算分子量之前，我們必須先擁有正確解讀「化學式」的能力。化學式就像是材料的密碼，把原本長長一串的中文名稱，濃縮成幾個簡短的英文字母與數字的組合。只要掌握幾個基本規則，解碼化學式其實非常簡單。</p>
+
+  <h3>辨識大寫字母與元素符號</h3>
+  <p>化學式是由各種元素的英文縮寫組合而成的。一個最重要且絕對不能弄錯的判斷技巧是：每一個「大寫字母」就代表一種新元素的開始。如果大寫字母後面跟著一個小寫字母，這兩個字母合起來代表「同一種元素」。例如石英 SiO₂，大寫 S 小寫 i 是一組，代表矽（Silicon）；接著大寫 O 是一組，代表氧（Oxygen）。絕不能把它看成 S、i、O 三種獨立元素，大小寫的嚴格區分是讀懂化學式的第一步。</p>
+
+  <h3>右下角下標數字的意義</h3>
+  <p>找出了有哪些元素之後，接下來要看每個元素符號「右下角」的小數字。這個數字非常關鍵，它代表了該元素在整個化學式中的原子個數（或者說比例）。例如在 Al₂O₃ 中，Al 右下角的 2 表示有 2 個鋁原子；O 右下角的 3 表示有 3 個氧原子。這些數字就像是食譜中的份量，絕對不能忽略或隨意更改。</p>
+
+  <h3>隱藏的數字「1」</h3>
+  <p>您可能會發現，有些元素符號的右下角空空如也，完全沒有寫數字。這不是漏印，而是在國際化學命名規則裡，預設沒有標示數字就代表數量為「1」。因此，當您看見 SiO₂ 時，雖然 Si 旁邊沒數字，但我們能準確解讀為：Si 有 1 個，O 有 2 個。記住這個隱形的「1」，在後續的加總計算中才不會漏算元素。</p>
+
+  <h2>五、分子量計算的黃金三步驟</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <!-- 步驟 1 -->
+      <circle cx="150" cy="120" r="60" fill="#FFB800"/>
+      <text x="150" y="105" font-family="sans-serif" font-weight="bold" font-size="24" fill="#fff" text-anchor="middle" dominant-baseline="middle">Step 1</text>
+      <text x="150" y="140" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">拆解元素</text>
+
+      <path d="M 230 120 L 320 120" stroke="#d8d4c5" stroke-width="6" marker-end="url(#arrow-golden)"/>
+
+      <!-- 步驟 2 -->
+      <circle cx="400" cy="120" r="60" fill="#E6007E"/>
+      <text x="400" y="105" font-family="sans-serif" font-weight="bold" font-size="24" fill="#fff" text-anchor="middle" dominant-baseline="middle">Step 2</text>
+      <text x="400" y="140" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">數量乘算</text>
+
+      <path d="M 480 120 L 570 120" stroke="#d8d4c5" stroke-width="6" marker-end="url(#arrow-golden)"/>
+      <defs>
+        <marker id="arrow-golden" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#d8d4c5" />
+        </marker>
+      </defs>
+
+      <!-- 步驟 3 -->
+      <circle cx="650" cy="120" r="60" fill="#0070C0"/>
+      <text x="650" y="105" font-family="sans-serif" font-weight="bold" font-size="24" fill="#fff" text-anchor="middle" dominant-baseline="middle">Step 3</text>
+      <text x="650" y="140" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">總和加總</text>
+
+      <rect x="760" y="90" width="100" height="60" rx="8" fill="#00B050"/>
+      <text x="810" y="120" font-family="sans-serif" font-weight="bold" font-size="20" fill="#fff" text-anchor="middle" dominant-baseline="middle">得出結果!</text>
+    </svg>
+  </div>
+
+  <p>看到陌生的化學式千萬不要覺得恐懼，計算分子量其實只是一個非常簡單的加法與乘法數學遊戲。為了確保每一次計算都不會出錯，我們為初學者整理了以下這三個不可動搖的黃金步驟。</p>
+
+  <h3>第一步：拆解與查表</h3>
+  <p>當您拿到一個化學式時，第一件事就是像拼圖一樣，把它拆解成一個個獨立的元素符號。利用前面學到的大寫字母規則，把化學式切開。接著，拿出手邊的元素週期表或是我們整理好的原子量速查表，將這些元素對應的原子量一個個寫下來，作為計算的準備素材。</p>
+
+  <h3>第二步：數量乘算</h3>
+  <p>找出所有元素與原子量後，目光移向化學式中每個元素符號右下角的數字。將第一步查到的原子量，乘上這個下標數量，計算出該元素在這個化合物中貢獻的「小計質量」。如果沒有看到數字，記得要乘以 1。這個步驟必須非常仔細，很多計算錯誤都是因為看錯了下標，或是漏乘了數量。</p>
+
+  <h3>第三步：總和加總</h3>
+  <p>這一步是最後也是最輕鬆的數學運算。將第二步中算出的所有元素「小計質量」全部加總在一起。經過簡單的加法計算，您最終得到的那個數字，就是這個化學式的分子量（或式量）。只要按部就班地執行這三個步驟，即便是像長石或高嶺土那樣複雜冗長的化學配方，也絕對難不倒你。</p>
+
+  <h2>六、實戰解析一：二氧化矽（石英）的計算</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <text x="400" y="50" font-family="sans-serif" font-weight="bold" font-size="32" fill="#333" text-anchor="middle">SiO₂ (石英 / 二氧化矽) 計算演練</text>
+      
+      <!-- 計算區塊 -->
+      <rect x="150" y="80" width="200" height="120" rx="10" fill="#FFF5E6" stroke="#FF6600" stroke-width="2"/>
+      <text x="250" y="115" font-family="sans-serif" font-weight="bold" font-size="24" fill="#FF6600" text-anchor="middle" dominant-baseline="middle">Si (矽)</text>
+      <text x="250" y="145" font-family="sans-serif" font-size="18" fill="#333" text-anchor="middle" dominant-baseline="middle">28.09 × 1</text>
+      <text x="250" y="175" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">= 28.09</text>
+
+      <text x="400" y="140" font-family="sans-serif" font-weight="bold" font-size="50" fill="#ccc" text-anchor="middle" dominant-baseline="middle">+</text>
+
+      <rect x="450" y="80" width="200" height="120" rx="10" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+      <text x="550" y="115" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">O (氧)</text>
+      <text x="550" y="145" font-family="sans-serif" font-size="18" fill="#333" text-anchor="middle" dominant-baseline="middle">16.00 × 2</text>
+      <text x="550" y="175" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">= 32.00</text>
+
+      <line x1="150" y1="205" x2="650" y2="205" stroke="#d8d4c5" stroke-width="2"/>
+      <rect x="300" y="210" width="200" height="40" rx="20" fill="#E6007E"/>
+      <text x="400" y="230" font-family="sans-serif" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">總式量 = 60.09</text>
+    </svg>
+  </div>
+
+  <p>我們從釉藥中最基礎，也是含量通常最大的一個成分——石英（二氧化矽）開始實戰練習。矽石被譽為是玻璃與釉藥的骨架，幾乎存在於世界上所有的陶瓷配方之中。</p>
+
+  <h3>矽與氧的原子比例</h3>
+  <p>石英的化學式是 SiO₂。根據我們前面學到的拆解步驟，我們一眼就能看出它由大寫 S 和小寫 i 結合的矽（Si），以及大寫的氧（O）所組成。在觀察右下角的數字標示上，Si 的旁邊沒有任何數字，代表它的數量為 1；而 O 的旁邊有一個數字 2，代表它的數量為 2。這意味著在龐大的石英晶體網路中，矽與氧的原子數量比永遠維持在 1：2。</p>
+
+  <h3>詳細計算式推演</h3>
+  <p>讓我們準備好紙筆來計算 SiO₂ 的分子量：<br>
+  首先查表得知：矽（Si）的原子量約為 28.09，氧（O）的原子量約為 16.00。<br>
+  進行第二步的乘算：<br>
+  Si 的小計 = 28.09 × 1 = 28.09<br>
+  O 的小計 = 16.00 × 2 = 32.00<br>
+  最後進行加總：28.09 + 32.00 = 60.09。<br>
+  就這麼簡單，我們順利算出了二氧化矽（SiO₂）的分子量（式量）為 60.09。</p>
+
+  <h3>二氧化矽在釉層的骨架意義</h3>
+  <p>知道這個 60.09 的數值有什麼實際用途呢？在釉式（Seger Formula）分析中，二氧化矽扮演著「網狀形成者」的核心角色。當我們想增加釉面的抗刮硬度、提高整體熔點，或是為了防止釉面產生冰裂紋時，我們就需要增加釉藥系統中 SiO₂ 的莫耳數。透過 60.09 這個基準數字，我們才能準確換算出，添加 100 克的石英粉末，究竟能為釉藥提供多少「化學單位」的二氧化矽骨架。</p>
+
+  <h2>七、實戰解析二：氧化鋁的計算與下標陷阱</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <text x="400" y="50" font-family="sans-serif" font-weight="bold" font-size="32" fill="#333" text-anchor="middle">Al₂O₃ (氧化鋁) 雙下標演練</text>
+      
+      <rect x="180" y="80" width="180" height="120" rx="10" fill="#FFF0F5" stroke="#E6007E" stroke-width="2"/>
+      <text x="270" y="115" font-family="sans-serif" font-weight="bold" font-size="24" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">Al₂ (鋁)</text>
+      <text x="270" y="145" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">26.98 × 2</text>
+      <text x="270" y="175" font-family="sans-serif" font-weight="bold" font-size="20" fill="#00B050" text-anchor="middle" dominant-baseline="middle">= 53.96</text>
+
+      <text x="400" y="140" font-family="sans-serif" font-weight="bold" font-size="50" fill="#ccc" text-anchor="middle" dominant-baseline="middle">+</text>
+
+      <rect x="440" y="80" width="180" height="120" rx="10" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+      <text x="530" y="115" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">O₃ (氧)</text>
+      <text x="530" y="145" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">16.00 × 3</text>
+      <text x="530" y="175" font-family="sans-serif" font-weight="bold" font-size="20" fill="#00B050" text-anchor="middle" dominant-baseline="middle">= 48.00</text>
+
+      <rect x="330" y="210" width="140" height="30" rx="5" fill="#FFB800"/>
+      <text x="400" y="225" font-family="sans-serif" font-weight="bold" font-size="18" fill="#333" text-anchor="middle" dominant-baseline="middle">總和 = 101.96</text>
+    </svg>
+  </div>
+
+  <p>接下來我們來看另一個非常重要的釉藥原料：氧化鋁。它是釉藥中用來調控高溫黏度、防止釉漿在垂直器壁上流動過度的關鍵成分。它的化學式會比石英稍微複雜一點，因為它包含了兩個都不是 1 的下標數字。</p>
+
+  <h3>注意下標的絕對重要性</h3>
+  <p>氧化鋁的化學式是 Al₂O₃。在這裡，右下角的數字 2 與 3 是絕對不可忽視的線索。初學者最常犯的計算錯誤就是：只查了鋁和氧的原子量然後直接加起來，完全忘記要乘以下標。下標數字就像是烘焙食譜中的份數，如果一份配方明確要求需要 2 顆蛋和 3 匙糖，你不可以擅自只放 1 顆蛋和 1 匙糖，否則烤出來的蛋糕（也就是計算出來的分子量）就會完全失敗，導致後續的釉式推導全面崩潰。</p>
+
+  <h3>精準的相加與乘法演練</h3>
+  <p>讓我們來精準計算 Al₂O₃ 的分子量：<br>
+  查表得知：鋁（Al）約為 26.98，氧（O）約為 16.00。<br>
+  鋁的小計：26.98 × 2（因為下標明確指示有 2 個鋁）= 53.96。<br>
+  氧的小計：16.00 × 3（因為下標指示有 3 個氧）= 48.00。<br>
+  最後總和計算：53.96 + 48.00 = 101.96。<br>
+  因此，氧化鋁的分子量約為 101.96。</p>
+
+  <h3>氧化鋁與釉面黏度的關係</h3>
+  <p>在實際的釉藥配方調校中，氧化鋁的分子量（101.96）讓我們能衡量配方中 Al₂O₃ 的真實化學比例。當您燒出來的釉面出現過度流動導致釉藥沾黏到棚板，或是表面光澤過於刺眼想要調整為霧面時，陶藝家會透過調整高嶺土或氧化鋁粉的公克數，來增加系統中 Al₂O₃ 的莫耳數。理解 101.96 這個數值，能幫助我們更精確地掌握釉面的霧面質感與燒成的穩定性。</p>
+
+  <h2>八、實戰解析三：碳酸鈣的分解與重量流失</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <text x="400" y="40" font-family="sans-serif" font-weight="bold" font-size="26" fill="#333" text-anchor="middle">碳酸鈣 CaCO₃ 的高溫熱分解</text>
+      
+      <!-- CaCO3 -->
+      <circle cx="200" cy="150" r="70" fill="#E6FFED" stroke="#00B050" stroke-width="3"/>
+      <text x="200" y="135" font-family="sans-serif" font-weight="bold" font-size="26" fill="#00B050" text-anchor="middle" dominant-baseline="middle">CaCO₃</text>
+      <text x="200" y="165" font-family="sans-serif" font-size="18" fill="#333" text-anchor="middle" dominant-baseline="middle">100.09</text>
+      <text x="200" y="240" font-family="sans-serif" font-weight="bold" font-size="16" fill="#555" text-anchor="middle" dominant-baseline="middle">入窯前的粉末重量</text>
+
+      <path d="M 285 150 L 365 150" stroke="#FF6600" stroke-width="4" marker-end="url(#arrow-red)"/>
+      <text x="325" y="130" font-family="sans-serif" font-weight="bold" font-size="16" fill="#FF6600" text-anchor="middle" dominant-baseline="middle">高溫燒成</text>
+      <defs>
+        <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#FF6600" />
+        </marker>
+      </defs>
+
+      <!-- CaO -->
+      <circle cx="460" cy="150" r="50" fill="#E6F2FF" stroke="#0070C0" stroke-width="3"/>
+      <text x="460" y="140" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">CaO</text>
+      <text x="460" y="170" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">56.08</text>
+      <text x="460" y="240" font-family="sans-serif" font-weight="bold" font-size="16" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">留在釉中的助熔物</text>
+
+      <text x="540" y="150" font-family="sans-serif" font-weight="bold" font-size="40" fill="#ccc" text-anchor="middle" dominant-baseline="middle">+</text>
+
+      <!-- CO2 -->
+      <circle cx="650" cy="90" r="40" fill="#FFF0F5" stroke="#E6007E" stroke-width="3" stroke-dasharray="6,6"/>
+      <text x="650" y="80" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">CO₂ ↑</text>
+      <text x="650" y="110" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">44.01</text>
+      <text x="650" y="160" font-family="sans-serif" font-weight="bold" font-size="16" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">化為氣體揮發流失</text>
+      
+      <path d="M 650 40 L 650 15" stroke="#E6007E" stroke-width="4" marker-end="url(#arrow-up)"/>
+      <defs>
+        <marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 10 L 5 0 L 10 10 z" fill="#E6007E" />
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <p>前面的石英與氧化鋁，都是燒成後會 100% 原封不動留在釉層裡的穩定成分。但是，釉藥中作為強力高溫助熔劑的「碳酸鈣（CaCO₃）」卻有著截然不同的化學特性，這也是學習分子量知識最有價值、最能體現實務應用的地方。</p>
+
+  <h3>碳酸鈣的三種元素組成</h3>
+  <p>碳酸鈣 CaCO₃ 包含了三種不同的元素：鈣（Ca）、碳（C）與氧（O）。<br>
+  依照我們的黃金三步驟計算分子量：<br>
+  Ca：40.08 × 1 = 40.08<br>
+  C：12.01 × 1 = 12.01<br>
+  O：16.00 × 3 = 48.00（注意，氧必須乘以 3）<br>
+  總和計算：40.08 + 12.01 + 48.00 = 100.09。為了方便記憶，我們通常將碳酸鈣的分子量記為約 100。</p>
+
+  <h3>高溫釋放二氧化碳的現象</h3>
+  <p>為什麼算出這個 100.09 對陶藝家來說如此重要？因為在高於 800 度的窯爐中，固態的 CaCO₃ 會發生熱分解反應，斷裂成固體的 CaO（氧化鈣，分子量 56.08）與氣體的 CO₂（二氧化碳，分子量 44.01）。產生的二氧化碳氣體會以氣泡的形式穿透釉層，最終揮發到空氣中消失不見，根本不會參與最終釉面的形成。</p>
+
+  <h3>燒失量（LOI）的配方意義</h3>
+  <p>這個化學反應揭示了一個驚人的事實：這表示當您在釉盆裡加入 100 克的碳酸鈣粉末，燒完之後，實際留在釉藥裡發揮助熔作用的有效氧化鈣，其實只有約 56 克！這流失掉的 44% 重量，在陶瓷工程學上稱為「燒失量（Loss on Ignition, LOI）」。如果您不懂得分子量計算，只看電子秤上的克數，您將永遠無法掌握釉藥在燒成後真實的化學氧化物比例，這正是拉開專業陶藝家與初學者差距的關鍵知識。</p>
+
+  <h2>九、常見陶瓷氧化物類原料的分子量速查</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      <text x="400" y="45" font-family="sans-serif" font-weight="bold" font-size="24" fill="#333" text-anchor="middle">釉藥常用單一氧化物分子量速查圖</text>
+      
+      <!-- MgO -->
+      <g transform="translate(100, 80)">
+        <rect width="120" height="120" rx="15" fill="#E6FFED" stroke="#00B050" stroke-width="3"/>
+        <text x="60" y="45" font-family="sans-serif" font-weight="bold" font-size="28" fill="#00B050" dominant-baseline="middle" text-anchor="middle">MgO</text>
+        <text x="60" y="80" font-family="sans-serif" font-size="16" fill="#333" dominant-baseline="middle" text-anchor="middle">氧化鎂</text>
+        <text x="60" y="105" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">40.30</text>
+      </g>
+
+      <!-- ZnO -->
+      <g transform="translate(260, 80)">
+        <rect width="120" height="120" rx="15" fill="#E6F2FF" stroke="#0070C0" stroke-width="3"/>
+        <text x="60" y="45" font-family="sans-serif" font-weight="bold" font-size="28" fill="#0070C0" dominant-baseline="middle" text-anchor="middle">ZnO</text>
+        <text x="60" y="80" font-family="sans-serif" font-size="16" fill="#333" dominant-baseline="middle" text-anchor="middle">氧化鋅</text>
+        <text x="60" y="105" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">81.38</text>
+      </g>
+
+      <!-- TiO2 -->
+      <g transform="translate(420, 80)">
+        <rect width="120" height="120" rx="15" fill="#FFF5E6" stroke="#FFB800" stroke-width="3"/>
+        <text x="60" y="45" font-family="sans-serif" font-weight="bold" font-size="28" fill="#FFB800" dominant-baseline="middle" text-anchor="middle">TiO₂</text>
+        <text x="60" y="80" font-family="sans-serif" font-size="16" fill="#333" dominant-baseline="middle" text-anchor="middle">二氧化鈦</text>
+        <text x="60" y="105" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">79.87</text>
+      </g>
+
+      <!-- Fe2O3 -->
+      <g transform="translate(580, 80)">
+        <rect width="120" height="120" rx="15" fill="#FFF0F5" stroke="#E6007E" stroke-width="3"/>
+        <text x="60" y="45" font-family="sans-serif" font-weight="bold" font-size="28" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">Fe₂O₃</text>
+        <text x="60" y="80" font-family="sans-serif" font-size="16" fill="#333" dominant-baseline="middle" text-anchor="middle">氧化鐵</text>
+        <text x="60" y="105" font-family="sans-serif" font-weight="bold" font-size="20" fill="#E6007E" dominant-baseline="middle" text-anchor="middle">159.69</text>
+      </g>
+    </svg>
+  </div>
+
+  <p>氧化物原料是釉藥調配中最純粹、最直接的添加物。與前段介紹的碳酸鹽不同，它們本身不含會揮發流失的碳酸根，理論上您加入多少重量，燒成後就保留多少重量在釉層中。了解它們的分子量，能幫助我們更精準地掌控助熔與呈色效果。</p>
+
+  <h3>助熔劑類氧化物特性</h3>
+  <p>除了碳酸鈣，有時陶藝家也會直接使用氧化鈣 (CaO) 或氧化鎂 (MgO) 來作為鹼土金屬助熔劑。氧化鎂的分子量是 40.30，相對於其它常見助熔劑來說極為輕盈。這意味著同樣是添加 10 克的粉末，氧化鎂所能提供的「原子莫耳數量」會比分子量極重的氧化鋇（BaO）多出非常多。這也是為什麼在調整配方時，只要添加微量的氧化鎂，就能非常顯著地影響釉面質感，這背後完全是化學莫耳數在發揮作用。</p>
+
+  <h3>著色劑類氧化物的影響</h3>
+  <p>著色劑（如金屬氧化物）在基礎釉藥中的添加量通常很少（約 1% ~ 10%），但對發色與光澤的影響卻極為巨大。例如紅褐色的氧化鐵 (Fe₂O₃) 分子量高達 159.69，而黑色的氧化銅 (CuO) 則為 79.55。在進階的釉式設計中，透過分子量將它們的重量精準轉換為化學比例，陶藝家可以藉此預測還原燒時青瓷的翠綠深淺程度，或是銅紅釉發色的最佳臨界點。</p>
+
+  <h3>理論值與純度差異</h3>
+  <p>在此必須提醒一個重要的實務觀念：我們計算出來的分子量是基於「100% 純淨無雜質的化學品」所推導出的理論值。而在實際的陶藝材料行中買到的氧化鐵或氧化銅，多半屬於工業級礦物，其純度可能落在 90%~98% 之間。因此，分子量計算是我們進行配方分析的理論羅盤，而親手製作試片進窯燒製，才是檢驗釉面成敗的唯一標準。</p>
+
+  <h2>十、碳酸鹽類原料的分子量與有效比例</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      <text x="450" y="40" font-family="sans-serif" font-weight="bold" font-size="24" fill="#333" text-anchor="middle">碳酸鹽類：生料重量與有效氧化物留存比例圖</text>
+      
+      <!-- BaCO3 -->
+      <circle cx="200" cy="140" r="80" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+      <circle cx="200" cy="155" r="55" fill="#0070C0"/>
+      <text x="200" y="95" font-family="sans-serif" font-weight="bold" font-size="16" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">碳酸鋇 BaCO₃</text>
+      <text x="200" y="150" font-family="sans-serif" font-weight="bold" font-size="16" fill="#fff" text-anchor="middle" dominant-baseline="middle">有效 BaO</text>
+      <text x="200" y="170" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fff" text-anchor="middle" dominant-baseline="middle">153.3 (佔 77%)</text>
+
+      <!-- SrCO3 -->
+      <circle cx="450" cy="140" r="80" fill="#E6FFED" stroke="#00B050" stroke-width="2"/>
+      <circle cx="450" cy="155" r="45" fill="#00B050"/>
+      <text x="450" y="100" font-family="sans-serif" font-weight="bold" font-size="16" fill="#00B050" text-anchor="middle" dominant-baseline="middle">碳酸鍶 SrCO₃</text>
+      <text x="450" y="150" font-family="sans-serif" font-weight="bold" font-size="16" fill="#fff" text-anchor="middle" dominant-baseline="middle">有效 SrO</text>
+      <text x="450" y="170" font-family="sans-serif" font-weight="bold" font-size="12" fill="#fff" text-anchor="middle" dominant-baseline="middle">103.6 (佔 70%)</text>
+
+      <!-- Li2CO3 -->
+      <circle cx="700" cy="140" r="80" fill="#FFF0F5" stroke="#E6007E" stroke-width="2"/>
+      <circle cx="700" cy="165" r="35" fill="#E6007E"/>
+      <text x="700" y="110" font-family="sans-serif" font-weight="bold" font-size="16" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">碳酸鋰 Li₂CO₃</text>
+      <text x="700" y="160" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fff" text-anchor="middle" dominant-baseline="middle">Li₂O</text>
+      <text x="700" y="178" font-family="sans-serif" font-weight="bold" font-size="12" fill="#fff" text-anchor="middle" dominant-baseline="middle">29.9 (40%)</text>
+      
+      <text x="450" y="235" font-family="sans-serif" font-size="14" fill="#555" text-anchor="middle">* 實心圓代表高溫燒成後，實際留在釉層中發揮作用的有效氧化物比例，其餘皆為揮發的二氧化碳。</text>
+    </svg>
+  </div>
+
+  <p>除了最為人熟知的碳酸鈣，釉藥工作室裡還有許多碳酸鹽家族的成員。把它們當作提供鹼土金屬（RO）或鹼金屬（R₂O）的優良載體是非常普遍的做法，因為它們在常溫下穩定、不易吸水受潮，且粉末細緻容易在釉漿中懸浮。</p>
+
+  <h3>碳酸鋇與碳酸鍶的重量特徵</h3>
+  <p>碳酸鋇 (BaCO₃) 的分子量高達 197.34，分解後提供有毒的氧化鋇 (BaO) 與氣體。而常用於替代它的碳酸鍶 (SrCO₃)，分子量則為 147.63。從數字可以明顯看出，鋇原子非常沉重。如果我們想在無毒釉藥的配方設計中，用鍶來取代鋇，我們絕不能直接 1:1 用電子秤的重量替換，而必須根據它們各自的分子量，計算出對等的「莫耳數」，才能維持釉面原有的熔融狀態不變。</p>
+
+  <h3>鹼金屬碳酸鹽的應用</h3>
+  <p>碳酸鈉 (Na₂CO₃) 與碳酸鉀 (K₂CO₃) 是低溫釉常用的強力助熔劑。然而，它們高度溶於水，如果直接大量使用在生料釉漿中，會造成嚴重的流變問題（導致釉漿嚴重結塊或過度水化黏稠）。儘管實務上不常直接使用，但了解它們的分子量依然很重要，因為在工業製作「熔塊（Frit）」的計算過程中，我們需要精確掌握這些碳酸鹽能提供多少鹼金屬氧化物進入固化的玻璃網絡中。</p>
+
+  <h3>氣泡與針孔瑕疵的化學成因</h3>
+  <p>所有碳酸鹽原料的共通點就是，在高溫下會大量釋放 CO₂ 氣體 (分子量 44.01)。如果您的釉藥配方中使用了極高比例的碳酸鹽類（例如生料配方中含有超過 20% 的碳酸鈣），在高溫熔融的過程中釉層就會像沸騰的水一樣產生大量氣體。如果這時釉面的表面張力過大提早封閉，氣體排不出去被困在釉層裡，冷卻後就會形成令人頭痛的密集氣泡與針孔瑕疵。這是從分子量知識延伸出的寶貴燒窯實務經驗。</p>
+
+  <h2>十一、複合礦物與黏土原料的進階計算</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <text x="450" y="40" font-family="sans-serif" font-weight="bold" font-size="24" fill="#333" text-anchor="middle">高嶺土理想化學式的括號解構：Al₂Si₂O₅(OH)₄</text>
+      
+      <rect x="50" y="70" width="150" height="100" rx="8" fill="#FFF0F5" stroke="#E6007E" stroke-width="2"/>
+      <text x="125" y="110" font-family="sans-serif" font-weight="bold" font-size="26" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">Al₂</text>
+      <text x="125" y="145" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">26.98 × 2</text>
+
+      <text x="225" y="125" font-family="sans-serif" font-weight="bold" font-size="30" fill="#ccc" text-anchor="middle" dominant-baseline="middle">+</text>
+
+      <rect x="250" y="70" width="150" height="100" rx="8" fill="#FFF5E6" stroke="#FF6600" stroke-width="2"/>
+      <text x="325" y="110" font-family="sans-serif" font-weight="bold" font-size="26" fill="#FF6600" text-anchor="middle" dominant-baseline="middle">Si₂</text>
+      <text x="325" y="145" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">28.09 × 2</text>
+
+      <text x="425" y="125" font-family="sans-serif" font-weight="bold" font-size="30" fill="#ccc" text-anchor="middle" dominant-baseline="middle">+</text>
+
+      <rect x="450" y="70" width="150" height="100" rx="8" fill="#E6F2FF" stroke="#0070C0" stroke-width="2"/>
+      <text x="525" y="110" font-family="sans-serif" font-weight="bold" font-size="26" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">O₅</text>
+      <text x="525" y="145" font-family="sans-serif" font-size="16" fill="#333" text-anchor="middle" dominant-baseline="middle">16.00 × 5</text>
+
+      <text x="625" y="125" font-family="sans-serif" font-weight="bold" font-size="30" fill="#ccc" text-anchor="middle" dominant-baseline="middle">+</text>
+
+      <rect x="650" y="70" width="200" height="100" rx="8" fill="#E6FFED" stroke="#00B050" stroke-width="2"/>
+      <text x="750" y="110" font-family="sans-serif" font-weight="bold" font-size="26" fill="#00B050" text-anchor="middle" dominant-baseline="middle">(OH)₄</text>
+      <text x="750" y="145" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle" dominant-baseline="middle">(16+1.008) × 4</text>
+      
+      <path d="M 450 190 L 450 210" stroke="#E6007E" stroke-width="2"/>
+      <text x="450" y="230" font-family="sans-serif" font-weight="bold" font-size="22" fill="#E6007E" text-anchor="middle" dominant-baseline="middle">總式量 ≈ 258.16</text>
+    </svg>
+  </div>
+
+  <p>走到這一步，我們要面對陶藝原料中最為複雜的一群：天然礦石與黏土類原料。把它們冗長的化學式拆解開來，是釉藥計算中最進階的挑戰，但也最能讓我們看清大自然賦予這些材料的真實面目。</p>
+
+  <h3>高嶺土化學式的括號解析</h3>
+  <p>我們以高嶺土的主要礦物成分「高嶺石」為例，其理想化學式為 Al₂Si₂O₅(OH)₄。看到括號請保持冷靜，化學式中括號右下角的數字 4，代表括號內的「每一個」元素都要乘以 4。所以 (OH)₄ 等於是 4 個 O 加上 4 個 H。把前面所有的鋁、矽、氧與括號內的原子各自計算小計後加總，我們得出高嶺石的理想分子量約為 258.16。這告訴我們，加入高嶺土不僅能為釉藥提供氧化鋁與二氧化矽，它還會帶著大量的水分（以羥基形式存在的結構水）進入窯爐，並在較高溫段揮發消失。</p>
+
+  <h3>鉀鈉長石的多重組成</h3>
+  <p>長石是釉藥中最主要的助熔劑與玻璃質來源。鉀長石的理想化學式是 KAlSi₃O₈，分子量約 278.33；鈉長石是 NaAlSi₃O₈，分子量約 262.22。透過詳細的分子量計算，我們可以非常清晰地看到，僅僅一莫耳的長石，就能同時提供 1 莫耳的鹼金屬助熔劑（鉀或鈉）、1 莫耳的黏度調節劑（氧化鋁），以及高達 3 莫耳的骨架成分（二氧化矽）。這完美解釋了為什麼單一原料的長石，只要溫度夠高，自己本身就能熔融成一層美麗的玻璃釉面。</p>
+
+  <h3>天然雜質與理論值的差距</h3>
+  <p>在學習進階計算時，必須釐清一個重要的務實觀念：我們手算出來的高嶺土或長石分子量，是基於「理想礦物晶體」的標準數值。但您從鶯歌或其他陶藝材料行買來的長石粉，是一座天然礦山的產物，裡面不可避免地會混雜了鈉長石、游離石英、雲母或微量的鐵雜質。因此，針對天然複合礦物，專業配方軟體中使用的分子量與化學組成，通常是該產地經過光譜儀器精密分析後的「實測平均值」，這會比我們手算的理想分子量更貼近真實的配方狀況。</p>
+
+  <h2>十二、從分子量邁向釉藥配方設計的最後一哩路</h2>
+  
+  <div class="svg-container">
+    <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#ffffff" />
+      
+      <circle cx="150" cy="125" r="60" fill="#FFB800"/>
+      <text x="150" y="115" font-family="sans-serif" font-weight="bold" font-size="20" fill="#fff" text-anchor="middle" dominant-baseline="middle">配方重量</text>
+      <text x="150" y="145" font-family="sans-serif" font-size="16" fill="#fff" text-anchor="middle" dominant-baseline="middle">(公克 g)</text>
+
+      <path d="M 220 125 L 320 125" stroke="#00B050" stroke-width="4" marker-end="url(#arrow-green-2)"/>
+      <text x="260" y="110" font-family="sans-serif" font-weight="bold" font-size="16" fill="#00B050" text-anchor="middle" dominant-baseline="middle">除以</text>
+      <text x="260" y="145" font-family="sans-serif" font-weight="bold" font-size="16" fill="#00B050" text-anchor="middle" dominant-baseline="middle">分子量</text>
+      <defs>
+        <marker id="arrow-green-2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#00B050" />
+        </marker>
+      </defs>
+
+      <circle cx="390" cy="125" r="60" fill="#00B050"/>
+      <text x="390" y="115" font-family="sans-serif" font-weight="bold" font-size="22" fill="#fff" text-anchor="middle" dominant-baseline="middle">莫耳數</text>
+      <text x="390" y="145" font-family="sans-serif" font-size="16" fill="#fff" text-anchor="middle" dominant-baseline="middle">(Moles)</text>
+
+      <path d="M 460 125 L 560 125" stroke="#0070C0" stroke-width="4" marker-end="url(#arrow-blue-2)"/>
+      <text x="500" y="110" font-family="sans-serif" font-weight="bold" font-size="16" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">歸一化</text>
+      <text x="500" y="145" font-family="sans-serif" font-weight="bold" font-size="16" fill="#0070C0" text-anchor="middle" dominant-baseline="middle">比例運算</text>
+      <defs>
+        <marker id="arrow-blue-2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#0070C0" />
+        </marker>
+      </defs>
+
+      <rect x="580" y="75" width="280" height="100" rx="15" fill="#0070C0"/>
+      <text x="720" y="115" font-family="sans-serif" font-weight="bold" font-size="24" fill="#fff" text-anchor="middle" dominant-baseline="middle">釉式 (Seger Formula)</text>
+      <text x="720" y="150" font-family="sans-serif" font-size="16" fill="#E6F2FF" text-anchor="middle" dominant-baseline="middle">看透釉藥配方的化學本質</text>
+    </svg>
+  </div>
+
+  <p>恭喜您，當您讀到這裡並能完全理解分子量的計算邏輯時，您已經成功推開了高階釉藥設計的大門。請記住，手動計算分子量並不是我們學習的最終目的，它只是一項通往「化學配方設計」的起點基礎工具。</p>
+
+  <h3>將克數換算為莫耳數</h3>
+  <p>在陶藝工作室裡，我們用電子秤量的是「公克」，但化學反應在乎的卻是原子的「個數」。將「原料配方的克數」除以我們剛剛辛苦學會的「分子量」，就能得到一個名為「莫耳數（Moles）」的數值。莫耳數代表了該物質在這個配方中真實存在的化學數量比例。這也就是為什麼同樣加入 100 克，分子量極輕的物質，其莫耳數會比較大，在配方中的化學影響力也就顯得更為強烈。</p>
+
+  <h3>莫耳比例與統一分子式（UMF）</h3>
+  <p>當我們把一個配方中所有的天然材料，都成功換算成化學氧化物的莫耳數後，再透過數學方式，將提供鹼性與鹼土金屬（RO/R₂O）的助熔劑總量歸一化設定為 1。這就是釉藥界最著名的統一分子式（Unity Molecular Formula, UMF），俗稱塞格式（Seger Formula）。釉式的出現，徹底剝去了天然礦物複雜多變的外衣，讓您可以跨越原料的限制，直接在一個標準化的平台上比較不同配方的熔點、光澤與表面張力等物理特性。</p>
+
+  <h3>建立專屬的釉藥化學知識系統</h3>
+  <p>了解分子量的計算邏輯後，下一次當您從網路上或是書籍中抄錄到一個全新的釉藥配方時，試著不要只是一昧地照抄克數。去查閱這些原料的化學式，計算一下它們的分子量，想像它們進入 1230 度高溫後，碳酸根化作氣泡飛散，剩下的金屬氧化物互相交融熔化成玻璃的壯麗過程。掌握分子量，您就擁有了透視陶瓷釉藥的最強大能力。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">初學者常見化學計算 FAQ</div>
+    <p><strong>Q：我一定要自己用計算機手算嗎？不能依賴電腦軟體嗎？</strong><br>
+    A：您完全可以使用軟體！現在有許多免費的資源（如 Glazy 等網站）能一秒幫您計算出釉式。但在完全依賴軟體之前，親自動手算過幾次基礎原料（如石英、碳酸鈣），能幫助您建立對物質比例的「化學直覺」。這樣未來如果軟體跑出異常的數字，您才會有警覺心，而不是盲目相信。</p>
+    
+    <p><strong>Q：原子量有那麼多位數，小數點到底要取到第幾位才夠準確？</strong><br>
+    A：在陶藝領域的計算中，因為天然原料本身的變異性（例如礦脈雜質、環境濕度帶來的水分）遠大於原子量小數點後三位的誤差，因此我們通常只取小數點後兩位（例如氧 16.00, 矽 28.09）來計算式量，這樣就已經非常足夠應付日常釉藥調配了。</p>
+    
+    <p><strong>Q：我在配方裡看到「高嶺土」，但我不知道我買的到底是哪一種成分，該怎麼算分子量？</strong><br>
+    A：如果是用作理論學習與練習，我們直接使用高嶺石的理想化學式 Al₂Si₂O₅(OH)₄（分子量約 258）即可。但如果您是要進行非常精確的配方分析與釉式轉換，請務必向您的陶藝材料供應商（如原料行）索取該批次高嶺土的「化學分析表（COA）」，上面會詳細標示出實際的氧化鋁、二氧化矽與雜質的百分比，這才是最準確的計算依據。</p>
+  </div>
+
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+    <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+  </div>
+
+</article>
+</main>
+</body>
+</html>

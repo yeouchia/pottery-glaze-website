@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料配方如何精準轉換成賽格式（釉式）？實例計算教學05（螢石的應用）</title>
+<meta name="description" content="陶瓷釉式計算實戰！探討以「螢石」取代碳酸鈣的 100g 釉藥配方。詳細拆解螢石提供高 CaO 與微量 SiO₂ 的雙重特性，並解析氟氣揮發對高溫流動性與乳濁效果的實務影響。">
+<style>
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --line:#dcd7c7;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid #e1ddcf;
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+  .article{
+    padding:42px 56px 64px;
+  }
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:#625d4e;
+    background:var(--accent-light);
+    border:1px solid #dcd7c7;
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:48px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ddd8ca;
+    color:#3e3b32;
+  }
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+  }
+  .lead{
+    background:var(--quote);
+    border:1px solid #dedacd;
+    border-radius:8px;
+    padding:20px 24px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:16px;
+    line-height: 1.8;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .tag{
+    border:1px solid #d7d2c3;
+    background:#f8f6ed;
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:32px 0;
+  }
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid #d7d2c3;
+    padding-bottom: 10px;
+  }
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:6px 0}
+  strong{font-weight:700; color:#2a2822;}
+  .table-wrap{
+    overflow-x:auto;
+    margin:24px 0 32px;
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+    background:#faf9f3;
+  }
+  th,td{
+    border-bottom:1px solid #dfdccf;
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#ece9dc;
+    font-weight:700;
+    color:#4d493e;
+    font-size:15px;
+  }
+  td{font-size:15px}
+  tr:last-child td{border-bottom:none}
+  .svg-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 24px auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .color-ro { color: #d2691e; }
+  .color-r2o3 { color: #008b8b; }
+  .color-ro2 { color: #228b22; }
+  .calc-list li { margin: 10px 0; font-size: 17px; }
+  .calc-hint {
+    background-color: #fdf5e6;
+    border-left: 4px solid #d2691e;
+    padding: 8px 16px;
+    margin: 10px 0 20px -10px;
+    font-size: 15px;
+    color: #a0522d;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* 基準點特別強調樣式 */
+  .baseline-value {
+    color: #d32f2f; 
+    font-size: 1.25em; 
+    font-weight: 900; 
+    background-color: #fff0f5; 
+    padding: 2px 8px; 
+    border-radius: 4px;
+    border: 1px dashed #ffb6c1; 
+    margin: 0 4px;
+  }
+
+  .related h3 { margin-top: 40px; border-bottom: none; border-left: none; padding-left: 0; font-size: 22px; }
+  .related a { display: block; position: relative; background-color: var(--paper); border: 1px solid #dcd7c7; border-radius: 8px; padding: 14px 40px 14px 16px; margin-top: 10px; box-shadow: 0 2px 5px rgba(70,62,45,.05); color: #2c5e7b; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+  .related a:last-child { border-bottom: 1px solid #dcd7c7; }
+  .related a::after { content: "〉"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; font-weight: normal; }
+  .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
+  .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥配方與釉式｜釉式計算</div>
+  <span class="eyebrow">實作演練篇 05</span>
+  <h1>原料配方如何精準轉換成賽格式（釉式）？實例計算教學05</h1>
+  <div class="lead"><strong>進階挑戰：神秘的螢石（Fluorite）。</strong>在陶瓷配釉中，要尋找提供氧化鈣（CaO）的來源，除了常見的碳酸鈣與矽灰石外，還有一種能帶來極強流動性與乳濁效果的原料——「螢石」。天然螢石不僅含有極高的鈣，還常伴隨少許的石英（SiO₂）。透過 <strong>釜戶長石 55g、螢石 25g、高嶺土 15g、石英 5g</strong> 這份 100g 特殊配方，我們將一起拆解螢石在釉式計算中的關鍵角色！</div>
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">賽格式</span><span class="tag">莫耳數</span><span class="tag">螢石</span><span class="tag">氟氣</span><span class="tag">乳濁釉</span><span class="tag">實例教學</span>
+  </div>
+
+  <h2>一、為什麼要用「螢石」取代碳酸鈣？</h2>
+  <svg class="svg-box" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="200" rx="8" fill="#f8f9fa"/>
+    <rect x="50" y="50" width="160" height="100" fill="#a9a9a9" rx="8"/>
+    <text x="130" y="105" fill="#fff" font-size="20" font-weight="bold" text-anchor="middle">天然螢石</text>
+    <path d="M 230 80 L 320 60" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <path d="M 230 120 L 320 140" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <rect x="350" y="30" width="180" height="40" fill="#db7093" rx="4"/>
+    <text x="440" y="55" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">供給: CaO (高達70%)</text>
+    <rect x="350" y="120" width="180" height="40" fill="#4169e1" rx="4"/>
+    <text x="440" y="145" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">供給: SiO₂ (雜質約5%)</text>
+    <path d="M 130 150 L 130 180" stroke="#d32f2f" stroke-width="2" stroke-dasharray="4,4"/>
+    <text x="130" y="195" fill="#d32f2f" font-size="14" font-weight="bold" text-anchor="middle">剩餘為氟氣 (F) 燒失</text>
+  </svg>
+  
+  <h3>1. 強大的助熔與乳濁效應</h3>
+  <p>螢石的化學式是氟化鈣（CaF₂）。當它在窯爐中遇到高溫時，其含有的「氟氣（F）」會揮發逸散。氟氣在逃逸的過程中會劇烈攪動釉漿，大幅降低釉藥的黏度，帶來極強的流動性。同時，部分未能逃逸的氟元素會促使釉面產生細微的晶體，形成美麗的「乳濁效果（Opalescence）」，這也是為什麼傳統鈞釉或流動性強的藝術釉常會添加少量螢石。</p>
+  
+  <h3>2. 螢石計算的雙重陷阱</h3>
+  <p>許多陶藝家在使用螢石時會忘記兩件事：第一，它在燒成後主要提供的是 CaO，因此它是強力的 RO 組助熔劑。第二，自然界開採的螢石礦幾乎一定會伴生石英（SiO₂），因此它也是「一料雙供」的原料，在計算時必須將這微量的矽納入考量。</p>
+
+  <h2>二、第一階段準備：建立 100g 實作的化學分析數據</h2>
+  <p>我們將使用以下比例：<strong>釜戶長石 55g、螢石 25g、高嶺土 15g、石英 5g</strong>（總重 100g）。</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>原料名稱</th>
+          <th>重量配比</th>
+          <th>K₂O (%)</th>
+          <th>Na₂O (%)</th>
+          <th>CaO (%)</th>
+          <th>Al₂O₃ (%)</th>
+          <th>SiO₂ (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>釜戶長石</strong></td>
+          <td>55g</td>
+          <td>6</td>
+          <td>4</td>
+          <td>1</td>
+          <td>17</td>
+          <td>72</td>
+        </tr>
+        <tr>
+          <td><strong>天然螢石</strong></td>
+          <td>25g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>70</td>
+          <td>-</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td><strong>高嶺土</strong></td>
+          <td>15g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>39</td>
+          <td>46</td>
+        </tr>
+        <tr>
+          <td><strong>石英</strong></td>
+          <td>5g</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="calc-hint">
+    💡 <strong>實務補充：</strong>表格中為教學用「假設化學分析表」。天然螢石中的氟 (F) 在計算釉式時通常被視為燒失量（LOI）剔除，我們直接計算殘留的 CaO (約70%) 與雜質 SiO₂ (約5%)。實際在進行釉藥調配時，<strong>必須以原料廠商提供的「實際原料分析表」為正確來源參考。</strong>
+  </div>
+
+  <h3>常用陶瓷氧化物分子量對照表</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>氧化物名稱</th><th>化學符號</th><th>分子量 (約值)</th></tr>
+      <tr><td>氧化鉀</td><td>K₂O</td><td>94</td></tr>
+      <tr><td>氧化鈉</td><td>Na₂O</td><td>62</td></tr>
+      <tr><td>氧化鈣</td><td>CaO</td><td>56</td></tr>
+      <tr><td>氧化鋁</td><td>Al₂O₃</td><td>102</td></tr>
+      <tr><td>二氧化矽</td><td>SiO₂</td><td>60</td></tr>
+    </table>
+  </div>
+
+  <h2>三、實例計算步驟一：將原料重量換算成氧化物重量</h2>
+  <svg class="svg-box" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="160" rx="8" fill="#f8f9fa"/>
+    <text x="300" y="40" fill="#333" font-size="18" font-weight="bold" text-anchor="middle">原料總重 (g) × 原料分析表內的各項成分百分比 = 氧化物實際重量</text>
+    <rect x="150" y="70" width="90" height="50" fill="#20b2aa" rx="5"/>
+    <text x="195" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">25g</text>
+    <text x="260" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">×</text>
+    <rect x="280" y="70" width="90" height="50" fill="#f4a460" rx="5"/>
+    <text x="325" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">70%</text>
+    <text x="390" y="102" fill="#333" font-size="20" font-weight="bold" text-anchor="middle">=</text>
+    <rect x="410" y="70" width="100" height="50" fill="#cd5c5c" rx="5"/>
+    <text x="460" y="102" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">17.50g</text>
+    <text x="300" y="145" fill="#777" font-size="13" text-anchor="middle">(例如：螢石中所含有的 CaO 實際殘留重量)</text>
+  </svg>
+  
+  <p>將混合便當拆解成單一成分。記得將百分比轉換為小數（如 70% = 0.70）。</p>
+  
+  <h3>1. 釜戶長石 (55g) 與 螢石 (25g) 的雙重拆解</h3>
+  <ul>
+    <li><strong>長石：</strong> K₂O: 55g × 0.06 = <strong>3.30g</strong>｜Na₂O: 55g × 0.04 = <strong>2.20g</strong>｜CaO: 55g × 0.01 = <strong>0.55g</strong>｜Al₂O₃: 55g × 0.17 = <strong>9.35g</strong>｜SiO₂: 55g × 0.72 = <strong>39.60g</strong></li>
+    <li><strong>螢石（重點！）：</strong> CaO: 25g × 0.70 = <strong>17.50g</strong> ｜ SiO₂: 25g × 0.05 = <strong>1.25g</strong></li>
+  </ul>
+
+  <h3>2. 高嶺土 (15g) 與石英 (5g) 的拆解</h3>
+  <ul>
+    <li><strong>高嶺土：</strong> 15g × 0.39 = <strong>5.85g</strong> Al₂O₃ ｜ 15g × 0.46 = <strong>6.90g</strong> SiO₂</li>
+    <li><strong>石英：</strong> 5g × 1.00 = <strong>5.00g</strong> SiO₂</li>
+  </ul>
+
+  <h2>四、實例計算步驟二：將氧化物重量轉換為莫耳數</h2>
+  <p>公式：<strong>氧化物重量 (g) ÷ 該氧化物的分子量 = 莫耳數 (Mole)</strong>。</p>
+  
+  <h3>1. RO 組（助熔劑：鉀、鈉、鈣）莫耳數計算</h3>
+  <ul>
+    <li>K₂O (長石)：3.30g ÷ 94 = <strong>0.0351</strong></li>
+    <li>Na₂O (長石)：2.20g ÷ 62 = <strong>0.0355</strong></li>
+    <li>CaO (長石)：0.55g ÷ 56 = <strong>0.0098</strong></li>
+    <li>CaO (螢石)：17.50g ÷ 56 = <strong>0.3125</strong></li>
+  </ul>
+
+  <h3>2. R₂O₃ 組（鋁）與 RO₂ 組（矽）莫耳數計算</h3>
+  <ul>
+    <li>Al₂O₃ (長石)：9.35g ÷ 102 = <strong>0.0917</strong></li>
+    <li>Al₂O₃ (高嶺土)：5.85g ÷ 102 = <strong>0.0574</strong></li>
+    <li>SiO₂ (長石)：39.60g ÷ 60 = <strong>0.6600</strong></li>
+    <li>SiO₂ (螢石)：1.25g ÷ 60 = <strong>0.0208</strong></li>
+    <li>SiO₂ (高嶺土)：6.90g ÷ 60 = <strong>0.1150</strong></li>
+    <li>SiO₂ (石英)：5.00g ÷ 60 = <strong>0.0833</strong></li>
+  </ul>
+
+  <h2>五、實例計算步驟三：彙整所有氧化物的莫耳數總表</h2>
+  <p>我們將剛剛算出的莫耳數，依照化學元素種類進行垂直加總。螢石所貢獻的微量石英（SiO₂），在這裡也必須被精準地加進去！</p>
+  <ul>
+    <li><strong>K₂O 總和：</strong>0.0351</li>
+    <li><strong>Na₂O 總和：</strong>0.0355</li>
+    <li><strong>CaO 總和：</strong>0.0098 (長石) + 0.3125 (螢石) = <strong>0.3223</strong></li>
+    <li><strong>Al₂O₃ 總和：</strong>0.0917 (長石) + 0.0574 (高嶺) = <strong>0.1491</strong></li>
+    <li><strong>SiO₂ 總和：</strong>0.6600(長石) + 0.0208(螢石) + 0.1150(高嶺) + 0.0833(石英) = <strong>0.8791</strong></li>
+  </ul>
+
+  <h2>六、實例計算步驟四：尋找歸一化的基準點</h2>
+  <p>為了建立釉式的比較基準，我們將負責降溫的 RO 鹼性組總和壓縮為 1.000。這次因為高達 25g 螢石的加入，助熔劑總和非常龐大！</p>
+  <h3>1. 算出本次配方的「基準尺」</h3>
+  <p>我們將第五步算出的 RO 組莫耳數加總：<br>
+  總鹼性莫耳數 = K₂O (0.0351) + Na₂O (0.0355) + CaO (0.3223) = <span class="baseline-value">0.3929</span></p>
+  <p>所以，<span class="baseline-value">0.3929</span> 就是我們這支含螢石釉藥配方的歸一化基準點。</p>
+
+  <h2>七、實例計算步驟五：得出最終的賽格式（釉式）</h2>
+  <p>最後一步，我們將剛剛彙整的所有莫耳數，統統除以我們的基準值 <span class="baseline-value">0.3929</span>：</p>
+  <ul class="calc-list">
+    <li class="color-ro">【RO組】K₂O：0.0351 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3929</span> = <strong>0.089</strong></li>
+    <li class="color-ro">【RO組】Na₂O：0.0355 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3929</span> = <strong>0.090</strong></li>
+    <li class="color-ro">【RO組】CaO：0.3223 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3929</span> = <strong>0.821</strong> <em>(因四捨五入微調以湊齊1.000)</em></li>
+  </ul>
+  <div class="calc-hint">
+    💡 <strong>防呆檢查：</strong>以上 K₂O、Na₂O、CaO 相加 0.089 + 0.090 + 0.821 剛好等於 <strong>1.000</strong>，證明歸一化計算完全正確！
+  </div>
+  <ul class="calc-list">
+    <li class="color-r2o3">【R₂O₃組】Al₂O₃：0.1491 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3929</span> = <strong>0.379</strong></li>
+    <li class="color-ro2">【RO₂組】SiO₂：0.8791 ÷ <span class="baseline-value" style="font-size: 1.1em; padding: 0 4px;">0.3929</span> = <strong>2.237</strong></li>
+  </ul>
+  
+  <h3>我們的 100g 螢石範例最終釉式揭曉：</h3>
+  <div class="lead">
+    <span class="color-ro"><strong>RO組 (1.000)：</strong> K₂O: 0.089, Na₂O: 0.090, CaO: 0.821</span><br>
+    <span class="color-r2o3"><strong>R₂O₃組：</strong> Al₂O₃: 0.379</span><br>
+    <span class="color-ro2"><strong>RO₂組：</strong> SiO₂: 2.237</span>
+  </div>
+
+  <h2>八、實例解析：這支「高螢石」配方燒出來會怎樣？</h2>
+  <p>透過釉式解碼，我們可以預見這支配方在 1260°C 窯爐中將會上演一場劇烈的化學變化：</p>
+  <h3>1. 強力助熔與極佳的流動感</h3>
+  <p>CaO 的比例突破天際來到了 0.821！加上氟氣（F）在高溫下獨特的強力降溫與攪動作用，這支釉藥在 1260°C 時會變得像水一樣具備極強的流動性。如果將它施塗在立體雕塑的轉角處，會產生非常明顯的「積釉」與「流淌」效果。</p>
+  <h3>2. 迷人的乳濁效應</h3>
+  <p>相較於一般的碳酸鈣，螢石配方即使鋁矽比（0.379 : 2.237）落在光澤面的安全範圍內，依然會因為氟的殘留與細微結晶，而呈現出半透明甚至帶有藍白色調的「乳濁感（Opalescence）」。這正是許多傳統鈞釉能呈現深邃層次的核心秘密！</p>
+  <h3>3. 注意窯爐通風與安全</h3>
+  <p>實務上，由於氟氣具有腐蝕性與毒性，大量使用螢石（高達 25%）的配方在燒製時，務必要確保窯爐的抽風系統良好，以保護電窯的加熱絲與工作室人員的安全。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">螢石計算 常見問答 FAQ</div>
+    <p><strong>Q：為什麼釉式計算中看不到氟（F）這個元素？</strong><br>
+    A：在傳統的賽格式（Seger Formula）系統中，通常只專注於留在釉面上的金屬氧化物結構（RO、R₂O₃、RO₂）。氟氣大部分會在高溫中揮發，因此在基礎的釉式運算裡，我們將它視為「燒失量」剔除，僅計算殘留下來發揮骨幹作用的 CaO 與 SiO₂。</p>
+    <p><strong>Q：這支配方看起來很好，我可以隨便把它塗在杯子外面嗎？</strong><br>
+    A：千萬小心！這支配方的 CaO 極高且使用了螢石，它的流動性非常強大。如果你把它塗得太厚，或者施塗到杯子底部，高溫時極有可能會直接「流淌到窯板上（流釉）」，導致作品黏底報廢。建議先在試片上確認流動距離後再使用。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+<svg width="0" height="0">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
+</body>
+</html>

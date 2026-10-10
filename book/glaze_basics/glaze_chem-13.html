@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>什麼是氧化物？從陶瓷釉藥認識化學積木與配方基礎</title>
+<meta name="description" content="什麼是氧化物？本篇專為陶藝與釉藥學習者設計，淺顯易懂地解析氧化鈣、二氧化矽、氧化鋁等氧化物如何影響釉面熔融、顏色與質地，帶你輕鬆入門釉藥化學計算。">
+<meta name="keywords" content="陶藝, 化學元素, 氧化物, 氧化鈣, 二氧化矽, 氧化鋁, 釉藥燒成, 助熔劑, 呈色氧化物, 釉藥配方計算, 釉式, Seger Formula">
+<style>
+  /* =========================================
+     核心配色與網站風格變數設定
+     ========================================= */
+  :root{
+    --bg:#eee7d8;
+    --paper:#fbfaf5;
+    --card:#f1f0e4;
+    --sub-card:#f6f4e9;
+    --line:#d8d4c5;
+    --text:#39372f;
+    --muted:#777367;
+    --accent:#6c6654;
+    --accent-light:#e8e4d6;
+    --quote:#eeeadd;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height:1.85;
+    font-size:16px;
+  }
+
+  .page{
+    width:min(900px, calc(100% - 32px));
+    margin:34px auto 70px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:0 7px 24px rgba(70,62,45,.08);
+    overflow:hidden;
+  }
+
+  .article{
+    padding:42px 56px 64px;
+  }
+
+  .breadcrumb{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    color:var(--accent);
+    background:var(--accent-light);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:4px 12px;
+    margin-bottom:13px;
+    font-weight: bold;
+  }
+
+  h1{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-weight:700;
+    font-size:32px;
+    line-height:1.45;
+    margin:0 0 18px;
+    color:#35332c;
+  }
+
+  h2{
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size:24px;
+    line-height:1.55;
+    margin:60px 0 20px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--line);
+    color:#3e3b32;
+  }
+
+  h3{
+    font-size:19px;
+    margin:32px 0 12px;
+    color:#464238;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    font-weight:700;
+  }
+
+  .lead{
+    background:var(--quote);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:24px 0 32px;
+    color:#4d4a40;
+    font-size:17px;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+
+  .svg-container {
+    width: 100%;
+    margin: 24px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background-color: #fff;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+
+  .tag{
+    border:1px solid var(--line);
+    background:var(--sub-card);
+    color:#706b5d;
+    border-radius:999px;
+    padding:4px 12px;
+    font-size:13px;
+  }
+
+  .faq-box {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 28px;
+    margin:40px 0;
+  }
+
+  .faq-title {
+    font-weight:700;
+    font-size:20px;
+    margin:0 0 16px;
+    color:#4c493e;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+
+  p{margin:14px 0}
+  ul,ol{padding-left:1.8em; margin:14px 0 24px;}
+  li{margin:8px 0}
+  strong{font-weight:700; color:#2a2822;}
+
+  /* 相關文章按鈕卡片設計 */
+  .related h3 {
+    margin-top: 40px;
+    border-bottom: none;
+    border-left: none;
+    padding-left: 0;
+    font-size: 22px;
+  }
+  
+  .site-footer-link {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .home-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .home-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  @media(max-width:700px){
+    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+    .article{padding:28px 24px 45px}
+    h1{font-size:26px}
+    h2{font-size:22px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body id="top">
+<main class="page">
+<article class="article">
+  <div class="breadcrumb">陶藝與釉藥知識｜釉藥基礎｜認識氧化物</div>
+  <span class="eyebrow">釉藥化學基礎系列</span>
+  <h1>什麼是氧化物？從陶瓷釉藥認識組成釉面的化學積木</h1>
+  
+  <div class="lead">
+    當我們走進陶藝展覽，欣賞一件件迷人的陶瓷作品時，可能會看到如玻璃般透亮的透明釉、散發溫潤玉石光澤的青瓷釉、呈現深邃神秘感的天目釉，或是表面佈滿星光般結晶的金屬釉。然而，你有沒有想過，這些外觀、觸感與色彩完全不同的釉面，背後究竟藏著什麼共同的秘密？<br><br>
+    答案的關鍵之一，就是「氧化物」。在陶瓷釉藥的高溫世界裡，氧化物就像是一組看不見卻至關重要的化學積木。我們在工作桌上秤取的長石、石英、碳酸鈣等各種礦物粉末，在經過高溫窯爐的焠鍊後，最終都會以「氧化物」的形態存在並互相反應。有些氧化物負責像膠水一樣幫助釉藥熔融，有些則挺身而出形成堅固的玻璃結構，有些默默調整釉層的黏稠度，更有些像是神奇的顏料，為釉面染上絢麗的色彩。<br><br>
+    學習陶藝釉藥，不能只停留在死背原料名稱的階段。我們必須更進一步，了解這些粉末能提供哪些「化學積木（氧化物）」，以及這些積木在烈火中究竟會發揮什麼樣的功能。今天，就讓我們以淺顯易懂、循序漸進的方式，一起揭開氧化物的神秘面紗，為你的釉藥配方計算打下最扎實的基礎！
+  </div>
+
+  <div class="tags">
+    <span class="tag">陶藝</span><span class="tag">化學元素</span><span class="tag">氧化物</span><span class="tag">氧化鈣</span><span class="tag">二氧化矽</span><span class="tag">氧化鋁</span><span class="tag">釉藥燒成</span><span class="tag">釉式計算</span><span class="tag">助熔劑</span><span class="tag">呈色氧化物</span>
+  </div>
+
+  <!-- 主題 1 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#2d3436"/>
+      <circle cx="200" cy="125" r="50" fill="#e17055" />
+      <text x="200" y="133" font-size="32" fill="white" font-weight="bold" text-anchor="middle">Ca</text>
+      <text x="200" y="200" font-size="18" fill="#ffeaa7" font-weight="bold" text-anchor="middle">鈣元素</text>
+      
+      <text x="300" y="135" font-size="40" fill="white" font-weight="bold" text-anchor="middle">+</text>
+      
+      <circle cx="400" cy="125" r="50" fill="#0984e3" />
+      <text x="400" y="133" font-size="32" fill="white" font-weight="bold" text-anchor="middle">O</text>
+      <text x="400" y="200" font-size="18" fill="#ffeaa7" font-weight="bold" text-anchor="middle">氧元素</text>
+      
+      <path d="M 480 125 L 560 125" stroke="#fdcb6e" stroke-width="8" stroke-dasharray="10,5" marker-end="url(#arrow)"/>
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#fdcb6e" />
+        </marker>
+      </defs>
+
+      <circle cx="630" cy="125" r="60" fill="#00b894" stroke="#55efc4" stroke-width="4"/>
+      <text x="630" y="133" font-size="36" fill="white" font-weight="bold" text-anchor="middle">CaO</text>
+      <text x="630" y="215" font-size="18" fill="#ffeaa7" font-weight="bold" text-anchor="middle">氧化鈣 (氧化物)</text>
+    </svg>
+  </div>
+  <h2>一、什麼是氧化物？從化學積木理解基礎概念</h2>
+  <p>在進入複雜的釉藥配方之前，我們必須先搞懂最基礎的名詞：到底什麼是氧化物？如果用最簡單的一句話來概括：「氧化物，就是氧元素與另一種元素結合所形成的化合物。」在地球上，氧氣無處不在，許多元素都非常容易與氧發生反應，結合成穩定的氧化物形態。</p>
+  
+  <h3>1. 氧元素與其他元素的結合</h3>
+  <p>我們可以把化學元素想像成不同形狀與顏色的積木。當代表「氧 (O)」的積木，與代表「矽 (Si)」、「鋁 (Al)」或「鈣 (Ca)」的積木按照特定的比例組合在一起時，就會誕生全新的物質。例如，鈣與氧結合形成氧化鈣（CaO），矽與氧結合形成二氧化矽（SiO₂）。這些組合完成的「複合積木」，就是我們在陶藝中不斷討論的氧化物。</p>
+  
+  <h3>2. 氧化物在生活與陶瓷中的存在</h3>
+  <p>氧化物聽起來很學術，但其實它充斥在我們的日常生活中。最常見的氧化物就是水（H₂O），它是氫與氧的結合；我們呼出的二氧化碳（CO₂），則是碳與氧的結合。而在陶瓷領域，因為陶土與釉藥都要經過高達 1200℃ 以上的高溫窯燒，在如此高溫富氧的環境下，絕大多數的礦物最終都會以耐高溫的「金屬氧化物」或「非金屬氧化物」形式穩定存在並構成釉面。</p>
+  
+  <h3>3. 為什麼不是所有加熱後的物質都是氧化物？</h3>
+  <p>這裡有一個初學者常犯的迷思：是不是把任何粉末拿去燒，燒出來的東西就是氧化物？其實不然。氧化物必須是「僅由氧和另一種元素組成」的化合物。如果你加熱的是純金（Au），它在高溫下依然是純金屬，不會變成氧化物；如果加熱的是碳酸鈣（CaCO₃），它在高溫下會分解，把二氧化碳（CO₂）以氣體形式排走，最後留下來的氧化鈣（CaO）才是氧化物。因此，氧化物是一個明確的化學狀態，也是我們分析釉藥的最終標準。</p>
+
+  <!-- 主題 2 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#fbc531"/>
+      <!-- 原料袋 -->
+      <path d="M 100 200 L 120 70 L 180 70 L 200 200 Z" fill="#e1b12c" stroke="#2f3640" stroke-width="4"/>
+      <text x="150" y="145" font-size="20" fill="#2f3640" font-weight="bold" text-anchor="middle">長石</text>
+      <text x="150" y="230" font-size="16" fill="#2f3640" font-weight="bold" text-anchor="middle">外觀名稱</text>
+      
+      <!-- 放大鏡 -->
+      <circle cx="400" cy="125" r="70" fill="#f5f6fa" stroke="#353b48" stroke-width="8"/>
+      <path d="M 450 175 L 500 225" stroke="#353b48" stroke-width="12" stroke-linecap="round"/>
+      
+      <!-- 放大鏡內的化學式 -->
+      <circle cx="370" cy="100" r="20" fill="#e84118"/>
+      <text x="370" y="106" font-size="14" fill="white" font-weight="bold" text-anchor="middle">K₂O</text>
+      
+      <circle cx="420" cy="140" r="25" fill="#4cd137"/>
+      <text x="420" y="146" font-size="14" fill="white" font-weight="bold" text-anchor="middle">Al₂O₃</text>
+      
+      <circle cx="380" cy="160" r="30" fill="#00a8ff"/>
+      <text x="380" y="166" font-size="16" fill="white" font-weight="bold" text-anchor="middle">SiO₂</text>
+      
+      <text x="400" y="230" font-size="16" fill="#2f3640" font-weight="bold" text-anchor="middle">看透內在的氧化物組成</text>
+
+      <path d="M 230 125 L 300 125" stroke="#2f3640" stroke-width="6" marker-end="url(#arrow-dark)"/>
+      <defs>
+        <marker id="arrow-dark" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#2f3640" />
+        </marker>
+      </defs>
+    </svg>
+  </div>
+  <h2>二、為什麼陶瓷釉藥設計需要深入認識氧化物？</h2>
+  <p>想像一下，你手邊有一份透明釉的配方，上面寫著：「長石 40%、石英 30%、碳酸鈣 20%、高嶺土 10%」。這些名稱都是大自然中的礦物名稱。但當你把這份配方放入窯爐升溫到 1230℃ 時，礦物原本的結晶結構會被徹底破壞。高溫窯爐並不認識「長石」這個名字，它只對長石裡面的「氧化物」產生反應。這就是為什麼我們必須學會用氧化物的角度來看待釉藥。</p>
+
+  <h3>1. 超越原料名稱的表面意義</h3>
+  <p>在不同的國家或不同的礦區，即使同樣被稱為「長石」，其內部的化學組成可能差異極大。有些長石含鈉比較多，有些含鉀比較多。如果我們只看「原料名稱」，當原料缺貨需要替換時，往往會不知所措。但如果我們懂得分析原料能提供哪些「氧化物」，就能看穿粉末的表面，精準地尋找具有相同氧化物比例的替代材料。</p>
+
+  <h3>2. 預測高溫燒成後的實際反應</h3>
+  <p>釉藥在高溫下會融化成液態的玻璃質，冷卻後固化。這個過程中，是各種氧化物在互相拉扯與重組。例如，氧化鈣負責打破二氧化矽的結構使其融化，氧化鋁負責增加黏度防止液體流得太快。只有掌握了配方中各種「氧化物」的比例，陶藝家才能預測這鍋釉藥燒出來是光澤的、霧面的、容易流動的，還是會乾澀縮釉。</p>
+
+  <h3>3. 建立通用且科學的釉藥語言</h3>
+  <p>無論你身在台灣、日本還是美國，雖然大家使用的礦物原料名稱五花八門，但「化學氧化物」是全球共通的科學語言。當我們將配方轉換成氧化物比例（即所謂的釉式 Seger Formula）時，就能跟全世界的陶藝家交流配方，分析他們配方中助熔劑與玻璃形成劑的巧妙比例，這正是釉藥化學最迷人且實用的價值所在。</p>
+
+  <!-- 主題 3 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#273c75"/>
+      
+      <!-- Al2O3 分解圖 -->
+      <text x="400" y="70" font-size="48" fill="white" font-weight="bold" text-anchor="middle" letter-spacing="5">Al<tspan font-size="32" dy="15">2</tspan><tspan font-size="48" dy="-15">O</tspan><tspan font-size="32" dy="15">3</tspan></text>
+      
+      <path d="M 330 90 L 250 140" stroke="#fbc531" stroke-width="4" stroke-dasharray="5,5"/>
+      <path d="M 470 90 L 550 140" stroke="#00a8ff" stroke-width="4" stroke-dasharray="5,5"/>
+      
+      <!-- 鋁原子 -->
+      <circle cx="210" cy="160" r="35" fill="#fbc531"/>
+      <text x="210" y="168" font-size="24" fill="#273c75" font-weight="bold" text-anchor="middle">Al</text>
+      <circle cx="290" cy="160" r="35" fill="#fbc531"/>
+      <text x="290" y="168" font-size="24" fill="#273c75" font-weight="bold" text-anchor="middle">Al</text>
+      <text x="250" y="230" font-size="18" fill="#fbc531" font-weight="bold" text-anchor="middle">2個 鋁原子</text>
+
+      <!-- 氧原子 -->
+      <circle cx="470" cy="160" r="35" fill="#00a8ff"/>
+      <text x="470" y="168" font-size="24" fill="white" font-weight="bold" text-anchor="middle">O</text>
+      <circle cx="550" cy="160" r="35" fill="#00a8ff"/>
+      <text x="550" y="168" font-size="24" fill="white" font-weight="bold" text-anchor="middle">O</text>
+      <circle cx="630" cy="160" r="35" fill="#00a8ff"/>
+      <text x="630" y="168" font-size="24" fill="white" font-weight="bold" text-anchor="middle">O</text>
+      <text x="550" y="230" font-size="18" fill="#00a8ff" font-weight="bold" text-anchor="middle">3個 氧原子</text>
+    </svg>
+  </div>
+  <h2>三、破解化學式：CaO、SiO₂、Al₂O₃ 到底代表什麼？</h2>
+  <p>當非理工背景的初學者第一次看到 CaO、SiO₂、Al₂O₃ 這些英文與數字交雜的符號時，往往會產生抗拒感，覺得這是在上艱深的化學課。其實，只要掌握一個簡單的看圖法則，化學式就像是一份非常直觀的「成分說明書」，它清楚地告訴你這個物質是由哪些積木、以什麼樣的比例組裝而成的。</p>
+
+  <h3>1. 符號背後的元素身分證</h3>
+  <p>化學式中的英文字母代表了元素的縮寫。大寫字母開頭就是一種新元素的起點。例如在「CaO」中，C 是大寫，a 是小寫，這代表「Ca」是一個完整的元素代號，也就是「鈣（Calcium）」；而後面的「O」是大寫，代表另一種元素「氧（Oxygen）」。所以看到 CaO，你就知道這個物質裡只有鈣和氧兩種成員參與。</p>
+
+  <h3>2. 數字下標代表的原子比例</h3>
+  <p>在英文字母的右下角，經常會出現小小的數字下標，這代表了該元素在分子中出現的數量比例。如果沒有數字，就代表預設是 1。<br>
+  - <strong>CaO (氧化鈣)</strong>：Ca 後面沒數字 (代表 1)，O 後面沒數字 (代表 1)。說明鈣與氧是以 1：1 的原子比例結合。<br>
+  - <strong>SiO₂ (二氧化矽)</strong>：Si (矽) 是 1，O (氧) 後面有 2。說明矽與氧是以 1：2 的比例結合。<br>
+  - <strong>Al₂O₃ (氧化鋁)</strong>：Al 後面有 2，O 後面有 3。這表示每 2 個鋁原子，會與 3 個氧原子緊緊綁在一起。</p>
+
+  <h3>3. 從化學式看見釉藥的組成輪廓</h3>
+  <p>學會看懂化學式，你就不會把成分搞混。這不僅幫助我們計算原料的「分子量」（將在後續文章深入探討），更能讓我們清楚知道，當我們加入某種原料時，到底帶入了多少單位的特定元素進入窯爐。這看似微小的基礎知識，卻是未來掌握進階釉藥調配不可或缺的第一步。</p>
+
+  <!-- 主題 4 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#ff7f50"/>
+      
+      <!-- 三大類群組 -->
+      <!-- NWF -->
+      <circle cx="200" cy="120" r="70" fill="#2ed573" stroke="white" stroke-width="4"/>
+      <text x="200" y="110" font-size="22" fill="white" font-weight="bold" text-anchor="middle">形成網絡</text>
+      <text x="200" y="140" font-size="18" fill="white" font-weight="bold" text-anchor="middle">(如 SiO₂)</text>
+      <text x="200" y="215" font-size="16" fill="white" font-weight="bold" text-anchor="middle">建構玻璃骨架</text>
+
+      <!-- INT -->
+      <circle cx="400" cy="120" r="70" fill="#1e90ff" stroke="white" stroke-width="4"/>
+      <text x="400" y="110" font-size="22" fill="white" font-weight="bold" text-anchor="middle">中間氧化物</text>
+      <text x="400" y="140" font-size="18" fill="white" font-weight="bold" text-anchor="middle">(如 Al₂O₃)</text>
+      <text x="400" y="215" font-size="16" fill="white" font-weight="bold" text-anchor="middle">穩定與調節</text>
+
+      <!-- NWM -->
+      <circle cx="600" cy="120" r="70" fill="#ffa502" stroke="white" stroke-width="4"/>
+      <text x="600" y="110" font-size="22" fill="white" font-weight="bold" text-anchor="middle">助熔氧化物</text>
+      <text x="600" y="140" font-size="18" fill="white" font-weight="bold" text-anchor="middle">(如 CaO, Na₂O)</text>
+      <text x="600" y="215" font-size="16" fill="white" font-weight="bold" text-anchor="middle">破壞結構促熔</text>
+    </svg>
+  </div>
+  <h2>四、陶瓷釉藥最重要的三大類氧化物分類解析</h2>
+  <p>為了方便分析與計算，釉藥化學家依照氧化物在高溫融化後於玻璃結構中所扮演的角色，將所有參與釉藥反應的氧化物分成了三大陣營。了解這三大分類，就等於掌握了釉藥配方的黃金三角平衡。</p>
+
+  <h3>1. 形成玻璃網絡的核心氧化物 (NWF)</h3>
+  <p>這類氧化物被稱為「玻璃形成劑（Network Formers）」。它們是構成釉面玻璃質主體的骨架，能夠自行形成連續的三維立體網絡結構。在一般陶瓷釉藥中，最絕對的主角就是<strong>二氧化矽（SiO₂）</strong>。有時候，硼氧化物（B₂O₃）或磷氧化物（P₂O₅）也會參與形成玻璃網絡。沒有它們，釉藥就無法形成光滑堅硬的玻璃層，只會變成一堆散落的粉末。</p>
+
+  <h3>2. 改變熔融行為的助熔氧化物 (NWM)</h3>
+  <p>這類氧化物被稱為「網絡修飾劑（Network Modifiers）」或大家熟知的「助熔劑」。它們的角色是「搗蛋鬼」，負責鑽進矽建立的堅固網絡中，破壞矽氧之間的鍵結，讓原本需要極高溫才會融化的矽骨架，在較低的溫度（如 1200℃）下就能順利融化。常見的代表包括鈉（Na₂O）、鉀（K₂O）、鈣（CaO）、鎂（MgO）、鋅（ZnO）等。適當的助熔劑讓釉藥得以燒成，過多則會讓釉藥流淌成河。</p>
+
+  <h3>3. 負責穩定與調節的中間氧化物 (INT)</h3>
+  <p>這類氧化物被稱為「中間體（Intermediates）」，它們是性格隨和的兩面派。它們不能單獨形成玻璃，但在助熔劑與玻璃形成劑之間，它們可以加入網絡增強結構。在釉藥中最具代表性的就是<strong>氧化鋁（Al₂O₃）</strong>。中間氧化物的主要任務是擔任煞車皮，提高熔融釉漿的黏度，防止流釉，並賦予釉面極佳的化學耐久性與抗刮度。</p>
+
+  <!-- 主題 5 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#3dc1d3"/>
+      
+      <text x="150" y="100" font-size="36" fill="white" font-weight="bold" text-anchor="middle">CaCO₃</text>
+      <text x="150" y="140" font-size="18" fill="white" font-weight="bold" text-anchor="middle">(碳酸鈣原料)</text>
+      
+      <!-- 火焰與加熱 -->
+      <path d="M 330 110 Q 350 80 370 120 T 410 100 T 430 140 Q 400 160 380 140 Z" fill="#e15f41"/>
+      <text x="380" y="180" font-size="20" fill="white" font-weight="bold" text-anchor="middle">高溫 900℃+</text>
+      <path d="M 230 125 L 300 125" stroke="white" stroke-width="4" marker-end="url(#arrow-white)"/>
+      <path d="M 450 125 L 520 125" stroke="white" stroke-width="4" marker-end="url(#arrow-white)"/>
+      
+      <defs>
+        <marker id="arrow-white" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="white" />
+        </marker>
+      </defs>
+
+      <circle cx="600" cy="90" r="45" fill="#f5cd79" stroke="#f19066" stroke-width="4"/>
+      <text x="600" y="100" font-size="28" fill="#546de5" font-weight="bold" text-anchor="middle">CaO</text>
+      <text x="600" y="160" font-size="18" fill="white" font-weight="bold" text-anchor="middle">氧化鈣 (留在釉中)</text>
+      
+      <path d="M 680 90 Q 700 60 720 40" stroke="white" stroke-width="3" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow-white)"/>
+      <text x="750" y="70" font-size="20" fill="#e15f41"  font-weight="bold"  text-anchor="middle">CO₂ 揮發</text>
+    </svg>
+  </div>
+  <h2>五、氧化鈣 CaO：為何它是釉藥配方中的重要助熔成員？</h2>
+  <p>氧化鈣（CaO）是陶瓷釉藥中最常見、也最不可或缺的 RO 類助熔氧化物之一。無論你是在配製透明的亮釉，還是溫潤的霧面無光釉，幾乎都會發現氧化鈣的身影。你可以把它想像成釉藥團隊中那位穩定可靠、推動整體進度的核心主管。</p>
+
+  <h3>1. 氧化鈣在高溫下的助熔機制</h3>
+  <p>二氧化矽單獨存在的熔點高達 1700℃，這已經超過了一般陶藝窯爐的極限。當氧化鈣加入配方後，在超過 1100℃ 的高溫階段，氧化鈣會開始積極發揮作用，與矽、鋁形成共熔點，促使釉藥開始液化熔融。相較於鈉或鉀這類在較低溫就開始劇烈反應的助熔劑，氧化鈣的熔融過程更加平穩，能形成質地堅硬、不易產生冰裂紋的穩定釉面。</p>
+
+  <h3>2. 碳酸鈣如何轉換為氧化鈣</h3>
+  <p>在現實中，我們無法直接購買純的「氧化鈣」粉末來配釉，因為氧化鈣極度容易吸水變成鹼性的氫氧化鈣。因此，陶藝家最常使用的原料是「碳酸鈣（CaCO₃）」，也就是俗稱的石灰石粉或冰洲石。當窯溫上升至約 800~900℃ 時，碳酸鈣會發生熱分解反應，釋放出二氧化碳氣體（CO₂），並將純粹的氧化鈣（CaO）留在釉層中參與後續的玻璃化反應。這就是原料與氧化物之間最經典的轉換範例。</p>
+
+  <h3>3. 氧化鈣過量或不足對釉面的影響</h3>
+  <p>凡事過猶不及。如果配方中氧化鈣的比例不足，釉藥會缺乏足夠的助熔力，燒成後表面可能呈現乾澀、粗糙未熔的狀態。相反地，如果氧化鈣過量，釉藥在冷卻階段極易產生結晶析出，導致原本期待的透明亮釉變成不透明的黃綠色或乳白色霧面釉。因此，精準計算並控制 CaO 在配方中的莫耳比例，是調配理想釉面的關鍵。</p>
+
+  <!-- 主題 6 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#574b90"/>
+      <!-- 玻璃網絡網格結構 -->
+      <path d="M 100 125 L 180 70 L 260 125 L 260 200 L 180 250 L 100 200 Z" fill="none" stroke="#786fa6" stroke-width="4"/>
+      <path d="M 260 125 L 340 70 L 420 125 L 420 200 L 340 250 L 260 200 Z" fill="none" stroke="#786fa6" stroke-width="4"/>
+      <path d="M 420 125 L 500 70 L 580 125 L 580 200 L 500 250 L 420 200 Z" fill="none" stroke="#786fa6" stroke-width="4"/>
+      <path d="M 580 125 L 660 70 L 740 125 L 740 200 L 660 250 L 580 200 Z" fill="none" stroke="#786fa6" stroke-width="4"/>
+      
+      <!-- 節點標示 SiO2 -->
+      <circle cx="260" cy="125" r="30" fill="#f3a683"/>
+      <text x="260" y="132" font-size="18" fill="#303952" font-weight="bold" text-anchor="middle">SiO₂</text>
+      
+      <circle cx="420" cy="125" r="30" fill="#f3a683"/>
+      <text x="420" y="132" font-size="18" fill="#303952" font-weight="bold" text-anchor="middle">SiO₂</text>
+      
+      <circle cx="580" cy="125" r="30" fill="#f3a683"/>
+      <text x="580" y="132" font-size="18" fill="#303952" font-weight="bold" text-anchor="middle">SiO₂</text>
+
+      <text x="420" y="40" font-size="24" fill="white" font-weight="bold" text-anchor="middle">強韌的矽氧立體玻璃網絡</text>
+    </svg>
+  </div>
+  <h2>六、二氧化矽 SiO₂：建構陶瓷與釉面玻璃質的靈魂骨架</h2>
+  <p>如果說釉面是一件陶瓷作品美麗的玻璃外衣，那麼二氧化矽（SiO₂）就是編織這件外衣絕對不可或缺的絲線。在地球的地殼中，矽和氧是最豐富的兩種元素，它們結合成的二氧化矽構成了岩石與沙子的主體。在陶藝世界裡，它則是釉面玻璃網絡的靈魂骨架。</p>
+
+  <h3>1. 二氧化矽的高溫玻璃化特性</h3>
+  <p>玻璃的本質，其實是一種「過冷液體」，也就是在高溫融化後，冷卻速度過快導致分子來不及排列成整齊的晶體，而是以混亂交織的立體網絡凍結起來。二氧化矽（SiO₂）天生就具備這種形成連續不規則網絡的強大能力。當釉藥在窯爐中融化成液體，並隨著溫度下降逐漸固化時，SiO₂ 就會搭建起強韌的立體骨架，賦予釉面抗酸鹼、耐刮擦的光滑玻璃特性。</p>
+
+  <h3>2. 為什麼釉藥不能只單獨使用二氧化矽？</h3>
+  <p>既然 SiO₂ 這麼好，我們能只把石英粉末塗在坯體上去燒嗎？答案是不行的。如同前面提到的，純二氧化矽的熔點接近 1700℃，在我們一般的陶藝窯爐（約 1200~1250℃）中，它連稍微變軟的跡象都不會有。因此，我們必須邀請助熔氧化物（如鈉、鉀、鈣）加入，把它強大的結構「切斷」一部分，降低整體的熔融溫度，才能在合理的溫度下得到美觀的玻璃釉層。</p>
+
+  <h3>3. 矽與其他氧化物的共生關係</h3>
+  <p>在釉藥配方中，SiO₂ 的含量多寡直接決定了釉藥的命運。SiO₂ 比例越高，釉面越堅硬、抗酸鹼能力越好，但同時需要更高的燒成溫度，且冷卻後較容易呈現透明光澤；若 SiO₂ 比例偏低，雖然容易融化，但釉面可能會變得脆弱，甚至容易被食物的酸性物質侵蝕。因此，維持 SiO₂ 與助熔劑之間的完美比例，是釉藥化學計算中最核心的任務。</p>
+
+  <!-- 主題 7 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#e15f41"/>
+      
+      <!-- 低氧化鋁：流動性高 -->
+      <path d="M 150 150 Q 200 250 250 150 Z" fill="#f5cd79" opacity="0.8"/>
+      <path d="M 180 50 C 180 50 160 120 200 200 C 240 120 220 50 220 50 Z" fill="#f5cd79"/>
+      <text x="200" y="220" font-size="20" fill="white" font-weight="bold" text-anchor="middle">缺乏 Al₂O₃</text>
+      <text x="200" y="245" font-size="16" fill="white" font-weight="bold" text-anchor="middle">釉藥如水般流淌</text>
+      
+      <line x1="400" y1="50" x2="400" y2="200" stroke="white" stroke-width="4" stroke-dasharray="8,8"/>
+      
+      <!-- 高氧化鋁：高黏度 -->
+      <path d="M 500 170 C 500 170 480 230 600 230 C 720 230 700 170 700 170 C 700 170 650 140 600 140 C 550 140 500 170 500 170 Z" fill="#f5cd79" opacity="0.9"/>
+      <circle cx="600" cy="185" r="45" fill="#f5cd79"/>
+      <text x="600" y="100" font-size="24" fill="white" font-weight="bold" text-anchor="middle">加入適量 Al₂O₃</text>
+      <text x="600" y="195" font-size="20" fill="#303952" font-weight="bold" text-anchor="middle">增加黏稠度、抗流掛</text>
+    </svg>
+  </div>
+  <h2>七、氧化鋁 Al₂O₃：為何釉藥不能只追求容易熔融的流動性？</h2>
+  <p>初學釉藥的人往往有一個誤解：既然助熔劑可以幫助釉藥融化，是不是助熔成分加得越多，釉藥的配方就越棒？其實不然。釉藥在高溫融化後，如果沒有適當的「煞車系統」，液態的釉漿會像水一樣快速流向坯體底部，甚至黏住窯板造成災難。這時候，中間氧化物中的王者——氧化鋁（Al₂O₃），就必須強勢登場了。</p>
+
+  <h3>1. 控制黏度與防止過度流釉的煞車皮</h3>
+  <p>氧化鋁在釉藥系統中，最廣為人知的物理功能就是「增加熔融態釉漿的黏度」。你可以把助熔劑想像成水，把氧化鋁想像成太白粉。當配方中的氧化鋁含量足夠時，高溫融化的釉藥會呈現如同濃稠蜂蜜般的狀態，穩穩地附著在陶瓷坯體的垂直面上，而不會輕易流掛到底部。適當的 Al₂O₃ 能讓釉藥在高溫下保持漂亮的厚度與均勻度。</p>
+
+  <h3>2. 提升釉面耐磨度與化學穩定性</h3>
+  <p>除了物理上的黏度控制，氧化鋁在化學結構上也扮演著橋樑與強化筋的作用。它能進入由 SiO₂ 建立的玻璃網絡中，填補空隙並強化整體鍵結。添加了適量氧化鋁的釉面，其表面硬度會大幅提升，較不容易被刀叉刮傷，同時抗酸鹼侵蝕的能力也會顯著增強。這對於製作日常實用食器（如馬克杯、餐盤）而言，是極度重要的安全指標。</p>
+
+  <h3>3. 氧化鋁在消光與霧面釉中的關鍵角色</h3>
+  <p>除了影響物理與化學性質，Al₂O₃ 比例的高低也直接掌控了釉面的視覺質感。一般來說，當配方中 SiO₂ 與 Al₂O₃ 的比值較高時，容易燒出光澤透明的亮釉；但如果我們刻意提高氧化鋁的比例（例如多加一些高嶺土），會使部分高溫下未能完全融入玻璃網絡的微小晶體留存在釉層表面，進而散射光線，形成觸感柔和、視覺溫潤的「霧面釉」或「消光釉」。</p>
+
+  <!-- 主題 8 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#1B1464"/>
+      
+      <!-- 基礎透明釉 -->
+      <circle cx="150" cy="125" r="60" fill="url(#grad1)" stroke="#dcdde1" stroke-width="4"/>
+      <defs>
+        <radialGradient id="grad1" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#f5f6fa"/>
+          <stop offset="100%" stop-color="#dcdde1"/>
+        </radialGradient>
+      </defs>
+      <text x="150" y="215" font-size="18" fill="white" font-weight="bold" text-anchor="middle">無色透明基礎釉</text>
+      
+      <text x="270" y="135" font-size="40" fill="#fbc531" font-weight="bold" text-anchor="middle">+</text>
+      
+      <!-- 呈色氧化物滴入 -->
+      <path d="M 390 120 Q 390 160 360 160 Q 330 160 330 120 Q 330 80 360 50 Q 390 80 390 120 Z" fill="#EA2027"/>
+      <text x="335" y="125" font-size="10" fill="white" font-weight="bold" text-anchor="start">呈色氧化物</text>
+      <text x="400" y="130" font-size="20" fill="white" font-weight="bold" text-anchor="start">1%~5% 呈色氧化物</text>
+      <text x="440" y="155" font-size="14" fill="#fbc531" font-weight="bold" text-anchor="start">(如 氧化銅、氧化鐵)</text>
+      
+      <path d="M 580 125 L 600 125" stroke="#fbc531" stroke-width="4" marker-end="url(#arrow-yellow)"/>
+      <defs>
+        <marker id="arrow-yellow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#fbc531" />
+        </marker>
+      </defs>
+
+      <!-- 繽紛色彩釉 -->
+      <circle cx="700" cy="125" r="60" fill="url(#grad2)" stroke="#fff" stroke-width="3"/>
+      <defs>
+        <radialGradient id="grad2" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#00a8ff"/>
+          <stop offset="50%" stop-color="#4cd137"/>
+          <stop offset="100%" stop-color="#9c88ff"/>
+        </radialGradient>
+      </defs>
+      <text x="700" y="215" font-size="18" fill="white" font-weight="bold" text-anchor="middle">絢麗的色釉</text>
+    </svg>
+  </div>
+  <h2>八、氧化物會影響釉藥的顏色嗎？揭開色彩的化學面紗</h2>
+  <p>我們在陶藝教室看到的各種鮮豔色料與漂亮色釉，並不是依賴一般的繪畫顏料或染料所達成的。傳統的水彩或壓克力顏料，在 1200℃ 的高溫下早就灰飛煙滅，燒得一乾二淨了。要在陶瓷的極端高溫下展現色彩，唯一的解答就是倚靠特殊的「金屬呈色氧化物」。</p>
+
+  <h3>1. 呈色氧化物與無色基礎釉的關係</h3>
+  <p>在前幾段我們提到的氧化鈣、二氧化矽、氧化鋁等，它們雖然是構成釉面骨架的關鍵，但它們燒成後基本上是無色透明，或是白色的。我們將這種由助熔劑、氧化鋁、二氧化矽組成的無色配方稱為「基礎釉（Base Glaze）」。基礎釉就像是一張純白的畫布，只有當我們在這張畫布中加入微量的「過渡金屬氧化物（如鐵、銅、鈷、錳）」時，這些過渡金屬的電子結構才會在高溫下產生變化，進而吸收與反射特定波長的光線，讓釉面呈現出肉眼可見的美麗色彩。</p>
+
+  <h3>2. 基礎氧化物群如何間接影響發色</h3>
+  <p>有趣的是，雖然呈現顏色的主角是金屬氧化物，但背景的「基礎釉」卻會強烈干涉最終的發色結果。這就像是同樣的顏料，塗在水彩紙上和畫布上會有截然不同的效果。例如，同樣加入 2% 的氧化銅，如果基礎釉中的助熔劑是以「鈉（Na₂O）」為主，燒出來會是鮮豔明亮的土耳其藍；但如果助熔劑是以「鉛（PbO）」為主，燒出來就會是青翠欲滴的草綠色。基礎化學成分與呈色氧化物之間的連鎖反應，是釉藥調配最迷人的變數。</p>
+
+  <h3>3. 燒成氣氛對氧化物顏色的決定性作用</h3>
+  <p>除了配方本身，窯爐內的「呼吸」狀態也會徹底改變氧化物的顏色。我們常說的「氧化燒」與「還原燒」，指的就是窯爐內的氧氣濃度。在氧氣充足的氧化燒中，金屬元素會與充足的氧結合；而在缺氧的還原燒中，火焰為了燃燒會強行奪走金屬氧化物中的氧原子，改變它們的化學價數。這種化學結構的剝奪與重組，會讓相同的氧化物呈現出截然不同的驚艷色彩。</p>
+
+  <!-- 主題 9 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#2d3436"/>
+      
+      <!-- 鐵 -->
+      <path d="M 120 180 Q 170 240 220 180 L 200 90 L 140 90 Z" fill="#d35400"/>
+      <text x="170" y="145" font-size="28" fill="white" font-weight="bold" text-anchor="middle">Fe</text>
+      <text x="170" y="230" font-size="18" fill="#ffeaa7" font-weight="bold" text-anchor="middle">氧化鐵: 黃/褐/紅/青綠</text>
+
+      <!-- 銅 -->
+      <path d="M 370 180 Q 420 240 470 180 L 450 90 L 390 90 Z" fill="#009432"/>
+      <text x="420" y="145" font-size="28" fill="white" font-weight="bold" text-anchor="middle">Cu</text>
+      <text x="420" y="230" font-size="18" fill="#ffeaa7" font-weight="bold" text-anchor="middle">氧化銅: 綠/藍/辰砂紅</text>
+
+      <!-- 鈷 -->
+      <path d="M 620 180 Q 670 240 720 180 L 700 90 L 640 90 Z" fill="#0652DD"/>
+      <text x="670" y="145" font-size="28" fill="white" font-weight="bold" text-anchor="middle">Co</text>
+      <text x="670" y="230" font-size="18" fill="#ffeaa7" font-weight="bold" text-anchor="middle">氧化鈷: 深邃青花藍</text>
+      
+      <text x="400" y="45" font-size="24" fill="white" font-weight="bold" text-anchor="middle">三大魔幻金屬呈色氧化物</text>
+    </svg>
+  </div>
+  <h2>九、常見金屬呈色氧化物解析：鐵、銅、鈷的色彩魔術</h2>
+  <p>在眾多過渡金屬中，有三種金屬氧化物是陶藝歷史上最悠久、應用最廣泛、也最變化多端的色彩魔法師。它們分別是氧化鐵（Fe₂O₃）、氧化銅（CuO）以及氧化鈷（CoO）。只要熟悉這三位主角的脾氣，你就能調配出成千上萬種迷人的釉色。</p>
+
+  <h3>1. 氧化鐵的多變面貌：從青瓷到天目</h3>
+  <p>氧化鐵（Fe₂O₃）可以說是大自然賦予陶瓷最慷慨的禮物。一般陶土中就含有微量的鐵，這也是為什麼多數陶土燒出來會帶有黃色或紅褐色。在釉藥中，鐵的變化堪稱一絕。在氧化燒中，少量鐵會產生琥珀黃，大量鐵則會形成深褐、紅棕甚至黑色的黑天目釉；若轉換為還原燒，鐵氧化物被奪去氧原子轉為低價鐵（FeO），就會孕育出宋代最引以為傲、清澈如玉的粉青與梅子青等「青瓷釉」。</p>
+
+  <h3>2. 氧化銅的雙重性格：綠色與還原紅</h3>
+  <p>氧化銅（CuO）是一個性格極端且敏感的著色劑。在氧氣充足的氧化環境下，只要加入 1%~3% 的氧化銅，就能輕易燒出翠綠、草綠或是帶藍調的孔雀綠。然而，當它遭遇到強烈的還原氣氛（缺氧狀態）時，氧化銅會被還原成金屬銅微粒或亞氧化銅，瞬間在釉面綻放出如同寶石般鮮豔奪目的「辰砂紅」或「牛血紅」。這也是傳統「銅紅釉」燒製困難且珍貴的原因。</p>
+
+  <h3>3. 氧化鈷的強勢著色力：深邃的青花藍</h3>
+  <p>說到陶瓷上的藍色，所有人第一時間想到的絕對是經典的「青花瓷」。這迷人的藍色，全部歸功於氧化鈷（CoO）。氧化鈷是所有著色氧化物中著色力最強的霸主，有時候只需添加不到 0.5% 的極微量，就能將整鍋白釉染成明顯的淡藍色；若添加到 1%~2%，就能呈現出深邃飽滿的琉璃藍。而且，鈷的發色極度穩定，無論是在氧化燒還是還原燒，它都堅持展現其獨有的藍色風貌。</p>
+
+  <!-- 主題 10 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#009432"/>
+      
+      <circle cx="200" cy="125" r="70" fill="url(#gloss)" stroke="white" stroke-width="4"/>
+      <defs>
+        <radialGradient id="gloss" cx="35%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="50%" stop-color="#44bd32"/>
+          <stop offset="100%" stop-color="#218c74"/>
+        </radialGradient>
+      </defs>
+      <text x="200" y="225" font-size="20" fill="white" font-weight="bold" text-anchor="middle">速冷: 光滑透明亮釉</text>
+      
+      <text x="400" y="135" font-size="32" fill="white" font-weight="bold" text-anchor="middle">相同氧化物組成</text>
+      <text x="400" y="165" font-size="16" fill="#fbc531" font-weight="bold" text-anchor="middle">溫度與曲線的魔法</text>
+
+      <circle cx="600" cy="125" r="70" fill="#a4b0be" stroke="white" stroke-width="4"/>
+      <!-- 畫一些結晶圖案 -->
+      <path d="M 600 80 L 610 110 L 640 120 L 610 130 L 600 160 L 590 130 L 560 120 L 590 110 Z" fill="#dfe4ea"/>
+      <path d="M 570 80 L 575 95 L 590 100 L 575 105 L 570 120 L 565 105 L 550 100 L 565 95 Z" fill="#ffffff" transform="rotate(30 570 100)"/>
+      <text x="600" y="225" font-size="20" fill="white" font-weight="bold" text-anchor="middle">緩冷: 析出霧面或結晶釉</text>
+    </svg>
+  </div>
+  <h2>十、同樣的氧化物組成，為什麼能燒出完全不同的釉面？</h2>
+  <p>許多初學者在學會看氧化物成分後，會產生一個疑問：如果我把兩份含有完全相同種類「氧化鈣、二氧化矽、氧化鋁」的原料混合，為什麼燒出來的結果可能一款是晶瑩剔透的亮釉，另一款卻是充滿質感的消光霧面釉？原因就在於，化學組成只是決定釉面特性的「潛力」，真正的結果還受到許多外在與內在變數的深刻影響。</p>
+
+  <h3>1. 氧化物比例微調帶來的巨大差異</h3>
+  <p>即便使用的氧化物種類一模一樣，只要它們之間的「莫耳比例（比例數量）」不同，結果就會天差地遠。例如，當 SiO₂ 與 Al₂O₃ 的比值落在 10：1 左右時，釉藥傾向於熔融成光澤玻璃面；但如果我們把比例拉近到 5：1（氧化鋁變多），釉藥在高溫下會變得很黏稠，無法完全平滑延展，冷卻後就會形成微觀表面凹凸不平的消光霧面效果。比例的魔力，是釉藥計算的核心精髓。</p>
+
+  <h3>2. 升溫與冷卻曲線對晶體生長的影響</h3>
+  <p>除了配方比例，窯爐的「燒成曲線（Fire Schedule）」扮演了決定性的角色。玻璃的本質是快速冷卻下來不及結晶的液體。如果同一款釉藥，我們在達到最高溫後立刻切斷電源，讓窯爐迅速降溫，釉面通常會保持光滑透明；但如果我們刻意讓窯爐在 1000℃ 左右緩慢降溫，甚至保溫數小時，釉藥內的氧化物原子就有充足的時間重新排列整齊，生長出美麗的微晶甚至肉眼可見的大型花朵結晶（如著名的結晶釉）。</p>
+
+  <h3>3. 釉層厚薄與坯土交界處的化學反應</h3>
+  <p>施釉技巧與坯體材質同樣不容忽視。釉層塗得極薄時，底下的陶土會強烈干涉釉的反應，陶土中的鐵質與鋁質會向上滲透，改變釉的本質；當釉層塗得極厚時，釉藥內部的化學流動空間變大，更容易產生流淌、漸層或是氣泡效果。同樣一桶氧化物配方，施在白瓷土與深色含鐵陶土上，或是刷塗一截與浸泡三秒，燒出來的質感都會截然不同。</p>
+
+  <!-- 主題 11 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#833471"/>
+      
+      <!-- 原料秤重 -->
+      <path d="M 120 200 L 220 200 L 220 220 L 120 220 Z" fill="#d1ccc0"/>
+      <path d="M 150 130 L 190 130 L 200 200 L 140 200 Z" fill="#f8efba"/>
+      <text x="170" y="180" font-size="28" fill="#2c2c54" font-weight="bold" text-anchor="middle">50g</text>
+      <text x="170" y="110" font-size="22" fill="white" font-weight="bold" text-anchor="middle">碳酸鈣粉末</text>
+      <text x="170" y="245" font-size="16" fill="#f8efba" font-weight="bold" text-anchor="middle">(看得到、摸得到的原料)</text>
+
+      <path d="M 300 150 L 380 150" stroke="#f8efba" stroke-width="6" marker-end="url(#arrow-raw)"/>
+      <defs>
+        <marker id="arrow-raw" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#f8efba" />
+        </marker>
+      </defs>
+
+      <text x="340" y="130" font-size="18" fill="white" font-weight="bold" text-anchor="middle">高溫轉化</text>
+
+      <!-- 氧化物轉換 -->
+      <circle cx="500" cy="150" r="50" fill="#ffda79"/>
+      <text x="500" y="158" font-size="22" fill="#2c2c54" font-weight="bold" text-anchor="middle">28g CaO</text>
+      <text x="500" y="80" font-size="22" fill="white" font-weight="bold" text-anchor="middle">氧化鈣</text>
+      <text x="500" y="245" font-size="16" fill="#f8efba" font-weight="bold" text-anchor="middle">(進入釉面的化學積木)</text>
+
+      <circle cx="680" cy="100" r="40" fill="#34ace0" stroke="white" stroke-dasharray="4,4"/>
+      <text x="680" y="108" font-size="18" fill="white" font-weight="bold" text-anchor="middle">22g CO₂</text>
+      <text x="680" y="165" font-size="16" fill="#34ace0" font-weight="bold" text-anchor="middle">燒失氣體揮發</text>
+      <path d="M 570 130 L 620 110" stroke="white" stroke-width="2" stroke-dasharray="2,2"/>
+    </svg>
+  </div>
+  <h2>十一、氧化物與實際操作的原料到底有什麼不同？</h2>
+  <p>這是釉藥初學者在實務操作與理論學習之間，最常卡關的盲點。許多人會困惑：「老師，既然配方要算氧化物，那我可以直接去化工行買『純氧化物』來配釉嗎？」答案通常是不行的，或者成本極高且危險。我們必須清楚區分「原料」與「氧化物」在釉藥流程中的不同定位。</p>
+
+  <h3>1. 原料是真實的粉末，氧化物是化學成分</h3>
+  <p>「原料」是你在陶藝材料行買到的一包包粉末，例如長石、高嶺土、滑石、碳酸鈣。它們是地球經過億萬年地質擠壓生成的天然礦物，看得見、摸得到，你可以用電子秤精準秤出 50 克的重量。而「氧化物」則是存在於這些原料內部的化學組成結構，是用來分析與計算的科學概念。我們秤取的是原料重量，但窯爐反應的是氧化物數量。</p>
+
+  <h3>2. 一種原料提供多種氧化物的複雜性</h3>
+  <p>多數天然礦物原料並不是單一成分。最典型的例子就是「長石（Feldspar）」。當你加入 100 克的長石到配方中時，你不僅僅是加入了一種東西；長石在融化後，會同時提供幫助熔融的鉀氧化物或鈉氧化物（K₂O/Na₂O）、防止流釉的氧化鋁（Al₂O₃），以及作為玻璃骨架的二氧化矽（SiO₂）。這就像你買了一個綜合蔬菜包，裡面同時包含了多種營養素，原料與氧化物絕對不是一對一的簡單關係。</p>
+
+  <h3>3. 高溫燒失物與留存氧化物的區別</h3>
+  <p>有些原料在常溫下的重量，並不等於它進入釉面後的重量。以碳酸鈣為例，100 克的碳酸鈣粉末在加熱到高溫分解時，大約會有 44 克的二氧化碳（CO₂）變成氣體飛走，真正留在窯內參與玻璃反應的氧化鈣（CaO）大約只有 56 克。這部分的重量損失被稱為「燒失量（LOI）」。如果不理解氧化物與原料的差異，單純用原料重量來預估結果，你的配方比例將會產生巨大的誤差。</p>
+
+  <!-- 主題 12 -->
+  <div class="svg-container">
+    <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="250" fill="#006266"/>
+      
+      <!-- 傳統配方 vs 釉式計算 -->
+      <rect x="50" y="60" width="250" height="150" fill="#12cbc4" rx="10"/>
+      <text x="175" y="100" font-size="22" fill="#006266" font-weight="bold" text-anchor="middle">傳統原料重量配方</text>
+      <text x="175" y="140" font-size="16" fill="white" font-weight="bold" text-anchor="middle">長石 40%</text>
+      <text x="175" y="165" font-size="16" fill="white" font-weight="bold" text-anchor="middle">石英 30%</text>
+      <text x="175" y="190" font-size="16" fill="white" font-weight="bold" text-anchor="middle">換了產地就失效！</text>
+      
+      <path d="M 330 135 L 430 135" stroke="#f6e58d" stroke-width="8" marker-end="url(#arrow-yellow-big)"/>
+      <defs>
+        <marker id="arrow-yellow-big" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#f6e58d" />
+        </marker>
+      </defs>
+
+      <rect x="500" y="60" width="250" height="150" fill="#A3CB38" rx="10"/>
+      <text x="625" y="100" font-size="22" fill="#006266" font-weight="bold" text-anchor="middle">氧化物莫耳釉式</text>
+      <text x="625" y="140" font-size="16" fill="white" font-weight="bold" text-anchor="middle">RO : Al₂O₃ : SiO₂</text>
+      <text x="625" y="165" font-size="18" fill="#006266" font-weight="bold" text-anchor="middle">1.0 : 0.4 : 3.5</text>
+      <text x="625" y="190" font-size="16" fill="white" font-weight="bold" text-anchor="middle">精準替換、隨意調整！</text>
+    </svg>
+  </div>
+  <h2>十二、為什麼進階釉藥計算要用氧化物，而不是只看原料重量？</h2>
+  <p>這是釉藥科學中最具革命性的一步：從「重量百分比」跨越到「氧化物莫耳比例（Seger Formula 釉式）」。如果你只是照著書上的配方抓藥，用原料重量計算或許沒問題；但如果你想成為能自行除錯、研發新釉色的陶藝創作者，這一步是必經之路。</p>
+
+  <h3>1. 突破不同產地原料替換的盲點</h3>
+  <p>書上寫「紐西蘭高嶺土 20 克」，但你手上只有「台灣本地高嶺土」，你能直接用 20 克替換嗎？絕對不行。不同產地的天然礦物，其內部的矽、鋁雜質比例完全不同。如果我們懂得將這兩種高嶺土的成分化驗表轉換為氧化物，就能精算：「為了提供相同數量的純氧化鋁，我需要多少克的台灣高嶺土來替換？」這樣才能確保替換後的釉面效果完全不走樣。</p>
+
+  <h3>2. 莫耳數與釉式（Seger Formula）的科學精準度</h3>
+  <p>重量無法反應化學反應的真實數量。因為每種氧化物的「體重（分子量）」都不一樣。舉例來說，氧化鉛（PbO）非常重，而氧化鋰（Li₂O）非常輕。如果你各加 10 克的粉末，裡面包含的鋰原子數量會遠遠多於鉛原子數量。透過將重量除以分子量，轉換為化學反應的通用單位「莫耳數（Mole）」，並整理成 UMF（統一莫耳公式，又稱施格公式），我們才能在同一個起跑線上，真實比較每一種氧化物對釉藥發揮的影響力。</p>
+
+  <h3>3. 從經驗配釉走向理性設計的必經之路</h3>
+  <p>一旦你學會透過氧化物來看待配方，釉藥對你而言將不再是一鍋未知的魔法湯。你可以利用本站提供的「釉式計算工具」，精準調整 SiO₂ 與 Al₂O₃ 的比值，讓配方從亮面變成霧面；你也能理性地減少配方中的鈣、增加鎂，來解決嚴重的冰裂與流淌問題。學會氧化物計算，就等於把釉藥變化的遙控器，牢牢掌握在自己手中。</p>
+
+  <div class="faq-box">
+    <div class="faq-title">關於「氧化物與釉藥」常見問答 FAQ</div>
+    <p><strong>Q：初學者需要把所有化學式都背下來嗎？</strong><br>
+    A：不需要死背！你只需要熟悉最常見的幾個核心成分，如二氧化矽（SiO₂）、氧化鋁（Al₂O₃）與氧化鈣（CaO）。本站與多數計算軟體都會幫你處理複雜的分子量換算，重點在於「理解它們在釉面中的功能與作用」。</p>
+    <p><strong>Q：如果我不知道買來的礦物粉末裡面到底有什麼氧化物怎麼辦？</strong><br>
+    A：正規的陶瓷材料行或供應商，通常能提供該批原料的「化學分析表（C.O.A）」。如果沒有，可以參考本站的「陶瓷原料與釉藥化學導航總表」，裡面記錄了多數常見原料的理論氧化物組成，足以應付多數配方設計需求。</p>
+    <p><strong>Q：只要氧化物比例算得準確，燒出來的釉色就一定會成功嗎？</strong><br>
+    A：氧化物配方決定了 70% 的結果，剩下的 30% 仍受到「窯爐的升降溫曲線」、「施釉的厚薄手法」以及「素坯土質的干涉」影響。科學計算能幫你找到最正確的方向並減少試錯成本，但實際的燒窯經驗與測試依然是陶藝不可或缺的浪漫與技術。</p>
+  </div>
+  
+  <!-- === 動態相關文章區塊 開始 === -->
+  <div id="dynamic-related-articles"></div>
+  <script src="../../assets/js/knowledge-data.js"></script>
+  <script src="../../assets/js/related.js"></script>
+  <!-- === 動態相關文章區塊 結束 === -->
+
+  <div class="site-footer-link">
+       <a href="../../../index.html" target="_top" class="home-link">(陶藝與釉藥調配網站 | Pottery & Glaze Knowledge Base by 黃明文 2026)</a>
+       <div class="footer-share-wrapper"></div>
+  </div>
+</article>
+</main>
+</body>
+</html>
