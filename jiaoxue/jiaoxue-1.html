@@ -244,6 +244,41 @@
             color: var(--primary-accent);
             text-decoration: underline;
         }
+
+/* ===== 以下為新增的手機版表格自動壓縮修正 ===== */
+        @media(max-width: 768px) {
+            /* 縮小表格外框的留白，讓畫面有更多空間顯示表格 */
+            .table-container {
+                padding: 12px 4px; 
+            }
+            
+            /* 強制表格寬度符合螢幕，取消任何最小寬度限制 */
+            table.dataTable, .table {
+                min-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            /* 極度壓縮儲存格的內距與字體，並強制文字換行 */
+            table.dataTable th, table.dataTable td {
+                padding: 4px 2px !important;
+                font-size: 11px !important; 
+                word-break: break-word !important; /* 允許文字自動換行 */
+                white-space: normal !important;
+                line-height: 1.3 !important;
+            }
+
+            /* 將表格內的標籤（Badge）也同步縮小 */
+            .badge-role, .badge-level-a, .badge-level-b, .badge-level-c, .badge-level-d, .badge-level-e, .badge-level-f {
+                padding: 2px 4px !important;
+                font-size: 10px !important;
+                display: inline-block;
+                line-height: 1.2;
+            }
+        }
+        /* ============================================== */
+
+
+
     </style>
 </head>
 <body>
