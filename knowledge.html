@@ -89,21 +89,32 @@
         .category-group:nth-child(4n+4).active-category .category-title i:first-child, .category-group:nth-child(4n+4).active-category .category-title i.toggle-icon { color: #805ad5 !important; animation: icon-shake-pop 0.5s ease-out; }
         .category-group:nth-child(4n+4) .article-item.active { border-left-color: #805ad5 !important; background-color: #faf5ff; color: #6b46c1; }
 
-        .tag-filter-container { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px 6px 36px; display: none; }
-        .category-group.open .tag-filter-container { display: flex; }
-        
-        .tag-btn {
-            background-color: #e2e8f0; color: #475569; border: 1px solid transparent; border-radius: 12px;
-            padding: 4px 10px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; font-weight: 500;
-        }
-        .tag-btn:hover { background-color: #cbd5e1; color: #1e293b; }
-        .tag-btn.active {
-            background-color: var(--accent-color); color: #ffffff;
-            box-shadow: 0 2px 4px rgba(252, 163, 17, 0.3); border-color: #e5930f;
-        }
+        /* === 兩層式樹狀目錄結構樣式 === */
+        .category-content { display: none; flex-direction: column; gap: 4px; padding-top: 4px; }
+        .category-group.open .category-content { display: flex; }
 
-        .article-list { list-style: none; padding-left: 28px; display: none; margin-top: 5px; flex-direction: column; gap: 2px; }
-        .category-group.open .article-list { display: flex; }
+        .sub-category-group { margin: 2px 0 2px 18px; border-left: 2px solid #e2e8f0; padding-left: 6px; }
+        .sub-category-title {
+            font-size: 0.95rem; padding: 8px 12px; border-radius: 4px; font-weight: 500;
+            color: #475569; display: flex; align-items: center; gap: 8px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .sub-category-title:hover { background-color: #f1f5f9; color: var(--primary-bg); }
+        .sub-category-title i.fa-folder, .sub-category-title i.fa-folder-open { color: var(--accent-color); font-size: 1.1em; }
+        .sub-category-title i.toggle-icon { margin-left: auto; font-size: 0.75rem; transition: transform 0.3s; color: var(--text-muted); }
+        
+        .sub-category-group.open > .sub-category-title { color: var(--primary-bg); font-weight: bold; }
+        .sub-category-group.open > .sub-category-title i.toggle-icon { transform: rotate(180deg); }
+        .sub-category-group.open > .sub-category-title i.fa-folder::before { content: "\f07c"; } /* 切換為打開的資料夾圖示 */
+
+        .article-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        
+        /* 次級資料夾內的文章列表預設隱藏 */
+        .sub-category-group .article-list { display: none; padding-left: 8px; margin-top: 4px; margin-bottom: 6px; }
+        .sub-category-group.open .article-list { display: flex; }
+
+        /* 直接在主分類下的文章列表 (沒有次級資料夾時) */
+        .category-content > .article-list { padding-left: 24px; margin-top: 2px; }
 
         .article-item-container { display: block; }
         
@@ -174,12 +185,10 @@
             return urlParams.get('article');
         }
 
-        // --- 1. 動態生成側邊欄目錄 (支援搜尋目標置頂，且確保無參數時正常渲染) ---
+        // --- 核心：動態生成側邊欄樹狀目錄 (升級兩層式折疊) ---
         function renderSidebar() {
             const container = document.getElementById('sidebar-content');
             container.innerHTML = '';
-
-            const targetId = getTargetArticleId();
 
             knowledgeTree.forEach((group) => {
                 const groupDiv = document.createElement('div');
@@ -195,111 +204,102 @@
                     });
                     groupDiv.classList.toggle('open');
                     document.querySelectorAll('.category-group').forEach(g => g.classList.remove('active-category'));
-                    groupDiv.classList.add('active-category');
+                    if (groupDiv.classList.contains('open')) {
+                        groupDiv.classList.add('active-category');
+                    }
                 };
 
-                const listUl = document.createElement('ul');
-                listUl.className = 'article-list';
-                
-                const uniqueTags = [...new Set(group.articles.map(a => a.tag).filter(Boolean))];
-                
-                if (uniqueTags.length > 0) {
-                    const tagContainer = document.createElement('div');
-                    tagContainer.className = 'tag-filter-container';
-                    
-                    const allBtn = document.createElement('button');
-                    allBtn.className = 'tag-btn active';
-                    allBtn.textContent = '全部';
-                    allBtn.onclick = (e) => filterArticles(e, listUl, '全部');
-                    tagContainer.appendChild(allBtn);
-                    
+                const contentContainer = document.createElement('div');
+                contentContainer.className = 'category-content';
+
+                const articlesToRender = group.articles;
+                const uniqueTags = [...new Set(articlesToRender.map(a => a.tag || '未分類'))];
+
+                // 如果該主分類下的標籤大於 1 個，則啟動「次級資料夾」模式
+                if (uniqueTags.length > 1) {
                     uniqueTags.forEach(tag => {
-                        const tagBtn = document.createElement('button');
-                        tagBtn.className = 'tag-btn';
-                        tagBtn.textContent = tag;
-                        tagBtn.onclick = (e) => filterArticles(e, listUl, tag);
-                        tagContainer.appendChild(tagBtn);
-                    });
-                    groupDiv.appendChild(tagContainer);
-                }
+                        const subGroupDiv = document.createElement('div');
+                        subGroupDiv.className = 'sub-category-group';
 
-                // 複製一份文章陣列來做排序
-                let articlesToRender = [...group.articles];
-                if (targetId) {
-                    const targetIndex = articlesToRender.findIndex(a => a.id === targetId);
-                    if (targetIndex !== -1) {
-                        const [matchedArticle] = articlesToRender.splice(targetIndex, 1);
-                        articlesToRender.unshift(matchedArticle);
-                    }
-                }
+                        const subTitleDiv = document.createElement('div');
+                        subTitleDiv.className = 'sub-category-title';
+                        subTitleDiv.innerHTML = `<i class="fa-solid fa-folder"></i> ${tag} <i class="fa-solid fa-chevron-down toggle-icon"></i>`;
 
-                // 生成文章項目
-                articlesToRender.forEach(article => {
-                    const itemContainerLi = document.createElement('li');
-                    itemContainerLi.className = 'article-item-container';
-                    itemContainerLi.dataset.tag = article.tag || '未分類';
-                    
-                    if (article.subTopics && article.subTopics.length > 0) {
-                        itemContainerLi.classList.add('has-subs');
-                    }
+                        const subListUl = document.createElement('ul');
+                        subListUl.className = 'article-list';
 
-                    const itemLi = document.createElement('div');
-                    itemLi.className = 'article-item';
-                    itemLi.dataset.id = article.id;
-                    itemLi.textContent = article.title;
-                    
-                    itemLi.onclick = (e) => {
-                        e.stopPropagation();
-                        loadArticle(article.url, article.id, group.category, article.title, null);
-                        if(window.innerWidth <= 1000) toggleSidebar(); 
-                    };
-                    itemContainerLi.appendChild(itemLi);
+                        subTitleDiv.onclick = (e) => {
+                            e.stopPropagation(); // 防止點擊事件往上傳遞觸發主分類折疊
+                            subGroupDiv.classList.toggle('open');
+                        };
 
-                    // 渲染子主題 (錨點)
-                    if (article.subTopics && article.subTopics.length > 0) {
-                        const subUl = document.createElement('ul');
-                        subUl.className = 'sub-topic-list';
-                        article.subTopics.forEach(sub => {
-                            const subLi = document.createElement('li');
-                            subLi.className = 'sub-topic-item';
-                            subLi.textContent = sub.title;
-                            subLi.onclick = (e) => {
-                                e.stopPropagation();
-                                loadArticle(article.url, article.id, group.category, article.title, sub.id);
-                                if(window.innerWidth <= 1000) toggleSidebar(); 
-                            };
-                            subUl.appendChild(subLi);
+                        const articlesInTag = articlesToRender.filter(a => (a.tag || '未分類') === tag);
+                        articlesInTag.forEach(article => {
+                            subListUl.appendChild(createArticleItem(article, group.category));
                         });
-                        itemContainerLi.appendChild(subUl);
-                    }
-                    listUl.appendChild(itemContainerLi);
-                });
+
+                        subGroupDiv.appendChild(subTitleDiv);
+                        subGroupDiv.appendChild(subListUl);
+                        contentContainer.appendChild(subGroupDiv);
+                    });
+                } else {
+                    // 若無標籤或只有 1 個標籤，則直接渲染文章列表 (向下相容)
+                    const directListUl = document.createElement('ul');
+                    directListUl.className = 'article-list';
+                    articlesToRender.forEach(article => {
+                        directListUl.appendChild(createArticleItem(article, group.category));
+                    });
+                    contentContainer.appendChild(directListUl);
+                }
 
                 groupDiv.appendChild(titleDiv);
-                groupDiv.appendChild(listUl);
+                groupDiv.appendChild(contentContainer);
                 container.appendChild(groupDiv);
             });
         }
 
-        // --- 2. 標籤過濾邏輯 ---
-        function filterArticles(event, listUl, selectedTag) {
-            event.stopPropagation();
-            const tagContainer = event.target.parentElement;
-            tagContainer.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        // --- 輔助：生成單筆文章項目的 DOM ---
+        function createArticleItem(article, categoryName) {
+            const itemContainerLi = document.createElement('li');
+            itemContainerLi.className = 'article-item-container';
             
-            const items = listUl.querySelectorAll('.article-item-container');
-            items.forEach(item => {
-                const itemTag = item.dataset.tag;
-                if (selectedTag === '全部' || itemTag === selectedTag) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            if (article.subTopics && article.subTopics.length > 0) {
+                itemContainerLi.classList.add('has-subs');
+            }
+
+            const itemLi = document.createElement('div');
+            itemLi.className = 'article-item';
+            itemLi.dataset.id = article.id;
+            itemLi.textContent = article.title;
+            
+            itemLi.onclick = (e) => {
+                e.stopPropagation();
+                loadArticle(article.url, article.id, categoryName, article.title, null);
+                if(window.innerWidth <= 1000) toggleSidebar(); 
+            };
+            itemContainerLi.appendChild(itemLi);
+
+            // 渲染內文子標題 (錨點)
+            if (article.subTopics && article.subTopics.length > 0) {
+                const subUl = document.createElement('ul');
+                subUl.className = 'sub-topic-list';
+                article.subTopics.forEach(sub => {
+                    const subLi = document.createElement('li');
+                    subLi.className = 'sub-topic-item';
+                    subLi.textContent = sub.title;
+                    subLi.onclick = (e) => {
+                        e.stopPropagation();
+                        loadArticle(article.url, article.id, categoryName, article.title, sub.id);
+                        if(window.innerWidth <= 1000) toggleSidebar(); 
+                    };
+                    subUl.appendChild(subLi);
+                });
+                itemContainerLi.appendChild(subUl);
+            }
+            return itemContainerLi;
         }
 
-        // --- 3. 載入文章與更新介面狀態 ---
+        // --- 載入文章與更新介面狀態 ---
         function loadArticle(url, id, category, title, anchorId) {
             const iframe = document.getElementById('articleFrame');
             const targetUrl = anchorId ? `${url}#${anchorId}` : url;
@@ -314,6 +314,7 @@
             
             document.getElementById('current-path').innerHTML = `<span style="color: var(--accent-color);">${category}</span> <i class="fa-solid fa-angle-right" style="margin: 0 8px; font-size: 0.8em;"></i> ${title}`;
 
+            // 重置所有選取狀態
             document.querySelectorAll('.article-item').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.article-item-container').forEach(el => el.classList.remove('active-parent'));
             document.querySelectorAll('.category-group').forEach(group => group.classList.remove('active-category'));
@@ -321,9 +322,15 @@
             const activeItem = document.querySelector(`.article-item[data-id="${id}"]`);
             if(activeItem) {
                 activeItem.classList.add('active');
+                
                 const itemContainer = activeItem.closest('.article-item-container');
                 if(itemContainer) itemContainer.classList.add('active-parent');
                 
+                // 自動展開所屬的次級資料夾 (若有)
+                const subGroup = activeItem.closest('.sub-category-group');
+                if(subGroup) subGroup.classList.add('open');
+
+                // 自動展開所屬的主分類
                 const parentGroup = activeItem.closest('.category-group');
                 if(parentGroup) {
                     parentGroup.classList.add('active-category');
@@ -332,7 +339,7 @@
             }
         }
 
-        // --- 4. 處理網址參數與動態展開 ---
+        // --- 處理網址參數與動態展開 (優化平滑滾動) ---
         function handleUrlParams() {
             const targetId = getTargetArticleId();
             const urlParams = new URLSearchParams(window.location.search);
@@ -344,22 +351,14 @@
             if (targetId) {
                 const articleData = findArticleById(targetId);
                 if (articleData) {
-                    // 若有帶 article 參數，重新渲染一次以達成指定文章置頂
-                    renderSidebar();
                     loadArticle(articleData.url, articleData.id, articleData.category, articleData.title, null);
                     
                     setTimeout(() => {
-                        document.querySelectorAll('.category-group').forEach(group => {
-                            const foundItem = group.querySelector(`.article-item[data-id="${targetId}"]`);
-                            if (foundItem) {
-                                group.classList.add('open');
-                                group.classList.add('active-category');
-                                const targetTitle = group.querySelector('.category-title');
-                                if (targetTitle) {
-                                    targetTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }
-                        });
+                        const foundItem = document.querySelector(`.article-item[data-id="${targetId}"]`);
+                        if (foundItem) {
+                            // 滾動到特定文章的位置 (畫面置中)
+                            foundItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
                     }, 100);
                     return;
                 }
@@ -377,6 +376,7 @@
                             groupDivs.forEach(g => { g.classList.remove('open'); g.classList.remove('active-category'); });
                             groupDivs[groupIndex].classList.add('open');
                             groupDivs[groupIndex].classList.add('active-category');
+                            
                             const targetTitle = groupDivs[groupIndex].querySelector('.category-title');
                             if (targetTitle) targetTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
                             
@@ -391,6 +391,7 @@
                 }
             }
 
+            // 預設載入第一篇
             const firstArticle = knowledgeTree[0].articles[0];
             if(firstArticle) loadArticle(firstArticle.url, firstArticle.id, knowledgeTree[0].category, firstArticle.title, null);
         }

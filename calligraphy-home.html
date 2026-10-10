@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>書畫筆墨與文字 - 總覽大廳｜黃明文老師</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           書畫筆墨與文字大廳 - 宣紙古風與金石配色系統
+           ========================================= */
+        :root {
+            --bg: #eee7d8;           /* 宣紙溫潤背景 */
+            --paper: #fbfaf5;        /* 卡片主底色 */
+            --card: #f1f0e4;         /* 強調卡片底色 */
+            --sub-card: #f6f4e9;     /* 次卡片底色 */
+            --line: #d8d4c5;         /* 典雅邊框線 */
+            --text: #39372f;         /* 濃墨主文字 */
+            --muted: #777367;        /* 淡墨次要文字 */
+            --accent: #6c6654;       /* 古銅褐主強調色 */
+            --accent-light: #e8e4d6; /* 淺強調色 */
+            --seal-red: #9e2a2b;     /* 朱砂印章紅 */
+            --ink-dark: #22201b;     /* 頂部深墨色 */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body {
+            height: 100%;
+            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100% !important;
+        }
+
+        /* 頂部水墨金石橫幅 (Hero Banner) */
+        .hero-banner {
+            background: linear-gradient(135deg, #26241e 0%, #3d392e 55%, #524c3e 100%);
+            color: var(--paper);
+            padding: 34px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(40, 36, 28, 0.2);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        /* 背景宣紙紋理與書法浮水印裝飾 */
+        .hero-banner::before {
+            content: "書畫同源・金石永壽";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Noto Serif TC", "PMingLiU", serif;
+            font-size: clamp(3rem, 9vw, 6.5rem);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.035);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: 0.25em;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .hero-badge-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(216, 212, 197, 0.25);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: #e8e4d6;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .seal-stamp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--seal-red);
+            color: #fbfaf5;
+            font-family: "Noto Serif TC", serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content h1 {
+            font-family: "Noto Serif TC", "Source Han Serif TC", "PMingLiU", serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            margin-bottom: 10px;
+            color: #fbfaf5;
+        }
+
+        .hero-content h1 span {
+            color: #e5c185;
+        }
+
+        .hero-subtitle {
+            font-size: 0.98rem;
+            color: rgba(251, 250, 245, 0.86);
+            max-width: 720px;
+            margin: 0 auto 20px;
+            line-height: 1.7;
+        }
+
+        .hero-subtitle strong {
+            color: #f3d5a0;
+            font-weight: 700;
+        }
+
+        /* 智慧搜尋列與分類篩選區 */
+        .search-box-wrap {
+            display: flex;
+            justify-content: center;
+            max-width: 520px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box-wrap i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .search-box-wrap input {
+            width: 100%;
+            padding: 12px 18px 12px 44px;
+            border-radius: 30px;
+            border: 2px solid var(--line);
+            background-color: var(--paper);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            outline: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .search-box-wrap input:focus {
+            border-color: #e5c185;
+            box-shadow: 0 4px 20px rgba(229, 193, 133, 0.35);
+        }
+
+        /* 主內容容器 */
+        .container {
+            max-width: 1220px;
+            margin: 30px auto 70px;
+            padding: 0 20px;
+        }
+
+        /* 頂部工具列：標題與分類篩選膠囊 */
+        .toolbar-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-title {
+            font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid var(--seal-red);
+            padding-left: 12px;
+        }
+
+        .filter-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background: var(--sub-card);
+            color: var(--muted);
+            border: 1px solid var(--line);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            background: var(--accent-light);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: var(--paper);
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(108, 102, 84, 0.25);
+        }
+
+        /* 文章卡片網格 */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .article-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-top: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 5px 18px rgba(70, 62, 45, 0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(70, 62, 45, 0.14);
+            border-top-color: var(--seal-red);
+        }
+
+        .card-top-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 8px;
+        }
+
+        .card-ep-badge {
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: var(--seal-red);
+            background: #f9ecec;
+            border: 1px solid #e5c5c5;
+            padding: 3px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.03em;
+        }
+
+        .card-cat-badge {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-light);
+            border: 1px solid var(--line);
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+
+        .card-title {
+            font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.45;
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .article-card:hover .card-title {
+            color: var(--seal-red);
+        }
+
+        .card-desc {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 18px;
+            text-align: justify;
+            flex-grow: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--line);
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            color: var(--muted);
+            background: var(--sub-card);
+            border: 1px solid var(--line);
+            padding: 2px 9px;
+            border-radius: 999px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--accent);
+            padding-top: 6px;
+        }
+
+        .card-footer .read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .article-card:hover .card-footer .read-btn {
+            color: var(--seal-red);
+            transform: translateX(4px);
+        }
+
+        .no-results {
+            display: none;
+            grid-column: 1 / -1;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        /* =========================================
+           沉浸式文章閱讀器 (Slide-over Reader Overlay)
+           ========================================= */
+        .reader-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            background: var(--bg);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            visibility: hidden;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.35s;
+        }
+
+        .reader-overlay.active {
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+        .reader-topbar {
+            height: 48px;
+            background: var(--ink-dark);
+            color: var(--paper);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+            gap: 10px;
+        }
+
+        .reader-back-btn {
+            background: #e5c185;
+            color: var(--ink-dark);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .reader-back-btn:hover {
+            background: #ffffff;
+            transform: translateX(-2px);
+        }
+
+        .reader-current-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #e8e4d6;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .reader-nav-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .reader-nav-btn {
+            background: rgba(255,255,255,0.12);
+            color: var(--paper);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 11px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .reader-nav-btn:hover:not(:disabled) {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .reader-nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .reader-iframe {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: var(--bg);
+        }
+
+        /* =========================================
+           手機版 RWD 極致壓縮最佳化
+           ========================================= */
+        @media (max-width: 768px) {
+            .hero-banner { padding: 22px 14px 20px; }
+            .hero-content h1 { font-size: 1.45rem; }
+            .hero-subtitle { font-size: 0.86rem; margin-bottom: 14px; }
+            .search-box-wrap input { padding: 10px 14px 10px 38px; font-size: 0.88rem; }
+            
+            .container { margin: 18px auto 50px; padding: 0 12px; }
+            .toolbar-row { gap: 10px; margin-bottom: 16px; }
+            .section-title { font-size: 1.15rem; }
+            .filter-btn { padding: 4px 11px; font-size: 0.78rem; }
+
+            .articles-grid { grid-template-columns: 1fr; gap: 14px; }
+            .article-card { padding: 16px; border-radius: 10px; }
+            .card-title { font-size: 1.08rem; margin-bottom: 8px; }
+            .card-desc { font-size: 0.85rem; margin-bottom: 12px; line-height: 1.55; }
+            .card-tags { margin-bottom: 12px; padding-top: 8px; }
+
+            .reader-topbar { height: 44px; padding: 0 8px; }
+            .reader-back-btn { padding: 5px 10px; font-size: 0.78rem; }
+            .reader-current-title { font-size: 0.82rem; }
+            .reader-nav-btn span { display: none; }
+            .reader-nav-btn { padding: 5px 9px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部視覺化宣紙墨韻橫幅 -->
+    <div class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-badge-row">
+                <span class="seal-stamp">墨韻器韻</span>
+                <span>立體的泥土器物 × 平面的筆墨線條</span>
+            </div>
+            <h1>書畫筆墨與<span>文字美學館</span></h1>
+            <p class="hero-subtitle">
+                從新石器時代<strong>半坡陶符、大汶口陶文</strong>的泥火刻劃，到<strong>商周甲骨金文、大小篆與五體演變</strong>。<br>
+                探索漢字造型與筆墨線條跨越三千年的歷史脈絡與空間美學。
+            </p>
+            
+            <!-- 即時關鍵字檢索列 -->
+            <div class="search-box-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="輸入關鍵字篩選文章（例如：甲骨文、金文、大篆、毛公鼎、五體）..." oninput="renderCards()">
+            </div>
+        </div>
+    </div>
+
+    <!-- 卡片式文章選擇主容器 -->
+    <div class="container">
+        <div class="toolbar-row">
+            <div class="section-title">
+                <i class="fa-solid fa-scroll" style="color: var(--seal-red);"></i> 書畫與古文字專題文章
+            </div>
+            <div class="filter-pills" id="filterPills">
+                <button class="filter-btn active" onclick="setCategory('all', this)">全部專題</button>
+                <button class="filter-btn" onclick="setCategory('書法通論與五體', this)">書法通論與五體</button>
+                <button class="filter-btn" onclick="setCategory('陶符與文字起源', this)">陶符與文字起源</button>
+                <button class="filter-btn" onclick="setCategory('甲骨與兩周金文', this)">甲骨與兩周金文</button>
+                <button class="filter-btn" onclick="setCategory('大小篆與工藝轉折', this)">大小篆與工藝轉折</button>
+            </div>
+        </div>
+
+        <!-- 動態渲染之文章卡片區 -->
+        <div class="articles-grid" id="articlesGrid"></div>
+    </div>
+
+    <!-- 全螢幕滑動式文章閱讀器 (避免雙重導覽列重疊) -->
+    <div class="reader-overlay" id="readerOverlay">
+        <div class="reader-topbar">
+            <button class="reader-back-btn" onclick="closeReader()">
+                <i class="fa-solid fa-chevron-left"></i> 返回書畫大廳
+            </button>
+            <div class="reader-current-title" id="readerTitle">載入文章中...</div>
+            <div class="reader-nav-group">
+                <button class="reader-nav-btn" id="prevArticleBtn" onclick="navigateArticle(-1)" title="上一篇">
+                    <i class="fa-solid fa-arrow-left"></i> <span>上一篇</span>
+                </button>
+                <button class="reader-nav-btn" id="nextArticleBtn" onclick="navigateArticle(1)" title="下一篇">
+                    <span>下一篇</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <iframe id="readerIframe" class="reader-iframe" src=""></iframe>
+    </div>
+
+    <script>
+        /* =========================================================
+           📚 書畫筆墨與文字 - 文章資料庫
+           💡 已對應您的 folder_tree.txt，精準指向 ./book/calligraphy/ 資料夾！
+           ========================================================= */
+        const articlesData = [
+            {
+                id: "calligraphy-01",
+                episode: "專題 01",
+                category: "書法通論與五體",
+                title: "書法史脈絡與五體演變：從甲骨文、篆隸草楷行到當代書法空間美學",
+                desc: "解析「漢字＋書寫＝書法」的核心定義，引入丹納《藝術哲學》種族、環境、時代三維史觀，完整梳理甲骨文與篆、隸、草、楷、行五體演變、名跡對照與文房四寶物質文化。",
+                tags: ["何謂書法", "丹納藝術哲學", "五體演變", "蠶頭雁尾", "蘭亭序", "文房四寶"],
+                url: "./book/calligraphy/01書法史9-13.html"
+            },
+            {
+                id: "calligraphy-02",
+                episode: "專題 02",
+                category: "陶符與文字起源",
+                title: "書法之前與抽象之源：從結繩記事、半坡陶符到殷墟甲骨文的文字演進與美學思辨",
+                desc: "從「書法之前、之間、未來、還能」四大叩問出發，探討上古結繩記事、六千年前西安半坡陶符、四千年前大汶口陶文至殷墟甲骨文，並以「象」字剖析自然、象形至書法之狀的三階抽象轉化。",
+                tags: ["結繩記事", "半坡陶符", "大汶口陶文", "殷墟甲骨文", "三階抽象轉化", "陶紋與陶文辨析"],
+                url: "./book/calligraphy/02書法史9-20.html"
+            },
+            {
+                id: "calligraphy-03",
+                episode: "專題 03",
+                category: "甲骨與兩周金文",
+                title: "從甲骨契刻到兩周金文：先秦古文字的空間佈局、冶煉工藝與當代書法轉化",
+                desc: "深入剖析甲骨文順應卜兆骨紋的「有行無列」空間美學與董作賓《甲骨文七言聯》，探討青銅器金文的「亞字形」格局、書寫者與鑄造者的範鑄協作，並對照納西東巴文、埃及聖書字與青山杉雨《鳥獸戲畫》。",
+                tags: ["有行無列", "董作賓七言聯", "兩周金文", "亞字形銘文", "納西東巴文", "青山杉雨"],
+                url: "./book/calligraphy/03書法史9-27書法史.html"
+            },
+            {
+                id: "calligraphy-04",
+                episode: "專題 04",
+                category: "大小篆與工藝轉折",
+                title: "從古文字演變看篆書發展：甲骨文、金文工藝到大篆與小篆的書法史解析",
+                desc: "辨析文字發展史與書法發展史的分野，對比甲骨文「一次寫刻」與金文「原創書寫＋二次範鑄」工藝差異，精析《大盂鼎》、《毛公鼎》、《石鼓文》、王國維戰國文字兩系說，以及李斯小篆（玉筋篆）的規範化。",
+                tags: ["二次創作鑄造", "大盂鼎與毛公鼎", "太史籀大篆", "石鼓文", "王國維兩系說", "李斯小篆"],
+                url: "./book/calligraphy/04書法史10-4書法史.html"
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentArticleIndex = -1;
+
+        // 切換分類標籤
+        function setCategory(cat, btnEl) {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            renderCards();
+        }
+
+        // 渲染文章卡片列表
+        function renderCards() {
+            const grid = document.getElementById('articlesGrid');
+            const keyword = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+
+            const filtered = articlesData.filter((art) => {
+                const matchCat = (currentCategory === 'all') || (art.category === currentCategory);
+                const fullText = `${art.episode} ${art.category} ${art.title} ${art.desc} ${art.tags.join(' ')}`.toLowerCase();
+                const matchKey = !keyword || fullText.includes(keyword);
+                return matchCat && matchKey;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results" style="display:block;">
+                        <i class="fa-solid fa-feather-pointed" style="font-size:1.8rem; color:var(--accent); margin-bottom:10px; display:block;"></i>
+                        找不到與「${keyword}」相關的書畫與文字文章，請嘗試其他關鍵字！
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((art) => {
+                const realIdx = articlesData.findIndex(item => item.id === art.id);
+                const tagsHtml = art.tags.map(t => `<span class="card-tag"># ${t}</span>`).join('');
+                return `
+                    <article class="article-card" onclick="openReader(${realIdx})">
+                        <div>
+                            <div class="card-top-meta">
+                                <span class="card-ep-badge"><i class="fa-solid fa-bookmark"></i> ${art.episode}</span>
+                                <span class="card-cat-badge">${art.category}</span>
+                            </div>
+                            <h3 class="card-title">${art.title}</h3>
+                            <p class="card-desc">${art.desc}</p>
+                        </div>
+                        <div>
+                            <div class="card-tags">${tagsHtml}</div>
+                            <div class="card-footer">
+                                <span><i class="fa-solid fa-book-open"></i> 完整圖表與專論</span>
+                                <span class="read-btn">進入展廳閱讀 <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // 開啟沉浸式閱讀器，並自動隱藏單篇文章內可能多餘的下載輔助列
+        function openReader(index) {
+            if (index < 0 || index >= articlesData.length) return;
+            currentArticleIndex = index;
+            const art = articlesData[index];
+
+            const overlay = document.getElementById('readerOverlay');
+            const iframe = document.getElementById('readerIframe');
+            const titleEl = document.getElementById('readerTitle');
+            const prevBtn = document.getElementById('prevArticleBtn');
+            const nextBtn = document.getElementById('nextArticleBtn');
+
+            titleEl.textContent = `${art.episode}｜${art.title}`;
+            prevBtn.disabled = (index <= 0);
+            nextBtn.disabled = (index >= articlesData.length - 1);
+
+            // 使用 encodeURI 確保中文檔名在本機端 (file://) 與 Vercel 伺服器端皆能 100% 穩定讀取
+            iframe.src = encodeURI(art.url);
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // 當文章載入完成後，若為同源環境，自動隱藏文章內部的頂部下載輔助列 (#helper-download-bar) 與重複導覽列
+            iframe.onload = function() {
+                try {
+                    const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (innerDoc) {
+                        const downloadBar = innerDoc.getElementById('helper-download-bar');
+                        if (downloadBar) downloadBar.style.display = 'none';
+                        const injectedHeader = innerDoc.getElementById('site-header-container');
+                        if (injectedHeader) injectedHeader.style.display = 'none';
+                    }
+                } catch (e) {
+                    // 若於本機 file:// 環境觸發跨框架限制則安全略過，不影響閱讀
+                }
+            };
+        }
+
+        // 上一篇 / 下一篇快速切換
+        function navigateArticle(direction) {
+            const nextIndex = currentArticleIndex + direction;
+            if (nextIndex >= 0 && nextIndex < articlesData.length) {
+                openReader(nextIndex);
+            }
+        }
+
+        // 關閉閱讀器返回卡片大廳
+        function closeReader() {
+            const overlay = document.getElementById('readerOverlay');
+            const iframe = document.getElementById('readerIframe');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                iframe.src = '';
+            }, 300);
+        }
+
+        // 支援網址參數直接開啟指定文章 (例如 calligraphy-home.html?id=calligraphy-02)
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCards();
+            const params = new URLSearchParams(window.location.search);
+            const targetId = params.get('id');
+            if (targetId) {
+                const idx = articlesData.findIndex(a => a.id === targetId);
+                if (idx !== -1) openReader(idx);
+            }
+        });
+    </script>
+</body>
+</html>

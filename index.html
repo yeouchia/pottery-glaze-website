@@ -141,6 +141,7 @@
         }
 
         .dropdown-item { color: #14213d; padding: 12px 18px; text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 700; white-space: nowrap; transition: all 0.2s ease; border-left: 6px solid transparent; background-color: #f9f9f9; cursor: pointer; border-bottom: 1px solid #eee; }
+        .dropdown-item:hover { background-color: #fff8e7; border-left-color: var(--accent-color); }
         .dropdown-item i { width: 20px; text-align: center; }
 
         main { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; background-color: white; position: relative; }
@@ -273,26 +274,22 @@
                         </a>
                     </div>
 
-                    <!-- 5. 影像編輯工具 -->
-                    <div class="dropdown" id="otherDropdown">
-                        <a href="javascript:void(0)" class="nav-btn theme-gold icon-purple" onmouseenter="playHoverSound()" onclick="toggleDropdown('otherDropdown')">
-                            <div><i class="fa-solid fa-image"></i> 影像編輯工具</div> <i class="fa-solid fa-caret-down"></i>
+                    <!-- 5. 書畫筆墨與文字 (原影像編輯工具位置，點擊直接進入卡片式閱讀大廳) -->
+                    <div class="dropdown">
+                        <a href="./calligraphy-home.html" target="content_frame" class="nav-btn theme-gold icon-purple" onmouseenter="playHoverSound()" onclick="playClickSound(); handleMobileClick(event);">
+                            <div><i class="fa-solid fa-pen-nib"></i> 書畫筆墨與文字</div>
                         </a>
-                        <div class="dropdown-content">
-                            <div class="dropdown-inner">
-                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-desktop" style="color:#6a1b9a;"></i> 電腦版影像編輯器</a>
-                                <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-mobile-screen" style="color:#6a1b9a;"></i> 手機版影像編輯器</a>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- 6. 其他 (完整包含作品分享、關於本站、原料廠商、留言板) -->
+                    <!-- 6. 其他 (已整合電腦版/手機版影像編輯器、原料廠商、作品分享、留言板、關於本站) -->
                     <div class="dropdown" id="extraMenuDropdown">
                         <a href="javascript:void(0)" class="nav-btn theme-purple" onmouseenter="playHoverSound()" onclick="toggleDropdown('extraMenuDropdown')">
                             <div><i class="fa-solid fa-layer-group"></i> 其他</div> <i class="fa-solid fa-caret-down"></i>
                         </a>
-                        <div class="dropdown-content">
+                        <div class="dropdown-content" style="right: 0; left: auto;">
                             <div class="dropdown-inner">
+                                <a href="./photo_edit/photo_edit.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-desktop" style="color:#6a1b9a;"></i> 電腦版影像編輯器</a>
+                                <a href="./photo_edit/phone_photo_edit.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-mobile-screen" style="color:#6a1b9a;"></i> 手機版影像編輯器</a>
                                 <a href="./info/suppliers.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-store" style="color:#7b2cbf;"></i> 原料／廠商資訊</a>
                                 <a href="./info/works.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-palette" style="color:#7b2cbf;"></i> 作品分享</a>
                                 <a href="guestbook.html" target="content_frame" class="dropdown-item" onmouseenter="playHoverSound()" onclick="handleMobileClick(event)"><i class="fa-solid fa-comments" style="color:#7b2cbf;"></i> 留言板</a>
