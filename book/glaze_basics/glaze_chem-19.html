@@ -195,14 +195,29 @@
   .related a:hover { background-color: #ffffff; border-color: #b5afa0; box-shadow: 0 4px 8px rgba(70,62,45,.1); }
   .site-footer-link { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); }
   .site-footer-link a { color: var(--muted); text-decoration: none; font-size: 14px; }
-  @media(max-width:700px){
-    .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
-    .article{padding:28px 24px 45px}
-    h1{font-size:26px}
-    h2{font-size:22px}
-    body{font-size:15px}
+@media(max-width:700px){
+  .page{ width:calc(100% - 18px); margin:16px auto 40px; border-radius:9px; }
+  .article{padding:28px 24px 45px}
+  h1{font-size:26px}
+  h2{font-size:22px}
+  body{font-size:15px}
+
+  /* ===== 以下為新增的手機版表格修正 ===== */
+  table {
+    min-width: 100%; /* 取消原本 620px 的最小寬度限制，允許表格配合螢幕自動壓縮 */
   }
-</style>
+  th, td {
+    padding: 8px 4px; /* 縮小儲存格的左右留白，以騰出更多空間給多欄位 */
+    word-break: break-word; /* 允許文字在狹窄空間自動換行 */
+  }
+  th {
+    font-size: 13px; /* 稍微縮小表格標題字體 */
+  }
+  td {
+    font-size: 13px; /* 稍微縮小表格內容字體 */
+  }
+  /* ================================== */
+}
 </head>
 <body id="top">
 <main class="page">
