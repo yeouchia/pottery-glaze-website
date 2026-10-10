@@ -243,6 +243,48 @@
             .tile-grid { grid-template-columns: 1fr 1fr; }
             .site-footer-link a.home-link { font-size: 0.75rem; }
         }
+
+
+/* ===== 以下為新增的手機版畫面超出邊界修正 ===== */
+        @media (max-width: 768px) {
+            /* 限制主容器與整體頁面寬度，避免任何元素溢出手機螢幕 */
+            body {
+                padding: 0 10px 20px 10px !important;
+                overflow-x: hidden !important;
+            }
+            .article-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 20px auto 0 auto !important;
+                overflow-x: hidden !important;
+            }
+
+            /* 將左右並排的圖片網格改為手機上的單欄上下排列，防止橫向撐破 */
+            .image-grid-2 {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+                margin: 20px 0 !important;
+            }
+
+            /* 確保所有圖片與圖說不會超出畫面寬度 */
+            figure {
+                max-width: 100% !important;
+                margin: 20px 0 !important;
+            }
+            figure img {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+        /* ============================================== */
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
