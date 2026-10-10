@@ -163,6 +163,44 @@
   button.show-ans-btn:hover {
     background: #e8e4d6;
   }
+
+@media(max-width:700px){
+  /* 縮小手機版的外框與內距，騰出更多畫面空間 */
+  .page { width: calc(100% - 16px); margin: 16px auto 40px; }
+  .article { padding: 20px 12px 40px; }
+  h1 { font-size: 24px; }
+  
+  /* 解除表格 620px 最小寬度限制，讓其自動適應手機螢幕 */
+  table, .info-table-wrap table {
+    min-width: 100%; 
+  }
+  
+  /* 縮小儲存格內距與字體 */
+  th, td {
+    padding: 6px 2px;
+    font-size: 12px;
+    word-break: break-word;
+  }
+  
+  /* 縮小測驗輸入框，避免撐破表格 */
+  input[type="number"] {
+    width: 45px !important; /* 從原本的 70px 縮小 */
+    padding: 4px;
+    font-size: 13px;
+  }
+  
+  /* 情報區兩張表格在手機上改為上下垂直排列 */
+  .info-flex-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .info-flex-container > div {
+    min-width: 100%;
+  }
+}
+
+
+
 </style>
 </head>
 <body>
