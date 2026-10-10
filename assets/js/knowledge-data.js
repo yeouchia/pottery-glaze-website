@@ -1,5 +1,5 @@
 // assets/js/knowledge-data.js
-// 陶藝與釉藥知識庫 - 分類樹狀結構 (標籤完美對應升級版)
+// 陶藝與釉藥知識庫 - 分類樹狀結構 (升級兩層式次分類版本，優化學習順序)
 
 const knowledgeTree = [
     {
@@ -101,166 +101,192 @@ const knowledgeTree = [
         category: "釉藥基礎",
         icon: "fa-flask",
         articles: [
-            { id: "glaze_basics-1", title: "釉陶藝釉藥基礎", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-1.html" },
-            { id: "glaze_basics-2", title: "什麼是釉藥？", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-2.html" },
-            { id: "glaze_basics-3", title: "釉藥的形成與作用", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-3.html" },
-            { id: "glaze_basics-4", title: "釉藥與陶瓷坯體的關係", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-4.html" },
-            { id: "glaze_basics-5", title: "釉藥在陶瓷中的功能", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-5.html" },
-            { id: "glaze_basics-6", title: "認識釉藥的基本組成概念", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-6.html" },
-            { id: "glaze_basics-7", title: "釉藥從生料到熔融的過程", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-7.html" },
-      { id: "glaze_basics-8", title: "釉藥與玻璃的關係", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-8.html" },
-      { id: "glaze_basics-9", title: "釉藥在生活與科技上的應用", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-9.html" },
-      { id: "glaze_basics-10", title: "釉藥有毒嗎？", tag: "認識釉藥", url: "./book/glaze_basics/glaze_basics-10.html" },
+            // --- ① 認識釉藥 (1~10) ---
+            { id: "glaze_basics-1", title: "釉陶藝釉藥基礎", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-1.html" },
+            { id: "glaze_basics-2", title: "什麼是釉藥？", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-2.html" },
+            { id: "glaze_basics-3", title: "釉藥的形成與作用", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-3.html" },
+            { id: "glaze_basics-4", title: "釉藥與陶瓷坯體的關係", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-4.html" },
+            { id: "glaze_basics-5", title: "釉藥在陶瓷中的功能", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-5.html" },
+            { id: "glaze_basics-6", title: "認識釉藥的基本組成概念", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-6.html" },
+            { id: "glaze_basics-7", title: "釉藥從生料到熔融的過程", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-7.html" },
+            { id: "glaze_basics-8", title: "釉藥與玻璃的關係", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-8.html" },
+            { id: "glaze_basics-9", title: "釉藥在生活與科技上的應用", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-9.html" },
+            { id: "glaze_basics-10", title: "釉藥有毒嗎？", tag: "① 認識釉藥", url: "./book/glaze_basics/glaze_basics-10.html" },
 
-      { id: "glaze_basics-11", title: "釉藥組成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-11.html" },
-      { id: "glaze_basics-12", title: "釉藥的三大基本成分", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-12.html" },
-      { id: "glaze_basics-13", title: "釉藥的三大基本成分~二氧化矽 SiO₂", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-13.html" },
-      { id: "glaze_basics-14", title: "釉藥的三大基本成分~氧化鋁 Al₂O₃", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-14.html" },
-      { id: "glaze_basics-15", title: "釉藥的三大基本成分~助熔劑的作用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-15.html" },
-
-
-   { id: "glaze_basics-16", title: "助熔劑~鹼性氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-16.html" },
-   { id: "glaze_basics-17", title: "助熔劑~鹼土類氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-17.html" },
-   { id: "glaze_basics-18", title: "釉藥的中性氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-18.html" },
-   { id: "glaze_basics-19", title: "釉藥中的氧化物", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-19.html" },
-   { id: "glaze_basics-20", title: "氧化物與釉面性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-20.html" },
-
-
-   { id: "glaze_basics-21", title: "釉藥組成與熔融溫度", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-21.html" },
-   { id: "glaze_basics-22", title: "常見釉藥原料的氧化物來源", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-22.html" },
-   { id: "glaze_basics-23", title: "釉藥組成與熔融行為", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-23.html" },
-   { id: "glaze_basics-24", title: "釉面硬度與耐久性", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-24.html" },
-   { id: "glaze_basics-25", title: "光澤釉與霧面釉的形成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-25.html" },
-   { id: "glaze_basics-26", title: "B₂O₃ 硼氧化物與硼熔塊", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-26.html" },
-   { id: "glaze_basics-27", title: "B₂O₃ 的助熔作用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-27.html" },
-   { id: "glaze_basics-28", title: "釉藥原料與氧化物的關係", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-28.html" },
-   { id: "glaze_basics-29", title: "氧化物之間的相互作用與比例", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-29.html" },
-   { id: "glaze_basics-30", title: "釉藥配方 → 氧化物 → Seger／UMF", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-30.html" },
-
-
-
-   { id: "glaze_basics-31", title: "熔塊（Frit）基礎：從原料到釉藥應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-31.html" },
-   { id: "glaze_basics-32", title: "熔塊（Frit）是什麼？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-32.html" },
-   { id: "glaze_basics-33", title: "為什麼要把生釉原料製成熔塊（Frit）？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-33.html" },
-   { id: "glaze_basics-34", title: "熔塊（Frit）如何製作？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-34.html" },
-   { id: "glaze_basics-35", title: "熔塊（Frit）在釉中的作用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-35.html" },
-   { id: "glaze_basics-36", title: "熔塊（Frit）與生釉的差異", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-36.html" },
-   { id: "glaze_basics-37", title: "不同種類熔塊（Frit）的應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-37.html" },
-   { id: "glaze_basics-38", title: "熔塊（Frit）在釉藥配方計算中的角色", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-38.html" },
-   { id: "glaze_basics-39", title: "熔塊（Frit）的化學組成", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-39.html" },
-   { id: "glaze_basics-40", title: "如何從輕鬆從生活中取得熔塊（Frit）", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-40.html" },
-
-   { id: "glaze_basics-41", title: "認識「SiO₂／Al₂O₃ 線性圖」", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-41.html" },
-   { id: "glaze_basics-42", title: "什麼是 SiO₂／Al₂O₃ 比例？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-42.html" },
-   { id: "glaze_basics-43", title: "SiO₂／Al₂O₃ 比例計算公式", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-43.html" },
-   { id: "glaze_basics-44", title: "SiO₂／Al₂O₃線性圖表示法", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-44.html" },
-   { id: "glaze_basics-45", title: "如何閱讀 SiO₂／Al₂O₃ 線性圖？", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-45.html" },
-   { id: "glaze_basics-46", title: "實際案例：從配方到線性圖", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-46.html" },
-   { id: "glaze_basics-47", title: "SiO₂／Al₂O₃比例與釉藥性質", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-47.html" },
-   { id: "glaze_basics-48", title: "SiO₂／Al₂O₃線性圖上的釉藥配方比較", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-48.html" },
-   { id: "glaze_basics-49", title: "SiO₂／Al₂O₃比例不能單獨判斷釉藥", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-49.html" },
-   { id: "glaze_basics-50", title: "SiO₂／Al₂O₃線性圖的實際應用", tag: "釉藥組成", url: "./book/glaze_basics/glaze_basics-50.html" },
-
-  { id: "glaze_basics-51", title: "釉藥原料的基本認識", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-51.html" },
-  { id: "glaze_basics-52", title: "鹼金屬類／R₂O 原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-52.html" },
-  { id: "glaze_basics-53", title: "RO 類／鹼土與二價金屬原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-53.html" },
-  { id: "glaze_basics-54", title: "Al₂O₃／鋁質與中間體原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-54.html" },
-  { id: "glaze_basics-55", title: "硼系原料／B₂O₃", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-55.html" },
-  { id: "glaze_basics-56", title: "SiO₂／RO₂ 類網絡形成與特殊氧化物", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-56.html" },
-  { id: "glaze_basics-57", title: "磷系原料／P₂O₅", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-57.html" },
-  { id: "glaze_basics-58", title: "釉藥的著色氧化物", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-58.html" },
-  { id: "glaze_basics-59", title: "特殊功能與特殊效果原料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-59.html" },
-  { id: "glaze_basics-60", title: "陶瓷顏料與色料", tag: "釉藥原料", url: "./book/glaze_basics/glaze_basics-60.html" },
+            // --- ② 釉藥化學基礎 (移至第二順位，做為釉藥組成的先修觀念) ---
+            { id: "glaze_chem-01", title: "01 認識元素週期表：從元素開始認識釉藥化學", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-01.html" },
+            { id: "glaze_chem-02", title: "02 元素是什麼？元素符號怎麼看？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-02.html" },
+            { id: "glaze_chem-03", title: "03 什麼是原子量？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-03.html" },
+            { id: "glaze_chem-04", title: "04 陶藝釉藥元素週期表", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-04.html" },
+            { id: "glaze_chem-05", title: "05 原子與原子量", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-05.html" },
+            { id: "glaze_chem-06", title: "06 分子量如何計算？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-06.html" },
+            { id: "glaze_chem-07", title: "07 化學式中的下標怎麼看？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-07.html" },
+            { id: "glaze_chem-08", title: "08 括號化學式怎麼計算？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-08.html" },
+            { id: "glaze_chem-09", title: "09 分子量、式量、莫耳質量有什麼不同？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-09.html" },
+            { id: "glaze_chem-10", title: "10 陶藝常見原料的分子量怎麼算？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-10.html" },
+            { id: "glaze_chem-11", title: "11 為什麼釉藥計算需要分子量？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-11.html" },
+            { id: "glaze_chem-12", title: "12 碳酸鹽為什麼可以提供氧化物？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-12.html" },
+            { id: "glaze_chem-13", title: "13 什麼是氧化物？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-13.html" }, 
+            { id: "glaze_chem-14", title: "14 什麼是莫耳？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-14.html" },
+            { id: "glaze_chem-15", title: "15 什麼是 Seger Formula（釉式）？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-15.html" },
+            { id: "glaze_chem-16", title: "16 原料配方如何轉換成釉式？", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-16.html" },
+            { id: "glaze_chem-17", title: "17 釉式如何反推原料配方？實例計算教學01", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-17.html" },
  
 
-  { id: "glaze_basics-61", title: "釉藥的種類與全面解析", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-61.html" },
-  { id: "glaze_basics-62", title: "釉藥的基礎釉類", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-62.html" },
-  { id: "glaze_basics-63", title: "依釉面效果分類", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-63.html" },
-  { id: "glaze_basics-64", title: "釉藥的溫度與氣氛", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-64.html" },
-  { id: "glaze_basics-65", title: "釉藥的表面質感", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-65.html" },
-
-  { id: "glaze_basics-66", title: "釉藥的燒成", tag: "釉藥的種類", url: "./book/glaze_basics/glaze_basics-66.html" },
-  { id: "glaze_basics-67", title: "釉藥的特性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-67.html" },
-  { id: "glaze_basics-68", title: "釉藥的特性-透明性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-68.html" },
-  { id: "glaze_basics-69", title: "釉藥的特性-乳濁性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-69.html" },
-  { id: "glaze_basics-70", title: "釉藥的特性-光澤與霧面", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-70.html" },
-
-  { id: "glaze_basics-71", title: "釉藥的熔融性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-71.html" },
-  { id: "glaze_basics-72", title: "釉藥的流動性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-72.html" },
-  { id: "glaze_basics-73", title: "釉藥的黏度", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-73.html" },
-  { id: "glaze_basics-74", title: "釉藥的表面張力", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-74.html" },
-  { id: "glaze_basics-75", title: "釉藥的收縮與膨脹", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-75.html" },
-  { id: "glaze_basics-76", title: "釉藥與坯體的適合性", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-76.html" },
-  { id: "glaze_basics-77", title: "釉藥的結晶", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-77.html" },
-  { id: "glaze_basics-78", title: "釉藥的失透", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-78.html" },
-  { id: "glaze_basics-79", title: "釉面質感的形成", tag: "釉藥的特性", url: "./book/glaze_basics/glaze_basics-79.html" },
+ { id: "glaze_chem-18", title: "18 釉式如何反推原料配方？實例計算教學02", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-18.html" },
+ { id: "glaze_chem-19", title: "19 釉式如何反推原料配方？實例計算教學03", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-19.html" },
+ { id: "glaze_chem-20", title: "20 釉式如何反推原料配方？實例計算教學04", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-20.html" },
+ { id: "glaze_chem-21", title: "21 釉式如何反推原料配方？實例計算教學05", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-21.html" },
+ { id: "glaze_chem-22", title: "22 釉式如何反推原料配方？實例計算教學06", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-22.html" },
+ { id: "glaze_chem-23", title: "23 釉式如何反推原料配方？實例計算教學07", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-23.html" },
+ { id: "glaze_chem-24", title: "24 釉式如何反推原料配方？實例計算教學08", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-24.html" },
+ { id: "glaze_chem-25", title: "25 釉式如何反推原料配方？實例計算教學09", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-25.html" },
+ { id: "glaze_chem-26", title: "26 釉式如何反推原料配方？實例計算教學10", tag: "② 釉藥化學基礎", url: "./book/glaze_basics/glaze_chem-26.html" },
 
 
 
-
-  { id: "glaze_basics-80", title: "釉藥的呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-80.html" },
-  { id: "glaze_basics-81", title: "為什麼釉藥會有顏色？", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-81.html" },
-  { id: "glaze_basics-82", title: "釉藥呈色的基本原理", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-82.html" },
-  { id: "glaze_basics-83", title: "金屬氧化物與呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-83.html" },
-  { id: "glaze_basics-84", title: "氧化鐵呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-84.html" },
-  { id: "glaze_basics-85", title: "氧化銅呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-85.html" },
-  { id: "glaze_basics-86", title: "氧化鈷呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-86.html" },
-  { id: "glaze_basics-87", title: "氧化鉻呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-87.html" },
-  { id: "glaze_basics-88", title: "二氧化錳呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-88.html" },
-  { id: "glaze_basics-89", title: "其他金屬氧化物呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-89.html" },
-  { id: "glaze_basics-90", title: "釉藥發色劑與色料呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-90.html" },
-
-  { id: "glaze_basics-91", title: "氧化燒與還原燒的呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-91.html" },
-  { id: "glaze_basics-92", title: "陶土與瓷土對釉的呈色影響", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-92.html" },
-  { id: "glaze_basics-93", title: "釉中結晶與呈色", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-93.html" },
-  { id: "glaze_basics-94", title: "基礎色釉的調製概念", tag: "釉藥的呈色", url: "./book/glaze_basics/glaze_basics-94.html" },
-  { id: "glaze_basics-95", title: "釉藥施用與調製", tag: "釉藥的應用", url: "./book/glaze_basics/glaze_basics-95.html" },
-  { id: "glaze_basics-96", title: "釉藥燒成與變化", tag: "釉藥的燒成", url: "./book/glaze_basics/glaze_basics-96.html" }
+  // --- ③ 互動測驗：原料百分比轉換賽格式 
+            { id: "glaze_quiz_01", title: "互動測驗01：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_01.html" },
+            { id: "glaze_quiz_02", title: "互動測驗02：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_02.html" },
+            { id: "glaze_quiz_03", title: "互動測驗03：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_03.html" },
+            { id: "glaze_quiz_04", title: "互動測驗04：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_04.html" },
+            { id: "glaze_quiz_05", title: "互動測驗05：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_05.html" },
+            { id: "glaze_quiz_06", title: "互動測驗06：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_06.html" },
+            { id: "glaze_quiz_07", title: "互動測驗07：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_07.html" },
+            { id: "glaze_quiz_08", title: "互動測驗08：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_08.html" },
+            { id: "glaze_quiz_09", title: "互動測驗09：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_09.html" },
+            { id: "glaze_quiz_10", title: "互動測驗10：原料百分比轉換賽格式", tag: "③ 原料轉換賽格式-學習測驗", url: "./book/glaze_basics/glaze_quiz_10.html" },
 
 
 
+
+
+            // --- ④ 釉藥組成 (原 ②，11~50) ---
+            { id: "glaze_basics-11", title: "釉藥組成", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-11.html" },
+            { id: "glaze_basics-12", title: "釉藥的三大基本成分", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-12.html" },
+            { id: "glaze_basics-13", title: "釉藥的三大基本成分~二氧化矽 SiO₂", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-13.html" },
+            { id: "glaze_basics-14", title: "釉藥的三大基本成分~氧化鋁 Al₂O₃", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-14.html" },
+            { id: "glaze_basics-15", title: "釉藥的三大基本成分~助熔劑的作用", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-15.html" },
+            { id: "glaze_basics-16", title: "助熔劑~鹼性氧化物", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-16.html" },
+            { id: "glaze_basics-17", title: "助熔劑~鹼土類氧化物", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-17.html" },
+            { id: "glaze_basics-18", title: "釉藥的中性氧化物", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-18.html" },
+            { id: "glaze_basics-19", title: "釉藥中的氧化物", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-19.html" },
+            { id: "glaze_basics-20", title: "氧化物與釉面性質", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-20.html" },
+            { id: "glaze_basics-21", title: "釉藥組成與熔融溫度", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-21.html" },
+            { id: "glaze_basics-22", title: "常見釉藥原料的氧化物來源", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-22.html" },
+            { id: "glaze_basics-23", title: "釉藥組成與熔融行為", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-23.html" },
+            { id: "glaze_basics-24", title: "釉面硬度與耐久性", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-24.html" },
+            { id: "glaze_basics-25", title: "光澤釉與霧面釉的形成", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-25.html" },
+            { id: "glaze_basics-26", title: "B₂O₃ 硼氧化物與硼熔塊", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-26.html" },
+            { id: "glaze_basics-27", title: "B₂O₃ 的助熔作用", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-27.html" },
+            { id: "glaze_basics-28", title: "釉藥原料與氧化物的關係", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-28.html" },
+            { id: "glaze_basics-29", title: "氧化物之間的相互作用與比例", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-29.html" },
+            { id: "glaze_basics-30", title: "釉藥配方 → 氧化物 → Seger／UMF", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-30.html" },
+            { id: "glaze_basics-31", title: "熔塊（Frit）基礎：從原料到釉藥應用", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-31.html" },
+            { id: "glaze_basics-32", title: "熔塊（Frit）是什麼？", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-32.html" },
+            { id: "glaze_basics-33", title: "為什麼要把生釉原料製成熔塊（Frit）？", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-33.html" },
+            { id: "glaze_basics-34", title: "熔塊（Frit）如何製作？", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-34.html" },
+            { id: "glaze_basics-35", title: "熔塊（Frit）在釉中的作用", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-35.html" },
+            { id: "glaze_basics-36", title: "熔塊（Frit）與生釉的差異", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-36.html" },
+            { id: "glaze_basics-37", title: "不同種類熔塊（Frit）的應用", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-37.html" },
+            { id: "glaze_basics-38", title: "熔塊（Frit）在釉藥配方計算中的角色", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-38.html" },
+            { id: "glaze_basics-39", title: "熔塊（Frit）的化學組成", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-39.html" },
+            { id: "glaze_basics-40", title: "如何從輕鬆從生活中取得熔塊（Frit）", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-40.html" },
+            { id: "glaze_basics-41", title: "認識「SiO₂／Al₂O₃ 線性圖」", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-41.html" },
+            { id: "glaze_basics-42", title: "什麼是 SiO₂／Al₂O₃ 比例？", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-42.html" },
+            { id: "glaze_basics-43", title: "SiO₂／Al₂O₃ 比例計算公式", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-43.html" },
+            { id: "glaze_basics-44", title: "SiO₂／Al₂O₃線性圖表示法", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-44.html" },
+            { id: "glaze_basics-45", title: "如何閱讀 SiO₂／Al₂O₃ 線性圖？", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-45.html" },
+            { id: "glaze_basics-46", title: "實際案例：從配方到線性圖", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-46.html" },
+            { id: "glaze_basics-47", title: "SiO₂／Al₂O₃比例與釉藥性質", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-47.html" },
+            { id: "glaze_basics-48", title: "SiO₂／Al₂O₃線性圖上的釉藥配方比較", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-48.html" },
+            { id: "glaze_basics-49", title: "SiO₂／Al₂O₃比例不能單獨判斷釉藥", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-49.html" },
+            { id: "glaze_basics-50", title: "SiO₂／Al₂O₃線性圖的實際應用", tag: "④ 釉藥組成", url: "./book/glaze_basics/glaze_basics-50.html" },
+
+            // --- ⑤ 釉藥原料 (原 ③，51~60) ---
+            { id: "glaze_basics-51", title: "釉藥原料的基本認識", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-51.html" },
+            { id: "glaze_basics-52", title: "鹼金屬類／R₂O 原料", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-52.html" },
+            { id: "glaze_basics-53", title: "RO 類／鹼土與二價金屬原料", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-53.html" },
+            { id: "glaze_basics-54", title: "Al₂O₃／鋁質與中間體原料", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-54.html" },
+            { id: "glaze_basics-55", title: "硼系原料／B₂O₃", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-55.html" },
+            { id: "glaze_basics-56", title: "SiO₂／RO₂ 類網絡形成與特殊氧化物", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-56.html" },
+            { id: "glaze_basics-57", title: "磷系原料／P₂O₅", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-57.html" },
+            { id: "glaze_basics-58", title: "釉藥的著色氧化物", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-58.html" },
+            { id: "glaze_basics-59", title: "特殊功能與特殊效果原料", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-59.html" },
+            { id: "glaze_basics-60", title: "陶瓷顏料與色料", tag: "⑤ 釉藥原料", url: "./book/glaze_basics/glaze_basics-60.html" },
+
+            // --- ⑥ 釉藥種類 (原 ④，61~66) ---
+            { id: "glaze_basics-61", title: "釉藥的種類與全面解析", tag: "⑥ 釉藥種類", url: "./book/glaze_basics/glaze_basics-61.html" },
+            { id: "glaze_basics-62", title: "釉藥的基礎釉類", tag: "⑥ 釉藥種類", url: "./book/glaze_basics/glaze_basics-62.html" },
+            { id: "glaze_basics-63", title: "依釉面效果分類", tag: "⑥ 釉藥種類", url: "./book/glaze_basics/glaze_basics-63.html" },
+            { id: "glaze_basics-64", title: "釉藥的溫度與氣氛", tag: "⑥ 釉藥種類", url: "./book/glaze_basics/glaze_basics-64.html" },
+            { id: "glaze_basics-65", title: "釉藥的表面質感", tag: "⑥ 釉藥種類", url: "./book/glaze_basics/glaze_basics-65.html" },
+            { id: "glaze_basics-66", title: "釉藥的燒成", tag: "⑥ 釉藥種類", url: "./book/glaze_basics/glaze_basics-66.html" },
+
+            // --- ⑦ 釉藥特性 (原 ⑤，67~79) ---
+            { id: "glaze_basics-67", title: "釉藥的特性", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-67.html" },
+            { id: "glaze_basics-68", title: "釉藥的特性-透明性", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-68.html" },
+            { id: "glaze_basics-69", title: "釉藥的特性-乳濁性", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-69.html" },
+            { id: "glaze_basics-70", title: "釉藥的特性-光澤與霧面", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-70.html" },
+            { id: "glaze_basics-71", title: "釉藥的熔融性", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-71.html" },
+            { id: "glaze_basics-72", title: "釉藥的流動性", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-72.html" },
+            { id: "glaze_basics-73", title: "釉藥的黏度", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-73.html" },
+            { id: "glaze_basics-74", title: "釉藥的表面張力", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-74.html" },
+            { id: "glaze_basics-75", title: "釉藥的收縮與膨脹", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-75.html" },
+            { id: "glaze_basics-76", title: "釉藥與坯體的適合性", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-76.html" },
+            { id: "glaze_basics-77", title: "釉藥的結晶", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-77.html" },
+            { id: "glaze_basics-78", title: "釉藥的失透", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-78.html" },
+            { id: "glaze_basics-79", title: "釉面質感的形成", tag: "⑦ 釉藥特性", url: "./book/glaze_basics/glaze_basics-79.html" },
+
+            // --- ⑧ 釉藥呈色 (原 ⑥，80~94) ---
+            { id: "glaze_basics-80", title: "釉藥的呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-80.html" },
+            { id: "glaze_basics-81", title: "為什麼釉藥會有顏色？", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-81.html" },
+            { id: "glaze_basics-82", title: "釉藥呈色的基本原理", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-82.html" },
+            { id: "glaze_basics-83", title: "金屬氧化物與呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-83.html" },
+            { id: "glaze_basics-84", title: "氧化鐵呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-84.html" },
+            { id: "glaze_basics-85", title: "氧化銅呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-85.html" },
+            { id: "glaze_basics-86", title: "氧化鈷呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-86.html" },
+            { id: "glaze_basics-87", title: "氧化鉻呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-87.html" },
+            { id: "glaze_basics-88", title: "二氧化錳呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-88.html" },
+            { id: "glaze_basics-89", title: "其他金屬氧化物呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-89.html" },
+            { id: "glaze_basics-90", title: "釉藥發色劑與色料呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-90.html" },
+            { id: "glaze_basics-91", title: "氧化燒與還原燒的呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-91.html" },
+            { id: "glaze_basics-92", title: "陶土與瓷土對釉的呈色影響", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-92.html" },
+            { id: "glaze_basics-93", title: "釉中結晶與呈色", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-93.html" },
+            { id: "glaze_basics-94", title: "基礎色釉的調製概念", tag: "⑧ 釉藥呈色", url: "./book/glaze_basics/glaze_basics-94.html" },
+
+            // --- ⑨ 釉藥施用與調製 (原 ⑦，95) ---
+            { id: "glaze_basics-95", title: "釉藥施用與調製", tag: "⑨ 釉藥施用與調製", url: "./book/glaze_basics/glaze_basics-95.html" },
+
+            // --- ⑩ 釉藥燒成與變化 (原 ⑧，96) ---
+            { id: "glaze_basics-96", title: "釉藥燒成與變化", tag: "⑩ 釉藥燒成與變化", url: "./book/glaze_basics/glaze_basics-96.html" }
         ]
     },
     {
         category: "窯燒知識",
         icon: "fa-fire-burner",
         articles: [
-     
-   { id: "firing-1", title: "窯爐與釉燒", tag: "窯爐與釉燒", url: "./book/firing/firing-1.html" },    
-   { id: "firing-2", title: "釉藥加熱後的變化", tag: "窯爐與釉燒", url: "./book/firing/firing-2.html" }, 
-   { id: "firing-3", title: "釉藥的熔融與玻璃化過程", tag: "窯爐與釉燒", url: "./book/firing/firing-3.html" }, 
-   { id: "firing-4", title: "釉藥與坯體的反應", tag: "窯爐與釉燒", url: "./book/firing/firing-4.html" }, 
-   { id: "firing-5", title: "釉藥未燒熟、成熟、過熟(火)", tag: "窯爐與釉燒", url: "./book/firing/firing-5.html" }, 
-   { id: "firing-6", title: "窯爐燒成溫度對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-6.html" }, 
-   { id: "firing-7", title: "窯爐燒成氣氛對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-7.html" }, 
-   { id: "firing-8", title: "燒成曲線對釉面的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-8.html" }, 
-   { id: "firing-9", title: "保溫對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-9.html" }, 
-   { id: "firing-10", title: "冷卻速度與釉面變化", tag: "窯爐與釉燒", url: "./book/firing/firing-10.html" }, 
-
-
-   { id: "firing-11", title: "結晶形成", tag: "窯爐與釉燒", url: "./book/firing/firing-11.html" },    
-   { id: "firing-12", title: "坯釉適合性與燒成", tag: "窯爐與釉燒", url: "./book/firing/firing-12.html" }, 
-   { id: "firing-13", title: "常見陶藝窯爐種類與特性解析", tag: "認識窯爐", url: "./book/firing/firing-13.html" }, 
-   { id: "firing-14", title: "如何選購適合的窯爐", tag: "認識窯爐", url: "./book/firing/firing-14.html" }, 
-   { id: "firing-15", title: "客製化窯爐需求", tag: "認識窯爐", url: "./book/firing/firing-15.html" }, 
-   { id: "firing-16", title: "電窯基本結構與運作原理", tag: "認識窯爐", url: "./book/firing/firing-16.html" }, 
-   { id: "firing-17", title: "瓦斯窯基本結構與運作原理", tag: "認識窯爐", url: "./book/firing/firing-17.html" }, 
-
-
-
-
-   { id: "firing-21", title: "燒窯溫度曲線設計", tag: "窯爐燒成技術", url: "./book/firing/firing-21.html" },
-   { id: "firing-22", title: "什麼是素燒與釉燒？", tag: "窯爐與釉燒", url: "./book/firing/firing-22.html" },
-   { id: "firing-23", title: "燒成技術~氧化燒", tag: "窯爐燒成技術", url: "./book/firing/firing-23.html" },
-   { id: "firing-24", title: "燒成技術~還原燒", tag: "窯爐燒成技術", url: "./book/firing/firing-24.html" }
-
-
-
-
-
-
-
-
+            { id: "firing-1", title: "窯爐與釉燒", tag: "窯爐與釉燒", url: "./book/firing/firing-1.html" },    
+            { id: "firing-2", title: "釉藥加熱後的變化", tag: "窯爐與釉燒", url: "./book/firing/firing-2.html" }, 
+            { id: "firing-3", title: "釉藥的熔融與玻璃化過程", tag: "窯爐與釉燒", url: "./book/firing/firing-3.html" }, 
+            { id: "firing-4", title: "釉藥與坯體的反應", tag: "窯爐與釉燒", url: "./book/firing/firing-4.html" }, 
+            { id: "firing-5", title: "釉藥未燒熟、成熟、過熟(火)", tag: "窯爐與釉燒", url: "./book/firing/firing-5.html" }, 
+            { id: "firing-6", title: "窯爐燒成溫度對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-6.html" }, 
+            { id: "firing-7", title: "窯爐燒成氣氛對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-7.html" }, 
+            { id: "firing-8", title: "燒成曲線對釉面的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-8.html" }, 
+            { id: "firing-9", title: "保溫對釉藥的影響", tag: "窯爐與釉燒", url: "./book/firing/firing-9.html" }, 
+            { id: "firing-10", title: "冷卻速度與釉面變化", tag: "窯爐與釉燒", url: "./book/firing/firing-10.html" }, 
+            { id: "firing-11", title: "結晶形成", tag: "窯爐與釉燒", url: "./book/firing/firing-11.html" },    
+            { id: "firing-12", title: "坯釉適合性與燒成", tag: "窯爐與釉燒", url: "./book/firing/firing-12.html" }, 
+            { id: "firing-13", title: "常見陶藝窯爐種類與特性解析", tag: "認識窯爐", url: "./book/firing/firing-13.html" }, 
+            { id: "firing-14", title: "如何選購適合的窯爐", tag: "認識窯爐", url: "./book/firing/firing-14.html" }, 
+            { id: "firing-15", title: "客製化窯爐需求", tag: "認識窯爐", url: "./book/firing/firing-15.html" }, 
+            { id: "firing-16", title: "電窯基本結構與運作原理", tag: "認識窯爐", url: "./book/firing/firing-16.html" }, 
+            { id: "firing-17", title: "瓦斯窯基本結構與運作原理", tag: "認識窯爐", url: "./book/firing/firing-17.html" }, 
+            { id: "firing-21", title: "燒窯溫度曲線設計", tag: "窯爐燒成技術", url: "./book/firing/firing-21.html" },
+            { id: "firing-22", title: "什麼是素燒與釉燒？", tag: "窯爐與釉燒", url: "./book/firing/firing-22.html" },
+            { id: "firing-23", title: "燒成技術~氧化燒", tag: "窯爐燒成技術", url: "./book/firing/firing-23.html" },
+            { id: "firing-24", title: "燒成技術~還原燒", tag: "窯爐燒成技術", url: "./book/firing/firing-24.html" }
         ]
     },
     {
