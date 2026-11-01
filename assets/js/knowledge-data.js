@@ -296,8 +296,8 @@ const knowledgeTree = [
             { id: "experiments-1", title: "釉藥的奧秘~三角座標", tag: "配方系統", url: "./book/experiments/experiments-1.html" },
             { id: "experiments-2", title: "01實戰解析：66個三角座標試片燒成紀錄與配方分析", tag: "配方系統", url: "./book/experiments/02/experiments-2.html" },
             { id: "experiments-3", title: "02實戰解析：66個三角座標試片燒成紀錄與配方分析", tag: "配方系統", url: "./book/experiments/03/experiments-3.html" },
-            { id: "experiments-4", title: "03實戰解析：66個三角座標試片燒成紀錄與配方分析", tag: "配方系統", url: "./book/experiments/04/experiments-4.html" }
-
+            { id: "experiments-4", title: "03實戰解析：66個三角座標試片燒成紀錄與配方分析", tag: "配方系統", url: "./book/experiments/04/experiments-4.html" },
+            { id: "experiments-5", title: "04實戰解析：66個三角座標試片燒成紀錄與配方分析", tag: "配方系統", url: "./book/experiments/05/experiments-5.html" }
         ]
     },
     {
