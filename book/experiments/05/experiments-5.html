@@ -38,8 +38,9 @@
        figure { margin: 35px 0; background: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 100%; min-width: 0; }
        figure img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; }
        figure:hover img { transform: scale(1.02); }
-       figcaption { padding: 14px 15px; font-size: 0.95rem; font-weight: 700; color: #475569; text-align: center; background: #f1f5f9; border-top: 1px solid #e2e8f0; word-wrap: break-word; overflow-wrap: anywhere; }
+       figcaption { padding: 14px 15px; font-size: 0.95rem; font-weight: 700; color: #475569; text-align: center; background: #f1f5f9; border-top: 1px solid #e2e8f0; word-wrap: break-word; overflow-wrap: anywhere; line-height: 1.5; }
        figcaption i { color: var(--accent-color); margin-right: 6px; }
+       figcaption span.recipe { display: block; font-size: 0.85rem; color: #64748b; margin-top: 4px; font-weight: 600; }
        
        .image-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 35px 0; }
        .image-grid-2 figure { margin: 0; min-width: 0; }
@@ -101,7 +102,7 @@
                <path d="M 65 274 L 335 274 M 80 248 L 320 248 M 95 222 L 305 222 M 110 196 L 290 196 M 125 170 L 275 170 M 140 144 L 260 144 M 155 118 L 245 118 M 170 92 L 230 92 M 185 66 L 215 66 M 185 66 L 320 300 M 170 92 L 290 300 M 155 118 L 260 300 M 140 144 L 230 300 M 125 170 L 200 300 M 110 196 L 170 300 M 95 222 L 140 300 M 80 248 L 110 300 M 65 274 L 80 300 M 215 66 L 80 300 M 230 92 L 110 300 M 245 118 L 140 300 M 260 144 L 170 300 M 275 170 L 200 300 M 290 196 L 230 300 M 305 222 L 260 300 M 320 248 L 290 300 M 335 274 L 320 300" stroke="#cbd5e1" stroke-width="1.2" fill="none"/>
                <polygon points="200,40 50,300 350,300" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linejoin="round"/>
                <text x="200" y="25" fill="#d97706" font-size="15" font-weight="900" text-anchor="middle">霞正長石 (A=100%)</text>
-               <text x="55" y="325" fill="#16a34a" font-size="15" font-weight="900" text-anchor="middle">氧化鋅 (B=50%)</text>
+               <text x="60" y="325" fill="#16a34a" font-size="15" font-weight="900" text-anchor="middle">氧化鋅 (B=50%)</text>
                <text x="340" y="325" fill="#2563eb" font-size="15" font-weight="900" text-anchor="middle">高嶺土 (C=50%)</text>
            </g>
        </defs>
@@ -173,11 +174,26 @@
                    </svg>
                </div>
                <div class="tile-grid">
-                   <figure><img src="./10-22 (6).jpg" alt="No.7"><figcaption><i class="fa-solid fa-droplet"></i> No.7</figcaption></figure>
-                   <figure><img src="./10-22 (7).jpg" alt="No.8"><figcaption><i class="fa-solid fa-bolt"></i> No.8</figcaption></figure>
-                   <figure><img src="./10-22 (8).jpg" alt="No.9"><figcaption><i class="fa-solid fa-bolt"></i> No.9</figcaption></figure>
-                   <figure><img src="./10-22 (9).jpg" alt="No.10"><figcaption><i class="fa-solid fa-water"></i> No.10</figcaption></figure>
-                   <figure><img src="./10-22 (10).jpg" alt="No.11"><figcaption><i class="fa-solid fa-water"></i> No.11</figcaption></figure>
+                   <figure>
+                       <img src="./10-22 (6).jpg" alt="No.7">
+                       <figcaption><i class="fa-solid fa-droplet"></i> No.7 <span class="recipe">霞85 / 鋅15 / 高0</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (7).jpg" alt="No.8">
+                       <figcaption><i class="fa-solid fa-bolt"></i> No.8 <span class="recipe">霞85 / 鋅10 / 高5</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (8).jpg" alt="No.9">
+                       <figcaption><i class="fa-solid fa-bolt"></i> No.9 <span class="recipe">霞85 / 鋅5 / 高10</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (9).jpg" alt="No.10">
+                       <figcaption><i class="fa-solid fa-water"></i> No.10 <span class="recipe">霞85 / 鋅0 / 高15</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (10).jpg" alt="No.11">
+                       <figcaption><i class="fa-solid fa-water"></i> No.11 <span class="recipe">霞80 / 鋅20 / 高0</span></figcaption>
+                   </figure>
                </div>
            </div>
 
@@ -194,10 +210,22 @@
                    </svg>
                </div>
                <div class="tile-grid">
-                   <figure><img src="./10-22 (11).jpg" alt="No.16"><figcaption><i class="fa-solid fa-triangle-exclamation"></i> No.16</figcaption></figure>
-                   <figure><img src="./10-22 (12).jpg" alt="No.17"><figcaption><i class="fa-solid fa-triangle-exclamation"></i> No.17</figcaption></figure>
-                   <figure><img src="./10-22 (13).jpg" alt="No.18"><figcaption><i class="fa-solid fa-circle-exclamation"></i> No.18</figcaption></figure>
-                   <figure><img src="./10-22 (21).jpg" alt="No.56"><figcaption><i class="fa-solid fa-circle-exclamation"></i> No.56</figcaption></figure>
+                   <figure>
+                       <img src="./10-22 (11).jpg" alt="No.16">
+                       <figcaption><i class="fa-solid fa-triangle-exclamation"></i> No.16 <span class="recipe">霞75 / 鋅25 / 高0</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (12).jpg" alt="No.17">
+                       <figcaption><i class="fa-solid fa-triangle-exclamation"></i> No.17 <span class="recipe">霞75 / 鋅20 / 高5</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (13).jpg" alt="No.18">
+                       <figcaption><i class="fa-solid fa-circle-exclamation"></i> No.18 <span class="recipe">霞75 / 鋅15 / 高10</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (21).jpg" alt="No.56">
+                       <figcaption><i class="fa-solid fa-circle-exclamation"></i> No.56 <span class="recipe">霞50 / 鋅50 / 高0</span></figcaption>
+                   </figure>
                </div>
            </div>
 
@@ -216,12 +244,30 @@
                    </svg>
                </div>
                <div class="tile-grid">
-                   <figure><img src="./10-22 (14).jpg" alt="No.34"><figcaption><i class="fa-solid fa-star"></i> No.34</figcaption></figure>
-                   <figure><img src="./10-22 (15).jpg" alt="No.38"><figcaption><i class="fa-solid fa-star"></i> No.38</figcaption></figure>
-                   <figure><img src="./10-22 (16).jpg" alt="No.42"><figcaption><i class="fa-solid fa-star"></i> No.42</figcaption></figure>
-                   <figure><img src="./10-22 (17).jpg" alt="No.43"><figcaption><i class="fa-solid fa-star"></i> No.43</figcaption></figure>
-                   <figure><img src="./10-22 (18).jpg" alt="No.51"><figcaption><i class="fa-solid fa-star"></i> No.51</figcaption></figure>
-                   <figure><img src="./10-22 (19).jpg" alt="No.52"><figcaption><i class="fa-solid fa-star"></i> No.52</figcaption></figure>
+                   <figure>
+                       <img src="./10-22 (14).jpg" alt="No.34">
+                       <figcaption><i class="fa-solid fa-star"></i> No.34 <span class="recipe">霞65 / 鋅10 / 高25</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (15).jpg" alt="No.38">
+                       <figcaption><i class="fa-solid fa-star"></i> No.38 <span class="recipe">霞60 / 鋅35 / 高5</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (16).jpg" alt="No.42">
+                       <figcaption><i class="fa-solid fa-star"></i> No.42 <span class="recipe">霞60 / 鋅15 / 高25</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (17).jpg" alt="No.43">
+                       <figcaption><i class="fa-solid fa-star"></i> No.43 <span class="recipe">霞60 / 鋅10 / 高30</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (18).jpg" alt="No.51">
+                       <figcaption><i class="fa-solid fa-star"></i> No.51 <span class="recipe">霞55 / 鋅20 / 高25</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (19).jpg" alt="No.52">
+                       <figcaption><i class="fa-solid fa-star"></i> No.52 <span class="recipe">霞55 / 鋅15 / 高30</span></figcaption>
+                   </figure>
                </div>
            </div>
 
@@ -241,13 +287,34 @@
                    </svg>
                </div>
                <div class="tile-grid">
-                   <figure><img src="./10-22 (20).jpg" alt="No.53"><figcaption><i class="fa-solid fa-ban"></i> No.53</figcaption></figure>
-                   <figure><img src="./10-22 (22).jpg" alt="No.59"><figcaption><i class="fa-solid fa-ban"></i> No.59</figcaption></figure>
-                   <figure><img src="./10-22 (23).jpg" alt="No.60"><figcaption><i class="fa-solid fa-ban"></i> No.60</figcaption></figure>
-                   <figure><img src="./10-22 (24).jpg" alt="No.61"><figcaption><i class="fa-solid fa-ban"></i> No.61</figcaption></figure>
-                   <figure><img src="./10-22 (25).jpg" alt="No.62"><figcaption><i class="fa-solid fa-ban"></i> No.62</figcaption></figure>
-                   <figure><img src="./10-22 (26).jpg" alt="No.63"><figcaption><i class="fa-solid fa-ban"></i> No.63</figcaption></figure>
-                   <figure><img src="./10-22 (27).jpg" alt="No.64"><figcaption><i class="fa-solid fa-ban"></i> No.64</figcaption></figure>
+                   <figure>
+                       <img src="./10-22 (20).jpg" alt="No.53">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.53 <span class="recipe">霞55 / 鋅10 / 高35</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (22).jpg" alt="No.59">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.59 <span class="recipe">霞50 / 鋅35 / 高15</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (23).jpg" alt="No.60">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.60 <span class="recipe">霞50 / 鋅30 / 高20</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (24).jpg" alt="No.61">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.61 <span class="recipe">霞50 / 鋅25 / 高25</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (25).jpg" alt="No.62">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.62 <span class="recipe">霞50 / 鋅20 / 高30</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (26).jpg" alt="No.63">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.63 <span class="recipe">霞50 / 鋅15 / 高35</span></figcaption>
+                   </figure>
+                   <figure>
+                       <img src="./10-22 (27).jpg" alt="No.64">
+                       <figcaption><i class="fa-solid fa-ban"></i> No.64 <span class="recipe">霞50 / 鋅10 / 高40</span></figcaption>
+                   </figure>
                </div>
            </div>
 
@@ -282,19 +349,19 @@
                <div class="tile-grid">
                    <figure>
                        <img src="./10-22 (34).jpg" alt="No.8 瓷土">
-                       <figcaption><i class="fa-solid fa-snowflake"></i> No.8 (瓷土)：高透玻璃質</figcaption>
+                       <figcaption><i class="fa-solid fa-snowflake"></i> No.8 (瓷土)：高透玻璃質 <span class="recipe">霞85 / 鋅10 / 高5</span></figcaption>
                    </figure>
                    <figure>
                        <img src="./10-22 (35).jpg" alt="No.11 瓷土">
-                       <figcaption><i class="fa-solid fa-snowflake"></i> No.11 (瓷土)：產生積釉與流釉</figcaption>
+                       <figcaption><i class="fa-solid fa-snowflake"></i> No.11 (瓷土)：產生積釉與流釉 <span class="recipe">霞80 / 鋅20 / 高0</span></figcaption>
                    </figure>
                    <figure>
                        <img src="./10-22 (36).jpg" alt="No.16 瓷土">
-                       <figcaption><i class="fa-solid fa-star"></i> No.16 (瓷土)：較不易縮釉，呈現厚實乳白</figcaption>
+                       <figcaption><i class="fa-solid fa-star"></i> No.16 (瓷土)：較不易縮釉，呈現厚實乳白 <span class="recipe">霞75 / 鋅25 / 高0</span></figcaption>
                    </figure>
                    <figure>
                        <img src="./10-22 (37).jpg" alt="No.52 瓷土">
-                       <figcaption><i class="fa-solid fa-star"></i> No.52 (瓷土)：極佳霧面白，附著力穩定</figcaption>
+                       <figcaption><i class="fa-solid fa-star"></i> No.52 (瓷土)：極佳霧面白，附著力穩定 <span class="recipe">霞55 / 鋅15 / 高30</span></figcaption>
                    </figure>
                </div>
            </div>
@@ -306,22 +373,22 @@
            <div class="image-grid-2">
                <figure>
                    <img src="./10-22 (38).jpg" alt="No.7 陶土與瓷土對比">
-                   <figcaption><i class="fa-solid fa-code-compare"></i> No.7：高流動透亮釉。左側瓷土呈現純淨透明；右側陶土因含鐵質透出溫暖黃褐色。</figcaption>
+                   <figcaption><i class="fa-solid fa-code-compare"></i> No.7：高流動透亮釉。左側瓷土呈現純淨透明；右側陶土因含鐵質透出溫暖黃褐色。 <span class="recipe">霞85 / 鋅15 / 高0</span></figcaption>
                </figure>
                <figure>
                    <img src="./10-22 (39).jpg" alt="No.11 陶土與瓷土對比">
-                   <figcaption><i class="fa-solid fa-code-compare"></i> No.11：高透氣泡釉。瓷土表面氣泡較少且明亮；陶土表面氣泡密集且邊緣略顯焦黃。</figcaption>
+                   <figcaption><i class="fa-solid fa-code-compare"></i> No.11：高透氣泡釉。瓷土表面氣泡較少且明亮；陶土表面氣泡密集且邊緣略顯焦黃。 <span class="recipe">霞80 / 鋅20 / 高0</span></figcaption>
                </figure>
            </div>
            
            <div class="image-grid-2">
                <figure>
                    <img src="./10-22 (40).jpg" alt="No.19 陶土與瓷土對比">
-                   <figcaption><i class="fa-solid fa-code-compare"></i> No.19：高鋅失透釉。左側瓷土因緻密化程度高，釉面附著較穩；右側陶土明顯縮釉且乾澀。</figcaption>
+                   <figcaption><i class="fa-solid fa-code-compare"></i> No.19：高鋅失透釉。左側瓷土因緻密化程度高，釉面附著較穩；右側陶土明顯縮釉且乾澀。 <span class="recipe">霞75 / 鋅10 / 高15</span></figcaption>
                </figure>
                <figure>
                    <img src="./10-22 (41).jpg" alt="No.34 陶土與瓷土對比">
-                   <figcaption><i class="fa-solid fa-code-compare"></i> No.34：完美半啞光。左側瓷土表現出冷調乳白；右側陶土則呈現溫潤柔和的暖霧白色。</figcaption>
+                   <figcaption><i class="fa-solid fa-code-compare"></i> No.34：完美半啞光。左側瓷土表現出冷調乳白；右側陶土則呈現溫潤柔和的暖霧白色。 <span class="recipe">霞65 / 鋅10 / 高25</span></figcaption>
                </figure>
            </div>
 
