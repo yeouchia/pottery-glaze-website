@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>節慶時刻｜立體陶藝場景構思與文生圖產生器</title>
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入清晰易讀的繁體中文字型 Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Microsoft JhengHei"', 'sans-serif'],
+          },
+          colors: {
+            clay: {
+              50: '#FBF8F3',
+              100: '#F4EDE2',
+              200: '#E8D8C3',
+              300: '#D6BA99',
+              500: '#B85D3B',
+              600: '#9A482B',
+              700: '#7C3820',
+              800: '#4A3428',
+              900: '#2E1F17',
+            },
+            celadon: {
+              50: '#F1F7F4',
+              100: '#DFECE5',
+              600: '#356654',
+              700: '#274E40',
+            },
+            ochre: {
+              50: '#FDF7EC',
+              100: '#F8E9CC',
+              600: '#B87324',
+              700: '#8F5717',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* 基礎字體設定：預設即採偏大易讀字級，並支援一鍵切換護眼超大字 */
+    html {
+      font-size: 17px;
+      scroll-behavior: smooth;
+    }
+    html.font-xl {
+      font-size: 20px;
+    }
+    body {
+      background-color: #FBF8F3;
+      color: #2E1F17;
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* 選擇卡片微動效 */
+    .select-card {
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+    }
+    .select-card:active {
+      transform: scale(0.98);
+    }
+
+    /* 自訂捲軸 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6BA99;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F4EDE2;
+    }
+
+    /* 列印專用樣式：讓企劃單與提示詞乾淨印出 */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-avoid {
+        break-inside: avoid;
+      }
+      .print-card {
+        box-shadow: none !important;
+        border: 2px solid #444 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ==================== 頂部導覽列 ==================== -->
+  <header class="sticky top-0 z-40 bg-clay-900 text-white shadow-lg no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-clay-500 flex items-center justify-center text-2xl shadow-inner shrink-0">
+          🏺
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-black tracking-wide leading-tight">
+            節慶時刻・立體陶藝發想與文生圖產生器
+          </h1>
+          <p class="text-xs sm:text-sm text-clay-200">
+            2027 全國兒少陶藝獎｜立體雕塑構圖 × 道具 × 人物 × 提示詞工具
+          </p>
+        </div>
+      </div>
+
+      <!-- 工具列：字體大小切換 & 重設 -->
+      <div class="flex items-center gap-2">
+        <button id="btnToggleFont" type="button"
+          class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-clay-900 font-bold text-sm sm:text-base shadow transition flex items-center gap-1.5"
+          title="切換護眼超大字體">
+          <span>🔍</span>
+          <span id="fontToggleLabel">字體再加大</span>
+        </button>
+        <button id="btnResetAll" type="button"
+          class="px-3.5 py-2 rounded-xl bg-clay-800 hover:bg-clay-700 text-clay-100 font-bold text-sm sm:text-base border border-clay-700 transition">
+          ↺ 重新開始
+        </button>
+      </div>
+    </div>
+
+    <!-- 五步驟進度條 -->
+    <div class="bg-clay-800/95 border-t border-clay-700">
+      <div class="max-w-6xl mx-auto px-3 py-2.5">
+        <nav id="stepperNav" class="grid grid-cols-5 gap-1.5 sm:gap-2" aria-label="步驟導覽">
+          <!-- 由 JS 動態渲染 -->
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 主內容區域 ==================== -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 pb-28">
+
+    <!-- 目前已選狀態摘要條（步驟 2~4 顯示，隨時掌握進度） -->
+    <div id="liveSummaryBar" class="hidden mb-5 bg-white border-2 border-clay-200 rounded-2xl p-3.5 shadow-sm no-print">
+      <div class="flex flex-wrap items-center gap-2 text-sm sm:text-base">
+        <span class="font-bold text-clay-700">📌 目前配置：</span>
+        <span id="sumFestival" class="px-3 py-1 rounded-full bg-clay-100 text-clay-900 font-bold">尚未選擇節慶</span>
+        <span id="sumProps" class="px-3 py-1 rounded-full bg-ochre-100 text-ochre-700 font-bold">道具 0 項</span>
+        <span id="sumPeople" class="px-3 py-1 rounded-full bg-celadon-100 text-celadon-700 font-bold">人物 0 位</span>
+        <span id="sumStyle" class="px-3 py-1 rounded-full bg-purple-100 text-purple-900 font-bold hidden">風格未選</span>
+      </div>
+    </div>
+
+    <!-- ==================== STEP 1：選擇節慶主題 ==================== -->
+    <section id="step-1" class="step-panel space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-clay-200 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-clay-100 text-clay-700 font-bold text-sm mb-1">步驟 1 / 5</span>
+            <h2 class="text-2xl font-black text-clay-900">請選擇想創作的「節慶時刻」主題</h2>
+            <p class="text-clay-700 mt-1">先點選下方三大分類，挑選最讓你有回憶的節日或活動（點選後將自動載入專屬道具與場景風格）。</p>
+          </div>
+          <button type="button" id="btnRandomFestival"
+            class="px-4 py-2.5 rounded-2xl bg-ochre-600 hover:bg-ochre-700 text-white font-bold shadow transition">
+            🎲 隨機抽一個題材
+          </button>
+        </div>
+
+        <!-- 三大分類頁籤 -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-5" id="categoryTabs">
+          <button type="button" data-cat="traditional"
+            class="cat-tab p-3.5 rounded-2xl border-2 font-black text-lg flex items-center justify-center gap-2 transition">
+            🏮 一、傳統節慶與民俗
+          </button>
+          <button type="button" data-cat="family"
+            class="cat-tab p-3.5 rounded-2xl border-2 font-black text-lg flex items-center justify-center gap-2 transition">
+            🏡 二、家庭聚會與紀念日
+          </button>
+          <button type="button" data-cat="school"
+            class="cat-tab p-3.5 rounded-2xl border-2 font-black text-lg flex items-center justify-center gap-2 transition">
+            🎓 三、學校活動與青春時刻
+          </button>
+        </div>
+
+        <!-- 節慶選項卡片網格 -->
+        <div id="festivalGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <!-- 由 JS 渲染 -->
+        </div>
+
+        <!-- 自訂私密紀念日輸入 -->
+        <div class="mt-6 pt-5 border-t-2 border-dashed border-clay-200">
+          <label for="customFestivalInput" class="block font-bold text-clay-800 mb-2">
+            ✍️ 或是輸入自己專屬的特別紀念日（選填，例如：阿公果園大豐收日、爸爸康復出院日）：
+          </label>
+          <div class="flex flex-col sm:flex-row gap-2.5">
+            <input id="customFestivalInput" type="text" placeholder="輸入自訂節慶名稱..."
+              class="flex-1 px-4 py-3 rounded-xl border-2 border-clay-300 focus:border-clay-600 focus:outline-none bg-clay-50 text-clay-900 font-medium" />
+            <button type="button" id="btnApplyCustomFestival"
+              class="px-5 py-3 rounded-xl bg-clay-800 hover:bg-clay-700 text-white font-bold transition shrink-0">
+              使用此自訂主題
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STEP 2：配景道具與立體底座 ==================== -->
+    <section id="step-2" class="step-panel hidden space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-clay-200 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-ochre-100 text-ochre-700 font-bold text-sm mb-1">步驟 2 / 5</span>
+            <h2 class="text-2xl font-black text-clay-900">
+              挑選「<span id="step2FestivalName" class="text-clay-600"></span>」的配景道具與立體底座
+            </h2>
+            <p class="text-clay-700 mt-1">可複選多個代表性飲食、道具，並挑選一個穩固又有故事性的立體底座／背景結構。</p>
+          </div>
+          <div class="flex gap-2">
+            <button type="button" id="btnAutoPickProps"
+              class="px-4 py-2.5 rounded-2xl bg-ochre-600 hover:bg-ochre-700 text-white font-bold shadow transition">
+              ✨ 幫我推薦搭配
+            </button>
+            <button type="button" id="btnClearProps"
+              class="px-4 py-2.5 rounded-2xl bg-clay-100 hover:bg-clay-200 text-clay-800 font-bold transition">
+              清空重選
+            </button>
+          </div>
+        </div>
+
+        <!-- 2-1 特色飲食與器皿 -->
+        <div class="mb-6">
+          <h3 class="text-lg font-black text-clay-800 mb-3 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">🍲</span>
+            特色節日飲食與器皿（可複選）
+          </h3>
+          <div id="foodPropsContainer" class="flex flex-wrap gap-2.5"></div>
+        </div>
+
+        <!-- 2-2 配景道具與裝飾 -->
+        <div class="mb-6">
+          <h3 class="text-lg font-black text-clay-800 mb-3 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center">🏮</span>
+            氣氛道具與民俗／活動裝飾（可複選）
+          </h3>
+          <div id="decorPropsContainer" class="flex flex-wrap gap-2.5"></div>
+        </div>
+
+        <!-- 2-3 立體底座與背景結構（單選或複選） -->
+        <div class="mb-6 bg-celadon-50 border-2 border-celadon-100 rounded-2xl p-4">
+          <h3 class="text-lg font-black text-celadon-700 mb-1 flex items-center gap-2">
+            <span>🏛️</span>
+            立體雕塑「底座造型」與「背景支撐結構」（建議選 1～2 項）
+          </h3>
+          <p class="text-sm text-celadon-700 mb-3">
+            💡 陶藝小秘訣：用底座直接點題，並讓背景牆與人物局部黏合借力，燒製更穩固！
+          </p>
+          <div id="basePropsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
+        </div>
+
+        <!-- 自訂補充道具 -->
+        <div class="pt-4 border-t-2 border-dashed border-clay-200">
+          <label for="customPropInput" class="block font-bold text-clay-800 mb-2">
+            ➕ 想加入其他特別道具？（例如：阿嬤的舊收音機、生鏽腳踏車、貓抓板）
+          </label>
+          <div class="flex flex-col sm:flex-row gap-2.5">
+            <input id="customPropInput" type="text" placeholder="輸入道具名稱，按加入即可..."
+              class="flex-1 px-4 py-3 rounded-xl border-2 border-clay-300 focus:border-clay-600 focus:outline-none bg-clay-50" />
+            <button type="button" id="btnAddCustomProp"
+              class="px-5 py-3 rounded-xl bg-clay-800 hover:bg-clay-700 text-white font-bold transition shrink-0">
+              ＋ 加入道具
+            </button>
+          </div>
+          <div id="customPropsList" class="flex flex-wrap gap-2 mt-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STEP 3：選擇人物角色與人數 ==================== -->
+    <section id="step-3" class="step-panel hidden space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-clay-200 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-celadon-100 text-celadon-700 font-bold text-sm mb-1">步驟 3 / 5</span>
+            <h2 class="text-2xl font-black text-clay-900">選擇登場人物、人數與互動動作</h2>
+            <p class="text-clay-700 mt-1">點擊「＋／－」設定每位家人、同學或神話角色的人數，系統會自動計算總人數與雕塑比例建議。</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="px-4 py-2 rounded-2xl bg-clay-900 text-white font-black text-lg">
+              總計：<span id="totalPeopleCount" class="text-amber-300">0</span> 位角色
+            </div>
+            <button type="button" id="btnClearPeople"
+              class="px-3.5 py-2.5 rounded-2xl bg-clay-100 hover:bg-clay-200 text-clay-800 font-bold transition">
+              歸零
+            </button>
+          </div>
+        </div>
+
+        <!-- 快捷組合按鈕 -->
+        <div class="mb-5 flex flex-wrap items-center gap-2 bg-clay-50 p-3.5 rounded-2xl border border-clay-200">
+          <span class="font-bold text-clay-800 mr-1">⚡ 快速套用常見組合：</span>
+          <button type="button" data-preset="nuclear" class="preset-people-btn px-3.5 py-2 rounded-xl bg-white hover:bg-clay-100 border-2 border-clay-200 font-bold text-sm transition">
+            👨‍👩‍👧‍👦 小家庭（爸媽＋我＋弟妹）
+          </button>
+          <button type="button" data-preset="threeGen" class="preset-people-btn px-3.5 py-2 rounded-xl bg-white hover:bg-clay-100 border-2 border-clay-200 font-bold text-sm transition">
+            👴👵 三代同堂（爺奶＋爸媽＋我）
+          </button>
+          <button type="button" data-preset="bigFamily" class="preset-people-btn px-3.5 py-2 rounded-xl bg-white hover:bg-clay-100 border-2 border-clay-200 font-bold text-sm transition">
+            🎊 熱鬧大家族（含叔伯姑姑）
+          </button>
+          <button type="button" data-preset="schoolSquad" class="preset-people-btn px-3.5 py-2 rounded-xl bg-white hover:bg-clay-100 border-2 border-clay-200 font-bold text-sm transition">
+            🎒 校園夥伴（老師＋我＋3位同學）
+          </button>
+          <button type="button" data-preset="petMode" class="preset-people-btn px-3.5 py-2 rounded-xl bg-white hover:bg-clay-100 border-2 border-clay-200 font-bold text-sm transition">
+            🐶 我與毛小孩主角
+          </button>
+        </div>
+
+        <!-- 陶藝人數貼心提醒 -->
+        <div id="peopleAdviceBox" class="hidden mb-5 p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 text-amber-950 font-medium">
+        </div>
+
+        <!-- 3-1 家庭成員與親戚 -->
+        <div class="mb-6">
+          <h3 class="text-lg font-black text-clay-800 mb-3 flex items-center gap-2">
+            <span>👨‍👩‍👧‍👦</span> 家庭成員與親戚（點擊 ＋ 增加人數）
+          </h3>
+          <div id="familyRolesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- 3-2 校園夥伴、寵物與神話／民俗角色 -->
+        <div class="mb-6">
+          <h3 class="text-lg font-black text-clay-800 mb-3 flex items-center gap-2">
+            <span>🎭</span> 校園夥伴、毛小孩與節慶專屬角色
+          </h3>
+          <div id="otherRolesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- 3-3 指定主要主角 & 互動動作 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-5 border-t-2 border-clay-200">
+          <div class="bg-clay-50 rounded-2xl p-4 border border-clay-200">
+            <h3 class="text-lg font-black text-clay-900 mb-2">🌟 誰是畫面「最大最搶眼的主要主角」？（選填）</h3>
+            <p class="text-sm text-clay-700 mb-3">決定視覺中心，其餘人物自動退為「次主角」襯托故事。</p>
+            <input id="mainHeroInput" type="text" placeholder="例如：戴著柚子帽的阿公、吹蠟燭的我、衝刺交棒的兩位同學..."
+              class="w-full px-4 py-3 rounded-xl border-2 border-clay-300 focus:border-clay-600 focus:outline-none bg-white" />
+          </div>
+
+          <div class="bg-ochre-50 rounded-2xl p-4 border border-ochre-200">
+            <h3 class="text-lg font-black text-clay-900 mb-2">🎬 人物正在做什麼「難忘瞬間動作」？（可複選）</h3>
+            <div id="actionChipsContainer" class="flex flex-wrap gap-2 mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STEP 4：專屬場景風格與陶藝造形 ==================== -->
+    <section id="step-4" class="step-panel hidden space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-clay-200 shadow-sm">
+        <div class="mb-5">
+          <span class="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-900 font-bold text-sm mb-1">步驟 4 / 5</span>
+          <h2 class="text-2xl font-black text-clay-900">
+            選擇「<span id="step4FestivalName" class="text-clay-600"></span>」專屬場景與雕塑風格
+          </h2>
+          <p class="text-clay-700 mt-1">每個節慶都有專屬的多種立體場景配置，搭配陶藝質感與色彩氛圍，讓文生圖結果更驚艷！</p>
+        </div>
+
+        <!-- 4-1 該節慶專屬場景選擇 -->
+        <div class="mb-7">
+          <h3 class="text-xl font-black text-clay-900 mb-3 flex items-center gap-2">
+            <span>🏞️</span> 一、本節慶專屬「場景構圖風格」（單選）
+          </h3>
+          <div id="exclusiveScenesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+        </div>
+
+        <!-- 4-2 立體陶藝質感與藝術風格 -->
+        <div class="mb-7">
+          <h3 class="text-xl font-black text-clay-900 mb-3 flex items-center gap-2">
+            <span>🎨</span> 二、立體陶藝與雕塑藝術風格（單選）
+          </h3>
+          <div id="artStylesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
+        </div>
+
+        <!-- 4-3 創意潛能構圖心法 -->
+        <div class="mb-7">
+          <h3 class="text-xl font-black text-clay-900 mb-3 flex items-center gap-2">
+            <span>💡</span> 三、得獎創意構圖策略（單選）
+          </h3>
+          <div id="creativeStrategyGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- 4-4 釉色與光影氛圍 -->
+        <div>
+          <h3 class="text-xl font-black text-clay-900 mb-3 flex items-center gap-2">
+            <span>✨</span> 四、陶藝釉色與光影氛圍（單選）
+          </h3>
+          <div id="colorMoodGrid" class="flex flex-wrap gap-2.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STEP 5：最終結果與文生圖提示詞 ==================== -->
+    <section id="step-5" class="step-panel hidden space-y-6">
+
+      <!-- 企劃成果總覽卡 -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-2 border-clay-300 shadow-md print-card">
+        <div class="flex flex-wrap items-start justify-between gap-4 pb-5 border-b-2 border-clay-200">
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-clay-600 text-white font-bold text-sm mb-2">
+              🏆 2027 全國兒少陶藝獎・立體雕塑創作企劃結果
+            </span>
+            <h2 id="resWorkTitle" class="text-2xl sm:text-3xl font-black text-clay-900 leading-snug">
+              作品名稱
+            </h2>
+            <p id="resSubtitle" class="text-clay-700 font-medium mt-1"></p>
+          </div>
+          <div class="flex flex-wrap gap-2 no-print">
+            <button type="button" id="btnPrintPlan"
+              class="px-4 py-2.5 rounded-xl bg-celadon-600 hover:bg-celadon-700 text-white font-bold shadow transition">
+              🖨️ 列印企劃與提示詞
+            </button>
+            <button type="button" id="btnBackToEdit"
+              class="px-4 py-2.5 rounded-xl bg-clay-100 hover:bg-clay-200 text-clay-900 font-bold transition">
+              ✏️ 修改選項
+            </button>
+          </div>
+        </div>
+
+        <!-- 結構化配置摘要表 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
+          <div class="bg-clay-50 rounded-2xl p-4 border border-clay-200 print-break-avoid">
+            <h3 class="font-black text-clay-800 text-lg mb-2">📌 主題與場景設定</h3>
+            <ul id="resSummaryLeft" class="space-y-2 text-clay-900"></ul>
+          </div>
+          <div class="bg-celadon-50 rounded-2xl p-4 border border-celadon-100 print-break-avoid">
+            <h3 class="font-black text-celadon-700 text-lg mb-2">👥 人物角色與互動安排</h3>
+            <ul id="resSummaryRight" class="space-y-2 text-clay-900"></ul>
+          </div>
+        </div>
+
+        <!-- 選定的飲食、道具與底座清單 -->
+        <div class="bg-ochre-50 rounded-2xl p-4 border border-ochre-200 mb-5 print-break-avoid">
+          <h3 class="font-black text-ochre-700 text-lg mb-2">🏺 配景道具與立體支撐結構（主 6：次 3：景 1）</h3>
+          <div id="resPropsBreakdown" class="space-y-2 text-clay-900"></div>
+        </div>
+
+        <!-- 立體陶藝實戰結構叮嚀 -->
+        <div class="bg-stone-100 rounded-2xl p-4 border border-stone-300 print-break-avoid">
+          <h3 class="font-black text-stone-800 text-base mb-1.5">🛠️ 老師指導與窯燒結構建議</h3>
+          <p id="resStructureTip" class="text-stone-800 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- 文生圖提示詞區塊（中文 + 英文） -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <!-- 中文文生圖提示詞 -->
+        <div class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-clay-300 shadow-sm flex flex-col print-card print-break-avoid">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div>
+              <h3 class="text-xl font-black text-clay-900">📝 中文文生圖指令提示詞</h3>
+              <p class="text-sm text-clay-600">適合貼入 Gemini、ChatGPT、Bing、可靈、即夢等繪圖工具</p>
+            </div>
+            <button type="button" id="btnCopyZh"
+              class="px-4 py-2.5 rounded-xl bg-clay-600 hover:bg-clay-700 text-white font-bold shadow transition shrink-0 no-print">
+              📋 複製中文
+            </button>
+          </div>
+          <textarea id="promptZhArea" rows="9"
+            class="w-full flex-1 p-4 rounded-2xl bg-clay-50 border-2 border-clay-200 text-clay-900 leading-relaxed font-medium focus:outline-none focus:border-clay-500 resize-y"></textarea>
+        </div>
+
+        <!-- 英文專業文生圖提示詞 -->
+        <div class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-clay-300 shadow-sm flex flex-col print-card print-break-avoid">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div>
+              <h3 class="text-xl font-black text-clay-900">🌐 英文專業文生圖提示詞</h3>
+              <p class="text-sm text-clay-600">適合 Midjourney、Imagen、Flux、Stable Diffusion（立體陶藝精準度最高）</p>
+            </div>
+            <button type="button" id="btnCopyEn"
+              class="px-4 py-2.5 rounded-xl bg-celadon-600 hover:bg-celadon-700 text-white font-bold shadow transition shrink-0 no-print">
+              📋 複製英文
+            </button>
+          </div>
+          <textarea id="promptEnArea" rows="9"
+            class="w-full flex-1 p-4 rounded-2xl bg-stone-50 border-2 border-stone-200 text-stone-900 leading-relaxed font-mono text-sm sm:text-base focus:outline-none focus:border-celadon-600 resize-y"></textarea>
+        </div>
+      </div>
+
+      <!-- AI 即時生成立體陶藝參考示意圖（選用強化功能） -->
+      <div class="bg-gradient-to-br from-clay-900 to-clay-800 text-white rounded-3xl p-5 sm:p-6 shadow-lg no-print">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black flex items-center gap-2">
+              <span>✨</span> 直接預覽「立體陶藝參考草圖」
+            </h3>
+            <p class="text-clay-200 text-sm sm:text-base mt-1">
+              可直接使用上方產出的提示詞，呼叫 AI 生成一張立體雕塑參考示意圖供學生觀察量體與構圖。
+            </p>
+          </div>
+          <button type="button" id="btnGenerateImage"
+            class="px-6 py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-clay-900 font-black text-lg shadow-lg transition flex items-center gap-2 shrink-0">
+            <span>🎨</span>
+            <span id="btnGenText">立即生成參考圖</span>
+          </button>
+        </div>
+
+        <!-- 載入中狀態 -->
+        <div id="imgLoadingBox" class="hidden mt-5 bg-white/10 rounded-2xl p-6 text-center">
+          <div class="inline-block w-10 h-10 border-4 border-amber-300 border-t-transparent rounded-full animate-spin mb-3"></div>
+          <p class="font-bold text-lg text-amber-200">正在為您捏製立體陶藝參考草圖，請稍候約 10～20 秒...</p>
+        </div>
+
+        <!-- 錯誤訊息框（取代 alert） -->
+        <div id="imgErrorBox" class="hidden mt-4 bg-rose-900/60 border border-rose-400 rounded-2xl p-4 text-rose-100"></div>
+
+        <!-- 生成結果圖片顯示 -->
+        <div id="imgResultBox" class="hidden mt-5 bg-white rounded-2xl p-4 text-clay-900">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <span class="font-black text-lg text-clay-800">🖼️ AI 立體陶藝參考示意圖</span>
+            <a id="btnDownloadImg" download="節慶時刻_立體陶藝參考圖.png"
+              class="px-4 py-2 rounded-xl bg-clay-700 hover:bg-clay-800 text-white font-bold text-sm transition">
+              ⬇️ 下載參考圖
+            </a>
+          </div>
+          <img id="generatedImgEl" alt="立體陶藝參考示意圖" class="w-full max-w-2xl mx-auto rounded-2xl shadow-md border border-clay-200" />
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== 底部固定步驟切換列 ==================== -->
+  <footer class="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t-2 border-clay-200 shadow-2xl no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <button id="btnPrevStep" type="button"
+        class="px-5 py-3 rounded-2xl bg-clay-100 hover:bg-clay-200 text-clay-900 font-black text-base sm:text-lg transition disabled:opacity-40 disabled:cursor-not-allowed">
+        ← 上一步
+      </button>
+
+      <div id="bottomHint" class="hidden md:block text-clay-700 font-bold text-center">
+        請挑選一個節慶主題開始發想
+      </div>
+
+      <button id="btnNextStep" type="button"
+        class="px-6 py-3 rounded-2xl bg-clay-600 hover:bg-clay-700 text-white font-black text-base sm:text-lg shadow-lg transition">
+        下一步：選配景道具 →
+      </button>
+    </div>
+  </footer>
+
+  <!-- ==================== 提示訊息 Toast（取代 alert） ==================== -->
+  <div id="toastBox"
+    class="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-6 py-3.5 rounded-2xl bg-clay-900 text-white font-bold text-base shadow-2xl border-2 border-amber-400 opacity-0 pointer-events-none transition-opacity duration-300">
+    訊息內容
+  </div>
+
+  <!-- ==================== 確認重設彈窗（取代 confirm） ==================== -->
+  <div id="resetModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 no-print">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 border-2 border-clay-300 shadow-2xl">
+      <h3 class="text-xl font-black text-clay-900 mb-2">確定要重新開始嗎？</h3>
+      <p class="text-clay-700 mb-5">這將會清空目前所有已選的節慶、配景道具、人物人數與風格設定。</p>
+      <div class="flex justify-end gap-3">
+        <button type="button" id="btnCancelReset"
+          class="px-5 py-2.5 rounded-xl bg-clay-100 hover:bg-clay-200 text-clay-800 font-bold">
+          先不要
+        </button>
+        <button type="button" id="btnConfirmReset"
+          class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold">
+          確定清空重來
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 核心資料與互動邏輯 ==================== -->
+  <script>
+    /*************************************************************************
+     * 一、完整中英雙語資料庫（28 種節慶主題 × 專屬道具 × 底座 × 專屬場景）
+     *************************************************************************/
+    const FESTIVALS = [
+      // ================= 1. 傳統節慶與民俗 =================
+      {
+        id: 'cny_dinner',
+        category: 'traditional',
+        emoji: '🧧',
+        name: '農曆新年・除夕圍爐',
+        enName: 'Lunar New Year Eve Reunion Dinner in Taiwan',
+        desc: '團圓吃火鍋、佛跳牆、發紅包與貼春聯的熱鬧團聚時刻',
+        foods: [
+          ['炭火銅鍋／砂鍋圍爐', 'steaming traditional hot pot'],
+          ['佛跳牆甕', 'ceramic Buddha Jumps Over the Wall soup jar'],
+          ['年年有餘全魚', 'steamed whole fish dish'],
+          ['烏魚子與長年菜', 'mullet roe and mustard greens'],
+          ['年糕與發糕', 'traditional rice cake and fortune sponge cake'],
+          ['多格糖果攢盒', 'multi-compartment New Year candy box'],
+          ['大吉大利橘子堆', 'pile of auspicious tangerines'],
+          ['金元寶水餃', 'ingot-shaped dumplings']
+        ],
+        props: [
+          ['大紅手寫春聯與倒貼福字', 'red calligraphy spring couplets and upside-down Fu paper'],
+          ['紅包袋與壓歲錢', 'red envelopes (Hongbao)'],
+          ['大紅燈籠', 'glowing red paper lanterns'],
+          ['炸開的紅鞭炮與紙屑', 'bursting firecrackers and red paper scraps'],
+          ['金桔與銀柳盆栽', 'potted kumquat tree and pussy willows'],
+          ['骰子與碗公（十八啦）', 'dice in a ceramic bowl'],
+          ['生肖小吉祥物', 'zodiac animal figurines']
+        ],
+        bases: [
+          ['厚實大圓桌底座（垂墜桌布褶皺支撐）', 'thick round banquet table base with sculpted draped tablecloth'],
+          ['弧形老宅紅磚牆背景（貼春聯掛燈籠）', 'curved vintage Taiwanese red-brick house wall backdrop with lanterns'],
+          ['巨型多格糖果盒化身微縮團圓舞台', 'oversized traditional New Year candy tray sculpted as a miniature stage']
+        ],
+        scenes: [
+          { name: '熱鬧圓桌搶夾菜圍爐夜', desc: '全家人圍著冒煙大銅鍋伸長筷子搶丸子，充滿歡笑與煙火氣', en: 'lively family gathered closely around a steaming round table reaching chopsticks into a central hotpot, joyful expressions' },
+          { name: '紅包發放與守歲客廳', desc: '長輩笑瞇瞇發紅包、小孩興奮拱手拜年，背景滿是春聯燈籠', en: 'warm Taiwanese living room scene with elders handing out red envelopes and excited children bowing happily' },
+          { name: '糖果攢盒裡的奇幻過年劇場', desc: '把八角形過年糖果盒放大成底座，每個格子演出不同過年習俗', en: 'whimsical miniature diorama built inside a giant octagonal Lunar New Year candy box with tiny festive scenes in each compartment' },
+          { name: '老宅紅磚門口貼春聯放鞭炮', desc: '古厝門框前大人貼春聯、小孩捂著耳朵看鞭炮劈啪炸開', en: 'traditional red-brick Taiwanese courtyard entrance, hanging spring couplets and playful kids covering ears near firecrackers' }
+        ],
+        actions: [
+          ['伸長筷子搶夾菜', 'reaching chopsticks eagerly for hotpot food'],
+          ['雙手拱手作揖領紅包', 'bowing happily to receive red envelopes'],
+          ['舉杯祝賀新年快樂', 'raising cups in a festive toast'],
+          ['捂著耳朵點鞭炮大笑', 'covering ears and laughing near firecrackers'],
+          ['熬夜守歲打瞌睡偷笑', 'staying up late for New Year Eve']
+        ]
+      },
+      {
+        id: 'lion_dance',
+        category: 'traditional',
+        emoji: '🦁',
+        name: '新春舞龍舞獅',
+        enName: 'Taiwanese Lion Dance and Dragon Dance Festival',
+        desc: '醒獅躍上梅花樁、大頭佛戲獅與鑼鼓喧天的震撼慶典',
+        foods: [
+          ['採青生菜與大橘子', 'lucky lettuce and tangerines for Plucking the Greens'],
+          ['平安紅龜粿', 'traditional red tortoise rice cakes'],
+          ['廟口奉茶桶', 'traditional tea barrel']
+        ],
+        props: [
+          ['華麗雕花醒獅頭', 'ornate sculpted lion dance head'],
+          ['大頭佛與逗獅繡球', 'big-headed Buddha mask and embroidered ball'],
+          ['大鼓與銅鈸鑼鼓', 'traditional festival drum and brass cymbals'],
+          ['炸裂鞭炮與捲曲煙霧', 'exploding firecrackers and curling sculpted smoke'],
+          ['高懸紅包彩帶（採青）', 'hanging lucky red envelope ribbon']
+        ],
+        bases: [
+          ['高低錯落的梅花樁柱群底座（支撐騰空獅身）', 'staggered wooden plum-blossom stilts base supporting the leaping lion'],
+          ['鋪滿鞭炮碎屑的廟口石板廣場底座', 'temple courtyard cobblestone base covered with sculpted red firecracker confetti'],
+          ['燕尾翹脊廟宇牌樓拱門背景', 'curved Taiwanese temple archway backdrop with swallowtail roof ridges']
+        ],
+        scenes: [
+          { name: '梅花樁高空飛躍採青', desc: '巨型醒獅高高躍起張大嘴咬紅包，動態張力滿分', en: 'dynamic leaping lion dancer perched high on staggered stilts reaching for a hanging lucky red envelope' },
+          { name: '廟口鑼鼓陣頭大匯演', desc: '大頭佛拿扇子逗弄醒獅，一旁用力敲大鼓、群眾圍觀歡呼', en: 'festive temple square performance with big-headed Buddha teasing the lion, drummers banging drums and cheering crowd' },
+          { name: '巨型醒獅頭微縮慶典舞台', desc: '以超巨大醒獅頭為背景主體，獅口與鬃毛間藏著熱鬧遊行隊伍', en: 'surreal sculpture centered around a giant ornate lion head housing miniature festival drummers and dancers' }
+        ],
+        actions: [
+          ['騰空飛躍張口咬紅包', 'leaping mid-air to bite the lucky red envelope'],
+          ['賣力敲打節慶大鼓', 'drumming energetically on a large festival drum'],
+          ['揮舞繡球逗弄醒獅', 'waving an embroidered ball playfully'],
+          ['鼓掌尖叫歡呼喝采', 'clapping and cheering enthusiastically']
+        ]
+      },
+      {
+        id: 'lantern_festival',
+        category: 'traditional',
+        emoji: '🏮',
+        name: '元宵節・放天燈與提花燈',
+        enName: 'Taiwan Lantern Festival and Pingxi Sky Lanterns',
+        desc: '平溪天燈緩緩升空、提生肖花燈夜遊、猜燈謎與吃大湯圓',
+        foods: [
+          ['熱呼呼大湯圓／滾元宵', 'steaming bowl of glutinous rice balls (Tangyuan)'],
+          ['竹篩與糯米粉', 'bamboo sieve for rolling yuanxiao'],
+          ['酒釀蛋花甜湯', 'sweet fermented rice soup bowl']
+        ],
+        props: [
+          ['寫滿願望的大天燈', 'glowing paper sky lantern covered in calligraphy wishes'],
+          ['手工竹編／生肖造型提燈', 'handcrafted zodiac animal hand lanterns'],
+          ['燈謎紙條與毛筆', 'hanging lantern riddle paper strips and calligraphy brush'],
+          ['鹽水蜂炮安全帽與火花', 'protective helmet amidst sparkling beehive fireworks'],
+          ['升空的小天燈群', 'clusters of floating miniature sky lanterns']
+        ],
+        bases: [
+          ['平溪老街鐵道與石階梯底座', 'Pingxi old street railway tracks and stone steps base'],
+          ['漸層夜空波浪雲霧背牆（支撐升空天燈）', 'layered wavy night-sky cloud ceramic wall backdrop supporting floating lanterns'],
+          ['巨大瓷碗湯圓池底座', 'oversized porcelain bowl base filled with sculpted round tangyuan']
+        ],
+        scenes: [
+          { name: '平溪老街鐵道齊放天燈', desc: '親友雙手緊拉膨脹的天燈紙角，抬頭看著滿天願望升空', en: 'Pingxi railway old street night scene, family holding corners of a glowing giant sky lantern ready for launch' },
+          { name: '花燈隧道提燈夜遊猜燈謎', desc: '穿梭在繽紛生肖花燈與燈謎紙條間的熱鬧夜遊畫面', en: 'joyful night parade walking under colorful zodiac lanterns and hanging riddle strips' },
+          { name: '鹽水蜂炮震撼火花夜', desc: '戴著全罩安全帽在放射狀泥塑火花與煙霧中勇敢體驗民俗', en: 'dramatic Yanshui Beehive Fireworks sculpture with helmeted figures surrounded by radiating sculpted sparks and smoke swirls' },
+          { name: '巨型鏤空天燈光影劇場', desc: '一盞膨脹飽滿的大型鏤空雕花天燈為主體，底部圍繞祈福人群', en: 'centered monumental pierced-clay sky lantern glowing warmly from inside with miniature wishing figures gathered below' }
+        ],
+        actions: [
+          ['雙手拉住天燈紙角準備放飛', 'holding the bottom frame of a rising sky lantern'],
+          ['高舉生肖提燈開心奔跑', 'running happily holding glowing zodiac lanterns'],
+          ['仰頭微笑許願看夜空', 'looking up at the sky making heartfelt wishes'],
+          ['拿毛筆在天燈上寫心願', 'writing wishes with a calligraphy brush on the lantern']
+        ]
+      },
+      {
+        id: 'qingming',
+        category: 'traditional',
+        emoji: '🌿',
+        name: '清明節・包潤餅與踏青',
+        enName: 'Qingming Festival Spring Roll Making and Family Gathering',
+        desc: '全家人圍桌DIY包潤餅、吃草仔粿、踏青放風箏與慎終追遠',
+        foods: [
+          ['料多爆餡潤餅捲', 'Taiwanese spring roll (Runbing) packed with fillings'],
+          ['艾草草仔粿', 'traditional green mugwort rice cakes'],
+          ['紅龜粿與白煮蛋', 'red tortoise cakes and boiled eggs'],
+          ['花生粉、蛋絲與高麗菜配料盤', 'dishes of peanut powder, shredded egg, and braised pork']
+        ],
+        props: [
+          ['竹編提籃與花布包巾', 'woven bamboo picnic basket with floral cloth'],
+          ['春日微風與紙風箏', 'traditional paper kites flying in spring breeze'],
+          ['油桐花瓣與青翠山坡', 'blossoming tung flowers and green hillside'],
+          ['五色壓墓紙與紙蓮花', 'colorful ceremonial paper and lotus'],
+          ['清明細雨與彩色雨傘', 'spring rain drops and colorful umbrellas']
+        ],
+        bases: [
+          ['鋪滿油桐花的起伏綠草山坡底座', 'undulating green hillside base dotted with sculpted white tung blossoms'],
+          ['古早味木餐桌底座（擺滿潤餅配料碗盤）', 'rustic wooden dining table base crowded with spring roll ingredient bowls'],
+          ['復古竹編大提籃化作微縮舞台', 'giant woven bamboo basket base cradling the family scene']
+        ],
+        scenes: [
+          { name: '全家搶料包潤餅大作戰', desc: '餐桌擺滿十幾盤配料，大家把潤餅包得像巨無霸差點漏餡大笑', en: 'cozy family table scene overflowing with bowls of fillings as everyone laughs trying to wrap oversized Taiwanese spring rolls' },
+          { name: '春雨油桐花山坡踏青放風箏', desc: '細雨初歇的春天山坡，大人孩子一起放風箏、提竹籃吃草仔粿', en: 'serene spring hillside covered in blossoms, family flying a sculpted kite connected by curling wind clouds' },
+          { name: '緬懷祖先的溫馨祭祖背影', desc: '三代同堂在青翠山坡撐傘拿香鞠躬，傳遞思念與家族凝聚力', en: 'heartwarming multi-generational family standing together on a misty green hill with umbrellas and offerings' }
+        ],
+        actions: [
+          ['手忙腳亂包超巨型潤餅', 'wrapping giant overflowing spring rolls while laughing'],
+          ['仰頭拉線放飛紙風箏', 'pulling kite strings looking up happily'],
+          ['雙手合十鞠躬致敬', 'bowing respectfully with palms together'],
+          ['開心分享草仔粿', 'sharing traditional green rice cakes']
+        ]
+      },
+      {
+        id: 'dragon_boat',
+        category: 'traditional',
+        emoji: '🐉',
+        name: '端午節・龍舟奪標與立蛋',
+        enName: 'Dragon Boat Festival Racing and Egg Balancing',
+        desc: '熱血龍舟破浪奪標、正午全家趴地立蛋、包肉粽與戴香包',
+        foods: [
+          ['成串竹葉肉粽', 'strings of bamboo-leaf sticky rice dumplings (Zongzi)'],
+          ['冰涼鹼粽沾蜂蜜', 'sweet alkaline zongzi with honey'],
+          ['傳統大蒸籠', 'steaming bamboo steamer basket'],
+          ['生雞蛋（正午立蛋）', 'standing raw eggs balanced upright']
+        ],
+        props: [
+          ['昂首雕花木龍舟與船槳', 'ornate carved wooden dragon boat with paddles'],
+          ['奪標紅旗與戰鼓', 'victory red flag and rhythmic boat drum'],
+          ['手工老虎／粽子香包', 'embroidered tiger and zongzi scent sachets'],
+          ['艾草與菖蒲花束', 'bundled mugwort and calamus leaves'],
+          ['五色平安線手環', 'five-colored lucky threads']
+        ],
+        bases: [
+          ['翻騰捲曲的立體浪花底座（穩托龍頭與奪標手）', 'dramatic curling sculpted river waves base supporting the leaping dragon boat'],
+          ['復古幾何磨石子地板底座（趴地立蛋場景）', 'vintage Taiwanese terrazzo floor tile base for egg balancing'],
+          ['剖開的巨型竹葉粽子化作競技舞台', 'giant unwrapped bamboo-leaf zongzi sculpted as a miniature stage']
+        ],
+        scenes: [
+          { name: '龍舟破浪奪標 0.1 秒瞬間', desc: '船頭雕花龍首衝破浪花，奪標手探身騰空抓紅旗的熱血瞬間', en: 'thrilling split-second moment of a carved dragon boat surging through curling clay waves as the flag catcher lunges forward' },
+          { name: '正午十二點全家趴地立蛋大挑戰', desc: '全家人趴在磨石子地上鬥雞眼屏息扶蛋，一旁還有調皮捣蛋鬼', en: 'humorous family scene lying flat on a vintage tile floor, squinting intensely to balance upright eggs at noon' },
+          { name: '古厝門前包肉粽掛艾草', desc: '長輩巧手摺粽葉綁棉繩，孩子戴著老虎香包在旁偷吃米飯', en: 'nostalgic courtyard scene with elders wrapping bamboo-leaf zongzi while kids wearing tiger sachets peek playfully' },
+          { name: '粽子與蛋黃的奇幻龍舟賽', desc: '擬人化的可愛肉粽們划著竹葉小舟在浪花中熱血奪標', en: 'whimsical anthropomorphic zongzi dumplings paddling a bamboo-leaf dragon boat across sculpted waves' }
+        ],
+        actions: [
+          ['俯身騰空奮力抓取奪標旗', 'lunging forward to grab the red victory flag'],
+          ['整齊揮槳奮力划龍舟', 'paddling furiously in rhythm'],
+          ['趴在地上屏息小心立蛋', 'lying on the floor concentrating intently on balancing an egg'],
+          ['巧手包粽子綁棉繩', 'wrapping sticky rice dumplings with cotton string']
+        ]
+      },
+      {
+        id: 'qixi',
+        category: 'traditional',
+        emoji: '🌌',
+        name: '七夕・鵲橋與做十六歲',
+        enName: 'Taiwan Qixi Festival and Coming of Age Ceremony',
+        desc: '浪漫銀河喜鵲橋、台南「做十六歲」鑽七娘媽亭成年禮',
+        foods: [
+          ['七娘媽油飯與麻油雞', 'sesame oil chicken and savory sticky rice'],
+          ['中間壓凹的七娘媽圓仔', 'dimpled sweet tangyuan (Weaver Girl tears)'],
+          ['紅龜粿與圓形大餅', 'traditional red cakes and round pastries']
+        ],
+        props: [
+          ['華麗雕花七娘媽亭（鳥母宮）', 'ornate traditional Seven Maidens ceremonial pavilion'],
+          ['展翅飛翔的喜鵲群', 'flock of sculpted magpies forming a bridge'],
+          ['胭脂水粉盒與圓鏡', 'vintage face powder box and round mirror'],
+          ['月老紅線與星星月亮', 'red thread of fate and starry crescent moon']
+        ],
+        bases: [
+          ['捲曲銀河星雲與喜鵲拱橋底座', 'swirling Milky Way cloud and magpie arch bridge base'],
+          ['立體鏤空七娘媽亭拱門結構', 'intricate pierced ceremonial archway pavilion structure'],
+          ['傳統紅磚廟埕石階底座', 'traditional Taiwanese temple red-brick courtyard base']
+        ],
+        scenes: [
+          { name: '台南「做十六歲」鑽出鳥母宮成年禮', desc: '青少年彎腰鑽過雕飾華麗的七娘媽亭，象徵邁向成長獨立的感動瞬間', en: 'meaningful Taiwanese coming-of-age ceremony where a teenager crawls joyfully beneath an ornate ceremonial pavilion cheered by family' },
+          { name: '銀河喜鵲橋浪漫重逢', desc: '成群喜鵲銜尾搭出立體拱橋，牛郎織女在星海捲雲中深情相望', en: 'dreamy mythical scene of Cowherd and Weaver Girl meeting atop a sculpted bridge of magpies over swirling Milky Way clouds' },
+          { name: '月老廟前綁紅線祈福', desc: '手牽紅線與親友在充滿星星與香煙的廟宇前微笑許願', en: 'charming temple courtyard scene tying red lucky threads amidst swirling incense clouds and starry accents' }
+        ],
+        actions: [
+          ['彎腰鑽過七娘媽亭象徵長大', 'crawling happily beneath the ceremonial pavilion'],
+          ['仰望滿天星河指著喜鵲橋', 'pointing up in wonder at the starry magpie bridge'],
+          ['雙手牽起祈福紅線', 'holding glowing red threads of fate'],
+          ['開心品嘗油飯與七娘媽圓仔', 'enjoying traditional Qixi festive dishes']
+        ]
+      },
+      {
+        id: 'ghost_festival',
+        category: 'traditional',
+        emoji: '⛵',
+        name: '中元節・普渡、水燈與搶孤',
+        enName: 'Taiwan Zhongyuan Festival Water Lanterns and Qianggu',
+        desc: '基隆放水燈漂浮海面、頭城搶孤高塔攀爬、壯觀普渡供品桌',
+        foods: [
+          ['澎湃零食泡麵供品塔', 'towering pyramid of Taiwanese snacks, instant noodles and sodas'],
+          ['插滿香腳的三牲與全豬', 'ceremonial feast platter with incense sticks'],
+          ['摩訶粿與必桃', 'traditional steamed festival buns'],
+          ['大串龍眼與水果籃', 'clusters of longan and fruit basket']
+        ],
+        props: [
+          ['基隆紙紮水燈頭小船', 'ornate miniature floating water lantern house'],
+          ['高聳搶孤棚架與順風旗', 'towering wooden Qianggu climbing pillar with victory flag'],
+          ['三角普渡旗與線香', 'triangular festival flags and curling incense smoke'],
+          ['廟口歌仔戲／布袋戲台', 'traditional Taiwanese outdoor puppet theater stage'],
+          ['洗臉盆與新毛巾', 'ceremonial washbasin and folded towel']
+        ],
+        bases: [
+          ['點點火光的立體海浪底座（放水燈）', 'dark sculpted ocean waves base carrying glowing water lanterns'],
+          ['多柱交錯的高塔型孤棚架構（搶孤）', 'tall multi-pillar wooden tower structure for dramatic vertical composition'],
+          ['擺滿零食山的長條辦桌供桌底座', 'long banquet offering table base piled high with miniature snack boxes']
+        ],
+        scenes: [
+          { name: '基隆夏夜海邊放水燈', desc: '人們捲起褲管走進浪花，將精緻的立體水燈頭推向大海祈福', en: 'atmospheric Taiwanese coastal night scene launching ornate miniature house-shaped water lanterns into sculpted curling ocean waves' },
+          { name: '頭城搶孤高空疊羅漢奪旗', desc: '選手們塗滿油滑肌理的高柱上疊羅漢奮力攀爬，充滿垂直視覺震撼', en: 'dramatic vertical tower sculpture of agile climbers stacking atop each other to snatch the top flag on a tall Qianggu pillar' },
+          { name: '超壯觀台灣零食塔普渡大桌', desc: '插滿線香與三角旗的可愛零食泡麵山，家人圍著虔誠合掌拜拜', en: 'charming detailed Taiwanese street offering table piled with miniature snack towers, triangular flags, and family praying peacefully' }
+        ],
+        actions: [
+          ['雙手輕推水燈小船漂向大海', 'gently pushing a glowing water lantern boat into the waves'],
+          ['在孤柱上奮力向上攀爬奪旗', 'climbing intensely toward the victory flag atop the tower'],
+          ['拿香虔誠合掌祈求平安', 'holding incense sticks praying for peace'],
+          ['興奮欣賞廟口布袋戲表演', 'watching a lively traditional glove puppet show']
+        ]
+      },
+      {
+        id: 'mid_autumn',
+        category: 'traditional',
+        emoji: '🌕',
+        name: '中秋節・烤肉賞月與柚子帽',
+        enName: 'Taiwanese Mid-Autumn Festival BBQ and Pomelo Hat',
+        desc: '一家烤肉萬家香、頭戴剝皮柚子帽、吃月餅泡茶與嫦娥玉兔',
+        foods: [
+          ['蛋黃酥與花紋月餅', 'patterned mooncakes and salted egg yolk pastries'],
+          ['剝成皇冠的文旦柚子', 'peeled pomelo fruit and pomelo-peel hat'],
+          ['炭火烤肉串（吐司肉片／甜不辣／香腸）', 'charcoal BBQ skewers, toast with pork slices, sausages and corn'],
+          ['紫砂茶壺與熱茶杯', 'traditional clay teapot and tiny teacups'],
+          ['鋁箔盒蛤蜊絲瓜與烤棉花糖', 'grilled clams and roasted marshmallows']
+        ],
+        props: [
+          ['戴在頭上的立體柚子帽', 'playful carved pomelo peel hat worn on head'],
+          ['冒著白煙的鐵烤肉架與木炭', 'charcoal grill rack with curling sculpted BBQ smoke'],
+          ['長烤肉夾與烤肉醬刷', 'long BBQ tongs and sauce brush'],
+          ['發亮仙女棒火花', 'sparkling handheld sparklers'],
+          ['桂花樹與搗藥玉兔', 'osmanthus tree and cute Jade Rabbit pounding mortar']
+        ],
+        bases: [
+          ['弧形凹凸月球滿月背牆（結合嫦娥玉兔浮雕）', 'large curved textured full-moon ceramic wall backdrop with Jade Rabbit relief'],
+          ['剖開的巨型文旦柚子化身烤肉微縮舞台', 'giant halved pomelo fruit sculpted as a cozy miniature BBQ courtyard'],
+          ['台灣騎樓圓柱與陽台欄杆底座', 'nostalgic Taiwanese arcade veranda and balcony railing base']
+        ],
+        scenes: [
+          { name: '台灣騎樓煙霧瀰漫烤肉趴', desc: '全家人與毛小孩都戴著柚子帽，圍著烤肉架煽火翻烤、笑鬧玩仙女棒', en: 'lively Taiwanese sidewalk Mid-Autumn BBQ party where family and pets wear pomelo-peel hats around a smoky charcoal grill under a full moon' },
+          { name: '巨型剖開柚子裡的奇幻賞月派對', desc: '把一顆超大文旦剖開當作溫馨客廳，家人在果肉裡泡茶吃月餅', en: 'whimsical miniature diorama tucked inside a giant hollowed-out pomelo fruit where a family drinks tea and eats mooncakes' },
+          { name: '月宮桂花樹下與玉兔嫦娥同樂', desc: '超現實童話風，主角飛上滿月與可愛玉兔一起烤肉吃蛋黃酥', en: 'magical storybook scene on the textured surface of the full moon sharing mooncakes and BBQ with Chang-e and a cute Jade Rabbit' },
+          { name: '頂樓陽台泡茶賞月溫馨夜', desc: '在滿月大背景前泡老人茶、剝柚子、互相為彼此戴上柚子帽', en: 'warm rooftop terrace gathering under a monumental sculpted full moon, pouring tea from a clay teapot and peeling pomelos' }
+        ],
+        actions: [
+          ['頭戴柚子帽拿夾子翻烤肉片', 'wearing a pomelo hat while flipping BBQ meat with tongs'],
+          ['用力揮動扇子煽炭火被煙燻笑', 'fanning charcoal smoke playfully while laughing'],
+          ['舉著仙女棒在夜空中畫愛心', 'drawing glowing trails in the air with sparklers'],
+          ['開心泡茶切月餅賞滿月', 'pouring hot tea and sharing mooncakes under the moon']
+        ]
+      },
+      {
+        id: 'winter_solstice',
+        category: 'traditional',
+        emoji: '🥣',
+        name: '冬至與重陽・搓湯圓與登高',
+        enName: 'Winter Solstice Tangyuan Making and Respecting Elders',
+        desc: '全家圍桌把糯米糰搓成紅白湯圓與搞怪動物、吃補冬薑母鴨、重陽登高',
+        foods: [
+          ['紅白小湯圓與大包餡湯圓', 'pink and white glutinous rice balls (Tangyuan)'],
+          ['捏成小豬／恐龍的搞怪湯圓', 'cute animal-shaped sculpted tangyuan dumplings'],
+          ['滾燙薑母鴨／麻油雞砂鍋', 'steaming ginger duck clay pot'],
+          ['菊花茶與重陽糕', 'chrysanthemum tea and Double Ninth cake']
+        ],
+        props: [
+          ['大竹編米篩（擺滿湯圓）', 'large woven bamboo sieve tray filled with tangyuan'],
+          ['長柄大湯勺與冒煙湯鍋', 'large soup ladle and steaming pot'],
+          ['黏在門窗上的餉耗湯圓', 'lucky tangyuan stuck playfully on wooden door frame'],
+          ['登山杖與菊花花束', 'hiking poles and chrysanthemum blossoms']
+        ],
+        bases: [
+          ['大型細緻竹編米篩圓形底座', 'oversized circular woven-bamboo tray base with tactile clay texture'],
+          ['冒著熱氣的大瓷碗化作湯圓溫泉池', 'giant steaming ceramic soup bowl base turning into a cozy tangyuan hot spring'],
+          ['重陽秋日楓葉山坡階梯底座', 'autumn hillside trail base with sculpted maple leaves']
+        ],
+        scenes: [
+          { name: '大手包小手・暖心搓湯圓特寫', desc: '長輩布滿歲月紋路的大手包覆著孩子沾滿糯米粉的小手一起搓湯圓', en: 'touching close-up sculpture of wrinkled elder hands gently guiding a child flour-dusted hands rolling pink and white tangyuan' },
+          { name: '竹米篩裡的搞怪湯圓派對', desc: '全家人圍著竹篩比賽誰捏的湯圓最可愛，恐龍、小貓湯圓活過來啦', en: 'playful family gathered around a huge woven bamboo tray sculpting whimsical animal-shaped tangyuan together' },
+          { name: '巨型湯圓甜湯碗溫泉圍爐', desc: '超現實趣味構圖，一家人像泡溫泉一樣泡在暖呼呼的紅白湯圓碗裡', en: 'surreal heartwarming ceramic diorama of a tiny family soaking happily like a hot spring inside a giant steaming bowl of pink and white tangyuan' },
+          { name: '重陽秋日牽手登高奉茶', desc: '陪伴阿公阿嬤在秋風山頂奉上一杯溫熱菊花茶與放風箏', en: 'warm autumn mountain peak scene offering hot chrysanthemum tea to grandparents with flying kites' }
+        ],
+        actions: [
+          ['雙手沾滿白粉專心搓湯圓', 'rolling glutinous rice balls with flour-dusted hands'],
+          ['得意舉起剛捏好的搞怪小動物湯圓', 'proudly holding up a funny animal-shaped tangyuan'],
+          ['雙手恭敬奉上一杯熱茶', 'respectfully offering a warm cup of tea'],
+          ['牽著長輩的手一起爬山看風景', 'holding grandparents hands on a scenic hilltop']
+        ]
+      },
+      {
+        id: 'mazu_temple',
+        category: 'traditional',
+        emoji: '🏯',
+        name: '媽祖遶境・台灣熱鬧廟會',
+        enName: 'Taiwan Mazu Pilgrimage and Traditional Temple Fair',
+        desc: '神轎出巡、跪地鑽轎底祈福、千里眼順風耳、電音三太子與燒王船',
+        foods: [
+          ['沿途結緣平安餐與碗粿', 'pilgrimage free blessing meals and rice puddings'],
+          ['冰涼仙草茶與結緣飲料', 'refreshing herbal tea cups'],
+          ['平安壽桃與紅蛋', 'blessing longevity peaches']
+        ],
+        props: [
+          ['華麗雕飾媽祖神轎與涼傘', 'ornate carved Mazu palanquin sedan chair and ceremonial umbrella'],
+          ['進香旗與壓轎金', 'pilgrimage flags and lucky yellow blessing paper'],
+          ['電音三太子與大墨鏡', 'cute Techno Third Prince puppet with sunglasses'],
+          ['千里眼與順風耳將軍', 'guardian deities Qianliyan and Shunfenger'],
+          ['東港彩繪王船與烈火', 'ornate painted King Boat with sculpted curling flames']
+        ],
+        bases: [
+          ['燕尾翹脊立體廟宇牌樓拱門', 'ornate Taiwanese temple entrance archway with curved swallowtail roof'],
+          ['蜿蜒石板進香路與香煙捲雲底座', 'winding stone pilgrimage road base with swirling sculpted incense clouds'],
+          ['海浪與火焰托起的王船底座', 'sculpted waves and stylized flames supporting a painted ceremonial boat']
+        ],
+        scenes: [
+          { name: '虔誠跪地「鑽轎底」長龍', desc: '華麗神轎高高抬過俯身祈福的信眾上方，充滿溫暖與信仰力量', en: 'iconic Taiwanese Mazu pilgrimage scene with an ornate sedan chair passing over a line of smiling kneeling devotees' },
+          { name: '電音三太子歡樂踩街派對', desc: '戴著大墨鏡的可愛三太子與大小朋友在廟口熱舞同樂', en: 'joyful lively Taiwanese temple fair with cute Techno Third Prince puppets dancing with cheering kids' },
+          { name: '千人遶境香煙繚繞進香團', desc: '手持進香旗、頭戴進香帽的親友互相打氣，展現台灣最美人情味', en: 'bustling Taiwanese pilgrimage procession carrying yellow flags and hats beneath swirling incense smoke and temple roofs' }
+        ],
+        actions: [
+          ['虔誠趴地鑽轎底祈求平安', 'kneeling devoutly beneath the passing Mazu palanquin'],
+          ['高舉進香旗熱情揮舞', 'waving colorful pilgrimage flags happily'],
+          ['跟著電音三太子開心跳舞', 'dancing joyfully alongside the Techno Third Prince'],
+          ['遞上奉茶點心為香燈腳加油', 'handing out free drinks and snacks with warm smiles']
+        ]
+      },
+      {
+        id: 'indigenous',
+        category: 'traditional',
+        emoji: '🪶',
+        name: '原住民族豐年祭／飛魚季',
+        enName: 'Taiwan Indigenous Harvest Festival and Flying Fish Season',
+        desc: '阿美族羽冠圍圓歌舞、達悟族拼板舟滿載飛魚、部落營火與文化傳承',
+        foods: [
+          ['香氣四溢竹筒飯', 'bamboo-tube sticky rice'],
+          ['傳統陶壺小米酒', 'traditional clay pot millet wine'],
+          ['木架上滿滿的飛魚乾', 'wooden rack hanging rows of dried flying fish'],
+          ['原民風味炭烤山豬肉', 'charcoal-roasted wild boar feast']
+        ],
+        props: [
+          ['華麗羽冠與手工情人袋', 'ornate feathered headdress and woven lover bag'],
+          ['蘭嶼圖騰彩繪拼板舟', 'iconic Tao tribe hand-carved patterned plank boat'],
+          ['傳統銀盔與百步蛇圖騰陶壺', 'traditional ceremonial silver helmet and totem clay pot'],
+          ['中央熊熊燃燒的部落營火', 'crackling central tribal bonfire'],
+          ['五年祭長竹竿與福球', 'tall bamboo poles and woven ceremonial ball']
+        ],
+        bases: [
+          ['環形部落營火廣場底座', 'circular tribal gathering plaza base centered around a bonfire'],
+          ['蘭嶼蔚藍捲浪與海岸礁岩底座', 'sculpted curling ocean waves and coastal basalt rocks base'],
+          ['層疊山稜線與立體圖騰柱背景', 'layered mountain ridges and carved wooden totem pillars backdrop']
+        ],
+        scenes: [
+          { name: '阿美族豐年祭手牽手圍圓歌舞', desc: '身穿紅黑圖騰族服與羽冠，大家牽手圍成圓圈隨歌聲起舞', en: 'vibrant Amis Harvest Festival sculpture with figures in feathered headdresses and woven attire holding hands dancing in a circle around a bonfire' },
+          { name: '蘭嶼拼板舟滿載飛魚大豐收', desc: '精細刻紋的紅黑白拼板舟乘風破浪，岸邊架上曬滿銀色飛魚', en: 'striking Lanyu Tao tribe carved plank boat riding sculpted waves filled with silvery flying fish and drying racks on shore' },
+          { name: '星光營火下的跨世代部落傳承', desc: '部落長老在營火旁教導孩子吹奏樂器與編織，充滿神聖溫度', en: 'heartwarming starry night bonfire gathering with tribal elders passing down traditional songs and crafts to children' }
+        ],
+        actions: [
+          ['手牽手圍成圓圈高歌起舞', 'holding hands dancing joyfully in a circle'],
+          ['高舉雙手歡呼慶祝大豐收', 'raising arms high celebrating an abundant harvest'],
+          ['齊心協力將拼板舟推向大海', 'pushing the patterned plank boat together into the surf'],
+          ['開心品嘗竹筒飯與烤肉', 'feasting happily on bamboo rice']
+        ]
+      },
+      {
+        id: 'xmas_newyear',
+        category: 'traditional',
+        emoji: '🎄',
+        name: '聖誕節與跨年煙火夜',
+        enName: 'Christmas Celebration and Taipei 101 New Year Fireworks',
+        desc: '閃耀聖誕樹拆交換禮物、薑餅屋派對，或是台北 101 跨年煙火倒數',
+        foods: [
+          ['立體糖霜薑餅屋', 'decorated gingerbread house'],
+          ['紅白拐杖糖與聖誕樹幹蛋糕', 'candy canes and Yule log cake'],
+          ['冬夜暖呼呼熱可可杯', 'steaming mugs of hot cocoa with marshmallows'],
+          ['烤雞聖誕大餐', 'festive roast chicken dinner']
+        ],
+        props: [
+          ['掛滿彩球星星的立體聖誕樹', 'sculpted Christmas tree adorned with stars and ornaments'],
+          ['緞帶禮物山與聖誕長襪', 'piles of ribbon-wrapped gift boxes and stockings'],
+          ['聖誕老公公與麋鹿雪橇', 'Santa Claus and reindeer sleigh'],
+          ['台北 101 大樓與立體綻放煙火', 'Taipei 101 skyscraper bursting with sculpted clay fireworks'],
+          ['螢光棒與跨年倒數數字牌', 'glow sticks and New Year countdown numbers']
+        ],
+        bases: [
+          ['蓬鬆雪地與壁爐暖屋角落底座', 'fluffy sculpted snow base with cozy fireplace backdrop'],
+          ['弧形立體煙火炸裂夜空背景牆', 'curved night-sky ceramic backdrop exploding with textured 3D fireworks'],
+          ['大禮物盒打開變成節慶微縮舞台', 'giant opened gift box base revealing a festive miniature scene']
+        ],
+        scenes: [
+          { name: '聖誕樹下瘋狂拆交換禮物', desc: '圍著高大聖誕樹拆開意想不到的驚喜禮物，氣氛溫馨又爆笑', en: 'cozy living room gathering beneath a tall ornate Christmas tree excitedly unwrapping ribboned gift boxes' },
+          { name: '台北 101 跨年煙火「3、2、1」倒數夜', desc: '大家圍著圍巾舉起雙手與螢光棒，背後 101 綻放絢麗立體泥塑煙火', en: 'exhilarating New Year Eve countdown scene with scarf-clad friends cheering as sculpted fireworks burst around Taipei 101' },
+          { name: '夢幻薑餅屋奇幻烘焙派對', desc: '把巨大的糖果薑餅屋當作房子，家人與聖誕老人一起裝飾屋頂', en: 'whimsical fairytale sculpture of family decorating a giant frosting-covered gingerbread house with Santa' }
+        ],
+        actions: [
+          ['驚喜拆開大緞帶禮物盒', 'unwrapping a big gift box with amazed expressions'],
+          ['倒數計時高舉雙手歡呼相擁', 'cheering and hugging during the New Year countdown'],
+          ['一起往聖誕樹掛上亮晶晶星星', 'hanging stars together on the Christmas tree'],
+          ['捧著熱可可互相依偎看煙火', 'cuddling with hot cocoa watching fireworks']
+        ]
+      },
+
+      // ================= 2. 家庭聚會與紀念日 =================
+      {
+        id: 'birthday',
+        category: 'family',
+        emoji: '🎂',
+        name: '生日派對・許願吹蠟燭',
+        enName: 'Joyful Family Birthday Party and Cake Celebration',
+        desc: '鼓起腮幫子吹蠟燭、鼻頭被偷抹奶油、派對帽氣球與大合照',
+        foods: [
+          ['多層鮮奶油草莓生日蛋糕', 'multi-tiered strawberry cream birthday cake'],
+          ['發亮數字蠟燭與傾斜火苗', 'glowing number candles with wind-bent clay flames'],
+          ['造型可愛杯子蛋糕塔', 'tower of cute frosted cupcakes'],
+          ['果汁壺與慶祝香檳杯', 'celebration juice glasses and pitcher']
+        ],
+        props: [
+          ['彩色波點派對尖頂帽', 'polka-dot cone party hats'],
+          ['爆開的彩帶噴筒與吹捲笛', 'bursting party poppers and party blowers'],
+          ['緊密堆疊的立體氣球拱門', 'clustered sculpted balloon arch'],
+          ['緞帶禮物盒山', 'stack of wrapped birthday gifts'],
+          ['牆面 Happy Birthday 拉旗', 'sculpted Happy Birthday bunting banner']
+        ],
+        bases: [
+          ['半圓弧形氣球與彩帶拉旗背景牆（結構超穩固）', 'semicircular clustered balloon and bunting wall backdrop providing strong support'],
+          ['超巨大圓形草莓蛋糕直接化作慶生舞台', 'giant sculpted round cream cake acting as the miniature stage base'],
+          ['溫馨客廳沙發與圓茶几底座', 'cozy living room sofa and coffee table base']
+        ],
+        scenes: [
+          { name: '鼓起腮幫子吹熄蠟燭瞬間', desc: '壽星閉眼用力吹氣、燭火歪斜，旁邊家人正偷偷伸手要抹奶油', en: 'expressive split-second birthday moment with puffed cheeks blowing tilted candle flames while mischievous family reaches to dab cream on the nose' },
+          { name: '奶油大戰與氣球狂歡派對', desc: '大家臉上都沾了鮮奶油、戴歪派對帽笑成一團，背景塞滿立體氣球', en: 'hilarious joyful birthday celebration with cream smudges on smiling faces, tilted party hats, and overflowing balloons' },
+          { name: '巨型蛋糕上的奇幻迷你慶生會', desc: '全家人縮小站在巨無霸草莓鮮奶油蛋糕上滑奶油溜滑梯慶祝', en: 'whimsical miniature family celebrating right on top of a gigantic sculpted strawberry cream birthday cake' }
+        ],
+        actions: [
+          ['鼓起腮幫子用力吹蠟燭', 'puffing cheeks to blow out birthday candles'],
+          ['閉上眼睛雙手合十誠心許願', 'closing eyes with clasped hands making a birthday wish'],
+          ['調皮偷抹奶油在壽星鼻頭', 'playfully dabbing cake frosting on the birthday star nose'],
+          ['擠在一起比 YA 拍慶生大合照', 'huddling closely flashing peace signs for a family photo']
+        ]
+      },
+      {
+        id: 'elder_longevity',
+        category: 'family',
+        emoji: '🍑',
+        name: '長輩大壽・壽桃與豬腳麵線',
+        enName: 'Taiwanese Grandparents Longevity Birthday Celebration',
+        desc: '幫阿公阿嬤慶祝大壽、捧巨型大壽桃、吃豬腳麵線與四代同堂',
+        foods: [
+          ['裂開包著小壽桃的巨型母子壽桃', 'giant sculpted longevity peach opening to reveal baby peaches inside'],
+          ['紅通通豬腳長壽麵線碗公', 'bowl of braised pork knuckle and longevity noodles'],
+          ['紅蛋與傳統壽字大餅', 'lucky red eggs and longevity pastry'],
+          ['熱呼呼烏龍茶壺', 'traditional oolong tea set']
+        ],
+        props: [
+          ['「壽」字鏤空雕花窗屏風', 'pierced traditional Longevity character folding screen'],
+          ['喜氣紅金八仙彩垂布', 'festive embroidered red longevity wall banner'],
+          ['長輩最愛的紅包與花束', 'blessing red envelopes and flower bouquet'],
+          ['復古相框與全家福合照', 'sculpted vintage family portrait frame']
+        ],
+        bases: [
+          ['傳統雕花紅木大圓桌底座', 'ornate carved wooden round banquet table base'],
+          ['「壽」字中式窗花屏風立體背牆', 'traditional Chinese Longevity lattice screen backdrop'],
+          ['超巨大粉嫩壽桃底座（全家圍繞祝福）', 'monumental blush-pink longevity peach base surrounded by loving family']
+        ],
+        scenes: [
+          { name: '阿公阿嬤捧巨型壽桃笑開懷', desc: '兩位長輩坐在正中央捧著比頭還大的壽桃，孫子們圍著捶背奉茶', en: 'heartwarming Taiwanese elder birthday scene with smiling grandparents holding a giant peach surrounded by grandchildren massaging shoulders and offering tea' },
+          { name: '長長壽麵一口吸不斷的趣味餐桌', desc: '阿公阿嬤拉起高高的長壽麵線，全家人鼓掌歡呼祝福福如東海', en: 'cheerful banquet table where grandparents lift ultra-long sculpted longevity noodles high while family applauds happily' },
+          { name: '八仙彩屏風前的四代同堂大合照', desc: '熱熱鬧鬧擠滿屏風前拍下珍貴的家族紀念合影', en: 'grand multi-generational family portrait sculpture arranged in front of an ornate red longevity banner and lattice screen' }
+        ],
+        actions: [
+          ['笑得合不攏嘴捧著大壽桃', 'beaming happily while cradling a giant longevity peach'],
+          ['幫阿公阿嬤捶背捏肩撒嬌', 'gently massaging grandparents shoulders affectionately'],
+          ['雙手恭敬奉茶祝賀身體健康', 'offering warm tea respectfully with blessings'],
+          ['開心地圍著長輩比愛心合照', 'making heart gestures around grandparents']
+        ]
+      },
+      {
+        id: 'family_hotpot',
+        category: 'family',
+        emoji: '🍲',
+        name: '週末家庭火鍋／聚餐夜',
+        enName: 'Cozy Taiwanese Family Hotpot Dinner Night',
+        desc: '掀開鍋蓋白煙瀰漫、滿桌澎湃火鍋料、長輩狂夾菜與桌下等吃的毛小孩',
+        foods: [
+          ['滿出蝦子丸子肉片的巨型鴛鴦鍋', 'oversized bubbling Ying-Yang hotpot overflowing with shrimp, meatballs and veggies'],
+          ['阿嬤拿手紅燒魚與滷肉', 'grandma signature braised pork and fish'],
+          ['電鍋掀蓋冒出的熱騰騰白煙', 'classic Taiwanese rice cooker steaming warmly'],
+          ['疊得像山一樣高的菜盤與肉盤', 'stacked plates of fresh vegetables and meat slices'],
+          ['切好的飯後芭樂與水果盤', 'sliced guava and fruit platter']
+        ],
+        props: [
+          ['交錯伸向鍋中的筷子與湯勺', 'crisscrossing chopsticks and soup ladles'],
+          ['沾醬沙茶醬碗與飲料瓶', 'shacha dipping sauce bowls and drink bottles'],
+          ['廚房圍裙與鍋鏟', 'kitchen apron and wok spatula'],
+          ['餐桌吊燈與溫馨桌布', 'warm hanging dining lamp and tablecloth']
+        ],
+        bases: [
+          ['圓形轉盤餐桌底座（蒸氣白煙往上捲曲成背景）', 'round lazy-susan dining table base with thick sculpted rising steam forming a natural backdrop'],
+          ['掀開鍋蓋的巨型鴛鴦鍋本身就是立體舞台', 'giant bubbling hotpot itself sculpted as the main sculptural centerpiece'],
+          ['透視剖面餐桌底座（同時看見桌上與桌底毛小孩）', 'cutaway dining table base showing both the feast above and curious pets hiding underneath']
+        ],
+        scenes: [
+          { name: '掀鍋蓋瞬間・滿滿好料大爆發', desc: '鍋蓋一掀開，蝦子、丸子與流暢捲曲的泥塑白煙湧出，全家人眼睛發亮', en: 'lively family dinner moment lifting the lid off a giant hotpot as sculpted steam swirls upward and everyone smiles in delight' },
+          { name: '餐桌上下雙重視角（桌底偷吃大作戰）', desc: '桌上大家搶夾最後一隻雞腿，桌底下毛小孩正眼巴巴盯著快掉下來的丸子', en: 'clever two-level ceramic sculpture showing family fighting playfully for food on top while a hungry puppy waits anxiously beneath the table' },
+          { name: '溫馨台灣老廚房忙進忙出', desc: '媽媽與阿嬤在大同電鍋與炒鍋旁大展身手，小孩探頭偷嘗一口', en: 'nostalgic Taiwanese home kitchen scene with bustling elders cooking near a classic rice cooker while kids sneak a taste' }
+        ],
+        actions: [
+          ['拿著長湯勺從火鍋撈出滿滿好料', 'scooping overflowing ingredients with a ladle'],
+          ['長輩拼命把菜夾進孩子碗裡堆成山', 'elders piling food lovingly into a child bowl'],
+          ['搶夾最後一隻大雞腿笑鬧', 'playfully competing for the last drumstick'],
+          ['趴在桌底下偷看掉落美食流口水', 'peeking eagerly from under the table for dropped treats']
+        ]
+      },
+      {
+        id: 'bando_wedding',
+        category: 'family',
+        emoji: '🎊',
+        name: '台灣傳統辦桌喜宴',
+        enName: 'Taiwanese Outdoor Bando Wedding Banquet',
+        desc: '紅白條紋帆布棚、紅色塑膠圓桌凳、總鋪師大火快炒與新人敬酒乾杯',
+        foods: [
+          ['霸氣紅蟳米糕與海鮮冷盤', 'Taiwanese mud crab sticky rice and grand seafood platter'],
+          ['花好月圓（炸紅白甜湯圓）', 'fried pink and white wedding tangyuan with peanut powder'],
+          ['佛跳牆與全雞湯', 'banquet soup pot'],
+          ['塑膠袋打包的豐盛菜尾', 'tied plastic bags of banquet leftovers']
+        ],
+        props: [
+          ['紅白相間帆布搭棚架', 'iconic red-and-white striped outdoor banquet canopy'],
+          ['大紅塑膠圓桌與堆疊塑膠凳', 'classic red round folding tables and stacked red plastic stools'],
+          ['總鋪師超大鐵鍋與大火鏟', 'master chef giant wok with sculpted flames'],
+          ['雙囍字大看板與氣球拱門', 'big Double Happiness calligraphy sign and balloon arch'],
+          ['舞台霓虹燈與卡拉 OK 麥克風', 'karaoke microphone and festive stage lights']
+        ],
+        bases: [
+          ['紅白條紋帆布棚頂＋紅色圓桌立體架構', 'iconic red-and-white striped tent roof supported by pillars framing a red banquet table'],
+          ['層層堆疊的紅色塑膠椅底座', 'sculpted base made of iconic stacked red Taiwanese plastic stools'],
+          ['總鋪師熱火朝天的戶外灶腳基地', 'bustling outdoor street-banquet kitchen base with giant woks']
+        ],
+        scenes: [
+          { name: '紅白帆布棚下・新人逐桌乾杯', desc: '穿紅禮服與西裝的新人舉杯敬酒，桌上擺滿紅蟳米糕、桌底小孩玩氣球', en: 'vibrant Taiwanese outdoor wedding banquet under a red-and-white striped tent, bride and groom toasting guests around red tables while kids play underneath' },
+          { name: '總鋪師大火快炒辦桌魂', desc: '霸氣總鋪師甩著超大鐵鍋噴出捲曲火焰，端菜阿姨穿梭上菜超熱鬧', en: 'dynamic sculpture of a Taiwanese Bando master chef stir-frying in a massive flaming wok with bustling servers' },
+          { name: '阿公拿卡拉OK高歌・大家搶包菜尾', desc: '最接地氣的台灣喜宴尾聲，台上有親戚忘情高歌、台下開心打包佳餚', en: 'humorous nostalgic Taiwanese banquet finale with relatives singing karaoke passionately while guests happily bag leftover dishes' }
+        ],
+        actions: [
+          ['高舉果汁杯大喊乾杯祝福新人', 'raising glasses high in a joyful wedding toast'],
+          ['總鋪師帥氣甩鍋大火快炒', 'master chef tossing a giant flaming wok dynamically'],
+          ['拿著麥克風閉眼陶醉唱卡拉OK', 'singing karaoke passionately into a microphone'],
+          ['在紅色圓桌底下鑽來鑽去玩氣球', 'playing happily with balloons underneath the red banquet table']
+        ]
+      },
+      {
+        id: 'baby_zhuazhou',
+        category: 'family',
+        emoji: '🐯',
+        name: '寶寶抓周與收涎慶典',
+        enName: 'Taiwanese Baby First Birthday Zhuazhou Ceremony',
+        desc: '戴虎頭帽趴在大米篩上抓物品、掛收涎餅乾、全家人蹲四周緊張加油',
+        foods: [
+          ['紅線串起的甜甜圈收涎餅乾', 'string of cute biscuit rings worn around baby neck'],
+          ['腳踩平安紅龜粿', 'traditional red tortoise rice cakes'],
+          ['滿月油飯與大雞腿紅蛋', 'savory oil rice, drumstick and red eggs'],
+          ['可愛周歲生日小蛋糕', 'cute first-birthday cake']
+        ],
+        props: [
+          ['可愛立體虎頭帽與虎頭鞋', 'adorable embroidered tiger hat and tiger shoes'],
+          ['特大號圓形竹編米篩', 'giant circular woven bamboo sieve'],
+          ['抓周寶物（毛筆／算盤／聽診器／金元寶／吉他／雞腿／蔥）', 'Zhuazhou prediction items: brush, abacus, stethoscope, gold ingot, guitar, drumstick and scallion'],
+          ['搖鈴鼓與拍不停的手機相機', 'baby rattles and family holding cameras']
+        ],
+        bases: [
+          ['特大號圓形竹編米篩直接做主體底座', 'oversized woven bamboo sieve forming the circular main stage base'],
+          ['紅通通巨型紅龜粿底座＋祝福布幔背牆', 'giant red tortoise cake base backed by a sculpted festive blessing banner'],
+          ['鋪著傳統花布墊的溫馨客廳地毯底座', 'cozy living room rug draped with Taiwanese floral cloth']
+        ],
+        scenes: [
+          { name: '米篩抓周・全場屏息大預測', desc: '戴虎頭帽的肉嘟嘟寶寶正猶豫要抓金元寶還是雞腿，四周大人蹲著瘋狂誘導', en: 'adorable Taiwanese Zhuazhou ceremony sculpture: chubby baby in a tiger hat reaching inside a giant bamboo tray full of symbolic toys while excited family kneels around cheering' },
+          { name: '超萌收涎餅乾流口水派對', desc: '寶寶脖子掛滿一圈可愛甜甜圈餅乾，長輩拿餅乾輕擦嘴角說吉祥話', en: 'sweet family gathering with a smiling baby wearing a necklace of round biscuits while grandparents gently touch a cookie to the baby chin' },
+          { name: '虎頭帽寶寶的夢想寶物山', desc: '放大誇張構圖，可愛寶寶坐在一座由毛筆、樂器、算盤與元寶堆起的奇幻寶山中', en: 'whimsical playful ceramic sculpture of a tiger-hatted baby sitting joyfully atop a mountain of oversized Zhuazhou prediction toys' }
+        ],
+        actions: [
+          ['肉嘟嘟伸出小手奮力抓寶物', 'reaching chubby little hands toward a symbolic toy'],
+          ['蹲在米篩四周搖玩具緊張加油', 'kneeling around the tray shaking rattles and cheering'],
+          ['舉著相機手機猛拍可愛瞬間', 'snapping photos excitedly with phones and cameras'],
+          ['拿收涎餅乾笑著幫寶寶說好話', 'smiling warmly while blessing the baby with a biscuit']
+        ]
+      },
+      {
+        id: 'housewarming',
+        category: 'family',
+        emoji: '📦',
+        name: '喬遷入厝・搬新家派對',
+        enName: 'Taiwanese Housewarming Moving Day Party',
+        desc: '門框掛菜頭滾鳳梨旺來、坐在滿屋紙箱山吃披薩慶祝新生活',
+        foods: [
+          ['大盒熱騰騰拉絲披薩', 'open boxes of cheesy pizza'],
+          ['入厝甜湯圓與炸雞桶', 'sweet housewarming tangyuan and fried chicken'],
+          ['好彩頭大白蘿蔔與大鳳梨', 'auspicious white radish and pineapple']
+        ],
+        props: [
+          ['高低堆疊的搬家開口紙箱山', 'stacked open cardboard moving boxes'],
+          ['傳統米桶、掃把與新碗筷', 'lucky rice bucket, broom and new tableware'],
+          ['大門鑰匙與門牌號碼', 'new house keys and doorplate'],
+          ['好奇鑽進紙箱只露屁股的貓狗', 'curious cat peeking out of a cardboard box']
+        ],
+        bases: [
+          ['立體幾何堆疊的開口紙箱牆（陶板接合最穩固）', 'geometric stacked cardboard moving boxes forming both base and sturdy stepped walls'],
+          ['新家微縮玄關與掛著鳳梨菜頭的門框', 'miniature doorway archway hung with a lucky radish and pineapple'],
+          ['打開屋頂的溫馨新家微縮剖面屋', 'cozy cutaway miniature new home base filled with moving boxes']
+        ],
+        scenes: [
+          { name: '紙箱山上的披薩入厝派對', desc: '家具還沒拆完，全家人乾脆拿大紙箱當餐桌，開心地拉起起司披薩乾杯', en: 'charming heartwarming moving-day party where a family sits amidst stacked open cardboard boxes sharing cheesy pizza on a box table' },
+          { name: '大門滾鳳梨喊「旺來」儀式', desc: '全家人拿著米桶、掃把與大鳳梨，笑著把鳳梨滾進新家大門', en: 'joyful Taiwanese housewarming ritual rolling a pineapple through a doorway decorated with a lucky white radish' },
+          { name: '搬家混亂大作戰與紙箱貓', desc: '大人抬沙發滿頭大汗，小孩與毛小孩卻在紙箱堆裡蓋起秘密城堡', en: 'playful chaotic moving scene with parents carrying furniture while kids and a cat build a fort out of cardboard boxes' }
+        ],
+        actions: [
+          ['坐在紙箱堆裡開心拉起披薩起司', 'pulling stretchy cheese pizza slices while sitting on moving boxes'],
+          ['笑著把大鳳梨滾進新家門', 'rolling a lucky pineapple across the threshold'],
+          ['舉著新家鑰匙歡呼跳躍', 'cheering happily holding up the new house keys'],
+          ['好奇探頭鑽進大紙箱玩躲貓貓', 'peeking playfully out of an open cardboard box']
+        ]
+      },
+      {
+        id: 'family_camping',
+        category: 'family',
+        emoji: '⛺',
+        name: '家族露營與野餐日',
+        enName: 'Family Outdoor Glamping and Picnic Day',
+        desc: '搭起三角帳篷、點亮星空串燈、圍著營火烤棉花糖與奔跑野餐',
+        foods: [
+          ['竹籤烤得微焦的棉花糖', 'toasted marshmallows on wooden skewers'],
+          ['手沖摩卡壺咖啡與野餐三明治', 'camping moka pot coffee and picnic sandwiches'],
+          ['卡式爐煎烤香腸與吐司', 'portable camp stove grilling sausages'],
+          ['藤編野餐籃與水果點心', 'woven picnic basket overflowing with snacks']
+        ],
+        props: [
+          ['立體掀簾三角帳篷／天幕', 'sculpted A-frame camping tent with open flap'],
+          ['溫暖發光的露營串燈與營燈', 'glowing camping fairy lights and lantern'],
+          ['噼啪燃燒的焚火台營火', 'crackling stone campfire with sculpted flames'],
+          ['摺疊露營椅與格子野餐墊', 'folding camp chairs and checkered picnic blanket'],
+          ['捕蟲網、吉他與風箏', 'butterfly net, acoustic guitar and kite']
+        ],
+        bases: [
+          ['坡度起伏的綠草山坡＋立體松樹剪影背牆', 'undulating grassy hillside base backed by sculpted pine trees and starry clouds'],
+          ['石塊圍砌的圓形營火基地', 'stone-ringed campfire clearing base'],
+          ['打開的巨型藤編野餐籃化作草地舞台', 'oversized open woven picnic basket transforming into a miniature park']
+        ],
+        scenes: [
+          { name: '星空串燈下的營火烤棉花糖夜', desc: '松樹與三角帳篷前，一家人圍坐營火烤棉花糖、彈吉他唱歌', en: 'magical starry night family camping sculpture with a glowing A-frame tent, pine trees, and family roasting marshmallows around a campfire' },
+          { name: '陽光草地格子布大野餐', desc: '藍天白雲下鋪開大野餐墊，擺滿藤編籃點心、小孩與狗狗追逐放風箏', en: 'cheerful sunny meadow picnic diorama on a checkered blanket with woven baskets, kids and a dog chasing a kite' },
+          { name: '打開帳篷裡的溫馨小宇宙', desc: '特寫放大的立體帳篷掀開門簾，裡面擠滿睡袋、手電筒與講故事的親子', en: 'cozy cutaway tent sculpture revealing parents and kids snuggled in sleeping bags telling stories by lantern light' }
+        ],
+        actions: [
+          ['圍著營火串起棉花糖小心烘烤', 'roasting marshmallows happily over the campfire'],
+          ['齊心協力拉繩子搭帳篷', 'working together to pitch the camping tent'],
+          ['拿著吉他彈唱營火晚會歌曲', 'playing acoustic guitar by the fire'],
+          ['在草地上奔跑放風箏抓蝴蝶', 'running joyfully across the grass']
+        ]
+      },
+      {
+        id: 'pet_birthday',
+        category: 'family',
+        emoji: '🐾',
+        name: '毛小孩慶生紀念日',
+        enName: 'Adorable Pet Birthday Celebration',
+        desc: '幫心愛的狗狗貓咪慶生！戴歪派對帽、肉泥罐頭塔與無奈呆萌表情',
+        foods: [
+          ['插著骨頭蠟燭的無糖肉泥蛋糕', 'pet-friendly meatloaf cake topped with a bone candle'],
+          ['疊得高高的寵物罐罐山', 'towering stack of pet food cans'],
+          ['肉條零食與潔牙骨', 'dog bone treats and cat snacks']
+        ],
+        props: [
+          ['戴歪的迷你派對小尖帽', 'tilted mini polka-dot party hat'],
+          ['毛小孩領結與小皇冠', 'cute pet bow tie and crown'],
+          ['咬破的玩具球與貓抓板', 'chewed squeaky ball and cat scratcher'],
+          ['高舉手機狂拍的主人', 'owners snapping endless photos with smartphones'],
+          ['腳印造型彩帶拉旗', 'paw-print party bunting banner']
+        ],
+        bases: [
+          ['軟塌受壓質感的立體寵物窩／沙發靠墊底座', 'plush pet bed or indented sofa cushion base showing soft clay folds'],
+          ['超巨大骨頭／魚乾造型慶生舞台底座', 'oversized bone or fish-shaped festive platform base'],
+          ['派對彩旗與罐罐山圍成的圓弧背景', 'semicircular backdrop of stacked pet cans and paw-print banners']
+        ],
+        scenes: [
+          { name: '一臉無奈被逼戴帽子的呆萌壽星', desc: '放大 3 倍的巨型毛小孩戴著歪斜生日帽盯著肉泥蛋糕眼神死，主人拿手機狂拍', en: 'hilarious heartwarming sculpture of an oversized dog or cat wearing a tilted party hat staring deadpan at a meat cake while owners frantically snap photos' },
+          { name: '毛小孩衝向罐罐山大狂歡', desc: '派對帽飛掉、口水直流，狗狗貓咪興奮撲向堆成山的生日肉泥塔', en: 'lively energetic pet birthday scene with excited dogs and cats leaping toward a towering mountain of pet cans and bone treats' },
+          { name: '溫暖沙發上的領養紀念抱抱', desc: '全家人與毛小孩緊緊依偎在沙發抱枕上，慶祝相遇的特別紀念日', en: 'touching adoption anniversary sculpture of a family cuddling closely with their beloved pet on a textured clay sofa' }
+        ],
+        actions: [
+          ['戴著生日帽盯著蛋糕一臉呆萌無奈', 'staring deadpan at the cake in a tiny party hat'],
+          ['高舉手機各種角度瘋狂拍毛孩', 'holding phones capturing cute pet photos'],
+          ['興奮搖尾巴撲向肉泥蛋糕', 'wagging tail excitedly leaping toward treats'],
+          ['緊緊抱著毛小孩開心微笑', 'hugging the beloved pet warmly']
+        ]
+      },
+
+      // ================= 3. 學校活動與青春時刻 =================
+      {
+        id: 'sports_relay',
+        category: 'school',
+        emoji: '🏃',
+        name: '校慶運動會・大隊接力',
+        enName: 'School Sports Day Relay Race',
+        desc: '紅色跑道極速衝刺、交接接力棒 0.1 秒瞬間與場邊嘶吼應援啦啦隊',
+        foods: [
+          ['大桶裝運動飲料與紙杯', 'large sports drink cooler and paper cups'],
+          ['消暑冰棒與能量香蕉', 'refreshing popsicles and bananas']
+        ],
+        props: [
+          ['關鍵交接的彩色接力棒', 'bright relay baton being passed mid-air'],
+          ['飛揚的號碼布與班服', 'fluttering numbered race bibs and class jerseys'],
+          ['加油大聲公與彩球', 'cheering megaphone and pom-poms'],
+          ['高舉揮舞的班級大旗', 'waving class banner flag'],
+          ['頒獎台、金銀銅獎牌與錦旗', 'winners podium, gold medals and championship pennant']
+        ],
+        bases: [
+          ['向上捲起變形的紅色 PU 跑道弧形底座（動感破表）', 'sweeping curved red running track base curling upward into a dynamic backdrop'],
+          ['高聳冠亞季軍頒獎台底座', 'three-tiered winners podium base with school banner backdrop'],
+          ['操場看台與遮陽帳篷立體場景', 'school stadium bleachers and team canopy tent base']
+        ],
+        scenes: [
+          { name: '交接接力棒 0.1 秒極限衝刺', desc: '兩位選手大幅度斜角前傾、手掌拼命伸長交棒，連馬尾和號碼布都飛起來', en: 'thrilling dynamic sculpture of two sprinting students leaning sharply forward on a curling red track, hands stretched at the exact 0.1-second baton handoff' },
+          { name: '衝過終點線的榮耀大擁抱', desc: '跑者衝破飄揚終點彩帶高舉雙手，全班同學衝進跑道擁抱歡呼', en: 'triumphant moment breaking through the finish tape as cheering classmates rush in to hug the runner' },
+          { name: '啦啦隊大聲公熱血應援看台', desc: '拿著大聲公、彩球與揮舞班旗的同學擠爆看台，臉上滿是熱血表情', en: 'energetic school bleachers packed with classmates shouting through megaphones, shaking pom-poms and waving class flags' }
+        ],
+        actions: [
+          ['極限前傾拼命伸手交接接力棒', 'leaning forward desperately passing the relay baton'],
+          ['張大嘴巴拿大聲公聲嘶力竭加油', 'shouting passionately through a megaphone'],
+          ['衝破終點彩帶高舉雙手吶喊', 'breaking through the finish ribbon in victory'],
+          ['站上頒獎台咬著金牌得意大笑', 'biting gold medals proudly atop the podium']
+        ]
+      },
+      {
+        id: 'tug_of_war',
+        category: 'school',
+        emoji: '🪢',
+        name: '拔河比賽決勝負',
+        enName: 'School Tug-of-War Championship',
+        desc: '全員大幅度後仰咬牙切齒、緊繃粗麻繩紅布條與急到跳腳的班導師',
+        foods: [
+          ['賽後補水運動飲料', 'sports drink bottles'],
+          ['慶功冰棒與糖果', 'victory ice pops']
+        ],
+        props: [
+          ['貫穿全場的粗麻繩與中央紅布條', 'thick taut hemp rope with central red marker ribbon'],
+          ['沾滿防滑白粉的雙手與手套', 'chalk-dusted gripping hands and gloves'],
+          ['吹哨子的裁判與碼錶', 'referee blowing whistle'],
+          ['飛揚的泥土與運動鞋印', 'scuffed clay tracks and flying dust swirls'],
+          ['一旁揮舞毛巾打節奏的班導師', 'teacher waving towel enthusiastically calling rhythm']
+        ],
+        bases: [
+          ['帶有鞋印刮痕的斜坡操場底座（粗麻繩貫穿強化支撐）', 'textured scuffed sports field base with the thick rope acting as a structural spine'],
+          ['對決雙邊拉鋸的波浪地形底座', 'dramatic tension-curved ground base emphasizing the tug-of-war pull']
+        ],
+        scenes: [
+          { name: '全員 45 度後仰・咬牙拉繩張力瞬間', desc: '一排同學像波浪般向後仰倒、五官誇張用力，展現極致的團結與力量感', en: 'highly expressive sculptural row of students leaning sharply backward at 45 degrees with clenched teeth, pulling a taut thick hemp rope in unison' },
+          { name: '紅布條過線！倒地疊羅漢大歡呼', desc: '贏得勝利那一刻大家往後摔成一團卻笑著抱在一起，老師激動跳起來', en: 'joyful chaotic victory moment tumbling backward in a laughing pile as the red rope marker crosses the line' },
+          { name: '特寫交疊的雙手與粗麻繩', desc: '聚焦許多雙握緊同一條粗麻繩的手臂與班服衣袖，象徵同心協力', en: 'powerful symbolic sculpture focusing on many determined hands gripping one thick twisted rope together' }
+        ],
+        actions: [
+          ['大幅度後仰咬牙切齒死命拉繩', 'leaning far back with clenched teeth pulling the rope'],
+          ['在場邊急到跳腳雙手揮舞喊一二殺', 'jumping up and down shouting the pulling rhythm'],
+          ['贏得比賽激動抱在一起歡呼', 'hugging wildly in triumph'],
+          ['緊盯中央紅布條吹響哨子', 'blowing the whistle watching the red ribbon']
+        ]
+      },
+      {
+        id: 'school_fair',
+        category: 'school',
+        emoji: '🎪',
+        name: '校慶園遊會／班級市集',
+        enName: 'Taiwanese School Fair Carnival and Student Booths',
+        desc: '掛滿彩旗的攤位帳篷、叫賣章魚燒棉花糖、套圈圈與搞笑紙箱鬼屋',
+        foods: [
+          ['會冒煙的乾冰彩色汽水', 'smoking dry-ice colorful sodas'],
+          ['章魚燒與香酥鬆餅', 'takoyaki balls and crispy waffles'],
+          ['蓬鬆超大棉花糖', 'giant fluffy cotton candy clouds'],
+          ['薯條熱狗與手搖飲', 'fries, hot dogs and bubble tea']
+        ],
+        props: [
+          ['三角形彩旗與攤位帳篷', 'festival booth tent strung with colorful pennant flags'],
+          ['手繪價目表黑板與宣傳海報', 'hand-drawn chalkboard menu and posters'],
+          ['零錢盒與一疊園遊券', 'cash box and carnival tickets'],
+          ['大聲公叫賣與圍裙', 'megaphone and vendor apron'],
+          ['紙箱迷宮鬼屋與撈金魚網', 'cardboard haunted house maze and goldfish scooping net']
+        ],
+        bases: [
+          ['搭著彩旗的立體攤位帳篷框架底座', 'structured carnival booth tent frame with pennant flags'],
+          ['貼滿手繪海報與塗鴉鬼臉的紙箱隔間牆', 'cardboard haunted house walls covered in funny student graffiti and price signs'],
+          ['熱鬧校園攤位小街底座', 'bustling miniature school festival lane base']
+        ],
+        scenes: [
+          { name: '班級美食攤・大聲公瘋狂叫賣', desc: '圍裙小老闆手忙腳亂翻烤章魚燒與擠棉花糖，攤位前擠滿舉券搶購人潮', en: 'bustling Taiwanese school fair food booth with aproned student chefs cooking takoyaki and cotton candy while classmates shout through megaphones' },
+          { name: '超鬧紙箱鬼屋・嚇人反被嚇', desc: '同學從貼滿符咒的紙箱門探頭裝鬼嚇人卻自己笑場，遊客尖叫又大笑', en: 'hilarious school carnival cardboard haunted house where goofy costumed students pop out trying to scare laughing visitors' },
+          { name: '園遊會遊戲攤大挑戰（套圈圈／撈金魚）', desc: '大家圍著水盆專注撈金魚與丟套圈圈，攤位掛滿大隻絨毛獎品', en: 'lively school carnival game stall with students concentrating on scooping goldfish and tossing rings for giant prizes' }
+        ],
+        actions: [
+          ['拿大聲公熱情沿街叫賣拉客', 'shouting sales pitches playfully with a megaphone'],
+          ['滿頭大汗翻烤章魚燒與捲棉花糖', 'busy cooking snacks and spinning cotton candy'],
+          ['探出紙箱門做鬼臉嚇同學', 'popping out of a cardboard doorway making silly ghost faces'],
+          ['高舉園遊券開心搶買美食', 'waving carnival tickets excitedly at the stall']
+        ]
+      },
+      {
+        id: 'graduation',
+        category: 'school',
+        emoji: '🎓',
+        name: '畢業典禮・拋學士帽',
+        enName: 'Taiwanese School Graduation Ceremony',
+        desc: '盛開鳳凰花、把帽子拋向天空、簽滿名字的制服與互遞衛生紙大擁抱',
+        foods: [
+          ['謝師宴點心與汽水', 'thank-you party snacks and drinks'],
+          ['畢業回憶珍奶乾杯', 'bubble tea farewell toast']
+        ],
+        props: [
+          ['飛向空中的學士帽與流蘇', 'graduation caps tossed high into the air'],
+          ['畢業證書筒與胸花', 'rolled diploma scroll and corsage'],
+          ['盛開的橘紅鳳凰花樹枝', 'blooming fiery-red poinciana tree branches'],
+          ['簽滿留言的畢業紀念冊與制服', 'yearbook and white uniform covered in classmate signatures'],
+          ['向日葵花束與拍立得相片', 'sunflower bouquet and Polaroid snapshots']
+        ],
+        bases: [
+          ['盛開的立體鳳凰木樹冠（巧妙支撐飛舞學士帽）', 'blooming poinciana tree canopy backdrop cleverly supporting tossed graduation caps'],
+          ['寫滿彩色粉筆祝福語的立體教室黑板牆', 'miniature classroom chalkboard backdrop covered in farewell doodles'],
+          ['翻開立起來的巨型「畢業紀念冊」立體書底座', 'giant opened graduation yearbook sculpted like a 3D pop-up book base']
+        ],
+        scenes: [
+          { name: '鳳凰花下・高拋學士帽的青春定格', desc: '同學們勾肩搭背仰頭把帽子拋向花樹之間，捕捉最閃耀的畢業瞬間', en: 'uplifting graduation sculpture beneath a blooming red poinciana tree with smiling students tossing graduation caps into the foliage' },
+          { name: '黑板前的淚水與大擁抱', desc: '畫滿粉筆插畫的教室黑板前，大家抱成一團哭著互遞衛生紙、在制服簽名', en: 'emotional classroom farewell in front of a doodle-filled chalkboard with classmates hugging, wiping happy tears, and signing uniforms' },
+          { name: '立體畢業紀念冊回憶盒', desc: '把翻開的畢冊做成舞台，裡面躍出操場、制服、花束與全班笑臉', en: 'poetic pop-up yearbook ceramic sculpture where miniature memories of classmates, sunflowers, and school gates emerge from clay pages' }
+        ],
+        actions: [
+          ['將學士帽用力拋向天空歡呼', 'tossing graduation caps joyfully into the sky'],
+          ['緊緊擁抱笑中帶淚互遞衛生紙', 'hugging tightly with happy tears and tissues'],
+          ['在同學背後的白色制服簽名留念', 'signing farewell messages on classmates uniforms'],
+          ['向老師深鞠躬獻上向日葵花束', 'bowing deeply to present sunflowers to the teacher']
+        ]
+      },
+      {
+        id: 'school_camp',
+        category: 'school',
+        emoji: '🔥',
+        name: '隔宿露營・營火晚會與畢旅',
+        enName: 'School Campfire Night and Graduation Trip',
+        desc: '熊熊營火搭肩大合唱、野炊炒焦蛋炒飯、遊覽車搶麥克風與半夜枕頭戰',
+        foods: [
+          ['微微烤焦的野炊大鐵鍋炒飯', 'slightly charred camp wok fried rice'],
+          ['飯店半夜偷吃的泡麵與洋芋片', 'midnight instant noodles and snack bags']
+        ],
+        props: [
+          ['交錯原木與捲曲火焰的巨型營火', 'roaring log campfire with stylized curling flames'],
+          ['手電筒、螢光棒與中隊旗', 'flashlights, glow sticks and squad flag'],
+          ['登山背包、行李箱與值星帶', 'backpacks, suitcases and leader sash'],
+          ['飛舞的枕頭與羽毛', 'flying pillows and playful feathers'],
+          ['遊覽車麥克風與摩天輪剪影', 'tour bus karaoke mic and Ferris wheel backdrop']
+        ],
+        bases: [
+          ['圓形石塊營火廣場＋帳篷夜空背景', 'circular stone campfire clearing base with tent silhouettes and starry night backdrop'],
+          ['微縮遊覽車車廂剖面底座（熱血歡唱場景）', 'cutaway miniature tour bus interior base'],
+          ['飯店雙人床底座（半夜枕頭大戰）', 'sculpted hotel bed base for a hilarious midnight pillow fight']
+        ],
+        scenes: [
+          { name: '熊熊營火旁・全班勾肩搭背大合唱', desc: '中央巨型泥塑火焰向上捲起，同學與教官圍圓高舉螢光棒感動合唱', en: 'heartwarming school campfire night sculpture with classmates and instructor arms around shoulders singing around a towering curling clay bonfire' },
+          { name: '手忙腳亂野炊大作戰', desc: '全組人圍著冒黑煙的鐵鍋搶鍋鏟、戴泳鏡切洋蔥，炒焦了還是笑到不行', en: 'hilarious outdoor school cooking scene around a smoky wok with students wearing goggles to chop onions and laughing' },
+          { name: '畢旅飯店半夜偷吃泡麵枕頭大戰', desc: '躲在棉被裡吃泡麵、空中枕頭滿天飛，最難忘的青春秘密夜', en: 'playful graduation trip hotel room sculpture with flying pillows, tumbling friends, and secret midnight instant noodles' }
+        ],
+        actions: [
+          ['勾肩搭背圍著營火搖擺大合唱', 'swaying arm-in-arm singing around the campfire'],
+          ['拿著鍋鏟在濃煙中手忙腳亂野炊', 'frantically stir-frying amidst billowing camp smoke'],
+          ['高舉枕頭展開爆笑枕頭大戰', 'swinging pillows in a laughing pillow fight'],
+          ['在遊覽車上搶麥克風高歌', 'fighting playfully over a karaoke microphone']
+        ]
+      },
+      {
+        id: 'club_showcase',
+        category: 'school',
+        emoji: '🎸',
+        name: '社團成發・音樂會與舞展',
+        enName: 'School Club Concert and Dance Showcase',
+        desc: '舞台聚光燈熱血電吉他獨奏、街舞高難度定格、台下應援燈海尖叫',
+        foods: [
+          ['後台加油飲料與喉糖', 'backstage drinks and cheering snacks']
+        ],
+        props: [
+          ['帥氣電吉他與麥克風架', 'electric guitar and standing microphone'],
+          ['爵士鼓組與音箱高塔', 'drum kit and towering speaker amplifiers'],
+          ['街舞老帽、潮鞋與音響', 'street dance cap, sneakers and boombox'],
+          ['大提琴／直笛與樂譜架', 'cello, flutes and music stands'],
+          ['台下高舉的應援燈牌與手機海', 'audience hands holding glowing light boards and phones']
+        ],
+        bases: [
+          ['階梯式舞台底座＋音箱塔與斜切立體聚光燈束', 'tiered concert stage base backed by stacked speaker towers and angled clay spotlight beams'],
+          ['巨型電吉他琴身直接化作熱血表演舞台', 'oversized electric guitar body sculpted horizontally as the concert stage'],
+          ['古典音樂廳弧形布幕舞台底座', 'classic concert hall curved velvet curtain stage backdrop']
+        ],
+        scenes: [
+          { name: '熱音社搖滾飆音・音箱全開夜', desc: '主唱與吉他手仰頭飆音、鼓手揮棒如飛，台下同學高舉應援燈牌狂歡', en: 'electrifying school rock band concert sculpture with soaring guitarist, intense drummer, towering speakers, and cheering crowd hands below' },
+          { name: '熱舞社單手定格（Freeze）神級瞬間', desc: '舞者倒立定格在舞台中央，隊友擺出超帥群舞陣形與飛揚衣角', en: 'dynamic street-dance showcase sculpture featuring a breakdancer frozen in a one-hand handstand surrounded by stylish crewmates' },
+          { name: '音樂會謝幕牽手鞠躬的榮耀時刻', desc: '演奏結束全體社團夥伴牽手向聚光燈與滿場掌聲深深鞠躬', en: 'touching orchestra and choir curtain-call sculpture holding instruments and bowing together under dramatic spotlight beams' }
+        ],
+        actions: [
+          ['仰頭陶醉猛刷電吉他獨奏', 'shredding an electric guitar solo passionately'],
+          ['單手撐地做出高難度街舞定格', 'holding an acrobatic street-dance freeze pose'],
+          ['在台下高舉應援燈牌瘋狂尖叫', 'waving glowing fan signs cheering wildly from the crowd'],
+          ['全體牽手向觀眾深深鞠躬謝幕', 'holding hands bowing proudly at curtain call']
+        ]
+      },
+      {
+        id: 'craft_competition',
+        category: 'school',
+        emoji: '🏅',
+        name: '技藝競賽・陶藝實作與開窯',
+        enName: 'School Ceramics Craft Competition and Kiln Opening',
+        desc: '賽前滿手泥巴熬夜趕工、屏息期待開窯那一刻、宣布得獎衝上台相擁',
+        foods: [
+          ['熬夜趕工提神點心與便當', 'late-night studio snacks and bento box']
+        ],
+        props: [
+          ['拉坏機與旋轉雕塑工作台', 'pottery wheel and sculpting banding wheel'],
+          ['修坯刀、海綿、草圖本與泥巴團', 'clay sculpting tools, sponges, sketchbook and lumps of clay'],
+          ['倒數計時碼錶與指導老師', 'countdown timer and encouraging teacher'],
+          ['冒著餘溫的陶瓷窯爐與成品', 'warm ceramic kiln opening to reveal glazed artworks'],
+          ['閃亮獎盃與得獎獎狀', 'gleaming trophy and award certificate']
+        ],
+        bases: [
+          ['立體工作室木桌與釉藥桶層架背景', 'ceramic studio workbench base backed by shelves of glaze buckets and tools'],
+          ['打開窯門的立體圓弧窯爐舞台', 'open brick ceramic kiln chamber framing the joyful moment'],
+          ['旋轉陶藝拉坏轉盤圓形底座', 'circular pottery wheel-head sculpted as the rotating base']
+        ],
+        scenes: [
+          { name: '開窯見證奇蹟的屏息瞬間', desc: '老師與學生圍在打開的窯爐前，看到完美閃亮出窯的作品激動歡呼', en: 'heartwarming ceramics studio moment gathering around an open kiln door, amazed and cheering at freshly fired glossy clay artworks' },
+          { name: '競賽倒數・滿手泥巴的專注職人魂', desc: '圍裙沾滿泥漿，眼神發亮地在轉盤前精雕細琢，一旁同學緊張看碼錶', en: 'focused passionate student sculptor covered in clay smudges working intensely on a pottery wheel as teammates cheer beside a timer' },
+          { name: '頒獎典禮衝上台尖叫抱獎盃', desc: '聽到自己名字那一秒，與老師同學衝上領獎台高舉獎盃喜極而泣', en: 'joyful award ceremony moment hugging teachers and classmates while hoisting a gleaming trophy high' }
+        ],
+        actions: [
+          ['滿手泥巴眼神發亮專心雕刻作品', 'sculpting intently with clay-covered hands'],
+          ['打開窯爐門驚喜雙手捧起作品', 'opening the kiln door in sheer amazement'],
+          ['高舉獎盃與獎狀開懷大笑', 'raising the trophy and certificate proudly'],
+          ['在旁探頭比讚加油打氣', 'peeking over giving enthusiastic thumbs-up']
+        ]
+      },
+      {
+        id: 'school_holiday',
+        category: 'school',
+        emoji: '🎃',
+        name: '校園萬聖遊行／聖誕交換禮物',
+        enName: 'School Halloween Costume Parade and Christmas Gift Exchange',
+        desc: '紙箱垃圾袋超鬧DIY變裝遊行、或是教室抽到「地獄禮物」全班笑翻',
+        foods: [
+          ['南瓜桶裡滿滿的糖果', 'pumpkin bucket overflowing with candies'],
+          ['教室同樂會披薩盒與炸雞桶', 'stacks of pizza boxes and fried chicken buckets'],
+          ['大瓶可樂與洋芋片山', 'soda bottles and pile of snack bags']
+        ],
+        props: [
+          ['紙箱DIY搞笑變裝（大恐龍／販賣機／無臉男）', 'hilarious DIY cardboard costumes like dinosaur, vending machine and ghost'],
+          ['講台上的包裝禮物山與抽籤筒', 'mountain of wrapped gifts and lottery draw box'],
+          ['爆笑地獄禮物（一捲衛生紙／大高麗菜／磚塊）', 'hilarious gag gifts like toilet paper roll or giant cabbage'],
+          ['課桌椅拼成長桌與噴雪花窗戶', 'pushed-together school desks and snow-sprayed classroom windows'],
+          ['寫滿慶祝塗鴉的教室黑板', 'classroom blackboard filled with festive chalk art']
+        ],
+        bases: [
+          ['教室課桌椅拼成底座＋立體塗鴉黑板背牆', 'classroom desks arranged as base backed by a relief-carved festive blackboard'],
+          ['巨型南瓜桶化作萬聖變裝派對舞台', 'giant jack-o-lantern candy bucket acting as a costume party stage'],
+          ['堆滿緞帶禮物盒的教室講台底座', 'school podium stacked with wrapped gift boxes']
+        ],
+        scenes: [
+          { name: '抽到「地獄禮物」全班笑到拍桌', desc: '同學拆開超大精美包裝盒，裡面竟然是一顆大高麗菜或衛生紙，全班笑翻', en: 'hilarious classroom Christmas gift exchange where a shocked student unwraps a huge ribbon box to find a giant cabbage while classmates laugh uncontrollably' },
+          { name: '超鬧紙箱 DIY 萬聖節校園遊行', desc: '大家用紙箱和黑色垃圾袋扮成自動販賣機、木乃伊與暴龍在走廊討糖', en: 'quirky Taiwanese school Halloween parade featuring students in hilarious handmade cardboard costumes marching down the hallway collecting candy' },
+          { name: '段考結束！課桌拼長桌披薩狂歡會', desc: '把教室課桌椅併成超大長桌，堆滿披薩盒炸雞桶與桌遊，老師也加入搞怪合照', en: 'joyful post-exam classroom party with desks pushed together piled high with pizza boxes, snacks, board games, and laughing students' }
+        ],
+        actions: [
+          ['拆開禮物盒看到地獄禮物驚嚇大笑', 'staring in comedic shock at a hilarious gag gift'],
+          ['穿著超大紙箱變裝開心比 YA', 'posing proudly inside a silly DIY cardboard costume'],
+          ['拿著南瓜桶伸手大喊不給糖就搗蛋', 'holding out a pumpkin bucket trick-or-treating'],
+          ['在教室黑板前擠在一起搞怪大合照', 'making funny faces together in front of the classroom blackboard']
+        ]
+      }
+    ];
+
+    /*************************************************************************
+     * 二、人物角色資料庫（含英文對應與分類）
+     *************************************************************************/
+    const FAMILY_ROLES = [
+      { id: 'me', emoji: '🌟', name: '我（主角）', en: 'a cheerful young student protagonist' },
+      { id: 'dad', emoji: '👨', name: '爸爸', en: 'loving father' },
+      { id: 'mom', emoji: '👩', name: '媽媽', en: 'warm mother' },
+      { id: 'grandpa', emoji: '👴', name: '爺爺／阿公', en: 'kind smiling grandfather' },
+      { id: 'grandma', emoji: '👵', name: '奶奶／阿嬤', en: 'affectionate grandmother' },
+      { id: 'older_bro', emoji: '🧑', name: '哥哥', en: 'older brother' },
+      { id: 'older_sis', emoji: '👧', name: '姊姊', en: 'older sister' },
+      { id: 'younger_bro', emoji: '👦', name: '弟弟', en: 'playful younger brother' },
+      { id: 'younger_sis', emoji: '👧', name: '妹妹', en: 'cute younger sister' },
+      { id: 'uncle_shu', emoji: '👨‍🦱', name: '叔叔', en: 'jovial uncle' },
+      { id: 'uncle_bo', emoji: '👨‍🦳', name: '伯伯', en: 'friendly elder uncle' },
+      { id: 'aunt_gu', emoji: '👩‍🦱', name: '姑姑', en: 'warm aunt' },
+      { id: 'aunt_yi', emoji: '👩‍🦰', name: '阿姨／舅舅', en: 'cheerful relatives' },
+      { id: 'cousin', emoji: '🧒', name: '堂／表兄弟姊妹', en: 'happy cousins' },
+      { id: 'baby', emoji: '👶', name: '小寶寶', en: 'chubby adorable baby' }
+    ];
+
+    const OTHER_ROLES = [
+      { id: 'dog', emoji: '🐶', name: '毛小孩（狗狗）', en: 'adorable playful family dog' },
+      { id: 'cat', emoji: '🐱', name: '毛小孩（貓咪）', en: 'cute curious family cat' },
+      { id: 'classmate', emoji: '🎒', name: '同學／好朋友', en: 'energetic school classmates' },
+      { id: 'teacher', emoji: '👩‍🏫', name: '老師／班導師', en: 'encouraging school teacher' },
+      { id: 'instructor', emoji: '🫡', name: '教官／裁判', en: 'spirited camp instructor or referee' },
+      { id: 'chef', emoji: '👨‍🍳', name: '總鋪師／攤主', en: 'lively Taiwanese master chef' },
+      { id: 'deity', emoji: '🎭', name: '民俗陣頭／三太子', en: 'cute Taiwanese folk festival performer or Techno Third Prince' },
+      { id: 'myth', emoji: '🐇', name: '神話角色（嫦娥／玉兔／財神）', en: 'whimsical mythical figures like Jade Rabbit or God of Wealth' }
+    ];
+
+    /*************************************************************************
+     * 三、立體陶藝藝術風格、創意構圖策略與色彩釉色
+     *************************************************************************/
+    const ART_STYLES = [
+      {
+        id: 'handbuilt_glaze',
+        emoji: '🏺',
+        name: '溫潤手捏彩釉陶偶風',
+        desc: '保留手工捏塑指紋與自然釉面光澤，最適合全國兒少陶藝獎呈現',
+        en: 'hand-built ceramic clay sculpture, tactile handmade pinch marks and organic glaze sheen, glossy and matte ceramic glazes, authentic kiln-fired art piece'
+      },
+      {
+        id: 'chibi_diorama',
+        emoji: '🧸',
+        name: 'Q版療癒微縮盒玩風',
+        desc: '圓潤可愛的大頭小身體比例，細節飽滿、討喜又好塑形',
+        en: 'adorable chibi-proportioned ceramic miniature diorama sculpture, rounded chunky forms, charming cute expressions, collectible art toy aesthetic crafted in glazed stoneware clay'
+      },
+      {
+        id: 'dynamic_caricature',
+        emoji: '⚡',
+        name: '誇張動態漫畫雕塑風',
+        desc: '表情生動逗趣、肢體斜角誇張，極具比賽搶眼張力',
+        en: 'expressive dynamic caricature clay sculpture, exaggerated joyful facial expressions and sweeping tilted action poses, rich sculpted textures, award-winning youth ceramics'
+      },
+      {
+        id: 'storybook_surreal',
+        emoji: '🌙',
+        name: '奇幻童話超現實陶藝',
+        desc: '如繪本跳出來的夢幻想像力，物件放大變形成神奇世界',
+        en: 'whimsical surreal storybook ceramic sculpture, imaginative fairytale proportions, poetic dreamy composition crafted in hand-painted stoneware'
+      },
+      {
+        id: 'taiwan_folk',
+        emoji: '🏮',
+        name: '台灣懷舊鄉土泥塑風',
+        desc: '類似交趾陶與傳統鄉土雕塑的親切溫度，色彩濃郁有文化底蘊',
+        en: 'nostalgic Taiwanese folk ceramic sculpture inspired by Koji pottery aesthetics, rich warm earthy clay textures, heartfelt cultural storytelling, handcrafted details'
+      },
+      {
+        id: 'raw_stoneware',
+        emoji: '🪵',
+        name: '柴燒素樸溫潤原土風',
+        desc: '展現粗獷陶土肌理與局部點綴化妝土，質感高雅耐看',
+        en: 'artistic natural stoneware and terracotta clay sculpture, raw unglazed earthy clay texture accented with subtle colorful slip painting and selective glossy glaze highlights'
+      }
+    ];
+
+    const CREATIVE_STRATEGIES = [
+      {
+        id: 'freeze_frame',
+        name: '1. 瞬間定格法',
+        desc: '抓住 0.1 秒動態爆發瞬間，物件與衣角微微飛揚',
+        en: 'split-second frozen action composition capturing peak emotional motion with sculpted dynamic folds'
+      },
+      {
+        id: 'vessel_theater',
+        name: '2. 容器／器物劇場',
+        desc: '以巨型器皿或食物當舞台，在內部展開微縮場景',
+        en: 'creative vessel-theater composition where an oversized symbolic food or ceramic bowl encloses the miniature scene'
+      },
+      {
+        id: 'proportion_contrast',
+        name: '3. 誇張比例對比法',
+        desc: '把核心主角或物件放大 2～3 倍，視覺焦點一眼抓住',
+        en: 'bold dramatic scale contrast making the central hero figure or key prop twice as large as surrounding details'
+      },
+      {
+        id: 'perspective_flip',
+        name: '4. 趣味視角翻轉法',
+        desc: '從寵物視角、桌底剖面或環繞俯視角說故事',
+        en: 'clever multi-layered storytelling perspective with playful hidden details visible from all 360-degree angles'
+      },
+      {
+        id: 'intimate_closeup',
+        name: '5. 溫馨特寫與肌理法',
+        desc: '聚焦親密互動與細膩刻紋，真摯情感直擊人心',
+        en: 'intimate heartwarming focal composition emphasizing expressive faces, touching gestures, and intricate tactile clay carvings'
+      }
+    ];
+
+    const COLOR_MOODS = [
+      { id: 'festive_red', name: '🏮 喜慶紅金暖色調', en: 'vibrant festive crimson red, warm gold, and creamy ivory ceramic glazes, warm studio spotlight' },
+      { id: 'pastel_warm', name: '🌸 溫馨柔和粉彩釉', en: 'soft pastel ceramic glazes in peach, mint celadon, butter yellow, and sky blue, gentle diffused daylight' },
+      { id: 'earthy_terracotta', name: '🏺 質樸大地陶土色', en: 'earthy terracotta, ochre brown, sage green, and warm off-white stoneware palette, natural gallery lighting' },
+      { id: 'night_glow', name: '✨ 夜間燈火高對比', en: 'deep cobalt indigo glaze backdrop contrasting with glowing warm amber and golden yellow highlights, dramatic warm rim lighting' },
+      { id: 'youth_pop', name: '🌈 青春繽紛高彩度', en: 'bright cheerful multi-colored glossy ceramic glazes in coral, turquoise, sunny yellow and cobalt, crisp clean studio photography' }
+    ];
+
+    /*************************************************************************
+     * 四、應用程式狀態管理
+     *************************************************************************/
+    const state = {
+      currentStep: 1,
+      activeCategory: 'traditional',
+      festivalId: 'mid_autumn', // 預設高亮中秋節方便立即體驗，但仍鼓勵切換
+      customFestivalName: '',
+      selectedFoods: [],
+      selectedProps: [],
+      selectedBases: [],
+      customProps: [],
+      peopleCounts: {}, // { roleId: number }
+      mainHero: '',
+      selectedActions: [],
+      selectedSceneIdx: 0,
+      selectedArtStyleId: 'handbuilt_glaze',
+      selectedStrategyId: 'freeze_frame',
+      selectedColorMoodId: 'festive_red',
+      isLargeFont: false,
+      isGeneratingImage: false
+    };
+
+    // 輔助函數：取得目前選定的節慶物件
+    function getCurrentFestival() {
+      return FESTIVALS.find(f => f.id === state.festivalId) || FESTIVALS[0];
+    }
+
+    function getFestivalDisplayName() {
+      if (state.customFestivalName.trim()) {
+        return state.customFestivalName.trim();
+      }
+      return getCurrentFestival().name;
+    }
+
+    // 顯示 Toast 提示訊息（絕不使用 alert）
+    let toastTimer = null;
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      box.textContent = msg;
+      box.classList.remove('opacity-0');
+      box.classList.add('opacity-100');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.remove('opacity-100');
+        box.classList.add('opacity-0');
+      }, 2600);
+    }
+
+    // 初始化預設資料（選取節慶時自動載入合理預設值，減少操作負擔）
+    function applyFestivalDefaults(festId, resetSelections = true) {
+      state.festivalId = festId;
+      const fest = getCurrentFestival();
+      if (resetSelections) {
+        state.selectedFoods = fest.foods.slice(0, 2).map(x => x[0]);
+        state.selectedProps = fest.props.slice(0, 2).map(x => x[0]);
+        state.selectedBases = fest.bases.length > 0 ? [fest.bases[0][0]] : [];
+        state.selectedActions = fest.actions.length > 0 ? [fest.actions[0][0]] : [];
+        state.selectedSceneIdx = 0;
+
+        // 若還沒選人物，依分類先幫設一個自然的人數起點
+        const total = getTotalPeopleCount();
+        if (total === 0) {
+          if (fest.category === 'school') {
+            state.peopleCounts = { me: 1, classmate: 2, teacher: 1 };
+          } else {
+            state.peopleCounts = { me: 1, dad: 1, mom: 1, grandma: 1 };
+          }
+        }
+      }
+    }
+
+    function getTotalPeopleCount() {
+      return Object.values(state.peopleCounts).reduce((sum, n) => sum + (Number(n) || 0), 0);
+    }
+
+    /*************************************************************************
+     * 五、UI 渲染函數
+     *************************************************************************/
+    const STEPS_META = [
+      { num: 1, short: '1.選節慶', nextLabel: '下一步：選配景道具 →', hint: '先挑選一個有回憶的節慶主題' },
+      { num: 2, short: '2.選道具', nextLabel: '下一步：選登場人物 →', hint: '挑選代表飲食、道具與穩固底座' },
+      { num: 3, short: '3.選人物', nextLabel: '下一步：選場景風格 →', hint: '設定家人或夥伴人數與互動動作' },
+      { num: 4, short: '4.選風格', nextLabel: '✨ 產出結果與文生圖指令 →', hint: '選擇該節慶專屬場景與陶藝風格' },
+      { num: 5, short: '5.看結果', nextLabel: '🔄 回到第 1 步再做一組', hint: '可直接複製中英文提示詞或列印企劃單' }
+    ];
+
+    function renderStepper() {
+      const nav = document.getElementById('stepperNav');
+      nav.innerHTML = STEPS_META.map(s => {
+        const isActive = s.num === state.currentStep;
+        const isDone = s.num < state.currentStep;
+        const cls = isActive
+          ? 'bg-amber-400 text-clay-900 font-black shadow'
+          : isDone
+            ? 'bg-clay-700 text-amber-200 font-bold hover:bg-clay-600'
+            : 'bg-clay-900/60 text-clay-300 font-medium hover:bg-clay-700';
+        return `
+          <button type="button" data-step="${s.num}"
+            class="step-nav-btn py-2 px-1.5 rounded-xl text-xs sm:text-sm md:text-base transition text-center truncate ${cls}">
+            ${s.short}
+          </button>
+        `;
+      }).join('');
+
+      nav.querySelectorAll('.step-nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          goToStep(Number(btn.dataset.step));
+        });
+      });
+
+      // 底部導覽列更新
+      const meta = STEPS_META[state.currentStep - 1];
+      document.getElementById('btnPrevStep').disabled = state.currentStep === 1;
+      document.getElementById('btnNextStep').textContent = meta.nextLabel;
+      document.getElementById('bottomHint').textContent = meta.hint;
+
+      // 摘要條顯示控制
+      const summaryBar = document.getElementById('liveSummaryBar');
+      if (state.currentStep >= 2 && state.currentStep <= 4) {
+        summaryBar.classList.remove('hidden');
+        document.getElementById('sumFestival').textContent = `${getCurrentFestival().emoji} ${getFestivalDisplayName()}`;
+        const propCount = state.selectedFoods.length + state.selectedProps.length + state.selectedBases.length + state.customProps.length;
+        document.getElementById('sumProps').textContent = `道具與底座 ${propCount} 項`;
+        document.getElementById('sumPeople').textContent = `登場人物 ${getTotalPeopleCount()} 位`;
+        const styleEl = document.getElementById('sumStyle');
+        if (state.currentStep === 4) {
+          const art = ART_STYLES.find(a => a.id === state.selectedArtStyleId);
+          styleEl.textContent = `🎨 ${art ? art.name : ''}`;
+          styleEl.classList.remove('hidden');
+        } else {
+          styleEl.classList.add('hidden');
+        }
+      } else {
+        summaryBar.classList.add('hidden');
+      }
+    }
+
+    function goToStep(stepNum) {
+      state.currentStep = Math.max(1, Math.min(5, stepNum));
+      document.querySelectorAll('.step-panel').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(`step-${state.currentStep}`).classList.remove('hidden');
+
+      if (state.currentStep === 1) renderStep1();
+      if (state.currentStep === 2) renderStep2();
+      if (state.currentStep === 3) renderStep3();
+      if (state.currentStep === 4) renderStep4();
+      if (state.currentStep === 5) renderStep5();
+
+      renderStepper();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== STEP 1 渲染 ====================
+    function renderStep1() {
+      // 更新分類分頁樣式
+      document.querySelectorAll('.cat-tab').forEach(btn => {
+        const cat = btn.dataset.cat;
+        const active = cat === state.activeCategory;
+        if (active) {
+          const activeColor = cat === 'traditional'
+            ? 'bg-clay-600 text-white border-clay-700 shadow-md'
+            : cat === 'family'
+              ? 'bg-ochre-600 text-white border-ochre-700 shadow-md'
+              : 'bg-celadon-600 text-white border-celadon-700 shadow-md';
+          btn.className = `cat-tab p-3.5 rounded-2xl border-2 font-black text-base sm:text-lg flex items-center justify-center gap-2 transition ${activeColor}`;
+        } else {
+          btn.className = 'cat-tab p-3.5 rounded-2xl border-2 border-clay-200 bg-clay-50 hover:bg-clay-100 text-clay-800 font-bold text-base sm:text-lg flex items-center justify-center gap-2 transition';
+        }
+      });
+
+      const list = FESTIVALS.filter(f => f.category === state.activeCategory);
+      const grid = document.getElementById('festivalGrid');
+      grid.innerHTML = list.map(f => {
+        const selected = f.id === state.festivalId && !state.customFestivalName;
+        return `
+          <button type="button" data-fest-id="${f.id}"
+            class="fest-card select-card text-left p-4 rounded-2xl border-2 flex flex-col gap-1.5 ${
+              selected
+                ? 'bg-clay-50 border-clay-600 ring-4 ring-clay-500/20 shadow-md'
+                : 'bg-white border-clay-200 hover:border-clay-400 hover:bg-clay-50/50'
+            }">
+            <div class="flex items-center justify-between w-full">
+              <span class="text-3xl">${f.emoji}</span>
+              ${selected ? '<span class="px-2.5 py-0.5 rounded-full bg-clay-600 text-white text-xs font-bold">✓ 已選擇</span>' : ''}
+            </div>
+            <div class="font-black text-lg text-clay-900 leading-snug">${f.name}</div>
+            <p class="text-sm text-clay-700 leading-relaxed">${f.desc}</p>
+          </button>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.fest-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.customFestivalName = '';
+          document.getElementById('customFestivalInput').value = '';
+          const changed = state.festivalId !== btn.dataset.festId;
+          applyFestivalDefaults(btn.dataset.festId, changed);
+          renderStep1();
+          showToast(`已選擇「${getCurrentFestival().name}」！`);
+        });
+      });
+    }
+
+    // ==================== STEP 2 渲染 ====================
+    function renderStep2() {
+      const fest = getCurrentFestival();
+      document.getElementById('step2FestivalName').textContent = getFestivalDisplayName();
+
+      // 渲染複選標籤按鈕的共用工具
+      function renderChips(containerId, items, selectedArray, activeClass) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = items.map(([zh]) => {
+          const isSel = selectedArray.includes(zh);
+          return `
+            <button type="button" data-val="${escapeHtml(zh)}"
+              class="prop-chip select-card px-4 py-2.5 rounded-2xl border-2 font-bold text-base transition flex items-center gap-1.5 ${
+                isSel
+                  ? activeClass
+                  : 'bg-white border-clay-200 text-clay-800 hover:border-clay-400 hover:bg-clay-50'
+              }">
+              <span>${isSel ? '✓' : '＋'}</span>
+              <span>${escapeHtml(zh)}</span>
+            </button>
+          `;
+        }).join('');
+
+        container.querySelectorAll('.prop-chip').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const val = btn.dataset.val;
+            const idx = selectedArray.indexOf(val);
+            if (idx > -1) selectedArray.splice(idx, 1);
+            else selectedArray.push(val);
+            renderStep2();
+            renderStepper();
+          });
+        });
+      }
+
+      renderChips('foodPropsContainer', fest.foods, state.selectedFoods, 'bg-amber-600 text-white border-amber-700 shadow');
+      renderChips('decorPropsContainer', fest.props, state.selectedProps, 'bg-clay-600 text-white border-clay-700 shadow');
+
+      // 渲染底座結構卡片
+      const baseBox = document.getElementById('basePropsContainer');
+      baseBox.innerHTML = fest.bases.map(([zh]) => {
+        const isSel = state.selectedBases.includes(zh);
+        return `
+          <button type="button" data-val="${escapeHtml(zh)}"
+            class="base-chip select-card text-left p-3.5 rounded-2xl border-2 font-bold text-base transition flex items-start gap-2.5 ${
+              isSel
+                ? 'bg-celadon-600 text-white border-celadon-700 shadow'
+                : 'bg-white border-celadon-200 text-clay-900 hover:border-celadon-600'
+            }">
+            <span class="text-lg shrink-0">${isSel ? '✅' : '⬜'}</span>
+            <span>${escapeHtml(zh)}</span>
+          </button>
+        `;
+      }).join('');
+
+      baseBox.querySelectorAll('.base-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.dataset.val;
+          const idx = state.selectedBases.indexOf(val);
+          if (idx > -1) state.selectedBases.splice(idx, 1);
+          else state.selectedBases.push(val);
+          renderStep2();
+          renderStepper();
+        });
+      });
+
+      // 渲染自訂補充道具
+      const customList = document.getElementById('customPropsList');
+      customList.innerHTML = state.customProps.map((item, i) => `
+        <span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-clay-800 text-white font-bold text-sm">
+          <span>✨ ${escapeHtml(item)}</span>
+          <button type="button" data-idx="${i}" class="del-custom-prop hover:text-amber-300 font-black">✕</button>
+        </span>
+      `).join('');
+
+      customList.querySelectorAll('.del-custom-prop').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.customProps.splice(Number(btn.dataset.idx), 1);
+          renderStep2();
+          renderStepper();
+        });
+      });
+    }
+
+    // ==================== STEP 3 渲染 ====================
+    function renderStep3() {
+      const fest = getCurrentFestival();
+
+      function renderRoleGrid(containerId, roles) {
+        const grid = document.getElementById(containerId);
+        grid.innerHTML = roles.map(r => {
+          const count = state.peopleCounts[r.id] || 0;
+          const active = count > 0;
+          return `
+            <div class="p-3.5 rounded-2xl border-2 flex items-center justify-between gap-2 transition ${
+              active ? 'bg-celadon-50 border-celadon-600 shadow-sm' : 'bg-white border-clay-200'
+            }">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="text-2xl shrink-0">${r.emoji}</span>
+                <span class="font-bold text-clay-900 truncate">${r.name}</span>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <button type="button" data-role="${r.id}" data-delta="-1"
+                  class="role-qty-btn w-10 h-10 rounded-xl bg-clay-100 hover:bg-clay-200 text-clay-900 font-black text-xl flex items-center justify-center transition disabled:opacity-30"
+                  ${count === 0 ? 'disabled' : ''}>－</button>
+                <span class="w-7 text-center font-black text-lg ${active ? 'text-celadon-700' : 'text-clay-400'}">${count}</span>
+                <button type="button" data-role="${r.id}" data-delta="1"
+                  class="role-qty-btn w-10 h-10 rounded-xl bg-celadon-600 hover:bg-celadon-700 text-white font-black text-xl flex items-center justify-center transition">＋</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        grid.querySelectorAll('.role-qty-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.role;
+            const delta = Number(btn.dataset.delta);
+            const nextVal = Math.max(0, Math.min(12, (state.peopleCounts[id] || 0) + delta));
+            if (nextVal === 0) delete state.peopleCounts[id];
+            else state.peopleCounts[id] = nextVal;
+            renderStep3();
+            renderStepper();
+          });
+        });
+      }
+
+      renderRoleGrid('familyRolesGrid', FAMILY_ROLES);
+      renderRoleGrid('otherRolesGrid', OTHER_ROLES);
+
+      // 更新總人數與雕塑結構提醒
+      const total = getTotalPeopleCount();
+      document.getElementById('totalPeopleCount').textContent = total;
+      const adviceBox = document.getElementById('peopleAdviceBox');
+      if (total === 0) {
+        adviceBox.classList.remove('hidden');
+        adviceBox.innerHTML = '💡 目前尚未選擇人物（也可以只做「純器物／食物擬人」立體雕塑喔！若要加入家人或同學，請點擊下方 ＋ 號）。';
+      } else if (total >= 6) {
+        adviceBox.classList.remove('hidden');
+        adviceBox.innerHTML = `🔥 已選擇 <strong>${total} 位角色</strong>，場面非常熱鬧！立體陶藝建議：將 <strong>1～2 位主要主角放大並精雕表情</strong>，其餘次主角可以稍微簡化或採半身／剪影群像貼靠背景，製作較省力且燒製不易斷裂。`;
+      } else {
+        adviceBox.classList.remove('hidden');
+        adviceBox.innerHTML = `👍 目前共 <strong>${total} 位角色</strong>，是立體雕塑最理想好發揮的人數配置！可以細緻刻畫每位角色的表情與動作互動。`;
+      }
+
+      // 主角輸入框同步
+      document.getElementById('mainHeroInput').value = state.mainHero;
+
+      // 渲染動作標籤
+      const actionBox = document.getElementById('actionChipsContainer');
+      actionBox.innerHTML = fest.actions.map(([zh]) => {
+        const isSel = state.selectedActions.includes(zh);
+        return `
+          <button type="button" data-val="${escapeHtml(zh)}"
+            class="action-chip px-3.5 py-2 rounded-xl border-2 font-bold text-sm sm:text-base transition ${
+              isSel
+                ? 'bg-ochre-600 text-white border-ochre-700 shadow'
+                : 'bg-white border-ochre-200 text-clay-800 hover:border-ochre-600'
+            }">
+            ${isSel ? '✓ ' : '＋ '}${escapeHtml(zh)}
+          </button>
+        `;
+      }).join('');
+
+      actionBox.querySelectorAll('.action-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.dataset.val;
+          const idx = state.selectedActions.indexOf(val);
+          if (idx > -1) state.selectedActions.splice(idx, 1);
+          else state.selectedActions.push(val);
+          renderStep3();
+        });
+      });
+    }
+
+    // ==================== STEP 4 渲染 ====================
+    function renderStep4() {
+      const fest = getCurrentFestival();
+      document.getElementById('step4FestivalName').textContent = getFestivalDisplayName();
+
+      // 1. 該節慶專屬場景構圖
+      const sceneGrid = document.getElementById('exclusiveScenesGrid');
+      sceneGrid.innerHTML = fest.scenes.map((sc, idx) => {
+        const isSel = state.selectedSceneIdx === idx;
+        return `
+          <button type="button" data-idx="${idx}"
+            class="scene-card select-card text-left p-4 rounded-2xl border-2 transition flex flex-col gap-1.5 ${
+              isSel
+                ? 'bg-clay-50 border-clay-600 ring-4 ring-clay-500/20 shadow-md'
+                : 'bg-white border-clay-200 hover:border-clay-400'
+            }">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-lg text-clay-900">🎬 ${sc.name}</span>
+              ${isSel ? '<span class="px-2.5 py-0.5 rounded-full bg-clay-600 text-white text-xs font-bold shrink-0">✓ 已選</span>' : ''}
+            </div>
+            <p class="text-sm sm:text-base text-clay-700 leading-relaxed">${sc.desc}</p>
+          </button>
+        `;
+      }).join('');
+
+      sceneGrid.querySelectorAll('.scene-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.selectedSceneIdx = Number(btn.dataset.idx);
+          renderStep4();
+        });
+      });
+
+      // 2. 立體陶藝藝術風格
+      const artGrid = document.getElementById('artStylesGrid');
+      artGrid.innerHTML = ART_STYLES.map(st => {
+        const isSel = state.selectedArtStyleId === st.id;
+        return `
+          <button type="button" data-id="${st.id}"
+            class="art-card select-card text-left p-4 rounded-2xl border-2 transition flex flex-col gap-1.5 ${
+              isSel
+                ? 'bg-purple-50 border-purple-700 ring-4 ring-purple-500/20 shadow-md'
+                : 'bg-white border-clay-200 hover:border-purple-400'
+            }">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">${st.emoji}</span>
+              ${isSel ? '<span class="px-2.5 py-0.5 rounded-full bg-purple-700 text-white text-xs font-bold">✓ 已選</span>' : ''}
+            </div>
+            <div class="font-black text-lg text-clay-900">${st.name}</div>
+            <p class="text-sm text-clay-700">${st.desc}</p>
+          </button>
+        `;
+      }).join('');
+
+      artGrid.querySelectorAll('.art-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.selectedArtStyleId = btn.dataset.id;
+          renderStep4();
+          renderStepper();
+        });
+      });
+
+      // 3. 創意潛能構圖策略
+      const stratGrid = document.getElementById('creativeStrategyGrid');
+      stratGrid.innerHTML = CREATIVE_STRATEGIES.map(cr => {
+        const isSel = state.selectedStrategyId === cr.id;
+        return `
+          <button type="button" data-id="${cr.id}"
+            class="strat-card select-card text-left p-3.5 rounded-2xl border-2 transition ${
+              isSel
+                ? 'bg-celadon-50 border-celadon-600 ring-2 ring-celadon-600/20 shadow-sm'
+                : 'bg-white border-clay-200 hover:border-celadon-600'
+            }">
+            <div class="font-black text-base text-clay-900 mb-1">${isSel ? '✅ ' : ''}${cr.name}</div>
+            <p class="text-sm text-clay-700">${cr.desc}</p>
+          </button>
+        `;
+      }).join('');
+
+      stratGrid.querySelectorAll('.strat-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.selectedStrategyId = btn.dataset.id;
+          renderStep4();
+        });
+      });
+
+      // 4. 色彩與釉色氛圍
+      const moodGrid = document.getElementById('colorMoodGrid');
+      moodGrid.innerHTML = COLOR_MOODS.map(m => {
+        const isSel = state.selectedColorMoodId === m.id;
+        return `
+          <button type="button" data-id="${m.id}"
+            class="mood-card select-card px-4 py-2.5 rounded-2xl border-2 font-bold text-base transition ${
+              isSel
+                ? 'bg-clay-800 text-white border-clay-900 shadow'
+                : 'bg-white border-clay-200 text-clay-800 hover:border-clay-500'
+            }">
+            ${isSel ? '✓ ' : ''}${m.name}
+          </button>
+        `;
+      }).join('');
+
+      moodGrid.querySelectorAll('.mood-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.selectedColorMoodId = btn.dataset.id;
+          renderStep4();
+        });
+      });
+    }
+
+    /*************************************************************************
+     * 六、Step 5 企劃結果整理與雙語文生圖提示詞引擎
+     *************************************************************************/
+    function buildPeopleSummaries() {
+      const allRoles = [...FAMILY_ROLES, ...OTHER_ROLES];
+      const zhParts = [];
+      const enParts = [];
+      let total = 0;
+
+      allRoles.forEach(r => {
+        const cnt = state.peopleCounts[r.id] || 0;
+        if (cnt > 0) {
+          total += cnt;
+          zhParts.push(`${r.name} ${cnt} 位`);
+          enParts.push(cnt === 1 ? `1 ${r.en}` : `${cnt} ${r.en}s`);
+        }
+      });
+
+      return {
+        total,
+        zhText: zhParts.length > 0 ? zhParts.join('、') : '無特定人物（以節慶器物／食物擬人化為主角）',
+        enText: enParts.length > 0
+          ? `a total of ${total} sculpted characters including ${enParts.join(', ')}`
+          : 'adorable anthropomorphic festive objects and food characters coming to life'
+      };
+    }
+
+    function mapToEnglish(selectedList, sourcePairs) {
+      return selectedList.map(zh => {
+        const found = sourcePairs.find(p => p[0] === zh);
+        return found ? found[1] : zh;
+      });
+    }
+
+    function renderStep5() {
+      const fest = getCurrentFestival();
+      const festName = getFestivalDisplayName();
+      const scene = fest.scenes[state.selectedSceneIdx] || fest.scenes[0];
+      const art = ART_STYLES.find(a => a.id === state.selectedArtStyleId) || ART_STYLES[0];
+      const strat = CREATIVE_STRATEGIES.find(s => s.id === state.selectedStrategyId) || CREATIVE_STRATEGIES[0];
+      const mood = COLOR_MOODS.find(m => m.id === state.selectedColorMoodId) || COLOR_MOODS[0];
+      const people = buildPeopleSummaries();
+
+      // 動態建議作品名稱
+      const catLabel = fest.category === 'traditional' ? '傳統節慶' : fest.category === 'family' ? '家庭聚會日' : '學校活動';
+      const autoTitle = `《${festName.split('・')[0]}・${scene.name}》`;
+      document.getElementById('resWorkTitle').textContent = autoTitle;
+      document.getElementById('resSubtitle').textContent = `分類：${catLabel} ｜ 立體雕塑類構想企劃 ｜ ${art.name}`;
+
+      // 左側摘要
+      document.getElementById('resSummaryLeft').innerHTML = `
+        <li><strong>節慶主題：</strong>${fest.emoji} ${escapeHtml(festName)}</li>
+        <li><strong>專屬場景：</strong>${escapeHtml(scene.name)}（${escapeHtml(scene.desc)}）</li>
+        <li><strong>藝術風格：</strong>${art.emoji} ${escapeHtml(art.name)}</li>
+        <li><strong>構圖策略：</strong>${escapeHtml(strat.name)}</li>
+        <li><strong>釉色氛圍：</strong>${escapeHtml(mood.name)}</li>
+      `;
+
+      // 右側摘要
+      const heroText = state.mainHero.trim()
+        ? escapeHtml(state.mainHero.trim())
+        : '（未指定特定單一主角，建議將最前面的中心人物放大製作）';
+      const actionZh = state.selectedActions.length > 0
+        ? state.selectedActions.join('、')
+        : '自然溫馨互動與燦爛笑容';
+
+      document.getElementById('resSummaryRight').innerHTML = `
+        <li><strong>總登場人數：</strong><span class="px-2.5 py-0.5 rounded-full bg-celadon-600 text-white font-bold">${people.total} 位</span></li>
+        <li><strong>角色陣容：</strong>${escapeHtml(people.zhText)}</li>
+        <li><strong>主要主角焦點：</strong>${heroText}</li>
+        <li><strong>瞬間互動動作：</strong>${escapeHtml(actionZh)}</li>
+      `;
+
+      // 道具與底座拆解
+      const allDecor = [...state.selectedProps, ...state.customProps];
+      const foodsZh = state.selectedFoods.length > 0 ? state.selectedFoods.join('、') : '依場景自由搭配';
+      const propsZh = allDecor.length > 0 ? allDecor.join('、') : '依場景自由搭配';
+      const basesZh = state.selectedBases.length > 0 ? state.selectedBases.join(' ＋ ') : '立體造型圓弧底座';
+
+      document.getElementById('resPropsBreakdown').innerHTML = `
+        <p><strong>🍲 特色飲食與器皿：</strong>${escapeHtml(foodsZh)}</p>
+        <p><strong>🏮 配景與活動道具：</strong>${escapeHtml(propsZh)}</p>
+        <p><strong>🏛️ 立體底座與支撐背景：</strong>${escapeHtml(basesZh)}</p>
+      `;
+
+      // 動態立體陶藝結構建議
+      const tipParts = [
+        `本作品建議以「${basesZh}」作為穩固的整體陶土底座，避免將小物件零散黏在薄泥板上。`,
+        people.total >= 5
+          ? `角色多達 ${people.total} 位，建議將視覺焦點（${state.mainHero.trim() || '主要主角'}）做大至 60% 視覺份量，後方人物採半身貼靠背景牆，既省工又不怕進窯軟塌。`
+          : `角色數量適中，可細心捏出眉眼表情、手部互動與衣領皺褶，並善用背景牆讓騰空物件（如火焰、煙霧、彩旗或揮舉的手臂）「借力靠合」支撐。`,
+        `別忘了在作品背面留一個可愛小彩蛋（例如躲在牆後的貓、貼反的字條或簽名），讓評審 360 度欣賞時眼睛一亮！`
+      ];
+      document.getElementById('resStructureTip').textContent = tipParts.join('');
+
+      // ==================== 產出中文文生圖提示詞 ====================
+      const zhPromptLines = [
+        `一件獲得陶藝大獎的【立體陶瓷雕塑 diorama 藝術品】，主題為台灣「${festName}」的「${scene.name}」。`,
+        `【人物與互動】畫面中共有 ${people.total} 位立體手捏陶偶角色（${people.zhText}）${state.mainHero.trim() ? `，其中「${state.mainHero.trim()}」為體積最大、最顯眼的視覺主要主角` : ''}，人物表情生動快樂，正在「${actionZh}」。`,
+        `【配景道具與飲食】場景中精緻雕塑出：${foodsZh}，並搭配豐富立體道具：${propsZh}。`,
+        `【立體底座與結構】整件作品穩固建構於「${basesZh}」之上，採用「${strat.name}（${strat.desc}）」，所有人物、道具與背景弧牆彼此自然銜接支撐，沒有懸空漂浮物，呈現完整的單件立體雕塑量體。`,
+        `【陶藝風格與材質】${art.name}（${art.desc}），清晰可見手工捏陶的溫潤肌理、窯燒釉藥光澤與手工彩繪細節；色彩氛圍採「${mood.name}」。`,
+        `【攝影呈現】置於乾淨簡約的鶯歌陶瓷博物館展示台，柔和棚拍聚光燈打亮立體層次與釉面反光，微距模型攝影質感、超高細節、3D 實體陶瓷作品，8K 畫質。`
+      ];
+      document.getElementById('promptZhArea').value = zhPromptLines.join('\n');
+
+      // ==================== 產出英文專業文生圖提示詞 ====================
+      const foodsEn = mapToEnglish(state.selectedFoods, fest.foods);
+      const propsEn = [...mapToEnglish(state.selectedProps, fest.props), ...state.customProps];
+      const basesEn = mapToEnglish(state.selectedBases, fest.bases);
+      const actionsEn = mapToEnglish(state.selectedActions, fest.actions);
+
+      const enPrompt = [
+        `An award-winning 3D handcrafted ceramic clay diorama sculpture depicting "${state.customFestivalName.trim() || fest.enName}", specifically the scene of ${scene.en}.`,
+        `Characters: ${people.enText}${state.mainHero.trim() ? `, with "${state.mainHero.trim()}" highlighted as the largest focal main character` : ''}, sculpted with lively joyful expressions and engaging in ${actionsEn.length > 0 ? actionsEn.join(' and ') : 'heartwarming festive celebration'}.`,
+        foodsEn.length > 0 ? `Festive food and ceramic vessels details: ${foodsEn.join(', ')}.` : '',
+        propsEn.length > 0 ? `Rich sculpted props and decorations: ${propsEn.join(', ')}.` : '',
+        `3D Structure & Base: All elements are solidly integrated onto ${basesEn.length > 0 ? basesEn.join(' combined with ') : 'a sculpted thematic ceramic base'}, utilizing ${strat.en}; physically cohesive stoneware sculpture with connected structural supports and zero floating detached parts.`,
+        `Art Style & Glaze: ${art.en}. Color and lighting mood: ${mood.en}.`,
+        `Presentation: photographed as a real physical handmade ceramic sculpture on a clean museum pedestal, soft studio lighting showcasing glossy glaze reflections and tactile clay textures, shallow depth of field, ultra-detailed, 8k resolution.`
+      ].filter(Boolean).join(' ');
+
+      document.getElementById('promptEnArea').value = enPrompt;
+    }
+
+    /*************************************************************************
+     * 七、剪貼簿複製（遵照規範使用 document.execCommand('copy')）
+     *************************************************************************/
+    function copyTextarea(textareaId, label) {
+      const el = document.getElementById(textareaId);
+      if (!el) return;
+      try {
+        el.focus();
+        el.select();
+        el.setSelectionRange(0, el.value.length);
+        const ok = document.execCommand('copy');
+        if (ok) {
+          showToast(`✅ 已成功複製「${label}」！可直接貼到 AI 繪圖工具使用`);
+        } else {
+          showToast('⚠️ 複製未完成，請手動全選文字複製');
+        }
+      } catch (err) {
+        showToast('⚠️ 無法自動複製，請手動選取文字複製');
+      }
+    }
+
+    /*************************************************************************
+     * 八、AI 生成立體陶藝參考草圖（Gemini 3.1 Flash Image + 指數退避重試）
+     *************************************************************************/
+    async function fetchWithBackoff(url, options, maxRetries = 4) {
+      let delay = 1000;
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+          const response = await fetch(url, options);
+          if (response.ok) return response;
+          if (response.status === 429 || response.status >= 500) {
+            if (attempt === maxRetries) return response;
+            await new Promise(res => setTimeout(res, delay));
+            delay *= 2;
+            continue;
+          }
+          return response;
+        } catch (err) {
+          if (attempt === maxRetries) throw err;
+          await new Promise(res => setTimeout(res, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    async function handleGenerateImage() {
+      if (state.isGeneratingImage) return;
+      const promptEn = document.getElementById('promptEnArea').value.trim();
+      if (!promptEn) {
+        showToast('請先產生提示詞');
+        return;
+      }
+
+      state.isGeneratingImage = true;
+      const btn = document.getElementById('btnGenerateImage');
+      const btnText = document.getElementById('btnGenText');
+      const loadingBox = document.getElementById('imgLoadingBox');
+      const errorBox = document.getElementById('imgErrorBox');
+      const resultBox = document.getElementById('imgResultBox');
+
+      btn.disabled = true;
+      btn.classList.add('opacity-60');
+      btnText.textContent = '生成中...';
+      loadingBox.classList.remove('hidden');
+      errorBox.classList.add('hidden');
+      resultBox.classList.add('hidden');
+
+      try {
+        const apiKey = ""; // Canvas 執行環境將自動提供金鑰
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+
+        const payload = {
+          contents: [{
+            role: 'user',
+            parts: [{ text: promptEn }]
+          }],
+          generationConfig: {
+            responseModalities: ['IMAGE'],
+            imageConfig: { aspectRatio: "4:3" }
+          }
+        };
+
+        const response = await fetchWithBackoff(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`圖片服務暫時無法回應（狀態碼 ${response.status}）`);
+        }
+
+        const result = await response.json();
+        const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+
+        if (!part || !part.inlineData?.data) {
+          throw new Error('未收到有效圖片資料，請稍後重試或直接複製提示詞貼到其他 AI 繪圖工具。');
+        }
+
+        const mime = part.inlineData.mimeType || 'image/png';
+        const imageUrl = `data:${mime};base64,${part.inlineData.data}`;
+
+        document.getElementById('generatedImgEl').src = imageUrl;
+        document.getElementById('btnDownloadImg').href = imageUrl;
+        resultBox.classList.remove('hidden');
+        showToast('🎨 立體陶藝參考草圖生成完成！');
+      } catch (err) {
+        errorBox.innerHTML = `
+          <strong>提醒：</strong>目前環境無法直接連線至即時繪圖服務（${escapeHtml(err.message)}）。<br/>
+          👉 您依然可以點擊上方的 <strong>「📋 複製中文」</strong> 或 <strong>「📋 複製英文」</strong> 按鈕，將完整提示詞貼到 Gemini、Midjourney 或其他 AI 繪圖工具中立即生圖！
+        `;
+        errorBox.classList.remove('hidden');
+      } finally {
+        state.isGeneratingImage = false;
+        btn.disabled = false;
+        btn.classList.remove('opacity-60');
+        btnText.textContent = '重新生成參考圖';
+        loadingBox.classList.add('hidden');
+      }
+    }
+
+    // HTML 安全跳脫
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /*************************************************************************
+     * 九、事件綁定與啟動初始化
+     *************************************************************************/
+    function bindEvents() {
+      // 字體大小切換（專為長輩與老花舒適閱讀設計）
+      document.getElementById('btnToggleFont').addEventListener('click', () => {
+        state.isLargeFont = !state.isLargeFont;
+        document.documentElement.classList.toggle('font-xl', state.isLargeFont);
+        document.getElementById('fontToggleLabel').textContent = state.isLargeFont ? '恢復標準大字' : '字體再加大';
+        showToast(state.isLargeFont ? '🔍 已開啟「護眼超大字體」模式' : '已切換為標準大字體模式');
+      });
+
+      // 重設彈窗
+      const resetModal = document.getElementById('resetModal');
+      document.getElementById('btnResetAll').addEventListener('click', () => {
+        resetModal.classList.remove('hidden');
+        resetModal.classList.add('flex');
+      });
+      document.getElementById('btnCancelReset').addEventListener('click', () => {
+        resetModal.classList.add('hidden');
+        resetModal.classList.remove('flex');
+      });
+      document.getElementById('btnConfirmReset').addEventListener('click', () => {
+        state.activeCategory = 'traditional';
+        state.customFestivalName = '';
+        state.customProps = [];
+        state.peopleCounts = {};
+        state.mainHero = '';
+        state.selectedArtStyleId = 'handbuilt_glaze';
+        state.selectedStrategyId = 'freeze_frame';
+        state.selectedColorMoodId = 'festive_red';
+        document.getElementById('customFestivalInput').value = '';
+        document.getElementById('mainHeroInput').value = '';
+        document.getElementById('imgResultBox').classList.add('hidden');
+        document.getElementById('imgErrorBox').classList.add('hidden');
+        applyFestivalDefaults('mid_autumn', true);
+        resetModal.classList.add('hidden');
+        resetModal.classList.remove('flex');
+        goToStep(1);
+        showToast('已全部清空，準備開始全新發想！');
+      });
+
+      // 分類頁籤切換
+      document.querySelectorAll('.cat-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.activeCategory = btn.dataset.cat;
+          renderStep1();
+        });
+      });
+
+      // 隨機抽選節慶
+      document.getElementById('btnRandomFestival').addEventListener('click', () => {
+        const rand = FESTIVALS[Math.floor(Math.random() * FESTIVALS.length)];
+        state.activeCategory = rand.category;
+        state.customFestivalName = '';
+        document.getElementById('customFestivalInput').value = '';
+        applyFestivalDefaults(rand.id, true);
+        renderStep1();
+        showToast(`🎲 隨機抽中「${rand.emoji} ${rand.name}」！`);
+      });
+
+      // 套用自訂節慶名稱
+      document.getElementById('btnApplyCustomFestival').addEventListener('click', () => {
+        const val = document.getElementById('customFestivalInput').value.trim();
+        if (!val) {
+          showToast('請先輸入自訂的節慶或紀念日名稱喔！');
+          return;
+        }
+        state.customFestivalName = val;
+        renderStep1();
+        showToast(`✨ 已套用自訂主題「${val}」，點下一步即可搭配道具！`);
+      });
+
+      // Step 2 推薦搭配 & 清空
+      document.getElementById('btnAutoPickProps').addEventListener('click', () => {
+        const fest = getCurrentFestival();
+        const pickRandom = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n).map(x => x[0]);
+        state.selectedFoods = pickRandom(fest.foods, Math.min(3, fest.foods.length));
+        state.selectedProps = pickRandom(fest.props, Math.min(3, fest.props.length));
+        state.selectedBases = pickRandom(fest.bases, 1);
+        renderStep2();
+        renderStepper();
+        showToast('✨ 已為您隨機搭配一組豐富道具與立體底座！');
+      });
+
+      document.getElementById('btnClearProps').addEventListener('click', () => {
+        state.selectedFoods = [];
+        state.selectedProps = [];
+        state.selectedBases = [];
+        state.customProps = [];
+        renderStep2();
+        renderStepper();
+        showToast('已清空目前道具選項');
+      });
+
+      // 新增自訂道具
+      const addCustomPropAction = () => {
+        const input = document.getElementById('customPropInput');
+        const val = input.value.trim();
+        if (!val) return;
+        if (!state.customProps.includes(val)) {
+          state.customProps.push(val);
+        }
+        input.value = '';
+        renderStep2();
+        renderStepper();
+        showToast(`已加入道具「${val}」`);
+      };
+      document.getElementById('btnAddCustomProp').addEventListener('click', addCustomPropAction);
+      document.getElementById('customPropInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addCustomPropAction();
+        }
+      });
+
+      // Step 3 人物快捷組合
+      document.querySelectorAll('.preset-people-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const type = btn.dataset.preset;
+          if (type === 'nuclear') state.peopleCounts = { me: 1, dad: 1, mom: 1, younger_bro: 1 };
+          if (type === 'threeGen') state.peopleCounts = { me: 1, dad: 1, mom: 1, grandpa: 1, grandma: 1 };
+          if (type === 'bigFamily') state.peopleCounts = { me: 1, dad: 1, mom: 1, grandpa: 1, grandma: 1, uncle_shu: 1, aunt_gu: 1, cousin: 2 };
+          if (type === 'schoolSquad') state.peopleCounts = { me: 1, classmate: 3, teacher: 1 };
+          if (type === 'petMode') state.peopleCounts = { me: 1, dog: 1, cat: 1 };
+          renderStep3();
+          renderStepper();
+          showToast('已套用角色人數組合！可再按 ＋／－ 微調');
+        });
+      });
+
+      document.getElementById('btnClearPeople').addEventListener('click', () => {
+        state.peopleCounts = {};
+        renderStep3();
+        renderStepper();
+        showToast('人物數量已歸零');
+      });
+
+      document.getElementById('mainHeroInput').addEventListener('input', (e) => {
+        state.mainHero = e.target.value;
+      });
+
+      // Step 5 複製、列印、編輯與 AI 生圖
+      document.getElementById('btnCopyZh').addEventListener('click', () => copyTextarea('promptZhArea', '中文文生圖指令'));
+      document.getElementById('btnCopyEn').addEventListener('click', () => copyTextarea('promptEnArea', '英文專業文生圖指令'));
+      document.getElementById('btnPrintPlan').addEventListener('click', () => window.print());
+      document.getElementById('btnBackToEdit').addEventListener('click', () => goToStep(4));
+      document.getElementById('btnGenerateImage').addEventListener('click', handleGenerateImage);
+
+      // 底部上一步／下一步按鈕
+      document.getElementById('btnPrevStep').addEventListener('click', () => {
+        if (state.currentStep > 1) goToStep(state.currentStep - 1);
+      });
+      document.getElementById('btnNextStep').addEventListener('click', () => {
+        if (state.currentStep < 5) {
+          goToStep(state.currentStep + 1);
+        } else {
+          goToStep(1);
+        }
+      });
+    }
+
+    // 啟動應用程式
+    window.addEventListener('DOMContentLoaded', () => {
+      applyFestivalDefaults('mid_autumn', true);
+      bindEvents();
+      goToStep(1);
+    });
+  </script>
+</body>
+</html>
